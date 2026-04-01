@@ -1,31 +1,91 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
-const phrase = "The result: 4–8x more content. 50–65% more traffic. 10–20 hours saved every week. Marketing that stops being an expense and starts being a revenue engine.";
+const SENTENCES = [
+  "The result: 4–8x more content.",
+  "50–65% more traffic.",
+  "10–20 hours saved every week.",
+  "Marketing that stops being an expense",
+  "and starts being a revenue engine."
+];
+
+// Helper to highlight specific impact words
+const renderLine = (line: string) => {
+  const words = line.split(" ");
+  return words.map((word, i) => {
+    const isHighlight = 
+      word.includes("4–8x") || 
+      word.includes("50–65%") || 
+      word.includes("10–20") || 
+      word.includes("revenue");
+
+    return (
+      <span key={i} className="inline-block mr-[0.25em] mb-[0.1em]">
+        {isHighlight ? (
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+            {word}
+          </span>
+        ) : (
+          word
+        )}
+      </span>
+    );
+  });
+};
 
 export const ResultsTypographySection = () => {
-  const words = phrase.split(" ");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track the scroll position relative to this section
+  const { scrollYProgress: rawProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  // Smooth the scroll progress to give it that buttery "fader" feel
+  const scrollYProgress = useSpring(rawProgress, {
+    stiffness: 70,
+    damping: 20,
+    restDelta: 0.001
+  });
 
   return (
-    <section className="py-24 md:py-40 bg-zinc-50 flex items-center justify-center">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 text-center md:text-left">
-        <p className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight leading-[1.05] md:leading-[1.05] text-zinc-900">
-          {words.map((word, i) => {
-            // Highlight logic to match previous design but static
-            const isHighlight = word.includes("4–8x") || word.includes("50–65%") || word.includes("10–20") || word.includes("revenue");
+    <section 
+      ref={containerRef} 
+      // Keep height high enough to allow scrolling sequentially through all lines
+      className="relative bg-zinc-50"
+      style={{ height: '250vh' }}
+    >
+      {/* Sticky viewport bounds the text to the center area */}
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-24">
+        
+        {/* We constrain the max-width to center it and apply pure text-center for alignment */}
+        <div className="max-w-4xl w-full px-6 md:px-12 text-center">
+          
+          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.25] text-zinc-900">
+            {SENTENCES.map((line, i) => {
+              // Calculate stagger logic: Each line gets a 15% window of the scroll length to fade in
+              const step = 1 / SENTENCES.length;
+              const start = i * step * 0.8; // multiplying by 0.8 condenses the reveal so it finishes before the absolute bottom
+              const end = start + step;
 
-            return (
-              <span key={i} className="inline-block mr-[0.3em] mb-[0.1em]">
-                {isHighlight ? (
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                    {word}
-                  </span>
-                ) : (
-                  word
-                )}
-              </span>
-            );
-          })}
-        </p>
+              const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
+              const y = useTransform(scrollYProgress, [start, end], [30, 0]);
+              const filter = useTransform(scrollYProgress, [start, end], ['blur(12px)', 'blur(0px)']);
+              
+              return (
+                <motion.span 
+                  key={i} 
+                  className="block"
+                  style={{ opacity, y, filter }}
+                >
+                  {renderLine(line)}
+                </motion.span>
+              );
+            })}
+          </p>
+          
+        </div>
       </div>
     </section>
   );
