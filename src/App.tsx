@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { Aurora } from './components/Aurora';
 import { SkipLink } from './components/SkipLink';
 
 // ── Eagerly loaded (above the fold / core navigation) ────────────────────────
@@ -63,7 +64,8 @@ export default function App() {
     <Router>
       {/* Accessibility: skip navigation for keyboard users */}
       <SkipLink />
-      <main id="main-content" className="relative bg-white text-zinc-900">
+      <Aurora />
+      <main id="main-content" className="relative bg-transparent text-zinc-900">
         <Header />
         <Suspense fallback={<PageLoader />}>
           <Routes>
