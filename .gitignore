@@ -1,0 +1,25 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Agent & AI Tool Directories
+.agent/
+.agents/
+everything-claude-code/
+.claude/
+.cursor/
+.trae/
+.codex/
+.kiro/
+.antigravity/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

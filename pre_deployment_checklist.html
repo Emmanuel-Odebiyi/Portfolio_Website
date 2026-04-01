@@ -1,0 +1,78 @@
+
+<style>
+.wrap{padding:1rem 0;font-family:var(--font-sans)}
+.phase{margin-bottom:1.4rem}
+.phase-header{display:flex;align-items:center;gap:8px;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--color-border-tertiary)}
+.pill{font-size:11px;font-weight:500;padding:2px 9px;border-radius:20px}
+.p1{background:#E1F5EE;color:#085041}.p2{background:#EEEDFE;color:#3C3489}.p3{background:#FAEEDA;color:#633806}.p4{background:#FAECE7;color:#712B13}.p5{background:#E6F1FB;color:#0C447C}
+.phase-title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:flex-start;gap:9px;padding:7px 11px;border-radius:8px;background:var(--color-background-secondary);cursor:pointer}
+.cb{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--color-border-primary);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.done .cb{background:#1D9E75;border-color:#1D9E75}
+.ck{display:none;width:9px;height:9px}
+.done .ck{display:block}
+.it{font-size:13px;color:var(--color-text-primary);line-height:1.4}
+.done .it{text-decoration:line-through;color:var(--color-text-tertiary)}
+.is{font-size:11px;color:var(--color-text-secondary);margin-top:1px}
+.pbar{height:4px;background:var(--color-border-tertiary);border-radius:2px;margin-bottom:1rem;overflow:hidden}
+.pfill{height:100%;background:#1D9E75;border-radius:2px;transition:width .3s;width:0%}
+.plabel{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+</style>
+<div class="wrap">
+<div class="plabel" id="pl">0 of 25 completed</div>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+
+<div class="phase">
+<div class="phase-header"><span class="pill p1">Design</span><span class="phase-title">Visual identity — lock these before anything else</span></div>
+<div class="items">
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Font pairing finalised</div><div class="is">One display font for headlines, one body font — no defaults (no Inter, Roboto, Arial)</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Colour palette locked as CSS variables</div><div class="is">Primary, accent, background, text, success, warning — all defined</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Logo and favicon in place</div><div class="is">Favicon: .ico or .png at 32×32 and 180×180 for Apple devices</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Mobile layout verified on 390px width</div><div class="is">Every page scrolls cleanly, no horizontal overflow, touch targets min 44px</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">OG image created for social sharing</div><div class="is">1200×630px — shown as preview when shared on LinkedIn, WhatsApp, Twitter</div></div></div>
+</div></div>
+
+<div class="phase">
+<div class="phase-header"><span class="pill p2">Content</span><span class="phase-title">Copy and messaging — every word counts</span></div>
+<div class="items">
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Zero placeholder text anywhere</div><div class="is">Search for "lorem ipsum", "placeholder", "coming soon", "TBD" across all pages</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Benchmark numbers correct everywhere</div><div class="is">520% ROI, 65% organic growth, 15 hrs saved — verify each on every page it appears</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">All CTAs point to real working destinations</div><div class="is">Booking link, contact form, proposal page — click every single button</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Page titles and meta descriptions written</div><div class="is">Every page needs a unique title (50–60 chars) and description (150–160 chars)</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Privacy policy and terms page exist</div><div class="is">Required the moment you collect emails via the tool lead-gen gates</div></div></div>
+</div></div>
+
+<div class="phase">
+<div class="phase-header"><span class="pill p3">Technical</span><span class="phase-title">Performance and functionality — non-negotiable</span></div>
+<div class="items">
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Production build generated (npm run build)</div><div class="is">Never deploy the dev server — build first, then deploy the /dist folder</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">All four tools calculate correctly</div><div class="is">Test every slider and input with edge case values (0, very large numbers)</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Email capture connected to real CRM</div><div class="is">Submit a test email on every gate — confirm it arrives in HubSpot or Mailchimp</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">SSL certificate active (https://)</div><div class="is">No browser security warnings — Netlify and Vercel handle this automatically</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">404 page exists and is on-brand</div><div class="is">Every broken link lands somewhere helpful, not a bare server error</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Analytics installed</div><div class="is">Google Analytics or equivalent — know who visits and which tool gets most engagement</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">sitemap.xml and robots.txt present</div><div class="is">Tells Google what to index — critical for SEO</div></div></div>
+</div></div>
+
+<div class="phase">
+<div class="phase-header"><span class="pill p4">Domain</span><span class="phase-title">Domain and hosting — do these first</span></div>
+<div class="items">
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Domain purchased and pointing to host</div><div class="is">DNS propagation takes up to 48hrs — buy it now, don't wait</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">www redirect configured</div><div class="is">Both yourdomain.com and www.yourdomain.com resolve to the same place</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">Professional email set up</div><div class="is">you@yourdomain.com looks far more credible than a generic Gmail address</div></div></div>
+</div></div>
+
+<div class="phase">
+<div class="phase-header"><span class="pill p5">Testing</span><span class="phase-title">Use all four of these before going live</span></div>
+<div class="items">
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">pagespeed.web.dev — speed audit</div><div class="is">Target 90+ on mobile. Shows exactly what is slow and how to fix it</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">responsively.app — cross-device preview</div><div class="is">See your site on iPhone, Android, tablet, desktop simultaneously — free app</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">wave.webaim.org — accessibility audit</div><div class="is">Checks colour contrast, missing alt text, broken form labels</div></div></div>
+<div class="item" onclick="tog(this)"><div class="cb"><svg class="ck" viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,1.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="it">deadlinkchecker.com — broken links</div><div class="is">Crawls every link and reports anything broken before visitors find it</div></div></div>
+</div></div>
+</div>
+<script>
+function tog(el){el.classList.toggle('done');upd()}
+function upd(){var t=document.querySelectorAll('.item').length,d=document.querySelectorAll('.item.done').length;document.getElementById('pf').style.width=(d/t*100)+'%';document.getElementById('pl').textContent=d+' of '+t+' completed'}
+</script>

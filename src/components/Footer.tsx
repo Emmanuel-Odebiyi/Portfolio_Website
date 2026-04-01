@@ -1,0 +1,137 @@
+import React from 'react';
+import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { Twitter, Linkedin, Instagram, Mail, ArrowRight } from 'lucide-react';
+import logo from '../assets/logo.svg';
+
+const footerLinks = [
+  {
+    title: 'Navigation',
+    links: [
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about' },
+      { name: 'Services', href: '/services' },
+      { name: 'Portfolio', href: '/portfolio' },
+      { name: 'Blog', href: '/blog' },
+      { name: 'Resume', href: '/resume' },
+    ],
+  },
+  {
+    title: 'Services',
+    links: [
+      { name: 'Content Automation', href: '/services' },
+      { name: 'SEO Strategy', href: '/services' },
+      { name: 'AI Workflows', href: '/services' },
+      { name: 'Growth Systems', href: '/services' },
+    ],
+  },
+  {
+    title: 'Connect',
+    links: [
+      { name: 'Twitter / X', href: 'https://x.com/Bobowrites_', icon: <Twitter size={16} /> },
+      { name: 'LinkedIn', href: 'https://www.linkedin.com/in/emmanuel-odebiyi', icon: <Linkedin size={16} /> },
+      { name: 'Instagram', href: 'https://www.instagram.com/emmanuelodebiyi_/', icon: <Instagram size={16} /> },
+      { name: 'Email', href: 'mailto:emmayoodebiyi001@gmail.com', icon: <Mail size={16} /> },
+    ],
+  },
+];
+
+export const Footer: React.FC = () => {
+  return (
+    <footer className="bg-white text-zinc-900 pt-24 pb-12 px-6 overflow-hidden relative border-t border-zinc-100">
+      {/* Top subtle highlight */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-deep-space-blue-500/10 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 lg:gap-12 relative z-10">
+        
+        {/* Brand Section (Left) */}
+        <div className="lg:col-span-2 flex flex-col justify-between">
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <img 
+                src={logo} 
+                alt="Emmanuel Odebiyi Logo" 
+                className="h-20 md:h-32 w-auto"
+              />
+            </div>
+            
+            <p className="text-lg text-zinc-500 font-light leading-relaxed max-w-sm">
+              Helping growing businesses automate their marketing and scale with predictable growth systems.
+            </p>
+            
+            <Link
+              to="/contact"
+              className="btn-primary"
+            >
+              Start a Project
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Links Sections (Middle & Right) */}
+        {footerLinks.map((section) => (
+          <div key={section.title} className="space-y-6">
+            <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400 font-semibold">
+              {section.title}
+            </h4>
+            <ul className="space-y-4">
+              {section.links.map((link) => {
+                const isExternal = link.href.startsWith('http') || link.href.startsWith('mailto');
+                const LinkPattern = (
+                  <span className="group flex items-center gap-3 text-zinc-500 hover:text-deep-space-blue-500 transition-all duration-300 w-fit">
+                    {link.icon && (
+                      <span className="text-zinc-400 group-hover:text-deep-space-blue-500 transition-colors duration-300 group-hover:-translate-y-0.5 group-hover:scale-110">
+                        {link.icon}
+                      </span>
+                    )}
+                    <span className="text-sm font-medium relative overflow-hidden group-hover:translate-x-1 transition-transform duration-300">
+                      {link.name}
+                      {/* Hover underline effect */}
+                      <span className="absolute bottom-0 left-0 w-full h-[1px] bg-deep-space-blue-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    </span>
+                  </span>
+                );
+
+                return (
+                  <li key={link.name}>
+                    {isExternal ? (
+                      <a 
+                        href={link.href} 
+                        target={link.href.startsWith('http') ? "_blank" : undefined}
+                        rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                        className="block"
+                      >
+                        {LinkPattern}
+                      </a>
+                    ) : (
+                      <Link to={link.href} className="block">
+                        {LinkPattern}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-400 text-xs font-mono tracking-widest uppercase relative z-10">
+        <div className="flex items-center gap-3">
+          <span>© {new Date().getFullYear()} Emmanuel Odebiyi</span>
+          <span className="w-1 h-1 rounded-full bg-zinc-200" />
+          <span>All Rights Reserved</span>
+        </div>
+        <div className="flex gap-8">
+          <Link to="/privacy" className="hover:text-deep-space-blue-500 transition-colors duration-300">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-deep-space-blue-500 transition-colors duration-300">Terms of Service</Link>
+        </div>
+      </div>
+
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-deep-space-blue-50/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3" />
+    </footer>
+  );
+};
