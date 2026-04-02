@@ -37,15 +37,15 @@ const steps = [
 
 export const ProcessSteps: React.FC = () => {
   return (
-    <section className="py-32 bg-white relative">
+    <section className="py-32 bg-transparent relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         
-        <div className="text-center space-y-6 mb-24 max-w-3xl mx-auto">
+        <div className="text-center space-y-6 mb-24 max-w-4xl mx-auto">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-zinc-500 font-mono text-xs uppercase tracking-[0.3em]"
+            className="inline-block px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-sm border border-zinc-100 text-zinc-500 font-mono text-[10px] uppercase tracking-[0.4em] font-black"
           >
             How It Works
           </motion.h2>
@@ -54,26 +54,27 @@ export const ProcessSteps: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight text-zinc-900"
+            className="text-4xl md:text-6xl font-black tracking-tighter text-zinc-900 leading-[1.1]"
           >
-            From Chaotic to Automated in Four Weeks
+            From Chaotic to <br className="hidden md:block" /> 
+            <span className="text-brand-gradient">Automated in Four Weeks.</span>
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-zinc-500 font-light leading-relaxed"
+            className="text-lg md:text-xl text-zinc-600 font-medium leading-relaxed max-w-2xl mx-auto"
           >
-            No lengthy onboarding. No bloated processes. Just three focused steps from kickoff to a system that runs.
+            No lengthy onboarding. No bloated processes. <span className="text-zinc-900 font-bold underline decoration-brand-gradient/30 decoration-4 underline-offset-4">Just three focused steps</span> from kickoff to a system that runs.
           </motion.p>
         </div>
 
         <div className="relative">
-          {/* Connecting Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-zinc-100 -z-10" />
+          {/* Connecting Line (Desktop) - Enhanced Visibility */}
+          <div className="hidden md:block absolute top-[5.5rem] left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent -z-10" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
@@ -81,35 +82,48 @@ export const ProcessSteps: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2, duration: 0.6 }}
-                className="relative group cursor-default border border-zinc-100/50 rounded-3xl p-8 transition-all duration-300 hover:shadow-lg"
-                style={{ backgroundColor: `${step.accentColor}08` }} // Extremely subtle (apx 3% opacity tint) overlaying white page
+                className="relative group cursor-default border border-zinc-200/50 bg-white/40 backdrop-blur-md rounded-[2.5rem] p-8 lg:p-10 transition-all duration-300 hover:shadow-2xl hover:shadow-zinc-200/50 hover:bg-white/80 hover:-translate-y-2 overflow-hidden"
               >
-                {/* Icon Circle */}
-                <div className="w-24 h-24 rounded-3xl bg-white border border-zinc-100 shadow-xl shadow-zinc-200/50 flex items-center justify-center mb-8 mx-auto md:mx-0 group-hover:-translate-y-2 transition-all duration-300"
-                     style={{ borderColor: `${step.accentColor}33` }}>
-                  {step.icon}
+                {/* Subtle Glow Background */}
+                <div 
+                  className="absolute -top-24 -right-24 w-48 h-48 rounded-full blur-[80px] opacity-10 transition-opacity group-hover:opacity-20"
+                  style={{ backgroundColor: step.accentColor }}
+                />
+
+                {/* Icon Box */}
+                <div className="w-20 h-20 rounded-3xl bg-white border border-zinc-100 shadow-xl shadow-zinc-200/30 flex items-center justify-center mb-10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                     style={{ borderColor: `${step.accentColor}44` }}>
+                  <div className="scale-110">{step.icon}</div>
                 </div>
 
-                <div className="text-center md:text-left space-y-6">
-                  <div className="space-y-2">
-                    <span className="text-brand-gradient font-mono text-xs font-bold tracking-widest uppercase">
-                      STEP {step.number} • {step.timeline}
-                    </span>
-                    <h4 className="text-2xl font-bold text-zinc-900">{step.title}</h4>
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <span className="flex-none text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400">
+                        STEP {step.number}
+                      </span>
+                      <div className="h-px flex-grow bg-zinc-100" />
+                      <span className="flex-none text-[10px] font-mono font-black uppercase tracking-widest text-brand-gradient">
+                        {step.timeline}
+                      </span>
+                    </div>
+                    <h4 className="text-2xl lg:text-3xl font-black text-zinc-900 tracking-tight leading-none group-hover:text-brand-gradient transition-colors">
+                      {step.title}
+                    </h4>
                   </div>
                   
-                  <p className="text-zinc-500 leading-relaxed font-light">
+                  <p className="text-zinc-600 leading-relaxed font-medium text-base">
                     {step.desc}
                   </p>
 
-                  <div className="pt-6 border-t border-zinc-100 space-y-4 text-sm">
-                    <div>
-                      <span className="block text-zinc-400 font-mono text-xs uppercase tracking-wider mb-1">Your Time Investment</span>
-                      <span className="font-semibold text-zinc-900">{step.investment}</span>
+                  <div className="pt-8 space-y-6">
+                    <div className="p-4 bg-zinc-50/50 rounded-2xl border border-zinc-100 group-hover:bg-white transition-colors">
+                      <span className="block text-zinc-400 font-mono text-[9px] uppercase tracking-[0.2em] font-black mb-2">Time Investment</span>
+                      <span className="font-bold text-zinc-900 text-sm md:text-base">{step.investment}</span>
                     </div>
-                    <div>
-                      <span className="block text-zinc-400 font-mono text-xs uppercase tracking-wider mb-1">What You Walk Away With</span>
-                      <span className="font-semibold text-brand-gradient">{step.outcome}</span>
+                    <div className="p-4 bg-brand-gradient/5 rounded-2xl border border-brand-gradient/10 group-hover:bg-white transition-colors">
+                      <span className="block text-zinc-400 font-mono text-[9px] uppercase tracking-[0.2em] font-black mb-2">The Deliverable</span>
+                      <span className="font-bold text-brand-gradient text-sm md:text-base">{step.outcome}</span>
                     </div>
                   </div>
                 </div>
