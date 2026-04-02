@@ -39,13 +39,15 @@ export const Header: React.FC = () => {
     }
   }, [location]);
 
+  const isAboutPage = location.pathname === '/about';
+
   return (
     <header className={`fixed left-1/2 -translate-x-1/2 z-[200] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-5xl' : 'top-6 max-w-7xl'}`}>
       <div 
         className={`w-full transition-all duration-500 transition-opacity duration-500 pointer-events-auto ${
           isScrolled 
             ? 'py-1.5 px-6 bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-[1.25rem]' 
-            : 'py-2 px-8 bg-white/30 backdrop-blur-lg border border-white/10 shadow-xl rounded-[1.5rem]'
+            : `py-2 px-8 ${isAboutPage ? 'bg-transparent border-transparent' : 'bg-white/30 border-white/10 shadow-xl'} backdrop-blur-lg rounded-[1.5rem]`
         }`}
       >
         <div className="mx-auto grid grid-cols-2 md:grid-cols-3 items-center">
@@ -58,7 +60,7 @@ export const Header: React.FC = () => {
             <img 
               src={logo} 
               alt="Emmanuel Odebiyi Logo" 
-              className="h-8 md:h-12 w-auto"
+              className={`h-8 md:h-12 w-auto transition-all ${isAboutPage && !isScrolled ? 'invert brightness-0' : ''}`}
             />
           </Link>
         </motion.div>
@@ -74,10 +76,10 @@ export const Header: React.FC = () => {
             >
               <Link
                 to={link.href}
-                className={`text-sm font-bold transition-all relative group ${
+                className={`text-sm font-black tracking-tight transition-all relative group ${
                   location.pathname === link.href 
-                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600' 
-                    : 'text-zinc-600 hover:text-zinc-900'
+                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500' 
+                    : (isAboutPage && !isScrolled ? 'text-white hover:text-white/80' : 'text-zinc-600 hover:text-zinc-900')
                 }`}
               >
                 {link.name}
@@ -97,7 +99,7 @@ export const Header: React.FC = () => {
           >
             <Link
               to="/contact"
-              className="px-6 py-1.5 bg-zinc-900 text-white text-sm font-bold rounded-xl hover:bg-brand-gradient transition-all shadow-lg shadow-zinc-200"
+              className={`px-6 py-1.5 ${isAboutPage && !isScrolled ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'} text-sm font-black rounded-xl hover:bg-brand-gradient hover:text-white transition-all shadow-lg shadow-zinc-200`}
             >
               Contact Me
             </Link>
@@ -105,7 +107,7 @@ export const Header: React.FC = () => {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden p-2 text-zinc-900"
+            className={`md:hidden p-2 ${isAboutPage && !isScrolled ? 'text-white' : 'text-zinc-900'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

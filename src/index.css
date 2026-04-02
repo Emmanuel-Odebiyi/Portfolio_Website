@@ -50,12 +50,15 @@
 
 :root {
   /* Semantic Mappings */
-  --bg-primary: var(--color-bg-canvas);
+  --bg-primary: #09090b; /* zinc-950 for dark theme consistency */
   --bg-secondary: var(--color-bg-surface);
   
   /* Text MUST be the darkest color closest to black (WCAG AA Compliance) */
   --text-primary: #09090b; /* Pitch dark gray almost black */
   --text-secondary: #3f3f46; /* High contrast mid-gray */
+  
+  /* Bright white/zinc text utility to be used on dark bg */
+  --text-inverse: #fafafa;
   
   --accent-primary: var(--color-primary);
 }

@@ -211,40 +211,124 @@ export default function About() {
   });
 
   return (
-    <div className="pt-32 pb-20 bg-white">
+    <div className="pt-0 pb-20 bg-white">
       <SEO 
         title="About Emmanuel Odebiyi | From Burnout Writer to Marketing Automation Specialist"
         description="How I went from drowning in content deadlines to building AI-powered marketing systems that deliver 520% ROI. My story, methodology, and why it works."
         keywords="marketing automation expert, content automation specialist, AI content systems, SEO and content strategist Nigeria"
       />
-      {/* Header Section */}
-      <section className="max-w-5xl mx-auto px-6 mb-24 text-center space-y-8">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
+      {/* Hero Section with Personal Narrative Image */}
+      <section className="relative h-screen min-h-[700px] flex items-end justify-start overflow-hidden bg-zinc-950">
+        {/* Background Image with Focal Point Adjustment */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/about-hero.jpg" 
+            alt="Emmanuel Odebiyi" 
+            className="w-full h-full object-cover object-[center_20%] scale-105 grayscale brightness-125 contrast-150 opacity-40 mix-blend-overlay"
+          />
+          {/* Halftone / Dither Pattern Overlay */}
+          <div className="absolute inset-0 z-10 opacity-30 pointer-events-none mix-blend-multiply" 
+               style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
+          
+          {/* Edge Fades & Soft Vignette to guide eye to text/face */}
+          <div className="absolute inset-0 z-20 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none" />
+        </div>
+
+        <div className="max-w-6xl mx-auto px-6 lg:px-12 pb-32 relative z-30 text-left space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white/70 tracking-[0.4em] uppercase"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient animate-pulse" />
+            The Origin Story
+          </motion.div>
+          
+          <div className="space-y-6">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[0.9] drop-shadow-2xl max-w-4xl">
+              I Used to Be the <span className="text-zinc-500">Burnout.</span><br />
+              Now I Build the System That <span className="text-brand-gradient">Prevents It.</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-zinc-300 font-medium leading-relaxed max-w-2xl opacity-90">
+              I went from drowning in deadlines to designing automated marketing engines that deliver <strong className="text-white font-black underline decoration-indigo-500 underline-offset-8">520% ROI</strong>.
+            </p>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-2"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
-          About Me
+          <div className="w-1 h-2 bg-brand-gradient rounded-full" />
         </motion.div>
-        
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-zinc-900 mx-auto leading-[1.05]">
-          I Used to Be the <span className="text-zinc-300">Burnout.</span><br />
-          Now I Build the System That <span className="text-brand-gradient">Prevents It.</span>
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-zinc-500 font-light leading-relaxed max-w-4xl mx-auto">
-          I went from drowning in deadlines to designing automated marketing engines that deliver <strong className="text-zinc-900 font-semibold">520% ROI</strong> — and now I build them for businesses like yours.
-        </p>
       </section>
 
       {/* Opening narrative block */}
-      <section className="max-w-3xl mx-auto px-6 mb-32 space-y-6 text-xl text-zinc-600 font-light leading-relaxed">
-        <p>Most content marketers burn out trying to keep up. I burned out too — and then I reverse-engineered why, and built something better.</p>
-        <p>Growing businesses face a brutal contradiction: content marketing drives growth, but producing it consistently is expensive, time-consuming, and unsustainable. So most businesses are stuck choosing between doing it badly or not doing it at all.</p>
-        <p className="text-zinc-900 font-medium">I solve that exact problem.</p>
-        <p>I design and build automated marketing systems that deliver enterprise-level content output — without the enterprise price tag, the management overhead, or the constant scramble to keep things moving.</p>
-        <p className="text-brand-gradient font-bold">Marketing that runs while you build. That's what I create.</p>
+      <section className="py-32 bg-white relative z-20">
+        <div className="max-w-3xl mx-auto px-6 space-y-12 text-xl md:text-2xl text-zinc-600 font-light leading-relaxed">
+          {[
+            {
+              content: "Most content marketers burn out trying to keep up. I burned out too — and then I reverse-engineered why, and built something better.",
+              emphasis: true,
+              dropCap: true
+            },
+            {
+              content: "Growing businesses face a brutal contradiction: content marketing drives growth, but producing it consistently is expensive, time-consuming, and unsustainable. So most businesses are stuck choosing between doing it badly or not doing it at all.",
+              emphasis: false
+            },
+            {
+              content: "I solve that exact problem.",
+              highlight: true
+            },
+            {
+              content: "I design and build automated marketing systems that deliver enterprise-level content output — without the enterprise price tag, the management overhead, or the constant scramble to keep things moving.",
+              point: "enterprise-level content output"
+            },
+            {
+              content: "Marketing that runs while you build. That's what I create.",
+              final: true
+            }
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.21, 0.45, 0.32, 0.9] }}
+            >
+              {item.dropCap ? (
+                <p>
+                  <span className="first-letter:text-7xl first-letter:font-black first-letter:text-zinc-900 first-letter:mr-3 first-letter:float-left">
+                    {item.content}
+                  </span>
+                </p>
+              ) : item.highlight ? (
+                <p className="text-zinc-900 font-bold text-3xl md:text-4xl tracking-tight">
+                  {item.content}
+                </p>
+              ) : item.final ? (
+                <p className="text-brand-gradient font-black text-2xl md:text-3xl italic">
+                  {item.content}
+                </p>
+              ) : (
+                <p>
+                  {item.point ? (
+                    item.content.split(item.point).map((part, i, arr) => (
+                      <React.Fragment key={i}>
+                        {part}
+                        {i < arr.length - 1 && <strong className="text-zinc-900 font-black underline decoration-indigo-500 decoration-2 underline-offset-4">{item.point}</strong>}
+                      </React.Fragment>
+                    ))
+                  ) : item.content}
+                </p>
+              )}
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* Side-by-Side Interactive Panels */}
