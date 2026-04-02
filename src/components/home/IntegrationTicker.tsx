@@ -91,8 +91,8 @@ export const IntegrationTicker: React.FC = () => {
           </p>
         </div>
 
-        {/* Ticker Rows */}
-        <div className="space-y-4 md:space-y-6">
+        {/* Ticker Rows with smooth mask fade */}
+        <div className="space-y-4 md:space-y-6 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] -webkit-[mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
           <TickerRow icons={n8nIcons} speed={40} />
           <TickerRow icons={makeIcons} speed={35} reverse={true} />
           <TickerRow icons={zapierIcons} speed={45} />
@@ -110,10 +110,6 @@ export const IntegrationTicker: React.FC = () => {
           </motion.button>
         </div>
       </div>
-
-      {/* Edge Fades - Enhanced with deeper gradients for smoother masking */}
-      <div className="absolute inset-y-0 left-0 w-32 md:w-80 bg-gradient-to-r from-white via-white to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-32 md:w-80 bg-gradient-to-l from-white via-white to-transparent z-20 pointer-events-none" />
     </section>
   );
 };
