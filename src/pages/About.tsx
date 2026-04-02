@@ -219,20 +219,19 @@ export default function About() {
       />
       {/* Hero Section with Personal Narrative Image */}
       <section className="relative h-screen min-h-[700px] flex items-end justify-start overflow-hidden bg-zinc-950">
-        {/* Background Image with Focal Point Adjustment */}
+        {/* Background Image - The Transformation Story */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/about-hero.jpg" 
-            alt="Emmanuel Odebiyi" 
-            className="w-full h-full object-cover object-[center_20%] scale-105 grayscale brightness-125 contrast-150 opacity-40 mix-blend-overlay"
+            src="https://res.cloudinary.com/dyd911kmh/image/upload/v1712072223/about-transformation.png"
+            alt="Emmanuel Odebiyi Transformation" 
+            className="w-full h-full object-cover object-center scale-105"
           />
-          {/* Halftone / Dither Pattern Overlay */}
-          <div className="absolute inset-0 z-10 opacity-30 pointer-events-none mix-blend-multiply" 
-               style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
           
-          {/* Edge Fades & Soft Vignette to guide eye to text/face */}
-          <div className="absolute inset-0 z-20 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-          <div className="absolute inset-0 z-20 bg-gradient-to-r from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none" />
+          {/* Subtle protection for the navbar text */}
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-zinc-950/40 to-transparent z-10 pointer-events-none" />
+          
+          {/* Bottom fade to transition into narrative */}
+          <div className="absolute inset-0 z-20 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
         </div>
 
         <div className="max-w-6xl mx-auto px-6 lg:px-12 pb-32 relative z-30 text-left space-y-8">
@@ -331,23 +330,72 @@ export default function About() {
         </div>
       </section>
 
-      {/* Side-by-Side Interactive Panels */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <InteractivePanel 
-            title="My Story"
-            subtitle="The journey from a writer to an automation specialist, and the lessons learned along the way."
-            icon={BookOpen}
-            path="/my-story"
-            accentColor="bg-deep-space-blue-50"
-          />
-          <InteractivePanel 
-            title="My Approach"
-            subtitle="Data, Systems, and Zero Guesswork. The methodology behind the results."
-            icon={Target}
-            path="/my-approach"
-            accentColor="bg-deep-space-blue-50"
-          />
+      {/* Large Premium journey Cards with Paper Texture */}
+      <section className="py-32 bg-white relative">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[
+              {
+                title: "My Story",
+                desc: "The journey from a writer to an automation specialist, and the lessons learned along the way.",
+                href: "/my-story",
+                icon: <BookOpen className="w-8 h-8" />,
+                color: "bg-zinc-900",
+                rotation: -1.5
+              },
+              {
+                title: "My Approach",
+                desc: "Data, Systems, and Zero Guesswork. The methodology behind the results.",
+                href: "/my-approach",
+                icon: <Target className="w-8 h-8" />,
+                color: "bg-blue-950",
+                rotation: 1.5
+              }
+            ].map((card) => (
+              <Link key={card.title} to={card.href} className="group block perspective-2000">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, rotate: card.rotation }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: card.rotation }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    rotate: 0, 
+                    y: -25, 
+                    scale: 1.05,
+                    transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] }
+                  }}
+                  className={`relative p-16 rounded-[4rem] ${card.color} border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] h-[650px] flex flex-col items-center text-center overflow-hidden transition-all duration-500`}
+                >
+                  {/* Premium Paper/Noise Texture Overlay */}
+                  <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay pointer-events-none" 
+                       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+                  
+                  {/* Internal Depth Glow */}
+                  <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/5 blur-[120px] rounded-full pointer-events-none" />
+                  
+                  {/* Icon */}
+                  <div className="p-6 rounded-[2rem] bg-white/5 border border-white/10 text-white mb-12 group-hover:bg-blue-600 group-hover:border-blue-500 group-hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-700 group-hover:scale-110">
+                    {card.icon}
+                  </div>
+
+                  <h3 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
+                    {card.title}
+                  </h3>
+                  
+                  <p className="text-zinc-400 text-lg md:text-xl font-medium leading-relaxed max-w-[320px] mb-auto">
+                    {card.desc}
+                  </p>
+
+                  {/* Reveal CTA */}
+                  <div className="mt-12 flex items-center gap-4 text-white font-black text-[12px] tracking-[0.4em] uppercase opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-8 group-hover:translate-y-0">
+                    Learn More <ArrowRight className="w-6 h-6 group-hover:translate-x-4 transition-transform duration-500" />
+                  </div>
+
+                  {/* Top Edge Polish */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                </motion.div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
