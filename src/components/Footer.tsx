@@ -79,16 +79,16 @@ export const Footer: React.FC = () => {
               {section.links.map((link) => {
                 const isExternal = link.href.startsWith('http') || link.href.startsWith('mailto');
                 const LinkPattern = (
-                  <span className="group flex items-center gap-3 text-zinc-500 hover:text-deep-space-blue-500 transition-all duration-300 w-fit">
+                  <span className="group flex items-center gap-3 text-zinc-500 hover:text-brand-gradient transition-all duration-300 w-fit">
                     {link.icon && (
-                      <span className="text-zinc-400 group-hover:text-deep-space-blue-500 transition-colors duration-300 group-hover:-translate-y-0.5 group-hover:scale-110">
+                      <span className="text-zinc-400 group-hover:text-brand-gradient transition-colors duration-300 group-hover:-translate-y-0.5 group-hover:scale-110">
                         {link.icon}
                       </span>
                     )}
                     <span className="text-sm font-medium relative overflow-hidden group-hover:translate-x-1 transition-transform duration-300">
                       {link.name}
                       {/* Hover underline effect */}
-                      <span className="absolute bottom-0 left-0 w-full h-[1px] bg-deep-space-blue-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                      <span className="absolute bottom-0 left-0 w-full h-[1px] bg-brand-gradient origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                     </span>
                   </span>
                 );
@@ -125,8 +125,8 @@ export const Footer: React.FC = () => {
           <span>All Rights Reserved</span>
         </div>
         <div className="flex gap-8">
-          <Link to="/privacy" className="hover:text-deep-space-blue-500 transition-colors duration-300">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-deep-space-blue-500 transition-colors duration-300">Terms of Service</Link>
+          <Link to="/privacy" className="hover:text-brand-gradient transition-colors duration-300">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-brand-gradient transition-colors duration-300">Terms of Service</Link>
         </div>
       </div>
 

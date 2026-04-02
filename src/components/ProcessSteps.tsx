@@ -92,7 +92,7 @@ export const ProcessSteps: React.FC = () => {
 
                 <div className="text-center md:text-left space-y-6">
                   <div className="space-y-2">
-                    <span className="text-deep-space-blue-500 font-mono text-xs font-bold tracking-widest uppercase">
+                    <span className="text-brand-gradient font-mono text-xs font-bold tracking-widest uppercase">
                       STEP {step.number} • {step.timeline}
                     </span>
                     <h4 className="text-2xl font-bold text-zinc-900">{step.title}</h4>
@@ -109,7 +109,7 @@ export const ProcessSteps: React.FC = () => {
                     </div>
                     <div>
                       <span className="block text-zinc-400 font-mono text-xs uppercase tracking-wider mb-1">What You Walk Away With</span>
-                      <span className="font-semibold text-deep-space-blue-600">{step.outcome}</span>
+                      <span className="font-semibold text-brand-gradient">{step.outcome}</span>
                     </div>
                   </div>
                 </div>

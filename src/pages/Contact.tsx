@@ -64,7 +64,7 @@ const ProgressIndicator = ({ currentStep, totalSteps }: { currentStep: number; t
         <motion.div 
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
-          className="h-full bg-deep-space-blue-500"
+          className="h-full bg-brand-gradient"
         />
       </div>
     </div>
@@ -82,7 +82,7 @@ const OptionCard = ({ selected, onClick, icon: Icon, label, desc }: any) => (
   >
     <div className="flex items-start gap-4">
       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
-        selected ? 'bg-white/10 text-deep-space-blue-400' : 'bg-zinc-50 text-zinc-400 group-hover:text-deep-space-blue-500'
+        selected ? 'bg-white/10 text-deep-space-blue-400' : 'bg-zinc-50 text-zinc-400 group-hover:text-brand-gradient'
       }`}>
         <Icon size={24} />
       </div>
@@ -178,7 +178,7 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
                 >
-                  <Sparkles size={12} className="text-deep-space-blue-500" />
+                  <Sparkles size={12} className="text-brand-gradient" />
                   Work With Me
                 </motion.div>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 leading-[1.15]">
@@ -382,7 +382,7 @@ export default function Contact() {
                   <button 
                     disabled={!isStepValid()}
                     onClick={nextStep}
-                    className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all flex items-center gap-2 disabled:opacity-50 disabled:hover:bg-zinc-900"
+                    className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all flex items-center gap-2 disabled:opacity-50 disabled:hover:bg-zinc-900"
                   >
                     Next Step
                     <ArrowRight size={20} />
@@ -391,7 +391,7 @@ export default function Contact() {
                   <button 
                     disabled={!isStepValid() || loading}
                     onClick={handleSubmit}
-                    className="px-10 py-5 bg-deep-space-blue-500 text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-400 transition-all flex items-center gap-2 shadow-xl shadow-deep-space-blue-500/20 disabled:opacity-50"
+                    className="px-10 py-5 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-400 transition-all flex items-center gap-2 shadow-xl shadow-indigo-500/20 disabled:opacity-50"
                   >
                     {loading ? 'Sending...' : 'Send Message'}
                     {!loading && <ArrowRight size={20} />}
@@ -407,7 +407,7 @@ export default function Contact() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center space-y-12 py-10"
             >
-              <div className="w-24 h-24 rounded-[2.5rem] bg-deep-space-blue-50 text-deep-space-blue-500 flex items-center justify-center mx-auto shadow-xl shadow-deep-space-blue-500/10">
+              <div className="w-24 h-24 rounded-[2.5rem] bg-deep-space-blue-50 text-brand-gradient flex items-center justify-center mx-auto shadow-xl shadow-indigo-500/10">
                 <CheckCircle2 size={48} />
               </div>
               <div className="space-y-4">
@@ -440,7 +440,7 @@ export default function Contact() {
               <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Link 
                   to="/portfolio"
-                  className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center gap-2"
+                  className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center gap-2"
                 >
                   View Case Studies
                   <ChevronRight size={20} />

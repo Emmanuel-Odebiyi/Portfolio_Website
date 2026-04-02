@@ -142,7 +142,7 @@ const ProgressBar = ({ current, total }: { current: number; total: number }) => 
     <motion.div 
       initial={{ width: 0 }}
       animate={{ width: `${(current / total) * 100}%` }}
-      className="h-full bg-deep-space-blue-500"
+      className="h-full bg-brand-gradient"
     />
   </div>
 );
@@ -293,7 +293,7 @@ export default function AutopilotScore() {
             >
               <div className="text-center space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
                   Diagnostic Tool
                 </div>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900">
@@ -377,7 +377,7 @@ export default function AutopilotScore() {
                   {formStep < 3 ? (
                     <button
                       onClick={() => setFormStep(prev => prev + 1)}
-                      className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all flex items-center gap-2"
+                      className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all flex items-center gap-2"
                     >
                       Next Step
                       <ChevronRight size={20} />
@@ -385,7 +385,7 @@ export default function AutopilotScore() {
                   ) : (
                     <button
                       onClick={handleStartScan}
-                      className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all flex items-center gap-2 shadow-lg shadow-deep-space-blue-200"
+                      className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all flex items-center gap-2 shadow-lg shadow-deep-space-blue-200"
                     >
                       Calculate Score
                       <Zap size={20} />
@@ -407,7 +407,7 @@ export default function AutopilotScore() {
               <div className="relative">
                 <div className="w-24 h-24 rounded-full border-4 border-zinc-100 border-t-deep-space-blue-500 animate-spin" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Zap size={32} className="text-deep-space-blue-500 animate-pulse" />
+                  <Zap size={32} className="text-brand-gradient animate-pulse" />
                 </div>
               </div>
               <div className="text-center space-y-2">
@@ -464,13 +464,13 @@ export default function AutopilotScore() {
                         </div>
                       </div>
                     </div>
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-deep-space-blue-500/10 blur-[80px] rounded-full" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gradient/10 blur-[80px] rounded-full" />
                   </div>
 
                   {/* Benchmark Comparison */}
                   <div className="p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 space-y-8">
                     <div className="flex items-center gap-3">
-                      <TrendingUp className="text-deep-space-blue-500" size={24} />
+                      <TrendingUp className="text-brand-gradient" size={24} />
                       <h4 className="text-xl font-bold text-zinc-900">Benchmark Comparison</h4>
                     </div>
                     <p className="text-lg text-zinc-500 font-light">
@@ -499,7 +499,7 @@ export default function AutopilotScore() {
                 <div className="lg:col-span-5">
                   <div className="sticky top-32 p-10 rounded-[3rem] bg-white border border-zinc-200 shadow-2xl shadow-zinc-200/50 space-y-8">
                     <div className="space-y-4">
-                      <div className="w-14 h-14 rounded-2xl bg-deep-space-blue-50 flex items-center justify-center text-deep-space-blue-500">
+                      <div className="w-14 h-14 rounded-2xl bg-deep-space-blue-50 flex items-center justify-center text-brand-gradient">
                         {isEmailUnlocked ? <Unlock size={28} /> : <Lock size={28} />}
                       </div>
                       <h4 className="text-2xl font-bold text-zinc-900 tracking-tight">Unlock Full Breakdown</h4>
@@ -534,7 +534,7 @@ export default function AutopilotScore() {
                         </div>
                         <button
                           type="submit"
-                          className="w-full py-5 bg-zinc-900 text-white font-bold rounded-xl hover:bg-deep-space-blue-500 transition-all flex items-center justify-center gap-2 group"
+                          className="w-full py-5 bg-zinc-900 text-white font-bold rounded-xl hover:bg-brand-gradient transition-all flex items-center justify-center gap-2 group"
                         >
                           {showSuccess ? 'Report Unlocked!' : 'Unlock Report'}
                           <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -543,14 +543,14 @@ export default function AutopilotScore() {
                     ) : (
                       <div className="space-y-6">
                         <div className="p-6 rounded-2xl bg-deep-space-blue-50 border border-deep-space-blue-100 flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-full bg-deep-space-blue-500 flex items-center justify-center text-white">
+                          <div className="w-10 h-10 rounded-full bg-brand-gradient flex items-center justify-center text-white">
                             <CheckCircle2 size={20} />
                           </div>
                           <p className="text-sm font-medium text-deep-space-blue-900">Full report unlocked for {name}</p>
                         </div>
                         <button
                           onClick={() => document.getElementById('full-report')?.scrollIntoView({ behavior: 'smooth' })}
-                          className="w-full py-5 bg-zinc-900 text-white font-bold rounded-xl hover:bg-deep-space-blue-500 transition-all flex items-center justify-center gap-2"
+                          className="w-full py-5 bg-zinc-900 text-white font-bold rounded-xl hover:bg-brand-gradient transition-all flex items-center justify-center gap-2"
                         >
                           View Breakdown ↓
                         </button>
@@ -616,7 +616,7 @@ export default function AutopilotScore() {
                         </div>
                         <div className="w-full h-2 bg-zinc-200 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-deep-space-blue-500 transition-all duration-1000" 
+                            className="h-full bg-brand-gradient transition-all duration-1000" 
                             style={{ width: `${cat.score}%` }}
                           />
                         </div>
@@ -626,7 +626,7 @@ export default function AutopilotScore() {
                             <p className="text-zinc-600 font-light">{cat.gap}</p>
                           </div>
                           <div className="space-y-2">
-                            <p className="text-[10px] font-mono text-deep-space-blue-500 uppercase tracking-widest">The Fix</p>
+                            <p className="text-[10px] font-mono text-brand-gradient uppercase tracking-widest">The Fix</p>
                             <p className="text-zinc-900 font-medium">{cat.fix}</p>
                           </div>
                         </div>
@@ -638,7 +638,7 @@ export default function AutopilotScore() {
                   <div className="bg-zinc-900 rounded-[4rem] p-12 md:p-24 text-center space-y-12 relative overflow-hidden">
                     <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
                       <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
-                        Ready to move from <span className="text-deep-space-blue-500">{results.tier}</span> to Autopilot?
+                        Ready to move from <span className="text-brand-gradient">{results.tier}</span> to Autopilot?
                       </h2>
                       <p className="text-xl text-zinc-400 font-light leading-relaxed">
                         The score gives you the diagnosis. I provide the cure. Let's build the systems that allow your business to scale without your constant involvement.
@@ -646,7 +646,7 @@ export default function AutopilotScore() {
                       <div className="pt-8">
                         <Link 
                           to="/about#contact-form"
-                          className="px-12 py-6 bg-white text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-500 hover:text-white transition-all shadow-2xl shadow-deep-space-blue-500/20 inline-flex items-center gap-3 group"
+                          className="px-12 py-6 bg-white text-zinc-900 font-bold rounded-2xl hover:bg-brand-gradient hover:text-white transition-all shadow-2xl shadow-indigo-500/20 inline-flex items-center gap-3 group"
                         >
                           Get a Custom Proposal
                           <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />

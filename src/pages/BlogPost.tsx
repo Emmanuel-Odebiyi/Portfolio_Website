@@ -373,7 +373,7 @@ export default function BlogPost() {
         
         {/* Introduction / Hook */}
         <section className="mb-20">
-          <p className="text-3xl md:text-4xl font-light text-zinc-500 leading-relaxed italic border-l-4 border-deep-space-blue-500 pl-8">
+          <p className="text-3xl md:text-4xl font-light text-zinc-500 leading-relaxed italic border-l-4 border-indigo-500 pl-8">
             {post.hook}
           </p>
         </section>
@@ -420,7 +420,7 @@ export default function BlogPost() {
                       {section.simplification.text}
                     </p>
                   </div>
-                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-deep-space-blue-500/10 blur-3xl rounded-full" />
+                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-gradient/10 blur-3xl rounded-full" />
                 </div>
               )}
 
@@ -428,7 +428,7 @@ export default function BlogPost() {
                 <ul className="space-y-4 pt-4">
                   {section.list.map((item: any, i: number) => (
                     <li key={i} className="flex items-start gap-4 group">
-                      <div className="mt-2 w-1.5 h-1.5 rounded-full bg-deep-space-blue-500 flex-shrink-0" />
+                      <div className="mt-2 w-1.5 h-1.5 rounded-full bg-brand-gradient flex-shrink-0" />
                       <span className="text-xl text-zinc-600 font-light leading-relaxed">{item}</span>
                     </li>
                   ))}
@@ -479,7 +479,7 @@ export default function BlogPost() {
         {/* Visual Break / Divider */}
         <div className="my-32 flex items-center justify-center gap-4">
           <div className="h-px w-12 bg-zinc-200" />
-          <div className="w-2 h-2 rounded-full bg-deep-space-blue-500" />
+          <div className="w-2 h-2 rounded-full bg-brand-gradient" />
           <div className="h-px w-12 bg-zinc-200" />
         </div>
 
@@ -493,7 +493,7 @@ export default function BlogPost() {
           <ul className="space-y-6">
             {post.takeaways.map((takeaway, i) => (
               <li key={i} className="flex items-start gap-4 group">
-                <div className="mt-1.5 w-5 h-5 rounded-full bg-deep-space-blue-100 text-deep-space-blue-600 flex items-center justify-center flex-shrink-0 group-hover:bg-deep-space-blue-500 group-hover:text-white transition-colors">
+                <div className="mt-1.5 w-5 h-5 rounded-full bg-deep-space-blue-100 text-brand-gradient flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gradient group-hover:text-white transition-colors">
                   <CheckCircle2 size={12} />
                 </div>
                 <span className="text-xl text-zinc-600 font-light leading-relaxed">{takeaway}</span>
@@ -524,7 +524,7 @@ export default function BlogPost() {
         {/* Simplified CTA Section */}
         <section className="mt-20 pt-12 border-t border-zinc-100">
           <p className="text-zinc-500 font-light">
-            Interested in seeing more? <Link to="/portfolio" className="text-deep-space-blue-600 font-bold hover:underline inline-flex items-center gap-1">View my portfolio <ArrowUpRight size={16} /></Link>, <Link to="/resume" className="text-zinc-900 font-bold hover:underline">check my resume</Link>, or <Link to="/contact" className="text-deep-space-blue-600 font-bold hover:underline">get in touch</Link>.
+            Interested in seeing more? <Link to="/portfolio" className="text-brand-gradient font-bold hover:underline inline-flex items-center gap-1">View my portfolio <ArrowUpRight size={16} /></Link>, <Link to="/resume" className="text-zinc-900 font-bold hover:underline">check my resume</Link>, or <Link to="/contact" className="text-brand-gradient font-bold hover:underline">get in touch</Link>.
           </p>
         </section>
 
@@ -554,12 +554,12 @@ export default function BlogPost() {
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     {related.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-[10px] font-mono uppercase tracking-widest text-deep-space-blue-600 bg-deep-space-blue-50 px-2 py-0.5 rounded">
+                      <span key={tag} className="text-[10px] font-mono uppercase tracking-widest text-brand-gradient bg-deep-space-blue-50 px-2 py-0.5 rounded">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h4 className="text-xl font-bold text-zinc-900 leading-tight group-hover:text-deep-space-blue-600 transition-colors">
+                  <h4 className="text-xl font-bold text-zinc-900 leading-tight group-hover:text-brand-gradient transition-colors">
                     {related.title}
                   </h4>
                   <p className="text-sm text-zinc-500 font-mono uppercase tracking-widest">{related.date}</p>
@@ -595,15 +595,15 @@ export default function BlogPost() {
               placeholder="Enter your email" 
               className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-deep-space-blue-500/30 transition-all"
             />
-            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-deep-space-blue-500 text-white rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-deep-space-blue-500/20">
+            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-white rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
               <ArrowRight size={20} />
             </button>
           </div>
         </div>
 
         {/* Background Decoration */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-deep-space-blue-500/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-deep-space-blue-500/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gradient/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gradient/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
       </section>
     </div>
   );

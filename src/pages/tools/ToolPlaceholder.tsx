@@ -39,7 +39,7 @@ export default function ToolPlaceholder() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
           <Link
             to="/growth-intelligence-lab"
-            className="flex items-center gap-2 text-zinc-900 font-bold hover:text-deep-space-blue-600 transition-colors"
+            className="flex items-center gap-2 text-zinc-900 font-bold hover:text-brand-gradient transition-colors"
           >
             <ArrowLeft size={20} />
             Back to Lab
@@ -47,7 +47,7 @@ export default function ToolPlaceholder() {
           
           <Link
             to="/services"
-            className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200"
+            className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200"
           >
             Explore Services
           </Link>

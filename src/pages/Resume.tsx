@@ -165,10 +165,10 @@ export default function Resume() {
               className="space-y-4 text-right md:pt-4"
             >
               <div className="flex flex-col gap-2 text-sm font-mono uppercase tracking-widest text-zinc-500">
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="hover:text-deep-space-blue-600 transition-colors">emmayoodebiyi001@gmail.com</a>
-                <a href="#" className="hover:text-deep-space-blue-600 transition-colors">LinkedIn</a>
-                <a href="#" className="hover:text-deep-space-blue-600 transition-colors">Twitter</a>
-                <a href="#" className="hover:text-deep-space-blue-600 transition-colors">Portfolio</a>
+                <a href="mailto:emmayoodebiyi001@gmail.com" className="hover:text-brand-gradient transition-colors">emmayoodebiyi001@gmail.com</a>
+                <a href="#" className="hover:text-brand-gradient transition-colors">LinkedIn</a>
+                <a href="#" className="hover:text-brand-gradient transition-colors">Twitter</a>
+                <a href="#" className="hover:text-brand-gradient transition-colors">Portfolio</a>
               </div>
               
               <AnimatePresence mode="wait">
@@ -187,7 +187,7 @@ export default function Resume() {
                     key="download"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white text-xs font-bold rounded-full hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 uppercase tracking-widest"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white text-xs font-bold rounded-full hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 uppercase tracking-widest"
                   >
                     <Download size={14} /> Download PDF
                   </motion.button>
@@ -210,7 +210,7 @@ export default function Resume() {
                   onClick={() => scrollToSection(section.id)}
                   className={`block text-xs font-bold uppercase tracking-[0.2em] transition-all text-left ${
                     activeSection === section.id 
-                      ? 'text-deep-space-blue-600' 
+                      ? 'text-brand-gradient' 
                       : 'text-zinc-300 hover:text-zinc-500'
                   }`}
                 >
@@ -235,7 +235,7 @@ export default function Resume() {
             <section id="summary" className="space-y-8">
               <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">01 / Summary</h2>
               <p className="text-2xl md:text-5xl text-zinc-900 font-bold leading-[1.1] tracking-tighter max-w-4xl">
-                I build <span className="text-deep-space-blue-500">autonomous growth engines</span> for SaaS companies. By combining AI-driven workflows with high-intent SEO strategy, I help brands scale their content operations and capture market share without increasing headcount.
+                I build <span className="text-brand-gradient">autonomous growth engines</span> for SaaS companies. By combining AI-driven workflows with high-intent SEO strategy, I help brands scale their content operations and capture market share without increasing headcount.
               </p>
               <p className="text-xl text-zinc-500 font-light leading-relaxed max-w-2xl">
                 Currently helping B2B technology platforms automate their marketing pipelines and achieve predictable, data-backed ROI.
@@ -250,7 +250,7 @@ export default function Resume() {
                   <div key={i} className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-8 group">
                     <div className="space-y-6">
                       <div className="space-y-1">
-                        <h3 className="text-2xl font-bold text-zinc-900 tracking-tight group-hover:text-deep-space-blue-600 transition-colors">{job.role}</h3>
+                        <h3 className="text-2xl font-bold text-zinc-900 tracking-tight group-hover:text-brand-gradient transition-colors">{job.role}</h3>
                         <p className="text-lg text-zinc-500 font-medium">{job.company}</p>
                       </div>
                       <p className="text-zinc-500 font-light leading-relaxed max-w-2xl italic">
@@ -284,7 +284,7 @@ export default function Resume() {
                     <ul className="space-y-3">
                       {group.skills.map(skill => (
                         <li key={skill} className="text-zinc-500 font-light flex items-center gap-2">
-                          <ChevronRight size={14} className="text-deep-space-blue-500" />
+                          <ChevronRight size={14} className="text-brand-gradient" />
                           {skill}
                         </li>
                       ))}
@@ -309,7 +309,7 @@ export default function Resume() {
                   >
                     <div className="flex justify-between items-start mb-6">
                       <h3 className="text-2xl font-bold text-zinc-900 tracking-tight">{project.title}</h3>
-                      <ExternalLink size={20} className="text-zinc-300 group-hover:text-deep-space-blue-500 transition-colors" />
+                      <ExternalLink size={20} className="text-zinc-300 group-hover:text-brand-gradient transition-colors" />
                     </div>
                     <p className="text-zinc-500 font-light leading-relaxed">{project.desc}</p>
                   </Link>
@@ -328,7 +328,7 @@ export default function Resume() {
                   "Zapier Automation Expert"
                 ].map((cert, i) => (
                   <div key={i} className="flex items-center gap-4 p-6 border border-zinc-100 rounded-2xl hover:border-deep-space-blue-200 transition-colors">
-                    <Award size={20} className="text-deep-space-blue-500" />
+                    <Award size={20} className="text-brand-gradient" />
                     <span className="font-medium text-zinc-800 tracking-tight">{cert}</span>
                   </div>
                 ))}
@@ -353,9 +353,9 @@ export default function Resume() {
                 © 2026 Emmanuel Odebiyi — Built for Growth
               </p>
               <div className="flex gap-8">
-                <a href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-deep-space-blue-600 transition-colors">LinkedIn</a>
-                <a href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-deep-space-blue-600 transition-colors">Twitter</a>
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-deep-space-blue-600 transition-colors">Email</a>
+                <a href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-brand-gradient transition-colors">LinkedIn</a>
+                <a href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-brand-gradient transition-colors">Twitter</a>
+                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-brand-gradient transition-colors">Email</a>
               </div>
             </footer>
 

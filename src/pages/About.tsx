@@ -164,7 +164,7 @@ const TimelineItem = ({ item, index }: { item: any; index: number; key?: any }) 
     <div ref={ref} className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 mb-16 last:mb-0">
       <div className={`hidden md:flex items-center ${index % 2 === 0 ? 'justify-end text-right' : 'order-last justify-start text-left'}`}>
         <motion.div style={{ opacity, x, scale }} className="space-y-2">
-          <span className="text-4xl font-bold text-deep-space-blue-500 font-mono tracking-tighter">{item.year}</span>
+          <span className="text-4xl font-bold text-brand-gradient font-mono tracking-tighter">{item.year}</span>
           <p className="text-xs font-mono text-zinc-400 uppercase tracking-[0.2em]">{item.issuer}</p>
         </motion.div>
       </div>
@@ -172,14 +172,14 @@ const TimelineItem = ({ item, index }: { item: any; index: number; key?: any }) 
       <div className={`${index % 2 === 0 ? 'md:order-last' : ''}`}>
         <motion.div 
           style={{ opacity, scale }}
-          className="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 shadow-xl shadow-zinc-950/30 hover:shadow-deep-space-blue-500/10 transition-all group relative overflow-hidden"
+          className="p-8 rounded-[2rem] bg-zinc-900 border border-zinc-800 shadow-xl shadow-zinc-950/30 hover:shadow-indigo-500/10 transition-all group relative overflow-hidden"
         >
           <div className="md:hidden flex items-center gap-3 mb-4">
-            <span className="text-sm font-mono text-deep-space-blue-500 font-bold">{item.year}</span>
+            <span className="text-sm font-mono text-brand-gradient font-bold">{item.year}</span>
             <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">{item.issuer}</span>
           </div>
           <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-            {item.icon || <Award size={20} className="text-deep-space-blue-500" />}
+            {item.icon || <Award size={20} className="text-brand-gradient" />}
             {item.title}
           </h4>
         </motion.div>
@@ -188,9 +188,9 @@ const TimelineItem = ({ item, index }: { item: any; index: number; key?: any }) 
       <div className="absolute left-0 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-20">
         <motion.div 
           style={{ scale: scrollYProgress }}
-          className="w-8 h-8 rounded-full bg-zinc-950 border-4 border-deep-space-blue-500 flex items-center justify-center"
+          className="w-8 h-8 rounded-full bg-zinc-950 border-4 border-indigo-500 flex items-center justify-center"
         >
-          <div className="w-2 h-2 rounded-full bg-deep-space-blue-500 animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-brand-gradient animate-pulse" />
         </motion.div>
       </div>
     </div>
@@ -224,13 +224,13 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
           About Me
         </motion.div>
         
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-zinc-900 mx-auto leading-[1.05]">
           I Used to Be the <span className="text-zinc-300">Burnout.</span><br />
-          Now I Build the System That <span className="text-deep-space-blue-500">Prevents It.</span>
+          Now I Build the System That <span className="text-brand-gradient">Prevents It.</span>
         </h1>
         
         <p className="text-xl md:text-2xl text-zinc-500 font-light leading-relaxed max-w-4xl mx-auto">
@@ -244,7 +244,7 @@ export default function About() {
         <p>Growing businesses face a brutal contradiction: content marketing drives growth, but producing it consistently is expensive, time-consuming, and unsustainable. So most businesses are stuck choosing between doing it badly or not doing it at all.</p>
         <p className="text-zinc-900 font-medium">I solve that exact problem.</p>
         <p>I design and build automated marketing systems that deliver enterprise-level content output — without the enterprise price tag, the management overhead, or the constant scramble to keep things moving.</p>
-        <p className="text-deep-space-blue-600 font-bold">Marketing that runs while you build. That's what I create.</p>
+        <p className="text-brand-gradient font-bold">Marketing that runs while you build. That's what I create.</p>
       </section>
 
       {/* Side-by-Side Interactive Panels */}
@@ -283,7 +283,7 @@ export default function About() {
                 className="p-8 rounded-3xl bg-zinc-50 border border-zinc-100 space-y-6 group hover:border-deep-space-blue-200 transition-all shadow-xl shadow-zinc-100"
               >
                 <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-md">
-                  <div className="text-deep-space-blue-500 group-hover:scale-110 transition-transform">
+                  <div className="text-brand-gradient group-hover:scale-110 transition-transform">
                     {skill.icon}
                   </div>
                 </div>
@@ -297,7 +297,7 @@ export default function About() {
           
           <div className="text-center pt-8">
             <p className="text-sm font-mono text-zinc-400 uppercase tracking-widest max-w-3xl mx-auto leading-loose">
-              <strong className="text-deep-space-blue-500">Tools I Use:</strong> Semrush • Ahrefs • Ubersuggest • Surfer SEO • Frase • n8n • Zapier • Make.com • HubSpot 
+              <strong className="text-brand-gradient">Tools I Use:</strong> Semrush • Ahrefs • Ubersuggest • Surfer SEO • Frase • n8n • Zapier • Make.com • HubSpot 
             </p>
           </div>
         </div>
@@ -316,7 +316,7 @@ export default function About() {
               {resultsData.map((row, i) => (
                 <div key={i} className="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <span className="text-xl font-bold text-zinc-900">{row.metric}</span>
-                  <span className="text-deep-space-blue-600 text-lg font-medium">{row.result}</span>
+                  <span className="text-brand-gradient text-lg font-medium">{row.result}</span>
                 </div>
               ))}
             </div>
@@ -332,7 +332,7 @@ export default function About() {
       {/* Certifications - Vertical Timeline */}
       <section className="py-32 bg-zinc-950 text-white max-w-7xl mx-auto rounded-[3rem] px-6 overflow-hidden my-20">
         <div className="text-center space-y-4 mb-32">
-          <h2 className="text-deep-space-blue-500 font-mono text-xs uppercase tracking-[0.3em]">Education & Credentials</h2>
+          <h2 className="text-brand-gradient font-mono text-xs uppercase tracking-[0.3em]">Education & Credentials</h2>
           <h3 className="text-5xl md:text-6xl font-bold tracking-tight">Certifications</h3>
         </div>
 
@@ -372,15 +372,15 @@ export default function About() {
             </a>
             <Link 
               to="/contact"
-              className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-[2rem] hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center justify-center gap-3"
+              className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-[2rem] hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center justify-center gap-3"
             >
               Book Your Call <ArrowRight size={20} />
             </Link>
           </div>
           
           <div className="flex justify-center flex-wrap items-center gap-8 text-zinc-400 font-mono text-xs uppercase tracking-widest pt-8">
-            <span className="flex items-center gap-2"><Mail size={14} className="text-deep-space-blue-500" /> Free 30-minute call</span>
-            <span className="flex items-center gap-2"><MessageSquare size={14} className="text-deep-space-blue-500" /> No pitch, just strategy</span>
+            <span className="flex items-center gap-2"><Mail size={14} className="text-brand-gradient" /> Free 30-minute call</span>
+            <span className="flex items-center gap-2"><MessageSquare size={14} className="text-brand-gradient" /> No pitch, just strategy</span>
           </div>
         </div>
       </section>

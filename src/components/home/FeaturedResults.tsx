@@ -36,7 +36,7 @@ const FeaturedResults = () => {
               <div>
                 <span className="text-zinc-400 font-mono text-xs uppercase tracking-widest mb-4 block">Case Study: TechFlow Solutions</span>
                 <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 leading-tight max-w-xl">
-                  520% ROI <br /> Delivered in 90 Days.
+                  <span className="text-brand-gradient">520% ROI</span> <br /> Delivered in 90 Days.
                 </h3>
               </div>
               <div className="flex items-center gap-4 group-hover:gap-6 transition-all">
@@ -61,7 +61,7 @@ const FeaturedResults = () => {
             className="md:col-span-4 md:row-span-1 bg-zinc-50 rounded-[2rem] border border-zinc-100 p-8 flex flex-col justify-center relative overflow-hidden group"
           >
             <div className="relative z-10">
-              <span className="text-6xl md:text-7xl font-bold text-zinc-900 mb-2 block">40+</span>
+              <span className="text-6xl md:text-7xl font-bold text-brand-gradient mb-2 block">40+</span>
               <p className="text-zinc-500 font-medium leading-snug">
                 Articles published monthly. <br />
                 Up from just 8.
@@ -80,7 +80,7 @@ const FeaturedResults = () => {
             transition={{ delay: 0.2 }}
             className="md:col-span-4 md:row-span-1 bg-zinc-50 rounded-[2rem] border border-zinc-100 p-8 flex flex-col justify-center group"
           >
-            <span className="text-4xl md:text-5xl font-bold text-zinc-900 mb-2 block leading-none">$127k</span>
+            <span className="text-4xl md:text-5xl font-bold text-brand-gradient mb-2 block leading-none">$127k</span>
             <p className="text-zinc-500 font-medium leading-snug">
               In directly attributed revenue. <br />
               First quarter alone.
@@ -96,7 +96,7 @@ const FeaturedResults = () => {
              <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
                    <span className="text-zinc-400 font-mono text-xs uppercase tracking-widest mb-4 block">Case Study: The Scoove Africa</span>
-                   <h3 className="text-4xl md:text-6xl font-bold text-zinc-900 leading-tight">65%</h3>
+                   <h3 className="text-4xl md:text-6xl font-bold text-brand-gradient leading-tight">65%</h3>
                    <p className="text-zinc-600 font-semibold text-xl md:text-2xl mt-2">Organic Growth</p>
                    <p className="text-zinc-500 mt-4 leading-relaxed max-w-xs">
                      Average ranking climbed from Position 24 to Position 9. 
@@ -120,7 +120,7 @@ const FeaturedResults = () => {
             className="md:col-span-4 md:row-span-1 bg-zinc-50 rounded-[2rem] border border-zinc-100 p-8 flex flex-col justify-center relative overflow-hidden group"
           >
             <div className="relative z-10">
-              <span className="text-5xl md:text-6xl font-bold text-zinc-900 mb-2 block">25k+</span>
+              <span className="text-5xl md:text-6xl font-bold text-brand-gradient mb-2 block">25k+</span>
               <p className="text-zinc-500 font-medium">Monthly impressions via programmatic SEO architecture.</p>
             </div>
             <img 
@@ -130,14 +130,13 @@ const FeaturedResults = () => {
             />
           </motion.div>
 
-          {/* Cell 6: CTR Improvement (Span 4) */}
           <motion.div 
             {...fadeIn}
             transition={{ delay: 0.5 }}
-            className="md:col-span-4 md:row-span-1 bg-[#EEF2FF] rounded-[2rem] p-8 flex flex-col justify-center border border-indigo-100 group"
+            className="md:col-span-4 md:row-span-1 bg-zinc-50 rounded-[2rem] p-8 flex flex-col justify-center border border-zinc-100 group"
           >
-            <span className="text-5xl md:text-6xl font-bold text-indigo-900 mb-2 block">40%</span>
-            <p className="text-indigo-700/80 font-medium">Click-through rate improvement in the first 90 days.</p>
+            <span className="text-5xl md:text-6xl font-bold text-brand-gradient mb-2 block">40%</span>
+            <p className="text-zinc-500 font-medium">Click-through rate improvement in the first 90 days.</p>
           </motion.div>
 
         </div>

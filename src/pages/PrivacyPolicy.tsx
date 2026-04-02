@@ -71,7 +71,7 @@ export default function PrivacyPolicy() {
               <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">6. Contact</h2>
               <p>
                 If you have any questions about this Privacy Policy, please contact me at: <br />
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-deep-space-blue-600 font-bold hover:underline">emmayoodebiyi001@gmail.com</a>
+                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-brand-gradient font-bold hover:underline">emmayoodebiyi001@gmail.com</a>
               </p>
             </section>
           </div>

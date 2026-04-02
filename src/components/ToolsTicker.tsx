@@ -34,7 +34,7 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
           {duplicatedTools.map((tool, i) => (
             <MagneticPull key={i} strength={0.3} radius={16}>
               <div
-                className="flex items-center gap-4 px-8 py-5 rounded-2xl bg-white/40 backdrop-blur-sm border border-zinc-200/50 group transition-all duration-300 hover:border-deep-space-blue-300/50 hover:bg-white/80 hover:shadow-2xl hover:shadow-deep-space-blue-500/10"
+                className="flex items-center gap-4 px-8 py-5 rounded-2xl bg-white/40 backdrop-blur-sm border border-zinc-200/50 group transition-all duration-300 hover:border-deep-space-blue-300/50 hover:bg-white/80 hover:shadow-2xl hover:shadow-indigo-500/10"
               >
                 {tool.logo ? (
                   <img
@@ -44,7 +44,7 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-8 h-8 flex items-center justify-center text-zinc-300 group-hover:text-deep-space-blue-500 transition-colors duration-500">
+                  <div className="w-8 h-8 flex items-center justify-center text-zinc-300 group-hover:text-brand-gradient transition-colors duration-500">
                     {tool.icon}
                   </div>
                 )}

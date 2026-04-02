@@ -13,11 +13,11 @@ export const StatsBar = () => {
         ].map((stat, i) => (
           <div key={i} className="flex flex-col items-center gap-1 group metric-card">
             <div className="flex items-baseline gap-1">
-              <span className="text-deep-space-blue-500 font-bold text-sm">✓</span>
+              <span className="text-brand-gradient font-bold text-sm">✓</span>
               <NumberTicker 
                 value={stat.value} 
                 suffix={stat.suffix} 
-                className="text-4xl md:text-5xl font-bold text-zinc-900 group-hover:text-deep-space-blue-500 transition-colors"
+                className="text-4xl md:text-5xl font-bold text-zinc-900 group-hover:text-brand-gradient transition-colors"
               />
             </div>
             <span className="text-zinc-400 font-mono text-[10px] uppercase tracking-widest">{stat.label}</span>

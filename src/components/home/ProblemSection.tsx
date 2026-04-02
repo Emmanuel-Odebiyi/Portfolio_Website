@@ -127,7 +127,7 @@ const VerticalNavigator = ({
 
   return (
     <div
-      className="absolute left-16 md:left-24 lg:left-32 top-1/2 -translate-y-1/2 z-[200] flex flex-col items-center"
+      className="absolute left-[-100px] top-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-auto"
       style={{ height: TRACK_HEIGHT + 56 }}
       aria-label="Problem navigation"
     >
@@ -458,12 +458,16 @@ export const ProblemSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Vertical navigator — left side, naturally sticky in this container */}
-        <VerticalNavigator
-          activeIndex={activeIndex}
-          onNodeClick={handleNodeClick}
-          progress={smoothProgress}
-        />
+        {/* Vertical navigator — wrapped in a content-aligned container to keep it close to the text */}
+        <div className="absolute inset-0 flex items-center justify-center px-6 md:px-16 lg:px-24 pointer-events-none z-[200]">
+          <div className="w-full max-w-6xl relative h-full">
+            <VerticalNavigator
+              activeIndex={activeIndex}
+              onNodeClick={handleNodeClick}
+              progress={smoothProgress}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

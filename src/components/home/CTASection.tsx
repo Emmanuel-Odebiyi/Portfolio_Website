@@ -9,7 +9,7 @@ export const CTASection = () => {
         <div className="space-y-6">
           <h2 className="text-4xl md:text-7xl font-bold text-zinc-900 tracking-tight leading-snug">
             Your Window Is Open. <br />
-            <span className="text-deep-space-blue-500">Your Competitors Are Already Moving.</span>
+            <span className="text-brand-gradient">Your Competitors Are Already Moving.</span>
           </h2>
           <p className="text-2xl text-zinc-500 font-light max-w-3xl mx-auto">
             Every week without a system is a week they're showing up where you aren't.

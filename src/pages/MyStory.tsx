@@ -7,7 +7,7 @@ export default function MyStory() {
   return (
     <div className="pt-32 pb-20 bg-white">
       <section className="max-w-4xl mx-auto px-6">
-        <Link to="/about" className="inline-flex items-center gap-2 text-zinc-500 hover:text-deep-space-blue-600 transition-colors mb-12 group">
+        <Link to="/about" className="inline-flex items-center gap-2 text-zinc-500 hover:text-brand-gradient transition-colors mb-12 group">
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           Back to About
         </Link>
@@ -17,9 +17,9 @@ export default function MyStory() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-deep-space-blue-50 text-deep-space-blue-600 text-xs font-mono tracking-[0.2em] uppercase"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-deep-space-blue-50 text-brand-gradient text-xs font-mono tracking-[0.2em] uppercase"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
               The Deep Dive
             </motion.div>
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[1.05] text-zinc-900">
@@ -55,7 +55,7 @@ export default function MyStory() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {['AI Efficiency', 'Human Strategy', 'Systematic Processes'].map((item) => (
                   <div key={item} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-zinc-100">
-                    <CheckCircle2 className="text-deep-space-blue-500" size={20} />
+                    <CheckCircle2 className="text-brand-gradient" size={20} />
                     <span className="font-bold text-zinc-900 text-sm">{item}</span>
                   </div>
                 ))}
@@ -69,7 +69,7 @@ export default function MyStory() {
             <div className="pt-20 text-center">
               <Link 
                 to="/contact"
-                className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200"
               >
                 Let's Build Your Story <ArrowLeft size={20} className="rotate-180" />
               </Link>

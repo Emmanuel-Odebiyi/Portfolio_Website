@@ -281,7 +281,7 @@ export default function GrowthSimulator() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
             Growth Forecasting Engine
           </motion.div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900">
@@ -485,7 +485,7 @@ export default function GrowthSimulator() {
                 <div className="space-y-2">
                   <p className="text-xs font-mono text-zinc-400 uppercase tracking-widest">The Opportunity Gap</p>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-bold text-deep-space-blue-500">+{gap.percent}%</span>
+                    <span className="text-4xl font-bold text-brand-gradient">+{gap.percent}%</span>
                     <span className="text-zinc-500 font-light">Growth Potential</span>
                   </div>
                 </div>
@@ -581,14 +581,14 @@ export default function GrowthSimulator() {
                     </div>
                     <button 
                       disabled={loading}
-                      className="w-full py-5 bg-deep-space-blue-500 text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-400 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+                      className="w-full py-5 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-400 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
                     >
                       {loading ? 'Generating Report...' : 'Generate Full Growth Report'}
                       <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </form>
                 </div>
-                <div className="absolute top-0 right-0 w-96 h-96 bg-deep-space-blue-500/10 blur-[100px] rounded-full" />
+                <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gradient/10 blur-[100px] rounded-full" />
               </div>
             ) : (
               <motion.div 
@@ -602,7 +602,7 @@ export default function GrowthSimulator() {
                     <h4 className="text-xl font-bold text-zinc-900">Monthly Performance Comparison</h4>
                     <div className="flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
                       <div className="flex items-center gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-deep-space-blue-500" /> Autopilot
+                        <div className="w-2 h-2 rounded-full bg-brand-gradient" /> Autopilot
                       </div>
                       <div className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded-full bg-amber-500" /> Manual
@@ -626,7 +626,7 @@ export default function GrowthSimulator() {
                               <div className="space-y-1">
                                 <span className="font-bold text-zinc-900">Month {row.month}</span>
                                 {row.milestone && (
-                                  <p className="text-[10px] text-deep-space-blue-600 font-bold uppercase tracking-tighter flex items-center gap-1">
+                                  <p className="text-[10px] text-brand-gradient font-bold uppercase tracking-tighter flex items-center gap-1">
                                     <Zap size={10} /> {row.milestone}
                                   </p>
                                 )}
@@ -635,19 +635,19 @@ export default function GrowthSimulator() {
                             <td className="px-8 py-6">
                               <div className="flex flex-col">
                                 <span className="text-zinc-400 text-xs line-through">{row.manualVisitors.toLocaleString()}</span>
-                                <span className="text-deep-space-blue-600 font-bold">{row.autopilotVisitors.toLocaleString()}</span>
+                                <span className="text-brand-gradient font-bold">{row.autopilotVisitors.toLocaleString()}</span>
                               </div>
                             </td>
                             <td className="px-8 py-6">
                               <div className="flex flex-col">
                                 <span className="text-zinc-400 text-xs line-through">{row.manualLeads.toLocaleString()}</span>
-                                <span className="text-deep-space-blue-600 font-bold">{row.autopilotLeads.toLocaleString()}</span>
+                                <span className="text-brand-gradient font-bold">{row.autopilotLeads.toLocaleString()}</span>
                               </div>
                             </td>
                             <td className="px-8 py-6">
                               <div className="flex flex-col">
                                 <span className="text-zinc-400 text-xs line-through">{formatCurrency(row.manualRevenue)}</span>
-                                <span className="text-deep-space-blue-600 font-bold">{formatCurrency(row.autopilotRevenue)}</span>
+                                <span className="text-brand-gradient font-bold">{formatCurrency(row.autopilotRevenue)}</span>
                               </div>
                             </td>
                           </tr>
@@ -672,7 +672,7 @@ export default function GrowthSimulator() {
                   <div className="relative z-10 max-w-2xl mx-auto space-y-8">
                     <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
                       See what this looks like <br />
-                      <span className="text-deep-space-blue-500">for your business.</span>
+                      <span className="text-brand-gradient">for your business.</span>
                     </h2>
                     <p className="text-lg text-zinc-400 font-light">
                       The simulator shows the math. We show you the strategy. Book a free call to map your specific automation growth path.
@@ -680,7 +680,7 @@ export default function GrowthSimulator() {
                     <div className="pt-4">
                       <Link 
                         to="/contact"
-                        className="px-10 py-5 bg-deep-space-blue-500 text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-400 transition-all shadow-2xl shadow-deep-space-blue-500/20 inline-flex items-center gap-3 group"
+                        className="px-10 py-5 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-400 transition-all shadow-2xl shadow-indigo-500/20 inline-flex items-center gap-3 group"
                       >
                         Book a Free Strategy Call
                         <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />

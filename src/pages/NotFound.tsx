@@ -13,7 +13,7 @@ export default function NotFound() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative inline-block"
         >
-          <div className="absolute inset-0 bg-deep-space-blue-500/10 blur-3xl rounded-full scale-150" />
+          <div className="absolute inset-0 bg-brand-gradient/10 blur-3xl rounded-full scale-150" />
           <Rocket size={120} className="text-zinc-900 relative z-10 mx-auto" strokeWidth={1} />
         </motion.div>
 
@@ -35,7 +35,7 @@ export default function NotFound() {
         >
           <Link
             to="/"
-            className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center gap-2 group"
+            className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center gap-2 group"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             Back to Home

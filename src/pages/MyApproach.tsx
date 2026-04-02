@@ -7,7 +7,7 @@ export default function MyApproach() {
   return (
     <div className="pt-32 pb-20 bg-white">
       <section className="max-w-4xl mx-auto px-6">
-        <Link to="/about" className="inline-flex items-center gap-2 text-zinc-500 hover:text-deep-space-blue-600 transition-colors mb-12 group">
+        <Link to="/about" className="inline-flex items-center gap-2 text-zinc-500 hover:text-brand-gradient transition-colors mb-12 group">
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           Back to About
         </Link>
@@ -17,9 +17,9 @@ export default function MyApproach() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-deep-space-blue-50 text-deep-space-blue-600 text-xs font-mono tracking-[0.2em] uppercase"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-deep-space-blue-50 text-brand-gradient text-xs font-mono tracking-[0.2em] uppercase"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
               The Methodology
             </motion.div>
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[1.05] text-zinc-900">
@@ -28,7 +28,7 @@ export default function MyApproach() {
           </div>
 
           <div className="prose prose-zinc prose-2xl font-light text-zinc-600 leading-relaxed space-y-12">
-            <p className="text-3xl font-bold text-deep-space-blue-600 leading-tight">
+            <p className="text-3xl font-bold text-brand-gradient leading-tight">
               Authority + Data + Simplicity + Action
             </p>
             
@@ -41,22 +41,22 @@ export default function MyApproach() {
                 { 
                   title: 'Systematic', 
                   desc: 'Process-oriented, workflow-focused, repeatable methods that don\'t rely on "inspiration".',
-                  icon: <Layers className="text-deep-space-blue-500" size={32} />
+                  icon: <Layers className="text-brand-gradient" size={32} />
                 },
                 { 
                   title: 'Data-Driven', 
                   desc: 'Every claim quantified with metrics. We track what works and kill what doesn\'t.',
-                  icon: <Search className="text-deep-space-blue-500" size={32} />
+                  icon: <Search className="text-brand-gradient" size={32} />
                 },
                 { 
                   title: 'Practical', 
                   desc: 'Actionable implementation over abstract theory. I build things that actually run.',
-                  icon: <Zap className="text-deep-space-blue-500" size={32} />
+                  icon: <Zap className="text-brand-gradient" size={32} />
                 },
                 { 
                   title: 'Clear', 
                   desc: 'Complex automation explained without jargon. You own the system, you understand it.',
-                  icon: <Bot className="text-deep-space-blue-500" size={32} />
+                  icon: <Bot className="text-brand-gradient" size={32} />
                 },
               ].map((val, i) => (
                 <motion.div 
@@ -83,7 +83,7 @@ export default function MyApproach() {
             <div className="pt-20 text-center">
               <Link 
                 to="/contact"
-                className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200"
               >
                 Scale Your Growth <Zap size={20} />
               </Link>

@@ -218,7 +218,7 @@ export default function Blog() {
                 </div>
                 
                 <div className="space-y-6">
-                  <h3 className="text-3xl font-bold leading-[1.1] tracking-tight group-hover:text-deep-space-blue-600 transition-colors">
+                  <h3 className="text-3xl font-bold leading-[1.1] tracking-tight group-hover:text-brand-gradient transition-colors">
                     {post.title}
                   </h3>
                   
@@ -242,7 +242,7 @@ export default function Blog() {
 
         {/* Pagination / Load More */}
         <div className="mt-24 flex justify-center">
-          <button className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center gap-3 group">
+          <button className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center gap-3 group">
             Load More Stories
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
@@ -279,15 +279,15 @@ export default function Blog() {
               placeholder="Enter your email" 
               className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-deep-space-blue-500/30 transition-all"
             />
-            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-deep-space-blue-500 text-white rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-deep-space-blue-500/20">
+            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-white rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
               <Mail size={20} />
             </button>
           </motion.div>
         </div>
 
         {/* Background Decoration */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-deep-space-blue-500/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-deep-space-blue-500/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gradient/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gradient/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
       </section>
     </div>
   );

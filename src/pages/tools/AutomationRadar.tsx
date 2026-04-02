@@ -92,11 +92,11 @@ const Question = ({
   value: boolean; 
   onChange: (v: boolean) => void 
 }) => (
-  <div className="flex items-center justify-between p-4 rounded-2xl bg-zinc-50 border border-zinc-100 hover:border-deep-space-blue-500/30 transition-all group">
+  <div className="flex items-center justify-between p-4 rounded-2xl bg-zinc-50 border border-zinc-100 hover:border-indigo-500/30 transition-all group">
     <span className="text-sm text-zinc-600 font-light group-hover:text-zinc-900 transition-colors">{label}</span>
     <button
       onClick={() => onChange(!value)}
-      className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${value ? 'bg-deep-space-blue-500' : 'bg-zinc-200'}`}
+      className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${value ? 'bg-brand-gradient' : 'bg-zinc-200'}`}
     >
       <div className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 ${value ? 'translate-x-6' : 'translate-x-0'}`} />
     </button>
@@ -158,7 +158,7 @@ export default function AutomationRadar() {
     };
 
     const levelToValue = (lvl: OpportunityLevel) => lvl === 'High' ? 90 : (lvl === 'Medium' ? 60 : 25);
-    const levelToColor = (lvl: OpportunityLevel) => lvl === 'High' ? 'bg-rose-500' : (lvl === 'Medium' ? 'bg-amber-500' : 'bg-deep-space-blue-500');
+    const levelToColor = (lvl: OpportunityLevel) => lvl === 'High' ? 'bg-rose-500' : (lvl === 'Medium' ? 'bg-amber-500' : 'bg-brand-gradient');
 
     // Content & Marketing
     const cmPts = (manualPublish ? 45 : 0) + (!definedWorkflow ? 45 : 0);
@@ -300,9 +300,9 @@ export default function AutomationRadar() {
           <motion.div
             animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-deep-space-blue-500/20 rounded-full"
+            className="absolute inset-0 bg-brand-gradient/20 rounded-full"
           />
-          <div className="absolute inset-0 flex items-center justify-center text-deep-space-blue-500">
+          <div className="absolute inset-0 flex items-center justify-center text-brand-gradient">
             <RadarIcon size={40} className="animate-pulse" />
           </div>
         </div>
@@ -341,7 +341,7 @@ export default function AutomationRadar() {
               Back to Lab
             </Link>
             <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight">
-              Automation Radar<span className="text-deep-space-blue-500">™</span>
+              Automation Radar<span className="text-brand-gradient">™</span>
             </h1>
             <p className="text-xl text-zinc-500 font-light max-w-2xl">
               Diagnose your business operations and uncover hidden automation opportunities across every department.
@@ -490,7 +490,7 @@ export default function AutomationRadar() {
                 <div className="space-y-6 pt-4">
                   <div className="flex justify-between items-center">
                     <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-400">04. Manual Task Load</h3>
-                    <span className="text-2xl font-bold text-deep-space-blue-500">{formData.adminHours} hrs/week</span>
+                    <span className="text-2xl font-bold text-brand-gradient">{formData.adminHours} hrs/week</span>
                   </div>
                   <div className="space-y-4">
                     <input 
@@ -512,7 +512,7 @@ export default function AutomationRadar() {
 
               <button
                 onClick={handleStartScan}
-                className="w-full py-6 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center justify-center gap-3 group"
+                className="w-full py-6 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center justify-center gap-3 group"
               >
                 Generate Automation Radar
                 <Zap size={20} className="group-hover:scale-110 transition-transform" />
@@ -522,7 +522,7 @@ export default function AutomationRadar() {
             {/* Info Section */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-32">
               <div className="p-10 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 space-y-8">
-                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-deep-space-blue-500">
+                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-gradient">
                   <RadarIcon size={32} />
                 </div>
                 <div className="space-y-4">
@@ -539,7 +539,7 @@ export default function AutomationRadar() {
                     'Estimated time-saving impact'
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-zinc-600 font-light">
-                      <CheckCircle2 size={18} className="text-deep-space-blue-500" />
+                      <CheckCircle2 size={18} className="text-brand-gradient" />
                       {item}
                     </li>
                   ))}
@@ -588,7 +588,7 @@ export default function AutomationRadar() {
                     <span className="text-8xl font-bold text-zinc-900 tracking-tighter">{results.readinessScore}</span>
                     <div className="space-y-1">
                       <span className="text-2xl font-bold text-zinc-400">/ 100</span>
-                      <p className="text-sm font-mono uppercase tracking-widest text-deep-space-blue-500 font-bold">Readiness Score</p>
+                      <p className="text-sm font-mono uppercase tracking-widest text-brand-gradient font-bold">Readiness Score</p>
                     </div>
                   </div>
                 </div>
@@ -621,7 +621,7 @@ export default function AutomationRadar() {
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ type: "spring", damping: 12, stiffness: 200 }}
-                          className="w-20 h-20 bg-deep-space-blue-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-deep-space-blue-500/20"
+                          className="w-20 h-20 bg-brand-gradient rounded-full flex items-center justify-center text-white shadow-lg shadow-indigo-500/20"
                         >
                           <CheckCircle2 size={40} />
                         </motion.div>
@@ -633,7 +633,7 @@ export default function AutomationRadar() {
                           <motion.div 
                             animate={{ x: [0, 10, 0] }}
                             transition={{ duration: 1.5, repeat: Infinity }}
-                            className="text-deep-space-blue-500 flex items-center gap-2 text-sm font-bold"
+                            className="text-brand-gradient flex items-center gap-2 text-sm font-bold"
                           >
                             Unlocking full report...
                           </motion.div>
@@ -670,7 +670,7 @@ export default function AutomationRadar() {
                               className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl px-6 py-4 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-deep-space-blue-500/30 transition-all"
                             />
                           </div>
-                          <button className="w-full py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-deep-space-blue-500/20 flex items-center justify-center gap-3">
+                          <button className="w-full py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-indigo-500/20 flex items-center justify-center gap-3">
                             Unlock Full Report
                             <ArrowRight size={20} />
                           </button>
@@ -774,7 +774,7 @@ export default function AutomationRadar() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                       <Link 
                         to="/about#contact-form"
-                        className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center gap-2"
+                        className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center gap-2"
                       >
                         Book a Free 30-Minute Strategy Call
                         <ArrowUpRight size={20} />

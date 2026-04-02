@@ -24,14 +24,14 @@ const coreServices = [
   {
     title: "Content Marketing Automation",
     description: "We build an end-to-end pipeline that handles keyword research, content briefs, drafting, and distribution. You get 4–8 high-quality, SEO-optimized articles per month without lifting a finger.",
-    icon: <Workflow className="text-deep-space-blue-500" size={32} />,
+    icon: <Workflow className="text-brand-gradient" size={32} />,
     color: "bg-deep-space-blue-50",
     accent: "deep-space-blue"
   },
   {
     title: "SEO Strategy & Optimization",
     description: "Deep technical SEO audits, site speed optimization, and on-page content alignment. We ensure your existing and new content is actually visible to your target audience.",
-    icon: <Search className="text-deep-space-blue-500" size={32} />,
+    icon: <Search className="text-brand-gradient" size={32} />,
     color: "bg-deep-space-blue-50",
     accent: "deep-space-blue"
   },
@@ -127,11 +127,11 @@ export default function Services() {
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
               Services & Solutions
             </motion.div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 leading-[1.05]">
-              Done-For-You Marketing Systems That <span className="text-deep-space-blue-500">Produce Real Revenue.</span>
+              Done-For-You Marketing Systems That <span className="text-brand-gradient">Produce Real Revenue.</span>
             </h1>
             <p className="text-xl text-zinc-500 font-light leading-relaxed max-w-xl">
               Consistent content. Higher rankings. Time back in your week. No team required.
@@ -139,7 +139,7 @@ export default function Services() {
             <div className="flex flex-wrap gap-4 pt-4">
               <Link 
                 to="/contact"
-                className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200 flex items-center gap-2"
+                className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center gap-2"
               >
                 Get a Proposal <ArrowRight size={18} />
               </Link>
@@ -162,7 +162,7 @@ export default function Services() {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: i * 0.1 }}
-                      className="aspect-square rounded-3xl bg-white border border-zinc-100 shadow-sm flex items-center justify-center text-zinc-400 group-hover:text-deep-space-blue-500 transition-colors"
+                      className="aspect-square rounded-3xl bg-white border border-zinc-100 shadow-sm flex items-center justify-center text-zinc-400 group-hover:text-brand-gradient transition-colors"
                     >
                       <Icon size={48} strokeWidth={1} />
                     </motion.div>
@@ -193,9 +193,9 @@ export default function Services() {
         </p>
         <div className="flex justify-center gap-8 text-sm font-mono text-zinc-400 uppercase tracking-widest pt-4">
           <span>No retainers</span>
-          <span className="text-deep-space-blue-500">•</span>
+          <span className="text-brand-gradient">•</span>
           <span>No bloated contracts</span>
-          <span className="text-deep-space-blue-500">•</span>
+          <span className="text-brand-gradient">•</span>
           <span>Just measurable growth</span>
         </div>
       </section>
@@ -253,14 +253,14 @@ export default function Services() {
                 </div>
 
                 <div className="mb-12">
-                  <p className={`text-sm font-mono uppercase tracking-widest mb-2 ${pkg.highlight ? 'text-deep-space-blue-400' : 'text-deep-space-blue-600'}`}>Pricing Structure</p>
+                  <p className={`text-sm font-mono uppercase tracking-widest mb-2 ${pkg.highlight ? 'text-deep-space-blue-400' : 'text-brand-gradient'}`}>Pricing Structure</p>
                   <p className="text-xl font-semibold">{pkg.price}</p>
                 </div>
 
                 <div className="space-y-6 flex-grow mb-16">
                   {pkg.features.map((feature, j) => (
                     <div key={j} className="flex items-start gap-4">
-                      <div className={`mt-1 bg-deep-space-blue-500 rounded-full p-1 text-white shrink-0`}>
+                      <div className={`mt-1 bg-brand-gradient rounded-full p-1 text-white shrink-0`}>
                         <CheckCircle2 size={16} />
                       </div>
                       <span className={`text-lg ${pkg.highlight ? 'text-zinc-300' : 'text-zinc-700'}`}>{feature}</span>
@@ -272,7 +272,7 @@ export default function Services() {
                   to="/contact"
                   className={`w-full py-5 rounded-2xl font-bold text-lg text-center transition-all flex items-center justify-center gap-2 ${
                     pkg.highlight 
-                      ? 'bg-deep-space-blue-500 text-white hover:bg-deep-space-blue-600' 
+                      ? 'bg-brand-gradient text-white hover:bg-brand-gradient' 
                       : 'bg-zinc-100 text-zinc-900 hover:bg-zinc-200'
                   }`}
                 >
@@ -289,7 +289,7 @@ export default function Services() {
         <div className="bg-zinc-900 rounded-[4rem] p-12 md:p-24 relative overflow-hidden">
           <div className="relative z-10 space-y-20">
             <div className="text-center space-y-4">
-              <h2 className="text-deep-space-blue-500 font-mono text-xs uppercase tracking-[0.3em]">The Methodology</h2>
+              <h2 className="text-brand-gradient font-mono text-xs uppercase tracking-[0.3em]">The Methodology</h2>
               <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight">The 3-Step Process</h3>
             </div>
             
@@ -304,7 +304,7 @@ export default function Services() {
                     <p className="text-zinc-400 font-light leading-relaxed text-lg">{item.desc}</p>
                   </div>
                   {i < 2 && (
-                    <div className="hidden lg:flex absolute top-1/2 -right-8 text-deep-space-blue-500/50 -translate-y-1/2 z-20">
+                    <div className="hidden lg:flex absolute top-1/2 -right-8 text-brand-gradient/50 -translate-y-1/2 z-20">
                       <ArrowRight size={32} />
                     </div>
                   )}
@@ -312,7 +312,7 @@ export default function Services() {
               ))}
             </div>
           </div>
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-deep-space-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gradient/10 blur-[120px] rounded-full pointer-events-none" />
         </div>
       </section>
 
@@ -323,7 +323,7 @@ export default function Services() {
             <div className="space-y-8">
               <h3 className="text-5xl font-bold tracking-tight leading-tight text-zinc-900">
                 Specialized SEO & <br />
-                <span className="text-deep-space-blue-500">Automation Stack.</span>
+                <span className="text-brand-gradient">Automation Stack.</span>
               </h3>
               <p className="text-xl text-zinc-500 font-light leading-relaxed">
                 Each solution is built on top-tier tools. Whether you need advanced technical SEO or seamless automation, you’ll receive tailored execution focused on growth metrics without vendor lock-in.
@@ -344,7 +344,7 @@ export default function Services() {
             </div>
             <div className="grid grid-cols-3 gap-6">
               {["Zapier", "n8n", "Make", "HubSpot", "Python", "OpenAI", "Semrush", "Ahrefs", "Surfer"].map((tool, i) => (
-                <div key={i} className="aspect-square rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center text-xs font-mono text-zinc-500 uppercase tracking-widest hover:bg-deep-space-blue-50 hover:text-deep-space-blue-600 hover:border-deep-space-blue-200 transition-all cursor-default shadow-sm h-full w-full">
+                <div key={i} className="aspect-square rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center text-xs font-mono text-zinc-500 uppercase tracking-widest hover:bg-deep-space-blue-50 hover:text-brand-gradient hover:border-deep-space-blue-200 transition-all cursor-default shadow-sm h-full w-full">
                   {tool}
                 </div>
               ))}
@@ -378,7 +378,7 @@ export default function Services() {
 
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-6">
-        <div className="bg-deep-space-blue-500 rounded-[4rem] p-12 md:p-24 text-center space-y-10 relative overflow-hidden">
+        <div className="bg-brand-gradient rounded-[4rem] p-12 md:p-24 text-center space-y-10 relative overflow-hidden">
           <div className="relative z-10 space-y-6">
             <h3 className="text-5xl md:text-7xl font-bold text-white tracking-tight">
               Ready to automate <br /> your growth?

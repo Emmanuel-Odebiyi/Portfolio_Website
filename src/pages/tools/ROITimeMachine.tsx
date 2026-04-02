@@ -250,7 +250,7 @@ export default function ROITimeMachine() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
             Financial Diagnostic
           </motion.div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900">
@@ -331,7 +331,7 @@ export default function ROITimeMachine() {
                     <label className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2">
                       <Clock size={14} /> Weekly Hours (Repetitive Tasks)
                     </label>
-                    <span className="text-lg font-bold text-deep-space-blue-600">{inputs.weeklyHours}h</span>
+                    <span className="text-lg font-bold text-brand-gradient">{inputs.weeklyHours}h</span>
                   </div>
                   <input 
                     type="range"
@@ -396,7 +396,7 @@ export default function ROITimeMachine() {
                 value={formatCurrency(results.monthlyAutomationSavings)}
                 subValue="Net gain"
                 icon={DollarSign}
-                colorClass="bg-deep-space-blue-50 text-deep-space-blue-600"
+                colorClass="bg-deep-space-blue-50 text-brand-gradient"
               />
               <MetricCard 
                 label="Breakeven Month"
@@ -437,7 +437,7 @@ export default function ROITimeMachine() {
                   </p>
                 </div>
               </div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-deep-space-blue-500/10 blur-[80px] rounded-full" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gradient/10 blur-[80px] rounded-full" />
             </div>
 
             {/* Email Gate */}
@@ -474,7 +474,7 @@ export default function ROITimeMachine() {
                   />
                   <button
                     type="submit"
-                    className="py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all flex items-center justify-center gap-2 group"
+                    className="py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all flex items-center justify-center gap-2 group"
                   >
                     {showSuccess ? 'Generating...' : 'Unlock Full Report'}
                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -496,7 +496,7 @@ export default function ROITimeMachine() {
                     </div>
                     <div className="flex items-center gap-4 text-xs font-mono uppercase tracking-widest">
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-deep-space-blue-500" />
+                        <div className="w-3 h-3 rounded-full bg-brand-gradient" />
                         <span>With Automation</span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -552,7 +552,7 @@ export default function ROITimeMachine() {
                   </div>
                   
                   <div className="p-6 rounded-2xl bg-deep-space-blue-50 border border-deep-space-blue-100 flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-deep-space-blue-500 flex items-center justify-center text-white shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-brand-gradient flex items-center justify-center text-white shrink-0">
                       <TrendingUp size={20} />
                     </div>
                     <div className="space-y-1">
@@ -586,8 +586,8 @@ export default function ROITimeMachine() {
                             <td className="px-8 py-4 font-bold text-zinc-900">Month {row.month}</td>
                             <td className="px-8 py-4 text-zinc-500 font-light">{formatCurrency(inputs.weeklyHours * 4.33 * inputs.hourlyCost * inputs.teamSize)}</td>
                             <td className="px-8 py-4 text-zinc-500 font-light">{formatCurrency(row.month === 1 ? inputs.setupInvestment : 0)}</td>
-                            <td className="px-8 py-4 text-deep-space-blue-600 font-bold">+{formatCurrency(row.netSavings)}</td>
-                            <td className={`px-8 py-4 font-bold ${row.cumulativeSavings >= 0 ? 'text-deep-space-blue-600' : 'text-orange-500'}`}>
+                            <td className="px-8 py-4 text-brand-gradient font-bold">+{formatCurrency(row.netSavings)}</td>
+                            <td className={`px-8 py-4 font-bold ${row.cumulativeSavings >= 0 ? 'text-brand-gradient' : 'text-orange-500'}`}>
                               {formatCurrency(row.cumulativeSavings)}
                             </td>
                           </tr>
@@ -600,7 +600,7 @@ export default function ROITimeMachine() {
                 {/* Benchmark Comparison */}
                 <div className="p-10 rounded-[3rem] bg-zinc-900 text-white space-y-8">
                   <div className="flex items-center gap-3">
-                    <BarChart3 className="text-deep-space-blue-500" size={24} />
+                    <BarChart3 className="text-brand-gradient" size={24} />
                     <h4 className="text-xl font-bold">Benchmark Comparison</h4>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -623,7 +623,7 @@ export default function ROITimeMachine() {
                         </div>
                         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-deep-space-blue-500" 
+                            className="h-full bg-brand-gradient" 
                             style={{ width: `${(inputs.weeklyHours / (BENCHMARK_HOURS * 1.5)) * 100}%` }}
                           />
                         </div>
@@ -644,7 +644,7 @@ export default function ROITimeMachine() {
           <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
               Want us to build this <br />
-              <span className="text-deep-space-blue-500">system for you?</span>
+              <span className="text-brand-gradient">system for you?</span>
             </h2>
             <p className="text-xl text-zinc-400 font-light leading-relaxed">
               The calculator shows you the potential. We provide the execution. Start with a deep-dive audit to map your path to 520% ROI.
@@ -652,7 +652,7 @@ export default function ROITimeMachine() {
             <div className="pt-8">
               <Link 
                 to="/services"
-                className="px-12 py-6 bg-white text-zinc-900 font-bold rounded-2xl hover:bg-deep-space-blue-500 hover:text-white transition-all shadow-2xl shadow-deep-space-blue-500/20 inline-flex items-center gap-3 group"
+                className="px-12 py-6 bg-white text-zinc-900 font-bold rounded-2xl hover:bg-brand-gradient hover:text-white transition-all shadow-2xl shadow-indigo-500/20 inline-flex items-center gap-3 group"
               >
                 Start with a $200 Deep-Dive Audit
                 <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />

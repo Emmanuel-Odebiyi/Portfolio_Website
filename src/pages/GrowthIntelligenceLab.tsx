@@ -55,7 +55,7 @@ const tools: Tool[] = [
     benefit: 'Calculate your 12-month growth trajectory.',
     icon: <Timer size={32} />,
     color: 'bg-deep-space-blue-50',
-    accent: 'text-deep-space-blue-600',
+    accent: 'text-brand-gradient',
     path: '/tools/roi-time-machine',
     outcomes: ['Revenue Projection', 'Cost Reduction Analysis']
   },
@@ -138,7 +138,7 @@ export default function GrowthIntelligenceLab() {
           animate={{ opacity: 1, y: 0 }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
           Growth Intelligence Lab
         </motion.div>
         
@@ -156,7 +156,7 @@ export default function GrowthIntelligenceLab() {
           onClick={() => document.getElementById('tools-grid')?.scrollIntoView({ behavior: 'smooth' })}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200"
+          className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200"
         >
           Start with a Tool ↓
         </motion.button>
@@ -178,7 +178,7 @@ export default function GrowthIntelligenceLab() {
             <div className="space-y-8">
               <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-snug">
                 Why use the <br />
-                <span className="text-deep-space-blue-500">Intelligence Lab?</span>
+                <span className="text-brand-gradient">Intelligence Lab?</span>
               </h2>
               <p className="text-xl text-zinc-400 font-light leading-relaxed">
                 Most businesses guess their way to growth. We use data-driven simulations to remove the guesswork. These tools are the exact frameworks I use with high-growth SaaS companies to identify scaling opportunities.
@@ -201,7 +201,7 @@ export default function GrowthIntelligenceLab() {
           </div>
           
           {/* Abstract Background Element */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-deep-space-blue-500/10 blur-[120px] rounded-full" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gradient/10 blur-[120px] rounded-full" />
         </div>
       </section>
 
@@ -217,7 +217,7 @@ export default function GrowthIntelligenceLab() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link 
             to="/services"
-            className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-zinc-200"
+            className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200"
           >
             Explore Services
           </Link>

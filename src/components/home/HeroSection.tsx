@@ -17,7 +17,7 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-10 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-800 tracking-[0.2em] uppercase"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient animate-pulse" />
             Content Marketing Automation Specialist
           </motion.div>
 
@@ -29,7 +29,7 @@ export const HeroSection = () => {
               className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1.05] text-zinc-900"
             >
               Your Competitors Are <br />
-              <span className="text-deep-space-blue-500">Publishing 40+ Articles.</span>
+              <span className="text-brand-gradient">Publishing 40+ Articles.</span>
             </motion.h1>
 
             <motion.div
@@ -54,7 +54,7 @@ export const HeroSection = () => {
             className="mb-12 max-w-3xl mx-auto"
           >
             <p className="text-lg md:text-xl text-zinc-500 leading-relaxed font-light">
-              I build <span className="text-deep-space-blue-500 font-semibold text-xl">automated content marketing systems</span> for growing businesses — so you can <strong className="font-bold text-zinc-900">publish consistently</strong>, <strong className="font-bold text-zinc-900">rank higher</strong>, and <strong className="font-bold text-zinc-900">generate revenue</strong> without hiring a team or burning out trying.
+              I build <span className="text-brand-gradient font-semibold text-xl">automated content marketing systems</span> for growing businesses — so you can <strong className="font-bold text-zinc-900">publish consistently</strong>, <strong className="font-bold text-zinc-900">rank higher</strong>, and <strong className="font-bold text-zinc-900">generate revenue</strong> without hiring a team or burning out trying.
             </p>
           </motion.div>
 

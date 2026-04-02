@@ -93,7 +93,7 @@ export function ToolsShowcase() {
       <section className="relative py-32 overflow-hidden bg-white text-zinc-900 flex flex-col items-center justify-center">
         {/* Subtle background glow */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center" aria-hidden="true">
-          <div className="w-[800px] h-[400px] bg-deep-space-blue-500/10 blur-[120px] rounded-full" />
+          <div className="w-[800px] h-[400px] bg-brand-gradient/10 blur-[120px] rounded-full" />
         </div>
 
         <div className="relative z-10 w-full">
@@ -133,7 +133,7 @@ export function ToolsShowcase() {
           >
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="px-6 py-3 bg-deep-space-blue-500 hover:bg-deep-space-blue-400 text-white text-sm font-semibold rounded-xl transition-all shadow-[0_4px_20px_rgba(0,166,255,0.2)] hover:shadow-[0_8px_30px_rgba(0,166,255,0.3)]"
+              className="px-6 py-3 bg-brand-gradient hover:bg-deep-space-blue-400 text-white text-sm font-semibold rounded-xl transition-all shadow-[0_4px_20px_rgba(0,166,255,0.2)] hover:shadow-[0_8px_30px_rgba(0,166,255,0.3)]"
             >
               Browse all integrations
             </button>
@@ -196,7 +196,7 @@ export function ToolsShowcase() {
                         <tool.Icon className="w-6 h-6 text-current" />
                       </div>
                       <div>
-                        <h4 className="text-zinc-900 font-semibold mb-1 group-hover:text-deep-space-blue-600 transition-colors">{tool.name}</h4>
+                        <h4 className="text-zinc-900 font-semibold mb-1 group-hover:text-brand-gradient transition-colors">{tool.name}</h4>
                         <p className="text-zinc-500 text-sm leading-relaxed">{tool.description}</p>
                       </div>
                     </div>

@@ -66,13 +66,13 @@ const smallResults = [
     title: "Lead Magnet Delivery + CRM Sync",
     desc: "Automated multi-step Zapier workflow to fulfill eBooks instantly and sync contacts to HubSpot.",
     stat: "2.5x Downloads",
-    icon: <Mail className="text-deep-space-blue-500" size={20} />
+    icon: <Mail className="text-brand-gradient" size={20} />
   },
   {
     title: "AI-Powered Content Repurposing",
     desc: "System built using n8n and OpenAI to turn blogs into ready-to-share social snippets.",
     stat: "80% Time Saved",
-    icon: <Zap className="text-deep-space-blue-500" size={20} />
+    icon: <Zap className="text-brand-gradient" size={20} />
   },
   {
     title: "Analytics Dashboard Automation",
@@ -104,7 +104,7 @@ export default function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-deep-space-blue-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
             Selected Work
           </motion.div>
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-zinc-900 leading-[1.05]">
@@ -212,7 +212,7 @@ export default function Portfolio() {
                 <p className="text-xs text-zinc-500 font-light leading-relaxed">{item.desc}</p>
               </div>
               <div className="pt-4 border-t border-zinc-200/50">
-                <p className="text-xl font-bold text-deep-space-blue-600">{item.stat}</p>
+                <p className="text-xl font-bold text-brand-gradient">{item.stat}</p>
               </div>
             </motion.div>
           ))}
@@ -226,7 +226,7 @@ export default function Portfolio() {
             <div className="space-y-8">
               <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
                 Want to see the <br />
-                <span className="text-deep-space-blue-500">full picture?</span>
+                <span className="text-brand-gradient">full picture?</span>
               </h2>
               <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-xl">
                 My portfolio shows the results, but my resume tells the story of how I built the expertise to deliver them. Explore my full professional background, certifications, and career trajectory.
@@ -234,7 +234,7 @@ export default function Portfolio() {
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <Link 
                   to="/resume"
-                  className="group px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-deep-space-blue-500 transition-all shadow-xl shadow-deep-space-blue-900/20 flex items-center gap-3"
+                  className="group px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-deep-space-blue-900/20 flex items-center gap-3"
                 >
                   <FileText size={20} /> 
                   <span>Explore Full Background & Resume</span>
@@ -251,12 +251,12 @@ export default function Portfolio() {
                   <div className="h-2 w-5/6 bg-white/10 rounded-full" />
                 </div>
                 <div className="pt-8 space-y-4">
-                  <div className="h-12 w-full bg-deep-space-blue-500/20 rounded-xl border border-deep-space-blue-500/30" />
+                  <div className="h-12 w-full bg-brand-gradient/20 rounded-xl border border-indigo-500/30" />
                   <div className="h-12 w-full bg-white/5 rounded-xl border border-white/10" />
                 </div>
               </div>
               {/* Decorative Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-deep-space-blue-500/20 blur-[80px] rounded-full" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-gradient/20 blur-[80px] rounded-full" />
             </div>
           </div>
         </div>

@@ -74,13 +74,15 @@ export const Header: React.FC = () => {
             >
               <Link
                 to={link.href}
-                className={`text-sm font-bold transition-colors relative group ${
-                  location.pathname === link.href ? 'text-deep-space-blue-600' : 'text-zinc-600 hover:text-zinc-900'
+                className={`text-sm font-bold transition-all relative group ${
+                  location.pathname === link.href 
+                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600' 
+                    : 'text-zinc-600 hover:text-zinc-900'
                 }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-deep-space-blue-500 transition-all duration-300 ${
-                  location.pathname === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                <span className={`absolute -bottom-1.5 left-0 h-[3px] rounded-full bg-brand-gradient transition-all duration-300 ${
+                  location.pathname === link.href ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'
                 }`} />
               </Link>
             </motion.div>
@@ -95,7 +97,7 @@ export const Header: React.FC = () => {
           >
             <Link
               to="/contact"
-              className="px-6 py-1.5 bg-zinc-900 text-white text-sm font-bold rounded-xl hover:bg-deep-space-blue-500 transition-all shadow-lg shadow-zinc-200"
+              className="px-6 py-1.5 bg-zinc-900 text-white text-sm font-bold rounded-xl hover:bg-brand-gradient transition-all shadow-lg shadow-zinc-200"
             >
               Contact Me
             </Link>
@@ -126,7 +128,7 @@ export const Header: React.FC = () => {
                   key={link.name}
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-bold text-zinc-900 hover:text-deep-space-blue-600 transition-colors"
+                  className="text-lg font-bold text-zinc-900 hover:text-brand-gradient transition-colors"
                 >
                   {link.name}
                 </Link>

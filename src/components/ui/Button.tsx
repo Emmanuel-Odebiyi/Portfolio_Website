@@ -15,7 +15,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = "inline-flex items-center justify-center font-bold tracking-tight rounded-2xl transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
     
     const variants = {
-      primary: "bg-zinc-900 text-white hover:bg-deep-space-blue-500 shadow-xl shadow-zinc-200 hover:shadow-[0_10px_40px_-10px_rgba(0,166,255,0.5)] border border-transparent hover:border-white/20",
+      primary: "bg-zinc-900 text-white hover:bg-brand-gradient shadow-xl shadow-zinc-100 hover:shadow-[0_10px_40px_-5px_rgba(79,70,229,0.4)] border border-transparent hover:border-white/20",
       secondary: "bg-transparent text-zinc-900 border-2 border-zinc-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white shadow-sm hover:shadow-xl",
       ghost: "bg-transparent text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100",
       link: "bg-transparent text-zinc-900 underline-offset-4 hover:underline",
@@ -34,7 +34,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         whileHover={{ translateY: -2 }}
         whileTap={{ scale: 0.97 }}
-        {...(props as HTMLMotionProps<"button">)}
+        {...(props as unknown as HTMLMotionProps<"button">)}
       >
         {children}
       </motion.button>
