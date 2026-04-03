@@ -199,6 +199,8 @@ const TimelineItem = ({ item, index }: { item: any; index: number; key?: any }) 
 
 export default function About() {
   const timelineRef = useRef(null);
+  const [hoverSide, setHoverSide] = useState<'burnout' | 'balance' | null>(null);
+  
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start center", "end center"]
@@ -217,43 +219,104 @@ export default function About() {
         description="How I went from drowning in content deadlines to building AI-powered marketing systems that deliver 520% ROI. My story, methodology, and why it works."
         keywords="marketing automation expert, content automation specialist, AI content systems, SEO and content strategist Nigeria"
       />
+      
       {/* Hero Section with Personal Narrative Image */}
-      <section className="relative h-screen min-h-[700px] flex items-end justify-start overflow-hidden bg-zinc-950">
-        {/* Background Image - The Transformation Story */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://res.cloudinary.com/dyd911kmh/image/upload/v1712072223/about-transformation.png"
-            alt="Emmanuel Odebiyi Transformation" 
-            className="w-full h-full object-cover object-center scale-105"
-          />
-          
-          {/* Subtle protection for the navbar text */}
-          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-zinc-950/40 to-transparent z-10 pointer-events-none" />
-          
-          {/* Bottom fade to transition into narrative */}
-          <div className="absolute inset-0 z-20 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-zinc-950">
+        
+        {/* Background Image Layer - Shared Centered Base */}
+        <div className="absolute inset-0 z-0 flex flex-col md:flex-row">
+          {/* Left/Top Half - Permanently Monochrome Burnout */}
+          <div className="w-full h-1/2 md:w-1/2 md:h-full relative overflow-hidden">
+            <motion.img 
+              src="/about-transformation.jpg"
+              alt="Emmanuel Odebiyi Burnout" 
+              animate={{ 
+                opacity: hoverSide === 'burnout' ? 0.6 : 0.4
+              }}
+              style={{
+                filter: `brightness(${hoverSide === 'burnout' ? 1.25 : 1.1}) contrast(1.5) grayscale(100%)`
+              }}
+              className="absolute left-0 top-0 h-[200%] w-full md:h-full md:w-[200%] max-w-none object-cover object-[center_15%] md:object-[25%_20%] transition-all duration-700"
+            />
+            <div className={`absolute inset-0 bg-zinc-950/20 transition-opacity duration-700 ${hoverSide === 'burnout' ? 'opacity-100' : 'opacity-0'}`} />
+          </div>
+
+          {/* Right/Bottom Half - Interactive Color Balance Reveal */}
+          <div className="w-full h-1/2 md:w-1/2 md:h-full relative overflow-hidden">
+            {/* Grayscale Base Image */}
+            <motion.img 
+              src="/about-transformation.jpg"
+              alt="Emmanuel Odebiyi Balance" 
+              animate={{ opacity: hoverSide === 'balance' ? 0 : 0.4 }}
+              style={{ filter: 'brightness(1.1) contrast(1.6) grayscale(100%)' }}
+              className="absolute right-0 bottom-0 h-[200%] w-full md:h-full md:w-[200%] max-w-none object-cover object-[center_15%] md:object-[75%_20%] transition-all duration-1000"
+            />
+            {/* Color Overlay Revealed on Hover */}
+            <motion.img 
+              src="/about-transformation.jpg"
+              alt="Emmanuel Odebiyi Balance Color" 
+              animate={{ 
+                opacity: hoverSide === 'balance' ? 0.9 : 0,
+                scale: hoverSide === 'balance' ? 1.05 : 1
+              }}
+              style={{ 
+                filter: `brightness(${hoverSide === 'balance' ? 0.8 : 1.1}) contrast(1.4)` 
+              }}
+              className="absolute right-0 bottom-0 h-[200%] w-full md:h-full md:w-[200%] max-w-none object-cover object-[center_15%] md:object-[75%_20%] transition-all duration-1000"
+            />
+            {/* Dramatically Darker Hover Overlay for Text Legibility */}
+            <div className={`absolute inset-0 bg-zinc-950/40 transition-opacity duration-700 ${hoverSide === 'balance' ? 'opacity-100' : 'opacity-0'}`} />
+            <div className={`absolute inset-0 bg-blue-500/5 transition-opacity duration-700 ${hoverSide === 'balance' ? 'opacity-100' : 'opacity-0'}`} />
+          </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 pb-32 relative z-30 text-left space-y-8">
+        {/* Global Halftone Pattern Overlay */}
+        <div className="absolute inset-0 z-15 opacity-40 pointer-events-none mix-blend-multiply" 
+             style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
+        
+        {/* Cinematic Narrative Split - Perfect Bottom Mirrors */}
+        <div className="w-full max-w-[1500px] px-8 md:px-24 absolute inset-0 z-30 flex flex-col md:flex-row justify-between items-end pointer-events-none pb-24 md:pb-32">
+          {/* Left Text Block: Burnout */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white/70 tracking-[0.4em] uppercase"
+            className="w-full md:w-[35%] flex flex-col items-center md:items-start gap-4 text-center md:text-left"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient animate-pulse" />
-            The Origin Story
-          </motion.div>
-          
-          <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[0.9] drop-shadow-2xl max-w-4xl">
-              I Used to Be the <span className="text-zinc-500">Burnout.</span><br />
-              Now I Build the System That <span className="text-brand-gradient">Prevents It.</span>
+            <span className="text-[10px] md:text-[11px] font-mono text-zinc-400 tracking-[0.4em] uppercase">The Origin Story</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
+              I Used to Be <br className="hidden md:block" /> the <br />
+              <span className={`transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100 brightness-200' : 'text-zinc-400 brightness-100'}`}>Burnout.</span>
             </h1>
-            
-            <p className="text-xl md:text-2xl text-zinc-300 font-medium leading-relaxed max-w-2xl opacity-90">
-              I went from drowning in deadlines to designing automated marketing engines that deliver <strong className="text-white font-black underline decoration-indigo-500 underline-offset-8">520% ROI</strong>.
+          </motion.div>
+
+          {/* Right Text Block: The Machine */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="w-full md:w-[35%] flex flex-col items-center md:items-end text-center md:text-right gap-6 mt-16 md:mt-0"
+          >
+            <h2 className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]' : 'text-zinc-100'}`}>
+              Now I Build <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 inline-block drop-shadow-sm brightness-125">The Machine.</span>
+            </h2>
+            <p className="text-sm md:text-lg text-zinc-300 font-medium max-w-[320px] leading-relaxed opacity-90">
+              Transforming chaos into <strong className="text-blue-400 font-extrabold brightness-125">520% ROI</strong> through battle-tested automation.
             </p>
-          </div>
+          </motion.div>
+        </div>
+
+        {/* Interactive Hover Coverage Overlays - Highest Z-Index for Total Response */}
+        <div className="absolute inset-0 z-40 flex flex-col md:flex-row pointer-events-auto cursor-default">
+           <div 
+             className="w-full h-1/2 md:w-1/2 md:h-full" 
+             onMouseEnter={() => setHoverSide('burnout')}
+             onMouseLeave={() => setHoverSide(null)}
+           />
+           <div 
+             className="w-full h-1/2 md:w-1/2 md:h-full" 
+             onMouseEnter={() => setHoverSide('balance')}
+             onMouseLeave={() => setHoverSide(null)}
+           />
         </div>
 
         {/* Scroll Indicator */}

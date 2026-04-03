@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Zap, Target, MessageSquare, Globe, Activity, Calculator, TrendingUp, Cpu } from 'lucide-react';
+import { Menu, X, ChevronDown, Zap, Target, MessageSquare, Globe, Activity, Calculator, TrendingUp, Cpu, User, Microscope, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
 const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
+  { 
+    name: 'About', 
+    href: '/about',
+    dropdown: [
+      { name: 'My Story', desc: 'From burnout writer to automation pro', href: '/about#story', icon: <User className="w-4 h-4" /> },
+      { name: 'My Approach', desc: 'The systems-first methodology', href: '/about#approach', icon: <Microscope className="w-4 h-4" /> },
+      { name: 'My Resume', desc: 'Experience & technical arsenal', href: '/resume', icon: <FileText className="w-4 h-4" /> },
+    ]
+  },
   { 
     name: 'Services', 
     href: '/services',
@@ -116,7 +124,7 @@ export const Header: React.FC = () => {
                       <div className={`border rounded-[2rem] p-5 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden backdrop-blur-3xl ${
                         isAboutPage && !isScrolled 
                           ? 'bg-zinc-950 border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]' 
-                          : 'bg-white/80 border-zinc-100'
+                          : 'bg-white/95 border-zinc-100 shadow-2xl'
                       }`}>
                         <div className="flex flex-col gap-2">
                           {link.dropdown.map((sub) => (
