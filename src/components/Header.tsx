@@ -121,14 +121,10 @@ export const Header: React.FC = () => {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                       className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[320px]"
                     >
-                      {/* Outer blow-out blur zone — completely destroys background readability */}
-                      {!(isAboutPage && !isScrolled) && (
-                        <div className="absolute -inset-8 -z-10 rounded-[3rem] backdrop-blur-[80px] bg-white/20" />
-                      )}
-                      <div className={`border rounded-[2rem] p-5 overflow-hidden ${
+                      <div className={`border rounded-[2rem] p-5 shadow-2xl relative z-10 ${
                         isAboutPage && !isScrolled 
                           ? 'bg-zinc-950 border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] backdrop-blur-3xl' 
-                          : 'bg-white/[0.92] border-white/70 shadow-[0_8px_60px_-8px_rgba(0,0,0,0.20)] backdrop-blur-2xl'
+                          : 'bg-white/98 border-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl'
                       }`}>
                         <div className="flex flex-col gap-2">
                           {link.dropdown.map((sub) => (
