@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Bot, PenTool } from 'lucide-react';
+import Lottie from 'lottie-react';
 
 // ─── Problem Data ─────────────────────────────────────────────────────────────
 
@@ -11,6 +12,7 @@ interface Problem {
   body: string;
   detail: string;
   icon: React.ElementType;
+  animationPath?: string;
   accentColor: string;
 }
 
@@ -22,6 +24,7 @@ const PROBLEMS: Problem[] = [
     body: "You hired a freelancer. They were great for a while. Then they got overloaded, quality dropped, and one day — they just stopped responding.",
     detail: "Now you're back to square one, sifting through proposals and hoping this one sticks.",
     icon: Users,
+    animationPath: '/animation/freelancer.json',
     accentColor: '#e85d4a',
   },
   {
@@ -31,6 +34,7 @@ const PROBLEMS: Problem[] = [
     body: "You tried an agency. Slick deck. Impressive pitch. Then the invoice arrived: $8,000/month, six-month minimum.",
     detail: "Three months later you're getting junior work at senior prices, and a simple revision takes two weeks.",
     icon: Building2,
+    animationPath: '/animation/agency.json',
     accentColor: '#f59e0b',
   },
   {
@@ -40,6 +44,7 @@ const PROBLEMS: Problem[] = [
     body: "It sounded like every other bland, generic article online. Worse, it sounded nothing like you.",
     detail: "Your brand voice? Gone. Your differentiation? Erased. Your audience can tell — and they're clicking away.",
     icon: Bot,
+    animationPath: '/animation/ai-tools.json',
     accentColor: '#8b5cf6',
   },
   {
@@ -49,6 +54,7 @@ const PROBLEMS: Problem[] = [
     body: "Except you're also the one running sales calls, managing the team, solving operational fires, and keeping clients happy.",
     detail: "So the blog post gets written at 11 PM — when it gets written at all. Three weeks later, nothing published. Again.",
     icon: PenTool,
+    animationPath: '/animation/diy.json',
     accentColor: '#10b981',
   },
 ];
@@ -313,18 +319,23 @@ const ProblemCard = ({
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-36 h-36 md:w-48 md:h-48 rounded-[2.5rem] border flex items-center justify-center"
-              style={{
-                backgroundColor: `${problem.accentColor}10`,
-                borderColor: `${problem.accentColor}25`,
-              }}
+              className="w-48 h-48 md:w-80 md:h-80 flex items-center justify-center -translate-y-4 mix-blend-multiply"
             >
-              <Icon
-                size={72}
-                strokeWidth={1}
-                style={{ color: problem.accentColor }}
-                className="md:w-24 md:h-24"
-              />
+              {problem.animationPath ? (
+                <Lottie 
+                  path={problem.animationPath} 
+                  loop={true} 
+                  autoplay={true} 
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : (
+                <Icon
+                  size={72}
+                  strokeWidth={1}
+                  style={{ color: problem.accentColor }}
+                  className="md:w-24 md:h-24"
+                />
+              )}
             </motion.div>
           </div>
         </div>
