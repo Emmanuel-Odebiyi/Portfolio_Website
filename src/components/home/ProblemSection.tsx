@@ -78,14 +78,14 @@ const ScrollRevealText = ({
       {words.map((word, i) => {
         const wordStart = startProgress + i * step;
         const wordEnd = Math.min(wordStart + step * 2.5, endProgress);
-        const opacity = useTransform(scrollYProgress, [wordStart, wordEnd], [0.12, 1]);
-        const y = useTransform(scrollYProgress, [wordStart, wordEnd], [8, 0]);
+        const opacity = useTransform(scrollYProgress, [wordStart, wordEnd], [0.2, 1]);
+        const y = useTransform(scrollYProgress, [wordStart, wordEnd], [10, 0]);
 
         return (
           <React.Fragment key={i}>
             <motion.span
               style={{ opacity, y, display: 'inline-block' }}
-              className="will-change-[opacity,transform]"
+              className="will-change-[opacity,transform] translate-z-0"
             >
               {word}
             </motion.span>
@@ -133,16 +133,17 @@ const VerticalNavigator = ({
     >
       {/* Background track line */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 w-[3px] rounded-full"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#e4e4e7' }}
+        className="absolute left-1/2 -translate-x-1/2 w-[2px] rounded-full"
+        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#f4f4f5' }}
       />
 
-      {/* Filled progress line */}
+      {/* Filled progress line - Using scaleY for GPU acceleration */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-[3px] rounded-full origin-top"
+        className="absolute left-1/2 -translate-x-1/2 w-[2px] rounded-full origin-top will-change-transform"
         style={{ 
           top: 28, 
-          height: fillHeight, 
+          height: TRACK_HEIGHT,
+          scaleY: progress, 
           backgroundColor: fillColor 
         }}
       />
@@ -256,11 +257,11 @@ const ProblemCard = ({
             {problem.tag}
           </span>
 
-          {/* Large number — higher contrast */}
-          <div>
+          {/* Large number — improved contrast and numeric variant */}
+          <div className="select-none pointer-events-none">
             <span
-              className="text-8xl md:text-[10rem] font-black leading-none select-none tracking-tighter block"
-              style={{ color: `${problem.accentColor}A6` }}
+              className="text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-60"
+              style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
             >
               {String(problem.id).padStart(2, '0')}
             </span>
