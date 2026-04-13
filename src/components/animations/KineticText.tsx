@@ -51,15 +51,28 @@ export const KineticText: React.FC<KineticTextProps> = ({ text, className = "", 
       variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: true, margin: '0px' }}
       className={className}
     >
       {elements.map((element, index) => (
-        <span key={index} style={{ overflow: 'hidden', display: 'inline-block', verticalAlign: 'bottom', paddingBottom: '0.15em' }}>
+        <span 
+          key={index} 
+          style={{ 
+            overflow: 'hidden', 
+            display: 'inline-block', 
+            verticalAlign: 'bottom', 
+            paddingBottom: '0.15em', 
+            paddingRight: '0.2em', 
+            marginRight: '-0.2em',
+          }}
+        >
           <motion.span
             variants={child}
-            className="will-change-[opacity,transform] translate-z-0"
-            style={{ display: 'inline-block', transformOrigin: 'top center' }}
+            className={`will-change-[opacity,transform] translate-z-0 ${className.includes('text-transparent') ? className : ''}`}
+            style={{ 
+              display: 'inline-block', 
+              transformOrigin: 'top center',
+            }}
           >
             {element === ' ' ? '\u00A0' : element}
           </motion.span>

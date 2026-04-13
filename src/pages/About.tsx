@@ -81,12 +81,12 @@ export default function About() {
       />
       
       {/* ═══════════════════════════════════════════
-          HERO SECTION — Cinematic Split (unchanged)
+          HERO SECTION — Cinematic Split
       ═══════════════════════════════════════════ */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-zinc-950">
         <div className="absolute inset-0 z-0 flex flex-col md:flex-row">
           {/* Left — Monochrome Burnout */}
-          <div className="w-full h-1/2 md:w-1/2 md:h-full relative overflow-hidden">
+          <div className="w-full h-1/2 md:w-1/2 md:h-full relative overflow-hidden text-zinc-400">
             <motion.img 
               src="/about-transformation.jpg"
               alt="Emmanuel Odebiyi — the burnout era" 
@@ -119,29 +119,71 @@ export default function About() {
         {/* Halftone */}
         <div className="absolute inset-0 z-15 opacity-40 pointer-events-none mix-blend-multiply" 
              style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
-        {/* Bottom-Mirrored Text */}
-        <div className="w-full max-w-[1500px] px-8 md:px-24 absolute inset-0 z-30 flex flex-col md:flex-row justify-between items-end pointer-events-none pb-24 md:pb-32">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="w-full md:w-[35%] flex flex-col items-center md:items-start gap-4 text-center md:text-left">
-            <span className="text-[10px] md:text-[11px] font-mono text-zinc-400 tracking-[0.4em] uppercase">The Origin Story</span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
-              <KineticText text="I Used to Be" type="words" delay={2} /> <br className="hidden md:block" /> <KineticText text="the" type="words" delay={3} /> <br />
-              <span className={`transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100 brightness-200' : 'text-zinc-400 brightness-100'}`}>
-                 <KineticText text="Burnout." type="letters" delay={4} />
-              </span>
-            </h1>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} className="w-full md:w-[35%] flex flex-col items-center md:items-end text-center md:text-right gap-6 mt-16 md:mt-0">
-            <h2 className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]' : 'text-zinc-100'}`}>
-              <KineticText text="Now I Build" type="words" delay={6} /> <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 inline-block drop-shadow-sm brightness-125">
-                 <KineticText text="The Machine." type="words" delay={7} />
-              </span>
-            </h2>
-            <p className="text-sm md:text-lg text-zinc-300 font-medium max-w-[320px] leading-relaxed opacity-90">
-              Transforming chaos into <strong className="text-blue-400 font-extrabold brightness-125">520% ROI</strong> through battle-tested automation.
-            </p>
-          </motion.div>
+        
+        {/* Left Text — absolutely positioned, independent of right side */}
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }} 
+          animate={{ opacity: 1, x: 0 }} 
+          transition={{ duration: 0.8 }}
+          className="absolute bottom-24 md:bottom-32 left-8 md:left-24 z-30 flex flex-col gap-4 text-left pointer-events-none"
+        >
+          <span className="text-[10px] md:text-[11px] font-mono text-zinc-400 tracking-[0.4em] uppercase">The Origin Story</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
+            <motion.span 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="block"
+            >
+              I Used to Be
+            </motion.span>
+            <motion.span 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="block"
+            >
+              the
+            </motion.span>
+            <motion.span 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className={`block transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100' : 'text-zinc-400'}`}
+            >
+              Burnout.
+            </motion.span>
+          </h1>
+        </motion.div>
+
+        {/* Right Text — absolutely positioned, independent of left side */}
+        <div className="absolute bottom-24 md:bottom-32 right-8 md:right-24 z-30 flex flex-col items-end gap-3 text-right pointer-events-none">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+            className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white' : 'text-zinc-100'}`}
+          >
+            Now I Build
+          </motion.h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic text-blue-400"
+          >
+            The Machine.
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.6 }}
+            className="text-sm md:text-lg text-zinc-300 font-medium max-w-[320px] leading-relaxed mt-2"
+          >
+            Transforming chaos into <strong className="text-blue-400 font-extrabold">520% ROI</strong> through battle-tested automation.
+          </motion.p>
         </div>
+
         {/* Hover Zones */}
         <div className="absolute inset-0 z-40 flex flex-col md:flex-row pointer-events-auto cursor-default">
            <div className="w-full h-1/2 md:w-1/2 md:h-full" onMouseEnter={() => setHoverSide('burnout')} onMouseLeave={() => setHoverSide(null)} />
@@ -268,8 +310,16 @@ export default function About() {
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-mono text-red-400/80 uppercase tracking-[0.3em]">The Breaking Point</span>
             <h2 className="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-tight">
-              <KineticText text="The Part Where It All Falls Apart" type="letters" />
-            </h2>
+            <motion.span
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="inline-block"
+            >
+              The Part Where It All Falls Apart
+            </motion.span>
+          </h2>
           </motion.div>
 
           <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">
@@ -517,8 +567,16 @@ export default function About() {
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-[0.3em]">Where I'm Going</span>
             <h2 className="text-4xl md:text-5xl font-black text-zinc-900 tracking-tight leading-tight">
-               <KineticText text="The Next Chapter" type="letters" delay={2} />
-            </h2>
+             <motion.span
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-block"
+             >
+               The Next Chapter
+             </motion.span>
+          </h2>
           </motion.div>
 
           <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">

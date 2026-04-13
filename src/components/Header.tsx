@@ -171,9 +171,9 @@ export const Header: React.FC = () => {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="hidden md:block">
               <Link
                 to="/contact"
-                className={`px-6 py-1.5 ${isAboutPage && !isScrolled ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'} text-sm font-black rounded-xl hover:bg-brand-gradient hover:text-white transition-all shadow-lg shadow-zinc-200`}
+                className={`px-6 py-2 ${isAboutPage && !isScrolled ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'} text-sm font-black rounded-xl hover:bg-blue-600 hover:text-white transition-all relative overflow-hidden group border-none`}
               >
-                Contact Me
+                <span className="relative z-10">Contact Me</span>
               </Link>
             </motion.div>
             <button className={`md:hidden p-2 ${isAboutPage && !isScrolled ? 'text-white' : 'text-zinc-900'}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
