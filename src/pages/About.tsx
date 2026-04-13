@@ -22,6 +22,8 @@ import { GooeyText } from '../components/ui/gooey-text-morphing';
 import { TextEffect } from '../components/ui/text-effect';
 import { ContainerScroll } from '../components/ui/container-scroll-animation';
 import { useTransform } from 'motion/react';
+import { KineticText } from '../components/animations/KineticText';
+import { ScrollMaskText } from '../components/animations/ScrollMaskText';
 
 const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\n\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\n\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\n\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\n\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\n\nAnd honestly? It was magic.`;
 
@@ -52,6 +54,7 @@ const StoryView = ({ progress }: { progress: any }) => {
     </div>
   );
 };
+
 
 /* ─── Fade-up animation variant ─── */
 const fadeUp = {
@@ -121,14 +124,18 @@ export default function About() {
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="w-full md:w-[35%] flex flex-col items-center md:items-start gap-4 text-center md:text-left">
             <span className="text-[10px] md:text-[11px] font-mono text-zinc-400 tracking-[0.4em] uppercase">The Origin Story</span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
-              I Used to Be <br className="hidden md:block" /> the <br />
-              <span className={`transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100 brightness-200' : 'text-zinc-400 brightness-100'}`}>Burnout.</span>
+              <KineticText text="I Used to Be" type="words" delay={2} /> <br className="hidden md:block" /> <KineticText text="the" type="words" delay={3} /> <br />
+              <span className={`transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100 brightness-200' : 'text-zinc-400 brightness-100'}`}>
+                 <KineticText text="Burnout." type="letters" delay={4} />
+              </span>
             </h1>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} className="w-full md:w-[35%] flex flex-col items-center md:items-end text-center md:text-right gap-6 mt-16 md:mt-0">
             <h2 className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]' : 'text-zinc-100'}`}>
-              Now I Build <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 inline-block drop-shadow-sm brightness-125">The Machine.</span>
+              <KineticText text="Now I Build" type="words" delay={6} /> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 inline-block drop-shadow-sm brightness-125">
+                 <KineticText text="The Machine." type="words" delay={7} />
+              </span>
             </h2>
             <p className="text-sm md:text-lg text-zinc-300 font-medium max-w-[320px] leading-relaxed opacity-90">
               Transforming chaos into <strong className="text-blue-400 font-extrabold brightness-125">520% ROI</strong> through battle-tested automation.
@@ -166,15 +173,15 @@ export default function About() {
           </div>
 
           {/* Empathy pull-quote */}
-          <motion.blockquote {...stagger(2)} className="border-l-4 border-blue-500 pl-6 py-2 text-lg md:text-xl text-zinc-500 italic leading-relaxed">
-            You know the feeling—it's Sunday night, you're staring at a blank document that should've been written three days ago, and you're wondering why something that's supposed to "drive growth" feels more like drowning in quicksand.
-          </motion.blockquote>
+          <blockquote className="border-l-4 border-blue-500 pl-6 py-2 text-lg md:text-xl text-zinc-500 italic leading-relaxed mt-10">
+            <ScrollMaskText text="You know the feeling—it's Sunday night, you're staring at a blank document that should've been written three days ago, and you're wondering why something that's supposed to drive growth feels more like drowning in quicksand." />
+          </blockquote>
 
-          <motion.p {...stagger(3)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            I've been there. Actually lived there for years.
-          </motion.p>
+          <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">
+            <ScrollMaskText text="I've been there. Actually lived there for years." />
+          </p>
 
-          <motion.p {...stagger(4)} className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight">
+          <motion.p {...stagger(4)} className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight mt-10">
             Now? I build the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">systems</span> that got me out—and I build them for businesses like yours.
           </motion.p>
         </article>
@@ -206,10 +213,14 @@ export default function About() {
                 {...stagger(i)}
                 className="text-center p-8 rounded-3xl bg-white border border-zinc-200 hover:border-blue-500/20 transition-all duration-500 shadow-sm"
               >
-                <div className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 leading-none mb-3">
-                  <NumberTicker value={stat.value} delay={0.3 + i * 0.2} className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500" />
+                <motion.div 
+                  animate={{ backgroundPosition: ['200% center', '-200% center'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                  className="text-6xl md:text-8xl font-black text-transparent bg-[length:200%_auto] bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-200 to-indigo-600 leading-none mb-3 drop-shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                >
+                  <NumberTicker value={stat.value} delay={0.3 + i * 0.2} className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-inherit" />
                   <span>{stat.suffix}</span>
-                </div>
+                </motion.div>
                 <p className="text-sm font-mono text-zinc-400 uppercase tracking-widest mb-2">{stat.label}</p>
                 <p className="text-xs text-zinc-600">{stat.sub}</p>
               </motion.div>
@@ -256,20 +267,22 @@ export default function About() {
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-mono text-red-400/80 uppercase tracking-[0.3em]">The Breaking Point</span>
-            <h2 className="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-tight">The Part Where It All Falls Apart</h2>
+            <h2 className="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-tight">
+              <KineticText text="The Part Where It All Falls Apart" type="letters" />
+            </h2>
           </motion.div>
 
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            The work never stops. The budgets never match the effort. And the pressure? Relentless.
-          </motion.p>
+          <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">
+            <ScrollMaskText text="The work never stops. The budgets never match the effort. And the pressure? Relentless." />
+          </p>
 
-          <motion.p {...stagger(2)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            I'd have clients wanting 10 blog posts by Friday with a budget that barely covered research for one. I'd spend 8 hours crafting the perfect piece, only to have the client ghost when it was time to pay.
-          </motion.p>
+          <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">
+            <ScrollMaskText text="I'd have clients wanting 10 blog posts by Friday with a budget that barely covered research for one. I'd spend 8 hours crafting the perfect piece, only to have the client ghost when it was time to pay." />
+          </p>
 
-          <motion.p {...stagger(3)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            Because there were only 24 hours in a day. And I was already using most of them.
-          </motion.p>
+          <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">
+            <ScrollMaskText text="Because there were only 24 hours in a day. And I was already using most of them." />
+          </p>
 
           {/* 2AM Pull-Quote (Text Reveal) */}
           <div className="-mx-6 md:-mx-24 rounded-3xl bg-zinc-100 border border-zinc-200 my-20">
@@ -280,7 +293,7 @@ export default function About() {
             />
           </div>
 
-          <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-700 font-medium leading-relaxed">
+          <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-700 font-medium leading-relaxed mt-10">
             <span className="text-red-600 font-black">The irony?</span> My clients were drowning in the exact same struggle.
           </motion.p>
 
@@ -319,9 +332,10 @@ export default function About() {
 
           {/* Pivotal Question */}
           <motion.p 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.8, rotateX: 20 }}
+            whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
             viewport={{ once: true }}
+            whileHover={{ scale: 1.05, rotateX: 10, rotateY: -5 }}
             transition={{ duration: 0.8, ease: [0.21, 0.45, 0.32, 0.9] }}
             className="text-3xl md:text-4xl lg:text-5xl font-black italic text-center text-blue-600 drop-shadow-sm leading-tight py-6"
           >
@@ -401,8 +415,8 @@ export default function About() {
                 className="relative rounded-3xl bg-zinc-50 border border-zinc-100 p-8 md:p-10 hover:border-blue-100 hover:shadow-lg transition-all duration-500"
               >
                 <Quote className="absolute top-6 right-8 w-10 h-10 text-zinc-200" />
-                <blockquote className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mb-6 relative z-10">
-                  "{testimonial.quote}"
+                <blockquote className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mb-6 relative z-10 mt-6">
+                  <ScrollMaskText text={`"${testimonial.quote}"`} />
                 </blockquote>
                 <figcaption className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm">
@@ -479,13 +493,14 @@ export default function About() {
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.02, rotate: i % 2 === 0 ? 1 : -1 }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: [0.21, 0.45, 0.32, 0.9] }}
-                className="p-8 rounded-3xl bg-zinc-50 border border-zinc-100 hover:border-blue-200 hover:shadow-lg transition-all duration-500 group"
+                className="relative overflow-hidden p-8 rounded-3xl bg-zinc-50 border border-zinc-100 transition-all duration-500 group shadow-sm hover:shadow-xl hover:shadow-blue-500/10 cursor-default"
               >
                 <div className="w-12 h-12 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center mb-6 text-zinc-600 group-hover:text-blue-500 group-hover:border-blue-200 transition-colors duration-300 shadow-sm">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-zinc-900 mb-3">{item.title}</h3>
+                <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all duration-300">{item.title}</h3>
                 <p className="text-sm text-zinc-500 leading-relaxed" dangerouslySetInnerHTML={{ __html: item.desc }} />
               </motion.div>
             ))}
@@ -501,12 +516,14 @@ export default function About() {
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-[0.3em]">Where I'm Going</span>
-            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 tracking-tight leading-tight">The Next Chapter</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 tracking-tight leading-tight">
+               <KineticText text="The Next Chapter" type="letters" delay={2} />
+            </h2>
           </motion.div>
 
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            Today, I build content marketing automation systems for businesses across continents. I'm certified in AI automation (n8n Academy), advanced SEO (Semrush), and marketing automation.
-          </motion.p>
+          <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed mt-10">
+            <ScrollMaskText text="Today, I build content marketing automation systems for businesses across continents. I'm certified in AI automation (n8n Academy), advanced SEO (Semrush), and marketing automation." />
+          </p>
 
           {/* Certification badges */}
           <motion.div {...stagger(2)} className="flex flex-wrap gap-3">

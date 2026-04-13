@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Bot, PenTool } from 'lucide-react';
+import Lottie from 'lottie-react';
 
 // ─── Problem Data ─────────────────────────────────────────────────────────────
 
@@ -11,6 +12,7 @@ interface Problem {
   body: string;
   detail: string;
   icon: React.ElementType;
+  animationPath?: string;
   accentColor: string;
 }
 
@@ -22,6 +24,7 @@ const PROBLEMS: Problem[] = [
     body: "You hired a freelancer. They were great for a while. Then they got overloaded, quality dropped, and one day — they just stopped responding.",
     detail: "Now you're back to square one, sifting through proposals and hoping this one sticks.",
     icon: Users,
+    animationPath: '/animation/freelancer.json',
     accentColor: '#e85d4a',
   },
   {
@@ -31,6 +34,7 @@ const PROBLEMS: Problem[] = [
     body: "You tried an agency. Slick deck. Impressive pitch. Then the invoice arrived: $8,000/month, six-month minimum.",
     detail: "Three months later you're getting junior work at senior prices, and a simple revision takes two weeks.",
     icon: Building2,
+    animationPath: '/animation/agency.json',
     accentColor: '#f59e0b',
   },
   {
@@ -40,6 +44,7 @@ const PROBLEMS: Problem[] = [
     body: "It sounded like every other bland, generic article online. Worse, it sounded nothing like you.",
     detail: "Your brand voice? Gone. Your differentiation? Erased. Your audience can tell — and they're clicking away.",
     icon: Bot,
+    animationPath: '/animation/ai-tools.json',
     accentColor: '#8b5cf6',
   },
   {
@@ -49,6 +54,7 @@ const PROBLEMS: Problem[] = [
     body: "Except you're also the one running sales calls, managing the team, solving operational fires, and keeping clients happy.",
     detail: "So the blog post gets written at 11 PM — when it gets written at all. Three weeks later, nothing published. Again.",
     icon: PenTool,
+    animationPath: '/animation/diy.json',
     accentColor: '#10b981',
   },
 ];
@@ -78,14 +84,14 @@ const ScrollRevealText = ({
       {words.map((word, i) => {
         const wordStart = startProgress + i * step;
         const wordEnd = Math.min(wordStart + step * 2.5, endProgress);
-        const opacity = useTransform(scrollYProgress, [wordStart, wordEnd], [0.12, 1]);
-        const y = useTransform(scrollYProgress, [wordStart, wordEnd], [8, 0]);
+        const opacity = useTransform(scrollYProgress, [wordStart, wordEnd], [0.2, 1]);
+        const y = useTransform(scrollYProgress, [wordStart, wordEnd], [10, 0]);
 
         return (
           <React.Fragment key={i}>
             <motion.span
               style={{ opacity, y, display: 'inline-block' }}
-              className="will-change-[opacity,transform]"
+              className="will-change-[opacity,transform] translate-z-0"
             >
               {word}
             </motion.span>
@@ -133,16 +139,17 @@ const VerticalNavigator = ({
     >
       {/* Background track line */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 w-[3px] rounded-full"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#e4e4e7' }}
+        className="absolute left-1/2 -translate-x-1/2 w-[2px] rounded-full"
+        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#f4f4f5' }}
       />
 
-      {/* Filled progress line */}
+      {/* Filled progress line - Using scaleY for GPU acceleration */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-[3px] rounded-full origin-top"
+        className="absolute left-1/2 -translate-x-1/2 w-[2px] rounded-full origin-top will-change-transform"
         style={{ 
           top: 28, 
-          height: fillHeight, 
+          height: TRACK_HEIGHT,
+          scaleY: progress, 
           backgroundColor: fillColor 
         }}
       />
@@ -256,11 +263,11 @@ const ProblemCard = ({
             {problem.tag}
           </span>
 
-          {/* Large number — higher contrast */}
-          <div>
+          {/* Large number — improved contrast and numeric variant */}
+          <div className="select-none pointer-events-none">
             <span
-              className="text-8xl md:text-[10rem] font-black leading-none select-none tracking-tighter block"
-              style={{ color: `${problem.accentColor}A6` }}
+              className="text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-60"
+              style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
             >
               {String(problem.id).padStart(2, '0')}
             </span>
@@ -312,18 +319,23 @@ const ProblemCard = ({
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-36 h-36 md:w-48 md:h-48 rounded-[2.5rem] border flex items-center justify-center"
-              style={{
-                backgroundColor: `${problem.accentColor}10`,
-                borderColor: `${problem.accentColor}25`,
-              }}
+              className="w-48 h-48 md:w-80 md:h-80 flex items-center justify-center -translate-y-4 mix-blend-multiply"
             >
-              <Icon
-                size={72}
-                strokeWidth={1}
-                style={{ color: problem.accentColor }}
-                className="md:w-24 md:h-24"
-              />
+              {problem.animationPath ? (
+                <Lottie 
+                  path={problem.animationPath} 
+                  loop={true} 
+                  autoplay={true} 
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : (
+                <Icon
+                  size={72}
+                  strokeWidth={1}
+                  style={{ color: problem.accentColor }}
+                  className="md:w-24 md:h-24"
+                />
+              )}
             </motion.div>
           </div>
         </div>
