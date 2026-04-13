@@ -15,12 +15,49 @@ import {
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { NumberTicker } from '../components/NumberTicker';
+import { TypewriterEffect } from '../components/ui/typewriter-effect';
+import { BlurFade } from '../components/ui/blur-fade';
+import { TextRevealByWord } from '../components/ui/text-reveal';
+import { GooeyText } from '../components/ui/gooey-text-morphing';
+import { TextEffect } from '../components/ui/text-effect';
+import { ContainerScroll } from '../components/ui/container-scroll-animation';
+import { useTransform } from 'motion/react';
+
+const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\n\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\n\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\n\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\n\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\n\nAnd honestly? It was magic.`;
+
+const StoryView = ({ progress }: { progress: any }) => {
+  const yTranslate = useTransform(progress, [0.1, 0.9], ["25vh", "-110vh"]);
+  const progressWidth = useTransform(progress, [0.1, 0.9], ["0%", "100%"]);
+
+  return (
+    <div className="w-full h-full relative overflow-hidden bg-[#fafafa]">
+      {/* Progress Bar */}
+      <div className="absolute top-0 left-0 w-full h-[6px] bg-zinc-200/50 z-50">
+        <motion.div style={{ width: progressWidth }} className="h-full bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
+      </div>
+
+      {/* Scrolling Content */}
+      <motion.div style={{ y: yTranslate }} className="px-8 py-20 md:px-20 lg:px-24 w-full max-w-3xl mx-auto h-[200vh]">
+        <TextRevealByWord 
+          progress={progress}
+          range={[0.1, 0.9]} 
+          text={STORY_TEXT}
+          textClassName="text-[1rem] md:text-xl lg:text-2xl text-zinc-900 font-serif leading-[2.2] md:leading-[2.5] tracking-wide"
+        />
+      </motion.div>
+      
+      {/* Fades */}
+      <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-[#fafafa] to-transparent z-40 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#fafafa] to-transparent z-40 pointer-events-none" />
+    </div>
+  );
+};
 
 /* ─── Fade-up animation variant ─── */
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" } as any,
+  viewport: { once: false, margin: "0px" } as any,
   transition: { duration: 0.7, ease: [0.21, 0.45, 0.32, 0.9] },
 };
 
@@ -115,13 +152,18 @@ export default function About() {
       ═══════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-white relative z-20">
         <article className="max-w-3xl mx-auto px-6 space-y-10">
-          <motion.h2 {...stagger(0)} className="text-4xl md:text-5xl font-black text-zinc-900 tracking-tight leading-tight">
-            Hey, I'm Emmanuel.
-          </motion.h2>
-
-          <motion.p {...stagger(1)} className="text-xl md:text-2xl text-zinc-600 font-light leading-relaxed">
-            I automate content marketing for businesses that are tired of the chaos.
-          </motion.p>
+          <div className="min-h-[140px] flex flex-col justify-start">
+            <TypewriterEffect 
+              words={[{ text: "Hey," }, { text: "I'm" }, { text: "Emmanuel." }]} 
+              className="text-left text-4xl md:text-5xl font-black text-zinc-900 tracking-tight leading-tight" 
+              cursorClassName="bg-blue-500 h-8 md:h-12" 
+            />
+            <BlurFade delay={0.8} yOffset={20}>
+              <p className="text-xl md:text-2xl text-zinc-600 font-light leading-relaxed mt-6">
+                I automate content marketing for businesses that are tired of the chaos.
+              </p>
+            </BlurFade>
+          </div>
 
           {/* Empathy pull-quote */}
           <motion.blockquote {...stagger(2)} className="border-l-4 border-blue-500 pl-6 py-2 text-lg md:text-xl text-zinc-500 italic leading-relaxed">
@@ -142,13 +184,13 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 2 — Proof Bar (dark zinc-950)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-zinc-950 text-white overflow-hidden">
+      <section className="py-24 md:py-32 bg-zinc-50 text-zinc-900 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 space-y-16">
           {/* Section Label */}
           <motion.div {...fadeUp} className="text-center space-y-4">
             <span className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em]">The Short Version</span>
-            <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-              I help growing businesses <span className="text-white font-semibold">(5–50 people, $500K–$10M revenue)</span> automate their content marketing so they can stop managing chaos and start seeing predictable results.
+            <p className="text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto leading-relaxed">
+              I help growing businesses <span className="text-zinc-900 font-semibold">(5–50 people, $500K–$10M revenue)</span> automate their content marketing so they can stop managing chaos and start seeing predictable results.
             </p>
           </motion.div>
 
@@ -162,7 +204,7 @@ export default function About() {
               <motion.div
                 key={stat.label}
                 {...stagger(i)}
-                className="text-center p-8 rounded-3xl bg-white/[0.03] border border-white/[0.06] hover:border-blue-500/20 transition-all duration-500"
+                className="text-center p-8 rounded-3xl bg-white border border-zinc-200 hover:border-blue-500/20 transition-all duration-500 shadow-sm"
               >
                 <div className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 leading-none mb-3">
                   <NumberTicker value={stat.value} delay={0.3 + i * 0.2} className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500" />
@@ -175,9 +217,9 @@ export default function About() {
           </div>
 
           {/* Global Badge */}
-          <motion.p {...fadeUp} className="text-center text-sm font-mono text-zinc-500 tracking-wider">
+          <motion.p {...fadeUp} className="text-center text-sm md:text-base font-semibold text-zinc-800 tracking-wider">
             Working remotely from Nigeria with businesses globally — US, UK, Canada, and beyond. <br className="hidden md:block" />
-            <span className="text-zinc-400">Time zones don't matter when you build systems that run 24/7.</span>
+            <span className="text-zinc-900 font-bold block mt-2 text-lg">Time zones don't matter when you build systems that run 24/7.</span>
           </motion.p>
         </div>
       </section>
@@ -186,48 +228,24 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 3 — Origin Story (white)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-white">
-        <article className="max-w-3xl mx-auto px-6 space-y-10">
-          <motion.div {...fadeUp} className="space-y-2">
-            <span className="text-xs font-mono text-zinc-400 uppercase tracking-[0.3em]">The Origin</span>
-            <h2 className="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-tight">How a Kid from Osogbo Ended Up Here</h2>
-          </motion.div>
-
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.
-          </motion.p>
-
-          <motion.p {...stagger(2)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            I went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree. The kind that makes parents proud at family gatherings.
-          </motion.p>
-
-          <motion.p {...stagger(3)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            But somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: <strong className="text-zinc-900 font-semibold">writing words that made people want to read them.</strong>
-          </motion.p>
-
-          {/* Highlighted callout */}
-          <motion.div {...stagger(4)} className="bg-zinc-50 rounded-2xl p-8 border border-zinc-100">
-            <p className="text-lg md:text-xl text-zinc-700 leading-relaxed">
-              Not academic writing. Not textbook stuff. <strong className="text-zinc-900 font-bold">The kind of writing that connects brands with real humans and turns strangers into customers.</strong>
-            </p>
-          </motion.div>
-
-          <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            So fresh out of secondary school, while my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me. Freelance platforms. Cold emails. Direct messages. Whatever worked.
-          </motion.p>
-
-          {/* Magic moment */}
-          <motion.p 
-            {...stagger(6)}
-            className="text-3xl md:text-4xl font-black italic text-zinc-900 tracking-tight"
-          >
-            And honestly? <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">It was magic.</span>
-          </motion.p>
-
-          <motion.p {...stagger(7)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
-            Getting paid to learn about industries I knew nothing about? Learning how to make complex things simple? Watching words I wrote actually drive business results? I was hooked.
-          </motion.p>
-        </article>
+      <section className="py-24 md:py-32 bg-white flex flex-col overflow-hidden">
+        <ContainerScroll
+          titleComponent={
+            <>
+              <motion.div {...fadeUp} className="space-y-4 mb-8">
+                <span className="text-xs font-mono text-zinc-400 uppercase tracking-[0.3em]">The Origin</span>
+                <h2 className="text-4xl md:text-7xl font-black text-zinc-900 tracking-tight leading-tight">
+                  How a Kid from Osogbo <br />
+                  <span className="text-blue-600">Ended Up Here</span>
+                </h2>
+              </motion.div>
+            </>
+          }
+        >
+          {(scrollYProgress) => (
+             <StoryView progress={scrollYProgress} />
+          )}
+        </ContainerScroll>
       </section>
 
 
@@ -253,12 +271,14 @@ export default function About() {
             Because there were only 24 hours in a day. And I was already using most of them.
           </motion.p>
 
-          {/* 2AM Pull-Quote */}
-          <motion.blockquote {...stagger(4)} className="border-l-4 border-red-500 pl-6 py-2">
-            <p className="text-xl md:text-2xl text-zinc-800 font-semibold leading-relaxed">
-              I remember writing at 2 AM because it was the only quiet time I had. I remember choosing between sleep and deadlines. <span className="text-red-600 font-black">Deadlines always won.</span>
-            </p>
-          </motion.blockquote>
+          {/* 2AM Pull-Quote (Text Reveal) */}
+          <div className="-mx-6 md:-mx-24 rounded-3xl bg-zinc-100 border border-zinc-200 my-20">
+            <TextRevealByWord 
+              text="I remember writing at 2 AM because it was the only quiet time I had. I remember choosing between sleep and deadlines. Deadlines always won." 
+              className="h-[120vh]"
+              textClassName="text-xl md:text-4xl font-semibold"
+            />
+          </div>
 
           <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-700 font-medium leading-relaxed">
             <span className="text-red-600 font-black">The irony?</span> My clients were drowning in the exact same struggle.
@@ -270,7 +290,7 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-zinc-900 text-white py-10 px-8 rounded-2xl text-center"
+            className="bg-zinc-100 text-zinc-900 py-10 px-8 rounded-2xl text-center border border-zinc-200"
           >
             <p className="text-xl md:text-2xl font-bold leading-relaxed">
               We were all trapped in the same broken system.
@@ -283,17 +303,17 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 5 — The Pivot Moment (dark zinc-950)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-zinc-950 text-white">
+      <section className="py-24 md:py-32 bg-zinc-50 text-zinc-900">
         <article className="max-w-4xl mx-auto px-6 space-y-12">
           <motion.div {...fadeUp} className="text-center space-y-4">
-            <span className="text-xs font-mono text-blue-400 uppercase tracking-[0.3em]">The Moment Everything Changed</span>
+            <span className="text-xs font-mono text-blue-600 uppercase tracking-[0.3em]">The Moment Everything Changed</span>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85]">
               November 2022.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">ChatGPT launched.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">ChatGPT launched.</span>
             </h2>
           </motion.div>
 
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed text-center max-w-2xl mx-auto">
+          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed text-center max-w-2xl mx-auto">
             Half the writers I knew panicked. "AI is going to replace us!" I had a different thought:
           </motion.p>
 
@@ -303,35 +323,43 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.21, 0.45, 0.32, 0.9] }}
-            className="text-3xl md:text-4xl lg:text-5xl font-black italic text-center text-blue-300 drop-shadow-[0_0_30px_rgba(59,130,246,0.25)] leading-tight py-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-black italic text-center text-blue-600 drop-shadow-sm leading-tight py-6"
           >
             "Wait... could this actually solve my&nbsp;problem?"
           </motion.p>
 
-          <motion.p {...stagger(2)} className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed text-center max-w-2xl mx-auto">
-            My problem wasn't lack of skill. <span className="text-white font-semibold">It was lack of scale.</span>
+          <motion.p {...stagger(2)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed text-center max-w-2xl mx-auto">
+            My problem wasn't lack of skill. <span className="text-zinc-900 font-semibold">It was lack of scale.</span>
           </motion.p>
 
           {/* Mindset Shift Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             <motion.div 
               {...stagger(3)}
-              className="p-8 rounded-2xl bg-zinc-900 border border-red-500/20 space-y-4"
+              className="p-8 rounded-2xl bg-white border border-red-200 space-y-4 shadow-sm"
             >
-              <span className="text-xs font-mono text-red-400 uppercase tracking-widest">Old Thinking</span>
-              <p className="text-xl md:text-2xl font-bold text-zinc-300 italic leading-snug">"How do I write faster?"</p>
-              <p className="text-xl md:text-2xl font-bold text-zinc-300 italic leading-snug">"How do I manage more clients?"</p>
+              <span className="text-xs font-mono text-red-500 uppercase tracking-widest">Old Thinking</span>
+              <p className="text-xl md:text-2xl font-bold text-zinc-700 italic leading-snug">"How do I write faster?"</p>
+              <p className="text-xl md:text-2xl font-bold text-zinc-700 italic leading-snug">"How do I manage more clients?"</p>
             </motion.div>
             <motion.div 
               {...stagger(4)}
-              className="p-8 rounded-2xl bg-zinc-900 border border-blue-500/30 ring-1 ring-blue-500/10 space-y-4"
+              className="p-8 rounded-2xl bg-blue-50 border border-blue-200 ring-1 ring-blue-500/10 space-y-4 shadow-sm"
             >
-              <span className="text-xs font-mono text-blue-400 uppercase tracking-widest">New Thinking</span>
-              <p className="text-xl md:text-2xl font-bold text-white italic leading-snug">"How do I build systems that write automatically?"</p>
-              <p className="text-xl md:text-2xl font-bold text-white italic leading-snug">"How do I build systems that manage themselves?"</p>
+              <span className="text-xs font-mono text-blue-600 uppercase tracking-widest">New Thinking</span>
+              <p className="text-xl md:text-2xl font-bold text-zinc-900 italic leading-snug">"How do I build systems that write automatically?"</p>
+              <p className="text-xl md:text-2xl font-bold text-zinc-900 italic leading-snug">"How do I build systems that manage themselves?"</p>
             </motion.div>
           </div>
 
+          <div className="h-[200px] md:h-[250px] flex items-center justify-center my-12 w-full overflow-hidden relative">
+            <GooeyText 
+              texts={["Writing Articles", "Building Engines", "Trading Time", "Scaling Impact", "Freelancer", "Automator"]} 
+              textClassName="text-zinc-900 font-black italic tracking-tighter text-4xl md:text-6xl lg:text-7xl drop-shadow-sm"
+              morphTime={1.2}
+              cooldownTime={1.5}
+            />
+          </div>
           <motion.p {...stagger(5)} className="text-center text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 pt-4">
             That shift changed everything.
           </motion.p>
@@ -395,32 +423,34 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 7 — What I Believe (dark zinc-950)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-zinc-950 text-white">
+      <section className="py-24 md:py-32 bg-zinc-50 text-zinc-900">
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
-            <span className="text-xs font-mono text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 uppercase tracking-[0.3em]">What I Believe</span>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">
-              Working harder doesn't guarantee better results.
+            <span className="text-xs font-mono text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 uppercase tracking-[0.3em]">What I Believe</span>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight min-h-[100px]">
+              <TextEffect per="word" preset="slide">
+                Working harder doesn't guarantee better results.
+              </TextEffect>
             </h2>
           </motion.div>
 
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
+          <motion.p {...stagger(1)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
             I know. In a world obsessed with hustle culture, that sounds almost blasphemous. But I've seen it play out too many times. You can grind 80-hour weeks and get nowhere. Or you can build the right system and get exceptional results with 20 hours of focused work.
           </motion.p>
 
-          <motion.p {...stagger(2)} className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+          <motion.p {...stagger(2)} className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">
             The difference isn't effort. It's systems.
           </motion.p>
 
           {/* Scripture */}
           <motion.blockquote {...stagger(3)} className="border-l-4 border-blue-500 pl-6 py-3">
-            <p className="text-xl md:text-2xl text-zinc-300 italic leading-relaxed">
+            <p className="text-xl md:text-2xl text-zinc-700 italic leading-relaxed">
               "Do you see someone skilled in their work? They will serve before kings; they will not serve before officials of low rank."
             </p>
             <cite className="block mt-3 text-sm font-mono text-zinc-500 not-italic">— Proverbs 22:29</cite>
           </motion.blockquote>
 
-          <motion.p {...stagger(4)} className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
+          <motion.p {...stagger(4)} className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
             My faith shapes how I work. I believe in doing exceptional work, using the gifts God's given me wisely, and serving others with integrity. That means building systems that genuinely work—not just collecting fees and disappearing.
           </motion.p>
         </article>

@@ -40,7 +40,7 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
                   <img
                     src={tool.logo}
                     alt={tool.name}
-                    className="w-8 h-8 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                    className="w-8 h-8 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                     referrerPolicy="no-referrer"
                   />
                 ) : (

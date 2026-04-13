@@ -1,23 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Box, Layers, Zap, Cpu, Search, Share2, TrendingUp, Rocket, Bot, MousePointer2 } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 interface TickerRowProps {
-  icons: React.ReactNode[];
+  icons: string[];
   speed: number;
   reverse?: boolean;
 }
 
 const TickerRow: React.FC<TickerRowProps> = ({ icons, speed, reverse = false }) => {
   // Triple icons for seamless loop
-  const duplicatedIcons = [...icons, ...icons, ...icons];
+  const duplicatedIcons = [...icons, ...icons, ...icons, ...icons, ...icons];
 
   return (
     <div className="flex overflow-hidden relative w-full py-4">
       <motion.div
         className="flex gap-4 md:gap-6 shrink-0"
         animate={{
-          x: reverse ? ["-33.33%", "0%"] : ["0%", "-33.33%"],
+          x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
         }}
         transition={{
           duration: speed,
@@ -25,14 +25,19 @@ const TickerRow: React.FC<TickerRowProps> = ({ icons, speed, reverse = false }) 
           ease: "linear",
         }}
       >
-        {duplicatedIcons.map((icon, i) => (
+        {duplicatedIcons.map((url, i) => (
           <div
             key={i}
-            className="w-16 h-16 md:w-20 md:h-20 flex-none rounded-2xl md:rounded-3xl bg-white/40 backdrop-blur-md border border-zinc-200/50 flex items-center justify-center group hover:bg-white hover:border-zinc-300 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-zinc-200/50"
+            className="w-16 h-16 md:w-20 md:h-20 flex-none rounded-2xl md:rounded-3xl bg-white/40 backdrop-blur-md border border-zinc-200/50 flex items-center justify-center group hover:bg-white hover:border-zinc-300 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-zinc-200/50 relative overflow-hidden"
           >
-            <div className="text-zinc-400 group-hover:text-brand-gradient transition-colors duration-500 transform group-hover:scale-110">
-              {icon}
-            </div>
+            <div className="absolute inset-0 bg-transparent group-hover:bg-brand-gradient/5 transition-colors duration-500 pointer-events-none" />
+            <img 
+               src={url} 
+               alt="Integration Logo" 
+               className="w-8 h-8 md:w-10 md:h-10 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110" 
+               referrerPolicy="no-referrer"
+               loading="lazy"
+            />
           </div>
         ))}
       </motion.div>
@@ -41,29 +46,44 @@ const TickerRow: React.FC<TickerRowProps> = ({ icons, speed, reverse = false }) 
 };
 
 export const IntegrationTicker: React.FC = () => {
-  // Placeholder icons for Row 1 (n8n/Any 10)
-  const n8nIcons = [
-    <Box size={32} />, <Layers size={32} />, <Zap size={32} />, 
-    <Cpu size={32} />, <Search size={32} />, <Share2 size={32} />,
-    <TrendingUp size={32} />, <Rocket size={32} />, <Bot size={32} />,
-    <MousePointer2 size={32} />
+  const row1 = [
+    'https://cdn.simpleicons.org/hubspot',
+    'https://cdn.simpleicons.org/zapier',
+    'https://cdn.simpleicons.org/n8n',
+    'https://cdn.simpleicons.org/make',
+    'https://cdn.simpleicons.org/openai',
+    'https://cdn.simpleicons.org/cloudflare',
+    'https://cdn.simpleicons.org/notion',
+    'https://cdn.simpleicons.org/slack',
+    'https://cdn.simpleicons.org/discord',
+    'https://cdn.simpleicons.org/github'
   ];
 
-  // Placeholder icons for Row 2 (Make.com)
-  const makeIcons = Array(10).fill(<div className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />).map((dot, i) => (
-    <div key={i} className="relative">
-      <Box size={28} />
-      <div className="absolute -top-1 -right-1">{dot}</div>
-    </div>
-  ));
+  const row2 = [
+    'https://cdn.simpleicons.org/salesforce',
+    'https://cdn.simpleicons.org/mailchimp',
+    'https://cdn.simpleicons.org/airtable',
+    'https://cdn.simpleicons.org/figma',
+    'https://cdn.simpleicons.org/stripe',
+    'https://cdn.simpleicons.org/wordpress',
+    'https://cdn.simpleicons.org/shopify',
+    'https://cdn.simpleicons.org/googleanalytics',
+    'https://cdn.simpleicons.org/x',
+    'https://cdn.simpleicons.org/linkedin'
+  ];
 
-  // Placeholder icons for Row 3 (Zapier)
-  const zapierIcons = Array(10).fill(null).map((_, i) => (
-    <div key={i} className="relative">
-      <Layers size={28} />
-      <Zap size={10} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-brand-gradient" />
-    </div>
-  ));
+  const row3 = [
+    'https://cdn.simpleicons.org/youtube',
+    'https://cdn.simpleicons.org/instagram',
+    'https://cdn.simpleicons.org/tiktok',
+    'https://cdn.simpleicons.org/calendly',
+    'https://cdn.simpleicons.org/zoom',
+    'https://cdn.simpleicons.org/twilio',
+    'https://cdn.simpleicons.org/jira',
+    'https://cdn.simpleicons.org/asana',
+    'https://cdn.simpleicons.org/trello',
+    'https://cdn.simpleicons.org/dropbox'
+  ];
 
   return (
     <section className="py-24 bg-transparent relative overflow-hidden z-10">
@@ -92,10 +112,10 @@ export const IntegrationTicker: React.FC = () => {
         </div>
 
         {/* Ticker Rows with smooth mask fade */}
-        <div className="space-y-4 md:space-y-6 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] -webkit-[mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
-          <TickerRow icons={n8nIcons} speed={40} />
-          <TickerRow icons={makeIcons} speed={35} reverse={true} />
-          <TickerRow icons={zapierIcons} speed={45} />
+        <div className="space-y-4 md:space-y-6 [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] -webkit-[mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] relative isolate">
+          <TickerRow icons={row1} speed={60} />
+          <TickerRow icons={row2} speed={55} reverse={true} />
+          <TickerRow icons={row3} speed={70} />
         </div>
 
         {/* Action Button */}
