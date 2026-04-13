@@ -28,29 +28,30 @@ import { ScrollMaskText } from '../components/animations/ScrollMaskText';
 const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\n\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\n\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\n\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\n\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\n\nAnd honestly? It was magic.`;
 
 const StoryView = ({ progress }: { progress: any }) => {
-  const yTranslate = useTransform(progress, [0.1, 0.9], ["25vh", "-110vh"]);
-  const progressWidth = useTransform(progress, [0.1, 0.9], ["0%", "100%"]);
+  const progressWidth = useTransform(progress, [0.05, 0.8], ["0%", "100%"]);
 
   return (
     <div className="w-full h-full relative overflow-hidden bg-[#fafafa]">
       {/* Progress Bar */}
-      <div className="absolute top-0 left-0 w-full h-[6px] bg-zinc-200/50 z-50">
+      <div className="absolute top-0 left-0 w-full h-[5px] bg-zinc-200/50 z-50">
         <motion.div style={{ width: progressWidth }} className="h-full bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
       </div>
 
-      {/* Scrolling Content */}
-      <motion.div style={{ y: yTranslate }} className="px-8 py-20 md:px-20 lg:px-24 w-full max-w-3xl mx-auto h-[200vh]">
-        <TextRevealByWord 
-          progress={progress}
-          range={[0.1, 0.9]} 
-          text={STORY_TEXT}
-          textClassName="text-[1rem] md:text-xl lg:text-2xl text-zinc-900 font-serif leading-[2.2] md:leading-[2.5] tracking-wide"
-        />
-      </motion.div>
+      {/* Story Content — text stays put, words reveal on scroll like reading a book */}
+      <div className="px-6 py-10 md:px-12 lg:px-16 w-full h-full flex items-center justify-center">
+        <div className="max-w-2xl w-full">
+          <TextRevealByWord 
+            progress={progress}
+            range={[0.05, 0.8]} 
+            text={STORY_TEXT}
+            textClassName="text-sm md:text-base lg:text-lg text-zinc-900 font-sans leading-[1.9] md:leading-[2.1] tracking-normal"
+          />
+        </div>
+      </div>
       
       {/* Fades */}
-      <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-[#fafafa] to-transparent z-40 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#fafafa] to-transparent z-40 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-[#fafafa] to-transparent z-40 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#fafafa] to-transparent z-40 pointer-events-none" />
     </div>
   );
 };
@@ -279,9 +280,9 @@ export default function About() {
 
 
       {/* ═══════════════════════════════════════════
-          SECTION 3 — Origin Story (white)
+          SECTION 3 — Origin Story (Immersive Sticky)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-white flex flex-col overflow-hidden">
+      <section className="relative z-[400] bg-white">
         <ContainerScroll
           titleComponent={
             <>

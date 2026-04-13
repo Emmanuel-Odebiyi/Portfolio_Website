@@ -30,13 +30,18 @@ export const ContainerScroll = ({
     return isMobile ? [0.7, 0.9] : [1.05, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 0.1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.1], scaleDimensions());
-  const headerTranslate = useTransform(scrollYProgress, [0, 0.1], [100, 0]);
+  // Phase 1 (0–5%): Tab rotates from 20° to tilted reading angle (8°), title slides in
+  // Phase 2 (5–80%): Tab stays at 8° while text scrolls
+  // Phase 3 (80–95%): Tab straightens from 8° to 0°
+  // Phase 4 (95–100%): Section scrolls away naturally
+  const rotate = useTransform(scrollYProgress, [0, 0.05, 0.8, 0.95], [20, 15, 15, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.05], scaleDimensions());
+  const headerTranslate = useTransform(scrollYProgress, [0, 0.05], [100, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.05, 0.8, 0.88], [0, 1, 1, 0]);
 
   return (
     <div
-      className="h-[300vh] flex items-start justify-center relative w-full"
+      className="h-[400vh] flex items-start justify-center relative w-full"
       ref={containerRef}
     >
       <div
@@ -45,7 +50,7 @@ export const ContainerScroll = ({
           perspective: "1000px",
         }}
       >
-        <Header translate={headerTranslate} titleComponent={titleComponent} />
+        <Header translate={headerTranslate} opacity={headerOpacity} titleComponent={titleComponent} />
         <Card rotate={rotate} scale={scale}>
           {typeof children === "function" ? children(scrollYProgress) : children}
         </Card>
@@ -54,11 +59,12 @@ export const ContainerScroll = ({
   );
 };
 
-export const Header = ({ translate, titleComponent }: any) => {
+export const Header = ({ translate, opacity, titleComponent }: any) => {
   return (
     <motion.div
       style={{
         translateY: translate,
+        opacity: opacity,
       }}
       className="div max-w-5xl mx-auto text-center"
     >
