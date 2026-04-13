@@ -55,7 +55,7 @@ export const KineticText: React.FC<KineticTextProps> = ({ text, className = "", 
       className={className}
     >
       {elements.map((element, index) => (
-        <span key={index} style={{ overflow: 'hidden', display: 'inline-block' }}>
+        <span key={index} style={{ overflow: 'hidden', display: 'inline-block', verticalAlign: 'bottom', paddingBottom: '0.15em' }}>
           <motion.span
             variants={child}
             className="will-change-[opacity,transform] translate-z-0"

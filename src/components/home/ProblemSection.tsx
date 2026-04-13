@@ -59,6 +59,35 @@ const PROBLEMS: Problem[] = [
   },
 ];
 
+// ─── Word-by-Word Component ───────────────────────────────────────────────
+
+const ProblemWord = ({ 
+  word, 
+  scrollYProgress, 
+  start, 
+  end, 
+  accentColor 
+}: { 
+  word: string; 
+  scrollYProgress: any; 
+  start: number; 
+  end: number; 
+  accentColor: string;
+}) => {
+  const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
+  const y = useTransform(scrollYProgress, [start, end], [10, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, y, display: 'inline-block' }}
+      className="will-change-[opacity,transform] translate-z-0"
+    >
+      {word}
+    </motion.span>
+  );
+};
+
+
 // ─── Word-by-Word Scroll Reveal ───────────────────────────────────────────────
 
 const ScrollRevealText = ({
@@ -66,6 +95,7 @@ const ScrollRevealText = ({
   scrollYProgress,
   startProgress,
   endProgress,
+  accentColor = '#3b82f6',
   className = '',
   style = {},
 }: {
@@ -73,6 +103,7 @@ const ScrollRevealText = ({
   scrollYProgress: any;
   startProgress: number;
   endProgress: number;
+  accentColor?: string;
   className?: string;
   style?: React.CSSProperties;
 }) => {
@@ -84,17 +115,16 @@ const ScrollRevealText = ({
       {words.map((word, i) => {
         const wordStart = startProgress + i * step;
         const wordEnd = Math.min(wordStart + step * 2.5, endProgress);
-        const opacity = useTransform(scrollYProgress, [wordStart, wordEnd], [0.2, 1]);
-        const y = useTransform(scrollYProgress, [wordStart, wordEnd], [10, 0]);
 
         return (
           <React.Fragment key={i}>
-            <motion.span
-              style={{ opacity, y, display: 'inline-block' }}
-              className="will-change-[opacity,transform] translate-z-0"
-            >
-              {word}
-            </motion.span>
+            <ProblemWord 
+              word={word} 
+              scrollYProgress={scrollYProgress} 
+              start={wordStart} 
+              end={wordEnd} 
+              accentColor={accentColor} 
+            />
             {' '}
           </React.Fragment>
         );

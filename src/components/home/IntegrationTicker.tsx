@@ -37,6 +37,16 @@ const TickerRow: React.FC<TickerRowProps> = ({ icons, speed, reverse = false }) 
                className="w-8 h-8 md:w-10 md:h-10 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110" 
                referrerPolicy="no-referrer"
                loading="lazy"
+               onError={(e) => {
+                 const target = e.currentTarget;
+                 target.style.display = 'none';
+                 const parent = target.parentElement;
+                 if (parent) {
+                   const placeholder = document.createElement('div');
+                   placeholder.className = 'w-1.5 h-1.5 rounded-full bg-brand-gradient opacity-40 group-hover:opacity-100 transition-opacity';
+                   parent.appendChild(placeholder);
+                 }
+               }}
             />
           </div>
         ))}
@@ -118,17 +128,7 @@ export const IntegrationTicker: React.FC = () => {
           <TickerRow icons={row3} speed={70} />
         </div>
 
-        {/* Action Button */}
-        <div className="mt-16 text-center">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-sm shadow-xl hover:bg-black transition-all flex items-center gap-3 mx-auto group"
-          >
-            <span>Browse All Integrations</span>
-            <Search size={16} className="text-zinc-400 group-hover:text-white transition-colors" />
-          </motion.button>
-        </div>
+
       </div>
     </section>
   );
