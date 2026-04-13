@@ -147,13 +147,6 @@ const VerticalNavigator = ({
   const NODE_GAP = 96; // px between nodes
   const TRACK_HEIGHT = (PROBLEMS.length - 1) * NODE_GAP;
 
-  // Linear progress mapping: map 0-1 scroll to 0-TRACK_HEIGHT pixels
-  const fillHeight = useTransform(
-    progress,
-    [...PROBLEMS.map((_, i) => i / PROBLEMS.length), 1],
-    [...PROBLEMS.map((_, i) => i * NODE_GAP), TRACK_HEIGHT]
-  );
-
   // Smooth color transition for the track as it grows
   const fillColor = useTransform(
     progress,
@@ -164,18 +157,18 @@ const VerticalNavigator = ({
   return (
     <div
       className="absolute left-[-100px] top-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-auto"
-      style={{ height: TRACK_HEIGHT + 56 }}
+      style={{ height: TRACK_HEIGHT + 56, width: 56 }}
       aria-label="Problem navigation"
     >
-      {/* Background track line */}
+      {/* Background track line - darker for visibility */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 w-[2px] rounded-full"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#f4f4f5' }}
+        className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full z-0"
+        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#e4e4e7' }}
       />
 
       {/* Filled progress line - Using scaleY for GPU acceleration */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-[2px] rounded-full origin-top will-change-transform"
+        className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full origin-top will-change-transform z-10"
         style={{ 
           top: 28, 
           height: TRACK_HEIGHT,
@@ -190,7 +183,7 @@ const VerticalNavigator = ({
         const isPast = i < activeIndex;
 
         return (
-          <div key={problem.id} className="absolute" style={{ top: i * NODE_GAP }}>
+          <div key={problem.id} className="absolute left-1/2 -translate-x-1/2 z-20" style={{ top: i * NODE_GAP }}>
             <button
               onClick={() => onNodeClick(i)}
               className="relative flex items-center justify-center cursor-pointer outline-none group"
