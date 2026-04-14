@@ -39,7 +39,7 @@ const TextRevealByWordInternal = ({
       {words.map((word, i) => {
         // If it's a newline string, break the flex column!
         if (word === "\n" || word === "<br/>") {
-          return <div key={i} className="basis-full h-6 md:h-8" />;
+          return <div key={i} className="basis-full h-1 md:h-3" />;
         }
 
         const start = customRange[0] + (i / totalWords) * (customRange[1] - customRange[0]);
@@ -112,7 +112,7 @@ const Word: FC<WordProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
   return (
     <span className="xl:lg-3 relative mx-1 lg:mx-2.5">
-      <span className={"absolute text-zinc-300 opacity-60"}>{children}</span>
+      <span className={"absolute text-zinc-400 opacity-40"}>{children}</span>
       <motion.span
         style={{ opacity: opacity }}
         className={"text-zinc-900"}

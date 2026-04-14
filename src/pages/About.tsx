@@ -17,15 +17,16 @@ import { SEO } from '../components/SEO';
 import { NumberTicker } from '../components/NumberTicker';
 import { TypewriterEffect } from '../components/ui/typewriter-effect';
 import { BlurFade } from '../components/ui/blur-fade';
-import { TextRevealByWord } from '../components/ui/text-reveal';
-import { GooeyText } from '../components/ui/gooey-text-morphing';
-import { TextEffect } from '../components/ui/text-effect';
 import { ContainerScroll } from '../components/ui/container-scroll-animation';
 import { useTransform } from 'motion/react';
+import { GSAPTextReveal } from '../components/ui/gsap-text-reveal';
+import { TextRevealByWord } from '../components/ui/text-reveal';
+import { TextEffect } from '../components/ui/text-effect';
 import { KineticText } from '../components/animations/KineticText';
 import { ScrollMaskText } from '../components/animations/ScrollMaskText';
+import { GooeyText } from '../components/ui/gooey-text-morphing';
 
-const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\n\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\n\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\n\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\n\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\n\nAnd honestly? It was magic.`;
+const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\nAnd honestly? It was magic.`;
 
 const StoryView = ({ progress }: { progress: any }) => {
   const progressWidth = useTransform(progress, [0.05, 0.8], ["0%", "100%"]);
@@ -37,21 +38,19 @@ const StoryView = ({ progress }: { progress: any }) => {
         <motion.div style={{ width: progressWidth }} className="h-full bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
       </div>
 
-      {/* Story Content — text stays put, words reveal on scroll like reading a book */}
-      <div className="px-6 py-10 md:px-12 lg:px-16 w-full h-full flex items-center justify-center">
-        <div className="max-w-2xl w-full">
-          <TextRevealByWord 
-            progress={progress}
-            range={[0.05, 0.8]} 
+      {/* Story Content — GSAP takes over the perfect internal scroll and stagger matching the real DOM height! */}
+      <div className="px-6 md:px-12 lg:px-16 w-full h-full flex flex-col items-center justify-start overflow-hidden relative">
+        <div className="max-w-2xl w-full h-full pb-4">
+          <GSAPTextReveal 
             text={STORY_TEXT}
-            textClassName="text-sm md:text-base lg:text-lg text-zinc-900 font-sans leading-[1.9] md:leading-[2.1] tracking-normal"
+            textClassName="text-[14px] sm:text-[15px] md:text-[17px] lg:text-[19px] text-zinc-900 font-sans leading-[2] lg:leading-[2.2] tracking-normal"
           />
         </div>
       </div>
       
       {/* Fades */}
-      <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-[#fafafa] to-transparent z-40 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#fafafa] to-transparent z-40 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[15vh] bg-gradient-to-b from-[#fafafa] via-[#fafafa]/80 to-transparent z-40 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-[15vh] bg-gradient-to-t from-[#fafafa] via-[#fafafa]/80 to-transparent z-40 pointer-events-none" />
     </div>
   );
 };
@@ -335,14 +334,19 @@ export default function About() {
             <ScrollMaskText text="Because there were only 24 hours in a day. And I was already using most of them." />
           </p>
 
-          {/* 2AM Pull-Quote (Text Reveal) */}
-          <div className="-mx-6 md:-mx-24 rounded-3xl bg-zinc-100 border border-zinc-200 my-20">
-            <TextRevealByWord 
-              text="I remember writing at 2 AM because it was the only quiet time I had. I remember choosing between sleep and deadlines. Deadlines always won." 
-              className="h-[120vh]"
-              textClassName="text-xl md:text-4xl font-semibold"
+          {/* 2AM Pull-Quote — full-bleed sticky text reveal */}
+          <div className="-mx-6 md:-mx-24 my-20">
+            <div className="flex items-center gap-3 mb-8 px-6 md:px-0">
+              <div className="w-6 h-px bg-red-400/60" />
+              <span className="text-[10px] font-mono text-red-400/60 uppercase tracking-[0.4em]">2:00 AM</span>
+            </div>
+            <TextRevealByWord
+              text="I remember writing at 2 AM because it was the only quiet time I had. I remember choosing between sleep and deadlines. Deadlines always won."
+              className="h-[180vh]"
+              textClassName="text-2xl md:text-4xl lg:text-5xl font-bold text-zinc-900 leading-tight"
             />
           </div>
+
 
           <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-700 font-medium leading-relaxed mt-10">
             <span className="text-red-600 font-black">The irony?</span> My clients were drowning in the exact same struggle.
