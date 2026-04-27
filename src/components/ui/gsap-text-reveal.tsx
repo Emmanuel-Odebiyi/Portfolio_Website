@@ -75,16 +75,7 @@ export const GSAPTextReveal: React.FC<GSAPTextRevealProps> = ({
 
   return (
     <div ref={containerRef} className={cn("relative overflow-hidden w-full h-full", className)}>
-      {/* Miniature UI Logo — Far Top Left, clears the text column */}
-      <div className="absolute top-4 left-4 z-50 pointer-events-none">
-        <img
-          src="/logo.svg"
-          alt="Branding"
-          className="w-8 h-8 md:w-10 md:h-10 opacity-60 select-none grayscale contrast-125"
-        />
-      </div>
-
-      {/* Increased pt to push first line below the top gradient fade and logo zone */}
+      {/* Increased pt to push first line into a clean starting position */}
       <div ref={textWrapperRef} className={cn("flex flex-col gap-5 pt-[22%] relative z-10", textClassName)}>
         {paragraphs.map((p, pIndex) => (
           <div key={pIndex} className="flex flex-wrap">

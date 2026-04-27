@@ -20,6 +20,7 @@ import { BlurFade } from '../components/ui/blur-fade';
 import { ContainerScroll } from '../components/ui/container-scroll-animation';
 import { useTransform } from 'motion/react';
 import { GSAPTextReveal } from '../components/ui/gsap-text-reveal';
+import { WorldMap } from '../components/ui/world-map';
 import { TextRevealByWord } from '../components/ui/text-reveal';
 import { TextEffect } from '../components/ui/text-effect';
 import { KineticText } from '../components/animations/KineticText';
@@ -40,6 +41,15 @@ const StoryView = ({ progress }: { progress: any }) => {
 
       {/* Story Content — GSAP takes over the perfect internal scroll and stagger matching the real DOM height! */}
       <div className="px-6 md:px-12 lg:px-16 w-full h-full flex flex-col items-center justify-start overflow-hidden relative">
+        {/* Miniature UI Logo — Positioned on the far left 'binding' side of the tab */}
+        <div className="absolute top-[10%] left-[6%] md:left-[8%] z-50 pointer-events-none">
+          <img
+            src="/logo.svg"
+            alt="Branding"
+            className="w-10 h-10 md:w-12 md:h-12 opacity-60 select-none grayscale contrast-125"
+          />
+        </div>
+
         <div className="max-w-2xl w-full h-full pb-4">
           <GSAPTextReveal 
             text={STORY_TEXT}
@@ -269,6 +279,30 @@ export default function About() {
             ))}
           </div>
 
+          {/* World Map — between stats and global text */}
+          <div className="relative w-full -mx-6 md:mx-0">
+            <WorldMap
+              dots={[
+                {
+                  start: { lat: 9.082, lng: 8.6753, label: "Nigeria" },
+                  end: { lat: 38.8951, lng: -77.0364, label: "USA" }
+                },
+                {
+                  start: { lat: 9.082, lng: 8.6753 },
+                  end: { lat: 51.5074, lng: -0.1278, label: "UK" }
+                },
+                {
+                  start: { lat: 9.082, lng: 8.6753 },
+                  end: { lat: 45.4215, lng: -75.6972, label: "Canada" }
+                },
+                {
+                  start: { lat: 9.082, lng: 8.6753 },
+                  end: { lat: -33.8688, lng: 151.2093, label: "Australia" }
+                }
+              ]}
+            />
+          </div>
+
           {/* Global Badge */}
           <motion.p {...fadeUp} className="text-center text-sm md:text-base font-semibold text-zinc-800 tracking-wider">
             Working remotely from Nigeria with businesses globally — US, UK, Canada, and beyond. <br className="hidden md:block" />
@@ -335,7 +369,7 @@ export default function About() {
           </p>
 
           {/* 2AM Pull-Quote — full-bleed sticky text reveal */}
-          <div className="-mx-6 md:-mx-24 my-20">
+          <div className="-mx-6 md:-mx-24 mt-20 mb-8">
             <div className="flex items-center gap-3 mb-8 px-6 md:px-0">
               <div className="w-6 h-px bg-red-400/60" />
               <span className="text-[10px] font-mono text-red-400/60 uppercase tracking-[0.4em]">2:00 AM</span>
@@ -347,8 +381,7 @@ export default function About() {
             />
           </div>
 
-
-          <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-700 font-medium leading-relaxed mt-10">
+          <motion.p {...stagger(5)} className="text-lg md:text-xl text-zinc-700 font-medium leading-relaxed">
             <span className="text-red-600 font-black">The irony?</span> My clients were drowning in the exact same struggle.
           </motion.p>
 
@@ -599,7 +632,7 @@ export default function About() {
             But honestly? The metrics matter less than the mission. I get to solve the exact problem I once lived. The overwhelmed business owner juggling 47 priorities? <strong className="text-zinc-900 font-semibold">Been there.</strong> The person who knows what needs to happen but doesn't have bandwidth? <strong className="text-zinc-900 font-semibold">Lived that.</strong>
           </motion.p>
 
-          <motion.div {...stagger(4)} className="space-y-4">
+          <motion.div {...stagger(4)} className="space-y-6">
             <p className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed">
               <strong className="text-zinc-900 font-bold">Future focus:</strong> I'm targeting opportunities with businesses in the US, UK, and Canada—operating at a global standard and working with companies pushing boundaries.
             </p>
