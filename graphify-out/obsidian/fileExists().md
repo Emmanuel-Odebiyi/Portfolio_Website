@@ -1,0 +1,20 @@
+---
+source_file: "everything-claude-code\scripts\harness-audit.js"
+type: "code"
+community: "Community 25"
+location: "L88"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Community_25
+---
+
+# fileExists()
+
+## Connections
+- [[detectTargetMode()]] - `calls` [EXTRACTED]
+- [[getConsumerChecks()]] - `calls` [EXTRACTED]
+- [[getRepoChecks()]] - `calls` [EXTRACTED]
+- [[harness-audit.js]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_25
