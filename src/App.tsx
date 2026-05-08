@@ -65,7 +65,7 @@ export default function App() {
       {/* Accessibility: skip navigation for keyboard users */}
       <SkipLink />
       <Aurora />
-      <main id="main-content" className="relative bg-transparent text-zinc-900">
+      <main id="main-content" className="relative bg-transparent">
         <Header />
         <Suspense fallback={<PageLoader />}>
           <Routes>

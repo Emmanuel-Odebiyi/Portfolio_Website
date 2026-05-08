@@ -154,15 +154,21 @@ export const SolutionSection = () => {
       aria-label="The Solution Section"
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col bg-white">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: '#1e1b4b' }}>
+
+        {/* Aurora blobs for the solution section */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="aurora-orb-1 absolute rounded-full" style={{ width: '60vw', height: '60vw', maxWidth: 700, maxHeight: 700, top: '-20%', left: '-10%', background: 'radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          <div className="aurora-orb-2 absolute rounded-full" style={{ width: '45vw', height: '45vw', maxWidth: 600, maxHeight: 600, bottom: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(217,119,6,0.20) 0%, transparent 70%)', filter: 'blur(90px)' }} />
+          <div className="aurora-orb-3 absolute rounded-full" style={{ width: '35vw', height: '35vw', maxWidth: 450, maxHeight: 450, top: '30%', right: '20%', background: 'radial-gradient(circle, rgba(5,150,105,0.15) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        </div>
 
         {/* ── Headline Block ── */}
-        {/* Added extra padding-top to keep it away from main navigation */}
         <div className="shrink-0 pt-28 pb-6 px-6 md:px-16 text-center z-10">
-          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase text-zinc-400 mb-4">
+          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-4" style={{ color: 'rgba(217,119,6,0.85)' }}>
             The Solution
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-zinc-900 tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-4">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-4">
             <LineReveal
               lines={['What If Your Marketing', 'Could Run Itself?']}
               scrollYProgress={scrollYProgress}
@@ -174,8 +180,9 @@ export const SolutionSection = () => {
             style={{
               opacity: useTransform(scrollYProgress, [0.05, 0.15], [0, 1]),
               y: useTransform(scrollYProgress, [0.05, 0.15], [10, 0]),
+              color: 'rgba(148,163,184,0.80)',
             }}
-            className="text-zinc-500 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-sm md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
             I build intelligent content marketing systems that produce consistent,
             high-quality output — without you lifting a finger after setup.

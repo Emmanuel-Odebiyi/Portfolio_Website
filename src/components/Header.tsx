@@ -67,15 +67,21 @@ export const Header: React.FC = () => {
   }, [location]);
 
   const isAboutPage = location.pathname === '/about';
+  const isHomePage  = location.pathname === '/';
+  // On dark-bg pages (home unscrolled, about unscrolled) nav should be white
+  const onDarkBg = (isHomePage && !isScrolled) || (isAboutPage && !isScrolled);
 
   return (
     <header className={`fixed left-1/2 -translate-x-1/2 z-[300] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-5xl' : 'top-6 max-w-7xl'}`}>
       <div 
-        className={`w-full transition-all duration-500 transition-opacity duration-500 pointer-events-auto ${
+      className={`w-full transition-all duration-500 pointer-events-auto ${
           isScrolled 
-            ? 'py-1.5 px-6 bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-[1.25rem]' 
-            : `py-2 px-8 ${isAboutPage ? 'bg-transparent border-transparent' : 'bg-white/30 border-white/10 shadow-xl'} backdrop-blur-lg rounded-[1.5rem]`
+            ? isHomePage
+              ? 'py-1.5 px-6 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.25rem]'
+              : 'py-1.5 px-6 bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-[1.25rem]'
+            : `py-2 px-8 ${onDarkBg ? 'bg-transparent border-transparent' : 'bg-white/30 border-white/10 shadow-xl'} backdrop-blur-lg rounded-[1.5rem]`
         }`}
+        style={isScrolled && isHomePage ? { background: 'rgba(10,15,30,0.70)' } : {}}
       >
         <div className="mx-auto grid grid-cols-2 md:grid-cols-3 items-center">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex justify-start">
@@ -83,7 +89,7 @@ export const Header: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                className={`h-8 md:h-12 w-auto transition-all ${isAboutPage && !isScrolled ? 'invert brightness-0' : ''}`}
+                className={`h-8 md:h-12 w-auto transition-all ${onDarkBg ? 'invert brightness-0' : ''}`}
               />
             </Link>
           </motion.div>
@@ -101,7 +107,7 @@ export const Header: React.FC = () => {
                   className={`flex items-center gap-1.5 text-sm font-black tracking-tight transition-all relative group ${
                     location.pathname === link.href 
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500' 
-                      : (isAboutPage && !isScrolled ? 'text-white hover:text-white/80' : 'text-zinc-600 hover:text-zinc-900')
+                      : (onDarkBg ? 'text-white/80 hover:text-white' : 'text-zinc-600 hover:text-zinc-900')
                   }`}
                 >
                   {link.name}
@@ -171,7 +177,12 @@ export const Header: React.FC = () => {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="hidden md:block">
               <Link
                 to="/contact"
-                className={`px-6 py-2 ${isAboutPage && !isScrolled ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'} text-sm font-black rounded-xl hover:bg-blue-600 hover:text-white transition-all relative overflow-hidden group border-none`}
+                className={`px-6 py-2 text-sm font-black rounded-xl transition-all relative overflow-hidden group border-none ${
+                  onDarkBg ? 'text-zinc-900 hover:text-white' : 'text-white hover:bg-blue-600'
+                }`}
+                style={onDarkBg
+                  ? { background: 'linear-gradient(135deg, #d97706, #fbbf24)', boxShadow: '0 4px 20px rgba(217,119,6,0.30)' }
+                  : { background: '#18181b' }}
               >
                 <span className="relative z-10">Contact Me</span>
               </Link>

@@ -19,21 +19,21 @@ const FeaturedResults = () => {
   };
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-24 overflow-hidden" style={{ backgroundColor: '#0a0f1e' }}>
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}
         <div className="mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight mb-2">
-             Real Businesses. <span className="text-brand-gradient">Real Numbers.</span> 
+          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-2">
+             Real Businesses. <span className="text-amber-gradient">Real Numbers.</span>
           </h2>
-          <p className="text-zinc-500 text-lg md:text-xl font-light">
+          <p className="text-lg md:text-xl font-light" style={{ color: 'rgba(148,163,184,0.75)' }}>
             Measurable impact, delivered through data-driven automation.
           </p>
         </div>
 
-        {/* The "Together but Separate" Bento — Dasboard Shell Approach */}
-        <div className="bg-zinc-50 p-4 md:p-6 rounded-[3rem] border border-zinc-200 shadow-sm relative z-0">
+        {/* The "Together but Separate" Bento */}
+        <div className="p-4 md:p-6 rounded-[3rem] relative z-0" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
             
             {/* Cell 1: Main Case Study (TechFlow) */}

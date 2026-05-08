@@ -159,13 +159,13 @@ export const AutomationInAction = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] bg-transparent z-20">
+    <section ref={containerRef} className="relative h-[500vh] z-20" style={{ backgroundColor: '#0f172a' }}>
       
       {/* Sticky Container */}
-      <div className="sticky top-0 min-h-screen pt-24 pb-8 overflow-hidden bg-transparent border-y border-zinc-100/50 flex flex-col justify-center">
+      <div className="sticky top-0 min-h-screen pt-24 pb-8 overflow-hidden flex flex-col justify-center" style={{ backgroundColor: '#0f172a', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         
         {/* Background Decorative Element */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-50/10 -skew-x-12 translate-x-20 z-0 border-l border-zinc-100/20 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1/3 h-full -skew-x-12 translate-x-20 z-0 border-l pointer-events-none" style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.04)' }} />
         
         <div className="max-w-[1440px] w-full mx-auto px-6 relative z-10 flex flex-col h-full justify-between gap-6">
           
@@ -175,20 +175,21 @@ export const AutomationInAction = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-zinc-200 mb-4"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4"
+                style={{ background: 'rgba(217,119,6,0.10)', border: '1px solid rgba(217,119,6,0.25)' }}
               >
-                <Sparkles className="w-3 h-3 text-brand-gradient" />
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-800">Automation in Action</span>
+                <Sparkles className="w-3 h-3" style={{ color: '#d97706' }} />
+                <span className="text-[10px] font-mono font-black uppercase tracking-widest" style={{ color: '#d97706' }}>Automation in Action</span>
               </motion.div>
-              <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-black text-zinc-900 tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-black text-white tracking-tighter leading-tight">
                 The High-ROI <br />
                 <span className="text-brand-gradient">Automation Lab.</span>
               </h2>
             </div>
             
             {/* Simplified Top Right Content */}
-            <p className="text-zinc-500 text-sm md:text-base font-medium max-w-sm leading-relaxed border-l-2 border-brand-gradient pl-5 shrink-0 bg-white/30 backdrop-blur-sm py-2 rounded-r-xl">
-              I map the inefficiency and build the systems that eliminate it—<span className="text-zinc-900 font-bold block mt-1">Reclaiming 10 to 20 hours of your week.</span>
+            <p className="text-sm md:text-base font-medium max-w-sm leading-relaxed shrink-0 py-2 rounded-r-xl pl-5" style={{ color: 'rgba(148,163,184,0.80)', borderLeft: '2px solid #d97706' }}>
+              I map the inefficiency and build the systems that eliminate it—<span className="text-white font-bold block mt-1">Reclaiming 10 to 20 hours of your week.</span>
             </p>
           </div>
 
@@ -281,7 +282,8 @@ export const AutomationInAction = () => {
                      </div>
 
                      {/* Gradient Overlay for Content */}
-                     <div className="absolute bottom-0 left-0 right-0 pt-20 pb-4 px-6 lg:pb-6 lg:px-8 bg-gradient-to-t from-white via-white/95 to-transparent text-zinc-900 border-none shadow-none z-10 flex flex-col justify-end">
+                     <div className="absolute bottom-0 left-0 right-0 pt-20 pb-4 px-6 lg:pb-6 lg:px-8 z-10 flex flex-col justify-end"
+                          style={{ background: 'linear-gradient(to top, rgba(10,15,30,0.98) 0%, rgba(10,15,30,0.80) 60%, transparent 100%)' }}>
                         <div className="flex flex-col md:flex-row gap-2 lg:gap-6 items-start md:items-end">
                           <div className="flex-grow">
                             <h4 className="text-zinc-400 text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-1 lg:mb-2">Core Problem</h4>

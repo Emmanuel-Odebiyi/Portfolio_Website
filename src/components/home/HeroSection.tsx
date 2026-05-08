@@ -1,75 +1,209 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Button } from '../ui/Button';
+import { ArrowRight } from 'lucide-react';
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-transparent">
-      {/* 
-        Background 3D Mesh / Aurora will be loaded here later. 
-        For now, the parent page will load the 3D element behind this content.
-      */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-32 pb-24 flex flex-col items-center">
+    <section className="relative min-h-[100vh] flex items-center overflow-hidden grain-overlay"
+             style={{ backgroundColor: '#0a0f1e' }}>
+
+      {/* ── Aurora Orbs ─────────────────────────────────────────────────────── */}
+      {/* Blue orb — left/center */}
+      <div
+        className="aurora-orb-1 absolute pointer-events-none rounded-full"
+        style={{
+          width: '65vw',
+          height: '65vw',
+          maxWidth: 900,
+          maxHeight: 900,
+          top: '5%',
+          left: '-10%',
+          background: 'radial-gradient(circle, rgba(37,99,235,0.38) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+      {/* Amber/Gold orb — right/top */}
+      <div
+        className="aurora-orb-2 absolute pointer-events-none rounded-full"
+        style={{
+          width: '50vw',
+          height: '50vw',
+          maxWidth: 700,
+          maxHeight: 700,
+          top: '-10%',
+          right: '-5%',
+          background: 'radial-gradient(circle, rgba(217,119,6,0.28) 0%, transparent 70%)',
+          filter: 'blur(100px)',
+        }}
+      />
+      {/* Teal orb — bottom/center */}
+      <div
+        className="aurora-orb-3 absolute pointer-events-none rounded-full"
+        style={{
+          width: '40vw',
+          height: '40vw',
+          maxWidth: 600,
+          maxHeight: 600,
+          bottom: '-5%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'radial-gradient(circle, rgba(5,150,105,0.20) 0%, transparent 70%)',
+          filter: 'blur(100px)',
+        }}
+      />
+
+      {/* ── Content ──────────────────────────────────────────────────────────── */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-36 pb-24 flex flex-col items-center">
         <div className="text-center">
+
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-10 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-800 tracking-[0.2em] uppercase"
+            transition={{ duration: 0.7 }}
+            className="mb-10 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass-card text-xs font-mono tracking-[0.22em] uppercase text-white/70"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient animate-pulse" />
+            <span
+              className="w-2 h-2 rounded-full animate-pulse"
+              style={{ background: 'radial-gradient(circle, #d97706, #fbbf24)' }}
+            />
             Content Marketing Automation Specialist
           </motion.div>
 
-          <div className="mb-14 space-y-10">
+          {/* Headline */}
+          <div className="mb-14 space-y-8">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 1, ease: "easeOut" }}
-              className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1.05] text-zinc-900"
+              transition={{ delay: 0.1, duration: 1, ease: 'easeOut' }}
+              className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1.02] text-white"
             >
-              Your Competitors Are <br />
-              <span className="text-brand-gradient">Publishing 40+ Articles.</span>
+              Your Competitors Are{' '}
+              <br />
+              <span
+                style={{
+                  display: 'inline-block',
+                  background: 'linear-gradient(135deg, #60a5fa 0%, #818cf8 45%, #d97706 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Publishing 40+ Articles.
+              </span>
             </motion.h1>
 
+            {/* Subheadline */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 1.2 }}
+              transition={{ delay: 0.35, duration: 1.1 }}
               className="relative"
             >
               <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                <div className="w-full h-px bg-zinc-400" />
+                <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.2)' }} />
               </div>
-              <h2 className="relative z-10 text-2xl sm:text-4xl md:text-5xl lg:text-5xl text-zinc-400 font-bold tracking-tight bg-[#f8fafc] px-8">
+              <h2
+                className="relative z-10 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight px-8 italic"
+                style={{ color: 'rgba(148,163,184,0.85)' }}
+              >
                 While you're still writing one at 11 PM on a Sunday.
               </h2>
             </motion.div>
           </div>
 
+          {/* Body copy */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="mb-12 max-w-3xl mx-auto"
+            transition={{ delay: 0.25, duration: 0.9 }}
+            className="mb-14 max-w-3xl mx-auto"
           >
-            <p className="text-lg md:text-xl text-zinc-500 leading-relaxed font-light">
-              I build <span className="text-brand-gradient font-semibold text-xl">automated content marketing systems</span> for growing businesses — so you can <strong className="font-bold text-zinc-900">publish consistently</strong>, <strong className="font-bold text-zinc-900">rank higher</strong>, and <strong className="font-bold text-zinc-900">generate revenue</strong> without hiring a team or burning out trying.
+            <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'rgba(148,163,184,0.80)' }}>
+              I build{' '}
+              <span
+                style={{
+                  display: 'inline',
+                  background: 'linear-gradient(to right, #60a5fa, #d97706)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontWeight: 600,
+                }}
+              >
+                automated content marketing systems
+              </span>{' '}
+              for growing businesses — so you can{' '}
+              <strong className="font-bold text-white">publish consistently</strong>,{' '}
+              <strong className="font-bold text-white">rank higher</strong>, and{' '}
+              <strong className="font-bold text-white">generate revenue</strong> without hiring a team or burning out trying.
             </p>
           </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link to="/portfolio" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full">
-                See Real Client Results →
-              </Button>
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            {/* Primary — gradient fill */}
+            <Link
+              to="/portfolio"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-white text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl"
+              style={{
+                background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #d97706 100%)',
+                boxShadow: '0 8px 30px rgba(37,99,235,0.35)',
+              }}
+            >
+              See Real Client Results
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/contact" className="w-full sm:w-auto">
-              <Button variant="secondary" size="lg" className="w-full">
-                Book a Free Strategy Call
-              </Button>
+
+            {/* Secondary — glass ghost */}
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-sm transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'rgba(255,255,255,0.85)',
+                backdropFilter: 'blur(10px)',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.10)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(217,119,6,0.5)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)';
+              }}
+            >
+              Book a Free Strategy Call
             </Link>
-          </div>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="mt-20 flex flex-col items-center gap-2"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-6 h-10 rounded-full flex justify-center p-2"
+              style={{ border: '1px solid rgba(255,255,255,0.15)' }}
+            >
+              <div className="w-1 h-2 rounded-full" style={{ background: '#d97706' }} />
+            </motion.div>
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em]" style={{ color: 'rgba(148,163,184,0.4)' }}>
+              scroll
+            </span>
+          </motion.div>
+
         </div>
       </div>
     </section>

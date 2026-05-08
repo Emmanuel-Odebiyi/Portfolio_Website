@@ -22,7 +22,15 @@ const renderLine = (line: string) => {
     return (
       <span key={i} className="inline-block mr-[0.25em] mb-[0.1em]">
         {isHighlight ? (
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+          <span
+            style={{
+              display: 'inline',
+              background: 'linear-gradient(135deg, #d97706 0%, #fbbf24 50%, #60a5fa 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
             {word}
           </span>
         ) : (
@@ -51,10 +59,9 @@ export const ResultsTypographySection = () => {
 
   return (
     <section 
-      ref={containerRef} 
-      // Keep height high enough to allow scrolling sequentially through all lines
-      className="relative bg-zinc-50"
-      style={{ height: '250vh' }}
+      ref={containerRef}
+      className="relative grain-overlay"
+      style={{ height: '250vh', backgroundColor: '#0a0f1e' }}
     >
       {/* Sticky viewport bounds the text to the center area */}
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-24">
@@ -62,7 +69,7 @@ export const ResultsTypographySection = () => {
         {/* We constrain the max-width to center it and apply pure text-center for alignment */}
         <div className="max-w-4xl w-full px-6 md:px-12 text-center">
           
-          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.25] text-zinc-900">
+          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.25] text-white">
             {SENTENCES.map((line, i) => {
               // Calculate stagger logic: Each line gets a 15% window of the scroll length to fade in
               const step = 1 / SENTENCES.length;

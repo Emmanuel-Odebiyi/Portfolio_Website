@@ -160,10 +160,10 @@ const VerticalNavigator = ({
       style={{ height: TRACK_HEIGHT + 56, width: 56 }}
       aria-label="Problem navigation"
     >
-      {/* Background track line - darker for visibility */}
+      {/* Background track line */}
       <div
         className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full z-0"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: '#e4e4e7' }}
+        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: 'rgba(255,255,255,0.12)' }}
       />
 
       {/* Filled progress line - Using scaleY for GPU acceleration */}
@@ -297,7 +297,7 @@ const ProblemCard = ({
           </div>
 
           {/* Headline — word-by-word reveal */}
-          <h2 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight leading-[1.1] max-w-3xl -mt-4">
+          <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] max-w-3xl -mt-4">
             <ScrollRevealText
               text={problem.headline}
               scrollYProgress={scrollYProgress}
@@ -307,7 +307,7 @@ const ProblemCard = ({
           </h2>
 
           {/* Body — word-by-word reveal */}
-          <p className="text-lg md:text-2xl text-zinc-600 max-w-3xl leading-relaxed">
+          <p className="text-lg md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(148,163,184,0.85)' }}>
             <ScrollRevealText
               text={problem.body}
               scrollYProgress={scrollYProgress}
@@ -447,19 +447,19 @@ export const ProblemSection: React.FC = () => {
       aria-label="The Problem Section"
     >
       {/* Sticky full-screen viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-white">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center" style={{ backgroundColor: '#0f172a' }}>
         {/* Section label — top center */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase text-zinc-800 bg-zinc-100/80 px-4 py-1.5 rounded-full shadow-sm backdrop-blur-sm">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(217,119,6,0.9)', background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.2)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>
             The Problem
           </span>
         </div>
 
-        {/* Subtle radial accent glow — shifts with active problem color */}
+        {/* Radial accent glow — shifts with active problem color, stronger on dark bg */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           animate={{
-            background: `radial-gradient(ellipse 50% 50% at 65% 50%, ${PROBLEMS[activeIndex].accentColor}06 0%, transparent 70%)`,
+            background: `radial-gradient(ellipse 55% 55% at 65% 50%, ${PROBLEMS[activeIndex].accentColor}18 0%, transparent 70%)`,
           }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         />
@@ -484,8 +484,8 @@ export const ProblemSection: React.FC = () => {
               key={p.id}
               animate={{
                 width: i === activeIndex ? 24 : 6,
-                opacity: i === activeIndex ? 1 : 0.3,
-                backgroundColor: i === activeIndex ? p.accentColor : '#d4d4d8',
+                opacity: i === activeIndex ? 1 : 0.25,
+                backgroundColor: i === activeIndex ? p.accentColor : 'rgba(255,255,255,0.3)',
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 24 }}
               className="h-1.5 rounded-full"
