@@ -72,23 +72,23 @@ export default function Home() {
       <IntegrationTicker />
 
       {/* Core Tech Stack - Static 3-Logo Shared Background Layout */}
-      <section className="bg-transparent border-t border-zinc-100/50">
+      <section className="bg-transparent border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-24 text-center">
           <div className="flex flex-col items-center gap-12">
-            <h2 className="text-zinc-400 font-mono text-[10px] uppercase font-black tracking-[0.5em]">Powered By:</h2>
+            <h2 className="text-gray-500 font-mono text-[10px] uppercase font-black tracking-[0.5em]">Powered By:</h2>
             
-            <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 px-12 py-10 rounded-[3rem] bg-zinc-50/40 backdrop-blur-sm border border-zinc-100/50 shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-zinc-200/40">
+            <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 px-12 py-10 rounded-[3rem] bg-white/5 backdrop-blur-sm border border-white/10 shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/10">
               {[
                 { name: 'n8n', icon: 'https://cdn.simpleicons.org/n8n' },
                 { name: 'Zapier', icon: 'https://cdn.simpleicons.org/zapier' },
                 { name: 'Make.com', icon: 'https://cdn.simpleicons.org/make' }
               ].map((tool, i) => (
                 <div key={i} className="flex items-center gap-4 group cursor-default">
-                  <div className="p-3 w-14 h-14 bg-white rounded-xl shadow-sm border border-zinc-100 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 flex items-center justify-center overflow-hidden relative">
+                  <div className="p-3 w-14 h-14 bg-white/10 rounded-xl shadow-sm border border-white/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 flex items-center justify-center overflow-hidden relative">
                     <div className="absolute inset-0 bg-transparent group-hover:bg-brand-gradient/5 transition-colors duration-500 pointer-events-none" />
                     <img src={tool.icon} alt={tool.name} className="w-8 h-8 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
                   </div>
-                  <span className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tighter italic opacity-80 group-hover:opacity-100 transition-opacity">
+                  <span className="text-2xl md:text-3xl font-black text-white tracking-tighter italic opacity-80 group-hover:opacity-100 transition-opacity">
                     {tool.name}
                   </span>
                 </div>

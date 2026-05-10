@@ -38,9 +38,9 @@ const footerLinks = [
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-white text-zinc-900 pt-24 pb-12 px-6 overflow-hidden relative border-t border-zinc-100">
+    <footer className="bg-[#0B0F19] text-white pt-24 pb-12 px-6 overflow-hidden relative border-t border-white/10">
       {/* Top subtle highlight */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-deep-space-blue-500/10 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 lg:gap-12 relative z-10">
         
@@ -51,11 +51,11 @@ export const Footer: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                className="h-20 md:h-32 w-auto"
+                className="h-20 md:h-32 w-auto invert brightness-0"
               />
             </div>
             
-            <p className="text-lg text-zinc-500 font-light leading-relaxed max-w-sm">
+            <p className="text-lg text-gray-400 font-light leading-relaxed max-w-sm">
               Helping growing businesses automate their marketing and scale with predictable growth systems.
             </p>
             
@@ -72,16 +72,16 @@ export const Footer: React.FC = () => {
         {/* Links Sections (Middle & Right) */}
         {footerLinks.map((section) => (
           <div key={section.title} className="space-y-6">
-            <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-400 font-semibold">
+            <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-gray-500 font-semibold">
               {section.title}
             </h4>
             <ul className="space-y-4">
               {section.links.map((link) => {
                 const isExternal = link.href.startsWith('http') || link.href.startsWith('mailto');
                 const LinkPattern = (
-                  <span className="group flex items-center gap-3 text-zinc-500 hover:text-brand-gradient transition-all duration-300 w-fit">
+                  <span className="group flex items-center gap-3 text-gray-400 hover:text-brand-gradient transition-all duration-300 w-fit">
                     {link.icon && (
-                      <span className="text-zinc-400 group-hover:text-brand-gradient transition-colors duration-300 group-hover:-translate-y-0.5 group-hover:scale-110">
+                      <span className="text-gray-500 group-hover:text-brand-gradient transition-colors duration-300 group-hover:-translate-y-0.5 group-hover:scale-110">
                         {link.icon}
                       </span>
                     )}
@@ -118,10 +118,10 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-400 text-xs font-mono tracking-widest uppercase relative z-10">
+      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-xs font-mono tracking-widest uppercase relative z-10">
         <div className="flex items-center gap-3">
           <span>© {new Date().getFullYear()} Emmanuel Odebiyi</span>
-          <span className="w-1 h-1 rounded-full bg-zinc-200" />
+          <span className="w-1 h-1 rounded-full bg-gray-600" />
           <span>All Rights Reserved</span>
         </div>
         <div className="flex gap-8">
@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-deep-space-blue-50/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3" />
     </footer>
   );
 };

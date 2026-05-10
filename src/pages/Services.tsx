@@ -114,7 +114,7 @@ export default function Services() {
   };
 
   return (
-    <div className="bg-white selection:bg-brand-gradient selection:text-white">
+    <div className="bg-[#0B0F19] text-white selection:bg-brand-gradient selection:text-white min-h-screen">
       <SEO 
         title="Marketing Automation Services | Content, SEO & Process Automation for Growing Businesses"
         description="Done-for-you content marketing automation, SEO optimization, and business process automation. Enterprise results without enterprise costs. Month-to-month, no lock-in."
@@ -130,13 +130,13 @@ export default function Services() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-50 border border-zinc-100 text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-300 tracking-[0.2em] uppercase"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
             Services & Solutions
           </motion.div>
           
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 leading-[1.1] min-h-[140px] md:min-h-[160px]">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1] min-h-[140px] md:min-h-[160px]">
             <TextEffect as="span" preset="fade" per="char">
               Done-For-You Marketing Systems That Produce Real Revenue.
             </TextEffect>
@@ -146,7 +146,7 @@ export default function Services() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="text-xl text-zinc-500 font-light leading-relaxed max-w-2xl mx-auto"
+            className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto"
           >
             Consistent content. Higher rankings. Time back in your week. No team required.
           </motion.p>
@@ -159,13 +159,13 @@ export default function Services() {
           >
             <Link 
               to="/contact"
-              className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-200/50 flex items-center gap-2 group"
+              className="px-8 py-4 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20 flex items-center gap-2 group"
             >
               Get a Proposal <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
             </Link>
             <Link 
               to="/portfolio"
-              className="px-8 py-4 bg-white text-zinc-900 font-bold rounded-2xl border border-zinc-200 hover:bg-zinc-50 transition-all"
+              className="px-8 py-4 bg-white/5 text-white font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition-all"
             >
               View Case Studies
             </Link>
@@ -177,7 +177,7 @@ export default function Services() {
           <ContainerScroll
             titleComponent={<></>}
           >
-            <div className="w-full h-full bg-white rounded-2xl overflow-hidden shadow-2xl relative border border-zinc-100 flex items-center justify-center group">
+            <div className="w-full h-full bg-[#0B0F19] rounded-2xl overflow-hidden shadow-2xl relative border border-white/10 flex items-center justify-center group">
                {/* Dashboard Placeholder Image */}
                <img 
                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
@@ -197,13 +197,13 @@ export default function Services() {
 
       {/* Intro Text */}
       <section className="max-w-4xl mx-auto px-6 mb-32 text-center space-y-8 pt-40 md:pt-64">
-        <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 tracking-tight leading-snug">
+        <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-snug">
           Growing businesses don't need more advice. They need a system that actually runs.
         </h2>
-        <p className="text-xl text-zinc-500 font-light leading-relaxed">
+        <p className="text-xl text-gray-400 font-light leading-relaxed">
           One that publishes consistently, ranks in search, and generates leads on autopilot. I build custom-engineered marketing systems that deliver enterprise output without enterprise complexity, cost, or management overhead.
         </p>
-        <div className="flex justify-center gap-8 text-sm font-mono text-zinc-400 uppercase tracking-widest pt-4">
+        <div className="flex justify-center gap-8 text-sm font-mono text-gray-500 uppercase tracking-widest pt-4">
           <span>No retainers</span>
           <span className="text-brand-gradient">•</span>
           <span>No bloated contracts</span>
@@ -215,8 +215,8 @@ export default function Services() {
       {/* Core Services Grid */}
       <section className="max-w-7xl mx-auto px-6 mb-32">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-zinc-400 font-mono text-xs uppercase tracking-[0.3em]">The Capabilities</h2>
-          <h3 className="text-5xl font-bold text-zinc-900 tracking-tight">Core Services</h3>
+          <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]">The Capabilities</h2>
+          <h3 className="text-5xl font-bold text-white tracking-tight">Core Services</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {coreServices.map((service, i) => (
@@ -227,17 +227,17 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -5 }}
-              className={`p-10 rounded-[3rem] bg-white border border-zinc-100 space-y-8 group transition-all cursor-default shadow-sm hover:shadow-xl hover:border-zinc-200 relative overflow-hidden`}
+              className={`p-10 rounded-[3rem] bg-white/5 border border-white/10 space-y-8 group transition-all cursor-default shadow-sm hover:shadow-xl hover:border-white/20 relative overflow-hidden backdrop-blur-sm`}
             >
               {/* Subtle hover gradient bloom */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-100 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform relative z-10">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/10 shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform relative z-10">
                 {service.icon}
               </div>
               <div className="space-y-4 relative z-10">
-                <h4 className="text-2xl font-bold text-zinc-900">{service.title}</h4>
-                <p className="text-zinc-600 font-light leading-relaxed">
+                <h4 className="text-2xl font-bold text-white">{service.title}</h4>
+                <p className="text-gray-400 font-light leading-relaxed">
                   {service.description}
                 </p>
               </div>
@@ -247,12 +247,12 @@ export default function Services() {
       </section>
 
       {/* Packages / How We Work Together */}
-      <section className="bg-zinc-50 py-32 border-y border-zinc-100 mb-32 overflow-hidden">
+      <section className="bg-zinc-950/40 backdrop-blur-sm py-32 border-y border-white/10 mb-32 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center space-y-4 mb-20">
-            <h2 className="text-zinc-400 font-mono text-xs uppercase tracking-[0.3em]">Engagement Model</h2>
-            <h3 className="text-5xl md:text-6xl font-bold text-zinc-900 tracking-tight">How We Work Together</h3>
-            <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto pt-4">
+            <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]">Engagement Model</h2>
+            <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight">How We Work Together</h3>
+            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto pt-4">
               I don't do 12-month retainers. I offer transparent, month-to-month engagements focused purely on results.
             </p>
           </div>
@@ -265,8 +265,8 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className={`relative p-10 md:p-14 rounded-[3rem] bg-white group flex flex-col ${
-                  pkg.highlight ? '' : 'border border-zinc-200 shadow-xl shadow-zinc-100/50'
+                className={`relative p-10 md:p-14 rounded-[3rem] bg-white/5 backdrop-blur-md group flex flex-col ${
+                  pkg.highlight ? '' : 'border border-white/10 shadow-2xl'
                 }`}
               >
                 {/* Magic Gradient Border for Highlighted Package */}
@@ -276,22 +276,22 @@ export default function Services() {
                 {pkg.highlight && (
                   <div className="absolute -inset-[2px] rounded-[3rem] bg-gradient-to-r from-teal-400/50 via-blue-500/50 to-purple-500/50 opacity-40 group-hover:opacity-80 blur-[8px] transition-opacity duration-500 z-0 pointer-events-none" />
                 )}
-                {/* Solid white background for internal content */}
+                {/* Solid dark background for internal content */}
                 {pkg.highlight && (
-                   <div className="absolute inset-0 bg-white rounded-[3rem] z-0" />
+                   <div className="absolute inset-0 bg-[#0B0F19] rounded-[3rem] z-0" />
                 )}
 
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="space-y-4 mb-12">
-                     <h4 className="text-3xl font-bold text-zinc-900">{pkg.title}</h4>
-                     <p className="text-lg leading-relaxed text-zinc-500">
+                     <h4 className="text-3xl font-bold text-white">{pkg.title}</h4>
+                     <p className="text-lg leading-relaxed text-gray-400">
                         {pkg.subtitle}
                      </p>
                   </div>
 
                   <div className="mb-12">
-                     <p className="text-sm font-mono uppercase tracking-widest mb-2 text-zinc-400">Pricing Structure</p>
-                     <p className="text-xl font-semibold text-zinc-900">{pkg.price}</p>
+                     <p className="text-sm font-mono uppercase tracking-widest mb-2 text-gray-500">Pricing Structure</p>
+                     <p className="text-xl font-semibold text-white">{pkg.price}</p>
                   </div>
 
                   <div className="space-y-6 flex-grow mb-16">
@@ -304,10 +304,10 @@ export default function Services() {
                            key={j} 
                            className="flex items-start gap-4"
                         >
-                           <div className="mt-1 bg-zinc-100 rounded-full p-1 text-zinc-900 shrink-0 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-300">
+                           <div className="mt-1 bg-white/10 rounded-full p-1 text-white shrink-0 group-hover:bg-brand-gradient transition-colors duration-300">
                               <CheckCircle2 size={16} />
                            </div>
-                           <span className="text-lg text-zinc-700">{feature}</span>
+                           <span className="text-lg text-gray-300">{feature}</span>
                         </motion.div>
                      ))}
                   </div>
@@ -316,8 +316,8 @@ export default function Services() {
                      to="/contact"
                      className={`w-full py-5 rounded-2xl font-bold text-lg text-center transition-all flex items-center justify-center gap-2 group/btn ${
                         pkg.highlight 
-                           ? 'bg-zinc-900 text-white shadow-xl hover:bg-zinc-800' 
-                           : 'bg-white border border-zinc-200 text-zinc-900 hover:bg-zinc-50 hover:border-zinc-300'
+                           ? 'bg-brand-gradient text-zinc-900 shadow-xl hover:brightness-110' 
+                           : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20'
                      }`}
                   >
                      Choose {pkg.title.split(' (')[0]} <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform"/>
@@ -329,8 +329,8 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Light Theme Scrollytelling Process */}
-      <section className="py-32 bg-white relative">
+      {/* Dark Theme Scrollytelling Process */}
+      <section className="py-32 bg-[#0B0F19] relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             {/* Sticky Left */}
@@ -340,11 +340,11 @@ export default function Services() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-zinc-400 font-mono text-xs uppercase tracking-[0.3em] mb-4 outline-none">The Methodology</h2>
-                <h3 className="text-5xl md:text-6xl font-bold text-zinc-900 tracking-tight leading-[1.1] mb-6">
+                <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em] mb-4 outline-none">The Methodology</h2>
+                <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
                   The 3-Step <br /> Process
                 </h3>
-                <p className="text-xl text-zinc-500 font-light leading-relaxed max-w-md">
+                <p className="text-xl text-gray-400 font-light leading-relaxed max-w-md">
                   A systematic approach to moving you from chaotic, manual operations to sleek, profitable automation.
                 </p>
               </motion.div>
@@ -359,17 +359,17 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6 }}
-                  className="relative p-10 lg:p-14 bg-zinc-50 rounded-[3rem] border border-zinc-100 hover:bg-white hover:shadow-2xl hover:border-zinc-200 transition-all duration-500 group overflow-hidden"
+                  className="relative p-10 lg:p-14 bg-white/5 backdrop-blur-md rounded-[3rem] border border-white/10 hover:bg-white/10 hover:shadow-2xl hover:border-white/20 transition-all duration-500 group overflow-hidden"
                 >
-                  <div className="absolute top-0 left-0 w-2 h-full bg-zinc-200 group-hover:bg-brand-gradient transition-colors duration-500" />
+                  <div className="absolute top-0 left-0 w-2 h-full bg-white/10 group-hover:bg-brand-gradient transition-colors duration-500" />
                   
-                  <div className="text-[120px] leading-none font-bold text-zinc-900/5 font-mono absolute top-4 right-4 pointer-events-none group-hover:text-zinc-900/10 transition-colors duration-500">
+                  <div className="text-[120px] leading-none font-bold text-white/5 font-mono absolute top-4 right-4 pointer-events-none group-hover:text-white/10 transition-colors duration-500">
                     {item.step}
                   </div>
                   
                   <div className="relative z-10">
-                    <h4 className="text-2xl lg:text-3xl font-bold text-zinc-900 tracking-tight mb-6">{item.title}</h4>
-                    <p className="text-zinc-500 font-light leading-relaxed text-lg">{item.desc}</p>
+                    <h4 className="text-2xl lg:text-3xl font-bold text-white tracking-tight mb-6">{item.title}</h4>
+                    <p className="text-gray-400 font-light leading-relaxed text-lg">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -379,13 +379,13 @@ export default function Services() {
       </section>
 
       {/* Specialized Tools Ticker Stack */}
-      <section className="py-20 bg-white relative flex flex-col items-center border-t border-zinc-100 mt-20">
+      <section className="py-20 bg-[#0B0F19] relative flex flex-col items-center border-t border-white/10 mt-20">
         <div className="text-center space-y-4 mb-16 px-6">
-           <h3 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-zinc-900">
+           <h3 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-white">
               Specialized SEO & <br />
               <span className="text-brand-gradient">Automation Stack.</span>
            </h3>
-           <p className="text-xl text-zinc-500 font-light">
+           <p className="text-xl text-gray-400 font-light">
              We leverage industry-leading tools to build indestructible workflows.
            </p>
         </div>
@@ -393,7 +393,7 @@ export default function Services() {
       </section>
 
       {/* Specialized Stats */}
-      <section className="py-32 bg-white px-6">
+      <section className="py-32 bg-[#0B0F19] px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { label: "ROI Focused", value: "300-520%" },
@@ -407,10 +407,10 @@ export default function Services() {
                viewport={{ once: true }}
                transition={{ delay: i * 0.1 }}
                key={i} 
-               className="p-8 rounded-[2rem] bg-zinc-50 border border-zinc-100 flex flex-col items-center justify-center text-center group hover:bg-white hover:border-zinc-200 hover:shadow-xl transition-all"
+               className="p-8 rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center text-center group hover:bg-white/10 hover:border-white/20 hover:shadow-2xl transition-all"
             >
-              <p className="text-3xl lg:text-4xl font-bold text-zinc-900 mb-2 group-hover:scale-110 transition-transform">{stat.value}</p>
-              <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">{stat.label}</p>
+              <p className="text-3xl lg:text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">{stat.value}</p>
+              <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">{stat.label}</p>
             </motion.div>
           ))}
         </div>
@@ -419,8 +419,8 @@ export default function Services() {
       {/* FAQ Section */}
       <section className="max-w-3xl mx-auto px-6 mb-32">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-zinc-400 font-mono text-xs uppercase tracking-[0.3em]">Common Questions</h2>
-          <h3 className="text-5xl font-bold text-zinc-900 tracking-tight">FAQ</h3>
+          <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]">Common Questions</h2>
+          <h3 className="text-5xl font-bold text-white tracking-tight">FAQ</h3>
         </div>
         <div className="space-y-4">
           {faqs.map((faq, i) => (
@@ -430,14 +430,14 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-zinc-50 rounded-3xl border border-zinc-100 overflow-hidden"
+              className="bg-white/5 rounded-3xl border border-white/10 overflow-hidden"
             >
               <button
                 onClick={() => toggleFaq(i)}
                 className="w-full flex items-center justify-between p-8 text-left focus:outline-none"
               >
-                <span className={`text-xl font-bold pr-8 transition-colors ${openFaq === i ? 'text-zinc-900' : 'text-zinc-700'}`}>{faq.question}</span>
-                <div className={`w-10 h-10 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-zinc-900 text-white border-zinc-900 rotate-180' : 'bg-white border-zinc-200 text-zinc-500'}`}>
+                <span className={`text-xl font-bold pr-8 transition-colors ${openFaq === i ? 'text-white' : 'text-gray-300'}`}>{faq.question}</span>
+                <div className={`w-10 h-10 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-brand-gradient text-zinc-900 border-none rotate-180' : 'bg-white/10 border-white/20 text-gray-400'}`}>
                   {openFaq === i ? <Minus size={16} /> : <Plus size={16} />}
                 </div>
               </button>
@@ -450,7 +450,7 @@ export default function Services() {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="px-8 pb-8 text-zinc-500 font-light leading-relaxed text-lg pt-2 border-t border-zinc-100 mt-2 mx-8">
+                    <div className="px-8 pb-8 text-gray-400 font-light leading-relaxed text-lg pt-2 border-t border-white/10 mt-2 mx-8">
                       {faq.answer}
                     </div>
                   </motion.div>
@@ -463,26 +463,26 @@ export default function Services() {
 
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-6 pb-32">
-        <div className="relative bg-zinc-50 rounded-[4rem] p-12 md:p-24 text-center space-y-10 overflow-hidden border border-zinc-200 shadow-2xl group hover:shadow-3xl transition-shadow">
+        <div className="relative bg-zinc-950/50 backdrop-blur-sm rounded-[4rem] p-12 md:p-24 text-center space-y-10 overflow-hidden border border-white/10 shadow-2xl group hover:shadow-3xl transition-shadow">
           <div className="relative z-10 space-y-6">
-            <h3 className="text-5xl md:text-7xl font-bold text-zinc-900 tracking-tight leading-tight">
+            <h3 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight">
               Ready to automate <br /> your growth?
             </h3>
-            <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto">
+            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
               Every business is unique. Bespoke solutions and flexible packages available to meet your exact growth stage and needs.
             </p>
             <div className="pt-6">
               <Link 
                 to="/contact"
-                className="px-12 py-6 bg-zinc-900 text-white font-bold text-xl rounded-[2rem] hover:bg-zinc-800 transition-all shadow-2xl shadow-zinc-900/20 inline-flex items-center gap-2 group/btn"
+                className="px-12 py-6 bg-brand-gradient text-zinc-900 font-bold text-xl rounded-[2rem] hover:brightness-110 transition-all shadow-2xl shadow-indigo-500/20 inline-flex items-center gap-2 group/btn"
               >
                 Book a Free Discovery Call <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
-          {/* Decorative Circles Light Theme */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gradient/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-gradient/10 transition-colors duration-1000" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-gradient/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-gradient/10 transition-colors duration-1000" />
+          {/* Decorative Circles Dark Theme */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gradient/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-gradient/20 transition-colors duration-1000" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-gradient/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-gradient/20 transition-colors duration-1000" />
         </div>
       </section>
     </div>

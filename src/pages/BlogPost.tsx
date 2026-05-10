@@ -313,7 +313,7 @@ export default function BlogPost() {
     .slice(0, 3); // Take top 3
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="min-h-screen bg-[#0B0F19] text-white">
       
       {/* Article Hero - Full Viewport */}
       <section className="relative h-screen w-full overflow-hidden">
@@ -373,7 +373,7 @@ export default function BlogPost() {
         
         {/* Introduction / Hook */}
         <section className="mb-20">
-          <p className="text-3xl md:text-4xl font-light text-zinc-500 leading-relaxed italic border-l-4 border-indigo-500 pl-8">
+          <p className="text-3xl md:text-4xl font-light text-gray-400 leading-relaxed italic border-l-4 border-indigo-500 pl-8">
             {post.hook}
           </p>
         </section>
@@ -382,38 +382,38 @@ export default function BlogPost() {
         <div className="space-y-24">
           {post.sections.map((section, index) => (
             <section key={index} className="space-y-8">
-              <h2 className="text-4xl font-bold tracking-tight text-zinc-900">
+              <h2 className="text-4xl font-bold tracking-tight text-white">
                 {section.heading}
               </h2>
               
-              <div className="prose prose-zinc prose-xl font-light text-zinc-600 leading-relaxed">
+              <div className="prose prose-invert prose-xl font-light text-gray-400 leading-relaxed">
                 <p>{section.content}</p>
               </div>
 
               {section.example && (
-                <div className="p-10 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 space-y-4">
-                  <div className="flex items-center gap-3 text-zinc-400 font-mono text-xs uppercase tracking-widest">
+                <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm space-y-4">
+                  <div className="flex items-center gap-3 text-gray-500 font-mono text-xs uppercase tracking-widest">
                     <Lightbulb size={16} className="text-amber-500" />
                     Example Case
                   </div>
-                  <p className="text-xl text-zinc-700 font-light leading-relaxed italic">
+                  <p className="text-xl text-gray-300 font-light leading-relaxed italic">
                     "{section.example}"
                   </p>
                 </div>
               )}
 
               {section.highlight && (
-                <div className="p-10 rounded-[2.5rem] bg-deep-space-blue-50 border border-deep-space-blue-100 space-y-4">
-                  <p className="text-2xl font-bold text-deep-space-blue-900 leading-tight">
+                <div className="p-10 rounded-[2.5rem] bg-white/10 border border-white/20 backdrop-blur-sm space-y-4">
+                  <p className="text-2xl font-bold text-white leading-tight">
                     {section.highlight}
                   </p>
                 </div>
               )}
 
               {section.simplification && (
-                <div className="p-10 rounded-[2.5rem] bg-zinc-900 text-white space-y-6 relative overflow-hidden">
+                <div className="p-10 rounded-[2.5rem] bg-zinc-950/80 border border-white/10 text-white space-y-6 relative overflow-hidden">
                   <div className="relative z-10">
-                    <h4 className="text-xs font-mono uppercase tracking-[0.3em] text-deep-space-blue-400 mb-4">
+                    <h4 className="text-xs font-mono uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-4">
                       {section.simplification.label}
                     </h4>
                     <p className="text-2xl font-light leading-relaxed text-zinc-300">
@@ -429,30 +429,30 @@ export default function BlogPost() {
                   {section.list.map((item: any, i: number) => (
                     <li key={i} className="flex items-start gap-4 group">
                       <div className="mt-2 w-1.5 h-1.5 rounded-full bg-brand-gradient flex-shrink-0" />
-                      <span className="text-xl text-zinc-600 font-light leading-relaxed">{item}</span>
+                      <span className="text-xl text-gray-300 font-light leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
               )}
 
               {section.quote && (
-                <div className="py-12 border-y border-zinc-100 my-12">
-                  <p className="text-3xl font-serif italic text-zinc-900 leading-tight text-center max-w-2xl mx-auto">
+                <div className="py-12 border-y border-white/10 my-12">
+                  <p className="text-3xl font-serif italic text-white leading-tight text-center max-w-2xl mx-auto">
                     "{section.quote.text}"
                   </p>
-                  <p className="text-center mt-6 text-zinc-400 font-mono text-xs uppercase tracking-widest">
+                  <p className="text-center mt-6 text-gray-500 font-mono text-xs uppercase tracking-widest">
                     — {section.quote.author}
                   </p>
                 </div>
               )}
 
               {section.table && (
-                <div className="my-12 overflow-x-auto rounded-3xl border border-zinc-100">
+                <div className="my-12 overflow-x-auto rounded-3xl border border-white/10">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="bg-zinc-50 border-b border-zinc-100">
+                      <tr className="bg-white/5 border-b border-white/10">
                         {section.table.headers.map((header: string, i: number) => (
-                          <th key={i} className="px-6 py-4 text-xs font-mono uppercase tracking-widest text-zinc-400">
+                          <th key={i} className="px-6 py-4 text-xs font-mono uppercase tracking-widest text-gray-400">
                             {header}
                           </th>
                         ))}
@@ -460,9 +460,9 @@ export default function BlogPost() {
                     </thead>
                     <tbody>
                       {section.table.rows.map((row: string[], i: number) => (
-                        <tr key={i} className="border-b border-zinc-50 last:border-0 hover:bg-zinc-50/50 transition-colors">
+                        <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                           {row.map((cell: string, j: number) => (
-                            <td key={j} className="px-6 py-6 text-sm text-zinc-600 font-light leading-relaxed">
+                            <td key={j} className="px-6 py-6 text-sm text-gray-300 font-light leading-relaxed">
                               {cell}
                             </td>
                           ))}
@@ -478,61 +478,61 @@ export default function BlogPost() {
 
         {/* Visual Break / Divider */}
         <div className="my-32 flex items-center justify-center gap-4">
-          <div className="h-px w-12 bg-zinc-200" />
+          <div className="h-px w-12 bg-white/20" />
           <div className="w-2 h-2 rounded-full bg-brand-gradient" />
-          <div className="h-px w-12 bg-zinc-200" />
+          <div className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Key Takeaways Section */}
-        <section className="p-12 md:p-20 rounded-[4rem] bg-zinc-50 border border-zinc-100 space-y-12">
+        <section className="p-12 md:p-20 rounded-[4rem] bg-white/5 border border-white/10 backdrop-blur-md space-y-12">
           <div className="space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-400">Summary</h3>
-            <h2 className="text-4xl font-bold text-zinc-900 tracking-tight">Key Insights</h2>
+            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-gray-500">Summary</h3>
+            <h2 className="text-4xl font-bold text-white tracking-tight">Key Insights</h2>
           </div>
           
           <ul className="space-y-6">
             {post.takeaways.map((takeaway, i) => (
               <li key={i} className="flex items-start gap-4 group">
-                <div className="mt-1.5 w-5 h-5 rounded-full bg-deep-space-blue-100 text-brand-gradient flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gradient group-hover:text-white transition-colors">
+                <div className="mt-1.5 w-5 h-5 rounded-full bg-white/10 text-brand-gradient flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gradient group-hover:text-zinc-900 transition-colors">
                   <CheckCircle2 size={12} />
                 </div>
-                <span className="text-xl text-zinc-600 font-light leading-relaxed">{takeaway}</span>
+                <span className="text-xl text-gray-300 font-light leading-relaxed">{takeaway}</span>
               </li>
             ))}
           </ul>
         </section>
 
         {/* Author Section with Bio */}
-        <section className="mt-32 pt-12 border-t border-zinc-100">
+        <section className="mt-32 pt-12 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-            <img src={post.authorImage} alt={post.author} className="w-24 h-24 rounded-full grayscale hover:grayscale-0 transition-all duration-500" />
+            <img src={post.authorImage} alt={post.author} className="w-24 h-24 rounded-full grayscale hover:grayscale-0 transition-all duration-500 border-2 border-white/10" />
             <div className="space-y-4 flex-1">
               <div>
-                <p className="text-2xl font-bold text-zinc-900">{post.author}</p>
-                <p className="text-zinc-400 text-sm font-mono uppercase tracking-widest">{post.date}</p>
+                <p className="text-2xl font-bold text-white">{post.author}</p>
+                <p className="text-gray-500 text-sm font-mono uppercase tracking-widest">{post.date}</p>
               </div>
-              <p className="text-lg text-zinc-500 font-light leading-relaxed max-w-2xl">
+              <p className="text-lg text-gray-400 font-light leading-relaxed max-w-2xl">
                 {post.authorBio}
               </p>
               <div className="flex gap-4">
-                <Share2 size={20} className="text-zinc-300 hover:text-zinc-900 cursor-pointer transition-colors" />
+                <Share2 size={20} className="text-gray-500 hover:text-white cursor-pointer transition-colors" />
               </div>
             </div>
           </div>
         </section>
 
         {/* Simplified CTA Section */}
-        <section className="mt-20 pt-12 border-t border-zinc-100">
-          <p className="text-zinc-500 font-light">
-            Interested in seeing more? <Link to="/portfolio" className="text-brand-gradient font-bold hover:underline inline-flex items-center gap-1">View my portfolio <ArrowUpRight size={16} /></Link>, <Link to="/resume" className="text-zinc-900 font-bold hover:underline">check my resume</Link>, or <Link to="/contact" className="text-brand-gradient font-bold hover:underline">get in touch</Link>.
+        <section className="mt-20 pt-12 border-t border-white/10">
+          <p className="text-gray-400 font-light">
+            Interested in seeing more? <Link to="/portfolio" className="text-brand-gradient font-bold hover:underline inline-flex items-center gap-1">View my portfolio <ArrowUpRight size={16} /></Link>, <Link to="/resume" className="text-white font-bold hover:underline">check my resume</Link>, or <Link to="/contact" className="text-brand-gradient font-bold hover:underline">get in touch</Link>.
           </p>
         </section>
 
         {/* Related Articles Section */}
-        <section className="mt-32 pt-32 border-t border-zinc-100 space-y-12">
+        <section className="mt-32 pt-32 border-t border-white/10 space-y-12">
           <div className="space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-400">Next Up</h3>
-            <h2 className="text-4xl font-bold text-zinc-900 tracking-tight">Related Articles</h2>
+            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-gray-500">Next Up</h3>
+            <h2 className="text-4xl font-bold text-white tracking-tight">Related Articles</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -554,15 +554,15 @@ export default function BlogPost() {
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     {related.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-[10px] font-mono uppercase tracking-widest text-brand-gradient bg-deep-space-blue-50 px-2 py-0.5 rounded">
+                      <span key={tag} className="text-[10px] font-mono uppercase tracking-widest text-brand-gradient bg-white/10 border border-white/20 backdrop-blur-sm px-2 py-0.5 rounded">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h4 className="text-xl font-bold text-zinc-900 leading-tight group-hover:text-brand-gradient transition-colors">
+                  <h4 className="text-xl font-bold text-white leading-tight group-hover:text-brand-gradient transition-colors">
                     {related.title}
                   </h4>
-                  <p className="text-sm text-zinc-500 font-mono uppercase tracking-widest">{related.date}</p>
+                  <p className="text-sm text-gray-500 font-mono uppercase tracking-widest">{related.date}</p>
                 </div>
               </Link>
             ))}
@@ -572,7 +572,7 @@ export default function BlogPost() {
       </article>
 
       {/* Newsletter Section (Re-integrated from Blog page) */}
-      <section className="bg-zinc-900 py-32 px-6 overflow-hidden relative">
+      <section className="bg-zinc-950/40 border-t border-white/10 py-32 px-6 overflow-hidden relative">
         <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -582,9 +582,9 @@ export default function BlogPost() {
           >
             <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
               Stay ahead with <br />
-              <span className="text-deep-space-blue-400 italic">automation insights</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 italic">automation insights</span>
             </h2>
-            <p className="text-xl text-zinc-400 font-light max-w-2xl mx-auto">
+            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
               Join 2,000+ founders and marketers getting weekly strategies on AI workflows and growth systems.
             </p>
           </motion.div>
@@ -593,9 +593,9 @@ export default function BlogPost() {
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-deep-space-blue-500/30 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 placeholder-gray-500 backdrop-blur-sm transition-all"
             />
-            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-white rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
+            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-zinc-900 rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
               <ArrowRight size={20} />
             </button>
           </div>

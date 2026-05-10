@@ -208,26 +208,26 @@ export const AutomationInAction = () => {
                     onClick={() => handleTabClick(idx)}
                     className={`w-full text-left p-3 lg:p-4 rounded-2xl transition-all relative border flex items-center gap-3 group ${
                       activeIndex === idx 
-                        ? 'border-zinc-200 bg-white shadow-xl shadow-zinc-200/40 ring-1 ring-zinc-100' 
-                        : 'border-transparent hover:bg-white/50 backdrop-blur-sm'
+                        ? 'border-white/20 bg-white/5 shadow-xl shadow-indigo-500/10 ring-1 ring-white/10' 
+                        : 'border-transparent hover:bg-white/5 backdrop-blur-sm'
                     }`}
                   >
-                    <div className={`p-2 lg:p-2.5 rounded-xl transition-colors shrink-0 ${activeIndex === idx ? 'bg-zinc-900 text-white' : 'bg-white text-zinc-500 group-hover:text-zinc-800 border border-zinc-200 shadow-sm'}`}>
+                    <div className={`p-2 lg:p-2.5 rounded-xl transition-colors shrink-0 ${activeIndex === idx ? 'bg-white text-zinc-900' : 'bg-white/5 text-gray-400 group-hover:text-white border border-white/10 shadow-sm'}`}>
                       <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
                     </div>
                     
                     <div className="flex-grow">
-                      <span className={`text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-widest block mb-0.5 ${activeIndex === idx ? 'text-brand-gradient' : 'text-zinc-400'}`}>
+                      <span className={`text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-widest block mb-0.5 ${activeIndex === idx ? 'text-brand-gradient' : 'text-gray-500 group-hover:text-gray-400'}`}>
                         System {w.count}
                       </span>
-                      <h3 className={`text-sm lg:text-base font-bold ${activeIndex === idx ? 'text-zinc-900' : 'text-zinc-500'}`}>
+                      <h3 className={`text-sm lg:text-base font-bold ${activeIndex === idx ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'}`}>
                         {w.category}
                       </h3>
                     </div>
 
                     {activeIndex === idx && (
                       <motion.div layoutId="tab-indicator" className="absolute right-3 lg:right-4">
-                         <ChevronRight className="w-4 h-4 text-brand-gradient" />
+                         <ChevronRight className="w-4 h-4 text-white" />
                       </motion.div>
                     )}
                   </button>
@@ -308,9 +308,9 @@ export const AutomationInAction = () => {
                   {/* Technical Deliverables - Compacted */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {active.deliverables.map((item, i) => (
-                      <div key={i} className="flex flex-col gap-2 p-3 lg:p-4 bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-zinc-200 shadow-sm group hover:shadow-md hover:border-zinc-300 transition-all text-left">
-                         <Layers className="w-4 h-4 text-zinc-400 group-hover:text-brand-gradient transition-colors" />
-                         <span className="text-[10px] lg:text-xs font-semibold text-zinc-700 leading-snug lg:leading-normal">{item}</span>
+                      <div key={i} className="flex flex-col gap-2 p-3 lg:p-4 bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-white/10 shadow-sm group hover:shadow-md hover:border-white/20 hover:bg-white/10 transition-all text-left">
+                         <Layers className="w-4 h-4 text-gray-500 group-hover:text-brand-gradient transition-colors" />
+                         <span className="text-[10px] lg:text-xs font-semibold text-gray-300 leading-snug lg:leading-normal">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -341,7 +341,7 @@ export const AutomationInAction = () => {
                {['No Commitments', 'Expert Advice', 'Proven Results'].map((label, i) => (
                   <div key={i} className="flex items-center gap-1.5 lg:gap-2 group">
                      <CheckCircle2 className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-brand-gradient" />
-                     <span className="text-[9px] lg:text-[10px] font-mono font-black uppercase tracking-widest text-zinc-800 leading-none">{label}</span>
+                     <span className="text-[9px] lg:text-[10px] font-mono font-black uppercase tracking-widest text-gray-300 leading-none">{label}</span>
                   </div>
                ))}
             </div>

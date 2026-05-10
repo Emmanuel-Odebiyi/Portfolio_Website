@@ -84,7 +84,7 @@ export default function Blog() {
   });
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="min-h-screen bg-[#0B0F19] text-white">
       <SEO 
         title="Marketing Automation Blog | SEO, AI & Content Strategy for Growing Businesses"
         description="Practical guides on automating content marketing, SEO, and business growth — written by someone who's built the systems and delivered the results."
@@ -157,8 +157,8 @@ export default function Blog() {
       <section className="max-w-7xl mx-auto px-6 py-32">
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
           <div className="space-y-4 max-w-2xl">
-            <h2 className="text-5xl font-bold tracking-tighter text-zinc-900">Marketing Automation Insights</h2>
-            <p className="text-xl text-zinc-500 font-light leading-relaxed">Practical, no-fluff strategies for automating content, SEO, and growth — from someone who's built the systems and measured the results.</p>
+            <h2 className="text-5xl font-bold tracking-tighter text-white">Marketing Automation Insights</h2>
+            <p className="text-xl text-gray-400 font-light leading-relaxed">Practical, no-fluff strategies for automating content, SEO, and growth — from someone who's built the systems and measured the results.</p>
           </div>
           <div className="relative w-full md:w-80">
             <input 
@@ -166,9 +166,9 @@ export default function Blog() {
               placeholder="Search articles..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-deep-space-blue-500/20 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 placeholder-gray-500 backdrop-blur-sm transition-all"
             />
-            <Search className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-300" size={18} />
+            <Search className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
           </div>
         </div>
 
@@ -180,8 +180,8 @@ export default function Blog() {
               onClick={() => setSelectedTag(tag)}
               className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all border ${
                 selectedTag === tag
-                  ? 'bg-zinc-900 text-white border-zinc-900 shadow-lg shadow-zinc-200'
-                  : 'bg-white text-zinc-500 border-zinc-100 hover:border-zinc-300'
+                  ? 'bg-white/10 text-white border-white/20 shadow-lg shadow-indigo-500/10 backdrop-blur-md'
+                  : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/20'
               }`}
             >
               {tag}
@@ -212,8 +212,8 @@ export default function Blog() {
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute top-6 right-6 w-12 h-12 bg-white rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                    <ArrowUpRight size={20} className="text-zinc-900" />
+                  <div className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 border border-white/20">
+                    <ArrowUpRight size={20} className="text-white" />
                   </div>
                 </div>
                 
@@ -227,11 +227,11 @@ export default function Blog() {
                     <img 
                       src={post.authorImage} 
                       alt={post.author} 
-                      className="w-8 h-8 rounded-full bg-zinc-100"
+                      className="w-8 h-8 rounded-full bg-white/10"
                     />
                     <div>
-                      <p className="text-sm font-bold text-zinc-900 tracking-tight">{post.author}</p>
-                      <p className="text-[10px] text-zinc-400 font-mono uppercase tracking-widest">{post.date} • {post.readTime}</p>
+                      <p className="text-sm font-bold text-white tracking-tight">{post.author}</p>
+                      <p className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">{post.date} • {post.readTime}</p>
                     </div>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function Blog() {
 
         {/* Pagination / Load More */}
         <div className="mt-24 flex justify-center">
-          <button className="px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 flex items-center gap-3 group">
+          <button className="px-10 py-5 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20 flex items-center gap-3 group">
             Load More Stories
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
@@ -250,7 +250,7 @@ export default function Blog() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="bg-zinc-900 py-32 px-6 overflow-hidden relative">
+      <section className="bg-zinc-950/40 border-t border-white/10 py-32 px-6 overflow-hidden relative">
         <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -260,7 +260,7 @@ export default function Blog() {
           >
             <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
               Get Weekly Insights That <br />
-              <span className="text-deep-space-blue-400 italic">Actually Move the Needle</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 italic">Actually Move the Needle</span>
             </h2>
             <p className="text-xl text-zinc-400 font-light max-w-2xl mx-auto">
               Join 500+ marketers and founders getting practical automation strategies — content marketing, SEO, AI implementation, and growth systems — every week.
@@ -279,7 +279,7 @@ export default function Blog() {
               placeholder="Enter your email" 
               className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-deep-space-blue-500/30 transition-all"
             />
-            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-white rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
+            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-zinc-900 rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
               <Mail size={20} />
             </button>
           </motion.div>

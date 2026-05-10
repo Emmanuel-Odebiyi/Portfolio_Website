@@ -66,22 +66,16 @@ export const Header: React.FC = () => {
     }
   }, [location]);
 
-  const isAboutPage = location.pathname === '/about';
   const isHomePage  = location.pathname === '/';
-  // On dark-bg pages (home unscrolled, about unscrolled) nav should be white
-  const onDarkBg = (isHomePage && !isScrolled) || (isAboutPage && !isScrolled);
 
   return (
     <header className={`fixed left-1/2 -translate-x-1/2 z-[300] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-5xl' : 'top-6 max-w-7xl'}`}>
       <div 
-      className={`w-full transition-all duration-500 pointer-events-auto ${
+        className={`w-full transition-all duration-500 pointer-events-auto ${
           isScrolled 
-            ? isHomePage
-              ? 'py-1.5 px-6 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.25rem]'
-              : 'py-1.5 px-6 bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-[1.25rem]'
-            : `py-2 px-8 ${onDarkBg ? 'bg-transparent border-transparent' : 'bg-white/30 border-white/10 shadow-xl'} backdrop-blur-lg rounded-[1.5rem]`
+            ? 'py-1.5 px-6 bg-[#0B0F19]/70 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.25rem]'
+            : 'py-2 px-8 bg-transparent border-transparent backdrop-blur-sm rounded-[1.5rem]'
         }`}
-        style={isScrolled && isHomePage ? { background: 'rgba(10,15,30,0.70)' } : {}}
       >
         <div className="mx-auto grid grid-cols-2 md:grid-cols-3 items-center">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex justify-start">
@@ -89,13 +83,13 @@ export const Header: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                className={`h-8 md:h-12 w-auto transition-all ${onDarkBg ? 'invert brightness-0' : ''}`}
+                className="h-8 md:h-12 w-auto transition-all invert brightness-0"
               />
             </Link>
           </motion.div>
 
           <nav className="hidden md:flex items-center justify-center gap-6">
-            {navLinks.map((link, i) => (
+            {navLinks.map((link) => (
               <div 
                 key={link.name}
                 className="relative py-4"
@@ -107,7 +101,7 @@ export const Header: React.FC = () => {
                   className={`flex items-center gap-1.5 text-sm font-black tracking-tight transition-all relative group ${
                     location.pathname === link.href 
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500' 
-                      : (onDarkBg ? 'text-white/95 hover:text-white' : 'text-zinc-600 hover:text-zinc-900')
+                      : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -127,11 +121,7 @@ export const Header: React.FC = () => {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                       className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[320px]"
                     >
-                      <div className={`border rounded-[2rem] p-5 shadow-2xl relative z-10 ${
-                        isAboutPage && !isScrolled 
-                          ? 'bg-zinc-950 border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] backdrop-blur-3xl' 
-                          : 'bg-white/98 border-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl'
-                      }`}>
+                      <div className="border rounded-[2rem] p-5 shadow-2xl relative z-10 bg-zinc-950/90 border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] backdrop-blur-3xl">
                         <div className="flex flex-col gap-2">
                           {link.dropdown.map((sub) => (
                             <Link
@@ -141,26 +131,14 @@ export const Header: React.FC = () => {
                                 setActiveDropdown(null);
                                 setIsMobileMenuOpen(false);
                               }}
-                              className={`flex items-start gap-4 p-4 rounded-2xl transition-all group/item text-left ${
-                                isAboutPage && !isScrolled 
-                                  ? 'hover:bg-white/5' 
-                                  : 'hover:bg-zinc-50'
-                              }`}
+                              className="flex items-start gap-4 p-4 rounded-2xl transition-all group/item text-left hover:bg-white/5"
                             >
-                              <div className={`mt-1 p-2.5 rounded-xl border transition-all ${
-                                isAboutPage && !isScrolled 
-                                  ? 'bg-white/5 border-white/10 text-white group-hover/item:text-blue-400 group-hover/item:border-blue-400/30' 
-                                  : 'bg-zinc-50 border-zinc-100 text-zinc-400 group-hover/item:text-blue-600 group-hover/item:bg-blue-50 group-hover/item:border-blue-200'
-                              }`}>
+                              <div className="mt-1 p-2.5 rounded-xl border transition-all bg-white/5 border-white/10 text-white group-hover/item:text-blue-400 group-hover/item:border-blue-400/30">
                                 {sub.icon}
                               </div>
                               <div className="flex flex-col gap-0.5">
-                                <span className={`font-black text-sm tracking-tight ${
-                                  isAboutPage && !isScrolled ? 'text-white' : 'text-zinc-900'
-                                }`}>{sub.name}</span>
-                                <span className={`text-[11px] font-bold leading-snug uppercase tracking-[0.05em] transition-colors ${
-                                  isAboutPage && !isScrolled ? 'text-zinc-400 group-hover/item:text-zinc-300' : 'text-zinc-500 group-hover/item:text-zinc-900'
-                                }`}>{sub.desc}</span>
+                                <span className="font-black text-sm tracking-tight text-white">{sub.name}</span>
+                                <span className="text-[11px] font-bold leading-snug uppercase tracking-[0.05em] transition-colors text-zinc-400 group-hover/item:text-zinc-300">{sub.desc}</span>
                               </div>
                             </Link>
                           ))}
@@ -177,17 +155,13 @@ export const Header: React.FC = () => {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="hidden md:block">
               <Link
                 to="/contact"
-                className={`px-6 py-2 text-sm font-black rounded-xl transition-all relative overflow-hidden group border-none ${
-                  onDarkBg ? 'text-zinc-900 hover:text-white' : 'text-white hover:bg-blue-600'
-                }`}
-                style={onDarkBg
-                  ? { background: 'linear-gradient(135deg, #f59e0b, #fbbf24)', boxShadow: '0 4px 20px rgba(245,158,11,0.30)' }
-                  : { background: '#18181b' }}
+                className="px-6 py-2 text-sm font-black rounded-xl transition-all relative overflow-hidden group border-none text-zinc-900 hover:text-white"
+                style={{ background: 'linear-gradient(135deg, #f59e0b, #fbbf24)', boxShadow: '0 4px 20px rgba(245,158,11,0.30)' }}
               >
                 <span className="relative z-10">Contact Me</span>
               </Link>
             </motion.div>
-            <button className={`md:hidden p-2 ${isAboutPage && !isScrolled ? 'text-white' : 'text-zinc-900'}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <button className="md:hidden p-2 text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -200,7 +174,7 @@ export const Header: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white/95 backdrop-blur-2xl border-b border-zinc-100 overflow-hidden rounded-b-3xl"
+              className="md:hidden bg-[#0B0F19]/95 backdrop-blur-3xl border-b border-white/10 overflow-hidden rounded-b-3xl shadow-2xl"
             >
               <div className="px-6 py-8 flex flex-col gap-6">
                 {navLinks.map((link) => (
@@ -208,18 +182,18 @@ export const Header: React.FC = () => {
                     <Link
                       to={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-lg font-black text-zinc-900 hover:text-blue-500 transition-colors"
+                      className="text-lg font-black text-white hover:text-blue-400 transition-colors"
                     >
                       {link.name}
                     </Link>
                     {link.dropdown && (
-                      <div className="pl-4 flex flex-col gap-3 border-l border-zinc-100">
+                      <div className="pl-4 flex flex-col gap-3 border-l border-white/10">
                         {link.dropdown.map((sub) => (
                           <Link
                             key={sub.name}
                             to={sub.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-sm font-medium text-zinc-500"
+                            className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
                           >
                             {sub.name}
                           </Link>
@@ -228,7 +202,7 @@ export const Header: React.FC = () => {
                     )}
                   </div>
                 ))}
-                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 bg-zinc-900 text-white font-black rounded-xl text-center shadow-xl">
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-zinc-900 hover:text-white font-black rounded-xl text-center shadow-[0_4px_20px_rgba(245,158,11,0.30)] transition-colors">
                   Contact Me
                 </Link>
               </div>

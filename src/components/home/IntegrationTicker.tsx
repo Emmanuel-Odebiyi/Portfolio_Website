@@ -28,7 +28,7 @@ const TickerRow: React.FC<TickerRowProps> = ({ icons, speed, reverse = false }) 
         {duplicatedIcons.map((url, i) => (
           <div
             key={i}
-            className="w-16 h-16 md:w-20 md:h-20 flex-none rounded-2xl md:rounded-3xl bg-white/40 backdrop-blur-md border border-zinc-200/50 flex items-center justify-center group hover:bg-white hover:border-zinc-300 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-zinc-200/50 relative overflow-hidden"
+            className="w-16 h-16 md:w-20 md:h-20 flex-none rounded-2xl md:rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center group hover:bg-white/10 hover:border-white/20 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-transparent group-hover:bg-brand-gradient/5 transition-colors duration-500 pointer-events-none" />
             <img 
@@ -104,7 +104,7 @@ export const IntegrationTicker: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-sm border border-zinc-100 text-zinc-500 font-mono text-[10px] uppercase tracking-[0.4em] font-black"
+            className="inline-block px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 font-mono text-[10px] uppercase tracking-[0.4em] font-black"
           >
             Integrations
           </motion.h2>
@@ -112,11 +112,11 @@ export const IntegrationTicker: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black tracking-tighter text-zinc-900"
+            className="text-4xl md:text-5xl font-black tracking-tighter text-white"
           >
             Over <span className="text-brand-gradient">500+</span> Connected Nodes.
           </motion.h3>
-          <p className="text-zinc-500 font-medium text-sm md:text-base max-w-xl mx-auto">
+          <p className="text-gray-400 font-medium text-sm md:text-base max-w-xl mx-auto">
             Use pre-built nodes for common apps. Custom API connections for everything else.
           </p>
         </div>

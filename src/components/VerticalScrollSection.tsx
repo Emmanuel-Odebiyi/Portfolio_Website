@@ -46,12 +46,12 @@ export const VerticalScrollSection: React.FC<VerticalScrollSectionProps> = ({ it
   };
 
   return (
-    <div id={sectionId} className="relative bg-white">
+    <div id={sectionId} className="relative bg-[#0B0F19] text-white">
       {items.map((item, index) => (
           <section 
             key={item.id}
             ref={(el) => { sectionRefs.current[index] = el; }}
-            className="min-h-screen w-full flex items-center justify-center bg-white overflow-hidden px-6 py-32 relative"
+            className="min-h-screen w-full flex items-center justify-center bg-transparent overflow-hidden px-6 py-32 relative"
           >
             <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
               <motion.div
@@ -66,18 +66,18 @@ export const VerticalScrollSection: React.FC<VerticalScrollSectionProps> = ({ it
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
-                      className="text-zinc-400 font-mono text-xs uppercase tracking-[0.3em]"
+                      className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]"
                     >
                       {item.subtitle}
                     </motion.p>
                   )}
-                  <h2 className="text-3xl md:text-7xl lg:text-8xl font-bold text-zinc-900 tracking-tight leading-[1.1]">
+                  <h2 className="text-3xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[1.1]">
                     {item.title}
                   </h2>
                 </div>
                 
                 <div className="space-y-8">
-                  <div className="text-2xl lg:text-3xl text-zinc-500 font-light leading-relaxed max-w-xl">
+                  <div className="text-2xl lg:text-3xl text-gray-400 font-light leading-relaxed max-w-xl">
                     {item.content}
                   </div>
                   
@@ -86,10 +86,10 @@ export const VerticalScrollSection: React.FC<VerticalScrollSectionProps> = ({ it
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
-                      className="pt-8 border-t border-zinc-100"
+                      className="pt-8 border-t border-white/10"
                     >
-                      <p className="text-xl font-bold text-zinc-900">{item.author}</p>
-                      <p className="text-sm text-zinc-400 font-mono uppercase tracking-widest mt-1">{item.role}</p>
+                      <p className="text-xl font-bold text-white">{item.author}</p>
+                      <p className="text-sm text-gray-500 font-mono uppercase tracking-widest mt-1">{item.role}</p>
                     </motion.div>
                   )}
                 </div>
@@ -100,7 +100,7 @@ export const VerticalScrollSection: React.FC<VerticalScrollSectionProps> = ({ it
                   initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
                   whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  className="relative aspect-square rounded-[3rem] sm:rounded-[4rem] bg-zinc-50 border border-zinc-100 p-8 sm:p-16 flex items-center justify-center group"
+                  className="relative aspect-square rounded-[3rem] sm:rounded-[4rem] bg-white/5 border border-white/10 backdrop-blur-sm p-8 sm:p-16 flex items-center justify-center group"
                 >
                   <motion.img 
                     src={item.illustration} 
@@ -115,14 +115,14 @@ export const VerticalScrollSection: React.FC<VerticalScrollSectionProps> = ({ it
                     style={{ backgroundColor: item.color || '#000' }}
                   />
                   {/* Decorative elements */}
-                  <div className="absolute top-10 right-10 w-20 h-20 bg-white rounded-full blur-2xl opacity-50" />
-                  <div className="absolute bottom-10 left-10 w-32 h-32 bg-white rounded-full blur-3xl opacity-30" />
+                  <div className="absolute top-10 right-10 w-20 h-20 bg-white/20 rounded-full blur-2xl opacity-50" />
+                  <div className="absolute bottom-10 left-10 w-32 h-32 bg-white/20 rounded-full blur-3xl opacity-30" />
                 </motion.div>
               )}
             </div>
             
             {/* Section Progress Indicator */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[10px] font-mono text-zinc-300 uppercase tracking-[0.5em]">
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">
               0{index + 1} / 0{items.length}
             </div>
           </section>

@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 export default function MyApproach() {
   return (
-    <div className="pt-32 pb-20 bg-white">
+    <div className="pt-32 pb-20 bg-[#0B0F19] text-white min-h-screen">
       <section className="max-w-4xl mx-auto px-6">
-        <Link to="/about" className="inline-flex items-center gap-2 text-zinc-500 hover:text-brand-gradient transition-colors mb-12 group">
+        <Link to="/about" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-12 group">
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           Back to About
         </Link>
@@ -17,17 +17,17 @@ export default function MyApproach() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-deep-space-blue-50 text-brand-gradient text-xs font-mono tracking-[0.2em] uppercase"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white backdrop-blur-sm border border-white/20 text-xs font-mono tracking-[0.2em] uppercase"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
               The Methodology
             </motion.div>
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[1.05] text-zinc-900">
-              My <span className="text-zinc-300">Approach.</span>
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[1.05] text-white">
+              My <span className="text-gray-500">Approach.</span>
             </h1>
           </div>
 
-          <div className="prose prose-zinc prose-2xl font-light text-zinc-600 leading-relaxed space-y-12">
+          <div className="prose prose-invert prose-2xl font-light text-gray-400 leading-relaxed space-y-12">
             <p className="text-3xl font-bold text-brand-gradient leading-tight">
               Authority + Data + Simplicity + Action
             </p>
@@ -65,13 +65,13 @@ export default function MyApproach() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 space-y-6"
+                  className="p-10 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-xl space-y-6"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-sm">
+                  <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shadow-sm">
                     {val.icon}
                   </div>
-                  <h4 className="text-2xl font-bold text-zinc-900">{val.title}</h4>
-                  <p className="text-lg text-zinc-500 font-light leading-relaxed">{val.desc}</p>
+                  <h4 className="text-2xl font-bold text-white">{val.title}</h4>
+                  <p className="text-lg text-gray-400 font-light leading-relaxed">{val.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -83,7 +83,7 @@ export default function MyApproach() {
             <div className="pt-20 text-center">
               <Link 
                 to="/contact"
-                className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20"
               >
                 Scale Your Growth <Zap size={20} />
               </Link>

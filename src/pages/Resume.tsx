@@ -134,7 +134,7 @@ export default function Resume() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-32 pb-20 font-sans">
+    <div className="min-h-screen bg-[#0B0F19] text-white pt-32 pb-20 font-sans">
       <div className="max-w-5xl mx-auto px-6">
         
         {/* Header - Christie Tang Style */}
@@ -144,7 +144,7 @@ export default function Resume() {
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-5xl sm:text-7xl md:text-8xl font-bold text-zinc-900 tracking-tighter leading-snug"
+                className="text-5xl sm:text-7xl md:text-8xl font-bold text-white tracking-tighter leading-snug"
               >
                 Emmanuel <br /> Odebiyi
               </motion.h1>
@@ -152,7 +152,7 @@ export default function Resume() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-2xl text-zinc-400 font-light tracking-tight"
+                className="text-2xl text-gray-400 font-light tracking-tight"
               >
                 AI Automation Specialist & SEO Strategist
               </motion.p>
@@ -164,11 +164,11 @@ export default function Resume() {
               transition={{ delay: 0.2 }}
               className="space-y-4 text-right md:pt-4"
             >
-              <div className="flex flex-col gap-2 text-sm font-mono uppercase tracking-widest text-zinc-500">
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="hover:text-brand-gradient transition-colors">emmayoodebiyi001@gmail.com</a>
-                <a href="#" className="hover:text-brand-gradient transition-colors">LinkedIn</a>
-                <a href="#" className="hover:text-brand-gradient transition-colors">Twitter</a>
-                <a href="#" className="hover:text-brand-gradient transition-colors">Portfolio</a>
+              <div className="flex flex-col gap-2 text-sm font-mono uppercase tracking-widest text-gray-500">
+                <a href="mailto:emmayoodebiyi001@gmail.com" className="hover:text-white transition-colors">emmayoodebiyi001@gmail.com</a>
+                <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" className="hover:text-white transition-colors">Twitter</a>
+                <a href="#" className="hover:text-white transition-colors">Portfolio</a>
               </div>
               
               <AnimatePresence mode="wait">
@@ -178,7 +178,7 @@ export default function Resume() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center justify-end gap-2 text-zinc-300 text-xs font-mono uppercase tracking-widest"
+                    className="flex items-center justify-end gap-2 text-gray-500 text-xs font-mono uppercase tracking-widest"
                   >
                     <Loader2 size={14} className="animate-spin" /> Preparing PDF...
                   </motion.div>
@@ -187,7 +187,7 @@ export default function Resume() {
                     key="download"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white text-xs font-bold rounded-full hover:bg-brand-gradient transition-all shadow-xl shadow-zinc-200 uppercase tracking-widest"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-brand-gradient text-zinc-900 text-xs font-bold rounded-full hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20 uppercase tracking-widest"
                   >
                     <Download size={14} /> Download PDF
                   </motion.button>
@@ -196,7 +196,7 @@ export default function Resume() {
             </motion.div>
           </div>
           
-          <div className="h-px bg-zinc-100 w-full" />
+          <div className="h-px bg-white/10 w-full" />
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-20">
@@ -211,7 +211,7 @@ export default function Resume() {
                   className={`block text-xs font-bold uppercase tracking-[0.2em] transition-all text-left ${
                     activeSection === section.id 
                       ? 'text-brand-gradient' 
-                      : 'text-zinc-300 hover:text-zinc-500'
+                      : 'text-gray-500 hover:text-white'
                   }`}
                 >
                   {section.label}
@@ -220,7 +220,7 @@ export default function Resume() {
               <div className="pt-12">
                 <Link 
                   to="/portfolio"
-                  className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors"
+                  className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors"
                 >
                   <ArrowLeft size={12} /> Back to Work
                 </Link>
@@ -233,41 +233,41 @@ export default function Resume() {
             
             {/* Summary */}
             <section id="summary" className="space-y-8">
-              <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">01 / Summary</h2>
-              <p className="text-2xl md:text-5xl text-zinc-900 font-bold leading-[1.1] tracking-tighter max-w-4xl">
+              <h2 className="text-xs font-mono text-gray-600 uppercase tracking-[0.4em]">01 / Summary</h2>
+              <p className="text-2xl md:text-5xl text-white font-bold leading-[1.1] tracking-tighter max-w-4xl">
                 I build <span className="text-brand-gradient">autonomous growth engines</span> for SaaS companies. By combining AI-driven workflows with high-intent SEO strategy, I help brands scale their content operations and capture market share without increasing headcount.
               </p>
-              <p className="text-xl text-zinc-500 font-light leading-relaxed max-w-2xl">
+              <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl">
                 Currently helping B2B technology platforms automate their marketing pipelines and achieve predictable, data-backed ROI.
               </p>
             </section>
 
             {/* Experience */}
             <section id="experience" className="space-y-16">
-              <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">02 / Experience</h2>
+              <h2 className="text-xs font-mono text-gray-600 uppercase tracking-[0.4em]">02 / Experience</h2>
               <div className="space-y-24">
                 {experience.map((job, i) => (
                   <div key={i} className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-8 group">
                     <div className="space-y-6">
                       <div className="space-y-1">
-                        <h3 className="text-2xl font-bold text-zinc-900 tracking-tight group-hover:text-brand-gradient transition-colors">{job.role}</h3>
-                        <p className="text-lg text-zinc-500 font-medium">{job.company}</p>
+                        <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-brand-gradient transition-colors">{job.role}</h3>
+                        <p className="text-lg text-gray-400 font-medium">{job.company}</p>
                       </div>
-                      <p className="text-zinc-500 font-light leading-relaxed max-w-2xl italic">
+                      <p className="text-gray-400 font-light leading-relaxed max-w-2xl italic">
                         {job.description}
                       </p>
                       <ul className="space-y-4">
                         {job.bullets.map((bullet, j) => (
-                          <li key={j} className="flex items-start gap-4 text-zinc-600 leading-relaxed">
-                            <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-zinc-200 shrink-0" />
+                          <li key={j} className="flex items-start gap-4 text-gray-300 leading-relaxed">
+                            <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/20 shrink-0" />
                             {bullet}
                           </li>
                         ))}
                       </ul>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm font-mono text-zinc-400 uppercase tracking-widest">{job.period}</span>
-                      <p className="text-xs text-zinc-300 mt-1 uppercase tracking-widest">{job.location}</p>
+                      <span className="text-sm font-mono text-gray-500 uppercase tracking-widest">{job.period}</span>
+                      <p className="text-xs text-gray-600 mt-1 uppercase tracking-widest">{job.location}</p>
                     </div>
                   </div>
                 ))}
@@ -276,14 +276,14 @@ export default function Resume() {
 
             {/* Skills */}
             <section id="skills" className="space-y-16">
-              <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">03 / Skills</h2>
+              <h2 className="text-xs font-mono text-gray-600 uppercase tracking-[0.4em]">03 / Skills</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {skillGroups.map((group, i) => (
                   <div key={i} className="space-y-6">
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-900 border-b border-zinc-100 pb-4">{group.category}</h3>
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-white border-b border-white/10 pb-4">{group.category}</h3>
                     <ul className="space-y-3">
                       {group.skills.map(skill => (
-                        <li key={skill} className="text-zinc-500 font-light flex items-center gap-2">
+                        <li key={skill} className="text-gray-400 font-light flex items-center gap-2">
                           <ChevronRight size={14} className="text-brand-gradient" />
                           {skill}
                         </li>
@@ -296,7 +296,7 @@ export default function Resume() {
 
             {/* Projects */}
             <section id="projects" className="space-y-16">
-              <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">04 / Projects</h2>
+              <h2 className="text-xs font-mono text-gray-600 uppercase tracking-[0.4em]">04 / Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[
                   { title: "TechFlow Automation", desc: "Built a 520% ROI content machine for a SF-based SaaS.", link: "/portfolio" },
@@ -305,13 +305,13 @@ export default function Resume() {
                   <Link 
                     key={i} 
                     to={project.link}
-                    className="p-10 rounded-[2rem] bg-zinc-50 hover:bg-deep-space-blue-50 transition-all group border border-transparent hover:border-deep-space-blue-100"
+                    className="p-10 rounded-[2rem] bg-white/5 hover:bg-white/10 transition-all group border border-white/5 hover:border-white/20 backdrop-blur-sm"
                   >
                     <div className="flex justify-between items-start mb-6">
-                      <h3 className="text-2xl font-bold text-zinc-900 tracking-tight">{project.title}</h3>
-                      <ExternalLink size={20} className="text-zinc-300 group-hover:text-brand-gradient transition-colors" />
+                      <h3 className="text-2xl font-bold text-white tracking-tight">{project.title}</h3>
+                      <ExternalLink size={20} className="text-gray-600 group-hover:text-white transition-colors" />
                     </div>
-                    <p className="text-zinc-500 font-light leading-relaxed">{project.desc}</p>
+                    <p className="text-gray-400 font-light leading-relaxed">{project.desc}</p>
                   </Link>
                 ))}
               </div>
@@ -319,7 +319,7 @@ export default function Resume() {
 
             {/* Certifications */}
             <section id="certifications" className="space-y-16">
-              <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">05 / Certifications</h2>
+              <h2 className="text-xs font-mono text-gray-600 uppercase tracking-[0.4em]">05 / Certifications</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   "HubSpot Content Marketing Certified",
@@ -327,9 +327,9 @@ export default function Resume() {
                   "Semrush SEO Fundamentals",
                   "Zapier Automation Expert"
                 ].map((cert, i) => (
-                  <div key={i} className="flex items-center gap-4 p-6 border border-zinc-100 rounded-2xl hover:border-deep-space-blue-200 transition-colors">
+                  <div key={i} className="flex items-center gap-4 p-6 border border-white/10 rounded-2xl hover:border-white/20 bg-white/5 backdrop-blur-sm transition-colors">
                     <Award size={20} className="text-brand-gradient" />
-                    <span className="font-medium text-zinc-800 tracking-tight">{cert}</span>
+                    <span className="font-medium text-white tracking-tight">{cert}</span>
                   </div>
                 ))}
               </div>
@@ -337,25 +337,25 @@ export default function Resume() {
 
             {/* Education */}
             <section id="education" className="space-y-16">
-              <h2 className="text-xs font-mono text-zinc-300 uppercase tracking-[0.4em]">06 / Education</h2>
+              <h2 className="text-xs font-mono text-gray-600 uppercase tracking-[0.4em]">06 / Education</h2>
               <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-zinc-900 tracking-tight">Bachelor of Arts</h3>
-                  <p className="text-zinc-500 font-medium">Obafemi Awolowo University (OAU)</p>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">Bachelor of Arts</h3>
+                  <p className="text-gray-400 font-medium">Obafemi Awolowo University (OAU)</p>
                 </div>
-                <span className="text-sm font-mono text-zinc-400 uppercase tracking-widest">2018 - 2022</span>
+                <span className="text-sm font-mono text-gray-500 uppercase tracking-widest">2018 - 2022</span>
               </div>
             </section>
 
             {/* Final Footer */}
-            <footer className="pt-24 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-8">
-              <p className="text-zinc-300 text-xs font-mono uppercase tracking-widest">
+            <footer className="pt-24 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+              <p className="text-gray-600 text-xs font-mono uppercase tracking-widest">
                 © 2026 Emmanuel Odebiyi — Built for Growth
               </p>
               <div className="flex gap-8">
-                <a href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-brand-gradient transition-colors">LinkedIn</a>
-                <a href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-brand-gradient transition-colors">Twitter</a>
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-brand-gradient transition-colors">Email</a>
+                <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Twitter</a>
+                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Email</a>
               </div>
             </footer>
 
