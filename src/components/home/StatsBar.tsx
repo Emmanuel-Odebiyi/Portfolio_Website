@@ -17,7 +17,7 @@ export const StatsBar = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 80% 100% at 50% 50%, rgba(217,119,6,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 80% 100% at 50% 50%, rgba(245,158,11,0.12) 0%, transparent 70%)',
         }}
       />
 
@@ -39,7 +39,7 @@ export const StatsBar = () => {
             </div>
             <span
               className="font-mono text-[10px] uppercase tracking-widest"
-              style={{ color: 'rgba(148,163,184,0.6)' }}
+              style={{ color: 'rgba(226,232,240,0.9)' }}
             >
               {stat.label}
             </span>

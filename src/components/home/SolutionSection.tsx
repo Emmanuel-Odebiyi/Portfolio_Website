@@ -159,13 +159,13 @@ export const SolutionSection = () => {
         {/* Aurora blobs for the solution section */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="aurora-orb-1 absolute rounded-full" style={{ width: '60vw', height: '60vw', maxWidth: 700, maxHeight: 700, top: '-20%', left: '-10%', background: 'radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-          <div className="aurora-orb-2 absolute rounded-full" style={{ width: '45vw', height: '45vw', maxWidth: 600, maxHeight: 600, bottom: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(217,119,6,0.20) 0%, transparent 70%)', filter: 'blur(90px)' }} />
+          <div className="aurora-orb-2 absolute rounded-full" style={{ width: '45vw', height: '45vw', maxWidth: 600, maxHeight: 600, bottom: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(245,158,11,0.20) 0%, transparent 70%)', filter: 'blur(90px)' }} />
           <div className="aurora-orb-3 absolute rounded-full" style={{ width: '35vw', height: '35vw', maxWidth: 450, maxHeight: 450, top: '30%', right: '20%', background: 'radial-gradient(circle, rgba(5,150,105,0.15) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         </div>
 
         {/* ── Headline Block ── */}
         <div className="shrink-0 pt-28 pb-6 px-6 md:px-16 text-center z-10">
-          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-4" style={{ color: 'rgba(217,119,6,0.85)' }}>
+          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-4" style={{ color: 'rgba(251,191,36,0.95)' }}>
             The Solution
           </p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-4">
@@ -180,7 +180,7 @@ export const SolutionSection = () => {
             style={{
               opacity: useTransform(scrollYProgress, [0.05, 0.15], [0, 1]),
               y: useTransform(scrollYProgress, [0.05, 0.15], [10, 0]),
-              color: 'rgba(148,163,184,0.80)',
+              color: 'rgba(226,232,240,0.9)',
             }}
             className="text-sm md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
@@ -201,13 +201,17 @@ export const SolutionSection = () => {
                 className="relative overflow-hidden h-full rounded-[2rem] md:rounded-[3rem] mx-1 md:mx-2 first:ml-0 last:mr-0 border border-zinc-100"
                 animate={{ 
                     flex: isActive ? 12 : 1,
-                    // Stronger visual hierarchy: inactive cards are just slightly dim but still bright
-                    filter: isActive ? 'grayscale(0%) brightness(100%)' : 'grayscale(15%) brightness(96%)',
-                    scale: isActive ? 1 : 0.98,
-                    boxShadow: isActive ? '0 25px 50px -12px rgba(0,0,0,0.1)' : '0 4px 6px -1px rgba(0,0,0,0)'
+                    // High-end glassmorphism effect
+                    filter: isActive ? 'brightness(110%) saturate(120%)' : 'brightness(70%) saturate(80%)',
+                    scale: isActive ? 1 : 0.96,
+                    boxShadow: isActive ? `0 0 80px ${solution.accentColor}20` : 'none'
                 }}
-                transition={{ type: 'spring', stiffness: 180, damping: 30 }}
-                style={{ backgroundColor: solution.bgColor }}
+                transition={{ type: 'spring', stiffness: 150, damping: 25 }}
+                style={{ 
+                  backgroundColor: 'rgba(15, 23, 42, 0.4)', // Dark slate glass
+                  backdropFilter: 'blur(20px)',
+                  border: isActive ? `1.5px solid ${solution.accentColor}60` : '1px solid rgba(255,255,255,0.05)'
+                }}
               >
                 {/* Collapsed label (vertical text) */}
                 {!isActive && (
@@ -262,15 +266,13 @@ export const SolutionSection = () => {
                       </span>
                       
                       <h3
-                        className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-[1.1] tracking-tight"
-                        style={{ color: solution.textColor }}
+                        className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 leading-[1.1] tracking-tight text-white"
                       >
                         {solution.subtitle}
                       </h3>
                       
                       <p
-                        className="text-base md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-medium"
-                        style={{ color: `${solution.textColor}CC` }}
+                        className="text-base md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light text-slate-100"
                       >
                         {solution.description}
                       </p>

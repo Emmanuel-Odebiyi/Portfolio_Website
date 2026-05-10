@@ -163,7 +163,7 @@ const VerticalNavigator = ({
       {/* Background track line */}
       <div
         className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full z-0"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: 'rgba(255,255,255,0.12)' }}
+        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: 'rgba(255,255,255,0.25)' }}
       />
 
       {/* Filled progress line - Using scaleY for GPU acceleration */}
@@ -198,7 +198,7 @@ const VerticalNavigator = ({
                   backgroundColor: isActive || isPast ? problem.accentColor : '#e4e4e7',
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-md origin-center"
+                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg origin-center"
                 style={{
                   boxShadow: isActive ? `0 0 20px ${problem.accentColor}55` : '0 1px 4px rgba(0,0,0,0.1)',
                 }}
@@ -206,7 +206,7 @@ const VerticalNavigator = ({
                 <motion.span
                   className="text-xl font-black leading-none"
                   animate={{
-                    color: isActive || isPast ? '#fff' : '#a1a1aa',
+                    color: isActive || isPast ? '#fff' : '#d4d4d8',
                   }}
                   transition={{ duration: 0.3 }}
                 >
@@ -289,7 +289,7 @@ const ProblemCard = ({
           {/* Large number — improved contrast and numeric variant */}
           <div className="select-none pointer-events-none">
             <span
-              className="text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-60"
+              className="text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-80"
               style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
             >
               {String(problem.id).padStart(2, '0')}
@@ -302,17 +302,17 @@ const ProblemCard = ({
               text={problem.headline}
               scrollYProgress={scrollYProgress}
               startProgress={textRevealStart}
-              endProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.4}
+              endProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.3}
             />
           </h2>
 
           {/* Body — word-by-word reveal */}
-          <p className="text-lg md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(148,163,184,0.85)' }}>
+          <p className="text-lg md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
             <ScrollRevealText
               text={problem.body}
               scrollYProgress={scrollYProgress}
-              startProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.4}
-              endProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.75}
+              startProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.3}
+              endProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.65}
             />
           </p>
 
@@ -321,7 +321,7 @@ const ProblemCard = ({
             <ScrollRevealText
               text={problem.detail}
               scrollYProgress={scrollYProgress}
-              startProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.75}
+              startProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.65}
               endProgress={textRevealEnd}
               style={{ color: problem.accentColor }}
             />
@@ -330,32 +330,44 @@ const ProblemCard = ({
 
         {/* Icon Illustration — right side, matching the screenshot */}
         <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-          <div className="relative">
-            {/* Glow blob */}
+          <div className="relative group/icon">
+            {/* Subtle White "Lift" Gradient — separates from deep background without sharp edges */}
+            <div 
+              className="absolute inset-0 rounded-full blur-[100px] opacity-40 group-hover/icon:opacity-50 transition-opacity duration-700"
+              style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)' }}
+            />
+            
+            {/* Primary Accent Glow (Existing) */}
             <motion.div
-              animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.14, 0.06] }}
+              animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
               transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute inset-0 rounded-full blur-3xl -z-10"
               style={{ backgroundColor: problem.accentColor }}
             />
-            {/* Icon container */}
+
+            {/* Icon container — ensured no background and added subtle drop-shadow */}
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-48 h-48 md:w-80 md:h-80 flex items-center justify-center -translate-y-4 mix-blend-multiply"
+              className="w-48 h-48 md:w-80 md:h-80 flex items-center justify-center -translate-y-4 relative z-10"
+              style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}
             >
               {problem.animationPath ? (
                 <Lottie 
                   path={problem.animationPath} 
                   loop={true} 
                   autoplay={true} 
-                  style={{ width: '100%', height: '100%' }}
+                  style={{ width: '100%', height: '100%', background: 'transparent', mixBlendMode: 'multiply' }}
                 />
               ) : (
                 <Icon
                   size={72}
                   strokeWidth={1}
-                  style={{ color: problem.accentColor }}
+                  style={{ 
+                    color: problem.accentColor, 
+                    filter: `drop-shadow(0 0 20px ${problem.accentColor}40)`,
+                    mixBlendMode: 'multiply'
+                  }}
                   className="md:w-24 md:h-24"
                 />
               )}
@@ -442,7 +454,7 @@ export const ProblemSection: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="relative"
+      className="relative grain-overlay"
       style={{ height: SCROLL_HEIGHT }}
       aria-label="The Problem Section"
     >
@@ -450,7 +462,7 @@ export const ProblemSection: React.FC = () => {
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center" style={{ backgroundColor: '#0f172a' }}>
         {/* Section label — top center */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(217,119,6,0.9)', background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.2)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(251,191,36,1)', background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>
             The Problem
           </span>
         </div>

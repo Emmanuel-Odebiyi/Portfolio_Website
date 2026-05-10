@@ -107,7 +107,7 @@ export const Header: React.FC = () => {
                   className={`flex items-center gap-1.5 text-sm font-black tracking-tight transition-all relative group ${
                     location.pathname === link.href 
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500' 
-                      : (onDarkBg ? 'text-white/80 hover:text-white' : 'text-zinc-600 hover:text-zinc-900')
+                      : (onDarkBg ? 'text-white/95 hover:text-white' : 'text-zinc-600 hover:text-zinc-900')
                   }`}
                 >
                   {link.name}
@@ -181,7 +181,7 @@ export const Header: React.FC = () => {
                   onDarkBg ? 'text-zinc-900 hover:text-white' : 'text-white hover:bg-blue-600'
                 }`}
                 style={onDarkBg
-                  ? { background: 'linear-gradient(135deg, #d97706, #fbbf24)', boxShadow: '0 4px 20px rgba(217,119,6,0.30)' }
+                  ? { background: 'linear-gradient(135deg, #f59e0b, #fbbf24)', boxShadow: '0 4px 20px rgba(245,158,11,0.30)' }
                   : { background: '#18181b' }}
               >
                 <span className="relative z-10">Contact Me</span>

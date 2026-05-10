@@ -33,7 +33,7 @@ export const HeroSection = () => {
           maxHeight: 700,
           top: '-10%',
           right: '-5%',
-          background: 'radial-gradient(circle, rgba(217,119,6,0.28) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(245,158,11,0.35) 0%, transparent 70%)',
           filter: 'blur(100px)',
         }}
       />
@@ -62,11 +62,11 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mb-10 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass-card text-xs font-mono tracking-[0.22em] uppercase text-white/70"
+            className="mb-10 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass-card text-xs font-mono tracking-[0.22em] uppercase text-white/90"
           >
             <span
               className="w-2 h-2 rounded-full animate-pulse"
-              style={{ background: 'radial-gradient(circle, #d97706, #fbbf24)' }}
+              style={{ background: 'radial-gradient(circle, #f59e0b, #fbbf24)' }}
             />
             Content Marketing Automation Specialist
           </motion.div>
@@ -84,7 +84,7 @@ export const HeroSection = () => {
               <span
                 style={{
                   display: 'inline-block',
-                  background: 'linear-gradient(135deg, #60a5fa 0%, #818cf8 45%, #d97706 100%)',
+                  background: 'linear-gradient(135deg, #60a5fa 0%, #818cf8 45%, #f59e0b 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -106,7 +106,7 @@ export const HeroSection = () => {
               </div>
               <h2
                 className="relative z-10 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight px-8 italic"
-                style={{ color: 'rgba(148,163,184,0.85)' }}
+                style={{ color: 'rgba(226,232,240,0.95)' }}
               >
                 While you're still writing one at 11 PM on a Sunday.
               </h2>
@@ -120,12 +120,12 @@ export const HeroSection = () => {
             transition={{ delay: 0.25, duration: 0.9 }}
             className="mb-14 max-w-3xl mx-auto"
           >
-            <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'rgba(148,163,184,0.80)' }}>
+            <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'rgba(226,232,240,0.9)' }}>
               I build{' '}
               <span
                 style={{
                   display: 'inline',
-                  background: 'linear-gradient(to right, #60a5fa, #d97706)',
+                  background: 'linear-gradient(to right, #60a5fa, #f59e0b)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -153,7 +153,7 @@ export const HeroSection = () => {
               to="/portfolio"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-white text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl"
               style={{
-                background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #d97706 100%)',
+                background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #f59e0b 100%)',
                 boxShadow: '0 8px 30px rgba(37,99,235,0.35)',
               }}
             >
@@ -173,7 +173,7 @@ export const HeroSection = () => {
               }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.10)';
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(217,119,6,0.5)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(245,158,11,0.6)';
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
@@ -197,9 +197,9 @@ export const HeroSection = () => {
               className="w-6 h-10 rounded-full flex justify-center p-2"
               style={{ border: '1px solid rgba(255,255,255,0.15)' }}
             >
-              <div className="w-1 h-2 rounded-full" style={{ background: '#d97706' }} />
+              <div className="w-1 h-2 rounded-full" style={{ background: '#f59e0b' }} />
             </motion.div>
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em]" style={{ color: 'rgba(148,163,184,0.4)' }}>
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em]" style={{ color: 'rgba(226,232,240,0.6)' }}>
               scroll
             </span>
           </motion.div>

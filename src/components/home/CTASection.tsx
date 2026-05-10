@@ -20,7 +20,7 @@ export const CTASection = () => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(217,119,6,0.12) 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(245,158,11,0.20) 45%, transparent 70%)',
           filter: 'blur(80px)',
         }}
       />
@@ -31,7 +31,7 @@ export const CTASection = () => {
         <div className="space-y-6">
           <span
             className="inline-block text-[10px] font-mono uppercase tracking-[0.4em] mb-4"
-            style={{ color: 'rgba(217,119,6,0.8)' }}
+            style={{ color: 'rgba(251,191,36,0.95)' }}
           >
             Next Steps
           </span>
@@ -40,7 +40,7 @@ export const CTASection = () => {
             <span
               style={{
                 display: 'inline-block',
-                background: 'linear-gradient(135deg, #60a5fa 0%, #818cf8 45%, #d97706 100%)',
+                background: 'linear-gradient(135deg, #60a5fa 0%, #818cf8 45%, #f59e0b 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -51,13 +51,13 @@ export const CTASection = () => {
           </h2>
           <p
             className="text-2xl font-light max-w-3xl mx-auto"
-            style={{ color: 'rgba(148,163,184,0.75)' }}
+            style={{ color: 'rgba(226,232,240,0.9)' }}
           >
             Every week without a system is a week they're showing up where you aren't.
           </p>
           <p
             className="text-sm font-mono uppercase tracking-widest mt-8"
-            style={{ color: 'rgba(148,163,184,0.4)' }}
+            style={{ color: 'rgba(226,232,240,0.6)' }}
           >
             Availability: May 2026 Booking Now (Limited by Design)
           </p>
@@ -70,7 +70,7 @@ export const CTASection = () => {
               title: 'Free Strategy Call',
               desc: '30 Minutes. No pitch. Just honest conversation about whether automation is the right move.',
               btn: 'Book Your Call →',
-              accent: '#d97706',
+              accent: '#f59e0b',
               borderStyle: 'rgba(217,119,6,0.3)',
               glowColor: 'rgba(217,119,6,0.15)',
               isPrimary: true,
@@ -113,7 +113,7 @@ export const CTASection = () => {
 
               <div className="space-y-4">
                 <h4 className="text-xl font-bold text-white">{item.title}</h4>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(148,163,184,0.80)' }}>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
                   {item.desc}
                 </p>
               </div>
@@ -123,7 +123,7 @@ export const CTASection = () => {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all duration-300 group-hover:gap-3"
                 style={{
                   background: item.isPrimary
-                    ? 'linear-gradient(135deg, #2563eb, #d97706)'
+                    ? 'linear-gradient(135deg, #2563eb, #f59e0b)'
                     : 'rgba(255,255,255,0.08)',
                   border: `1px solid ${item.borderStyle}`,
                 }}
@@ -138,14 +138,14 @@ export const CTASection = () => {
         {/* Trust micro-copy */}
         <div
           className="flex justify-center flex-wrap items-center gap-8 font-mono text-xs uppercase tracking-widest"
-          style={{ color: 'rgba(148,163,184,0.4)' }}
+          style={{ color: 'rgba(226,232,240,0.7)' }}
         >
           <span className="flex items-center gap-2">
-            <span style={{ color: '#d97706' }}>✓</span> Free 30-minute call
+            <span style={{ color: '#f59e0b' }}>✓</span> Free 30-minute call
           </span>
           <span style={{ color: 'rgba(255,255,255,0.1)' }}>|</span>
           <span className="flex items-center gap-2">
-            <span style={{ color: '#d97706' }}>✓</span> No pitch, just strategy
+            <span style={{ color: '#f59e0b' }}>✓</span> No pitch, just strategy
           </span>
         </div>
       </div>

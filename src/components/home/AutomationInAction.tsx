@@ -5,6 +5,8 @@ import {
   Sparkles, Layers, Box, LucideIcon,
   FileText, Search, Share2, UserCheck, BarChart3
 } from 'lucide-react';
+import blueNodes from '../../assets/automation/blue_nodes.png';
+import amberNodes from '../../assets/automation/amber_nodes.png';
 
 // ─── TYPES & DATA ─────────────────────────────────────────────────────────────
 
@@ -98,9 +100,9 @@ const WORKFLOWS: WorkflowTemplate[] = [
 ];
 
 const PROVIDERS = [
-  { name: 'N8N WORKFLOW', iconColor: 'text-orange-500' },
-  { name: 'MAKE AUTOMATION', iconColor: 'text-purple-500' },
-  { name: 'ZAPIER PIPELINE', iconColor: 'text-orange-600' }
+  { name: 'N8N WORKFLOW', iconColor: 'text-orange-500', image: amberNodes },
+  { name: 'MAKE AUTOMATION', iconColor: 'text-purple-500', image: blueNodes },
+  { name: 'ZAPIER PIPELINE', iconColor: 'text-orange-600', image: amberNodes }
 ];
 
 export const AutomationInAction = () => {
@@ -159,7 +161,7 @@ export const AutomationInAction = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] z-20" style={{ backgroundColor: '#0f172a' }}>
+    <section ref={containerRef} className="relative h-[500vh] z-20 grain-overlay" style={{ backgroundColor: '#0f172a' }}>
       
       {/* Sticky Container */}
       <div className="sticky top-0 min-h-screen pt-24 pb-8 overflow-hidden flex flex-col justify-center" style={{ backgroundColor: '#0f172a', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
@@ -176,10 +178,10 @@ export const AutomationInAction = () => {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4"
-                style={{ background: 'rgba(217,119,6,0.10)', border: '1px solid rgba(217,119,6,0.25)' }}
+                style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)' }}
               >
-                <Sparkles className="w-3 h-3" style={{ color: '#d97706' }} />
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest" style={{ color: '#d97706' }}>Automation in Action</span>
+                <Sparkles className="w-3 h-3" style={{ color: '#f59e0b' }} />
+                <span className="text-[10px] font-mono font-black uppercase tracking-widest" style={{ color: '#f59e0b' }}>Automation in Action</span>
               </motion.div>
               <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-black text-white tracking-tighter leading-tight">
                 The High-ROI <br />
@@ -188,7 +190,7 @@ export const AutomationInAction = () => {
             </div>
             
             {/* Simplified Top Right Content */}
-            <p className="text-sm md:text-base font-medium max-w-sm leading-relaxed shrink-0 py-2 rounded-r-xl pl-5" style={{ color: 'rgba(148,163,184,0.80)', borderLeft: '2px solid #d97706' }}>
+            <p className="text-sm md:text-base font-medium max-w-sm leading-relaxed shrink-0 py-2 rounded-r-xl pl-5" style={{ color: 'rgba(226,232,240,0.9)', borderLeft: '2px solid #f59e0b' }}>
               I map the inefficiency and build the systems that eliminate it—<span className="text-white font-bold block mt-1">Reclaiming 10 to 20 hours of your week.</span>
             </p>
           </div>
@@ -245,55 +247,50 @@ export const AutomationInAction = () => {
                   className="flex flex-col h-full gap-4"
                 >
                   {/* Image Showcase with Gradient Overlay */}
-                  <div className="relative h-[250px] md:h-[300px] lg:h-[380px] shrink-0 bg-white/40 backdrop-blur-md border border-zinc-200 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden flex items-center justify-center group">
+                  <div className="relative h-[250px] md:h-[300px] lg:h-[380px] shrink-0 bg-[#0f172a] border border-white/10 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden flex items-center justify-center group shadow-2xl">
                      
-                     {/* Canvas Grid Background */}
-                     <div 
-                      className="absolute inset-0 opacity-[0.08]" 
-                      style={{ 
-                        backgroundImage: `radial-gradient(circleAtCenter, black 1px, transparent 0)`,
-                        backgroundSize: '24px 24px'
-                      }} 
-                     />
-
-                     {/* Template Label */}
-                     <div className="absolute top-4 left-6 lg:top-6 lg:left-8 flex items-center gap-2 lg:gap-3 z-10">
-                        <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-brand-gradient animate-pulse" />
-                        <span className="text-[8px] lg:text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest">env_production://{active.id}</span>
-                     </div>
-
                      {/* The Slideshow Container */}
-                     <div className="absolute inset-0 flex flex-col items-center justify-center -translate-y-8 lg:-translate-y-12">
+                     <div className="absolute inset-0">
                         <AnimatePresence mode="wait">
                            <motion.div 
                              key={activeProvider.name}
-                             initial={{ opacity: 0, scale: 0.95 }}
-                             animate={{ opacity: 1, scale: 1 }}
-                             exit={{ opacity: 0, scale: 0.95 }}
-                             transition={{ duration: 0.5 }}
-                             className="flex flex-col items-center gap-4 lg:gap-6"
+                             initial={{ opacity: 0 }}
+                             animate={{ opacity: 0.6 }}
+                             exit={{ opacity: 0 }}
+                             transition={{ duration: 1 }}
+                             className="absolute inset-0"
                            >
-                             <Box className={`w-12 h-12 lg:w-20 lg:h-20 opacity-40 ${activeProvider.iconColor}`} />
-                             <span className="font-mono text-[9px] lg:text-xs font-bold tracking-[0.3em] uppercase text-zinc-400">
-                               [{activeProvider.name} PLACEHOLDER]
-                             </span>
+                             <img 
+                                src={activeProvider.image} 
+                                alt={activeProvider.name} 
+                                className="w-full h-full object-cover"
+                             />
                            </motion.div>
                         </AnimatePresence>
                      </div>
 
+                     {/* Grid Overlay */}
+                     <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+
+                     {/* Template Label */}
+                     <div className="absolute top-4 left-6 lg:top-6 lg:left-8 flex items-center gap-2 lg:gap-3 z-10">
+                        <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-brand-gradient animate-pulse" />
+                        <span className="text-[8px] lg:text-[10px] font-mono font-bold text-white/60 uppercase tracking-widest">env_production://{active.id}</span>
+                     </div>
+
                      {/* Gradient Overlay for Content */}
-                     <div className="absolute bottom-0 left-0 right-0 pt-20 pb-4 px-6 lg:pb-6 lg:px-8 z-10 flex flex-col justify-end"
-                          style={{ background: 'linear-gradient(to top, rgba(10,15,30,0.98) 0%, rgba(10,15,30,0.80) 60%, transparent 100%)' }}>
-                        <div className="flex flex-col md:flex-row gap-2 lg:gap-6 items-start md:items-end">
+                     <div className="absolute bottom-0 left-0 right-0 pt-24 pb-6 px-6 lg:pb-8 lg:px-10 z-10 flex flex-col justify-end"
+                          style={{ background: 'linear-gradient(to top, #0f172a 0%, rgba(15,23,42,0.9) 50%, transparent 100%)' }}>
+                        <div className="flex flex-col md:flex-row gap-4 lg:gap-8 items-start md:items-end">
                           <div className="flex-grow">
-                            <h4 className="text-zinc-400 text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-1 lg:mb-2">Core Problem</h4>
-                            <p className="text-sm lg:text-lg font-bold leading-tight text-zinc-800">
+                            <h4 className="text-amber-400 text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-1 lg:mb-2">Core Problem</h4>
+                            <p className="text-lg lg:text-xl font-bold leading-tight text-white">
                               {active.problem}
                             </p>
                           </div>
-                          <div className="shrink-0 md:pl-6 md:border-l border-zinc-200/50 md:max-w-[280px]">
-                             <h4 className="text-brand-gradient text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-1 lg:mb-2 md:text-left">System Outcome</h4>
-                             <p className="text-xs lg:text-sm font-semibold text-zinc-600 leading-snug italic md:text-left">
+                          <div className="shrink-0 md:pl-8 md:border-l border-white/10 md:max-w-[320px]">
+                             <h4 className="text-brand-gradient text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-1 lg:mb-2">System Outcome</h4>
+                             <p className="text-sm lg:text-base font-medium text-slate-100 leading-snug italic">
                                {active.impact}
                              </p>
                           </div>
@@ -303,7 +300,7 @@ export const AutomationInAction = () => {
                      {/* Slideshow Indicators */}
                      <div className="absolute bottom-3 right-6 lg:right-8 flex items-center gap-1.5 z-20 opacity-40">
                         {PROVIDERS.map((_, i) => (
-                           <div key={i} className={`h-1 rounded-full transition-all duration-300 ${providerIndex === i ? 'w-6 bg-zinc-800' : 'w-1.5 bg-zinc-500'}`} />
+                           <div key={i} className={`h-1 rounded-full transition-all duration-300 ${providerIndex === i ? 'w-6 bg-white' : 'w-1.5 bg-slate-500'}`} />
                         ))}
                      </div>
                   </div>
