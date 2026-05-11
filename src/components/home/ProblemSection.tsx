@@ -357,7 +357,7 @@ const ProblemCard = ({
                   path={problem.animationPath} 
                   loop={true} 
                   autoplay={true} 
-                  style={{ width: '100%', height: '100%', background: 'transparent', mixBlendMode: 'multiply' }}
+                  style={{ width: '100%', height: '100%', background: 'transparent' }}
                 />
               ) : (
                 <Icon
@@ -365,8 +365,7 @@ const ProblemCard = ({
                   strokeWidth={1}
                   style={{ 
                     color: problem.accentColor, 
-                    filter: `drop-shadow(0 0 20px ${problem.accentColor}40)`,
-                    mixBlendMode: 'multiply'
+                    filter: `drop-shadow(0 0 20px ${problem.accentColor}40)`
                   }}
                   className="md:w-24 md:h-24"
                 />
