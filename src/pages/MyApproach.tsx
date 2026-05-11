@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Layers, Search, Zap, Bot, ArrowRight, BarChart3, Clock, Target } from 'lucide-react';
+import { ArrowLeft, Layers, Search, Zap, Bot, ArrowRight, BarChart3, Clock, Target, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const fadeUp = {

@@ -165,7 +165,7 @@ export default function Resume() {
               className="space-y-4 text-right md:pt-4"
             >
               <div className="flex flex-col gap-2 text-sm font-mono uppercase tracking-widest text-gray-500">
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="hover:text-white transition-colors">emmayoodebiyi001@gmail.com</a>
+                <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="hover:text-white transition-colors">emmanuelodebiyiwrites@gmail.com</a>
                 <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
                 <a href="#" className="hover:text-white transition-colors">Twitter</a>
                 <a href="#" className="hover:text-white transition-colors">Portfolio</a>
@@ -183,14 +183,16 @@ export default function Resume() {
                     <Loader2 size={14} className="animate-spin" /> Preparing PDF...
                   </motion.div>
                 ) : (
-                  <motion.button
+                  <motion.a
                     key="download"
+                    href="/Emmanuel_Odebiyi_Resume.pdf"
+                    download="Emmanuel_Odebiyi_Resume.pdf"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-brand-gradient text-zinc-900 text-xs font-bold rounded-full hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20 uppercase tracking-widest"
                   >
                     <Download size={14} /> Download PDF
-                  </motion.button>
+                  </motion.a>
                 )}
               </AnimatePresence>
             </motion.div>
@@ -355,7 +357,7 @@ export default function Resume() {
               <div className="flex gap-8">
                 <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">LinkedIn</a>
                 <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Twitter</a>
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Email</a>
+                <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Email</a>
               </div>
             </footer>
 

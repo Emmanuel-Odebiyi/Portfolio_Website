@@ -58,7 +58,7 @@ export default function TermsOfService() {
               <h2 className="text-2xl font-bold text-white tracking-tight">5. Contact</h2>
               <p>
                 If you have any questions about these Terms of Service, please contact me at: <br />
-                <a href="mailto:emmayoodebiyi001@gmail.com" className="text-brand-gradient font-bold hover:underline">emmayoodebiyi001@gmail.com</a>
+                <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="text-brand-gradient font-bold hover:underline">emmanuelodebiyiwrites@gmail.com</a>
               </p>
             </section>
           </div>

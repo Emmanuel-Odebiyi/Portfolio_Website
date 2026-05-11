@@ -665,7 +665,7 @@ export default function About() {
               {
                 title: "My Story",
                 desc: "The journey from a writer to an automation specialist, and the lessons learned along the way.",
-                href: "/about#story",
+                href: "/my-story",
                 icon: <BookOpen className="w-8 h-8" />,
                 color: "bg-[#0B0F19]/80 backdrop-blur-md",
                 rotation: -1.5
@@ -673,7 +673,7 @@ export default function About() {
               {
                 title: "My Approach",
                 desc: "Data, Systems, and Zero Guesswork. The methodology behind the results.",
-                href: "/about#approach",
+                href: "/my-approach",
                 icon: <Target className="w-8 h-8" />,
                 color: "bg-[#0B0F19]/80 backdrop-blur-md",
                 rotation: 1.5

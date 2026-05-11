@@ -10,8 +10,8 @@ const navLinks = [
     name: 'About', 
     href: '/about',
     dropdown: [
-      { name: 'My Story', desc: 'From burnout writer to automation pro', href: '/about#story', icon: <User className="w-4 h-4" /> },
-      { name: 'My Approach', desc: 'The systems-first methodology', href: '/about#approach', icon: <Microscope className="w-4 h-4" /> },
+      { name: 'My Story', desc: 'From burnout writer to automation pro', href: '/my-story', icon: <User className="w-4 h-4" /> },
+      { name: 'My Approach', desc: 'The systems-first methodology', href: '/my-approach', icon: <Microscope className="w-4 h-4" /> },
       { name: 'My Resume', desc: 'Experience & technical arsenal', href: '/resume', icon: <FileText className="w-4 h-4" /> },
     ]
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowLeft, ArrowRight, Zap, PenTool, Bot, Rocket } from 'lucide-react';
+import { CheckCircle2, ArrowLeft, ArrowRight, Zap, PenTool, Bot, Rocket, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const fadeUp = {
