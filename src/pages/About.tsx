@@ -20,7 +20,7 @@ import { BlurFade } from '../components/ui/blur-fade';
 import { ContainerScroll } from '../components/ui/container-scroll-animation';
 import { useTransform } from 'motion/react';
 import { GSAPTextReveal } from '../components/ui/gsap-text-reveal';
-import { WorldMap } from '../components/ui/world-map';
+import { Globe } from '../components/ui/globe';
 import { TextRevealByWord } from '../components/ui/text-reveal';
 import { TextEffect } from '../components/ui/text-effect';
 import { KineticText } from '../components/animations/KineticText';
@@ -279,28 +279,9 @@ export default function About() {
             ))}
           </div>
 
-          {/* World Map — between stats and global text */}
-          <div className="relative w-full -mx-6 md:mx-0">
-            <WorldMap
-              dots={[
-                {
-                  start: { lat: 9.082, lng: 8.6753, label: "Nigeria" },
-                  end: { lat: 38.8951, lng: -77.0364, label: "USA" }
-                },
-                {
-                  start: { lat: 9.082, lng: 8.6753 },
-                  end: { lat: 51.5074, lng: -0.1278, label: "UK" }
-                },
-                {
-                  start: { lat: 9.082, lng: 8.6753 },
-                  end: { lat: 45.4215, lng: -75.6972, label: "Canada" }
-                },
-                {
-                  start: { lat: 9.082, lng: 8.6753 },
-                  end: { lat: -33.8688, lng: 151.2093, label: "Australia" }
-                }
-              ]}
-            />
+          {/* 3D Globe — between stats and global text */}
+          <div className="relative w-full py-12">
+            <Globe />
           </div>
 
           {/* Global Badge */}

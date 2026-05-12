@@ -185,7 +185,7 @@ export default function Resume() {
                 ) : (
                   <motion.a
                     key="download"
-                    href="/Emmanuel_Odebiyi_Resume.pdf"
+                    href="/assets/Emmanuel_Odebiyi_Resume.pdf"
                     download="Emmanuel_Odebiyi_Resume.pdf"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}

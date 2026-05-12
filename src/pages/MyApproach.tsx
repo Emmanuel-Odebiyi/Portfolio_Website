@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Layers, Search, Zap, Bot, ArrowRight, BarChart3, Clock, Target, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Layers, Search, Zap, Bot, ArrowRight, BarChart3, Clock, Target, CheckCircle2, MessageSquare, Repeat } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const fadeUp = {
@@ -45,52 +45,52 @@ export default function MyApproach() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white mb-8"
           >
-            Zero Guesswork. <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-400 to-indigo-400">
-              Just Systems.
+            How I Work: <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-400 to-indigo-400 text-6xl md:text-8xl">
+              Data, Systems, and <br className="hidden md:block" /> Zero Guesswork.
             </span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-2xl"
+            className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-3xl"
           >
-            I don't just hand you a list of AI tools. I construct end-to-end infrastructures that integrate seamlessly into your business, turning content into a predictable revenue asset.
+            I don't give you tools and leave. I don't hand over tactics and hope for the best. I build complete systems — designed for your business, built on proven frameworks, and measured against real outcomes.
           </motion.p>
         </div>
 
-        {/* The 4 Pillars */}
+        {/* The 4 Principles */}
         <div className="mb-32">
           <motion.h2 
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="text-2xl md:text-3xl font-bold text-white mb-12 flex items-center gap-4"
           >
             <span className="w-8 h-1 bg-brand-gradient rounded-full" />
-            The Four Pillars of My Approach
+            Core Principles
           </motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {[
               { 
-                title: 'Systematic Frameworks', 
-                desc: 'I reject the "wait for inspiration" model. Everything is built on process-oriented, workflow-focused, repeatable methods. If it isn\'t scalable, we don\'t do it.',
-                icon: <Layers className="text-blue-400" size={28} />
+                title: 'Data-Backed Decisions', 
+                desc: 'No gut-feel advice. Every decision comes from research, competitive analysis, and frameworks I\'ve tested and refined across multiple industries.',
+                icon: <BarChart3 className="text-blue-400" size={28} />
               },
               { 
-                title: 'Data-Driven Validation', 
-                desc: 'Every claim is quantified with hard metrics. We track what works, double down on high-ROI channels, and ruthlessly kill what doesn\'t drive growth.',
-                icon: <BarChart3 className="text-amber-400" size={28} />
+                title: 'Measured Outcomes', 
+                desc: 'Not "traffic improved." Exactly 65% increase in 90 days. Not "you\'ll save time." Specifically 15+ hours reclaimed every week.',
+                icon: <Target className="text-amber-400" size={28} />
               },
               { 
-                title: 'Practical Implementation', 
-                desc: 'Actionable execution over abstract theory. I don\'t deliver 50-page strategy decks that sit in a drawer; I build live, breathing systems that actually run.',
-                icon: <Zap className="text-indigo-400" size={28} />
+                title: 'Built to Repeat', 
+                desc: 'Systems beat effort. Consistency beats intensity. Automation compounds. I build things that keep working long after the project ends.',
+                icon: <Repeat className="text-indigo-400" size={28} />
               },
               { 
                 title: 'Radical Clarity', 
-                desc: 'Complex automation explained without the heavy tech jargon. You own the system, you understand exactly how it works, and you maintain complete control.',
-                icon: <Target className="text-teal-400" size={28} />
+                desc: 'Complex automation doesn\'t have to be confusing. I make sure you understand what\'s running, why it works, and what to expect.',
+                icon: <MessageSquare className="text-teal-400" size={28} />
               },
             ].map((val, i) => (
               <motion.div 
@@ -123,15 +123,15 @@ export default function MyApproach() {
           <div className="absolute inset-0 backdrop-blur-3xl" />
           <div className="relative p-12 md:p-20 border border-white/10 rounded-[3rem] flex flex-col md:flex-row items-center gap-12">
             <div className="flex-1 space-y-6">
-              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">The End Goal: <br /> Absolute Predictability.</h3>
+              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">The Goal: Absolute <br className="hidden md:block" /> Business Predictability.</h3>
               <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-                My ultimate goal is to make your marketing as predictable as your operations. By automating the repetitive grunt work and fiercely optimizing the strategic elements, we create a marketing engine that scales seamlessly with your business.
+                Consistency beats intensity every single time. My goal is to build a marketing engine that doesn't just run—it compounds your growth while you focus on building.
               </p>
               <ul className="pt-4 space-y-4">
                 {[
-                  '15+ hours saved every single week',
-                  'Consistent publishing without the burnout',
-                  'Organic pipeline that grows on autopilot'
+                  '15+ hours reclaimed every week',
+                  '65% traffic growth within 90 days',
+                  'Repeatable systems, not one-off tactics'
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-gray-300 font-medium">
                     <CheckCircle2 size={20} className="text-blue-400" />
@@ -143,9 +143,9 @@ export default function MyApproach() {
             <div className="w-full md:w-1/3 shrink-0">
               <div className="aspect-square rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 text-center shadow-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-brand-gradient/5 group-hover:bg-brand-gradient/10 transition-colors duration-500" />
-                <Clock size={48} className="text-amber-400 mb-6" />
-                <div className="text-5xl font-black text-white mb-2">90%</div>
-                <div className="text-sm font-mono text-gray-400 uppercase tracking-widest">Reduction in manual marketing tasks</div>
+                <Bot size={48} className="text-amber-400 mb-6" />
+                <div className="text-5xl font-black text-white mb-2">65%</div>
+                <div className="text-sm font-mono text-gray-400 uppercase tracking-widest">Average Traffic Growth</div>
               </div>
             </div>
           </div>
