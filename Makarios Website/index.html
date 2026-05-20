@@ -77,20 +77,29 @@
     .logo-text {
       font-family: 'Playfair Display', serif;
       font-weight: 900;
-      font-size: 20px;
+      font-size: 22px;
       letter-spacing: -0.5px;
-      line-height: 1;
+      line-height: 1.1;
+      transition: color 0.3s ease;
     }
 
     .logo-text span {
       display: block;
-      font-size: 10px;
+      font-size: 9px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       color: var(--gold);
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-top: 2px;
+      margin-top: 3px;
+    }
+    
+    .logo-flame-img {
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .logo-container:hover .logo-flame-img {
+      transform: scale(1.15) rotate(8deg);
     }
 
     .nav-menu {
@@ -288,6 +297,7 @@
     .preview-section {
       padding: 60px 24px;
       background: var(--white);
+      scroll-margin-top: 90px;
     }
 
     .section-header {
@@ -1110,6 +1120,7 @@
       padding: 100px 24px;
       background: var(--cream);
       border-top: 1px solid var(--border-light);
+      scroll-margin-top: 90px;
     }
 
     .guide-container {
@@ -1172,6 +1183,7 @@
       padding: 100px 24px;
       background: var(--white);
       border-top: 1px solid var(--border-light);
+      scroll-margin-top: 90px;
     }
 
     .faq-container {
@@ -1262,6 +1274,23 @@
       0% { opacity: 0; transform: translateY(-8px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── SCROLL REVEAL & MOTION GRAPHICS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
   </style>
 </head>
 <body>
@@ -1270,7 +1299,7 @@
   <header id="main-header">
     <div class="nav-container">
       <a href="makarios-worship.html" class="logo-container" aria-label="Go to Makarios Worship Homepage">
-        <img src="./20260507_151526.png" alt="Makarios Worship Logo" class="logo-flame-img" style="height: 38px; width: auto; object-fit: contain;">
+        <img src="./20260507_151526.png" alt="Makarios Worship Logo" class="logo-flame-img" style="height: 48px; width: auto; object-fit: contain;">
         <div class="logo-text">
           Makarios Worship
           <span>Merchandise Store</span>
@@ -1304,7 +1333,7 @@
 
   <!-- STORE PREVIEW HEADER -->
   <section class="preview-section" id="store">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-badge">Exclusive Merch</span>
       <h2 class="section-title">Pentecost <span>Merchandise Store</span></h2>
       <div class="section-rule"></div>
@@ -1315,7 +1344,7 @@
       <div class="products-grid">
 
         <!-- PRODUCT 1: DTF sticker print -->
-        <div class="product-card featured-card" id="sticker-card">
+        <div class="product-card featured-card reveal" id="sticker-card">
           <span class="product-tag">Revival Core</span>
           <div class="product-media-wrapper">
             <!-- Thumbnail from main apparel file crop -->
@@ -1366,7 +1395,7 @@
         </div>
 
         <!-- PRODUCT 2: Pentecost Handband/Wristband -->
-        <div class="product-card" id="handband-card">
+        <div class="product-card reveal reveal-delay-1" id="handband-card">
           <div class="product-media-wrapper">
             <img src="./feem_77cab5ea15335_IMG-20260510-WA0005.jpg" alt="Makarios Worship Pentecost Wristbands All Colors Mockup" class="product-img">
           </div>
@@ -1510,7 +1539,7 @@
   <!-- APPLICATION GUIDE SECTION -->
   <section class="guide-section" id="guide">
     <div class="guide-container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-badge">How-To Guide</span>
         <h2 class="section-title">Applying Your <span>DTF Sticker Print</span></h2>
         <div class="section-rule"></div>
@@ -1518,7 +1547,7 @@
 
       <div class="guide-grid">
         
-        <div class="guide-card">
+        <div class="guide-card reveal">
           <span class="guide-number">01</span>
           <h3 class="guide-step-title">Position</h3>
           <p class="guide-step-desc">
@@ -1526,7 +1555,7 @@
           </p>
         </div>
 
-        <div class="guide-card">
+        <div class="guide-card reveal reveal-delay-1">
           <span class="guide-number">02</span>
           <h3 class="guide-step-title">Press</h3>
           <p class="guide-step-desc">
@@ -1534,7 +1563,7 @@
           </p>
         </div>
 
-        <div class="guide-card">
+        <div class="guide-card reveal reveal-delay-2">
           <span class="guide-number">03</span>
           <h3 class="guide-step-title">Peel</h3>
           <p class="guide-step-desc">
@@ -1549,7 +1578,7 @@
   <!-- FAQ SECTION -->
   <section class="faq-section" id="faq">
     <div class="faq-container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-badge">Customer Help</span>
         <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
         <div class="section-rule"></div>
@@ -1927,8 +1956,12 @@
 
       const { subtotal, delivery, total } = calculateTotals();
       
+      // Generate a unique 4-digit order reference ID
+      const orderRef = "MAK-" + Math.floor(1000 + Math.random() * 9000);
+      
       // Start building message sheet
       let message = `🔥 *MAKARIOS 4.0 MERCHANDISE ORDER SHEET* 🔥\n\n`;
+      message += `⚡ *Order Reference:* *${orderRef}* *(Please use this code as your Bank Transfer Narration/Description)*\n\n`;
       message += `*Customer Details:*\n`;
       message += `👤 *Name:* ${name}\n`;
       message += `📞 *WhatsApp:* ${phone}\n`;
@@ -1948,6 +1981,40 @@
       message += `💰 *Grand Total:* *₦${total.toLocaleString()}*\n\n`;
       
       message += `Please confirm my order and send over bank transfer details to finalize. Thank you!`;
+
+      // Optional automated free database logging (Google Sheets / n8n Webhook / Airtable)
+      // Pulls from window.MAKARIOS_ORDER_WEBHOOK URL if provided
+      const MONITORING_WEBHOOK_URL = window.MAKARIOS_ORDER_WEBHOOK || '';
+      
+      if (MONITORING_WEBHOOK_URL) {
+        const orderPayload = {
+          orderReference: orderRef,
+          customerName: name,
+          whatsappPhone: phone,
+          deliveryPreference: storeState.deliveryOption,
+          items: storeState.cart.map(item => ({
+            name: item.title,
+            details: item.desc,
+            quantity: item.qty,
+            subtotal: item.price * item.qty
+          })),
+          cartSubtotal: subtotal,
+          deliveryFee: delivery,
+          grandTotal: total,
+          timestamp: new Date().toISOString()
+        };
+
+        fetch(MONITORING_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(orderPayload)
+        })
+        .then(() => console.log('Successfully synced order to monitoring database.'))
+        .catch(err => console.error('Error syncing order:', err));
+      }
 
       // Coordinate Sales Coordinator Phone Number
       const coordinatorPhone = "2348058050407"; // Ojoade Felicia
@@ -1973,6 +2040,25 @@
         faqItemNode.classList.add('active');
       }
     }
+
+    // Scroll Reveal Observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // stop observing once active
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
   </script>
 </body>
 </html>

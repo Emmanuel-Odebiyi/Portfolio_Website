@@ -70,6 +70,13 @@
   .flame-bg {
     top: -60px; left: 50%; transform: translateX(-50%);
     width: 600px; height: 600px;
+    animation: float-flame 10s ease-in-out infinite alternate;
+  }
+
+  @keyframes float-flame {
+    0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.05; }
+    50% { transform: translateX(-50%) translateY(-15px) scale(1.03); opacity: 0.07; }
+    100% { transform: translateX(-50%) translateY(8px) scale(0.97); opacity: 0.04; }
   }
 
   .hero-badge {
@@ -190,7 +197,10 @@
   }
 
   /* ── SECTION COMMONS ── */
-  section { padding: 100px 24px; }
+  section { 
+    padding: 100px 24px; 
+    scroll-margin-top: 90px;
+  }
 
   .container { max-width: 960px; margin: 0 auto; }
 
@@ -284,7 +294,7 @@
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 24px;
     margin-bottom: 48px;
   }
@@ -293,15 +303,28 @@
     background: var(--white);
     border: 1px solid rgba(163,0,0,0.12);
     border-top: 4px solid var(--crimson);
-    padding: 32px 24px;
+    padding: 32px 16px;
     text-align: center;
-    border-radius: 2px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(163, 0, 0, 0.02);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(163, 0, 0, 0.08);
+    border-color: var(--gold);
   }
 
   .stat-icon {
-    font-size: 32px;
+    font-size: 36px;
     margin-bottom: 12px;
     display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .stat-card:hover .stat-icon {
+    transform: scale(1.15) rotate(5deg);
   }
 
   .stat-label {
@@ -313,11 +336,12 @@
 
   .stat-number {
     font-family: 'Playfair Display', serif;
-    font-size: 36px;
+    font-size: clamp(20px, 2.5vw, 24px);
     font-weight: 900;
     color: var(--crimson);
     display: block;
     margin-bottom: 6px;
+    white-space: nowrap;
   }
 
   /* ── PARTNERSHIP ── */
@@ -726,19 +750,28 @@
   .logo-text {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: 18px;
-    line-height: 1;
+    font-size: 22px;
+    line-height: 1.1;
+    transition: color 0.3s ease;
   }
 
   .logo-text span {
     display: block;
-    font-size: 8px;
+    font-size: 9px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: var(--gold);
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-top: 2px;
+    margin-top: 3px;
+  }
+  
+  .logo-flame-img {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .logo-container:hover .logo-flame-img {
+    transform: scale(1.15) rotate(8deg);
   }
 
   .nav-menu {
@@ -797,13 +830,31 @@
   @media (max-width: 600px) {
     .hero-details { gap: 28px; }
     .hero-cta { padding: 16px 32px; }
-    section { padding: 72px 20px; }
+    section { padding: 72px 20px; scroll-margin-top: 80px; }
     .kingdom-body { padding: 24px 20px; }
     .contact-card { padding: 32px 24px; }
     .about-highlight { padding: 28px 24px; }
     .nav-menu { gap: 12px; }
     .btn-nav-shop { padding: 6px 12px; font-size: 9px; }
   }
+
+  /* ── SCROLL REVEAL & MOTION GRAPHICS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
 </style>
 </head>
 <body>
@@ -812,7 +863,7 @@
 <header id="main-header">
   <div class="nav-container">
     <a href="#" class="logo-container">
-      <img src="./20260507_151526.png" alt="Makarios Worship Logo" class="logo-flame-img" style="height: 36px; width: auto; object-fit: contain;">
+      <img src="./20260507_151526.png" alt="Makarios Worship Logo" class="logo-flame-img" style="height: 48px; width: auto; object-fit: contain;">
       <div class="logo-text">
         Makarios Worship
         <span>Pentecost Revival</span>
@@ -862,7 +913,7 @@
 
 <!-- ABOUT -->
 <section class="about">
-  <div class="container">
+  <div class="container reveal">
     <p class="section-label">Who We Are</p>
     <h2 class="section-title">About Makarios Worship</h2>
     <div class="gold-rule"></div>
@@ -875,7 +926,7 @@
       Now in its 4th edition, Makarios Worship 4.0 is centred on the theme <strong>PENTECOST</strong> — a call to experience a fresh outpouring of God's presence and power.
     </p>
 
-    <div class="about-highlight">
+    <div class="about-highlight reveal reveal-delay-1">
       <p>Partner with us to make this worship experience impactful and transformative for an entire generation.</p>
     </div>
   </div>
@@ -885,27 +936,29 @@
 <!-- AUDIENCE -->
 <section class="audience">
   <div class="container">
-    <p class="section-label">Our Reach</p>
-    <h2 class="section-title">Who We Gather</h2>
-    <div class="gold-rule"></div>
+    <div class="reveal">
+      <p class="section-label">Our Reach</p>
+      <h2 class="section-title">Who We Gather</h2>
+      <div class="gold-rule"></div>
+    </div>
 
     <div class="stats-grid">
-      <div class="stat-card">
+      <div class="stat-card reveal">
         <span class="stat-icon">🎓</span>
         <span class="stat-number">Students</span>
         <span class="stat-label">University & Tertiary</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-1">
         <span class="stat-icon">💼</span>
         <span class="stat-number">Professionals</span>
         <span class="stat-label">Young Professionals</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-2">
         <span class="stat-icon">📚</span>
         <span class="stat-number">Academics</span>
         <span class="stat-label">Lecturers & Professors</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-3">
         <span class="stat-icon">🔥</span>
         <span class="stat-number">1,000+</span>
         <span class="stat-label">Engaged Youths Network</span>
@@ -1102,7 +1155,7 @@
   <p><strong>Makarios Worship 4.0</strong> &nbsp;·&nbsp; Theme: PENTECOST &nbsp;·&nbsp; July 24th, 2026 &nbsp;·&nbsp; RCCG Gloryland Zonal HQ, Ile-Ife, Osun State</p>
 </footer>
 
-<!-- DYNAMIC NAV SHADOW CONTROLLER -->
+<!-- DYNAMIC NAV SHADOW CONTROLLER & SCROLL REVEAL -->
 <script>
   window.addEventListener('scroll', () => {
     const header = document.getElementById('main-header');
@@ -1111,6 +1164,25 @@
     } else {
       header.classList.remove('scrolled');
     }
+  });
+
+  // Scroll Reveal Observer
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); // stop observing once active
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
   });
 </script>
 
