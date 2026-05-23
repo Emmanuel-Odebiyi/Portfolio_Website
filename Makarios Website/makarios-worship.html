@@ -1,1190 +1,595 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makarios Worship 4.0 — PENTECOST</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --crimson: #A30000;
-    --crimson-dark: #6B0000;
-    --crimson-light: #D42020;
-    --gold: #C9920A;
-    --gold-light: #F5C842;
-    --gold-pale: #FFF4D0;
-    --cream: #FFFDF7;
-    --white: #FFFFFF;
-    --charcoal: #1A1A1A;
-    --text-muted: #5A3A3A;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-    overflow-x: hidden;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    background: var(--crimson-dark);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 24px 60px;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,146,10,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(180,0,0,0.4) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 80% at 90% 80%, rgba(180,0,0,0.4) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .hero-ornament {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .hero-ornament svg {
-    position: absolute;
-    opacity: 0.07;
-  }
-
-  .flame-bg {
-    top: -60px; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 600px;
-    animation: float-flame 10s ease-in-out infinite alternate;
-  }
-
-  @keyframes float-flame {
-    0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.05; }
-    50% { transform: translateX(-50%) translateY(-15px) scale(1.03); opacity: 0.07; }
-    100% { transform: translateX(-50%) translateY(8px) scale(0.97); opacity: 0.04; }
-  }
-
-  .hero-badge {
-    display: inline-block;
-    border: 1px solid rgba(201,146,10,0.6);
-    color: var(--gold-light);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    padding: 8px 24px;
-    border-radius: 2px;
-    margin-bottom: 32px;
-    position: relative;
-  }
-
-  .hero-badge::before, .hero-badge::after {
-    content: '✦';
-    margin: 0 10px;
-    font-size: 8px;
-    opacity: 0.7;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(52px, 10vw, 110px);
-    font-weight: 900;
-    color: var(--white);
-    line-height: 0.9;
-    letter-spacing: -2px;
-    margin-bottom: 8px;
-    position: relative;
-  }
-
-  .hero-title span {
-    display: block;
-    color: var(--gold-light);
-  }
-
-  .hero-version {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(16px, 3vw, 28px);
-    font-weight: 300;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-  }
-
-  .hero-theme {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 6vw, 60px);
-    font-weight: 700;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    margin-bottom: 48px;
-  }
-
-  .hero-divider {
-    width: 120px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    margin: 0 auto 48px;
-  }
-
-  .hero-details {
-    display: flex;
-    gap: 48px;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-  }
-
-  .hero-detail-item {
-    text-align: center;
-  }
-
-  .hero-detail-label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-
-  .hero-detail-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--white);
-  }
-
-  .hero-cta {
-    margin-top: 60px;
-    display: inline-block;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    color: var(--crimson-dark);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 18px 48px;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .hero-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(201,146,10,0.5);
-  }
-
-  /* ── SECTION COMMONS ── */
-  section { 
-    padding: 100px 24px; 
-    scroll-margin-top: 90px;
-  }
-
-  .container { max-width: 960px; margin: 0 auto; }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--crimson);
-    text-align: center;
-    margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 700;
-    color: var(--charcoal);
-    text-align: center;
-    line-height: 1.1;
-    margin-bottom: 24px;
-  }
-
-  .gold-rule {
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(to right, var(--gold), var(--gold-light));
-    margin: 0 auto 48px;
-    border-radius: 2px;
-  }
-
-  /* ── ABOUT ── */
-  .about {
-    background: var(--white);
-    position: relative;
-  }
-
-  .about::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 5px;
-    background: linear-gradient(to bottom, var(--gold), var(--crimson));
-  }
-
-  .about-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 2.5vw, 22px);
-    font-weight: 400;
-    line-height: 1.8;
-    color: var(--charcoal);
-    text-align: center;
-    max-width: 720px;
-    margin: 0 auto 40px;
-  }
-
-  .about-highlight {
-    background: var(--crimson-dark);
-    color: var(--white);
-    padding: 40px 48px;
-    border-radius: 2px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-highlight::before {
-    content: '"';
-    position: absolute;
-    top: -20px; left: 20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 140px;
-    color: rgba(201,146,10,0.2);
-    line-height: 1;
-  }
-
-  .about-highlight p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 3vw, 26px);
-    font-weight: 600;
-    font-style: italic;
-    color: var(--gold-light);
-    line-height: 1.6;
-    position: relative;
-  }
-
-  /* ── AUDIENCE ── */
-  .audience {
-    background: var(--cream);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    margin-bottom: 48px;
-  }
-
-  .stat-card {
-    background: var(--white);
-    border: 1px solid rgba(163,0,0,0.12);
-    border-top: 4px solid var(--crimson);
-    padding: 32px 16px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(163, 0, 0, 0.02);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .stat-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 36px rgba(163, 0, 0, 0.08);
-    border-color: var(--gold);
-  }
-
-  .stat-icon {
-    font-size: 36px;
-    margin-bottom: 12px;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .stat-card:hover .stat-icon {
-    transform: scale(1.15) rotate(5deg);
-  }
-
-  .stat-label {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: var(--charcoal);
-  }
-
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 2.5vw, 24px);
-    font-weight: 900;
-    color: var(--crimson);
-    display: block;
-    margin-bottom: 6px;
-    white-space: nowrap;
-  }
-
-  /* ── PARTNERSHIP ── */
-  .partnership {
-    background: var(--crimson-dark);
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .partnership::after {
-    content: '';
-    position: absolute;
-    top: -100px; right: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: rgba(201,146,10,0.08);
-    pointer-events: none;
-  }
-
-  .partnership .section-title { color: var(--white); }
-  .partnership .section-label { color: var(--gold-light); }
-
-  .partnership-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.85);
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto 48px;
-  }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-  }
-
-  .benefit-item {
-    border: 1px solid rgba(201,146,10,0.3);
-    padding: 24px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.04);
-  }
-
-  .benefit-item h4 {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 10px;
-  }
-
-  .benefit-item p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.7;
-  }
-
-  /* ── PACKAGES ── */
-  .packages {
-    background: var(--cream);
-  }
-
-  .packages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-
-  .package-card {
-    background: var(--white);
-    border: 1px solid rgba(163,0,0,0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .package-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(163,0,0,0.12);
-  }
-
-  .package-card.featured {
-    border-color: var(--gold);
-    border-width: 2px;
-    position: relative;
-  }
-
-  .featured-badge {
-    position: absolute;
-    top: 0; right: 0;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--crimson-dark);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 16px;
-  }
-
-  .package-header {
-    padding: 28px 28px 20px;
-    border-bottom: 1px solid rgba(163,0,0,0.08);
-  }
-
-  .package-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-bottom: 16px;
-  }
-
-  .package-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--charcoal);
-    margin-bottom: 6px;
-  }
-
-  .package-price {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--crimson);
-    letter-spacing: 0.5px;
-  }
-
-  .package-body {
-    padding: 20px 28px 28px;
-  }
-
-  .package-perk {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 13px;
-    color: var(--charcoal);
-    line-height: 1.5;
-  }
-
-  .package-perk::before {
-    content: '';
-    flex-shrink: 0;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    margin-top: 5px;
-  }
-
-  /* Kingdom special */
-  .kingdom-card {
-    background: var(--crimson-dark);
-    color: var(--white);
-    border: 2px solid var(--gold);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 24px;
-  }
-
-  .kingdom-header {
-    padding: 36px 40px 24px;
-    background: linear-gradient(135deg, var(--crimson-dark) 0%, #3D0000 100%);
-    position: relative;
-    text-align: center;
-  }
-
-  .kingdom-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 80%; height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-  }
-
-  .kingdom-crown {
-    font-size: 40px;
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  .kingdom-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--gold-light);
-    margin-bottom: 6px;
-  }
-
-  .kingdom-price {
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.7);
-  }
-
-  .kingdom-body {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0;
-    padding: 32px 40px;
-  }
-
-  .kingdom-perk {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
-    font-size: 14px;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.5;
-  }
-
-  .kingdom-perk span.mark {
-    color: var(--gold-light);
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Open giving */
-  .giving-card {
-    background: linear-gradient(135deg, #FFF8E1 0%, #FFFDF7 100%);
-    border: 2px solid var(--gold);
-    border-radius: 2px;
-    padding: 40px;
-    text-align: center;
-    margin-top: 24px;
-  }
-
-  .giving-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--crimson-dark);
-    margin-bottom: 12px;
-  }
-
-  .giving-amounts {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 20px 0;
-  }
-
-  .giving-amount {
-    background: var(--crimson);
-    color: var(--white);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 10px 20px;
-    border-radius: 2px;
-  }
-
-  .giving-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* ── CONTACT ── */
-  .contact {
-    background: var(--charcoal);
-    color: var(--white);
-    text-align: center;
-  }
-
-  .contact .section-title { color: var(--white); }
-  .contact .section-label { color: var(--gold-light); }
-
-  .contact-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: rgba(255,255,255,0.75);
-    max-width: 540px;
-    margin: 0 auto 48px;
-    line-height: 1.7;
-  }
-
-  .contact-card {
-    display: inline-block;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(201,146,10,0.3);
-    border-radius: 2px;
-    padding: 40px 56px;
-  }
-
-  .contact-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--gold-light);
-    margin-bottom: 4px;
-  }
-
-  .contact-role {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 24px;
-  }
-
-  .contact-detail {
-    font-size: 16px;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 8px;
-  }
-
-  .contact-detail a {
-    color: var(--gold-light);
-    text-decoration: none;
-  }
-
-  .contact-detail a:hover { text-decoration: underline; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--crimson-dark);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 32px 24px;
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-
-  footer strong {
-    color: var(--gold-light);
-    font-weight: 600;
-  }
-
-  /* ── ADDITIONAL SUPPORT ── */
-  .inkind {
-    background: var(--white);
-  }
-
-  .inkind-box {
-    border: 1px solid rgba(163,0,0,0.2);
-    border-left: 6px solid var(--crimson);
-    padding: 32px 36px;
-    border-radius: 0 2px 2px 0;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
-  .inkind-box h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--crimson-dark);
-    margin-bottom: 10px;
-  }
-
-  .inkind-box p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* ── NAVIGATION HEADER ── */
-  header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 253, 247, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(163, 0, 0, 0.08);
-    z-index: 100;
-    transition: all 0.3s ease;
-  }
-
-  header.scrolled {
-    box-shadow: 0 4px 20px rgba(163, 0, 0, 0.05);
-    background: rgba(255, 253, 247, 0.98);
-  }
-
-  .nav-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 16px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--charcoal);
-  }
-
-  .logo-flame {
-    width: 28px;
-    height: 28px;
-    fill: var(--crimson);
-  }
-
-  .logo-text {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 22px;
-    line-height: 1.1;
-    transition: color 0.3s ease;
-  }
-
-  .logo-text span {
-    display: block;
-    font-size: 9px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 3px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makarios Worship 4.0 — PENTECOST Sponsorship Proposal</title>
   
-  .logo-flame-img {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
+  <!-- Preload Critical Logo Asset for instant mobile render -->
+  <link rel="preload" href="./20260507_151526.png" as="image">
   
-  .logo-container:hover .logo-flame-img {
-    transform: scale(1.15) rotate(8deg);
-  }
-
-  .nav-menu {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-  }
-
-  .nav-link {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    position: relative;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0; width: 0; height: 2px;
-    background: var(--gold);
-    transition: all 0.2s ease;
-  }
-
-  .nav-link:hover::after {
-    width: 100%;
-  }
-
-  .nav-link:hover {
-    color: var(--crimson);
-  }
-
-  .btn-nav-shop {
-    background: var(--crimson);
-    color: var(--white);
-    padding: 8px 16px;
-    border-radius: 2px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 12px rgba(163,0,0,0.15);
-    transition: all 0.2s ease;
-  }
-
-  .btn-nav-shop:hover {
-    background: var(--crimson-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(163,0,0,0.25);
-  }
-
-  @media (max-width: 600px) {
-    .hero-details { gap: 28px; }
-    .hero-cta { padding: 16px 32px; }
-    section { padding: 72px 20px; scroll-margin-top: 80px; }
-    .kingdom-body { padding: 24px 20px; }
-    .contact-card { padding: 32px 24px; }
-    .about-highlight { padding: 28px 24px; }
-    .nav-menu { gap: 12px; }
-    .btn-nav-shop { padding: 6px 12px; font-size: 9px; }
-  }
-
-  /* ── SCROLL REVEAL & MOTION GRAPHICS ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
-  }
-
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-</style>
-</head>
-<body>
-
-<!-- STICKY HEADER -->
-<header id="main-header">
-  <div class="nav-container">
-    <a href="#" class="logo-container">
-      <img src="./20260507_151526.png" alt="Makarios Worship Logo" class="logo-flame-img" style="height: 48px; width: auto; object-fit: contain;">
-      <div class="logo-text">
-        Makarios Worship
-        <span>Pentecost Revival</span>
-      </div>
-    </a>
-
-    <nav class="nav-menu">
-      <a href="#packages" class="nav-link">Sponsorship</a>
-      <a href="index.html" class="btn-nav-shop">🛒 Shop Merch</a>
-    </nav>
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-ornament">
-    <svg class="flame-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M200 380 C200 380 60 300 60 180 C60 80 140 20 200 20 C260 20 340 80 340 180 C340 300 200 380 200 380Z" fill="white"/>
-      <path d="M200 340 C200 340 100 280 100 200 C100 130 150 80 200 60 C250 80 300 130 300 200 C300 280 200 340 200 340Z" fill="white" opacity="0.5"/>
-    </svg>
-  </div>
-
-  <p class="hero-badge">Sponsorship Proposal</p>
-  <h1 class="hero-title">Makarios<span>Worship</span></h1>
-  <p class="hero-version">4th Edition · 2026</p>
-  <p class="hero-theme">Pentecost</p>
-  <div class="hero-divider"></div>
-
-  <div class="hero-details">
-    <div class="hero-detail-item">
-      <p class="hero-detail-label">Date</p>
-      <p class="hero-detail-value">July 24th, 2026</p>
-    </div>
-    <div class="hero-detail-item">
-      <p class="hero-detail-label">Venue</p>
-      <p class="hero-detail-value">RCCG Gloryland Zonal HQ</p>
-    </div>
-    <div class="hero-detail-item">
-      <p class="hero-detail-label">Location</p>
-      <p class="hero-detail-value">Ile-Ife, Osun State</p>
-    </div>
-  </div>
-
-  <a href="#packages" class="hero-cta">View Sponsorship Packages</a>
-</section>
-
-
-<!-- ABOUT -->
-<section class="about">
-  <div class="container reveal">
-    <p class="section-label">Who We Are</p>
-    <h2 class="section-title">About Makarios Worship</h2>
-    <div class="gold-rule"></div>
-
-    <p class="about-text">
-      Makarios Worship is a gathering of believers inspired by the Holy Spirit to create an atmosphere of true worship, spiritual awakening, and revival — particularly among students, young professionals, and the youth community.
-    </p>
-
-    <p class="about-text" style="margin-bottom: 48px;">
-      Now in its 4th edition, Makarios Worship 4.0 is centred on the theme <strong>PENTECOST</strong> — a call to experience a fresh outpouring of God's presence and power.
-    </p>
-
-    <div class="about-highlight reveal reveal-delay-1">
-      <p>Partner with us to make this worship experience impactful and transformative for an entire generation.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- AUDIENCE -->
-<section class="audience">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Our Reach</p>
-      <h2 class="section-title">Who We Gather</h2>
-      <div class="gold-rule"></div>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card reveal">
-        <span class="stat-icon">🎓</span>
-        <span class="stat-number">Students</span>
-        <span class="stat-label">University & Tertiary</span>
-      </div>
-      <div class="stat-card reveal reveal-delay-1">
-        <span class="stat-icon">💼</span>
-        <span class="stat-number">Professionals</span>
-        <span class="stat-label">Young Professionals</span>
-      </div>
-      <div class="stat-card reveal reveal-delay-2">
-        <span class="stat-icon">📚</span>
-        <span class="stat-number">Academics</span>
-        <span class="stat-label">Lecturers & Professors</span>
-      </div>
-      <div class="stat-card reveal reveal-delay-3">
-        <span class="stat-icon">🔥</span>
-        <span class="stat-number">1,000+</span>
-        <span class="stat-label">Engaged Youths Network</span>
-      </div>
-    </div>
-
-    <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--text-muted); line-height:1.8; max-width:640px; margin:0 auto;">
-      This creates a unique platform for brands that value excellence, impact, and intentional visibility within a vibrant, purpose-driven community.
-    </p>
-  </div>
-</section>
-
-
-<!-- PARTNERSHIP -->
-<section class="partnership">
-  <div class="container">
-    <p class="section-label">Why Partner With Us</p>
-    <h2 class="section-title">Partnership Opportunity</h2>
-    <div class="gold-rule"></div>
-
-    <p class="partnership-text">
-      We are inviting a select number of businesses and individuals to partner with us in bringing this vision to life. This partnership goes beyond financial support.
-    </p>
-
-    <div class="benefits-grid">
-      <div class="benefit-item">
-        <h4>Life-Transforming Impact</h4>
-        <p>Support a spiritual experience that changes lives and awakens a generation to purpose and divine encounter.</p>
-      </div>
-      <div class="benefit-item">
-        <h4>Purpose-Driven Alignment</h4>
-        <p>Align your brand with a faith-based, community-centred movement that embodies excellence and intentionality.</p>
-      </div>
-      <div class="benefit-item">
-        <h4>Meaningful Visibility</h4>
-        <p>Gain genuine engagement among a vibrant, growing audience of over 1,000 youths and young professionals.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- PACKAGES -->
-<section class="packages" id="packages">
-  <div class="container">
-    <p class="section-label">Get Involved</p>
-    <h2 class="section-title">Sponsorship Packages</h2>
-    <div class="gold-rule"></div>
-
-    <div class="packages-grid">
-
-      <!-- Seed -->
-      <div class="package-card">
-        <div class="package-header">
-          <div class="package-dot" style="background:#8B5E3C;"></div>
-          <p class="package-name">Seed Partner</p>
-          <p class="package-price">₦10,000</p>
-        </div>
-        <div class="package-body">
-          <div class="package-perk">Logo appearance on the event backdrop</div>
-        </div>
-      </div>
-
-      <!-- Fire Carrier -->
-      <div class="package-card">
-        <div class="package-header">
-          <div class="package-dot" style="background:#2E7D32;"></div>
-          <p class="package-name">Fire Carrier</p>
-          <p class="package-price">₦30,000 – ₦50,000</p>
-        </div>
-        <div class="package-body">
-          <div class="package-perk">Intentional brand acknowledgment during the appreciation segment</div>
-          <div class="package-perk">Logo featured on the official event backdrop</div>
-        </div>
-      </div>
-
-      <!-- Revival Partner -->
-      <div class="package-card">
-        <div class="package-header">
-          <div class="package-dot" style="background:#1565C0;"></div>
-          <p class="package-name">Revival Partner</p>
-          <p class="package-price">₦80,000 – ₦150,000</p>
-        </div>
-        <div class="package-body">
-          <div class="package-perk">Intentional brand acknowledgment during the appreciation segment</div>
-          <div class="package-perk">Logo featured on the official event backdrop</div>
-          <div class="package-perk">Opportunity to showcase your products on the event day (T&Cs apply)</div>
-          <div class="package-perk">Brand mention in post-event appreciation content</div>
-        </div>
-      </div>
-
-      <!-- Flaming Sponsor -->
-      <div class="package-card featured">
-        <div class="featured-badge">Most Impactful</div>
-        <div class="package-header">
-          <div class="package-dot" style="background:#6A1B9A;"></div>
-          <p class="package-name">Flaming Sponsor</p>
-          <p class="package-price">₦200,000 – ₦500,000</p>
-        </div>
-        <div class="package-body">
-          <div class="package-perk">Priority brand mention during the appreciation segment</div>
-          <div class="package-perk">Prominent logo placement on the event backdrop</div>
-          <div class="package-perk">Opportunity to showcase your products on the event day (T&Cs apply)</div>
-          <div class="package-perk">Dedicated post-event advertisement for 24 hours across our youth platform (1,000+ students and young professionals)</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Kingdom Financiers -->
-    <div class="kingdom-card">
-      <div class="kingdom-header">
-        <span class="kingdom-crown">👑</span>
-        <p class="kingdom-name">Kingdom Financiers</p>
-        <p class="kingdom-price">₦1,000,000 and above — Official Makarios Sponsor</p>
-      </div>
-      <div class="kingdom-body">
-        <div class="kingdom-perk"><span class="mark">✦</span> Official Makarios Sponsor title and designation</div>
-        <div class="kingdom-perk"><span class="mark">✦</span> Priority brand mention during the appreciation segment</div>
-        <div class="kingdom-perk"><span class="mark">✦</span> Premium logo placement on event backdrop</div>
-        <div class="kingdom-perk"><span class="mark">✦</span> Opportunity to showcase your products on the event day (T&Cs apply)</div>
-        <div class="kingdom-perk"><span class="mark">✦</span> Dedicated post-event advertisement for 3 consecutive days across our youth platform</div>
-        <div class="kingdom-perk"><span class="mark">✦</span> Official Makarios Partner Recognition Certificate and Award presented on Sunday, July 26th (brand representative must be present)</div>
-      </div>
-    </div>
-
-    <!-- Kingdom Builders -->
-    <div class="giving-card">
-      <p class="giving-title">🙌 Kingdom Builders — Open Giving</p>
-      <p class="giving-text">An opportunity to be part of what God is doing. Every gift is honoured.</p>
-      <div class="giving-amounts">
-        <span class="giving-amount">₦5,000</span>
-        <span class="giving-amount">₦10,000</span>
-        <span class="giving-amount">₦20,000</span>
-        <span class="giving-amount">₦50,000</span>
-      </div>
-      <p class="giving-text">All Kingdom Builders receive special collective appreciation during the appreciation segment.</p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- IN-KIND -->
-<section class="inkind">
-  <div class="container">
-    <div class="inkind-box">
-      <h3>Additional Support Options</h3>
-      <p>We also warmly welcome in-kind sponsorship from individuals and businesses looking to contribute goods, services, or resources toward making Makarios Worship 4.0 a remarkable experience.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- MERCHANDISE CALLOUT -->
-<section class="merch-callout" style="background: var(--cream); border-top: 1px solid rgba(163,0,0,0.08); text-align: center; padding: 100px 24px;">
-  <div class="container">
-    <p class="section-label">Official Store</p>
-    <h2 class="section-title">Get The Pentecost <span>Merchandise</span></h2>
-    <div class="gold-rule"></div>
-    <p class="about-text" style="margin-bottom: 40px; max-width: 640px; margin-left: auto; margin-right: auto;">
-      Support the Makarios Worship 4.0 movement. Get your premium debossed silicone Pentecost handbands and high-definition 3D gold-metallic DTF sticker prints!
-    </p>
-    <a href="index.html" class="hero-cta" style="margin-top: 0; display: inline-block; background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-dark) 100%); color: var(--white); box-shadow: 0 8px 24px rgba(163,0,0,0.25);">
-      🛒 Visit Merchandise Store &rarr;
-    </a>
-  </div>
-</section>
-
-
-<!-- CONTACT -->
-<section class="contact">
-  <div class="container">
-    <p class="section-label">Partner With Us</p>
-    <h2 class="section-title">Reach Out Today</h2>
-    <div class="gold-rule"></div>
-
-    <p class="contact-text">
-      We are intentional about excellence, impact, and meaningful partnerships. We believe your brand can play a vital role in making Makarios Worship 4.0 a remarkable and transformative experience.
-    </p>
-
-    <div class="contact-card">
-      <p class="contact-name">Ojoade Felicia</p>
-      <p class="contact-role">Fundraising Head</p>
-      <p class="contact-detail">📞 <a href="tel:+2348058050407">+234 805 805 0407</a></p>
-      <p class="contact-detail">📧 <a href="mailto:Makariosworshipofficial@gmail.com">Makariosworshipofficial@gmail.com</a></p>
-    </div>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <p><strong>Makarios Worship 4.0</strong> &nbsp;·&nbsp; Theme: PENTECOST &nbsp;·&nbsp; July 24th, 2026 &nbsp;·&nbsp; RCCG Gloryland Zonal HQ, Ile-Ife, Osun State</p>
-</footer>
-
-<!-- DYNAMIC NAV SHADOW CONTROLLER & SCROLL REVEAL -->
-<script>
-  window.addEventListener('scroll', () => {
-    const header = document.getElementById('main-header');
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  // Scroll Reveal Observer
-  document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target); // stop observing once active
+  <!-- SEO & Social Share Preview Meta Tags (Open Graph) -->
+  <meta name="description" content="Join us in bringing the vision of the Pentecost outpouring to life. Partner with Makarios Worship 4.0 to impact over 1,000 students, academics, and young professionals.">
+  <meta property="og:title" content="Makarios Worship 4.0 — PENTECOST Sponsorship Proposal">
+  <meta property="og:description" content="Join us in bringing the vision of the Pentecost outpouring to life. Partner with Makarios Worship 4.0 to impact over 1,000 students, academics, and young professionals.">
+  <meta property="og:image" content="./makarios_social_preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Makarios Worship 4.0 — PENTECOST Sponsorship Proposal">
+  <meta name="twitter:description" content="Join us in bringing the vision of the Pentecost outpouring to life. Partner with Makarios Worship 4.0 to impact over 1,000 students, academics, and young professionals.">
+  <meta name="twitter:image" content="./makarios_social_preview.png">
+  
+  <!-- Premium Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            crimson: {
+              light: '#D42020',
+              DEFAULT: '#A30000',
+              dark: '#6B0000',
+              deep: '#3D0000',
+            },
+            gold: {
+              pale: '#FFF4D0',
+              light: '#F5C842',
+              DEFAULT: '#C9920A',
+              dark: '#9A6E05',
+            },
+            cream: '#FFFDF7',
+            charcoal: {
+              light: '#2A2A2A',
+              DEFAULT: '#1A1A1A',
+              dark: '#0F0F0F',
+            }
+          },
+          fontFamily: {
+            playfair: ['Playfair Display', 'serif'],
+            cormorant: ['Cormorant Garamond', 'serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          }
         }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-    
-    revealElements.forEach(el => revealObserver.observe(el));
-  });
-</script>
+      }
+    }
+  </script>
 
+  <style type="text/css">
+    /* Scroll reveal styling */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="font-montserrat bg-cream text-charcoal overflow-x-hidden antialiased">
+
+  <!-- ================= STICKY HEADER & NAVBAR ================= -->
+  <header id="main-header" class="fixed top-0 w-full bg-cream/80 backdrop-blur-md border-b border-crimson/5 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
+      
+      <!-- Logo block -->
+      <a href="index.html" class="flex items-center gap-3 group text-decoration-none" aria-label="Go to Makarios Worship Homepage">
+        <img src="./20260507_151526.png" alt="Makarios Worship Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6">
+        <div class="flex flex-col">
+          <span class="font-playfair font-black text-lg sm:text-xl tracking-tight leading-none text-charcoal">Makarios Worship</span>
+          <span class="font-montserrat font-bold text-[8px] sm:text-[9px] text-gold tracking-widest uppercase mt-1">Pentecost Revival</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+        <a href="index.html#store" class="font-semibold text-xs text-charcoal hover:text-crimson tracking-wider uppercase relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Store</a>
+        <a href="index.html#about" class="font-semibold text-xs text-charcoal hover:text-crimson tracking-wider uppercase relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">About</a>
+        <a href="#reach" class="font-semibold text-xs text-charcoal hover:text-crimson tracking-wider uppercase relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Our Reach</a>
+        <a href="#packages" class="font-semibold text-xs text-charcoal hover:text-crimson tracking-wider uppercase relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Sponsorships</a>
+        <a href="#inkind" class="font-semibold text-xs text-charcoal hover:text-crimson tracking-wider uppercase relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">In-Kind</a>
+        <a href="#contact" class="font-semibold text-xs text-charcoal hover:text-crimson tracking-wider uppercase relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+      </nav>
+
+      <!-- Cart Trigger & Mobile Menu Icon -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="bg-crimson hover:bg-crimson-dark text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-full font-bold text-[10px] sm:text-xs tracking-wider uppercase transition-all duration-300 shadow-lg shadow-crimson/20 hover:shadow-crimson-dark/40 hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
+          🛒 Shop Merch
+        </a>
+
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-9 h-9 border border-charcoal/10 rounded-full text-charcoal hover:bg-charcoal/5 transition" aria-label="Toggle Mobile Menu">
+          <span class="w-4 h-[2px] bg-charcoal mb-[3px] rounded transition-transform" id="bar1"></span>
+          <span class="w-4 h-[2px] bg-charcoal mb-[3px] rounded transition-opacity" id="bar2"></span>
+          <span class="w-4 h-[2px] bg-charcoal rounded transition-transform" id="bar3"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-cream border-b border-crimson/5 w-full absolute top-full left-0 py-6 px-4 shadow-xl flex flex-col gap-4 text-center transition-all duration-300">
+      <a href="index.html#store" onclick="toggleMobileMenu()" class="font-bold text-sm text-charcoal hover:text-crimson tracking-wider uppercase py-2 border-b border-charcoal/5">Store</a>
+      <a href="index.html#about" onclick="toggleMobileMenu()" class="font-bold text-sm text-charcoal hover:text-crimson tracking-wider uppercase py-2 border-b border-charcoal/5">About</a>
+      <a href="#reach" onclick="toggleMobileMenu()" class="font-bold text-sm text-charcoal hover:text-crimson tracking-wider uppercase py-2 border-b border-charcoal/5">Our Reach</a>
+      <a href="#packages" onclick="toggleMobileMenu()" class="font-bold text-sm text-charcoal hover:text-crimson tracking-wider uppercase py-2 border-b border-charcoal/5">Sponsorships</a>
+      <a href="#inkind" onclick="toggleMobileMenu()" class="font-bold text-sm text-charcoal hover:text-crimson tracking-wider uppercase py-2 border-b border-charcoal/5">In-Kind</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="font-bold text-sm text-charcoal hover:text-crimson tracking-wider uppercase py-2">Contact</a>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO SECTION (Sponsorship Glow) ================= -->
+  <section class="relative min-h-[85vh] bg-gradient-to-b from-crimson-dark to-crimson-deep flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    
+    <!-- Cinematic Worship Backdrop Overlay -->
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-lighten pointer-events-none"></div>
+    
+    <!-- Warm Dramatic Stage Glow Gradients -->
+    <div class="absolute inset-0 bg-gradient-to-t from-crimson-deep via-crimson-deep/95 to-transparent pointer-events-none z-10"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-b from-crimson-dark/40 via-gold/15 to-transparent rounded-full blur-[100px] pointer-events-none opacity-80 z-10"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 flex flex-col items-center">
+      
+      <span class="inline-block border border-gold-light/45 bg-crimson-deep/60 backdrop-blur-sm text-gold-light text-[10px] sm:text-xs font-bold tracking-[0.3em] uppercase px-6 py-2.5 rounded-full mb-6">
+        ✦ Kingdom Partnership ✦
+      </span>
+      
+      <h1 class="font-playfair font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.9] text-white mb-6 drop-shadow-2xl">
+        Makarios <span class="bg-gradient-to-r from-gold via-gold-light to-gold text-transparent bg-clip-text">Worship</span>
+      </h1>
+      
+      <p class="font-montserrat font-bold text-sm sm:text-lg lg:text-xl text-white/60 tracking-[0.4em] uppercase mb-4">
+        4th Edition · Theme: Pentecost
+      </p>
+      
+      <div class="w-24 h-[1px] bg-gradient-to-r from-transparent via-gold-light to-transparent mb-10"></div>
+
+      <!-- Details Box Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 border border-white/10 bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 max-w-3xl w-full text-white/95 shadow-2xl mb-12">
+        <div class="flex flex-col items-center">
+          <span class="text-[9px] font-bold tracking-widest uppercase text-gold">Date</span>
+          <span class="font-cormorant text-xl font-bold mt-2">July 24th, 2026</span>
+        </div>
+        <div class="flex flex-col items-center border-y sm:border-y-0 sm:border-x border-white/10 py-4 sm:py-0">
+          <span class="text-[9px] font-bold tracking-widest uppercase text-gold">Venue</span>
+          <span class="font-cormorant text-xl font-bold mt-2">RCCG Gloryland HQ</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-[9px] font-bold tracking-widest uppercase text-gold">Location</span>
+          <span class="font-cormorant text-xl font-bold mt-2">Ile-Ife, Osun State</span>
+        </div>
+      </div>
+
+      <a href="#packages" class="bg-gradient-to-r from-gold to-gold-light text-crimson-deep px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-lg shadow-gold/20 hover:shadow-gold/40 hover:-translate-y-1 active:translate-y-0">
+        View Sponsorship Packages
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ================= ABOUT THE PROGRAM ================= -->
+  <section class="py-24 bg-white relative overflow-hidden">
+    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-gold to-crimson"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <div class="mb-12 reveal">
+        <span class="text-crimson text-xs sm:text-sm font-extrabold tracking-widest uppercase block mb-3">Who We Gather</span>
+        <h2 class="font-playfair font-bold text-3xl sm:text-5xl text-charcoal mb-4">Sponsoring the Outpour</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-gold to-gold-light mx-auto rounded-full"></div>
+      </div>
+
+      <p class="font-cormorant text-xl sm:text-2xl text-charcoal-light leading-relaxed mb-8 reveal">
+        Makarios Worship is a spiritual sanctuary designed to impact students, young professionals, and tertiary institution networks with the pure presence of God. Partnering with us is an opportunity to directly invest in a purpose-driven youth movement that values spiritual awakening, moral alignment, and absolute excellence.
+      </p>
+
+      <div class="bg-crimson-deep text-white p-8 rounded-2xl shadow-xl shadow-crimson-deep/10 border-l-4 border-gold relative overflow-hidden reveal">
+        <span class="font-playfair text-[8rem] text-gold/20 leading-none absolute -top-8 left-4 select-none pointer-events-none">“</span>
+        <p class="font-cormorant italic text-xl sm:text-2xl text-gold-light leading-relaxed relative z-10">
+          "Now in its fourth year, Makarios Worship has gathered thousands of young hearts who are standing for kingdom truth. We invite you to play an intentional part in shaping the future of this generation."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= OUR REACH (Analytics Grid) ================= -->
+  <section id="reach" class="py-24 bg-cream/40 border-t border-b border-charcoal/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16 reveal">
+        <span class="text-crimson text-xs sm:text-sm font-extrabold tracking-widest uppercase block mb-3">Our Reach</span>
+        <h2 class="font-playfair font-bold text-3xl sm:text-5xl text-charcoal mb-4">Who We Gather</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-gold to-gold-light mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Statistics metric grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-16">
+        
+        <div class="bg-white border border-charcoal/5 p-6 sm:p-8 rounded-2xl text-center shadow-lg shadow-charcoal/5 hover:-translate-y-1.5 transition-all duration-300 hover:border-gold/20 group reveal">
+          <span class="text-3xl mb-3 block group-hover:scale-110 transition duration-300">🎓</span>
+          <span class="font-playfair font-extrabold text-2xl sm:text-3xl text-crimson block mb-1">Students</span>
+          <span class="text-[10px] font-bold tracking-wider text-charcoal/50 uppercase">University & Tertiary</span>
+        </div>
+
+        <div class="bg-white border border-charcoal/5 p-6 sm:p-8 rounded-2xl text-center shadow-lg shadow-charcoal/5 hover:-translate-y-1.5 transition-all duration-300 hover:border-gold/20 group reveal reveal-delay-1">
+          <span class="text-3xl mb-3 block group-hover:scale-110 transition duration-300">💼</span>
+          <span class="font-playfair font-extrabold text-2xl sm:text-3xl text-crimson block mb-1">Professionals</span>
+          <span class="text-[10px] font-bold tracking-wider text-charcoal/50 uppercase">Young Professionals</span>
+        </div>
+
+        <div class="bg-white border border-charcoal/5 p-6 sm:p-8 rounded-2xl text-center shadow-lg shadow-charcoal/5 hover:-translate-y-1.5 transition-all duration-300 hover:border-gold/20 group reveal reveal-delay-2">
+          <span class="text-3xl mb-3 block group-hover:scale-110 transition duration-300">📚</span>
+          <span class="font-playfair font-extrabold text-2xl sm:text-3xl text-crimson block mb-1">Academics</span>
+          <span class="text-[10px] font-bold tracking-wider text-charcoal/50 uppercase">Lecturers & Professors</span>
+        </div>
+
+        <div class="bg-white border border-charcoal/5 p-6 sm:p-8 rounded-2xl text-center shadow-lg shadow-charcoal/5 hover:-translate-y-1.5 transition-all duration-300 hover:border-gold/20 group reveal reveal-delay-3">
+          <span class="text-3xl mb-3 block group-hover:scale-110 transition duration-300">🔥</span>
+          <span class="font-playfair font-extrabold text-2xl sm:text-3xl text-crimson block mb-1">1,000+</span>
+          <span class="text-[10px] font-bold tracking-wider text-charcoal/50 uppercase">Engaged Youths Network</span>
+        </div>
+
+      </div>
+
+      <p class="font-cormorant text-xl text-charcoal/60 leading-relaxed max-w-2xl mx-auto text-center reveal">
+        This unique attendee profile creates a highly aligned and strategic platform for brands that value excellence, social impact, and intentional visibility within a purpose-driven community.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ================= PARTNERSHIP VALUE ================= -->
+  <section class="py-24 bg-gradient-to-b from-crimson-deep to-crimson-dark text-white relative overflow-hidden">
+    <div class="absolute right-0 top-0 w-80 h-80 rounded-full bg-gold/5 blur-[100px] pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16 reveal">
+        <span class="text-gold-light text-xs sm:text-sm font-extrabold tracking-widest uppercase block mb-3">Value Realized</span>
+        <h2 class="font-playfair font-bold text-3xl sm:text-5xl text-white mb-4">Why Partner With Us</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-gold to-gold-light mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 reveal">
+        
+        <!-- Benefit 1 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-4 shadow-xl">
+          <h4 class="font-montserrat font-bold text-xs tracking-widest uppercase text-gold-light">Life-Transforming Impact</h4>
+          <p class="font-cormorant text-lg text-white/70 leading-relaxed">
+            Directly sponsor a spiritual platform that changes individual lives, breaks standard bondages, and awakens an entire generation of youths to real divine purpose.
+          </p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-4 shadow-xl">
+          <h4 class="font-montserrat font-bold text-xs tracking-widest uppercase text-gold-light">Purpose-Driven Alignment</h4>
+          <p class="font-cormorant text-lg text-white/70 leading-relaxed">
+            Align your brand or business values with a faith-based, community-centric movement that holds absolute structural excellence, integrity, and morality as its core standard.
+          </p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-4 shadow-xl">
+          <h4 class="font-montserrat font-bold text-xs tracking-widest uppercase text-gold-light">Meaningful Visibility</h4>
+          <p class="font-cormorant text-lg text-white/70 leading-relaxed">
+            Gain genuine, heart-aligned brand visibility and engagement among a vibrant, growing network of over 1,000 youth leaders, students, and academics on the ground.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= SPONSORSHIP TIERS ================= -->
+  <section id="packages" class="py-24 bg-cream/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16 reveal">
+        <span class="text-crimson text-xs sm:text-sm font-extrabold tracking-widest uppercase block mb-3">Partnership levels</span>
+        <h2 class="font-playfair font-bold text-3xl sm:text-5xl text-charcoal mb-4">Sponsorship Packages</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-gold to-gold-light mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Core package grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        
+        <!-- SEED PARTNER -->
+        <div class="bg-white border border-charcoal/5 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col relative reveal">
+          <div class="p-6 border-b border-charcoal/5 flex flex-col gap-1 bg-cream/20">
+            <div class="w-3.5 h-3.5 rounded-full mb-3" style="background-color: #8B5E3C;"></div>
+            <h4 class="font-playfair font-bold text-lg text-charcoal">Seed Partner</h4>
+            <span class="font-montserrat font-black text-xl text-crimson">₦10,000</span>
+          </div>
+          <div class="p-6 flex-grow flex flex-col gap-4">
+            <ul class="flex flex-col gap-2.5 text-xs text-charcoal/60 leading-relaxed flex-grow">
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Logo appearance on the official event backdrop.</li>
+            </ul>
+            <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%204.0%20as%20a%20Seed%20Partner%20(₦10,000)!" target="_blank" class="w-full bg-charcoal hover:bg-crimson text-white text-center py-3 rounded-xl font-bold text-[10px] tracking-widest uppercase transition duration-300">
+              Become a Partner
+            </a>
+          </div>
+        </div>
+
+        <!-- FIRE CARRIER -->
+        <div class="bg-white border border-charcoal/5 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col relative reveal reveal-delay-1">
+          <div class="p-6 border-b border-charcoal/5 flex flex-col gap-1 bg-cream/20">
+            <div class="w-3.5 h-3.5 rounded-full mb-3" style="background-color: #2E7D32;"></div>
+            <h4 class="font-playfair font-bold text-lg text-charcoal">Fire Carrier</h4>
+            <span class="font-montserrat font-black text-xl text-crimson">₦30,000 – ₦50,000</span>
+          </div>
+          <div class="p-6 flex-grow flex flex-col gap-4">
+            <ul class="flex flex-col gap-2.5 text-xs text-charcoal/60 leading-relaxed flex-grow">
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Intentional brand acknowledgment during the appreciation segment.</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Logo featured on the official event backdrop.</li>
+            </ul>
+            <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%204.0%20as%20a%20Fire%20Carrier%20(₦30,000%20-%20₦50,000)!" target="_blank" class="w-full bg-charcoal hover:bg-crimson text-white text-center py-3 rounded-xl font-bold text-[10px] tracking-widest uppercase transition duration-300">
+              Become a Partner
+            </a>
+          </div>
+        </div>
+
+        <!-- REVIVAL PARTNER -->
+        <div class="bg-white border border-charcoal/5 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col relative reveal reveal-delay-2">
+          <div class="p-6 border-b border-charcoal/5 flex flex-col gap-1 bg-cream/20">
+            <div class="w-3.5 h-3.5 rounded-full mb-3" style="background-color: #1565C0;"></div>
+            <h4 class="font-playfair font-bold text-lg text-charcoal">Revival Partner</h4>
+            <span class="font-montserrat font-black text-xl text-crimson">₦80,000 – ₦150,000</span>
+          </div>
+          <div class="p-6 flex-grow flex flex-col gap-4">
+            <ul class="flex flex-col gap-2.5 text-xs text-charcoal/60 leading-relaxed flex-grow">
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Intentional brand acknowledgment during the appreciation segment.</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Logo featured on the official event backdrop.</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Opportunity to showcase your products on event day (T&Cs apply).</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Brand mention in post-event appreciation content.</li>
+            </ul>
+            <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%204.0%20as%20a%20Revival%20Partner%20(₦80,000%20-%20₦150,000)!" target="_blank" class="w-full bg-charcoal hover:bg-crimson text-white text-center py-3 rounded-xl font-bold text-[10px] tracking-widest uppercase transition duration-300">
+              Become a Partner
+            </a>
+          </div>
+        </div>
+
+        <!-- FLAMING SPONSOR (Featured) -->
+        <div class="bg-white border-2 border-gold rounded-2xl overflow-hidden shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col relative reveal reveal-delay-3">
+          <span class="absolute top-0 right-0 bg-gradient-to-r from-gold to-gold-light text-crimson-deep font-bold text-[8px] tracking-wider uppercase px-4 py-1">
+            Most Impactful
+          </span>
+          <div class="p-6 border-b border-charcoal/5 flex flex-col gap-1 bg-cream/20">
+            <div class="w-3.5 h-3.5 rounded-full mb-3" style="background-color: #6A1B9A;"></div>
+            <h4 class="font-playfair font-bold text-lg text-charcoal">Flaming Sponsor</h4>
+            <span class="font-montserrat font-black text-xl text-crimson">₦200,000 – ₦500,000</span>
+          </div>
+          <div class="p-6 flex-grow flex flex-col gap-4">
+            <ul class="flex flex-col gap-2.5 text-xs text-charcoal/60 leading-relaxed flex-grow">
+              <li class="flex items-start gap-2 font-semibold text-charcoal"><span class="text-gold">✦</span> Priority brand mention during the appreciation segment.</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Prominent logo placement on the event backdrop.</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Opportunity to showcase your products on event day (T&Cs apply).</li>
+              <li class="flex items-start gap-2"><span class="text-gold">✦</span> Dedicated post-event advertisement for 24 hours across our youth platforms (1,000+).</li>
+            </ul>
+            <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%204.0%20as%20a%20Flaming%20Sponsor%20(₦200,000%20-%20₦500,000)!" target="_blank" class="w-full bg-gradient-to-r from-gold to-gold-light text-crimson-deep text-center py-3 rounded-xl font-bold text-[10px] tracking-widest uppercase transition duration-300 shadow shadow-gold/20 hover:shadow-gold/40">
+              Become a Partner
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- KINGDOM FINANCIERS (Premium card banner) -->
+      <div class="bg-crimson-deep text-white border-2 border-gold rounded-3xl overflow-hidden shadow-2xl relative flex flex-col md:flex-row mb-8 reveal">
+        
+        <!-- Glowing flame visualizer decorative background -->
+        <div class="absolute right-0 bottom-0 top-0 w-80 bg-gradient-to-l from-gold/15 to-transparent pointer-events-none"></div>
+
+        <div class="p-8 md:p-12 md:w-5/12 border-b md:border-b-0 md:border-r border-gold/10 flex flex-col justify-center items-center text-center relative z-10">
+          <span class="text-4xl mb-4 animate-bounce">👑</span>
+          <h3 class="font-playfair font-black text-3xl sm:text-4xl text-gold-light leading-none">Kingdom Financiers</h3>
+          <p class="text-sm font-semibold tracking-wider text-white/60 uppercase mt-4">Official Makarios Sponsor</p>
+          <span class="font-montserrat font-black text-2xl text-white mt-2 block">₦1,000,000 and above</span>
+        </div>
+
+        <div class="p-8 md:p-12 md:w-7/12 flex flex-col justify-between relative z-10">
+          <div class="flex flex-col gap-3">
+            <h4 class="font-bold text-xs tracking-widest uppercase text-gold-light mb-2">Premium Partner Benefits:</h4>
+            <ul class="flex flex-col gap-3 text-xs text-white/80 leading-relaxed">
+              <li class="flex items-start gap-2.5"><span class="text-gold-light text-base leading-none">✦</span> Official Makarios Sponsor title and premium designation.</li>
+              <li class="flex items-start gap-2.5"><span class="text-gold-light text-base leading-none">✦</span> Priority brand mention during the event appreciation segment.</li>
+              <li class="flex items-start gap-2.5"><span class="text-gold-light text-base leading-none">✦</span> Premium, large-scale logo placement on the official event backdrop.</li>
+              <li class="flex items-start gap-2.5"><span class="text-gold-light text-base leading-none">✦</span> Premium products showcase booth on event day (T&Cs apply).</li>
+              <li class="flex items-start gap-2.5"><span class="text-gold-light text-base leading-none">✦</span> Dedicated post-event advertisement for 3 consecutive days across our youth platforms.</li>
+              <li class="flex items-start gap-2.5"><span class="text-gold-light text-base leading-none">✦</span> Official Makarios Partner Recognition Certificate and Award presented on Sunday, July 26th.</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%204.0%20as%20a%20Kingdom%20Financier%20(₦1,000,000%20%2B)!" target="_blank" class="mt-8 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-crimson-deep text-center py-4 rounded-xl font-bold text-xs tracking-widest uppercase transition-all duration-300 shadow-md">
+            Outreach Coordination Team &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- KINGDOM BUILDERS (Open giving boxes) -->
+      <div class="bg-white border border-charcoal/5 rounded-3xl p-8 sm:p-12 text-center shadow-xl reveal">
+        <h3 class="font-playfair font-bold text-2xl sm:text-3xl text-crimson-dark mb-2">🙌 Kingdom Builders — Open Giving</h3>
+        <p class="font-cormorant italic text-lg sm:text-xl text-charcoal/60 mb-8 max-w-xl mx-auto">An opportunity to be part of what God is doing. Every seed is honored and collectively appreciated during the fellowship appreciation segment.</p>
+        
+        <div class="flex flex-wrap gap-4 justify-center mb-8">
+          <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%20as%20a%20Kingdom%20Builder%20with%20₦5,000!" target="_blank" class="bg-cream border border-charcoal/10 hover:border-crimson hover:bg-crimson/5 text-charcoal font-bold text-xs tracking-wider uppercase px-6 py-3.5 rounded-xl transition duration-300">
+            ₦5,000
+          </a>
+          <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%20as%20a%20Kingdom%20Builder%20with%20₦10,000!" target="_blank" class="bg-cream border border-charcoal/10 hover:border-crimson hover:bg-crimson/5 text-charcoal font-bold text-xs tracking-wider uppercase px-6 py-3.5 rounded-xl transition duration-300">
+            ₦10,000
+          </a>
+          <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%20as%20a%20Kingdom%20Builder%20with%20₦20,000!" target="_blank" class="bg-cream border border-charcoal/10 hover:border-crimson hover:bg-crimson/5 text-charcoal font-bold text-xs tracking-wider uppercase px-6 py-3.5 rounded-xl transition duration-300">
+            ₦20,000
+          </a>
+          <a href="https://wa.me/2348058050407?text=Hello%20Felicia,%20I%20would%20like%20to%20partner%20with%20Makarios%20Worship%20as%20a%20Kingdom%20Builder%20with%20₦50,000!" target="_blank" class="bg-cream border border-charcoal/10 hover:border-crimson hover:bg-crimson/5 text-charcoal font-bold text-xs tracking-wider uppercase px-6 py-3.5 rounded-xl transition duration-300">
+            ₦50,000
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= IN-KIND SUPPORT ================= -->
+  <section id="inkind" class="py-24 bg-white border-t border-b border-charcoal/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-cream border-l-4 border-crimson p-8 sm:p-12 rounded-r-3xl shadow-xl shadow-crimson/5 relative overflow-hidden reveal">
+        
+        <!-- Glow circle -->
+        <div class="absolute right-0 bottom-0 w-48 h-48 bg-crimson/5 rounded-full pointer-events-none"></div>
+
+        <h3 class="font-playfair font-bold text-2xl text-crimson-dark mb-4 relative z-10">Additional Support Options</h3>
+        <p class="font-cormorant text-lg sm:text-xl text-charcoal/70 leading-relaxed relative z-10">
+          We also warmly welcome in-kind sponsorship from individuals, corporate entities, and businesses looking to contribute goods, support logistics, supply media coverage, print handbills, or provide other resources toward making Makarios Worship 4.0 an outstanding, remarkable kingdom experience.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= MERCHANDISE LINK CALLOUT ================= -->
+  <section class="py-24 bg-cream/40 text-center">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="mb-12 reveal">
+        <span class="text-crimson text-xs sm:text-sm font-extrabold tracking-widest uppercase block mb-3">Official Store</span>
+        <h2 class="font-playfair font-bold text-3xl sm:text-5xl text-charcoal mb-4">Get The Pentecost Merchandise</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-gold to-gold-light mx-auto rounded-full"></div>
+      </div>
+
+      <p class="font-cormorant text-xl text-charcoal/60 leading-relaxed max-w-2xl mx-auto mb-10 reveal">
+        Support the Makarios Worship movement. Secure your debossed silicone wristbands and high-definition gold metallic insignia prints directly from our official portal!
+      </p>
+
+      <a href="index.html" class="bg-crimson hover:bg-crimson-dark text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-lg shadow-crimson/25 hover:shadow-crimson-dark/40 hover:-translate-y-1 active:translate-y-0 reveal">
+        🛒 Visit Merchandise Store &rarr;
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ================= CONTACT SECTION ================= -->
+  <section id="contact" class="py-24 bg-gradient-to-t from-crimson-dark to-crimson-deep text-white text-center relative overflow-hidden">
+    <div class="absolute left-1/2 -translate-x-1/2 bottom-0 w-[500px] h-[300px] bg-crimson-dark/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
+      
+      <div class="mb-12 reveal">
+        <span class="text-gold-light text-xs sm:text-sm font-extrabold tracking-widest uppercase block mb-3">Reach Out Today</span>
+        <h2 class="font-playfair font-bold text-3xl sm:text-5xl text-white mb-4">Partner With Us</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-gold to-gold-light mx-auto rounded-full"></div>
+      </div>
+
+      <p class="font-cormorant text-xl text-white/70 leading-relaxed max-w-xl mb-12 reveal">
+        We are intentional about spiritual alignment, structural excellence, and beautiful kingdom impact. Contact our fundraising head directly to discuss packages, pledges, and custom options.
+      </p>
+
+      <!-- Contact card -->
+      <div class="bg-white/5 border border-white/10 backdrop-blur-md px-10 py-12 rounded-3xl max-w-md w-full shadow-2xl hover:border-gold/20 transition-all duration-300 flex flex-col items-center reveal">
+        <h4 class="font-playfair font-bold text-2xl text-gold-light mb-1">Ojoade Felicia</h4>
+        <span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40 mb-6">Head of Fundraising</span>
+        
+        <div class="flex flex-col gap-3 font-semibold text-xs tracking-wider uppercase text-white/80 w-full text-center">
+          <a href="tel:+2348058050407" class="hover:text-gold-light transition flex justify-center items-center gap-2 py-2 border-b border-white/5 pb-3">📞 +234 805 805 0407</a>
+          <a href="mailto:Makariosworshipofficial@gmail.com" class="hover:text-gold-light transition flex justify-center items-center gap-2 py-2">📧 Makariosworshipofficial@gmail.com</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-crimson-deep text-white/50 py-12 px-4 border-t border-gold/15 text-center text-xs tracking-wider">
+    <div class="max-w-5xl mx-auto flex flex-col gap-6 items-center">
+      
+      <div class="flex items-center gap-3">
+        <img src="./20260507_151526.png" alt="Makarios Logo" class="h-8 w-auto">
+        <span class="font-playfair font-bold text-white text-base">Makarios Worship 4.0</span>
+      </div>
+
+      <p class="max-w-xl leading-relaxed">
+        Theme: PENTECOST Partnership Portal &nbsp;·&nbsp; July 24th, 2026 &nbsp;·&nbsp; RCCG Gloryland Zonal HQ, Ile-Ife, Osun State
+      </p>
+
+      <div class="w-24 h-[1px] bg-white/10"></div>
+
+      <p class="text-[10px] text-white/30">
+        &copy; 2026 Makarios Worship. Built with a heart for the Kingdom. All Rights Reserved.
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- ================= INTERACTION SCRIPT CONTROLLER ================= -->
+  <script>
+    // Header Scroll Shadow
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('main-header');
+      if (window.scrollY > 50) {
+        header.classList.add('shadow-xl', 'bg-cream/95');
+      } else {
+        header.classList.remove('shadow-xl', 'bg-cream/95');
+      }
+    });
+
+    // Mobile Hamburger Menu Trigger
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const isHidden = menu.classList.contains('hidden');
+      
+      const bar1 = document.getElementById('bar1');
+      const bar2 = document.getElementById('bar2');
+      const bar3 = document.getElementById('bar3');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        bar1.style.transform = 'translateY(5px) rotate(45deg)';
+        bar2.style.opacity = '0';
+        bar3.style.transform = 'translateY(-5px) rotate(-45deg)';
+      } else {
+        menu.classList.add('hidden');
+        bar1.style.transform = 'none';
+        bar2.style.opacity = '1';
+        bar3.style.transform = 'none';
+      }
+    }
+    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+    // Scroll Reveal Observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // stop observing once active
+          }
+        });
+      }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+  </script>
 </body>
 </html>
