@@ -101,8 +101,19 @@ export const Header: React.FC = () => {
                   className={`flex items-center gap-1.5 text-sm font-black tracking-tight transition-all relative group ${
                     location.pathname === link.href 
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500' 
-                      : 'text-white/80 hover:text-white'
+                      : 'text-zinc-100 hover:text-white'
                   }`}
+                  style={location.pathname === link.href ? {} : { color: 'rgba(255, 255, 255, 0.85)' }}
+                  onMouseEnter={(e) => {
+                    if (location.pathname !== link.href) {
+                      e.currentTarget.style.color = '#ffffff';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (location.pathname !== link.href) {
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)';
+                    }
+                  }}
                 >
                   {link.name}
                   {link.dropdown && <ChevronDown size={14} className={`opacity-50 transition-transform duration-300 ${activeDropdown === link.name ? 'rotate-180' : ''}`} />}

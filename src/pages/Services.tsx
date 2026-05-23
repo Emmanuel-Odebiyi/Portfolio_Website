@@ -1,101 +1,14 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-  Zap, 
-  Search, 
-  Cpu, 
-  Layers, 
-  ArrowRight, 
-  CheckCircle2, 
-  Workflow,
-  Plus,
-  Minus
+  Zap, Search, Cpu, Layers, ArrowRight, CheckCircle2, Workflow,
+  Plus, Minus, Sparkles, Sliders, Calendar, ArrowUpRight, Code,
+  Settings, Clock, Award, ShieldCheck, HelpCircle
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { TextEffect } from '../components/ui/text-effect';
-import { ContainerScroll } from '../components/ui/container-scroll-animation';
 import { ToolsTicker, Tool } from '../components/ToolsTicker';
-
-const coreServices = [
-  {
-    title: "Content Marketing Automation",
-    description: "We build an end-to-end pipeline that handles keyword research, content briefs, drafting, and distribution. You get 4–8 high-quality, SEO-optimized articles per month without lifting a finger.",
-    icon: <Workflow className="text-zinc-600 group-hover:text-brand-gradient transition-colors" size={32} />
-  },
-  {
-    title: "SEO Strategy & Optimization",
-    description: "Deep technical SEO audits, site speed optimization, and on-page content alignment. We ensure your existing and new content is actually visible to your target audience.",
-    icon: <Search className="text-zinc-600 group-hover:text-brand-gradient transition-colors" size={32} />
-  },
-  {
-    title: "Business Process Automation",
-    description: "Connecting your CRM (HubSpot), email marketing tools, and internal databases using n8n and Zapier. We eliminate data silos and automate lead nurturing so your team can focus on closing deals.",
-    icon: <Cpu className="text-zinc-600 group-hover:text-brand-gradient transition-colors" size={32} />
-  }
-];
-
-const packages = [
-  {
-    title: "The Kickstart (One-Off Build)",
-    subtitle: "Perfect for teams that need the infrastructure built, but want to run it themselves.",
-    price: "Custom implementation",
-    features: [
-      "Custom system architecture",
-      "3-5 automated workflows built & documented",
-      "Tech stack integration (HubSpot, Zapier, etc.)",
-      "2 weeks delivery time",
-      "1 month post-launch technical support"
-    ],
-    highlight: false
-  },
-  {
-    title: "The Growth Engine (Monthly)",
-    subtitle: "A completely done-for-you service. I build the systems and run the content machine for you.",
-    price: "Month-to-month. Cancel anytime.",
-    features: [
-      "Everything in The Kickstart",
-      "4-8 SEO articles fully produced & published per month",
-      "Continuous workflow optimization and bug fixing",
-      "Monthly strategy sessions and ROI reporting",
-      "Priority API updates and AI prompt refinements"
-    ],
-    highlight: true
-  }
-];
-
-const processSteps = [
-  { 
-    step: "01", 
-    title: "Phase 1: The Audit", 
-    desc: "We look at your current stack, find the bottlenecks, and design a custom blueprint that maximizes efficiency without bloated software costs." 
-  },
-  { 
-    step: "02", 
-    title: "Phase 2: The Build", 
-    desc: "I construct your automated pipelines, integrate your tools, and refine the AI prompts to ensure the output sounds exactly like your brand, not a robot." 
-  },
-  { 
-    step: "03", 
-    title: "Phase 3: The Scale", 
-    desc: "We hit publish. The system runs. We track the analytics, optimize the conversions, and scale the output as your business grows." 
-  }
-];
-
-const faqs = [
-  {
-    question: "How long does it take to see results?",
-    answer: "Automation results are immediate in terms of time saved. For SEO, we typically see significant movement in 3-6 months, though our automated systems often accelerate this by increasing publishing velocity."
-  },
-  {
-    question: "Do I need to hire a developer to maintain these systems?",
-    answer: "No. I build these systems to be user-friendly and self-sustaining. I also provide clear documentation and training for your existing team so you maintain full control."
-  },
-  {
-    question: "Which tools do you specialize in?",
-    answer: "I am an expert in n8n, Zapier, Make.com, HubSpot, and various AI models (OpenAI, Anthropic). I pick the tool that precisely fits your budget and operational complexity."
-  }
-];
 
 const toolData: Tool[] = [
   { name: 'Zapier', logo: 'https://cdn.simpleicons.org/zapier' },
@@ -107,384 +20,631 @@ const toolData: Tool[] = [
 ];
 
 export default function Services() {
+  // Calculator States
+  const [articlesCount, setArticlesCount] = useState(12);
+  const [manualHours, setManualHours] = useState(25);
+  const [customerValue, setCustomerValue] = useState(1500);
+
+  // Accordion active capability blueprint state
+  const [activeBlueprint, setActiveBlueprint] = useState<'content' | 'seo' | 'automation'>('content');
+
+  // FAQ state
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Calculations
+  const reclaimedHours = Math.round(manualHours * 0.8);
+  // Organic growth is assumed to bring a standard factor conversion: 3.5 conversions per 10 items
+  const valueGenerated = Math.round((articlesCount * 2.8 * customerValue * 0.04));
+  const efficiencyScore = Math.max(10, Math.round(100 - (manualHours * 1.5) + (articlesCount * 1.2)));
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  return (
-    <div className="bg-[#0B0F19] text-white selection:bg-brand-gradient selection:text-white min-h-screen">
-      <SEO 
-        title="Marketing Automation Services | Content, SEO & Process Automation for Growing Businesses"
-        description="Done-for-you content marketing automation, SEO optimization, and business process automation. Enterprise results without enterprise costs. Month-to-month, no lock-in."
-        keywords="content marketing automation services, SEO automation, business process automation, marketing systems consultant"
-      />
-      
-      {/* Hero Section */}
-      <section className="relative px-6 flex flex-col items-center pt-32 lg:pt-40 pb-20 overflow-visible">
-        {/* Subtle background glow */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-gradient/10 blur-[120px] rounded-full pointer-events-none" />
+  const faqs = [
+    {
+      question: "How quickly will I see results?",
+      answer: "Most clients see measurable improvements in content output and traffic within the first 60 days. SEO results typically compound over 3–6 months — the earlier we start, the faster the gains."
+    },
+    {
+      question: "Do you work with businesses outside Nigeria?",
+      answer: "Yes. I work remotely with clients across Africa, the UK, US, Canada, and beyond. Time zones are never a barrier."
+    },
+    {
+      question: "What size business is this right for?",
+      answer: "I work best with growing businesses — typically SMBs and mid-market companies that have validated their offer but haven't yet built a scalable marketing system."
+    },
+    {
+      question: "Will the content actually sound like me?",
+      answer: "Yes. Before building anything, I conduct a brand voice audit. Every piece of content goes through quality review to ensure it reflects your tone, language, and positioning — not generic AI output."
+    },
+    {
+      question: "What if I already have some systems in place?",
+      answer: "Even better. I'll audit what you have, identify the gaps, and build around your existing stack wherever possible. Nothing gets rebuilt unnecessarily."
+    }
+  ];
 
-        <div className="max-w-4xl text-center space-y-8 relative z-10 w-full">
+  return (
+    <div className="bg-[#0a0f1e] text-white selection:bg-indigo-500 selection:text-white min-h-screen relative overflow-hidden">
+      <SEO 
+        title="DFY Marketing Systems | Content Marketing Automation, SEO & Workflow Systems"
+        description="Done-for-you content marketing automation, technical SEO strategy, and workflow process automations. Month-to-month contracts. High ROI systems for growing businesses."
+        keywords="marketing automation Nigeria, B2B content automation, technical SEO architecture, n8n workflows"
+      />
+
+      {/* Decorative Aura Overlays */}
+      <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute top-[30%] right-[-10%] w-[50vw] h-[50vw] bg-teal-500/5 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-[-5%] left-[20%] w-[55vw] h-[55vw] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
+
+      <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
+
+        {/* Header Block */}
+        <div className="max-w-4xl mb-24 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-300 tracking-[0.2em] uppercase"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-400 tracking-[0.2em] uppercase"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
-            Services & Solutions
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+            Bespoke Growth Architecture
           </motion.div>
           
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1] min-h-[140px] md:min-h-[160px]">
-            <TextEffect as="span" preset="fade" per="char">
-              Done-For-You Marketing Systems That Produce Real Revenue.
-            </TextEffect>
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white">
+            Done-For-You <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400">
+              Marketing Systems
+            </span> <br />
+            That Produce Revenue.
           </h1>
           
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto"
-          >
+          <p className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-2xl pt-2">
             Consistent content. Higher rankings. Time back in your week. No team required.
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-4 pt-4"
-          >
-            <Link 
-              to="/contact"
-              className="px-8 py-4 bg-brand-gradient text-zinc-900 font-bold rounded-2xl hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20 flex items-center gap-2 group"
-            >
-              Get a Proposal <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
-            </Link>
-            <Link 
-              to="/portfolio"
-              className="px-8 py-4 bg-white/5 text-white font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition-all"
-            >
-              View Case Studies
-            </Link>
-          </motion.div>
+          </p>
         </div>
 
-        {/* Container Scroll Presentation */}
-        <div className="w-full mt-10 -mb-40 relative z-20">
-          <ContainerScroll
-            titleComponent={<></>}
-          >
-            <div className="w-full h-full bg-[#0B0F19] rounded-2xl overflow-hidden shadow-2xl relative border border-white/10 flex items-center justify-center group">
-               {/* Dashboard Placeholder Image */}
-               <img 
-                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Workflow Dashboard Mockup" 
-                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
-               <div className="absolute top-4 left-4 flex gap-2">
-                 <div className="w-3 h-3 rounded-full bg-rose-400" />
-                 <div className="w-3 h-3 rounded-full bg-amber-400" />
-                 <div className="w-3 h-3 rounded-full bg-emerald-400" />
-               </div>
+        {/* Intro Manifesto Panel */}
+        <div className="p-8 sm:p-12 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl mb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8 space-y-6">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                Growing businesses don't need more marketing advice. <br className="hidden sm:block" />
+                <span className="text-indigo-400">They need a system that actually runs.</span>
+              </h2>
+              <p className="text-zinc-400 font-light leading-relaxed">
+                One that publishes consistently, ranks in search, and generates leads on autopilot. That's what I build. Custom-engineered marketing systems that deliver enterprise output without enterprise complexity, cost, or management overhead.
+              </p>
             </div>
-          </ContainerScroll>
-        </div>
-      </section>
-
-      {/* Intro Text */}
-      <section className="max-w-4xl mx-auto px-6 mb-32 text-center space-y-8 pt-40 md:pt-64">
-        <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-snug">
-          Growing businesses don't need more advice. They need a system that actually runs.
-        </h2>
-        <p className="text-xl text-gray-400 font-light leading-relaxed">
-          One that publishes consistently, ranks in search, and generates leads on autopilot. I build custom-engineered marketing systems that deliver enterprise output without enterprise complexity, cost, or management overhead.
-        </p>
-        <div className="flex justify-center gap-8 text-sm font-mono text-gray-500 uppercase tracking-widest pt-4">
-          <span>No retainers</span>
-          <span className="text-brand-gradient">•</span>
-          <span>No bloated contracts</span>
-          <span className="text-brand-gradient">•</span>
-          <span>Just measurable growth</span>
-        </div>
-      </section>
-
-      {/* Core Services Grid */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]">The Capabilities</h2>
-          <h3 className="text-5xl font-bold text-white tracking-tight">Core Services</h3>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {coreServices.map((service, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -5 }}
-              className={`p-10 rounded-[3rem] bg-white/5 border border-white/10 space-y-8 group transition-all cursor-default shadow-sm hover:shadow-xl hover:border-white/20 relative overflow-hidden backdrop-blur-sm`}
-            >
-              {/* Subtle hover gradient bloom */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/10 shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform relative z-10">
-                {service.icon}
+            <div className="lg:col-span-4 flex flex-col gap-3 justify-center border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8 font-mono text-xs uppercase tracking-widest text-zinc-400">
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                <span>No retainers</span>
               </div>
-              <div className="space-y-4 relative z-10">
-                <h4 className="text-2xl font-bold text-white">{service.title}</h4>
-                <p className="text-gray-400 font-light leading-relaxed">
-                  {service.description}
-                </p>
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                <span>No bloated contracts</span>
               </div>
-            </motion.div>
-          ))}
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                <span>Just measurable growth</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
 
-      {/* Packages / How We Work Together */}
-      <section className="bg-zinc-950/40 backdrop-blur-sm py-32 border-y border-white/10 mb-32 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center space-y-4 mb-20">
-            <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]">Engagement Model</h2>
-            <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight">How We Work Together</h3>
-            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto pt-4">
-              I don't do 12-month retainers. I offer transparent, month-to-month engagements focused purely on results.
+        {/* ── INTERACTIVE IMPACT ESTIMATOR (Calculator Widget) ── */}
+        <div className="mb-32">
+          <div className="text-center mb-16 space-y-4">
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500">Autopilot Calculator</span>
+            <h3 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+              Estimate Your System's Impact
+            </h3>
+            <p className="text-zinc-400 font-light max-w-xl mx-auto">
+              Drag the parameters below based on your current manual resource overhead to see the direct returns of upgrading to an autonomous setup.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 relative z-10">
-            {packages.map((pkg, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className={`relative p-10 md:p-14 rounded-[3rem] bg-white/5 backdrop-blur-md group flex flex-col ${
-                  pkg.highlight ? '' : 'border border-white/10 shadow-2xl'
-                }`}
-              >
-                {/* Magic Gradient Border for Highlighted Package */}
-                {pkg.highlight && (
-                  <div className="absolute -inset-[1px] rounded-[3rem] bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 opacity-60 group-hover:opacity-100 blur-[2px] transition-opacity duration-500 z-0" />
-                )}
-                {pkg.highlight && (
-                  <div className="absolute -inset-[2px] rounded-[3rem] bg-gradient-to-r from-teal-400/50 via-blue-500/50 to-purple-500/50 opacity-40 group-hover:opacity-80 blur-[8px] transition-opacity duration-500 z-0 pointer-events-none" />
-                )}
-                {/* Solid dark background for internal content */}
-                {pkg.highlight && (
-                   <div className="absolute inset-0 bg-[#0B0F19] rounded-[3rem] z-0" />
-                )}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Control Panel (Left) */}
+            <div className="lg:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 p-6 sm:p-10 space-y-8 backdrop-blur-md">
+              <h4 className="text-xl font-bold flex items-center gap-2.5">
+                <Sliders size={18} className="text-indigo-400" />
+                System Input Parameters
+              </h4>
 
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="space-y-4 mb-12">
-                     <h4 className="text-3xl font-bold text-white">{pkg.title}</h4>
-                     <p className="text-lg leading-relaxed text-gray-400">
-                        {pkg.subtitle}
-                     </p>
-                  </div>
-
-                  <div className="mb-12">
-                     <p className="text-sm font-mono uppercase tracking-widest mb-2 text-gray-500">Pricing Structure</p>
-                     <p className="text-xl font-semibold text-white">{pkg.price}</p>
-                  </div>
-
-                  <div className="space-y-6 flex-grow mb-16">
-                     {pkg.features.map((feature, j) => (
-                        <motion.div 
-                           initial={{ opacity: 0, x: -10 }}
-                           whileInView={{ opacity: 1, x: 0 }}
-                           viewport={{ once: true }}
-                           transition={{ delay: 0.2 + (j * 0.1) }}
-                           key={j} 
-                           className="flex items-start gap-4"
-                        >
-                           <div className="mt-1 bg-white/10 rounded-full p-1 text-white shrink-0 group-hover:bg-brand-gradient transition-colors duration-300">
-                              <CheckCircle2 size={16} />
-                           </div>
-                           <span className="text-lg text-gray-300">{feature}</span>
-                        </motion.div>
-                     ))}
-                  </div>
-
-                  <Link 
-                     to="/contact"
-                     className={`w-full py-5 rounded-2xl font-bold text-lg text-center transition-all flex items-center justify-center gap-2 group/btn ${
-                        pkg.highlight 
-                           ? 'bg-brand-gradient text-zinc-900 shadow-xl hover:brightness-110' 
-                           : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20'
-                     }`}
-                  >
-                     Choose {pkg.title.split(' (')[0]} <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform"/>
-                  </Link>
+              {/* Slider 1: Article Count */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <label className="text-sm font-semibold text-zinc-300">Target Monthly Content Volume</label>
+                  <span className="px-3 py-1 bg-indigo-500/10 rounded-lg text-indigo-400 font-mono text-sm font-bold border border-indigo-500/20">
+                    {articlesCount} Articles / mo
+                  </span>
                 </div>
+                <input 
+                  type="range" 
+                  min="4" 
+                  max="40" 
+                  value={articlesCount} 
+                  onChange={(e) => setArticlesCount(Number(e.target.value))}
+                  className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-zinc-500 uppercase">
+                  <span>4 (Conservative)</span>
+                  <span>40 (Enterprise-Level Scale)</span>
+                </div>
+              </div>
+
+              {/* Slider 2: Manual Work Hours */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <label className="text-sm font-semibold text-zinc-300">Current Monthly Hours Spent on Manual Formatting & Writing</label>
+                  <span className="px-3 py-1 bg-amber-500/10 rounded-lg text-amber-400 font-mono text-sm font-bold border border-amber-500/20">
+                    {manualHours} Hours / mo
+                  </span>
+                </div>
+                <input 
+                  type="range" 
+                  min="5" 
+                  max="60" 
+                  value={manualHours} 
+                  onChange={(e) => setManualHours(Number(e.target.value))}
+                  className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-zinc-500 uppercase">
+                  <span>5 Hrs</span>
+                  <span>60 Hrs (High Burnout Risk)</span>
+                </div>
+              </div>
+
+              {/* Slider 3: Customer Value */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <label className="text-sm font-semibold text-zinc-300">Average Lifetime Value of One Client (LTV)</label>
+                  <span className="px-3 py-1 bg-teal-500/10 rounded-lg text-teal-400 font-mono text-sm font-bold border border-teal-500/20">
+                    ${customerValue.toLocaleString()} USD
+                  </span>
+                </div>
+                <input 
+                  type="range" 
+                  min="500" 
+                  max="5000" 
+                  step="250"
+                  value={customerValue} 
+                  onChange={(e) => setCustomerValue(Number(e.target.value))}
+                  className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-zinc-500 uppercase">
+                  <span>$500</span>
+                  <span>$5,000 (Premium Offer)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Results Display Panel (Right) */}
+            <div className="lg:col-span-5 rounded-[2.5rem] bg-zinc-950 border border-white/10 p-6 sm:p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-[50px] pointer-events-none" />
+              
+              <div className="space-y-6">
+                <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase block">Simulated Output</span>
+                
+                {/* Generated Value */}
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Estimated Generated Value / mo</span>
+                  <span className="text-3xl sm:text-4xl font-black text-indigo-400">${valueGenerated.toLocaleString()}</span>
+                  <p className="text-[10px] text-zinc-500 font-light leading-relaxed">
+                    *Calculated based on traffic growth and Conversion-to-LTV pipeline scaling curves.
+                  </p>
+                </div>
+
+                {/* Reclaimed Hours */}
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Manual Hours Reclaimed / mo</span>
+                  <span className="text-3xl sm:text-4xl font-black text-emerald-400">{reclaimedHours} Hours Saved</span>
+                  <p className="text-[10px] text-zinc-500 font-light leading-relaxed">
+                    Equivalent to recovering over {Math.round(reclaimedHours / 8)} full business workdays every single month.
+                  </p>
+                </div>
+
+                {/* Efficiency Gauge */}
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <div className="flex justify-between items-center text-xs font-mono text-zinc-400 uppercase tracking-wider">
+                    <span>Workflow Efficiency Score</span>
+                    <span className={efficiencyScore > 75 ? 'text-emerald-400 font-bold' : efficiencyScore > 45 ? 'text-amber-400' : 'text-red-400'}>
+                      {efficiencyScore}%
+                    </span>
+                  </div>
+                  <div className="h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full transition-all duration-500 ${efficiencyScore > 75 ? 'bg-emerald-500' : efficiencyScore > 45 ? 'bg-amber-500' : 'bg-red-500'}`}
+                      style={{ width: `${efficiencyScore}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Link 
+                to="/contact" 
+                className="mt-8 py-4.5 rounded-xl bg-brand-gradient text-zinc-900 font-bold text-center block hover:brightness-110 shadow-lg shadow-indigo-500/20 active:scale-95 transition-all text-sm uppercase tracking-wider"
+              >
+                Claim My System Setup
+              </Link>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── CORE SERVICES ARCHITECTURE BLUEPRINTS (Process Maps) ── */}
+        <div className="mb-32">
+          <div className="text-center mb-16 space-y-4">
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500">Core Services</span>
+            <h3 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+              Core Capabilities & Blueprints
+            </h3>
+            <p className="text-zinc-400 font-light max-w-xl mx-auto">
+              Click a capability tab to review the exact visual operational blueprint I design, build, and support for your business.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Selector column (Left) */}
+            <div className="lg:col-span-4 flex flex-col gap-3 justify-center">
+              {[
+                { id: 'content', title: 'Content Marketing Automation', desc: 'Stop Publishing When You Have Time. Start Publishing on a System.', icon: <Workflow size={20} /> },
+                { id: 'seo', title: 'SEO Strategy & Optimization', desc: "Ranking Higher Isn't Luck. It's Architecture.", icon: <Search size={20} /> },
+                { id: 'automation', title: 'Business Process Automation', desc: "Reclaim 10–20 Hours Reclaimed Per Week.", icon: <Cpu size={20} /> }
+              ].map((service) => (
+                <button
+                  key={service.id}
+                  onClick={() => setActiveBlueprint(service.id as any)}
+                  className={`w-full text-left p-6 rounded-2xl transition-all duration-300 border flex gap-4 items-start ${
+                    activeBlueprint === service.id
+                      ? 'bg-white/10 border-white/20 text-white font-bold shadow-xl'
+                      : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10 hover:text-white'
+                  }`}
+                >
+                  <div className={`p-3 rounded-xl border shrink-0 ${activeBlueprint === service.id ? 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400' : 'bg-white/5 border-white/10'}`}>
+                    {service.icon}
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-bold text-white tracking-tight leading-snug">{service.title}</h4>
+                    <p className="text-xs text-zinc-400 font-light leading-relaxed">{service.desc.substring(0, 55)}...</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Visual process detail window (Right) */}
+            <div className="lg:col-span-8">
+              <div className="rounded-[2.5rem] bg-zinc-950/70 border border-white/10 p-6 sm:p-10 flex flex-col justify-between h-full backdrop-blur-md shadow-2xl text-left relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-[60px] pointer-events-none" />
+                
+                <AnimatePresence mode="wait">
+                  {activeBlueprint === 'content' && (
+                    <motion.div
+                      key="content"
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      className="space-y-6"
+                    >
+                      <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase block">Content Engine Flow Map</span>
+                      <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+                        Stop Publishing When You Have Time. <span className="text-indigo-400">Start Publishing on a System.</span>
+                      </h4>
+                      <p className="text-zinc-400 font-light leading-relaxed">
+                        Most businesses don't have a content problem. They have a consistency problem. Great ideas, no reliable engine to get them out. I build the engine.
+                      </p>
+
+                      {/* Content Pipeline diagram */}
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 grid grid-cols-1 sm:grid-cols-5 gap-3 text-center text-xs font-mono">
+                        <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-lg">
+                          1. Keyword & Cluster Audit
+                        </div>
+                        <div className="flex items-center justify-center text-zinc-500">
+                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
+                        </div>
+                        <div className="p-3 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg">
+                          2. AI Brand-Voice Writing
+                        </div>
+                        <div className="flex items-center justify-center text-zinc-500">
+                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
+                        </div>
+                        <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg">
+                          3. Multi-Channel Distribution
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 border-t border-white/10 pt-6">
+                        <h5 className="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">What's Included:</h5>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300 font-light">
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Full content strategy & editorial calendar</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>AI-assisted content creation — brand tuned</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Automated publishing workflow (8-40+ posts)</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Blog, LinkedIn, Email multi-distribution</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
+                        Result: Your audience sees you everywhere, every week — without you writing a single word.
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeBlueprint === 'seo' && (
+                    <motion.div
+                      key="seo"
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      className="space-y-6"
+                    >
+                      <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase block">Search Architecture Blueprint</span>
+                      <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+                        Ranking Higher Isn't Luck. <span className="text-indigo-400">It's Architecture.</span>
+                      </h4>
+                      <p className="text-zinc-400 font-light leading-relaxed">
+                        You can publish great content and still get zero traffic. SEO is what determines whether your content gets found — or gets buried. I build SEO strategies from the foundation up.
+                      </p>
+
+                      {/* SEO flow diagram */}
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 grid grid-cols-1 sm:grid-cols-5 gap-3 text-center text-xs font-mono">
+                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-lg">
+                          1. Keyword Gap Scan
+                        </div>
+                        <div className="flex items-center justify-center text-zinc-500">
+                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
+                        </div>
+                        <div className="p-3 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-lg">
+                          2. Topic Cluster Layout
+                        </div>
+                        <div className="flex items-center justify-center text-zinc-500">
+                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
+                        </div>
+                        <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-lg">
+                          3. Technical Audit Sync
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 border-t border-white/10 pt-6">
+                        <h5 className="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">What's Included:</h5>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300 font-light">
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>In-depth keyword & competitor gap scan</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Topic cluster architecture for authority</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>On-page optimization across all posts</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Technical SEO audit & indexing optimization</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
+                        Result: Content that doesn't just exist — it ranks, it gets clicked, and it brings in the right traffic.
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeBlueprint === 'automation' && (
+                    <motion.div
+                      key="automation"
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      className="space-y-6"
+                    >
+                      <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase block">Process Automation Core</span>
+                      <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+                        The Hours You're Losing to Repetitive Tasks <span className="text-indigo-400">Are Hours You're Not Growing.</span>
+                      </h4>
+                      <p className="text-zinc-400 font-light leading-relaxed">
+                        Marketing isn't the only place where manual, repetitive work is stealing your time. Most growing businesses have entire workflows that could — and should — be automated.
+                      </p>
+
+                      {/* Process flow diagram */}
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 grid grid-cols-1 sm:grid-cols-5 gap-3 text-center text-xs font-mono">
+                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-lg">
+                          1. Task Audit Map
+                        </div>
+                        <div className="flex items-center justify-center text-zinc-500">
+                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
+                        </div>
+                        <div className="p-3 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg">
+                          2. n8n/Zapier Building
+                        </div>
+                        <div className="flex items-center justify-center text-zinc-500">
+                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
+                        </div>
+                        <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg">
+                          3. API Sync Launch
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 border-t border-white/10 pt-6">
+                        <h5 className="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">What's Included:</h5>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300 font-light">
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Full workflow audit and process mapping</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Custom n8n, Zapier & Make.com integrations</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Integration of CRM (HubSpot), Sheets & DBs</span>
+                          </div>
+                          <div className="flex items-center gap-2.5">
+                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
+                            <span>Ongoing workflow training & technical logs</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
+                        Result: Reclaim 10–20 hours per week, allowing your team to stop doing manual entry and focus on building.
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── ROADMAP DELIVERABLES (Week-by-Week Engagement) ── */}
+        <div className="mb-32">
+          <div className="text-center mb-20 space-y-4">
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500">Engagement Model</span>
+            <h3 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+              Month-to-Month. No Lock-In. No Surprises.
+            </h3>
+            <p className="text-zinc-400 font-light max-w-xl mx-auto">
+              I don't believe in locking clients into long-term retainers. Everything I offer is transparent, month-to-month, and measured on deliverables.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Week 1 setup', icon: <Settings className="text-indigo-400" size={24} />, desc: 'System Audit & Tech stack connection. We audit existing software accounts, identify integrations gaps, establish n8n connections, and deploy brand voice parameters.' },
+              { title: 'Month 1 Deliverables', icon: <Clock className="text-purple-400" size={24} />, desc: 'Workflow testing & Content rollout. We execute keyword topic clusters, configure automatic publishing webhooks to HubSpot/WordPress, and ship initial batches of articles.' },
+              { title: 'Ongoing Scaling', icon: <Award className="text-emerald-400" size={24} />, desc: 'Continuous optimization & ROI traces. We analyze active SERP positions, trace lead capture loops, refine prompts to protect content standards, and deliver performance charts.' }
+            ].map((step, idx) => (
+              <div 
+                key={step.title}
+                className="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-white/20 shadow-xl transition-all relative flex flex-col justify-between group"
+              >
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center">
+                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                      {step.icon}
+                    </div>
+                    <span className="font-mono text-xs text-zinc-600 font-bold group-hover:text-zinc-500 transition-colors">PHASE // 0{idx + 1}</span>
+                  </div>
+                  <div className="space-y-3 text-left">
+                    <h4 className="text-xl font-bold text-white capitalize tracking-tight">{step.title}</h4>
+                    <p className="text-zinc-400 font-light text-sm leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Specialized Tools Ticker Stack */}
+        <div className="py-20 flex flex-col items-center border-y border-white/10 mb-32">
+          <div className="text-center space-y-4 mb-16 px-6">
+             <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500">Tech Ecosystem</span>
+             <h3 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                Specialized SEO & <br className="sm:hidden" /> Automation Stack.
+             </h3>
+             <p className="text-lg text-zinc-400 font-light">
+               We leverage industry-leading tools to build indestructible workflows.
+             </p>
+          </div>
+          <ToolsTicker tools={toolData} />
+        </div>
+
+        {/* ── FAQS SECTION (All 5 Copy doc FAQs) ── */}
+        <div className="max-w-3xl mx-auto mb-32">
+          <div className="text-center space-y-4 mb-16">
+            <span className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em]">Common Queries</span>
+            <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight">FAQ</h3>
+          </div>
+          
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.div 
+                key={i} 
+                className="bg-white/5 rounded-3xl border border-white/10 overflow-hidden"
+              >
+                <button
+                  onClick={() => toggleFaq(i)}
+                  className="w-full flex items-center justify-between p-8 text-left focus:outline-none"
+                >
+                  <span className={`text-lg font-bold pr-8 transition-colors ${openFaq === i ? 'text-white' : 'text-zinc-300'}`}>
+                    {faq.question}
+                  </span>
+                  <div className={`w-9 h-9 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-indigo-500 text-zinc-900 border-none rotate-180' : 'bg-white/10 border-white/20 text-zinc-400'}`}>
+                    {openFaq === i ? <Minus size={14} /> : <Plus size={14} />}
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {openFaq === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-8 pb-8 text-zinc-400 font-light leading-relaxed text-base pt-2 border-t border-white/10 mt-2 mx-8">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Dark Theme Scrollytelling Process */}
-      <section className="py-32 bg-[#0B0F19] relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            {/* Sticky Left */}
-            <div className="lg:sticky lg:top-40 h-fit space-y-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em] mb-4 outline-none">The Methodology</h2>
-                <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                  The 3-Step <br /> Process
-                </h3>
-                <p className="text-xl text-gray-400 font-light leading-relaxed max-w-md">
-                  A systematic approach to moving you from chaotic, manual operations to sleek, profitable automation.
-                </p>
-              </motion.div>
+        {/* ── SERVICES PAGE DUAL CTA ── */}
+        <motion.div 
+          initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="relative rounded-[3rem] p-12 md:p-16 border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden shadow-2xl"
+        >
+          <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none" />
+          
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-left">
+            <div className="flex-1 space-y-4">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">No obligations</span>
+              <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+                Not Sure Which Service Is Right for You?
+              </h3>
+              <p className="text-lg text-zinc-400 font-light max-w-xl">
+                Let's figure it out together. Book a free 30-minute call and I'll tell you exactly what I'd build — and what results to expect.
+              </p>
             </div>
-            
-            {/* Scrolling Right */}
-            <div className="space-y-12 relative isolate">
-              {processSteps.map((item, i) => (
-                <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6 }}
-                  className="relative p-10 lg:p-14 bg-white/5 backdrop-blur-md rounded-[3rem] border border-white/10 hover:bg-white/10 hover:shadow-2xl hover:border-white/20 transition-all duration-500 group overflow-hidden"
-                >
-                  <div className="absolute top-0 left-0 w-2 h-full bg-white/10 group-hover:bg-brand-gradient transition-colors duration-500" />
-                  
-                  <div className="text-[120px] leading-none font-bold text-white/5 font-mono absolute top-4 right-4 pointer-events-none group-hover:text-white/10 transition-colors duration-500">
-                    {item.step}
-                  </div>
-                  
-                  <div className="relative z-10">
-                    <h4 className="text-2xl lg:text-3xl font-bold text-white tracking-tight mb-6">{item.title}</h4>
-                    <p className="text-gray-400 font-light leading-relaxed text-lg">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Specialized Tools Ticker Stack */}
-      <section className="py-20 bg-[#0B0F19] relative flex flex-col items-center border-t border-white/10 mt-20">
-        <div className="text-center space-y-4 mb-16 px-6">
-           <h3 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-white">
-              Specialized SEO & <br />
-              <span className="text-brand-gradient">Automation Stack.</span>
-           </h3>
-           <p className="text-xl text-gray-400 font-light">
-             We leverage industry-leading tools to build indestructible workflows.
-           </p>
-        </div>
-        <ToolsTicker tools={toolData} />
-      </section>
-
-      {/* Specialized Stats */}
-      <section className="py-32 bg-[#0B0F19] px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { label: "ROI Focused", value: "300-520%" },
-            { label: "Organic Gains", value: "65%+" },
-            { label: "Time Savings", value: "80%" },
-            { label: "Client Retained", value: "95%+" }
-          ].map((stat, i) => (
-            <motion.div 
-               initial={{ opacity: 0, scale: 0.9 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ delay: i * 0.1 }}
-               key={i} 
-               className="p-8 rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center text-center group hover:bg-white/10 hover:border-white/20 hover:shadow-2xl transition-all"
-            >
-              <p className="text-3xl lg:text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">{stat.value}</p>
-              <p className="text-xs font-mono text-gray-500 uppercase tracking-widest">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="max-w-3xl mx-auto px-6 mb-32">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-gray-500 font-mono text-xs uppercase tracking-[0.3em]">Common Questions</h2>
-          <h3 className="text-5xl font-bold text-white tracking-tight">FAQ</h3>
-        </div>
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white/5 rounded-3xl border border-white/10 overflow-hidden"
-            >
-              <button
-                onClick={() => toggleFaq(i)}
-                className="w-full flex items-center justify-between p-8 text-left focus:outline-none"
-              >
-                <span className={`text-xl font-bold pr-8 transition-colors ${openFaq === i ? 'text-white' : 'text-gray-300'}`}>{faq.question}</span>
-                <div className={`w-10 h-10 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-brand-gradient text-zinc-900 border-none rotate-180' : 'bg-white/10 border-white/20 text-gray-400'}`}>
-                  {openFaq === i ? <Minus size={16} /> : <Plus size={16} />}
-                </div>
-              </button>
-              <AnimatePresence>
-                {openFaq === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-8 pb-8 text-gray-400 font-light leading-relaxed text-lg pt-2 border-t border-white/10 mt-2 mx-8">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-32">
-        <div className="relative bg-zinc-950/50 backdrop-blur-sm rounded-[4rem] p-12 md:p-24 text-center space-y-10 overflow-hidden border border-white/10 shadow-2xl group hover:shadow-3xl transition-shadow">
-          <div className="relative z-10 space-y-6">
-            <h3 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight">
-              Ready to automate <br /> your growth?
-            </h3>
-            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
-              Every business is unique. Bespoke solutions and flexible packages available to meet your exact growth stage and needs.
-            </p>
-            <div className="pt-6">
+            <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
               <Link 
                 to="/contact"
-                className="px-12 py-6 bg-brand-gradient text-zinc-900 font-bold text-xl rounded-[2rem] hover:brightness-110 transition-all shadow-2xl shadow-indigo-500/20 inline-flex items-center gap-2 group/btn"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-5 rounded-2xl bg-brand-gradient text-zinc-900 font-bold hover:brightness-110 shadow-lg shadow-indigo-500/25 transition-all text-center group"
               >
-                Book a Free Discovery Call <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
+                Book Your Free Strategy Call
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
-          {/* Decorative Circles Dark Theme */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gradient/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-gradient/20 transition-colors duration-1000" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-gradient/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-gradient/20 transition-colors duration-1000" />
-        </div>
-      </section>
+        </motion.div>
+
+      </div>
     </div>
   );
 }
