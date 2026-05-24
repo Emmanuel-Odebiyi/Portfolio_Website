@@ -17,38 +17,38 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
   const duplicatedTools = [...tools, ...tools, ...tools];
 
   return (
-    <div className="relative w-full overflow-hidden bg-white py-20 border-y border-zinc-100 flex justify-center">
+    <div className="relative w-full overflow-hidden bg-transparent py-16 border-y border-white/5 flex justify-center">
       <div className="flex whitespace-nowrap overflow-hidden max-w-[100vw]">
         <motion.div
-          className="flex gap-8 md:gap-12 items-center min-w-max"
+          className="flex gap-6 md:gap-8 items-center min-w-max"
           animate={{
             x: ["0%", "-33.33%"],
           }}
           transition={{
-            duration: 40,
+            duration: 35,
             repeat: Infinity,
             ease: "linear",
           }}
           whileHover={{ animationPlayState: 'paused' }}
         >
           {duplicatedTools.map((tool, i) => (
-            <MagneticPull key={i} strength={0.3} radius={16}>
+            <MagneticPull key={i} strength={0.25} radius={14}>
               <div
-                className="flex items-center gap-4 px-8 py-5 rounded-2xl bg-white/40 backdrop-blur-sm border border-zinc-200/50 group transition-all duration-300 hover:border-deep-space-blue-300/50 hover:bg-white/80 hover:shadow-2xl hover:shadow-indigo-500/10"
+                className="flex items-center gap-4 px-6 py-4.5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group transition-all duration-300 hover:border-indigo-500/30 hover:bg-white/10 hover:shadow-2xl hover:shadow-indigo-500/10"
               >
                 {tool.logo ? (
                   <img
                     src={tool.logo}
                     alt={tool.name}
-                    className="w-8 h-8 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                    className="w-7 h-7 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-8 h-8 flex items-center justify-center text-zinc-300 group-hover:text-brand-gradient transition-colors duration-500">
+                  <div className="w-7 h-7 flex items-center justify-center text-zinc-400 group-hover:text-indigo-400 transition-colors duration-500">
                     {tool.icon}
                   </div>
                 )}
-                <span className="text-xl font-bold text-zinc-300 group-hover:text-zinc-900 transition-colors duration-500">
+                <span className="text-lg font-bold text-zinc-400 group-hover:text-white transition-colors duration-500">
                   {tool.name}
                 </span>
               </div>
@@ -57,9 +57,9 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
         </motion.div>
       </div>
 
-      {/* Gradient Overlays for smooth fade */}
-      <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+      {/* Gradient Overlays for smooth fade in dark theme */}
+      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0f1e] via-[#0a0f1e]/70 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0f1e] via-[#0a0f1e]/70 to-transparent z-10 pointer-events-none" />
     </div>
   );
 };

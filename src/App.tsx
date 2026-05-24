@@ -27,6 +27,9 @@ const AutopilotScore = lazy(() => import('./pages/tools/AutopilotScore'));
 const ROITimeMachine = lazy(() => import('./pages/tools/ROITimeMachine'));
 const GrowthSimulator = lazy(() => import('./pages/tools/GrowthSimulator'));
 const ToolPlaceholder = lazy(() => import('./pages/tools/ToolPlaceholder'));
+const ContentMarketingAutomation = lazy(() => import('./pages/services/ContentMarketingAutomation'));
+const SEOStrategyOptimization = lazy(() => import('./pages/services/SEOStrategyOptimization'));
+const BusinessProcessAutomation = lazy(() => import('./pages/services/BusinessProcessAutomation'));
 
 // ── Page Loading Fallback ─────────────────────────────────────────────────────
 function PageLoader() {
@@ -74,6 +77,9 @@ export default function App() {
             <Route path="/my-story" element={<MyStory />} />
             <Route path="/my-approach" element={<MyApproach />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/content-marketing-automation" element={<ContentMarketingAutomation />} />
+            <Route path="/services/seo-strategy-optimization" element={<SEOStrategyOptimization />} />
+            <Route path="/services/business-process-automation" element={<BusinessProcessAutomation />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/growth-intelligence-lab" element={<GrowthIntelligenceLab />} />
             <Route path="/tools/automation-radar" element={<AutomationRadar />} />

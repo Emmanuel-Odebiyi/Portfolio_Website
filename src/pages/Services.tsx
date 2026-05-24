@@ -290,6 +290,10 @@ export default function Services() {
             
             {/* Selector column (Left) */}
             <div className="lg:col-span-4 flex flex-col gap-3 justify-center">
+              <div className="flex items-center gap-2 mb-2 px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-400 uppercase tracking-widest w-fit animate-pulse">
+                <Sparkles size={12} className="fill-indigo-400" />
+                Click below to view blueprint ➔
+              </div>
               {[
                 { id: 'content', title: 'Content Marketing Automation', desc: 'Stop Publishing When You Have Time. Start Publishing on a System.', icon: <Workflow size={20} /> },
                 { id: 'seo', title: 'SEO Strategy & Optimization', desc: "Ranking Higher Isn't Luck. It's Architecture.", icon: <Search size={20} /> },
@@ -298,7 +302,7 @@ export default function Services() {
                 <button
                   key={service.id}
                   onClick={() => setActiveBlueprint(service.id as any)}
-                  className={`w-full text-left p-6 rounded-2xl transition-all duration-300 border flex gap-4 items-start ${
+                  className={`w-full text-left p-6 rounded-2xl transition-all duration-300 border flex gap-4 items-start group relative ${
                     activeBlueprint === service.id
                       ? 'bg-white/10 border-white/20 text-white font-bold shadow-xl'
                       : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10 hover:text-white'
@@ -307,10 +311,15 @@ export default function Services() {
                   <div className={`p-3 rounded-xl border shrink-0 ${activeBlueprint === service.id ? 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400' : 'bg-white/5 border-white/10'}`}>
                     {service.icon}
                   </div>
-                  <div className="space-y-1">
+                  <div className="space-y-1 flex-1 pr-6">
                     <h4 className="text-lg font-bold text-white tracking-tight leading-snug">{service.title}</h4>
                     <p className="text-xs text-zinc-400 font-light leading-relaxed">{service.desc.substring(0, 55)}...</p>
                   </div>
+                  {activeBlueprint !== service.id && (
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-indigo-400">
+                      View <ArrowRight size={10} />
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
@@ -381,6 +390,12 @@ export default function Services() {
                       <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
                         Result: Your audience sees you everywhere, every week — without you writing a single word.
                       </div>
+                      <Link
+                        to="/services/content-marketing-automation"
+                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-bold text-sm hover:brightness-110 shadow-lg shadow-indigo-500/20 active:scale-95 transition-all uppercase tracking-wider mt-2"
+                      >
+                        Let's Build Your Content Engine <ArrowRight size={16} />
+                      </Link>
                     </motion.div>
                   )}
 
@@ -444,6 +459,12 @@ export default function Services() {
                       <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
                         Result: Content that doesn't just exist — it ranks, it gets clicked, and it brings in the right traffic.
                       </div>
+                      <Link
+                        to="/services/seo-strategy-optimization"
+                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 via-teal-500 to-indigo-500 text-white font-bold text-sm hover:brightness-110 shadow-lg shadow-blue-500/20 active:scale-95 transition-all uppercase tracking-wider mt-2"
+                      >
+                        Build My SEO Foundation <ArrowRight size={16} />
+                      </Link>
                     </motion.div>
                   )}
 
@@ -507,6 +528,12 @@ export default function Services() {
                       <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
                         Result: Reclaim 10–20 hours per week, allowing your team to stop doing manual entry and focus on building.
                       </div>
+                      <Link
+                        to="/services/business-process-automation"
+                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-bold text-sm hover:brightness-110 shadow-lg shadow-amber-500/20 active:scale-95 transition-all uppercase tracking-wider mt-2"
+                      >
+                        Automate My Business Processes <ArrowRight size={16} />
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>

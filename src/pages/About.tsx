@@ -71,7 +71,7 @@ const fadeUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: false, margin: "0px" } as any,
-  transition: { duration: 0.7, ease: [0.21, 0.45, 0.32, 0.9] },
+  transition: { duration: 0.7, ease: [0.21, 0.45, 0.32, 0.9] as any },
 };
 
 const stagger = (i: number) => ({

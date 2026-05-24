@@ -312,27 +312,39 @@ export default function MyApproach() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Tabs List */}
-            <div className="lg:col-span-4 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible no-scrollbar pb-4 lg:pb-0">
-              {capabilities.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`w-full text-left p-4 rounded-xl transition-all duration-300 flex items-center justify-between shrink-0 lg:shrink border ${
-                    activeTab === tab.id
-                      ? 'bg-white/10 border-white/20 text-white font-bold shadow-lg'
-                      : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10 hover:text-white'
-                  }`}
-                  style={{ minWidth: '220px' }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${activeTab === tab.id ? 'bg-white/10' : 'bg-transparent'}`}>
-                      {tab.icon}
+            <div className="lg:col-span-4 flex flex-col gap-2">
+              <div className="flex items-center gap-2 mb-2 px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-blue-400 uppercase tracking-widest w-fit animate-pulse">
+                <Sparkles size={12} className="fill-blue-400" />
+                Click below to view details ➔
+              </div>
+              <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible no-scrollbar pb-4 lg:pb-0">
+                {capabilities.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`w-full text-left p-4 rounded-xl transition-all duration-300 flex items-center justify-between shrink-0 lg:shrink border group relative ${
+                      activeTab === tab.id
+                        ? 'bg-white/10 border-white/20 text-white font-bold shadow-lg'
+                        : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10 hover:text-white'
+                    }`}
+                    style={{ minWidth: '220px' }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`p-2 rounded-lg ${activeTab === tab.id ? 'bg-white/10' : 'bg-transparent'}`}>
+                        {tab.icon}
+                      </div>
+                      <span className="text-sm tracking-tight">{tab.title}</span>
                     </div>
-                    <span className="text-sm tracking-tight">{tab.title}</span>
-                  </div>
-                  <ChevronRight size={16} className={`hidden lg:block transition-transform duration-300 ${activeTab === tab.id ? 'translate-x-1' : 'opacity-40'}`} />
-                </button>
-              ))}
+                    {activeTab !== tab.id ? (
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-blue-400">
+                        View <ArrowRight size={10} />
+                      </div>
+                    ) : (
+                      <ChevronRight size={16} className={`hidden lg:block transition-transform duration-300 translate-x-1`} />
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Tab Panels */}
