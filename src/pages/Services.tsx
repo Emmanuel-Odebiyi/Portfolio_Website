@@ -80,7 +80,7 @@ export default function Services() {
       <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
 
         {/* Header Block */}
-        <div className="max-w-4xl mb-24 space-y-6">
+        <div className="max-w-4xl mx-auto mb-24 text-center flex flex-col items-center justify-center space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,7 +98,7 @@ export default function Services() {
             That Produce Revenue.
           </h1>
           
-          <p className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-2xl pt-2">
+          <p className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-2xl pt-2 mx-auto">
             Consistent content. Higher rankings. Time back in your week. No team required.
           </p>
         </div>

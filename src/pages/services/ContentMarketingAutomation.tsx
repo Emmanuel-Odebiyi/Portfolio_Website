@@ -125,7 +125,90 @@ export default function ContentMarketingAutomation() {
         {/* ── HERO ── */}
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh] pt-8">
           
-          {/* LEFT: Copy */}
+          {/* LEFT: Live Editorial Dashboard Visual */}
+          <motion.div
+            initial={{ opacity: 0, x: -50, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+            className="relative hidden lg:block"
+          >
+            {/* Ambient glow behind the card */}
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/15 to-blue-500/10 rounded-[2.5rem] blur-[60px] scale-110 pointer-events-none" />
+            
+            {/* Dashboard card */}
+            <div className="relative rounded-[2rem] bg-zinc-950/90 border border-white/10 backdrop-blur-xl shadow-2xl p-6 overflow-hidden">
+              {/* Top bar */}
+              <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <span className="ml-3 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Content Engine Dashboard</span>
+                </div>
+                <span className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  LIVE
+                </span>
+              </div>
+
+              {/* Queue of publishing articles */}
+              <div className="space-y-2.5 mb-5">
+                {[
+                  { title: '7 SaaS Pricing Strategies That Convert', channel: 'Blog', status: 'Published', color: 'emerald', delay: 0 },
+                  { title: 'How We Grew Organic Traffic 520%', channel: 'LinkedIn', status: 'Scheduled', color: 'blue', delay: 0.15 },
+                  { title: 'Top 10 Content Tools for 2025', channel: 'Newsletter', status: 'Writing...', color: 'purple', delay: 0.3 },
+                  { title: 'The Automation Stack Every SMB Needs', channel: 'Blog', status: 'Research', color: 'indigo', delay: 0.45 },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 + item.delay, duration: 0.5 }}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8 hover:border-white/15 transition-all group"
+                  >
+                    <div className={`w-1.5 h-8 rounded-full shrink-0 ${
+                      item.color === 'emerald' ? 'bg-emerald-500' :
+                      item.color === 'blue' ? 'bg-blue-500' :
+                      item.color === 'purple' ? 'bg-purple-500' : 'bg-indigo-500'
+                    }`} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold text-white truncate">{item.title}</p>
+                      <p className="text-[10px] text-zinc-500 font-mono">{item.channel}</p>
+                    </div>
+                    <span className={`text-[9px] font-mono px-2 py-1 rounded-md border shrink-0 ${
+                      item.color === 'emerald' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
+                      item.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
+                      item.color === 'purple' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' :
+                      'bg-indigo-500/10 border-indigo-500/30 text-indigo-400'
+                    }`}>
+                      {item.status}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Stats bar */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10"
+              >
+                {[
+                  { val: '40', label: 'articles/mo' },
+                  { val: '520%', label: 'ROI' },
+                  { val: '0hrs', label: 'manual work' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">{s.val}</div>
+                    <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">{s.label}</div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT: Copy */}
           <div className="space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -200,89 +283,6 @@ export default function ContentMarketingAutomation() {
               </a>
             </motion.div>
           </div>
-
-          {/* RIGHT: Live Editorial Dashboard Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-            className="relative hidden lg:block"
-          >
-            {/* Ambient glow behind the card */}
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/15 to-blue-500/10 rounded-[2.5rem] blur-[60px] scale-110 pointer-events-none" />
-            
-            {/* Dashboard card */}
-            <div className="relative rounded-[2rem] bg-zinc-950/90 border border-white/10 backdrop-blur-xl shadow-2xl p-6 overflow-hidden">
-              {/* Top bar */}
-              <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                  <span className="ml-3 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Content Engine Dashboard</span>
-                </div>
-                <span className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  LIVE
-                </span>
-              </div>
-
-              {/* Queue of publishing articles */}
-              <div className="space-y-2.5 mb-5">
-                {[
-                  { title: '7 SaaS Pricing Strategies That Convert', channel: 'Blog', status: 'Published', color: 'emerald', delay: 0 },
-                  { title: 'How We Grew Organic Traffic 520%', channel: 'LinkedIn', status: 'Scheduled', color: 'blue', delay: 0.15 },
-                  { title: 'Top 10 Content Tools for 2025', channel: 'Newsletter', status: 'Writing...', color: 'purple', delay: 0.3 },
-                  { title: 'The Automation Stack Every SMB Needs', channel: 'Blog', status: 'Research', color: 'indigo', delay: 0.45 },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + item.delay, duration: 0.5 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8 hover:border-white/15 transition-all group"
-                  >
-                    <div className={`w-1.5 h-8 rounded-full shrink-0 ${
-                      item.color === 'emerald' ? 'bg-emerald-500' :
-                      item.color === 'blue' ? 'bg-blue-500' :
-                      item.color === 'purple' ? 'bg-purple-500' : 'bg-indigo-500'
-                    }`} />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-white truncate">{item.title}</p>
-                      <p className="text-[10px] text-zinc-500 font-mono">{item.channel}</p>
-                    </div>
-                    <span className={`text-[9px] font-mono px-2 py-1 rounded-md border shrink-0 ${
-                      item.color === 'emerald' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
-                      item.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
-                      item.color === 'purple' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' :
-                      'bg-indigo-500/10 border-indigo-500/30 text-indigo-400'
-                    }`}>
-                      {item.status}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Stats bar */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-                className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10"
-              >
-                {[
-                  { val: '40', label: 'articles/mo' },
-                  { val: '520%', label: 'ROI' },
-                  { val: '0hrs', label: 'manual work' },
-                ].map((s, i) => (
-                  <div key={i} className="text-center">
-                    <div className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">{s.val}</div>
-                    <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">{s.label}</div>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          </motion.div>
 
         </div>
 
