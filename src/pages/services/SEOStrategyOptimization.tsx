@@ -155,65 +155,186 @@ export default function SEOStrategyOptimization() {
         </motion.div>
 
         {/* ── HERO ── */}
-        <div className="mb-24 max-w-5xl">
+        <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh] pt-8">
+
+          {/* LEFT: Copy */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-blue-400 tracking-[0.2em] uppercase"
+            >
+              <Search size={12} />
+              Service 02 — SEO Architecture
+            </motion.div>
+
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white"
+              >
+                Your customers{' '}
+                <br />
+                are searching.{' '}
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-teal-400 to-cyan-400">
+                  Will they find you?
+                </span>
+              </motion.h1>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed"
+            >
+              You can publish great content and still get zero traffic. SEO is what 
+              determines whether your content gets found — or gets buried.{' '}
+              <strong className="text-white font-semibold">I build the architecture that ranks.</strong>
+            </motion.p>
+
+            {/* Mock search bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md max-w-sm"
+            >
+              <Search size={15} className="text-zinc-500 shrink-0" />
+              <span className="text-sm text-zinc-300 font-mono flex-1">best saas for growing business</span>
+              <span className="text-[10px] font-mono px-2 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 shrink-0">↑ Rank #9</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-teal-500 to-cyan-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-blue-500/30 active:scale-95 transition-all group"
+              >
+                Build My SEO Foundation
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a
+                href="#seo-layers"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
+              >
+                See the Architecture
+                <ChevronDown size={16} />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: SERP Radar Visual */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-blue-400 tracking-[0.2em] uppercase mb-8"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.2, ease: 'easeOut' }}
+            className="relative hidden lg:flex items-center justify-center"
+            style={{ height: '480px' }}
           >
-            <Search size={12} />
-            Service 02 — SEO Architecture
+            {/* Ambient glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 via-teal-500/10 to-cyan-500/5 rounded-full blur-[80px] scale-75 pointer-events-none" />
+
+            {/* Concentric radar rings */}
+            {[1, 2, 3, 4].map((ring) => (
+              <motion.div
+                key={ring}
+                initial={{ opacity: 0, scale: 0.3 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 + ring * 0.1, duration: 0.8, ease: 'easeOut' }}
+                className="absolute rounded-full border border-blue-500/20"
+                style={{
+                  width: `${ring * 110}px`,
+                  height: `${ring * 110}px`,
+                }}
+              >
+                {/* Ping on outer ring only */}
+                {ring === 4 && (
+                  <div className="absolute inset-0 rounded-full border border-blue-400/15 animate-ping" style={{ animationDuration: '3s' }} />
+                )}
+              </motion.div>
+            ))}
+
+            {/* Rotating radar sweep line */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+              className="absolute"
+              style={{ width: '440px', height: '440px' }}
+            >
+              <div
+                className="absolute top-1/2 left-1/2 h-[220px] w-[1px] origin-bottom"
+                style={{
+                  background: 'linear-gradient(to top, rgba(59,130,246,0.6), transparent)',
+                  transformOrigin: 'bottom center',
+                  transform: 'translateX(-50%)',
+                }}
+              />
+            </motion.div>
+
+            {/* Center dot */}
+            <div className="absolute w-3 h-3 rounded-full bg-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.8)]" />
+
+            {/* Rank badge — outer orbit position */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+              className="absolute"
+              style={{ width: '440px', height: '440px' }}
+            >
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+                className="absolute top-2 left-1/2 -translate-x-1/2 px-3 py-2 rounded-xl bg-blue-500 text-white text-xs font-black shadow-[0_0_20px_rgba(59,130,246,0.5)] whitespace-nowrap"
+              >
+                #9 — Ranking
+              </motion.div>
+            </motion.div>
+
+            {/* Floating keyword pills */}
+            {[
+              { text: 'saas growth', x: '15%', y: '22%', delay: 0.8, color: 'teal' },
+              { text: 'content strategy', x: '62%', y: '12%', delay: 1.0, color: 'blue' },
+              { text: 'keyword gap', x: '70%', y: '70%', delay: 1.2, color: 'cyan' },
+              { text: 'topic clusters', x: '10%', y: '72%', delay: 1.4, color: 'indigo' },
+            ].map((kw, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: kw.delay, duration: 0.5 }}
+                className={`absolute text-[10px] font-mono px-2.5 py-1.5 rounded-lg border ${
+                  kw.color === 'teal' ? 'bg-teal-500/10 border-teal-500/30 text-teal-400' :
+                  kw.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
+                  kw.color === 'cyan' ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400' :
+                  'bg-indigo-500/10 border-indigo-500/30 text-indigo-400'
+                }`}
+                style={{ left: kw.x, top: kw.y }}
+              >
+                {kw.text}
+              </motion.div>
+            ))}
+
+            {/* Stats floating card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.6, duration: 0.6 }}
+              className="absolute bottom-4 right-4 px-4 py-3 rounded-2xl bg-zinc-950/90 border border-white/10 backdrop-blur-xl text-center shadow-xl"
+            >
+              <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">65%</div>
+              <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">Traffic Growth</div>
+            </motion.div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.02] text-white mb-8"
-          >
-            Ranking Higher{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-teal-400 to-indigo-400">
-              Isn't Luck.
-            </span>
-            <br />
-            It's{' '}
-            <span className="italic">Architecture.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-3xl"
-          >
-            You can publish great content and still get zero traffic. SEO is what determines
-            whether your content gets found — or gets buried. I build SEO strategies from the
-            foundation up: keyword architecture, technical health, content optimization, and a{' '}
-            <strong className="text-white font-semibold">ranking roadmap built around your actual business goals.</strong>
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex flex-col sm:flex-row gap-4 mt-10"
-          >
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-teal-500 to-indigo-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-blue-500/25 active:scale-95 transition-all"
-            >
-              Build My SEO Foundation
-              <ArrowRight size={18} />
-            </Link>
-            <a
-              href="#seo-layers"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
-            >
-              See the Architecture
-              <ChevronDown size={16} />
-            </a>
-          </motion.div>
         </div>
 
         {/* ── LIVE RANKING COUNTER DEMO ── */}

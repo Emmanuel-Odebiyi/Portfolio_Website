@@ -123,64 +123,167 @@ export default function ContentMarketingAutomation() {
         </motion.div>
 
         {/* ── HERO ── */}
-        <div className="mb-24 max-w-5xl">
+        <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh] pt-8">
+          
+          {/* LEFT: Copy */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase"
+            >
+              <Workflow size={12} className="animate-pulse" />
+              Service 01 — Content Engine
+            </motion.div>
+
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white"
+              >
+                Your content,{' '}
+                <br />
+                <span className="relative inline-block">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-500">
+                    published everywhere
+                  </span>
+                </span>
+                <br />
+                — while you sleep.
+              </motion.h1>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed"
+            >
+              Most businesses don't have a content problem. They have a 
+              consistency problem. Great ideas, no engine to get them out.{' '}
+              <strong className="text-white font-semibold">I build the engine.</strong>
+            </motion.p>
+
+            {/* Live output ticker */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex items-center gap-3 py-3 px-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 w-fit"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">Engine Active — 3 articles published today</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-indigo-500/30 active:scale-95 transition-all group"
+              >
+                Let's Build Your Content Engine
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a
+                href="#how-it-works"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
+              >
+                See How It Works
+                <ChevronDown size={16} />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: Live Editorial Dashboard Visual */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase mb-8"
+            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+            className="relative hidden lg:block"
           >
-            <Workflow size={12} />
-            Service 01 — Content Engine
+            {/* Ambient glow behind the card */}
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/15 to-blue-500/10 rounded-[2.5rem] blur-[60px] scale-110 pointer-events-none" />
+            
+            {/* Dashboard card */}
+            <div className="relative rounded-[2rem] bg-zinc-950/90 border border-white/10 backdrop-blur-xl shadow-2xl p-6 overflow-hidden">
+              {/* Top bar */}
+              <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <span className="ml-3 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Content Engine Dashboard</span>
+                </div>
+                <span className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  LIVE
+                </span>
+              </div>
+
+              {/* Queue of publishing articles */}
+              <div className="space-y-2.5 mb-5">
+                {[
+                  { title: '7 SaaS Pricing Strategies That Convert', channel: 'Blog', status: 'Published', color: 'emerald', delay: 0 },
+                  { title: 'How We Grew Organic Traffic 520%', channel: 'LinkedIn', status: 'Scheduled', color: 'blue', delay: 0.15 },
+                  { title: 'Top 10 Content Tools for 2025', channel: 'Newsletter', status: 'Writing...', color: 'purple', delay: 0.3 },
+                  { title: 'The Automation Stack Every SMB Needs', channel: 'Blog', status: 'Research', color: 'indigo', delay: 0.45 },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 + item.delay, duration: 0.5 }}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8 hover:border-white/15 transition-all group"
+                  >
+                    <div className={`w-1.5 h-8 rounded-full shrink-0 ${
+                      item.color === 'emerald' ? 'bg-emerald-500' :
+                      item.color === 'blue' ? 'bg-blue-500' :
+                      item.color === 'purple' ? 'bg-purple-500' : 'bg-indigo-500'
+                    }`} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold text-white truncate">{item.title}</p>
+                      <p className="text-[10px] text-zinc-500 font-mono">{item.channel}</p>
+                    </div>
+                    <span className={`text-[9px] font-mono px-2 py-1 rounded-md border shrink-0 ${
+                      item.color === 'emerald' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
+                      item.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
+                      item.color === 'purple' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' :
+                      'bg-indigo-500/10 border-indigo-500/30 text-indigo-400'
+                    }`}>
+                      {item.status}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Stats bar */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10"
+              >
+                {[
+                  { val: '40', label: 'articles/mo' },
+                  { val: '520%', label: 'ROI' },
+                  { val: '0hrs', label: 'manual work' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">{s.val}</div>
+                    <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">{s.label}</div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.02] text-white mb-8"
-          >
-            Stop Publishing{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-400">
-              When You Have Time.
-            </span>
-            <br />
-            Start Publishing{' '}
-            <span className="italic">on a System.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-3xl"
-          >
-            Most businesses don't have a content problem. They have a consistency problem.
-            Great ideas, no reliable engine to get them out.{' '}
-            <strong className="text-white font-semibold">I build the engine.</strong>
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex flex-col sm:flex-row gap-4 mt-10"
-          >
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-indigo-500/25 active:scale-95 transition-all"
-            >
-              Let's Build Your Content Engine
-              <ArrowRight size={18} />
-            </Link>
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
-            >
-              See How It Works
-              <ChevronDown size={16} />
-            </a>
-          </motion.div>
         </div>
 
         {/* ── PROOF BAR ── */}

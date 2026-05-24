@@ -155,37 +155,260 @@ export default function MyStory() {
           </Link>
         </motion.div>
         
-        {/* Hero Section */}
-        <div className="mb-24 max-w-5xl">
+        {/* ── HERO: TRANSFORMATION ── */}
+        <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh] pt-8">
+
+          {/* LEFT: Story Hook */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-[0.2em] uppercase text-zinc-400"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-400 to-amber-400 animate-pulse" />
+              The Origin Story
+            </motion.div>
+
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white"
+              >
+                The writer who got{' '}
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400">
+                  tired of grinding.
+                </span>
+                <br />
+                So he built a{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+                  machine.
+                </span>
+              </motion.h1>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed"
+            >
+              I went from drowning in deadlines and losing clients to pricing pressure — 
+              to building automated marketing engines that deliver{' '}
+              <strong className="text-white font-semibold">520% ROI on autopilot.</strong>
+              {' '}This is that story.
+            </motion.p>
+
+            {/* Transformation stat badges */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex flex-wrap gap-3"
+            >
+              {[
+                { val: '3 yrs', label: 'of building' },
+                { val: '520%', label: 'avg ROI delivered' },
+                { val: '0hrs', label: 'manual content work' },
+              ].map((b, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md"
+                >
+                  <span className="text-base font-black text-white">{b.val}</span>
+                  <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-wider">{b.label}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-blue-500/25 active:scale-95 transition-all group"
+              >
+                Work With Me
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                to="/my-approach"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
+              >
+                See My Methodology
+                <ChevronRight size={16} />
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: Transformation Identity Card */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mb-8 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-[0.2em] uppercase text-zinc-400"
+            initial={{ opacity: 0, x: 60, scale: 0.92 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.2, ease: 'easeOut' }}
+            className="relative hidden lg:block"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient animate-pulse" />
-            The Origin Story
+            {/* Outer glow ring */}
+            <div className="absolute inset-0 rounded-[2.5rem] blur-[60px] opacity-60 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at 60% 40%, rgba(99,102,241,0.25) 0%, rgba(245,158,11,0.1) 60%, transparent 80%)' }}
+            />
+
+            {/* Card container */}
+            <div className="relative rounded-[2rem] bg-zinc-950/95 border border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden">
+
+              {/* Card top header */}
+              <div className="flex items-center gap-2 p-5 border-b border-white/10">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                <span className="ml-2 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Emmanuel Odebiyi — Identity Log</span>
+              </div>
+
+              {/* Before / After toggle */}
+              <div className="p-6 space-y-5">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('story-sim');
+                      if (el) el.setAttribute('data-mode', 'before');
+                      el?.querySelectorAll('[data-before]').forEach(e => (e as HTMLElement).style.display = 'flex');
+                      el?.querySelectorAll('[data-after]').forEach(e => (e as HTMLElement).style.display = 'none');
+                    }}
+                    className="flex-1 py-2.5 rounded-xl text-xs font-mono font-bold bg-red-500/15 border border-red-500/30 text-red-400 hover:bg-red-500/25 transition-all"
+                  >
+                    ⚠ Before — 2021
+                  </button>
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('story-sim');
+                      if (el) el.setAttribute('data-mode', 'after');
+                      el?.querySelectorAll('[data-before]').forEach(e => (e as HTMLElement).style.display = 'none');
+                      el?.querySelectorAll('[data-after]').forEach(e => (e as HTMLElement).style.display = 'flex');
+                    }}
+                    className="flex-1 py-2.5 rounded-xl text-xs font-mono font-bold bg-blue-500/15 border border-blue-500/30 text-blue-400 hover:bg-blue-500/25 transition-all"
+                  >
+                    ✦ After — 2025
+                  </button>
+                </div>
+
+                {/* State display */}
+                <div id="story-sim" className="space-y-3">
+                  {/* BEFORE stats */}
+                  {[
+                    { label: 'Stress Level', val: '94%', bar: 94, color: 'red', prefix: '🔥' },
+                    { label: 'Articles / mo (manual)', val: '4', bar: 10, color: 'orange', prefix: '✍' },
+                    { label: 'Revenue Predictability', val: '12%', bar: 12, color: 'red', prefix: '📉' },
+                  ].map((stat, i) => (
+                    <motion.div
+                      key={i}
+                      data-before
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.7 + i * 0.1, duration: 0.4 }}
+                      className="flex flex-col gap-1.5"
+                    >
+                      <div className="flex justify-between text-[10px] font-mono">
+                        <span className="text-zinc-400">{stat.prefix} {stat.label}</span>
+                        <span className={stat.color === 'red' ? 'text-red-400 font-bold' : 'text-orange-400 font-bold'}>{stat.val}</span>
+                      </div>
+                      <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${stat.bar}%` }}
+                          transition={{ delay: 0.9 + i * 0.1, duration: 0.8 }}
+                          className={`h-full rounded-full ${stat.color === 'red' ? 'bg-red-500' : 'bg-orange-500'}`}
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  {/* AFTER stats — hidden by default, shown via button */}
+                  {[
+                    { label: 'System Uptime', val: '99.9%', bar: 99, color: 'emerald', prefix: '⚡' },
+                    { label: 'Articles / mo (automated)', val: '40+', bar: 100, color: 'blue', prefix: '🤖' },
+                    { label: 'Client ROI Average', val: '520%', bar: 85, color: 'indigo', prefix: '📈' },
+                  ].map((stat, i) => (
+                    <div
+                      key={i}
+                      data-after
+                      style={{ display: 'none' }}
+                      className="flex flex-col gap-1.5"
+                    >
+                      <div className="flex justify-between text-[10px] font-mono">
+                        <span className="text-zinc-400">{stat.prefix} {stat.label}</span>
+                        <span className={
+                          stat.color === 'emerald' ? 'text-emerald-400 font-bold' :
+                          stat.color === 'blue' ? 'text-blue-400 font-bold' : 'text-indigo-400 font-bold'
+                        }>{stat.val}</span>
+                      </div>
+                      <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full ${
+                            stat.color === 'emerald' ? 'bg-emerald-500' :
+                            stat.color === 'blue' ? 'bg-blue-500' : 'bg-indigo-500'
+                          }`}
+                          style={{ width: `${stat.bar}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Journey progress bar */}
+                <div className="pt-2 space-y-2">
+                  <div className="flex justify-between text-[9px] font-mono text-zinc-600 uppercase tracking-widest">
+                    <span>Burnout Writer</span>
+                    <span>Systems Architect</span>
+                  </div>
+                  <div className="h-2 bg-zinc-800 rounded-full overflow-hidden relative">
+                    <motion.div
+                      initial={{ width: '15%' }}
+                      animate={{ width: '88%' }}
+                      transition={{ delay: 1.2, duration: 1.5, ease: 'easeOut' }}
+                      className="h-full rounded-full bg-gradient-to-r from-red-500 via-amber-500 to-blue-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Floating achievement pills */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {[
+                    { text: '520% ROI', color: 'indigo' },
+                    { text: 'n8n Certified', color: 'amber' },
+                    { text: '40+ articles/mo', color: 'blue' },
+                    { text: 'SEO Specialist', color: 'teal' },
+                  ].map((badge, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: 1.4 + i * 0.08, duration: 0.4 }}
+                      className={`text-[9px] font-mono px-2.5 py-1 rounded-lg border ${
+                        badge.color === 'indigo' ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400' :
+                        badge.color === 'amber' ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' :
+                        badge.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
+                        'bg-teal-500/10 border-teal-500/30 text-teal-400'
+                      }`}
+                    >
+                      ✦ {badge.text}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white mb-8"
-          >
-            I Used to Be <br className="hidden sm:block" /> the Burnout. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400">
-              Now I Build the Systems.
-            </span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-3xl"
-          >
-            I went from drowning in deadlines to designing automated marketing engines that deliver 520% ROI — and now I build them for businesses like yours.
-          </motion.p>
+
         </div>
+
 
         {/* ── INTERACTIVE BRAIN-BUSTING SIMULATOR SECTION ── */}
         <div className="mb-32">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Zap, Target, MessageSquare, Globe, Activity, Calculator, TrendingUp, Cpu, User, Microscope, FileText } from 'lucide-react';
+import { Menu, X, ChevronDown, Workflow, Search, Cpu, Globe, Activity, Calculator, TrendingUp, User, Microscope, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
@@ -19,10 +19,9 @@ const navLinks = [
     name: 'Services', 
     href: '/services',
     dropdown: [
-      { name: 'Content Strategy', desc: 'Keyword research & SERP analysis', href: '/services#content', icon: <Target className="w-4 h-4" /> },
-      { name: 'Marketing Automation', desc: 'n8n, Zapier & Make workflows', href: '/services#automation', icon: <Zap className="w-4 h-4" /> },
-      { name: 'AI Implementation', desc: 'Custom ChatGPT & LLM pipelines', href: '/services#ai', icon: <MessageSquare className="w-4 h-4" /> },
-      { name: 'Technical SEO', desc: 'Structure & performance audits', href: '/services#seo', icon: <Globe className="w-4 h-4" /> },
+      { name: 'Content Marketing Automation', desc: 'AI-powered content engines & editorial systems', href: '/services/content-marketing-automation', icon: <Workflow className="w-4 h-4" /> },
+      { name: 'SEO Strategy & Optimization', desc: 'Keyword architecture & technical audits', href: '/services/seo-strategy-optimization', icon: <Search className="w-4 h-4" /> },
+      { name: 'Business Process Automation', desc: 'n8n, Zapier & Make workflow builds', href: '/services/business-process-automation', icon: <Cpu className="w-4 h-4" /> },
     ]
   },
   { 

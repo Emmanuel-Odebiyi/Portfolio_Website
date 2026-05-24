@@ -4,8 +4,9 @@ import {
   ArrowLeft, ArrowRight, BarChart3, Clock, Target, CheckCircle2, 
   MessageSquare, Repeat, Zap, Bot, Award, Database, Terminal, 
   BookOpen, Calendar, Cpu, Search, Check, ShieldCheck, ChevronRight, FileDown,
-  Layers, Settings, Sparkles, TrendingUp
+  Layers, Settings, Sparkles, TrendingUp, Activity
 } from 'lucide-react';
+
 import { Link } from 'react-router-dom';
 
 const fadeUp = {
@@ -153,37 +154,225 @@ export default function MyApproach() {
           </Link>
         </motion.div>
         
-        {/* Hero Section */}
-        <div className="mb-24 max-w-4xl">
+        {/* ── HERO: BLUEPRINT SCHEMATIC ── */}
+        <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh] pt-8">
+
+          {/* LEFT: Approach Hook */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono tracking-[0.2em] uppercase text-indigo-400"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+              The Methodology
+            </motion.div>
+
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white"
+              >
+                Not a consultant.
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-teal-400">
+                  An architect.
+                </span>
+                <br />
+                <span className="text-3xl sm:text-4xl lg:text-5xl text-zinc-400 font-light">
+                  Who engineers outcomes.
+                </span>
+              </motion.h1>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed"
+            >
+              I don't give you tools and leave. I don't hand over tactics and hope for the best.
+              I build{' '}
+              <strong className="text-white font-semibold">complete systems — designed for your business, measured against real outcomes.</strong>
+            </motion.p>
+
+            {/* The four commitments */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="space-y-3"
+            >
+              {[
+                { icon: <BarChart3 size={14} />, text: 'Every recommendation is backed by data', color: 'blue' },
+                { icon: <Target size={14} />, text: 'Every result is measured precisely', color: 'amber' },
+                { icon: <Repeat size={14} />, text: 'Every system is built to repeat', color: 'purple' },
+                { icon: <MessageSquare size={14} />, text: 'Everything is explained clearly', color: 'teal' },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all group`}
+                >
+                  <div className={`p-1.5 rounded-lg shrink-0 ${
+                    item.color === 'blue' ? 'bg-blue-500/10 text-blue-400' :
+                    item.color === 'amber' ? 'bg-amber-500/10 text-amber-400' :
+                    item.color === 'purple' ? 'bg-purple-500/10 text-purple-400' :
+                    'bg-teal-500/10 text-teal-400'
+                  }`}>
+                    {item.icon}
+                  </div>
+                  <span className="text-sm text-zinc-300 font-medium">{item.text}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.65 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-blue-500 to-teal-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-indigo-500/25 active:scale-95 transition-all group"
+              >
+                Work With Me
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                to="/my-story"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
+              >
+                Read My Story
+                <ChevronRight size={16} />
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: System Schematic Blueprint */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mb-8 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-[0.2em] uppercase text-zinc-400"
+            initial={{ opacity: 0, x: 60, scale: 0.92 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.2, ease: 'easeOut' }}
+            className="relative hidden lg:block"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-            The Methodology
+            {/* Glow */}
+            <div className="absolute inset-0 rounded-[2.5rem] blur-[60px] opacity-50 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(99,102,241,0.3) 0%, rgba(20,184,166,0.15) 60%, transparent 85%)' }}
+            />
+
+            {/* Blueprint card */}
+            <div className="relative rounded-[2rem] bg-zinc-950/95 border border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden">
+              
+              {/* Header bar */}
+              <div className="flex items-center justify-between p-5 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <span className="ml-2 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">System Architecture — v2025</span>
+                </div>
+                <span className="flex items-center gap-1.5 text-[10px] font-mono text-indigo-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                  DEPLOYED
+                </span>
+              </div>
+
+              {/* 5-phase pipeline */}
+              <div className="p-6 space-y-1">
+                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-4">Engagement Pipeline — 5 Phase Protocol</p>
+                {[
+                  { phase: '01', label: 'Discovery & Audit', desc: 'Current stack + gaps', color: 'blue', icon: <Search size={14} />, delay: 0.4 },
+                  { phase: '02', label: 'Strategy Architecture', desc: 'Data-driven roadmap', color: 'indigo', icon: <Layers size={14} />, delay: 0.55 },
+                  { phase: '03', label: 'System Build', desc: 'Workflows + content engine', color: 'purple', icon: <Settings size={14} />, delay: 0.7 },
+                  { phase: '04', label: 'Automation Deploy', desc: 'n8n, Zapier, APIs live', color: 'teal', icon: <Zap size={14} />, delay: 0.85 },
+                  { phase: '05', label: 'Optimize & Report', desc: 'Monthly performance loop', color: 'emerald', icon: <TrendingUp size={14} />, delay: 1.0 },
+                ].map((step, i) => (
+                  <div key={i}>
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: step.delay, duration: 0.5 }}
+                      className={`flex items-center gap-4 p-3.5 rounded-xl border transition-all ${
+                        i === 2
+                          ? 'bg-indigo-500/10 border-indigo-500/30'
+                          : i < 2
+                          ? 'bg-white/5 border-white/8'
+                          : 'bg-white/3 border-white/5 opacity-70'
+                      }`}
+                    >
+                      {/* Phase icon */}
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center border shrink-0 ${
+                        step.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
+                        step.color === 'indigo' ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400' :
+                        step.color === 'purple' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' :
+                        step.color === 'teal' ? 'bg-teal-500/10 border-teal-500/30 text-teal-400' :
+                        'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                      }`}>
+                        {step.icon}
+                      </div>
+                      {/* Labels */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] font-mono text-zinc-600">PHASE {step.phase}</span>
+                          {i < 2 && <span className="text-[8px] font-mono text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 rounded">✓ Done</span>}
+                          {i === 2 && (
+                            <span className="text-[8px] font-mono text-indigo-400 border border-indigo-500/30 bg-indigo-500/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+                              <span className="w-1 h-1 rounded-full bg-indigo-400 animate-pulse" /> Active
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs font-bold text-white">{step.label}</p>
+                        <p className="text-[9px] text-zinc-500 font-mono">{step.desc}</p>
+                      </div>
+                    </motion.div>
+                    {i < 4 && (
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ delay: step.delay + 0.2, duration: 0.3 }}
+                        className="w-px h-3 bg-gradient-to-b from-white/15 to-transparent ml-7 origin-top"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* System health footer */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.4, duration: 0.5 }}
+                className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-white/2"
+              >
+                <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
+                  <Activity size={10} className="text-emerald-400" />
+                  System Health
+                </div>
+                <div className="flex items-center gap-3">
+                  {[
+                    { label: 'Uptime', val: '99.9%', color: 'text-emerald-400' },
+                    { label: 'ROI Avg', val: '520%', color: 'text-indigo-400' },
+                    { label: 'Clients', val: '95%+', color: 'text-amber-400' },
+                  ].map((s, i) => (
+                    <div key={i} className="text-center">
+                      <div className={`text-xs font-black ${s.color}`}>{s.val}</div>
+                      <div className="text-[8px] font-mono text-zinc-600 uppercase">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white mb-8"
-          >
-            How I Work: <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-teal-400">
-              Data, Systems, & <br className="hidden sm:block" /> Zero Guesswork.
-            </span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-3xl"
-          >
-            I don't give you tools and leave. I don't hand over tactics and hope for the best. I build complete systems — designed for your business, built on proven frameworks, and measured against real outcomes.
-          </motion.p>
+
         </div>
+
 
         {/* 4 Pillars Section */}
         <div className="mb-32">

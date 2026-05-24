@@ -86,43 +86,217 @@ export default function BusinessProcessAutomation() {
         </motion.div>
 
         {/* ── HERO ── */}
-        <div className="mb-24 max-w-5xl">
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-400 tracking-[0.2em] uppercase mb-8">
-            <Cpu size={12} />
-            Service 03 — Process Automation
+        <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh] pt-8">
+
+          {/* LEFT: Copy + Before/After Widget */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-400 tracking-[0.2em] uppercase"
+            >
+              <Cpu size={12} className="animate-spin" style={{ animationDuration: '3s' }} />
+              Service 03 — Process Automation
+            </motion.div>
+
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white"
+              >
+                Stop bleeding{' '}
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
+                  hours every week
+                </span>
+                <br />
+                on tasks a machine can do.
+              </motion.h1>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed"
+            >
+              Most growing businesses have entire workflows that could — and should — be automated.
+              I map the inefficiency{' '}
+              <strong className="text-white font-semibold">and build the system that eliminates it.</strong>
+            </motion.p>
+
+            {/* Before / After comparison mini-widget */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="grid grid-cols-2 gap-3"
+            >
+              <div className="p-4 rounded-2xl bg-red-500/5 border border-red-500/20 space-y-2">
+                <div className="flex items-center gap-2 text-red-400">
+                  <Clock size={13} />
+                  <span className="text-[10px] font-mono uppercase tracking-widest">Before</span>
+                </div>
+                <div className="text-2xl font-black text-red-400">20+ hrs</div>
+                <div className="text-[10px] text-zinc-500 font-mono leading-snug">lost to manual tasks every single week</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 space-y-2">
+                <div className="flex items-center gap-2 text-emerald-400">
+                  <Zap size={13} className="animate-pulse" />
+                  <span className="text-[10px] font-mono uppercase tracking-widest">After</span>
+                </div>
+                <div className="text-2xl font-black text-emerald-400">0 hrs</div>
+                <div className="text-[10px] text-zinc-500 font-mono leading-snug">same work, running on autopilot 24/7</div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-amber-500/30 active:scale-95 transition-all group"
+              >
+                Automate My Business Processes
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a
+                href="#workflow-system"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
+              >
+                See the System <ChevronDown size={16} />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: Animated node-flow circuit */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
+            className="relative hidden lg:block"
+            style={{ height: '480px' }}
+          >
+            {/* Ambient glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-orange-500/8 to-red-500/5 rounded-[2rem] blur-[60px] pointer-events-none" />
+
+            <div className="relative h-full rounded-[2rem] bg-zinc-950/90 border border-white/10 backdrop-blur-xl overflow-hidden p-8">
+              {/* Top status bar */}
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Workflow Automation Map</span>
+                <span className="flex items-center gap-1.5 text-[10px] font-mono text-amber-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  RUNNING
+                </span>
+              </div>
+
+              {/* Node flow graph */}
+              <div className="relative flex flex-col gap-4">
+                {/* Row 1: Input triggers */}
+                <div className="flex gap-3 justify-start">
+                  {[
+                    { label: 'Lead Form', color: 'amber' },
+                    { label: 'Email Inbox', color: 'orange' },
+                  ].map((node, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 + i * 0.15, duration: 0.5 }}
+                      className={`px-3 py-2 rounded-xl text-[10px] font-mono font-bold border ${
+                        node.color === 'amber' ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' :
+                        'bg-orange-500/10 border-orange-500/30 text-orange-400'
+                      }`}
+                    >
+                      {node.label}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Connector line */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  className="h-px bg-gradient-to-r from-amber-500/40 via-orange-500/40 to-transparent origin-left"
+                />
+
+                {/* Row 2: Automation engines */}
+                <div className="flex gap-3">
+                  {[
+                    { label: 'n8n', color: 'amber' },
+                    { label: 'Zapier', color: 'orange' },
+                    { label: 'Make.com', color: 'purple' },
+                  ].map((node, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.9 + i * 0.12, duration: 0.5 }}
+                      className={`px-3 py-2.5 rounded-xl text-[10px] font-mono font-black border shadow-lg ${
+                        node.color === 'amber' ? 'bg-amber-500/15 border-amber-500/40 text-amber-300 shadow-amber-500/10' :
+                        node.color === 'orange' ? 'bg-orange-500/15 border-orange-500/40 text-orange-300 shadow-orange-500/10' :
+                        'bg-purple-500/15 border-purple-500/40 text-purple-300 shadow-purple-500/10'
+                      }`}
+                    >
+                      ⚡ {node.label}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Connector line */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                  className="h-px bg-gradient-to-r from-purple-500/40 via-blue-500/30 to-emerald-500/40 origin-left"
+                />
+
+                {/* Row 3: Destinations */}
+                <div className="flex gap-3 flex-wrap">
+                  {[
+                    { label: 'HubSpot CRM', color: 'teal' },
+                    { label: 'Google Sheets', color: 'emerald' },
+                    { label: 'Slack Alerts', color: 'indigo' },
+                    { label: 'Reports', color: 'blue' },
+                  ].map((node, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.3 + i * 0.1, duration: 0.4 }}
+                      className={`px-3 py-2 rounded-xl text-[10px] font-mono border ${
+                        node.color === 'teal' ? 'bg-teal-500/10 border-teal-500/30 text-teal-400' :
+                        node.color === 'emerald' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
+                        node.color === 'indigo' ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400' :
+                        'bg-blue-500/10 border-blue-500/30 text-blue-400'
+                      }`}
+                    >
+                      ✓ {node.label}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom savings badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.8, duration: 0.5 }}
+                className="absolute bottom-6 left-8 right-8 flex items-center justify-between p-4 rounded-2xl bg-amber-500/8 border border-amber-500/20"
+              >
+                <span className="text-xs text-zinc-400 font-mono">Time saved this week</span>
+                <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">18.5 hrs</span>
+              </motion.div>
+            </div>
           </motion.div>
 
-          <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.02] text-white mb-8">
-            The Hours You're Losing{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
-              to Repetitive Tasks
-            </span>
-            <br />
-            Are Hours You're{' '}
-            <span className="italic">Not Growing.</span>
-          </motion.h1>
-
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-3xl">
-            Marketing isn't the only place where manual, repetitive work is stealing your time.
-            Most growing businesses have entire workflows that could — and should — be automated.{' '}
-            <strong className="text-white font-semibold">I map the inefficiency and build the system that eliminates it.</strong>
-          </motion.p>
-
-          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex flex-col sm:flex-row gap-4 mt-10">
-            <Link to="/contact"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-amber-500/25 active:scale-95 transition-all">
-              Automate My Business Processes
-              <ArrowRight size={18} />
-            </Link>
-            <a href="#workflow-system"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all">
-              See the System <ChevronDown size={16} />
-            </a>
-          </motion.div>
         </div>
 
         {/* ── STATS ── */}
