@@ -19,19 +19,19 @@ const navLinks = [
     name: 'Services', 
     href: '/services',
     dropdown: [
-      { name: 'Content Marketing Automation', desc: 'AI-powered content engines & editorial systems', href: '/services/content-marketing-automation', icon: <Workflow className="w-4 h-4" /> },
-      { name: 'SEO Strategy & Optimization', desc: 'Keyword architecture & technical audits', href: '/services/seo-strategy-optimization', icon: <Search className="w-4 h-4" /> },
-      { name: 'Business Process Automation', desc: 'n8n, Zapier & Make workflow builds', href: '/services/business-process-automation', icon: <Cpu className="w-4 h-4" /> },
+      { name: 'AI-Powered Content Systems', desc: 'AI-powered content engines & editorial systems', href: '/services/content-marketing-automation', icon: <Workflow className="w-4 h-4" /> },
+      { name: 'Search Engine Visibility', desc: 'Keyword architecture & technical optimization', href: '/services/seo-strategy-optimization', icon: <Search className="w-4 h-4" /> },
+      { name: 'Custom Workflow Automation', desc: 'n8n, Zapier & Make integrations', href: '/services/business-process-automation', icon: <Cpu className="w-4 h-4" /> },
     ]
   },
   { 
     name: 'Tools', 
     href: '/growth-intelligence-lab',
     dropdown: [
-      { name: 'Automation Radar', desc: 'Track your growth efficiency', href: '/tools/automation-radar', icon: <Activity className="w-4 h-4" /> },
-      { name: 'Autopilot Score', desc: 'Score your business automation', href: '/tools/autopilot-score', icon: <Calculator className="w-4 h-4" /> },
-      { name: 'ROI Time Machine', desc: 'Predict your automation returns', href: '/tools/roi-time-machine', icon: <TrendingUp className="w-4 h-4" /> },
-      { name: 'Growth Simulator', desc: 'Stress test your marketing scale', href: '/tools/growth-simulator', icon: <Cpu className="w-4 h-4" /> },
+      { name: 'Workday Bottleneck Finder™', desc: 'Pinpoint daily friction & reclaim hours', href: '/tools/automation-radar', icon: <Activity className="w-4 h-4" /> },
+      { name: 'Business Freedom Calculator™', desc: 'Benchmark your scaling independence', href: '/tools/autopilot-score', icon: <Calculator className="w-4 h-4" /> },
+      { name: 'Time & Dollar Savings Predictor™', desc: 'Reclaimed hours & cash returns forecast', href: '/tools/roi-time-machine', icon: <TrendingUp className="w-4 h-4" /> },
+      { name: 'Revenue Scaling Planner™', desc: 'Zero-risk future scaling forecaster', href: '/tools/growth-simulator', icon: <Cpu className="w-4 h-4" /> },
     ]
   },
   { name: 'Portfolio', href: '/portfolio' },

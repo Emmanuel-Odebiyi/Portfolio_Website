@@ -31,6 +31,13 @@ const ContentMarketingAutomation = lazy(() => import('./pages/services/ContentMa
 const SEOStrategyOptimization = lazy(() => import('./pages/services/SEOStrategyOptimization'));
 const BusinessProcessAutomation = lazy(() => import('./pages/services/BusinessProcessAutomation'));
 
+// ── Portfolio Case Studies ──────────────────────────────────────────────────
+const TechFlowSolutions = lazy(() => import('./pages/portfolio/TechFlowSolutions'));
+const ScooveAfrica = lazy(() => import('./pages/portfolio/ScooveAfrica'));
+const EmergencyResponseAfrica = lazy(() => import('./pages/portfolio/EmergencyResponseAfrica'));
+const OAULibrary = lazy(() => import('./pages/portfolio/OAULibrary'));
+
+
 // ── Page Loading Fallback ─────────────────────────────────────────────────────
 function PageLoader() {
   return (
@@ -88,6 +95,10 @@ export default function App() {
             <Route path="/tools/growth-simulator" element={<GrowthSimulator />} />
             <Route path="/tools/:toolId" element={<ToolPlaceholder />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/techflow-solutions" element={<TechFlowSolutions />} />
+            <Route path="/portfolio/scoove-africa" element={<ScooveAfrica />} />
+            <Route path="/portfolio/emergency-response-africa" element={<EmergencyResponseAfrica />} />
+            <Route path="/portfolio/oau-library" element={<OAULibrary />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />

@@ -31,33 +31,54 @@ const projects = [
     tags: ["Automation", "SaaS", "Lead Gen"],
     metrics: "520% ROI",
     color: "bg-white/5 backdrop-blur-sm",
-    accent: "blue"
+    accent: "blue",
+    path: "/portfolio/techflow-solutions",
+    image: "/images/techflow_dashboard.png"
   },
   {
     title: "The Scoove Africa",
-    subtitle: "65% Traffic Growth in 3 Months",
+    subtitle: "150% Traffic Growth in 4 Months",
     industry: "Entertainment Media",
-    timeline: "3 Months",
-    problem: "Publishing was sporadic. Rankings were stuck at Position 24. Click-through rates were poor. With no systematic approach to keyword targeting or SEO, they had no way to diagnose the problem—let alone fix it.",
+    timeline: "4 Months",
+    problem: "Publishing was sporadic. Rankings were stuck at Position 45. Click-through rates were poor. With no systematic approach to keyword targeting or SEO, they had no way to diagnose the problem—let alone fix it.",
     solution: "Executed comprehensive gap analysis, full content optimization of existing articles, set up a systematic publishing schedule with SEO-first targeting, and built a structured topic cluster architecture.",
-    result: "Average ranking climbed from Position 24 to Position 9. 25,000+ monthly impressions. Click-through rate improved by 40%.",
+    result: "Organic traffic increased by 150%. 20+ new keywords on Google's Page 1. Bounce rate decreased by 25%. CTR boosted by 40%.",
     tags: ["SEO", "Content Strategy", "Media"],
-    metrics: "65% Growth",
+    metrics: "150% Growth",
     color: "bg-white/5 backdrop-blur-sm",
-    accent: "blue"
+    accent: "teal",
+    path: "/portfolio/scoove-africa",
+    image: "/images/scoove_analytics.png"
+  },
+  {
+    title: "Emergency Response Africa",
+    subtitle: "180% Organic Lead Boost in 60 Days",
+    industry: "Healthcare / MedTech",
+    timeline: "60 Days",
+    problem: "Offering advanced private emergency medical dispatch, but invisible online for high-intent search queries like 'emergency ambulance Lagos' and constrained by slow mobile page loading speeds.",
+    solution: "Built geo-targeted local keyword architecture, optimized GMB listings, deployed local patient testimonial acquisition, and integrated medical services structured Schema markup.",
+    result: "Organic traffic grew by 180%. Page 1 rankings achieved for 10+ high-intent healthcare terms. Direct emergency call volume increased by 30%.",
+    tags: ["Local SEO", "MedTech", "Conversion"],
+    metrics: "180% Growth",
+    color: "bg-white/5 backdrop-blur-sm",
+    accent: "rose",
+    path: "/portfolio/emergency-response-africa",
+    image: "/images/era_dispatch_dashboard.png"
   },
   {
     title: "OAU Library",
     subtitle: "Eliminated 3-Month Backlog With AI",
     industry: "Education / Research",
-    timeline: "3 months",
-    problem: "Drowning in repetitive data extraction and manual research tasks.",
-    solution: "AI-powered system using OpenAI API and Python for automated data processing.",
-    result: "91% content accuracy, 80% time savings, eliminated entire backlog in weeks.",
+    timeline: "3 weeks",
+    problem: "Drowning in repetitive data extraction and manual indexing tasks.",
+    solution: "AI-powered cataloging system using OpenAI API and Python for automated data parsing and relational metadata indexing.",
+    result: "91% content cataloging accuracy, 80% time savings, and eliminated the entire 3-month backlog in weeks.",
     tags: ["AI", "Python", "Workflow"],
     metrics: "80% Time Saved",
     color: "bg-white/5 backdrop-blur-sm",
-    accent: "amber"
+    accent: "amber",
+    path: "/portfolio/oau-library",
+    image: "/images/oau_library_automation.png"
   }
 ];
 
@@ -126,67 +147,68 @@ export default function Portfolio() {
       <section className="max-w-7xl mx-auto px-6 mb-32">
         <div className="grid grid-cols-1 gap-12">
           {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className={`group relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-16 rounded-[4rem] ${project.color} border border-white/10 overflow-hidden shadow-2xl`}
-            >
-              <div className={`space-y-10 relative z-10 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-mono uppercase tracking-widest text-gray-300">
-                        {tag}
-                      </span>
-                    ))}
+            <Link key={i} to={project.path} className="block group">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-16 rounded-[4rem] ${project.color} border border-white/10 hover:border-white/20 overflow-hidden shadow-2xl transition-all`}
+              >
+                <div className={`space-y-10 relative z-10 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-mono uppercase tracking-widest text-gray-300">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="text-3xl md:text-5xl font-bold text-white leading-snug">
+                      {project.subtitle}
+                    </h3>
+                    <p className="text-sm font-mono text-gray-400 uppercase tracking-widest">
+                      {project.title} • {project.industry}
+                    </p>
                   </div>
-                  <h3 className="text-3xl md:text-5xl font-bold text-white leading-snug">
-                    {project.subtitle}
-                  </h3>
-                  <p className="text-sm font-mono text-gray-400 uppercase tracking-widest">
-                    {project.title} • {project.industry}
-                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">The Challenge</p>
+                      <p className="text-gray-300 font-light leading-relaxed">{project.problem}</p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">The Solution</p>
+                      <p className="text-gray-300 font-light leading-relaxed">{project.solution}</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+                    <div className="space-y-1">
+                      <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">Key Result</p>
+                      <p className="text-2xl font-bold text-white">{project.result}</p>
+                    </div>
+                    <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/20 shadow-xl flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white/20 transition-all`}>
+                      <ArrowRight size={24} />
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <p className="text-xs font-mono text-gray-400 uppercase tracking-widest">The Challenge</p>
-                    <p className="text-gray-300 font-light leading-relaxed">{project.problem}</p>
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-xs font-mono text-gray-400 uppercase tracking-widest">The Solution</p>
-                    <p className="text-gray-300 font-light leading-relaxed">{project.solution}</p>
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-xs font-mono text-gray-400 uppercase tracking-widest">Key Result</p>
-                    <p className="text-2xl font-bold text-white">{project.result}</p>
-                  </div>
-                  <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/20 shadow-xl flex items-center justify-center text-${project.accent}-400 group-hover:scale-110 group-hover:bg-white/20 transition-all`}>
-                    <ArrowRight size={24} />
+                <div className={`relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[16/10] bg-zinc-950 flex items-center justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                  
+                  {/* Floating Glass Metric Badge */}
+                  <div className="absolute bottom-6 right-6 px-6 py-3 rounded-2xl bg-[#0B0F19]/90 border border-white/10 backdrop-blur-md shadow-xl flex flex-col items-end">
+                    <span className="text-2xl font-black text-white">{project.metrics}</span>
+                    <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Proven Outcome</span>
                   </div>
                 </div>
-              </div>
-
-              <div className={`relative flex items-center justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-[3rem]" />
-                <div className="relative text-center space-y-4">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="w-48 h-48 rounded-full bg-[#0B0F19]/80 backdrop-blur-md shadow-2xl flex flex-col items-center justify-center border border-white/10"
-                  >
-                    <span className="text-4xl font-bold text-white">{project.metrics.split(' ')[0]}</span>
-                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">
-                      {project.metrics.split(' ').slice(1).join(' ')}
-                    </span>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </section>
