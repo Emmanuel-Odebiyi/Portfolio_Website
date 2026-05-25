@@ -1,6 +1,6 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, Sphere, Stars, Html, Float } from '@react-three/drei';
+import { OrbitControls, Sphere, Stars, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
 // ── Coordinate Mapping ────────────────────────────────────────────────────────
@@ -9,9 +9,9 @@ import * as THREE from 'three';
 // "Nigeria at lng=8.6°" should appear at the front of the globe facing the camera.
 function latLngToVector3(lat: number, lng: number, radius: number): THREE.Vector3 {
   const phi   = (90 - lat) * (Math.PI / 180);  // polar angle: 0 = north pole
-  const theta = (lng + 180) * (Math.PI / 180); // azimuth: 0 = lng −180 (date-line)
+  const theta = lng * (Math.PI / 180);         // azimuth angle matching flipped UV space
 
-  // Standard right-hand spherical → cartesian, matching Three.js SphereGeometry UV
+  // Standard right-hand spherical → cartesian matching Three.js flipped UV mapping
   const x = -radius * Math.sin(phi) * Math.cos(theta);
   const y =  radius * Math.cos(phi);
   const z =  radius * Math.sin(phi) * Math.sin(theta);
@@ -25,52 +25,72 @@ interface MarkerProps {
   position: THREE.Vector3;
   label: string;
   isMain?: boolean;
+  theme: 'hologram' | 'political';
 }
 
-const Marker: React.FC<MarkerProps> = ({ position, label, isMain = false }) => (
-  <group position={position}>
-    {/* Core dot */}
-    <Sphere args={[isMain ? 0.08 : 0.045, 16, 16]}>
-      <meshBasicMaterial color={isMain ? '#f59e0b' : '#38bdf8'} />
-    </Sphere>
-    {/* Pulse ring */}
-    <Sphere args={[isMain ? 0.22 : 0.14, 16, 16]}>
-      <meshBasicMaterial color={isMain ? '#f59e0b' : '#38bdf8'} transparent opacity={0.18} />
-    </Sphere>
-    {/* Label — always faces camera because Html component auto-bills */}
-    <Html
-      distanceFactor={9}
-      position={[0, isMain ? 0.28 : 0.22, 0]}
-      center
-      style={{ pointerEvents: 'none', userSelect: 'none' }}
-    >
-      <span
-        style={{
-          fontSize: isMain ? '11px' : '9px',
-          fontWeight: isMain ? 700 : 600,
-          color: isMain ? '#fbbf24' : '#ffffff',
-          background: isMain ? 'rgba(251,191,36,0.12)' : 'rgba(56,189,248,0.12)',
-          border: `1px solid ${isMain ? 'rgba(251,191,36,0.35)' : 'rgba(56,189,248,0.3)'}`,
-          borderRadius: '4px',
-          padding: '2px 6px',
-          backdropFilter: 'blur(4px)',
-          whiteSpace: 'nowrap',
-          letterSpacing: '0.05em',
-          textTransform: 'uppercase',
-        }}
+const Marker: React.FC<MarkerProps> = ({ position, label, isMain = false, theme }) => {
+  const isHologram = theme === 'hologram';
+  const dotColor = isMain ? '#fbbf24' : (isHologram ? '#38bdf8' : '#00f0ff');
+  const ringColor = isMain ? '#fbbf24' : (isHologram ? '#38bdf8' : '#00f0ff');
+  return (
+    <group position={position}>
+      {/* Core dot */}
+      <Sphere args={[isMain ? 0.08 : 0.045, 16, 16]}>
+        <meshBasicMaterial color={dotColor} />
+      </Sphere>
+      {/* Pulse ring */}
+      <Sphere args={[isMain ? 0.22 : 0.14, 16, 16]}>
+        <meshBasicMaterial 
+          color={ringColor} 
+          transparent 
+          opacity={isHologram ? 0.18 : 0.35} 
+        />
+      </Sphere>
+      {/* Label — always faces camera because Html component auto-bills */}
+      <Html
+        occlude
+        distanceFactor={9}
+        position={[0, isMain ? 0.28 : 0.22, 0]}
+        center
+        style={{ pointerEvents: 'none', userSelect: 'none' }}
       >
-        {label}
-      </span>
-    </Html>
-  </group>
-);
+        <span
+          style={{
+            fontSize: isMain ? '11px' : '9px',
+            fontWeight: isMain ? 700 : 600,
+            color: isMain ? '#fbbf24' : '#ffffff',
+            background: isMain 
+              ? 'rgba(251,191,36,0.15)' 
+              : (isHologram ? 'rgba(56,189,248,0.12)' : 'rgba(15,23,42,0.92)'),
+            border: `1px solid ${
+              isMain 
+                ? 'rgba(251,191,36,0.4)' 
+                : (isHologram ? 'rgba(56,189,248,0.3)' : 'rgba(0,240,255,0.45)')
+            }`,
+            borderRadius: '4px',
+            padding: '2px 6px',
+            backdropFilter: 'blur(4px)',
+            whiteSpace: 'nowrap',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            boxShadow: isHologram ? 'none' : '0 4px 12px rgba(0,0,0,0.5)',
+          }}
+        >
+          {label}
+        </span>
+      </Html>
+    </group>
+  );
+};
 
 interface ArcProps {
   start: THREE.Vector3;
   end: THREE.Vector3;
+  theme: 'hologram' | 'political';
 }
 
-const Arc: React.FC<ArcProps> = ({ start, end }) => {
+const Arc: React.FC<ArcProps> = ({ start, end, theme }) => {
+  const isHologram = theme === 'hologram';
   const geometry = useMemo(() => {
     const mid = new THREE.Vector3()
       .addVectors(start, end)
@@ -84,7 +104,12 @@ const Arc: React.FC<ArcProps> = ({ start, end }) => {
 
   return (
     <line geometry={geometry}>
-      <lineBasicMaterial color="#38bdf8" transparent opacity={0.45} />
+      <lineBasicMaterial 
+        color={isHologram ? '#38bdf8' : '#00f0ff'} 
+        transparent 
+        opacity={isHologram ? 0.45 : 0.75} 
+        linewidth={isHologram ? 1 : 2}
+      />
     </line>
   );
 };
@@ -93,33 +118,41 @@ const Arc: React.FC<ArcProps> = ({ start, end }) => {
 
 const RADIUS = 2;
 
-// Nigeria is at lng ≈ +8.7°, which maps to the hemisphere that needs to face the camera.
-// After our latLng formula, Nigeria sits at roughly z < 0 (back of sphere facing +Z camera).
-// We rotate the ENTIRE GROUP by Math.PI around Y so everything — texture + dots — flips
-// together and Nigeria comes to the front (+Z toward camera).
-const GROUP_Y_OFFSET = Math.PI; // rotates so Africa faces camera at load time
+// Nigeria is at lng ≈ +8.7°. Under standard projection with zero local sphere rotation,
+// it sits near the negative X axis (angle ~188.6°). We rotate the parent group by
+// -98.6° to align Nigeria perfectly at the front (+Z axis) facing the camera at load.
+const GROUP_Y_OFFSET = (-98.6) * (Math.PI / 180);
 
 const LOCATIONS = [
   { name: 'Nigeria',   lat: 9.082,   lng: 8.6753,    isMain: true  },
   { name: 'USA',       lat: 40.7128, lng: -74.006,   isMain: false },
   { name: 'UK',        lat: 51.5074, lng: -0.1278,   isMain: false },
   { name: 'Canada',    lat: 43.6532, lng: -79.3832,  isMain: false },
-  { name: 'Australia', lat: -33.869, lng: 151.209,   isMain: false },
   { name: 'Germany',   lat: 52.52,   lng: 13.405,    isMain: false },
   { name: 'France',    lat: 48.857,  lng: 2.352,     isMain: false },
   { name: 'Japan',     lat: 35.676,  lng: 139.650,   isMain: false },
-  { name: 'UAE',       lat: 25.205,  lng: 55.271,    isMain: false },
   { name: 'Singapore', lat: 1.352,   lng: 103.820,   isMain: false },
+  { name: 'Australia', lat: -33.869, lng: 151.209,   isMain: false },
 ];
 
-const GlobeScene: React.FC = () => {
+interface GlobeSceneProps {
+  theme: 'hologram' | 'political';
+}
+
+const GlobeScene: React.FC<GlobeSceneProps> = ({ theme }) => {
   const groupRef = useRef<THREE.Group>(null);
-  const texture  = useLoader(THREE.TextureLoader, '/world-map.webp');
+  
+  // Load textures
+  const hologramTexture = useLoader(THREE.TextureLoader, '/world-map.webp');
+  const politicalTexture = useLoader(THREE.TextureLoader, '/world-map-political.jpg');
 
   // Slow continuous auto-rotation
   useFrame(() => {
-    if (groupRef.current) groupRef.current.rotation.y += 0.0012;
+    if (groupRef.current) groupRef.current.rotation.y += 0.0015;
   });
+
+  const isHologram = theme === 'hologram';
+  const activeTexture = isHologram ? hologramTexture : politicalTexture;
 
   const nigeriaVec = useMemo(
     () => latLngToVector3(9.082, 8.6753, RADIUS),
@@ -137,28 +170,33 @@ const GlobeScene: React.FC = () => {
   return (
     // Single group rotated together → texture + markers always aligned
     <group ref={groupRef} rotation={[0, GROUP_Y_OFFSET, 0]}>
-      {/* Globe sphere — NO separate rotation here */}
-      <Sphere args={[RADIUS, 64, 64]}>
+      {/* Globe sphere */}
+      <Sphere args={[RADIUS, 64, 64]} rotation={[0, 0, 0]}>
         <meshStandardMaterial
-          map={texture}
-          emissive="#1e3a8a"
-          emissiveMap={texture}
-          emissiveIntensity={0.25}   // reduced brightness
-          roughness={0.55}
-          metalness={0.15}
+          map={activeTexture}
+          emissive={isHologram ? '#1e3a8a' : '#0a0f1d'}
+          emissiveMap={activeTexture}
+          emissiveIntensity={isHologram ? 0.25 : 0.45} // bright emissive for timezone map pop
+          roughness={isHologram ? 0.55 : 0.45}
+          metalness={isHologram ? 0.15 : 0.1}
         />
       </Sphere>
 
       {/* Subtle outer atmosphere */}
       <Sphere args={[RADIUS * 1.12, 64, 64]}>
-        <meshBasicMaterial color="#38bdf8" transparent opacity={0.05} side={THREE.BackSide} />
+        <meshBasicMaterial 
+          color={isHologram ? '#38bdf8' : '#00f0ff'} 
+          transparent 
+          opacity={isHologram ? 0.05 : 0.02} 
+          side={THREE.BackSide} 
+        />
       </Sphere>
 
-      {/* Markers + arcs — inside same group, so they rotate with the sphere */}
+      {/* Markers + arcs — rotate with the sphere */}
       {points.map((loc) => (
         <React.Fragment key={loc.name}>
-          <Marker position={loc.vec} label={loc.name} isMain={loc.isMain} />
-          {!loc.isMain && <Arc start={nigeriaVec} end={loc.vec} />}
+          <Marker position={loc.vec} label={loc.name} isMain={loc.isMain} theme={theme} />
+          {!loc.isMain && <Arc start={nigeriaVec} end={loc.vec} theme={theme} />}
         </React.Fragment>
       ))}
     </group>
@@ -167,34 +205,63 @@ const GlobeScene: React.FC = () => {
 
 // ── Public export ─────────────────────────────────────────────────────────────
 
-export const Globe: React.FC = () => (
-  <div className="w-full h-[500px] md:h-[700px] relative">
-    <Canvas
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
-      camera={{ position: [0, 0, 6], fov: 45 }}
-    >
-      <React.Suspense
-        fallback={
-          <Sphere args={[RADIUS, 32, 32]}>
-            <meshBasicMaterial color="#0d1b3e" wireframe />
-          </Sphere>
-        }
+export const Globe: React.FC = () => {
+  const [theme, setTheme] = useState<'hologram' | 'political'>('political');
+
+  return (
+    <div className="w-full h-[500px] md:h-[700px] relative group/globe">
+      
+      {/* Floating Theme Console */}
+      <div className="absolute top-6 right-6 z-20 flex gap-2 p-1.5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl">
+        <button
+          onClick={() => setTheme('hologram')}
+          className={`px-4 py-2 text-xs font-mono font-bold tracking-wider uppercase rounded-xl transition-all ${
+            theme === 'hologram' 
+              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
+              : 'text-zinc-400 hover:text-white border border-transparent'
+          }`}
+        >
+          Hologram
+        </button>
+        <button
+          onClick={() => setTheme('political')}
+          className={`px-4 py-2 text-xs font-mono font-bold tracking-wider uppercase rounded-xl transition-all ${
+            theme === 'political' 
+              ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' 
+              : 'text-zinc-400 hover:text-white border border-transparent'
+          }`}
+        >
+          Political Map
+        </button>
+      </div>
+
+      <Canvas
+        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true }}
+        camera={{ position: [0, 0, 6], fov: 45 }}
       >
-        <ambientLight intensity={0.6} />
-        <pointLight position={[8, 8, 8]} intensity={1.8} />
-        <pointLight position={[-8, -8, -6]} intensity={0.4} color="#38bdf8" />
+        <React.Suspense
+          fallback={
+            <Sphere args={[RADIUS, 32, 32]}>
+              <meshBasicMaterial color="#0d1b3e" wireframe />
+            </Sphere>
+          }
+        >
+          <ambientLight intensity={theme === 'hologram' ? 0.6 : 0.85} />
+          <pointLight position={[8, 8, 8]} intensity={theme === 'hologram' ? 1.8 : 2.2} />
+          <pointLight position={[-8, -8, -6]} intensity={0.4} color={theme === 'hologram' ? '#38bdf8' : '#fbbf24'} />
 
-        <GlobeScene />
+          <GlobeScene theme={theme} />
 
-        {/* User can drag to spin */}
-        <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
+          {/* User can drag to spin */}
+          <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
 
-        <Stars radius={100} depth={50} count={1800} factor={4} saturation={0} fade speed={1} />
-      </React.Suspense>
-    </Canvas>
+          <Stars radius={100} depth={50} count={1800} factor={4} saturation={0} fade speed={1} />
+        </React.Suspense>
+      </Canvas>
 
-    {/* Top/bottom fade into page background */}
-    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]" />
-  </div>
-);
+      {/* Top/bottom fade into page background */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]" />
+    </div>
+  );
+};
