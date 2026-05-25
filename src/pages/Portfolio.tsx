@@ -117,29 +117,85 @@ export default function Portfolio() {
         description="Real case studies from real clients. TechFlow Solutions: 520% ROI in 90 days. The Scoove Africa: 65% traffic growth in 3 months. See exactly how it was done."
         keywords="marketing automation case studies, content automation results, SEO case studies, automation ROI"
       />
+
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
-        <div className="max-w-4xl space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-300 tracking-[0.2em] uppercase"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-gradient" />
-            Selected Work
-          </motion.div>
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-white leading-[1.05]">
-            If You Want Proof, <br />
-            <span className="text-gray-500">Here It Is.</span>
-          </h1>
-          <div className="space-y-4 max-w-2xl">
-            <p className="text-2xl text-gray-200 font-medium leading-relaxed">
-              520% ROI. 65% traffic growth. 70% time savings.
-            </p>
-            <p className="text-xl text-gray-400 font-light leading-relaxed">
-              Not estimates. Not projections. Results I delivered — for real businesses, with documented outcomes. Every case study below shows the exact situation, the system I built, and what happened. No cherry-picking. No spin.
-            </p>
+      <section className="max-w-7xl mx-auto px-6 pt-32 pb-12 mb-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          {/* Left Column: Narrative (Span 7) */}
+          <div className="lg:col-span-7 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300 tracking-[0.2em] uppercase"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+              Selected Work
+            </motion.div>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] font-display">
+              If You Want Proof, <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400">Here It Is.</span>
+            </h1>
+            <div className="space-y-4 max-w-2xl">
+              <p className="text-2xl text-gray-200 font-medium leading-relaxed">
+                520% ROI. 65% traffic growth. 70% time savings.
+              </p>
+              <p className="text-xl text-zinc-400 font-light leading-relaxed">
+                Not estimates. Not projections. Results I delivered — for real businesses, with documented outcomes. Every case study below shows the exact situation, the system I built, and what happened. No cherry-picking. No spin.
+              </p>
+            </div>
           </div>
+
+          {/* Right Column: Dynamic Stats Console (Span 5) */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-5 p-8 rounded-[2.5rem] bg-gradient-to-b from-zinc-900/60 to-zinc-950/60 border border-white/10 backdrop-blur-md relative overflow-hidden shadow-2xl space-y-8"
+          >
+            {/* Background glowing effects */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="flex items-center justify-between border-b border-white/5 pb-4">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Global Ledger</span>
+              </div>
+              <span className="text-[10px] font-mono text-zinc-500 uppercase">Verified Outcomes</span>
+            </div>
+
+            <div className="space-y-6">
+              {/* Stat 1 */}
+              <div className="space-y-1 group/stat">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-3xl font-black text-white tracking-tight group-hover/stat:text-blue-400 transition-colors">$2.4M+</span>
+                  <span className="text-[10px] font-mono text-blue-400 uppercase">Automation Yield</span>
+                </div>
+                <p className="text-xs text-zinc-400 font-light">Direct & attributed client revenue growth captured in 2025.</p>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="space-y-1 border-t border-white/5 pt-6 group/stat">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-3xl font-black text-white tracking-tight group-hover/stat:text-teal-400 transition-colors">70%+</span>
+                  <span className="text-[10px] font-mono text-teal-400 uppercase">Time Recaptured</span>
+                </div>
+                <p className="text-xs text-zinc-400 font-light">Average operational manual process hours completely saved.</p>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="space-y-1 border-t border-white/5 pt-6 group/stat">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-3xl font-black text-white tracking-tight group-hover/stat:text-rose-400 transition-colors">150%</span>
+                  <span className="text-[10px] font-mono text-rose-400 uppercase">Traffic Growth</span>
+                </div>
+                <p className="text-xs text-zinc-400 font-light">Average SEO crawl CTR increase across published platforms.</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -182,29 +238,41 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                    <div className="space-y-1">
-                      <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">Key Result</p>
-                      <p className="text-2xl font-bold text-white">{project.result}</p>
-                    </div>
-                    <div className={`w-16 h-16 rounded-2xl bg-white/10 border border-white/20 shadow-xl flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white/20 transition-all`}>
-                      <ArrowRight size={24} />
+                  <div className="pt-8 border-t border-white/10">
+                    {/* Key Outcome Highlights */}
+                    <div className={`p-6 rounded-2xl border-l-2 ${
+                      project.accent === 'blue' ? 'border-blue-500 bg-blue-500/5' :
+                      project.accent === 'teal' ? 'border-teal-500 bg-teal-500/5' :
+                      project.accent === 'rose' ? 'border-rose-500 bg-rose-500/5' : 'border-amber-500 bg-amber-500/5'
+                    } space-y-2`}>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">Key Outcome & ROI</p>
+                      <p className="text-base font-semibold text-white leading-relaxed">{project.result}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className={`relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[16/10] bg-zinc-950 flex items-center justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-                  
-                  {/* Floating Glass Metric Badge */}
-                  <div className="absolute bottom-6 right-6 px-6 py-3 rounded-2xl bg-[#0B0F19]/90 border border-white/10 backdrop-blur-md shadow-xl flex flex-col items-end">
-                    <span className="text-2xl font-black text-white">{project.metrics}</span>
-                    <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Proven Outcome</span>
+                <div className={`flex flex-col justify-between space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div className="relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[16/10] bg-zinc-950 flex items-center justify-center">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                    
+                    {/* Floating Glass Metric Badge */}
+                    <div className="absolute bottom-6 right-6 px-6 py-3 rounded-2xl bg-[#0B0F19]/90 border border-white/10 backdrop-blur-md shadow-xl flex flex-col items-end">
+                      <span className="text-2xl font-black text-white">{project.metrics}</span>
+                      <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Proven Outcome</span>
+                    </div>
+                  </div>
+
+                  {/* Premium Call to Action under the image */}
+                  <div className="flex items-center lg:justify-end justify-start">
+                    <div className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-white shadow-xl group-hover:bg-white/10 group-hover:border-white/25 transition-all duration-300">
+                      <span>Read Case Study</span>
+                      <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                    </div>
                   </div>
                 </div>
               </motion.div>
