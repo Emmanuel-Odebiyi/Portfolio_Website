@@ -5,7 +5,7 @@ import { CheckCircle2, Building2, UserX, MousePointer2, Users } from 'lucide-rea
 const comparisonData = [
   {
     title: "Agencies",
-    icon: <Building2 size={24} className="text-brand-gradient" />,
+    icon: <Building2 size={24} className="text-amber-400" />,
     advantages: [
       "You work directly with me — not a rotating junior team",
       "30–50% lower cost — no inflated agency overhead",
@@ -15,7 +15,7 @@ const comparisonData = [
   },
   {
     title: "Freelancers",
-    icon: <UserX size={24} className="text-brand-gradient" />,
+    icon: <UserX size={24} className="text-indigo-400" />,
     advantages: [
       "Complete systems — not fragmented, one-off deliverables",
       "Strategic thinking — not just execution without a plan",
@@ -25,7 +25,7 @@ const comparisonData = [
   },
   {
     title: "DIY",
-    icon: <MousePointer2 size={24} className="text-brand-gradient" />,
+    icon: <MousePointer2 size={24} className="text-purple-400" />,
     advantages: [
       "Expert-built from day one — no learning curves on your time",
       "Proven frameworks — not trial-and-error guesswork",
@@ -35,7 +35,7 @@ const comparisonData = [
   },
   {
     title: "In-House Hiring",
-    icon: <Users size={24} className="text-brand-gradient" />,
+    icon: <Users size={24} className="text-blue-400" />,
     advantages: [
       "$30K–$50K annually — not $80K–$120K+ with benefits and HR costs",
       "Broader expertise: SEO + content + automation + AI — not one specialty",
@@ -97,7 +97,7 @@ export const ProviderComparison: React.FC = () => {
                   return (
                     <li key={j} className="flex gap-4 items-start group/item">
                       <div className="mt-1 flex-none w-5 h-5 rounded-full bg-brand-gradient/10 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                        <CheckCircle2 size={12} className="text-brand-gradient" />
+                        <CheckCircle2 size={12} className="text-indigo-400" />
                       </div>
                       <span className="text-gray-400 text-sm lg:text-base leading-relaxed font-medium group-hover/item:text-white transition-colors">
                         {parts.length > 1 ? (

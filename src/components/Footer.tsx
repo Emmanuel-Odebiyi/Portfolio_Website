@@ -19,10 +19,9 @@ const footerLinks = [
   {
     title: 'Services',
     links: [
-      { name: 'Content Automation', href: '/services' },
-      { name: 'SEO Strategy', href: '/services' },
-      { name: 'AI Workflows', href: '/services' },
-      { name: 'Growth Systems', href: '/services' },
+      { name: 'Content Automation', href: '/services/content-marketing-automation' },
+      { name: 'SEO Strategy', href: '/services/seo-strategy-optimization' },
+      { name: 'Process Automation', href: '/services/business-process-automation' },
     ],
   },
   {

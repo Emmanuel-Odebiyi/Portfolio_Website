@@ -87,13 +87,13 @@ const smallResults = [
     title: "Lead Magnet Delivery + CRM Sync",
     desc: "Automated multi-step Zapier workflow to fulfill eBooks instantly and sync contacts to HubSpot.",
     stat: "2.5x Downloads",
-    icon: <Mail className="text-brand-gradient" size={20} />
+    icon: <Mail className="text-blue-400" size={20} />
   },
   {
     title: "AI-Powered Content Repurposing",
     desc: "System built using n8n and OpenAI to turn blogs into ready-to-share social snippets.",
     stat: "80% Time Saved",
-    icon: <Zap className="text-brand-gradient" size={20} />
+    icon: <Zap className="text-yellow-400" size={20} />
   },
   {
     title: "Analytics Dashboard Automation",
@@ -353,7 +353,7 @@ export default function Portfolio() {
       </section>
 
       {/* Final P.S. Section */}
-      <section className="max-w-4xl mx-auto px-6 text-center">
+      <section className="max-w-4xl mx-auto px-6 text-center mb-24">
         <p className="text-xl text-gray-400 font-light italic leading-relaxed">
           "Notice something about these case studies? They all have one thing in common: the client took action. They didn't wait for the 'perfect time.' They didn't overthink it. They decided growth was worth investing in, and we made it happen together. Your turn."
         </p>
