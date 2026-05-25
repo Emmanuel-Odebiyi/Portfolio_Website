@@ -342,3 +342,36 @@ h4, h5, h6 {
     background: var(--bg-gradient-brand);
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   ── GLOBAL HIGH-CONTRAST DARK ENGINE ─────────────────────────
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --dark-base: #0a0f1e;       /* Original deep space navy background */
+  --dark-surface: #0f172a;    /* Original premium slate surface */
+  --dark-mid: #1e1b4b;        /* Original deep indigo midground */
+  --dark-border: rgba(255, 255, 255, 0.08);
+  --dark-card: rgba(255, 255, 255, 0.03);
+  
+  --text-primary: #ffffff;    /* High-contrast pure white */
+  --text-secondary: #cbd5e1;  /* High-contrast slate grey - easily legible on dark backgrounds */
+}
+
+/* 
+   Globally lift gray-ish utility text colors to beautiful, 
+   crisp high-contrast slate to ensure excellent legibility.
+*/
+.text-zinc-400,
+.text-gray-400 {
+  color: #cbd5e1 !important;  /* Bright soft slate */
+}
+
+.text-zinc-500,
+.text-gray-500 {
+  color: #a1a1aa !important;  /* Muted legible grey */
+}
+
+
+
+

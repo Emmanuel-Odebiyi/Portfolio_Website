@@ -458,7 +458,7 @@ export const ProblemSection: React.FC = () => {
       aria-label="The Problem Section"
     >
       {/* Sticky full-screen viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center" style={{ backgroundColor: '#0f172a' }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[var(--dark-surface)]">
         {/* Section label — top center */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
           <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(251,191,36,1)', background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>

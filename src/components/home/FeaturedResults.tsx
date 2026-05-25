@@ -14,7 +14,7 @@ const FeaturedResults = () => {
   };
 
   return (
-    <section className="py-24 overflow-hidden" style={{ backgroundColor: '#0a0f1e' }}>
+    <section className="py-24 overflow-hidden bg-[var(--dark-base)]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}
@@ -22,7 +22,7 @@ const FeaturedResults = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-2">
              Real Businesses. <span className="text-amber-gradient">Real Numbers.</span>
           </h2>
-          <p className="text-lg md:text-xl font-light" style={{ color: 'rgba(255,255,255,0.9)' }}>
+          <p className="text-lg md:text-xl font-light text-[var(--text-secondary)]">
             Measurable impact, delivered through data-driven automation.
           </p>
         </div>

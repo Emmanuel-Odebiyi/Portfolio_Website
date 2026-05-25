@@ -154,7 +154,7 @@ export const SolutionSection = () => {
       aria-label="The Solution Section"
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: '#1e1b4b' }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col bg-[var(--dark-mid)]">
 
         {/* Aurora blobs for the solution section */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">

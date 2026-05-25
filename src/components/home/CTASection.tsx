@@ -6,8 +6,7 @@ export const CTASection = () => {
   return (
     <section
       id="contact"
-      className="relative py-40 grain-overlay overflow-hidden"
-      style={{ backgroundColor: '#0a0f1e' }}
+      className="relative py-40 grain-overlay overflow-hidden bg-[var(--dark-base)]"
     >
       {/* Concentrated aurora glow behind headline */}
       <div
@@ -50,14 +49,12 @@ export const CTASection = () => {
             </span>
           </h2>
           <p
-            className="text-2xl font-light max-w-3xl mx-auto"
-            style={{ color: 'rgba(226,232,240,0.9)' }}
+            className="text-2xl font-light max-w-3xl mx-auto text-[var(--text-secondary)]"
           >
             Every week without a system is a week they're showing up where you aren't.
           </p>
           <p
-            className="text-sm font-mono uppercase tracking-widest mt-8"
-            style={{ color: 'rgba(226,232,240,0.6)' }}
+            className="text-sm font-mono uppercase tracking-widest mt-8 text-[var(--text-secondary)]"
           >
             Availability: May 2026 Booking Now (Limited by Design)
           </p>
@@ -113,7 +110,7 @@ export const CTASection = () => {
 
               <div className="space-y-4">
                 <h4 className="text-xl font-bold text-white">{item.title}</h4>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
+                <p className="font-light leading-relaxed text-zinc-300">
                   {item.desc}
                 </p>
               </div>
@@ -137,8 +134,7 @@ export const CTASection = () => {
 
         {/* Trust micro-copy */}
         <div
-          className="flex justify-center flex-wrap items-center gap-8 font-mono text-xs uppercase tracking-widest"
-          style={{ color: 'rgba(226,232,240,0.7)' }}
+          className="flex justify-center flex-wrap items-center gap-8 font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)]"
         >
           <span className="flex items-center gap-2">
             <span style={{ color: '#f59e0b' }}>✓</span> Free 30-minute call

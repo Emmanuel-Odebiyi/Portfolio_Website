@@ -1,311 +1,128 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useParams, Link } from 'react-router-dom';
 import { 
   ArrowLeft, 
   Calendar, 
-  User, 
   Clock, 
   Share2, 
   Bookmark,
   CheckCircle2,
   Lightbulb,
-  ArrowRight,
   ArrowUpRight,
-  FileText,
-  Briefcase
+  ClipboardCheck,
+  Check,
+  ChevronRight,
+  BookOpen
 } from 'lucide-react';
-
-// Sample blog post data
-const blogPosts = {
-  "1": {
-    id: "1",
-    title: "Content Marketing Strategies: Explore content trend",
-    author: "Emmanuel Odebiyi",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel",
-    authorBio: "Emmanuel is a Content Strategist and AI Automation Expert dedicated to helping B2B SaaS companies scale their organic growth through data-driven storytelling and systematic workflows.",
-    date: "March 21, 2026",
-    readTime: "8 min read",
-    heroImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=2070",
-    tags: ["Marketing", "Strategy"],
-    hook: "The landscape of content marketing is shifting beneath our feet. What worked in 2024 is already becoming noise in 2026. If you're still just 'writing blogs,' you're missing the engine that drives modern growth.",
-    sections: [
-      {
-        heading: "The Death of the 'Standard' Blog Post",
-        content: "Standard blog posts are dying. Readers are no longer looking for generic information that AI can summarize in three seconds. They are looking for authority, unique data, and actionable systems. In an era where content is infinite, attention is the only currency that matters.",
-        example: "Think about the last time you read a 'Top 10 Tips' article. Did you actually finish it? Probably not. Now think about a deep-dive case study that showed you exactly how a company saved 15 hours a week. That's the difference."
-      },
-      {
-        heading: "The Rise of Authority-Led Content",
-        content: "Authority isn't just about what you know; it's about how you prove it. Modern readers crave 'Skin in the Game.' They want to see the scars of failed experiments and the blueprints of successful ones. This is why personal brands are outperforming corporate blogs.",
-        highlight: "True authority is built through transparency. Share the data, show the process, and don't be afraid to admit when something didn't work."
-      },
-      {
-        heading: "Section-Based Storytelling",
-        content: "HackerNoon-style articles succeed because they break complex ideas into clear, labeled sections. This isn't just for aesthetics; it's for cognitive load management. By creating distinct mental 'rooms,' you allow the reader to pause, reflect, and move forward without feeling overwhelmed.",
-        highlight: "Clear sections act as mental anchors, allowing readers to navigate deep technical content without getting lost in the weeds."
-      },
-      {
-        heading: "The 'In Plain Terms' Strategy",
-        content: "Every complex strategy should be followed by a simplification. If you can't explain it simply, you don't understand it well enough—and your reader definitely won't. This is the bridge between technical expertise and executive decision-making.",
-        simplification: {
-          label: "In simple terms",
-          text: "Don't just dump data on your readers. Tell them what it means for their business and why they should care right now. If they can't explain your value to their boss in one sentence, you've lost."
-        }
-      },
-      {
-        heading: "The Practical Takeaway",
-        content: "The best content doesn't just inform; it transforms. Every piece of content should leave the reader with a 'Day 1' action. What can they do immediately after closing this tab? If the answer is 'nothing,' the content has failed.",
-        example: "Instead of saying 'You should optimize your SEO,' say 'Go to your top 3 performing pages and update the meta descriptions with these 5 keywords today.'"
-      }
-    ],
-    takeaways: [
-      "Prioritize authority over volume.",
-      "Use section-based storytelling to improve retention.",
-      "Always include a 'plain terms' simplification for complex ideas.",
-      "Automate the distribution, not the thinking.",
-      "Focus on 'Day 1' actionable items for every reader."
-    ]
-  },
-  "2": {
-    id: "2",
-    title: "Social Media Marketing: Cover social media strategies",
-    author: "Emmanuel Odebiyi",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel",
-    authorBio: "Emmanuel is a Content Strategist and AI Automation Expert.",
-    date: "March 20, 2026",
-    readTime: "6 min read",
-    heroImage: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1974",
-    tags: ["Marketing", "Social Media"],
-    hook: "Social media is no longer just about posting; it's about building a community and driving real business outcomes through strategic engagement.",
-    sections: [
-      {
-        heading: "The Shift to Community",
-        content: "Algorithms are increasingly prioritizing meaningful interactions over passive consumption. If your strategy is just broadcasting, you're shouting into a void.",
-        highlight: "Engagement is the new reach. Focus on the 100 people who care, not the 10,000 who scroll past."
-      }
-    ],
-    takeaways: ["Focus on community.", "Engagement over reach."]
-  },
-  "3": {
-    id: "3",
-    title: "Data Privacy and Ethics in the Digital Age",
-    author: "Emmanuel Odebiyi",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel",
-    authorBio: "Emmanuel is a Content Strategist and AI Automation Expert.",
-    date: "March 19, 2026",
-    readTime: "10 min read",
-    heroImage: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
-    tags: ["AI", "Ethics"],
-    hook: "As we move further into the AI era, the ethical implications of data usage have never been more critical. Privacy is not a feature; it's a fundamental right.",
-    sections: [
-      {
-        heading: "The Ethical Dilemma",
-        content: "AI models are only as good as the data they are trained on. But where does that data come from, and who owns it?",
-        highlight: "Transparency in AI is the only way to build long-term trust with your users."
-      }
-    ],
-    takeaways: ["Privacy first.", "Transparent AI models."]
-  },
-  "7": {
-    id: "7",
-    title: "The Future of Remote Work and AI Collaboration",
-    author: "Emmanuel Odebiyi",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel",
-    authorBio: "Emmanuel is a Content Strategist and AI Automation Expert.",
-    date: "March 15, 2026",
-    readTime: "7 min read",
-    heroImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2071",
-    tags: ["AI", "Work"],
-    hook: "Remote work is here to stay, but the way we collaborate is being revolutionized by AI-driven tools that bridge the physical gap.",
-    sections: [
-      {
-        heading: "AI as a Team Member",
-        content: "AI isn't just a tool; it's becoming a collaborator that can summarize meetings, manage tasks, and even suggest creative directions.",
-        highlight: "The future of work is hybrid: human creativity augmented by AI efficiency."
-      }
-    ],
-    takeaways: ["AI as a collaborator.", "Hybrid work models."]
-  },
-  "8": {
-    id: "8",
-    title: "Mastering the Art of Prompt Engineering",
-    author: "Emmanuel Odebiyi",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel",
-    authorBio: "Emmanuel is a Content Strategist and AI Automation Expert.",
-    date: "March 14, 2026",
-    readTime: "12 min read",
-    heroImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2070",
-    tags: ["AI", "Strategy"],
-    hook: "Prompt engineering is the new coding. Understanding how to talk to AI is the most valuable skill of the next decade.",
-    sections: [
-      {
-        heading: "The Language of Machines",
-        content: "Getting the best out of an LLM requires more than just a simple question. It requires context, constraints, and clear objectives.",
-        highlight: "A well-crafted prompt is the difference between a generic answer and a breakthrough insight."
-      }
-    ],
-    takeaways: [
-      "Context is king.",
-      "Constraints drive quality."
-    ]
-  },
-  "10": {
-    id: "10",
-    title: "Content Marketing Automation: Is It Worth the Investment?",
-    author: "Emmanuel Odebiyi",
-    authorImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel",
-    authorBio: "Emmanuel is a Content Strategist and AI Automation Expert dedicated to helping B2B SaaS companies scale their organic growth through data-driven storytelling and systematic workflows.",
-    date: "March 22, 2026",
-    readTime: "15 min read",
-    heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
-    tags: ["Automation", "Strategy", "Marketing"],
-    hook: "One of the most discussed strategies in the sphere of digital marketing is 'content marketing automation.' This approach makes content generation, dissemination, and evaluation to be done automatically, which helps businesses to be resourceful in other activities they have to pursue.",
-    sections: [
-      {
-        heading: "What is Content Marketing Automation?",
-        content: "Content marketing automation encompasses the use of technological tools and platforms to execute repetitive marketing processes that relate to content production, sharing, and even analysis. From typical everyday activities such as scheduling posts, disseminating content across different platforms, or monitoring performance statistics, automation platforms enable the marketer to perform such tasks autonomously, thus enabling the marketer to get into more strategic engagements.",
-        simplification: {
-          label: "A simple automation process",
-          text: "1. It starts with content creation (AI writing buddy). 2. Schedule Your Posts Like a Pro. 3. Smooth Content Distribution. 4. Track Your Performance Like a Data Detective."
-        }
-      },
-      {
-        heading: "Why Should You Consider Automation?",
-        content: "The biggest advantages that man can gain from automation tools include time and resource efficiency, better personalization, consistency in distribution, and better data-driven decision making. A report from Nucleus Research says that marketing automation actually improves productivity by 20%, meaning organizations can accomplish more within a short time.",
-        highlight: "Fun Fact: According to HubSpot, companies that publish blog posts regularly receive 97% more links to their websites.",
-        list: [
-          "Time and Resource Efficiency: Shave off 50% of the time to run campaigns.",
-          "Better Personalization: Segment audience based on demographics and behavior.",
-          "Consistency: Reach your audience regularly to build trust.",
-          "Data-Driven Decisions: Track metrics around engagement and conversion in real-time.",
-          "Scalability: Scale efforts without having to expand team size proportionally."
-        ]
-      },
-      {
-        heading: "Challenges to Prepare For",
-        content: "Getting too overwhelmed by several benefits will be too early; they come with their challenges. Understanding these will better equip you to prepare for them and realize the fullest potential of your automation efforts.",
-        list: [
-          "High Initial Setup Costs: Premium platforms like HubSpot or Marketo require substantial investment.",
-          "The Learning Curve: Teams need time to understand all features of the platform.",
-          "Over-Automation Risk: Content ends up being robotic or impersonal if not balanced.",
-          "Quality of Content: Ensuring automation delivers the same quality as human-driven content."
-        ],
-        quote: {
-          text: "Automation is great when it comes to efficiency, but it should never replace the human touch in your marketing efforts.",
-          author: "Neil Patel"
-        }
-      },
-      {
-        heading: "Key Features to Look For",
-        content: "When investing in content marketing automation, it's essential to understand the core features that these tools offer. The right set of features can significantly enhance the efficiency and success of your marketing efforts.",
-        list: [
-          "Content Creation Assistance: AI-powered tools like Jasper and Copy.ai for ideas and short-form content, and BuzzSumo for identifying trending topics.",
-          "Scheduling and Publishing: Tools like Hootsuite and WordPress allow you to pre-schedule posts for weeks or months in advance.",
-          "Content Distribution: Sprout Social and Buffer enable distribution to multiple platforms with just one click.",
-          "Analytics and Reporting: Google Analytics and HubSpot track performance across various platforms to measure engagement and ROI.",
-          "SEO Integration: SEMrush and Yoast SEO help identify keywords and automatically generate meta tags."
-        ],
-        highlight: "Fun Fact: According to Ahrefs, the first page of Google captures 71% of search traffic clicks. Automation helps you get there."
-      },
-      {
-        heading: "Common Pitfalls to Avoid",
-        content: "While automation can revolutionize your marketing, it's not without its challenges. Automation tools are incredibly powerful but, when used improperly, they can cause more harm than good.",
-        list: [
-          "Over-Automation Without a Personal Touch: Too much automation can alienate your audience and feel robotic.",
-          "Neglecting to Monitor or Update: The 'set it and forget it' mentality can lead to outdated or irrelevant information being sent out.",
-          "Failing to Segment Properly: Treating all subscribers the same can lead to low engagement and high unsubscribe rates.",
-          "Relying on Automation to Generate Content: Automation works best for distribution, not for creating high-quality, nuanced content from scratch.",
-          "Not Measuring Performance: Failing to track metrics means you won't know what's working and what needs improvement."
-        ],
-        highlight: "Case Study: According to Campaign Monitor, segmented email campaigns have been shown to achieve a 760% increase in revenue."
-      },
-      {
-        heading: "The Cost of Automation",
-        content: "The costs associated with automation can vary significantly based on the type of tool, the features it offers, and the size of your business. Below is a breakdown of sample monthly costs for popular tools.",
-        table: {
-          headers: ["Tool", "Monthly Price", "Key Features"],
-          rows: [
-            ["Buffer", "$6 to $120", "Social media scheduling, analytics, multi-platform support"],
-            ["Hootsuite", "$49 to $739", "Social media scheduling, reporting, team collaboration"],
-            ["HubSpot", "$800+", "Complete inbound marketing suite, CRM integration, lead generation"],
-            ["Mailchimp", "Free to $299+", "Email marketing, automation workflows, customer segmentation"],
-            ["SEMrush", "$119.95 to $449.95", "SEO tools, keyword research, content marketing tools"]
-          ]
-        }
-      },
-      {
-        heading: "How to Get Started",
-        content: "Implementing content marketing automation can seem overwhelming, but following a clear and methodical process can smoothly transition your strategy. Choosing the right tool is the most critical step.",
-        table: {
-          headers: ["Tool", "Best for", "Key Features", "Pricing"],
-          rows: [
-            ["HubSpot", "All-in-one marketing, sales, and CRM", "Email marketing, workflows, analytics, CRM", "Starts at $50"],
-            ["Marketo", "Advanced B2B marketing automation", "Lead scoring, CRM integration, email workflows", "Starts at $895"],
-            ["Mailchimp", "Email marketing automation", "Email campaigns, segmentation, analytics", "Free to $299"],
-            ["Hootsuite", "Social media automation", "Post scheduling, social media monitoring", "Starts at $19"],
-            ["CoSchedule", "Content and marketing management", "Editorial calendar, scheduling, team collaboration", "Starts at $29"]
-          ]
-        },
-        list: [
-          "Define Clear Objectives: Ask what specific aspects you want to improve.",
-          "Choose the Right Tools: Select platforms that align with your goals.",
-          "Build a Workflow: Map out a sequence of tasks triggered by specific events.",
-          "Segment Your Audience: Create highly personalized content for specific groups.",
-          "Monitor and Optimize: Continuous monitoring is essential for long-term success."
-        ],
-        simplification: {
-          label: "Example Workflow",
-          text: "Trigger: User downloads a white paper. Day 1: Send 'Thank You' email. Day 3: Follow-up with related blog posts. Day 7: Send personalized offer."
-        }
-      },
-      {
-        heading: "Best Practices for Success",
-        content: "To get the most out of content marketing automation, it's not just about setting up the tools; it's about optimizing them for maximum impact.",
-        list: [
-          "Personalize Content as Much as Possible: Use dynamic content and segment by behavior.",
-          "Maintain Consistency in Tone: Develop brand guidelines and use pre-approved templates.",
-          "Don't Automate Everything: Humanize customer service and social media interactions.",
-          "Continuously Update and Refresh: Conduct audits every six months to keep content fresh.",
-          "Test and Experiment Regularly: Run A/B tests on subject lines, CTAs, and formats."
-        ],
-        highlight: "Pro Tip: Consistent branding can increase revenue by up to 23%, according to Lucidpress."
-      },
-      {
-        heading: "Measuring ROI",
-        content: "One of the key concerns is determining whether the investment is paying off. Calculating the return on investment (ROI) is essential to track success.",
-        highlight: "ROI Formula: (Revenue from Automation – Cost of Automation) / Cost of Automation x 100",
-        simplification: {
-          label: "ROI Example",
-          text: "If your business generated $50,000 from automated campaigns and spent $10,000 on tools, your ROI is 400%."
-        }
-      }
-    ],
-    takeaways: [
-      "Automation scales your efforts without scaling your team size proportionally.",
-      "Personalization is the key to avoiding the 'robotic' feel of automated content.",
-      "Start with simple workflows and grow into more advanced functionality over time.",
-      "Always monitor and optimize; automation is not a 'set it and forget it' solution.",
-      "Focus on ROI by tracking both revenue growth and labor cost reductions."
-    ]
-  }
-};
+import { SEO } from '../components/SEO';
+import { blogPosts } from '../data/blogData';
 
 export default function BlogPost() {
   const { id } = useParams();
-  const post = blogPosts[id as keyof typeof blogPosts] || blogPosts["1"];
-
-  // Logic to find related articles based on "closeness to main website" (AI, Automation, Strategy)
-  const coreThemes = ["AI", "Automation", "Strategy", "Growth"];
   
-  const relatedPosts = Object.values(blogPosts)
+  // Find post dynamically
+  const post = blogPosts.find(p => p.id === id) || blogPosts[0];
+
+  const [scrollPercent, setScrollPercent] = useState(0);
+  const [activeSection, setActiveSection] = useState(0);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  // Check and manage bookmarks from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('blog_bookmarks');
+      if (saved) {
+        const list = JSON.parse(saved) as string[];
+        setIsBookmarked(list.includes(post.id));
+      }
+    } catch (e) {
+      console.warn("Storage access not allowed:", e);
+    }
+  }, [post.id]);
+
+  const toggleBookmark = () => {
+    try {
+      const saved = localStorage.getItem('blog_bookmarks');
+      let list = saved ? (JSON.parse(saved) as string[]) : [];
+      if (list.includes(post.id)) {
+        list = list.filter(item => item !== post.id);
+        setIsBookmarked(false);
+        triggerToast("Removed from bookmarks");
+      } else {
+        list.push(post.id);
+        setIsBookmarked(true);
+        triggerToast("Saved to bookmarks! 🔖");
+      }
+      localStorage.setItem('blog_bookmarks', JSON.stringify(list));
+    } catch (e) {
+      triggerToast("Could not save bookmark");
+    }
+  };
+
+  const copyShareLink = () => {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => {
+        triggerToast("Link copied to clipboard! 📋");
+      })
+      .catch(() => {
+        triggerToast("Failed to copy link");
+      });
+  };
+
+  const triggerToast = (msg: string) => {
+    setToastMessage(msg);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2500);
+  };
+
+  // Scroll percent calculations for progress bar
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight <= 0) return;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollPercent(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scrollspy to set active Table of Contents header
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      const scrollPosition = window.scrollY + 180;
+      post.sections.forEach((_, idx) => {
+        const el = document.getElementById(`section-${idx}`);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(idx);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScrollSpy);
+    // Initial call
+    setTimeout(handleScrollSpy, 200);
+
+    return () => window.removeEventListener('scroll', handleScrollSpy);
+  }, [post.sections]);
+
+  // Logic to find related articles based on tags overlap
+  const relatedPosts = blogPosts
     .filter(p => p.id !== post.id) // Exclude current post
     .map(p => {
-      // Calculate relevance score
       let score = 0;
       p.tags.forEach(tag => {
-        if (coreThemes.includes(tag)) score += 2;
-        if (post.tags.includes(tag)) score += 1;
+        if (post.tags.includes(tag)) score += 2;
       });
       return { ...p, score };
     })
@@ -313,14 +130,42 @@ export default function BlogPost() {
     .slice(0, 3); // Take top 3
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white">
-      
-      {/* Article Hero - Full Viewport */}
-      <section className="relative h-screen w-full overflow-hidden">
+    <div className="min-h-screen bg-[#0a0f1e] text-[#f8fafc] overflow-hidden">
+      <SEO 
+        title={`${post.title} | Emmanuel Odebiyi`}
+        description={post.excerpt}
+        keywords={post.tags.join(", ")}
+      />
+
+      {/* Floating Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-white/5 z-50">
+        <div 
+          className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-75"
+          style={{ width: `${scrollPercent}%` }}
+        />
+      </div>
+
+      {/* Floating Toast Notification */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 bg-[#0f172a] border border-blue-500/30 text-white px-6 py-3.5 rounded-2xl shadow-2xl shadow-blue-500/10 flex items-center gap-3 backdrop-blur-md"
+          >
+            <Check size={16} className="text-blue-400" />
+            <span className="text-sm font-mono tracking-wide">{toastMessage}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Article Hero Banner */}
+      <section className="relative h-[80vh] w-full overflow-hidden">
         <motion.div 
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          initial={{ scale: 1.05 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
           className="absolute inset-0"
         >
           <img 
@@ -329,281 +174,378 @@ export default function BlogPost() {
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          {/* Enhanced Gradient Overlay for better contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/60 to-zinc-900/20" />
-          <div className="absolute inset-0 bg-black/10" />
+          {/* Crisp, deep overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/70 to-black/35" />
+          <div className="absolute inset-0 bg-[#0a0f1e]/15" />
         </motion.div>
 
-        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-20 max-w-7xl mx-auto w-full">
+        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-20 max-w-7xl mx-auto w-full relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="space-y-8 max-w-4xl"
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="space-y-6 max-w-4xl text-left"
           >
-            <Link to="/blog" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-4 group">
-              <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-              Back to Blog
+            <Link to="/blog" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-2 group font-mono text-xs uppercase tracking-widest">
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+              Back to Insights
             </Link>
             
-            <h1 className="text-5xl md:text-8xl font-bold text-white tracking-tight leading-[0.95]">
+            <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tight leading-[0.95] font-display">
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-8 pt-4">
-              <div className="flex items-center gap-4">
-                <img src={post.authorImage} alt={post.author} className="w-12 h-12 rounded-full border-2 border-white/20" />
-                <div className="text-left">
-                  <p className="text-white font-bold">{post.author}</p>
-                  <p className="text-white/60 text-sm">{post.date}</p>
+            <div className="flex flex-wrap items-center gap-6 pt-4">
+              <div className="flex items-center gap-3">
+                <img 
+                  src={post.authorImage} 
+                  alt={post.author} 
+                  className="w-10 h-10 rounded-full border border-white/10" 
+                />
+                <div>
+                  <p className="text-white font-bold text-sm leading-none">{post.author}</p>
+                  <p className="text-zinc-500 text-[10px] font-mono uppercase tracking-wider mt-1">{post.date}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-6 text-white/60 text-sm font-mono uppercase tracking-widest">
-                <span className="flex items-center gap-2"><Clock size={14} /> {post.readTime}</span>
-                <span className="flex items-center gap-2"><Share2 size={14} className="cursor-pointer hover:text-white transition-colors" /></span>
-                <span className="flex items-center gap-2"><Bookmark size={14} className="cursor-pointer hover:text-white transition-colors" /></span>
+              
+              <div className="h-4 w-px bg-white/10 hidden sm:block" />
+
+              <div className="flex items-center gap-6 text-zinc-400 text-xs font-mono">
+                <span className="flex items-center gap-1.5"><Clock size={13} /> {post.readTime}</span>
+                <button 
+                  onClick={copyShareLink}
+                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none"
+                  title="Share Link"
+                >
+                  <Share2 size={13} /> Share
+                </button>
+                <button 
+                  onClick={toggleBookmark}
+                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none"
+                  title="Bookmark post"
+                >
+                  <Bookmark size={13} className={isBookmarked ? "fill-blue-500 text-blue-500" : ""} /> Bookmark
+                </button>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Article Content Section */}
-      <article className="max-w-3xl mx-auto px-6 py-32">
-        
-        {/* Introduction / Hook */}
-        <section className="mb-20">
-          <p className="text-3xl md:text-4xl font-light text-gray-400 leading-relaxed italic border-l-4 border-indigo-500 pl-8">
-            {post.hook}
-          </p>
-        </section>
-
-        {/* Dynamic Sections */}
-        <div className="space-y-24">
-          {post.sections.map((section, index) => (
-            <section key={index} className="space-y-8">
-              <h2 className="text-4xl font-bold tracking-tight text-white">
-                {section.heading}
-              </h2>
-              
-              <div className="prose prose-invert prose-xl font-light text-gray-400 leading-relaxed">
-                <p>{section.content}</p>
-              </div>
-
-              {section.example && (
-                <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm space-y-4">
-                  <div className="flex items-center gap-3 text-gray-500 font-mono text-xs uppercase tracking-widest">
-                    <Lightbulb size={16} className="text-amber-500" />
-                    Example Case
-                  </div>
-                  <p className="text-xl text-gray-300 font-light leading-relaxed italic">
-                    "{section.example}"
-                  </p>
-                </div>
-              )}
-
-              {section.highlight && (
-                <div className="p-10 rounded-[2.5rem] bg-white/10 border border-white/20 backdrop-blur-sm space-y-4">
-                  <p className="text-2xl font-bold text-white leading-tight">
-                    {section.highlight}
-                  </p>
-                </div>
-              )}
-
-              {section.simplification && (
-                <div className="p-10 rounded-[2.5rem] bg-zinc-950/80 border border-white/10 text-white space-y-6 relative overflow-hidden">
-                  <div className="relative z-10">
-                    <h4 className="text-xs font-mono uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-4">
-                      {section.simplification.label}
-                    </h4>
-                    <p className="text-2xl font-light leading-relaxed text-zinc-300">
-                      {section.simplification.text}
-                    </p>
-                  </div>
-                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-gradient/10 blur-3xl rounded-full" />
-                </div>
-              )}
-
-              {section.list && (
-                <ul className="space-y-4 pt-4">
-                  {section.list.map((item: any, i: number) => (
-                    <li key={i} className="flex items-start gap-4 group">
-                      <div className="mt-2 w-1.5 h-1.5 rounded-full bg-brand-gradient flex-shrink-0" />
-                      <span className="text-xl text-gray-300 font-light leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {section.quote && (
-                <div className="py-12 border-y border-white/10 my-12">
-                  <p className="text-3xl font-serif italic text-white leading-tight text-center max-w-2xl mx-auto">
-                    "{section.quote.text}"
-                  </p>
-                  <p className="text-center mt-6 text-gray-500 font-mono text-xs uppercase tracking-widest">
-                    — {section.quote.author}
-                  </p>
-                </div>
-              )}
-
-              {section.table && (
-                <div className="my-12 overflow-x-auto rounded-3xl border border-white/10">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-white/5 border-b border-white/10">
-                        {section.table.headers.map((header: string, i: number) => (
-                          <th key={i} className="px-6 py-4 text-xs font-mono uppercase tracking-widest text-gray-400">
-                            {header}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {section.table.rows.map((row: string[], i: number) => (
-                        <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
-                          {row.map((cell: string, j: number) => (
-                            <td key={j} className="px-6 py-6 text-sm text-gray-300 font-light leading-relaxed">
-                              {cell}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </section>
-          ))}
-        </div>
-
-        {/* Visual Break / Divider */}
-        <div className="my-32 flex items-center justify-center gap-4">
-          <div className="h-px w-12 bg-white/20" />
-          <div className="w-2 h-2 rounded-full bg-brand-gradient" />
-          <div className="h-px w-12 bg-white/20" />
-        </div>
-
-        {/* Key Takeaways Section */}
-        <section className="p-12 md:p-20 rounded-[4rem] bg-white/5 border border-white/10 backdrop-blur-md space-y-12">
-          <div className="space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-gray-500">Summary</h3>
-            <h2 className="text-4xl font-bold text-white tracking-tight">Key Insights</h2>
-          </div>
+      {/* Main Content Layout */}
+      <section className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          <ul className="space-y-6">
-            {post.takeaways.map((takeaway, i) => (
-              <li key={i} className="flex items-start gap-4 group">
-                <div className="mt-1.5 w-5 h-5 rounded-full bg-white/10 text-brand-gradient flex items-center justify-center flex-shrink-0 group-hover:bg-brand-gradient group-hover:text-zinc-900 transition-colors">
-                  <CheckCircle2 size={12} />
-                </div>
-                <span className="text-xl text-gray-300 font-light leading-relaxed">{takeaway}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+          {/* Sticky Left Table of Contents */}
+          <aside className="hidden lg:block lg:col-span-3 sticky top-28 h-fit space-y-8 text-left border-r border-white/5 pr-6">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                <BookOpen size={12} />
+                <span>Reading Guide</span>
+              </div>
+              <h4 className="text-sm font-bold text-white font-sans">Core Framework</h4>
+            </div>
+            
+            <nav className="flex flex-col gap-2 relative">
+              {post.sections.map((sec, idx) => (
+                <a
+                  key={idx}
+                  href={`#section-${idx}`}
+                  className={`text-sm font-light py-2 pl-4 border-l transition-all duration-300 ${
+                    activeSection === idx
+                      ? 'text-blue-400 border-blue-500 font-medium'
+                      : 'text-zinc-500 border-white/5 hover:text-zinc-300 hover:border-white/10'
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById(`section-${idx}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }}
+                >
+                  {sec.heading}
+                </a>
+              ))}
+            </nav>
 
-        {/* Author Section with Bio */}
-        <section className="mt-32 pt-12 border-t border-white/10">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-            <img src={post.authorImage} alt={post.author} className="w-24 h-24 rounded-full grayscale hover:grayscale-0 transition-all duration-500 border-2 border-white/10" />
-            <div className="space-y-4 flex-1">
-              <div>
-                <p className="text-2xl font-bold text-white">{post.author}</p>
-                <p className="text-gray-500 text-sm font-mono uppercase tracking-widest">{post.date}</p>
-              </div>
-              <p className="text-lg text-gray-400 font-light leading-relaxed max-w-2xl">
-                {post.authorBio}
+            {/* Quick Actions Panel */}
+            <div className="pt-8 border-t border-white/5 space-y-4">
+              <button 
+                onClick={copyShareLink}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/8 transition-all text-xs font-mono text-zinc-300 hover:text-white"
+              >
+                <span>Share Insight</span>
+                <Share2 size={12} />
+              </button>
+              <button 
+                onClick={toggleBookmark}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/8 transition-all text-xs font-mono text-zinc-300 hover:text-white"
+              >
+                <span>{isBookmarked ? "Bookmarked" : "Bookmark Insight"}</span>
+                <Bookmark size={12} className={isBookmarked ? "fill-blue-500 text-blue-500" : ""} />
+              </button>
+            </div>
+          </aside>
+
+          {/* Article Central Column */}
+          <article className="col-span-1 lg:col-span-8 lg:pl-6 text-left">
+            
+            {/* Hook / Introduction */}
+            <section className="mb-16">
+              <p className="text-2xl md:text-3xl font-light text-zinc-300 leading-relaxed italic border-l-4 border-blue-500 pl-8 font-sans">
+                "{post.hook}"
               </p>
-              <div className="flex gap-4">
-                <Share2 size={20} className="text-gray-500 hover:text-white cursor-pointer transition-colors" />
+            </section>
+
+            {/* Content Sections */}
+            <div className="space-y-20">
+              {post.sections.map((section, index) => (
+                <section 
+                  key={index} 
+                  id={`section-${index}`} 
+                  className="space-y-6 scroll-mt-24 transition-opacity"
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
+                    <span className="text-zinc-600 text-sm font-mono tracking-wider font-light">0{index + 1}.</span>
+                    {section.heading}
+                  </h2>
+                  
+                  <div className="prose prose-invert max-w-none text-zinc-300 font-light text-base md:text-lg leading-relaxed space-y-4">
+                    <p className="whitespace-pre-line">{section.content}</p>
+                  </div>
+
+                  {/* Styled Section Extras */}
+                  {section.example && (
+                    <div className="p-8 rounded-3xl bg-[#0f172a]/50 border border-amber-500/20 shadow-lg shadow-amber-500/5 space-y-3 relative overflow-hidden">
+                      <div className="flex items-center gap-2 text-amber-400 font-mono text-[10px] uppercase tracking-widest">
+                        <Lightbulb size={14} />
+                        <span>Example Playbook</span>
+                      </div>
+                      <p className="text-base text-zinc-200 font-light leading-relaxed italic">
+                        "{section.example}"
+                      </p>
+                    </div>
+                  )}
+
+                  {section.highlight && (
+                    <div className="p-8 rounded-3xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 shadow-lg space-y-2">
+                      <p className="text-lg md:text-xl font-medium text-white leading-snug">
+                        {section.highlight}
+                      </p>
+                    </div>
+                  )}
+
+                  {section.simplification && (
+                    <div className="p-8 rounded-3xl bg-[#0a0f1e]/80 border border-white/5 text-white space-y-4 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
+                      <div className="relative z-10 space-y-2">
+                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] block">
+                          {section.simplification.label}
+                        </span>
+                        <p className="text-base md:text-lg font-light leading-relaxed text-zinc-300">
+                          {section.simplification.text}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {section.list && (
+                    <ul className="space-y-3.5 pt-2 pl-2">
+                      {section.list.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3.5 group">
+                          <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                          <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {section.quote && (
+                    <div className="py-10 border-y border-white/5 my-10 relative">
+                      <p className="text-2xl md:text-3xl font-display italic text-white leading-relaxed text-center max-w-2xl mx-auto">
+                        "{section.quote.text}"
+                      </p>
+                      <p className="text-center mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                        — {section.quote.author}
+                      </p>
+                    </div>
+                  )}
+
+                  {section.table && (
+                    <div className="my-8 overflow-x-auto rounded-2xl border border-white/5 shadow-2xl shadow-black/20">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="bg-white/5 border-b border-white/5">
+                            {section.table.headers.map((header, i) => (
+                              <th key={i} className="px-6 py-4.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.table.rows.map((row, i) => (
+                            <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-[#0f172a]/30 transition-colors">
+                              {row.map((cell, j) => (
+                                <td key={j} className="px-6 py-5 text-sm text-zinc-300 font-light leading-relaxed">
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </section>
+              ))}
+            </div>
+
+            {/* Divider Element */}
+            <div className="my-24 flex items-center justify-center gap-3">
+              <div className="h-px w-10 bg-white/10" />
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <div className="h-px w-10 bg-white/10" />
+            </div>
+
+            {/* Key Takeaways Section */}
+            <section className="p-8 md:p-16 rounded-[2.5rem] bg-[#0f172a]/40 border border-white/5 shadow-xl space-y-10">
+              <div className="space-y-3">
+                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-zinc-500 block">Executive Summary</span>
+                <h2 className="text-3xl font-bold text-white tracking-tight">Key Insights</h2>
               </div>
+              
+              <ul className="space-y-5">
+                {post.takeaways.map((takeaway, i) => (
+                  <li key={i} className="flex items-start gap-4 group">
+                    <div className="mt-1.5 w-5 h-5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                      <CheckCircle2 size={12} />
+                    </div>
+                    <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{takeaway}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Dynamic Author Bio Card */}
+            <section className="mt-24 pt-12 border-t border-white/5">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 bg-[#0f172a]/20 border border-white/5 p-8 rounded-3xl backdrop-blur-sm">
+                <img 
+                  src={post.authorImage} 
+                  alt={post.author} 
+                  className="w-20 h-20 rounded-full border border-white/10 object-cover shadow-lg shadow-black/20" 
+                />
+                <div className="space-y-3 flex-1 text-left">
+                  <div>
+                    <p className="text-xl font-bold text-white leading-none">{post.author}</p>
+                    <p className="text-zinc-500 text-xs font-mono uppercase mt-1 tracking-wider">{post.date} • Author</p>
+                  </div>
+                  <p className="text-sm md:text-base text-zinc-400 font-light leading-relaxed">
+                    {post.authorBio}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Bottom Actions Router */}
+            <section className="mt-16 p-8 border-t border-white/5 text-zinc-400 font-light text-sm text-left flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <p className="max-w-md">
+                Want to build automated pipelines like these for your business? Explore my solutions or reach out.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/portfolio" className="text-white hover:text-blue-400 font-bold hover:underline inline-flex items-center gap-1 font-mono text-xs uppercase tracking-widest transition-colors">
+                  Case Studies <ArrowUpRight size={14} />
+                </Link>
+                <span className="text-white/10 hidden md:inline">|</span>
+                <Link to="/contact" className="text-blue-400 hover:text-blue-300 font-bold hover:underline inline-flex items-center gap-1 font-mono text-xs uppercase tracking-widest transition-colors">
+                  Let's Connect <ArrowUpRight size={14} />
+                </Link>
+              </div>
+            </section>
+
+          </article>
+        </div>
+
+        {/* Dynamic Related Articles Section */}
+        {relatedPosts.length > 0 && (
+          <section className="mt-32 pt-20 border-t border-white/5 space-y-10 text-left">
+            <div className="space-y-3">
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-zinc-500 block">Next Up</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Related Insights</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {relatedPosts.map((related) => (
+                <Link 
+                  key={related.id} 
+                  to={`/blog/${related.id}`}
+                  className="group bg-[#0f172a]/20 hover:bg-[#0f172a]/50 border border-white/5 hover:border-white/10 rounded-3xl p-6 block transition-all duration-300 hover:y-[-4px]"
+                >
+                  <div className="aspect-[16/10] rounded-2xl overflow-hidden relative mb-6">
+                    <img 
+                      src={related.image} 
+                      alt={related.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-[#0a0f1e]/40 pointer-events-none" />
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex flex-wrap gap-1.5">
+                      {related.tags.slice(0, 2).map(tag => (
+                        <span key={tag} className="text-[8px] font-mono uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h4 className="text-lg font-bold text-white leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
+                      {related.title}
+                    </h4>
+                    <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono pt-3 border-t border-white/5">
+                      <span>{related.date}</span>
+                      <span className="flex items-center gap-1 group-hover:text-white transition-colors">
+                        Read
+                        <ChevronRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+      </section>
+
+      {/* Embedded unified bottom newsletter to match footer flow */}
+      <section className="bg-zinc-950/60 border-t border-white/5 py-24 px-6 overflow-hidden relative">
+        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+          <div className="space-y-3">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#60a5fa]">Organic Scale Insights</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-none font-display">
+              Join the Growth Lab
+            </h2>
+            <p className="text-zinc-400 font-light max-w-xl mx-auto text-sm leading-relaxed">
+              Get raw automated workflows, operational templates, and technical SEO frameworks delivered weekly. No spam, only engineering-grade growth strategy.
+            </p>
+          </div>
+
+          <div className="max-w-md mx-auto relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur-md opacity-20 group-focus-within:opacity-40 transition-opacity duration-300" />
+            <div className="relative flex bg-[#0f172a]/90 border border-white/10 p-2 rounded-xl">
+              <input 
+                type="email" 
+                placeholder="Enter email address" 
+                className="flex-1 bg-transparent px-4 text-white text-xs focus:outline-none placeholder-zinc-500"
+                disabled
+              />
+              <Link
+                to="/blog"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-[10px] uppercase tracking-wider font-mono shadow-md"
+              >
+                Sign Up
+              </Link>
             </div>
           </div>
-        </section>
-
-        {/* Simplified CTA Section */}
-        <section className="mt-20 pt-12 border-t border-white/10">
-          <p className="text-gray-400 font-light">
-            Interested in seeing more? <Link to="/portfolio" className="text-brand-gradient font-bold hover:underline inline-flex items-center gap-1">View my portfolio <ArrowUpRight size={16} /></Link>, <Link to="/resume" className="text-white font-bold hover:underline">check my resume</Link>, or <Link to="/contact" className="text-brand-gradient font-bold hover:underline">get in touch</Link>.
-          </p>
-        </section>
-
-        {/* Related Articles Section */}
-        <section className="mt-32 pt-32 border-t border-white/10 space-y-12">
-          <div className="space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-gray-500">Next Up</h3>
-            <h2 className="text-4xl font-bold text-white tracking-tight">Related Articles</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedPosts.map((related) => (
-              <Link 
-                key={related.id} 
-                to={`/blog/${related.id}`}
-                className="group space-y-4 block"
-              >
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden relative">
-                  <img 
-                    src={related.heroImage} 
-                    alt={related.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-                </div>
-                <div className="space-y-2">
-                  <div className="flex gap-2">
-                    {related.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-[10px] font-mono uppercase tracking-widest text-brand-gradient bg-white/10 border border-white/20 backdrop-blur-sm px-2 py-0.5 rounded">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h4 className="text-xl font-bold text-white leading-tight group-hover:text-brand-gradient transition-colors">
-                    {related.title}
-                  </h4>
-                  <p className="text-sm text-gray-500 font-mono uppercase tracking-widest">{related.date}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-      </article>
-
-      {/* Newsletter Section (Re-integrated from Blog page) */}
-      <section className="bg-zinc-950/40 border-t border-white/10 py-32 px-6 overflow-hidden relative">
-        <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
-              Stay ahead with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 italic">automation insights</span>
-            </h2>
-            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
-              Join 2,000+ founders and marketers getting weekly strategies on AI workflows and growth systems.
-            </p>
-          </motion.div>
-
-          <div className="max-w-md mx-auto relative">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 placeholder-gray-500 backdrop-blur-sm transition-all"
-            />
-            <button className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-brand-gradient text-zinc-900 rounded-xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20">
-              <ArrowRight size={20} />
-            </button>
-          </div>
         </div>
-
-        {/* Background Decoration */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gradient/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gradient/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
       </section>
     </div>
   );

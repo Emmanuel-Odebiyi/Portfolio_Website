@@ -5,8 +5,8 @@ import { ArrowRight } from 'lucide-react';
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[100vh] flex items-center overflow-hidden grain-overlay"
-             style={{ backgroundColor: '#0a0f1e' }}>
+    <section className="relative min-h-[100vh] flex items-center overflow-hidden grain-overlay bg-[var(--dark-base)]">
+
 
       {/* ── Aurora Orbs ─────────────────────────────────────────────────────── */}
       {/* Blue orb — left/center */}
@@ -105,8 +105,7 @@ export const HeroSection = () => {
                 <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.2)' }} />
               </div>
               <h2
-                className="relative z-10 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight px-8 italic"
-                style={{ color: 'rgba(226,232,240,0.95)' }}
+                className="relative z-10 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight px-8 italic text-zinc-300"
               >
                 While you're still writing one at 11 PM on a Sunday.
               </h2>
@@ -120,7 +119,8 @@ export const HeroSection = () => {
             transition={{ delay: 0.25, duration: 0.9 }}
             className="mb-8 max-w-3xl mx-auto"
           >
-            <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'rgba(226,232,240,0.9)' }}>
+            <p className="text-lg md:text-xl leading-relaxed text-zinc-300">
+
               I build{' '}
               <span
                 style={{
@@ -164,24 +164,11 @@ export const HeroSection = () => {
             {/* Secondary — glass ghost */}
             <Link
               to="/contact"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-sm transition-all duration-300 hover:scale-[1.02]"
-              style={{
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: 'rgba(255,255,255,0.85)',
-                backdropFilter: 'blur(10px)',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.10)';
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(245,158,11,0.6)';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)';
-              }}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-sm transition-all duration-300 hover:scale-[1.02] bg-[var(--dark-card)] border border-[var(--dark-border)] text-[var(--text-primary)] backdrop-blur-md hover:bg-white/10 hover:border-amber-500/50"
             >
               Book a Free Strategy Call
             </Link>
+
           </motion.div>
 
           {/* Scroll indicator */}
@@ -194,14 +181,14 @@ export const HeroSection = () => {
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-6 h-10 rounded-full flex justify-center p-2"
-              style={{ border: '1px solid rgba(255,255,255,0.15)' }}
+              className="w-6 h-10 rounded-full flex justify-center p-2 border border-[var(--dark-border)]"
             >
-              <div className="w-1 h-2 rounded-full" style={{ background: '#f59e0b' }} />
+              <div className="w-1 h-2 rounded-full bg-amber-500" />
             </motion.div>
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em]" style={{ color: 'rgba(226,232,240,0.6)' }}>
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[var(--text-secondary)]">
               scroll
             </span>
+
           </motion.div>
 
         </div>

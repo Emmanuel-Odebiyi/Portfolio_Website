@@ -161,10 +161,10 @@ export const AutomationInAction = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] z-20 grain-overlay" style={{ backgroundColor: '#0f172a' }}>
+    <section ref={containerRef} className="relative h-[500vh] z-20 grain-overlay bg-[var(--dark-surface)]">
       
       {/* Sticky Container */}
-      <div className="sticky top-0 min-h-screen pt-24 pb-8 overflow-hidden flex flex-col justify-center" style={{ backgroundColor: '#0f172a', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <div className="sticky top-0 min-h-screen pt-24 pb-8 overflow-hidden flex flex-col justify-center bg-[var(--dark-surface)] border-t border-b border-white/10">
         
         {/* Background Decorative Element */}
         <div className="absolute top-0 right-0 w-1/3 h-full -skew-x-12 translate-x-20 z-0 border-l pointer-events-none" style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.04)' }} />
@@ -190,7 +190,7 @@ export const AutomationInAction = () => {
             </div>
             
             {/* Simplified Top Right Content */}
-            <p className="text-sm md:text-base font-medium max-w-sm leading-relaxed shrink-0 py-2 rounded-r-xl pl-5" style={{ color: 'rgba(226,232,240,0.9)', borderLeft: '2px solid #f59e0b' }}>
+            <p className="text-sm md:text-base font-medium max-w-sm leading-relaxed shrink-0 py-2 rounded-r-xl pl-5 text-[var(--text-secondary)] border-l-2 border-amber-500">
               I map the inefficiency and build the systems that eliminate it—<span className="text-white font-bold block mt-1">Reclaiming 10 to 20 hours of your week.</span>
             </p>
           </div>

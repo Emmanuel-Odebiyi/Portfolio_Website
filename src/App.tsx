@@ -5,6 +5,8 @@ import { Footer } from './components/Footer';
 import { Aurora } from './components/Aurora';
 import { SkipLink } from './components/SkipLink';
 
+
+
 // ── Eagerly loaded (above the fold / core navigation) ────────────────────────
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
@@ -77,6 +79,7 @@ export default function App() {
       <Aurora />
       <main id="main-content" className="relative bg-transparent">
         <Header />
+
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -67,10 +67,10 @@ const InfiniteGrid = () => {
 
 export const Aurora: React.FC = () => {
   return (
-    /* Dark base color #0a0f1e — Deep Space Navy */
-    <div className="fixed inset-0 z-[-1] pointer-events-none" style={{ backgroundColor: '#0a0f1e' }}>
+    /* Dynamic base color using var(--dark-base) and custom selector hook */
+    <div className="fixed inset-0 z-[-1] pointer-events-none bg-[var(--dark-base)] aurora-canvas-container">
       <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-        {/* Fog fades grid into the dark base colour */}
+        {/* Fog fades grid into the active base color */}
         <fog attach="fog" args={['#0a0f1e', 5, 25]} />
         <ParticleSwarm />
         <InfiniteGrid />
@@ -78,3 +78,4 @@ export const Aurora: React.FC = () => {
     </div>
   );
 };
+
