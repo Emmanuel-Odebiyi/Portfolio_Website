@@ -6,31 +6,17 @@
   <meta name="robots" content="noindex" />
   <title>Content Manager | Emmanuel Odebiyi</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
   <script>
-    // Initialize Netlify Identity with explicit API URL (required when not hosted on Netlify)
+    // Point Identity widget to the Netlify site (required when not hosted on Netlify)
     if (window.netlifyIdentity) {
       window.netlifyIdentity.init({
         APIUrl: "https://guileless-malasada-3d31ba.netlify.app/.netlify/identity"
       });
     }
   </script>
+</head>
+<body>
+  <!-- Decap CMS auto-initializes from config.yml — do NOT call CMS.init() manually -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    // Explicitly initialize the CMS with identity and git gateway URLs
-    if (window.CMS) {
-      window.CMS.init({
-        config: {
-          backend: {
-            name: "git-gateway",
-            branch: "master",
-            identity_url: "https://guileless-malasada-3d31ba.netlify.app/.netlify/identity",
-            gateway_url: "https://guileless-malasada-3d31ba.netlify.app/.netlify/git"
-          }
-        }
-      });
-    }
-  </script>
 </body>
 </html>
