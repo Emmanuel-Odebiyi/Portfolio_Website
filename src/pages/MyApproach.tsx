@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -136,6 +137,11 @@ export default function MyApproach() {
 
   return (
     <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
+      <SEO 
+        title="My Approach — Data-Driven Systems Architecture | Emmanuel Odebiyi"
+        description="Every recommendation backed by data, every result measured precisely. Explore Emmanuel Odebiyi's 5-phase methodology for building autonomous growth engines."
+        keywords="marketing methodology, data-driven approach, automation architecture, SEO strategy framework"
+      />
       
       {/* Premium Background Decor */}
       <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0">

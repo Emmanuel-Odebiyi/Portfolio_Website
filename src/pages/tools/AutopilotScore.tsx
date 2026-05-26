@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../../components/SEO';
 import { 
   Gauge, 
   ChevronRight, 
@@ -331,6 +332,11 @@ export default function AutopilotScore() {
 
   return (
     <div className="pt-32 pb-20 bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden print-area">
+      <SEO 
+        title="Business Freedom Calculator — Score Your Readiness | Emmanuel Odebiyi"
+        description="Find out exactly how close your business is to running smoothly without you. Score across 5 pillars: process, integration, autonomy, data, and customer journey."
+        keywords="business freedom calculator, autopilot score, automation maturity assessment, operations readiness"
+      />
       {/* Dynamic Print Stylesheet */}
       <style dangerouslySetInnerHTML={{ __html: `
         @media print {

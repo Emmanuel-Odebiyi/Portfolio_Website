@@ -19,6 +19,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 const sections = [
   { id: 'summary', label: 'Summary' },
@@ -135,6 +136,11 @@ export default function Resume() {
 
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white pt-32 pb-20 font-sans">
+      <SEO 
+        title="Resume — Emmanuel Odebiyi | AI Automation Specialist & SEO Strategist"
+        description="Download Emmanuel Odebiyi's resume. AI Automation Specialist & SEO Strategist building autonomous growth engines for B2B SaaS companies."
+        keywords="emmanuel odebiyi resume, AI automation specialist, SEO strategist, content marketing resume"
+      />
       <div className="max-w-5xl mx-auto px-6">
         
         {/* Header - Christie Tang Style */}
@@ -166,9 +172,9 @@ export default function Resume() {
             >
               <div className="flex flex-col gap-2 text-sm font-mono uppercase tracking-widest text-gray-500">
                 <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="hover:text-white transition-colors">emmanuelodebiyiwrites@gmail.com</a>
-                <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-                <a href="#" className="hover:text-white transition-colors">Twitter</a>
-                <a href="#" className="hover:text-white transition-colors">Portfolio</a>
+                <a href="https://www.linkedin.com/in/emmanuel-odebiyi" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://x.com/Bobowrites_" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter</a>
+                <Link to="/portfolio" className="hover:text-white transition-colors">Portfolio</Link>
               </div>
               
               <AnimatePresence mode="wait">
@@ -355,8 +361,8 @@ export default function Resume() {
                 © 2026 Emmanuel Odebiyi — Built for Growth
               </p>
               <div className="flex gap-8">
-                <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">LinkedIn</a>
-                <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Twitter</a>
+                <a href="https://www.linkedin.com/in/emmanuel-odebiyi" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://x.com/Bobowrites_" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Twitter</a>
                 <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">Email</a>
               </div>
             </footer>

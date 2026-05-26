@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { 
   Radar, 
   Gauge, 
@@ -245,6 +246,11 @@ const tools: Tool[] = [
 export default function GrowthIntelligenceLab() {
   return (
     <div className="pt-36 pb-24 bg-[#030712] text-white min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Growth Intelligence Lab — Interactive Business Diagnostics | Emmanuel Odebiyi"
+        description="Interactive simulators to calculate bottlenecks, forecast scaling potential, and evaluate process maturity for your business operations."
+        keywords="growth intelligence lab, automation diagnostics, business scaling simulator, operations audit tool"
+      />
       {/* Immersive mesh glow elements */}
       <div className="absolute top-[-10%] left-[-20%] w-[60%] h-[50%] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/5 rounded-full blur-[140px] pointer-events-none" />
