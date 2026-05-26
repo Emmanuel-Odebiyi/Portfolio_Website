@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Users, Building2, Bot, PenTool } from 'lucide-react';
 import Lottie from 'lottie-react';
 
@@ -59,226 +59,30 @@ const PROBLEMS: Problem[] = [
   },
 ];
 
-// ─── Word-by-Word Component ───────────────────────────────────────────────
+// ─── Problem Card with Viewport Detection (Scroll Spy) ────────────────────────
 
-const ProblemWord = ({ 
-  word, 
-  scrollYProgress, 
-  start, 
-  end, 
-  accentColor 
+const ProblemCardSpy = ({ 
+  problem, 
+  index, 
+  onVisible 
 }: { 
-  word: string; 
-  scrollYProgress: any; 
-  start: number; 
-  end: number; 
-  accentColor: string;
+  problem: Problem; 
+  index: number; 
+  onVisible: () => void; 
 }) => {
-  const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
-  const y = useTransform(scrollYProgress, [start, end], [10, 0]);
-
-  return (
-    <motion.span
-      style={{ opacity, y, display: 'inline-block' }}
-      className="will-change-[opacity,transform] translate-z-0"
-    >
-      {word}
-    </motion.span>
-  );
-};
-
-
-// ─── Word-by-Word Scroll Reveal ───────────────────────────────────────────────
-
-const ScrollRevealText = ({
-  text,
-  scrollYProgress,
-  startProgress,
-  endProgress,
-  accentColor = '#3b82f6',
-  className = '',
-  style = {},
-}: {
-  text: string;
-  scrollYProgress: any;
-  startProgress: number;
-  endProgress: number;
-  accentColor?: string;
-  className?: string;
-  style?: React.CSSProperties;
-}) => {
-  const words = text.split(' ');
-  const step = (endProgress - startProgress) / Math.max(words.length, 1);
-
-  return (
-    <span className={className} style={style}>
-      {words.map((word, i) => {
-        const wordStart = startProgress + i * step;
-        const wordEnd = Math.min(wordStart + step * 2.5, endProgress);
-
-        return (
-          <React.Fragment key={i}>
-            <ProblemWord 
-              word={word} 
-              scrollYProgress={scrollYProgress} 
-              start={wordStart} 
-              end={wordEnd} 
-              accentColor={accentColor} 
-            />
-            {' '}
-          </React.Fragment>
-        );
-      })}
-    </span>
-  );
-};
-
-// ─── Vertical Side Navigator (matches the user's template) ───────────────────
-
-const VerticalNavigator = ({
-  activeIndex,
-  onNodeClick,
-  progress,
-}: {
-  activeIndex: number;
-  onNodeClick: (i: number) => void;
-  progress: any;
-}) => {
-  const NODE_GAP = 96; // px between nodes
-  const TRACK_HEIGHT = (PROBLEMS.length - 1) * NODE_GAP;
-
-  // Smooth color transition for the track as it grows
-  const fillColor = useTransform(
-    progress,
-    [...PROBLEMS.map((_, i) => i / PROBLEMS.length), 1],
-    [...PROBLEMS.map(p => p.accentColor), PROBLEMS[PROBLEMS.length - 1].accentColor]
-  );
-
-  return (
-    <div
-      className="hidden lg:flex absolute left-[-100px] top-1/2 -translate-y-1/2 flex-col items-center pointer-events-auto"
-      style={{ height: TRACK_HEIGHT + 56, width: 56 }}
-      aria-label="Problem navigation"
-    >
-      {/* Background track line */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full z-0"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: 'rgba(255,255,255,0.25)' }}
-      />
-
-      {/* Filled progress line - Using scaleY for GPU acceleration */}
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full origin-top will-change-transform z-10"
-        style={{ 
-          top: 28, 
-          height: TRACK_HEIGHT,
-          scaleY: progress, 
-          backgroundColor: fillColor 
-        }}
-      />
-
-      {/* Nodes */}
-      {PROBLEMS.map((problem, i) => {
-        const isActive = i === activeIndex;
-        const isPast = i < activeIndex;
-
-        return (
-          <div key={problem.id} className="absolute left-1/2 -translate-x-1/2 z-20" style={{ top: i * NODE_GAP }}>
-            <button
-              onClick={() => onNodeClick(i)}
-              className="relative flex items-center justify-center cursor-pointer outline-none group"
-              style={{ width: 56, height: 56 }}
-              aria-label={`Go to problem ${problem.id}`}
-              title={problem.tag}
-            >
-              {/* Circle node wrapper - expands when active */}
-              <motion.div
-                animate={{
-                  scale: isActive ? 1.25 : 1, // Enlarge active node
-                  backgroundColor: isActive || isPast ? problem.accentColor : '#e4e4e7',
-                }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg origin-center"
-                style={{
-                  boxShadow: isActive ? `0 0 20px ${problem.accentColor}55` : '0 1px 4px rgba(0,0,0,0.1)',
-                }}
-              >
-                <motion.span
-                  className="text-xl font-black leading-none"
-                  animate={{
-                    color: isActive || isPast ? '#fff' : '#d4d4d8',
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {problem.id}
-                </motion.span>
-              </motion.div>
-            </button>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-// ─── Problem Card (full-screen, fade in/out per scroll block) ─────────────────
-
-const ProblemCard = ({
-  problem,
-  index,
-  total,
-  scrollYProgress,
-}: {
-  problem: Problem;
-  index: number;
-  total: number;
-  scrollYProgress: any;
-}) => {
-  const block = 1 / total;
-  const start = index * block;
-  const end = (index + 1) * block;
-
-  // Fade timing
-  const fadeInStart = start;
-  const fadeInEnd = start + block * 0.10;
-  const fadeOutStart = end - block * 0.10;
-  const fadeOutEnd = end;
-
-  // Text reveal window (fills the middle 60% of the block)
-  const textRevealStart = start + block * 0.08;
-  const textRevealEnd = start + block * 0.70;
-
-  // Build opacity keyframes
-  let opacityKeyframes: number[];
-  let opacityValues: number[];
-
-  if (index === 0) {
-    // First card: visible from start, fades out at end
-    opacityKeyframes = [0, fadeOutStart, fadeOutEnd];
-    opacityValues = [1, 1, 0];
-  } else if (index === total - 1) {
-    // Last card: fades in, stays visible
-    opacityKeyframes = [fadeInStart, fadeInEnd, 1];
-    opacityValues = [0, 1, 1];
-  } else {
-    // Middle cards: fade in, hold, fade out
-    opacityKeyframes = [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd];
-    opacityValues = [0, 1, 1, 0];
-  }
-
-  const opacity = useTransform(scrollYProgress, opacityKeyframes, opacityValues);
   const Icon = problem.icon;
-
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center px-6 md:px-16 lg:px-24 pointer-events-none"
-      style={{ opacity }}
+      onViewportEnter={onVisible}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ amount: 0.4, once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full min-h-[60vh] flex items-center justify-center py-16 scroll-mt-28"
     >
-      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
-        {/* Text Content — matches the screenshot layout */}
-        <div className="space-y-4 md:space-y-6 order-2 lg:order-1 text-left">
-
-          {/* Tag pill — left aligned */}
+      <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
+        {/* Text Content */}
+        <div className="space-y-4 md:space-y-6 text-left order-2 lg:order-1">
           <span
             className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[9px] md:text-xs font-bold tracking-[0.2em] uppercase"
             style={{ backgroundColor: `${problem.accentColor}20`, color: problem.accentColor }}
@@ -286,66 +90,43 @@ const ProblemCard = ({
             {problem.tag}
           </span>
 
-          {/* Large number — improved contrast and numeric variant */}
           <div className="select-none pointer-events-none -mb-2 md:mb-0">
             <span
-              className="text-6xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-85"
-              style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
+              className="text-6xl md:text-[8rem] lg:text-[10rem] font-black leading-none tracking-tighter block opacity-85 font-display italic"
+              style={{ color: problem.accentColor }}
             >
               {String(problem.id).padStart(2, '0')}
             </span>
           </div>
 
-          {/* Headline — word-by-word reveal */}
-          <h2 className="text-2xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4">
-            <ScrollRevealText
-              text={problem.headline}
-              scrollYProgress={scrollYProgress}
-              startProgress={textRevealStart}
-              endProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.3}
-            />
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4">
+            {problem.headline}
           </h2>
 
-          {/* Body — word-by-word reveal */}
-          <p className="text-sm md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
-            <ScrollRevealText
-              text={problem.body}
-              scrollYProgress={scrollYProgress}
-              startProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.3}
-              endProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.65}
-            />
+          <p className="text-sm md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-slate-300">
+            {problem.body}
           </p>
 
-          {/* Detail — word-by-word reveal, colored italic */}
-          <p className="text-sm md:text-xl italic font-semibold max-w-3xl leading-relaxed">
-            <ScrollRevealText
-              text={problem.detail}
-              scrollYProgress={scrollYProgress}
-              startProgress={textRevealStart + (textRevealEnd - textRevealStart) * 0.65}
-              endProgress={textRevealEnd}
-              style={{ color: problem.accentColor }}
-            />
+          <p className="text-sm md:text-lg lg:text-xl italic font-semibold max-w-3xl leading-relaxed" style={{ color: problem.accentColor }}>
+            {problem.detail}
           </p>
         </div>
 
-        {/* Icon Illustration — right side, matching the screenshot */}
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end -mb-4 md:mb-0">
+        {/* Graphic Illustration */}
+        <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
           <div className="relative group/icon">
-            {/* Subtle White "Lift" Gradient — separates from deep background without sharp edges */}
             <div 
               className="absolute inset-0 rounded-full blur-[60px] md:blur-[100px] opacity-40 group-hover/icon:opacity-50 transition-opacity duration-700"
               style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)' }}
             />
             
-            {/* Primary Accent Glow (Existing) */}
             <motion.div
-              animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+              animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.25, 0.15] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute inset-0 rounded-full blur-3xl -z-10"
               style={{ backgroundColor: problem.accentColor }}
             />
 
-            {/* Icon container — ensured no background and added subtle drop-shadow */}
             <motion.div
               animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
@@ -381,140 +162,101 @@ const ProblemCard = ({
 // ─── Main ProblemSection ──────────────────────────────────────────────────────
 
 export const ProblemSection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const SCROLL_HEIGHT = `${PROBLEMS.length * 200}vh`;
-  const [navVisible, setNavVisible] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  // Track active problem index
   const [activeIndex, setActiveIndex] = useState(0);
-  useEffect(() => {
-    return smoothProgress.on('change', (p: number) => {
-      const idx = Math.min(
-        Math.floor(p * PROBLEMS.length),
-        PROBLEMS.length - 1
-      );
-      setActiveIndex(idx);
-    });
-  }, [smoothProgress]);
-
-  // Navigate to a specific problem on dot click
-  const handleNodeClick = (targetIndex: number) => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    const rect = container.getBoundingClientRect();
-    const absoluteTop = window.scrollY + rect.top;
-    const totalScrollable = container.scrollHeight - window.innerHeight;
-    const blockHeight = totalScrollable / PROBLEMS.length;
-    const targetScroll = absoluteTop + targetIndex * blockHeight + blockHeight * 0.3;
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-  };
-
-  // Hide main navbar while inside this section + control navigator visibility
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const header = document.querySelector('header');
-        if (!header) return;
-        if (entry.isIntersecting) {
-          (header as HTMLElement).style.opacity = '0';
-          (header as HTMLElement).style.pointerEvents = 'none';
-          setNavVisible(true);
-        } else {
-          (header as HTMLElement).style.opacity = '1';
-          (header as HTMLElement).style.pointerEvents = 'auto';
-          setNavVisible(false);
-        }
-      },
-      { threshold: 0.05 }
-    );
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => {
-      observer.disconnect();
-      const header = document.querySelector('header');
-      if (header) {
-        (header as HTMLElement).style.opacity = '1';
-        (header as HTMLElement).style.pointerEvents = 'auto';
-      }
-      setNavVisible(false);
-    };
-  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative grain-overlay"
-      style={{ height: SCROLL_HEIGHT }}
-      aria-label="The Problem Section"
-    >
-      {/* Sticky full-screen viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[var(--dark-surface)]">
-        {/* Section label — top center */}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(251,191,36,1)', background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>
-            The Problem
-          </span>
-        </div>
+    <section className="relative py-24 bg-[var(--dark-surface)] grain-overlay overflow-hidden">
+      {/* Radial ambient glow shifting colors based on active problem */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{
+          background: `radial-gradient(ellipse 55% 55% at 65% 50%, ${PROBLEMS[activeIndex].accentColor}12 0%, transparent 70%)`,
+        }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
+      />
 
-        {/* Radial accent glow — shifts with active problem color, stronger on dark bg */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            background: `radial-gradient(ellipse 55% 55% at 65% 50%, ${PROBLEMS[activeIndex].accentColor}18 0%, transparent 70%)`,
-          }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-        />
+      {/* Section Tag */}
+      <div className="text-center mb-16 relative z-10">
+        <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(251,191,36,1)', background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>
+          The Problem
+        </span>
+      </div>
 
-        {/* Problem cards stacked */}
-        <div className="absolute inset-0">
-          {PROBLEMS.map((problem, index) => (
-            <ProblemCard
-              key={problem.id}
-              problem={problem}
-              index={index}
-              total={PROBLEMS.length}
-              scrollYProgress={smoothProgress}
+      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 relative grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-8">
+        
+        {/* Left Column: Sticky Timeline Sidebar (Desktop Only) */}
+        <div className="hidden lg:block relative">
+          <div className="sticky top-[30vh] flex flex-col items-center">
+            {/* Timeline Background Track */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 w-[3px] rounded-full z-0 h-[288px] bg-white/10"
+              style={{ top: 28 }}
             />
-          ))}
-        </div>
-
-        {/* Bottom progress dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
-          {PROBLEMS.map((p, i) => (
+            {/* Active Progress Line */}
             <motion.div
-              key={p.id}
-              animate={{
-                width: i === activeIndex ? 24 : 6,
-                opacity: i === activeIndex ? 1 : 0.25,
-                backgroundColor: i === activeIndex ? p.accentColor : 'rgba(255,255,255,0.3)',
+              className="absolute left-1/2 -translate-x-1/2 w-[3px] rounded-full origin-top z-10"
+              style={{
+                top: 28,
+                height: `${(activeIndex / (PROBLEMS.length - 1)) * 288}px`,
+                backgroundColor: PROBLEMS[activeIndex].accentColor,
+                boxShadow: `0 0 10px ${PROBLEMS[activeIndex].accentColor}`,
               }}
-              transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-              className="h-1.5 rounded-full"
+              transition={{ type: 'spring', stiffness: 180, damping: 25 }}
             />
-          ))}
-        </div>
 
-        {/* Vertical navigator — wrapped in a content-aligned container to keep it close to the text */}
-        <div className="absolute inset-0 flex items-center justify-center px-6 md:px-16 lg:px-24 pointer-events-none z-[200]">
-          <div className="w-full max-w-6xl relative h-full">
-            <VerticalNavigator
-              activeIndex={activeIndex}
-              onNodeClick={handleNodeClick}
-              progress={smoothProgress}
-            />
+            {PROBLEMS.map((problem, i) => {
+              const isActive = i === activeIndex;
+              const isPast = i < activeIndex;
+              return (
+                <button
+                  key={problem.id}
+                  onClick={() => {
+                    const element = document.getElementById(`problem-card-${i}`);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                  }}
+                  className="relative z-20 flex items-center justify-center w-14 h-14 my-5 outline-none first:mt-0 last:mb-0 group cursor-pointer"
+                  aria-label={`Go to problem ${problem.id}`}
+                >
+                  <motion.div
+                    animate={{
+                      scale: isActive ? 1.25 : 1,
+                      backgroundColor: isActive || isPast ? problem.accentColor : 'rgba(255,255,255,0.05)',
+                      borderColor: isActive ? problem.accentColor : 'rgba(255,255,255,0.15)',
+                    }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center border font-mono font-black transition-all"
+                    style={{
+                      boxShadow: isActive ? `0 0 20px ${problem.accentColor}40` : 'none',
+                    }}
+                  >
+                    <span className={isActive || isPast ? "text-white text-sm" : "text-gray-400 text-sm"}>
+                      {problem.id}
+                    </span>
+                  </motion.div>
+                </button>
+              );
+            })}
           </div>
         </div>
+
+        {/* Right Column: Stack of beautifully animated cards that scroll naturally */}
+        <div className="space-y-20 lg:space-y-28">
+          {PROBLEMS.map((problem, index) => (
+            <div
+              key={problem.id}
+              id={`problem-card-${index}`}
+              className="scroll-mt-36"
+            >
+              <ProblemCardSpy
+                problem={problem}
+                index={index}
+                onVisible={() => setActiveIndex(index)}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
