@@ -12,6 +12,9 @@ export default defineConfig(({mode}) => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
+        workbox: {
+          maximumFileSizeToCacheInBytes: 15000000 // Allow up to 15MB for large TinaCMS assets
+        },
         manifest: {
           name: 'Emmanuel Odebiyi Portfolio',
           short_name: 'Emmanuel',
