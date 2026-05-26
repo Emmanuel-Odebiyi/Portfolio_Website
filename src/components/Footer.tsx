@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                className="h-20 md:h-32 w-auto invert brightness-0"
+                className="h-20 md:h-32 w-auto brightness-0 invert"
               />
             </div>
             

@@ -82,7 +82,7 @@ export const Header: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                className="h-8 md:h-12 w-auto transition-all invert brightness-0"
+                className="h-8 md:h-12 w-auto transition-all brightness-0 invert"
               />
             </Link>
           </motion.div>
