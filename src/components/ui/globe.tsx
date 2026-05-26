@@ -209,13 +209,13 @@ export const Globe: React.FC = () => {
   const [theme, setTheme] = useState<'hologram' | 'political'>('political');
 
   return (
-    <div className="w-full h-[500px] md:h-[700px] relative group/globe">
+    <div className="w-full h-[320px] sm:h-[500px] md:h-[700px] relative group/globe">
       
       {/* Floating Theme Console */}
-      <div className="absolute top-6 right-6 z-20 flex gap-2 p-1.5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl">
+      <div className="absolute top-4 right-4 md:top-6 md:right-6 z-20 flex gap-1.5 md:gap-2 p-1 md:p-1.5 rounded-xl md:rounded-2xl bg-black/60 backdrop-blur-md border border-white/10 shadow-2xl">
         <button
           onClick={() => setTheme('hologram')}
-          className={`px-4 py-2 text-xs font-mono font-bold tracking-wider uppercase rounded-xl transition-all ${
+          className={`px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs font-mono font-bold tracking-wider uppercase rounded-lg md:rounded-xl transition-all ${
             theme === 'hologram' 
               ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
               : 'text-zinc-400 hover:text-white border border-transparent'
@@ -225,7 +225,7 @@ export const Globe: React.FC = () => {
         </button>
         <button
           onClick={() => setTheme('political')}
-          className={`px-4 py-2 text-xs font-mono font-bold tracking-wider uppercase rounded-xl transition-all ${
+          className={`px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs font-mono font-bold tracking-wider uppercase rounded-lg md:rounded-xl transition-all ${
             theme === 'political' 
               ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' 
               : 'text-zinc-400 hover:text-white border border-transparent'

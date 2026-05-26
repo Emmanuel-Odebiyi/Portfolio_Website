@@ -156,7 +156,7 @@ const VerticalNavigator = ({
 
   return (
     <div
-      className="absolute left-[-100px] top-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-auto"
+      className="hidden lg:flex absolute left-[-100px] top-1/2 -translate-y-1/2 flex-col items-center pointer-events-auto"
       style={{ height: TRACK_HEIGHT + 56, width: 56 }}
       aria-label="Problem navigation"
     >
@@ -276,20 +276,20 @@ const ProblemCard = ({
     >
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
         {/* Text Content — matches the screenshot layout */}
-        <div className="space-y-6 order-2 lg:order-1">
+        <div className="space-y-4 md:space-y-6 order-2 lg:order-1 text-left">
 
           {/* Tag pill — left aligned */}
           <span
-            className="inline-block px-4 py-1.5 rounded-full text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase"
+            className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[9px] md:text-xs font-bold tracking-[0.2em] uppercase"
             style={{ backgroundColor: `${problem.accentColor}20`, color: problem.accentColor }}
           >
             {problem.tag}
           </span>
 
           {/* Large number — improved contrast and numeric variant */}
-          <div className="select-none pointer-events-none">
+          <div className="select-none pointer-events-none -mb-2 md:mb-0">
             <span
-              className="text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-80"
+              className="text-6xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-85"
               style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
             >
               {String(problem.id).padStart(2, '0')}
@@ -297,7 +297,7 @@ const ProblemCard = ({
           </div>
 
           {/* Headline — word-by-word reveal */}
-          <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] max-w-3xl -mt-4">
+          <h2 className="text-2xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4">
             <ScrollRevealText
               text={problem.headline}
               scrollYProgress={scrollYProgress}
@@ -307,7 +307,7 @@ const ProblemCard = ({
           </h2>
 
           {/* Body — word-by-word reveal */}
-          <p className="text-lg md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
+          <p className="text-sm md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
             <ScrollRevealText
               text={problem.body}
               scrollYProgress={scrollYProgress}
@@ -317,7 +317,7 @@ const ProblemCard = ({
           </p>
 
           {/* Detail — word-by-word reveal, colored italic */}
-          <p className="text-lg md:text-xl italic font-semibold max-w-3xl leading-relaxed">
+          <p className="text-sm md:text-xl italic font-semibold max-w-3xl leading-relaxed">
             <ScrollRevealText
               text={problem.detail}
               scrollYProgress={scrollYProgress}
@@ -329,11 +329,11 @@ const ProblemCard = ({
         </div>
 
         {/* Icon Illustration — right side, matching the screenshot */}
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div className="order-1 lg:order-2 flex justify-center lg:justify-end -mb-4 md:mb-0">
           <div className="relative group/icon">
             {/* Subtle White "Lift" Gradient — separates from deep background without sharp edges */}
             <div 
-              className="absolute inset-0 rounded-full blur-[100px] opacity-40 group-hover/icon:opacity-50 transition-opacity duration-700"
+              className="absolute inset-0 rounded-full blur-[60px] md:blur-[100px] opacity-40 group-hover/icon:opacity-50 transition-opacity duration-700"
               style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)' }}
             />
             
@@ -347,9 +347,9 @@ const ProblemCard = ({
 
             {/* Icon container — ensured no background and added subtle drop-shadow */}
             <motion.div
-              animate={{ y: [-10, 10, -10] }}
+              animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-48 h-48 md:w-80 md:h-80 flex items-center justify-center -translate-y-4 relative z-10"
+              className="w-28 h-28 md:w-80 md:h-80 flex items-center justify-center relative z-10"
               style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}
             >
               {problem.animationPath ? (
@@ -361,7 +361,7 @@ const ProblemCard = ({
                 />
               ) : (
                 <Icon
-                  size={72}
+                  size={48}
                   strokeWidth={1}
                   style={{ 
                     color: problem.accentColor, 

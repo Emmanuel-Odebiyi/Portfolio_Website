@@ -448,7 +448,7 @@ export default function Contact() {
                         </div>
 
                         {/* Company URL Input */}
-                        <div className="space-y-2 col-span-2">
+                        <div className="space-y-2 md:col-span-2">
                           <label className="text-[10px] font-mono uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5">
                             <Building size={12} /> Company URL
                           </label>

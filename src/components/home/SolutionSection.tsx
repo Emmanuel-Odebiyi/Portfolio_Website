@@ -164,11 +164,11 @@ export const SolutionSection = () => {
         </div>
 
         {/* ── Headline Block ── */}
-        <div className="shrink-0 pt-28 pb-6 px-6 md:px-16 text-center z-10">
-          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-4" style={{ color: 'rgba(251,191,36,0.95)' }}>
+        <div className="shrink-0 pt-24 md:pt-28 pb-4 md:pb-6 px-6 md:px-16 text-center z-10">
+          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-2 md:mb-4" style={{ color: 'rgba(251,191,36,0.95)' }}>
             The Solution
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-4">
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-2 md:mb-4">
             <LineReveal
               lines={['What If Your Marketing', 'Could Run Itself?']}
               scrollYProgress={scrollYProgress}
@@ -182,15 +182,15 @@ export const SolutionSection = () => {
               y: useTransform(scrollYProgress, [0.05, 0.15], [10, 0]),
               color: 'rgba(226,232,240,0.9)',
             }}
-            className="text-sm md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-xs md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
             I build intelligent content marketing systems that produce consistent,
             high-quality output — without you lifting a finger after setup.
           </motion.p>
         </div>
 
-        {/* ── Horizontal Accordion Panels ── */}
-        <div className="flex-1 flex flex-row overflow-hidden px-4 pb-4 md:px-8 md:pb-8">
+        {/* ── Accordion Panels — Stacks vertically on mobile/tablet, horizontal on desktop ── */}
+        <div className="flex-1 flex flex-col md:flex-row overflow-hidden px-4 pb-4 md:px-8 md:pb-8 gap-2 md:gap-0">
           {SOLUTIONS.map((solution, index) => {
             const isActive = index === activeIndex;
             const SolutionIcon = solution.Icon;
@@ -198,35 +198,36 @@ export const SolutionSection = () => {
             return (
               <motion.div
                 key={solution.id}
-                className="relative overflow-hidden h-full rounded-[2rem] md:rounded-[3rem] mx-1 md:mx-2 first:ml-0 last:mr-0 border border-zinc-100"
+                className="relative overflow-hidden rounded-[1.5rem] md:rounded-[3rem] mx-0 md:mx-2 first:ml-0 last:mr-0 border border-zinc-100 flex-1"
                 animate={{ 
-                    flex: isActive ? 12 : 1,
+                    flex: isActive ? 8 : 1,
                     // High-end glassmorphism effect
                     filter: isActive ? 'brightness(110%) saturate(120%)' : 'brightness(70%) saturate(80%)',
-                    scale: isActive ? 1 : 0.96,
+                    scale: isActive ? 1 : 0.98,
                     boxShadow: isActive ? `0 0 80px ${solution.accentColor}20` : 'none'
                 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 25 }}
                 style={{ 
                   backgroundColor: 'rgba(15, 23, 42, 0.4)', // Dark slate glass
                   backdropFilter: 'blur(20px)',
-                  border: isActive ? `1.5px solid ${solution.accentColor}60` : '1px solid rgba(255,255,255,0.05)'
+                  border: isActive ? `1.5px solid ${solution.accentColor}60` : '1px solid rgba(255,255,255,0.05)',
+                  minHeight: isActive ? '240px' : '48px', // Prevent collapsing into nothing on short phone screens
                 }}
               >
-                {/* Collapsed label (vertical text) */}
+                {/* Collapsed label (horizontal on mobile, vertical vertical text on desktop) */}
                 {!isActive && (
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="absolute inset-0 flex flex-col items-center justify-center p-2"
+                    className="absolute inset-0 flex flex-row md:flex-col items-center justify-center p-2 gap-3"
                   >
                     <SolutionIcon 
-                      size={24} 
+                      size={18} 
                       style={{ color: solution.accentColor }} 
-                      className="mb-8 drop-shadow-sm" 
+                      className="drop-shadow-sm shrink-0" 
                     />
                     <span
-                      className="text-[10px] font-bold uppercase tracking-[0.4em] [writing-mode:vertical-lr] rotate-180 whitespace-nowrap"
+                      className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.4em] md:[writing-mode:vertical-lr] md:rotate-180 whitespace-nowrap"
                       style={{ color: solution.accentColor }}
                     >
                       {solution.title}
@@ -238,41 +239,41 @@ export const SolutionSection = () => {
                 {isActive && (
                   <motion.div
                     key={`content-${solution.id}`}
-                    className="absolute inset-0 flex flex-col justify-center px-8 md:px-16"
-                    initial={{ opacity: 0, x: 50 }}
+                    className="absolute inset-0 flex flex-col justify-center px-6 md:px-16 py-4 md:py-0"
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <div className="max-w-3xl">
                       {/* Highly popped, bouncy icon wrapper with full saturation */}
                       <motion.div
-                        className="w-20 h-20 rounded-[1.5rem] flex items-center justify-center mb-8"
+                        className="w-10 h-10 md:w-20 md:h-20 rounded-xl md:rounded-[1.5rem] flex items-center justify-center mb-3 md:mb-8"
                         style={{ 
                           backgroundColor: solution.accentColor, 
-                          boxShadow: `0 12px 30px -10px ${solution.accentColor}` 
+                          boxShadow: `0 8px 24px -6px ${solution.accentColor}` 
                         }}
                         initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
                         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                        transition={{ type: 'spring', delay: 0.25, bounce: 0.5, duration: 0.8 }}
+                        transition={{ type: 'spring', delay: 0.15, bounce: 0.5, duration: 0.6 }}
                       >
-                        <SolutionIcon size={40} color="#ffffff" strokeWidth={2.5} />
+                        <SolutionIcon className="w-5 h-5 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
                       </motion.div>
                       
                       <span
-                        className="text-xs font-bold uppercase tracking-[0.3em] block mb-3 opacity-60"
+                        className="text-[9px] md:text-xs font-bold uppercase tracking-[0.3em] block mb-1 md:mb-3 opacity-60"
                         style={{ color: solution.accentColor }}
                       >
                         {solution.title}
                       </span>
                       
                       <h3
-                        className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 leading-[1.1] tracking-tight text-white"
+                        className="text-xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-8 leading-[1.1] tracking-tight text-white"
                       >
                         {solution.subtitle}
                       </h3>
                       
                       <p
-                        className="text-base md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light text-slate-100"
+                        className="text-xs md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light text-slate-200"
                       >
                         {solution.description}
                       </p>
