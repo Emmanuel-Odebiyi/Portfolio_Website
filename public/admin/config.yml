@@ -1,6 +1,7 @@
 backend:
   name: git-gateway
   branch: master
+  site_url: https://guileless-malasada-3d31ba.netlify.app
 
 # Uploaded media (images) will be stored here
 media_folder: "public/images/blog"
