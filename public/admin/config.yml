@@ -1,0 +1,91 @@
+backend:
+  name: git-gateway
+  branch: master
+
+# Uploaded media (images) will be stored here
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+# Slug settings
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    editor:
+      preview: false
+    sortable_fields: ["date", "title"]
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "MMMM DD, YYYY", date_format: "MMMM DD, YYYY", time_format: false }
+      - { label: "Author", name: "author", widget: "string", default: "Emmanuel Odebiyi" }
+      - { label: "Author Bio", name: "authorBio", widget: "text", default: "Emmanuel is a Content Strategist and AI Automation Expert dedicated to helping B2B SaaS companies scale their organic growth through data-driven storytelling and systematic workflows." }
+      - { label: "Author Image", name: "authorImage", widget: "string", default: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel" }
+      - { label: "Read Time", name: "readTime", widget: "string", default: "5 min read" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "A 1-2 sentence summary shown on blog listing cards" }
+      - { label: "Listing Image", name: "image", widget: "image", hint: "Used on the blog listing page cards" }
+      - { label: "Hero Image", name: "heroImage", widget: "image", hint: "Used as the full-width banner on the post detail page" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        default: ["Automation"]
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - { label: "Hook", name: "hook", widget: "text", hint: "The opening hook / italic introduction paragraph" }
+      - label: "Takeaways"
+        name: "takeaways"
+        widget: "list"
+        field: { label: "Takeaway", name: "takeaway", widget: "string" }
+      - label: "Sections"
+        name: "sections"
+        widget: "list"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Content", name: "content", widget: "text" }
+          - { label: "Example", name: "example", widget: "text", required: false }
+          - { label: "Highlight", name: "highlight", widget: "text", required: false }
+          - label: "Simplification"
+            name: "simplification"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text", required: false }
+          - label: "List Items"
+            name: "list"
+            widget: "list"
+            required: false
+            field: { label: "Item", name: "item", widget: "string" }
+          - label: "Quote"
+            name: "quote"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - { label: "Text", name: "text", widget: "string", required: false }
+              - { label: "Author", name: "author", widget: "string", required: false }
+          - label: "Table"
+            name: "table"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - label: "Headers"
+                name: "headers"
+                widget: "list"
+                required: false
+                field: { label: "Header", name: "header", widget: "string" }
+              - label: "Rows"
+                name: "rows"
+                widget: "list"
+                required: false
+                field: { label: "Row (comma-separated cells)", name: "row", widget: "string" }

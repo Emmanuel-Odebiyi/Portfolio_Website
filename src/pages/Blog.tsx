@@ -13,7 +13,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { blogPosts } from '../data/blogData';
+import { allBlogPosts as blogPosts } from '../data/blogLoader';
 
 export default function Blog() {
   const [selectedTag, setSelectedTag] = useState("All");

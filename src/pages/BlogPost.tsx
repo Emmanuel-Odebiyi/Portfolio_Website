@@ -16,7 +16,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { blogPosts } from '../data/blogData';
+import { allBlogPosts as blogPosts } from '../data/blogLoader';
 
 export default function BlogPost() {
   const { id } = useParams();
