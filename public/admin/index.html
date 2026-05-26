@@ -5,18 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Content Manager | Emmanuel Odebiyi</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    // Point Identity widget to the Netlify site (required when not hosted on Netlify)
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.init({
-        APIUrl: "https://guileless-malasada-3d31ba.netlify.app/.netlify/identity"
-      });
-    }
-  </script>
 </head>
 <body>
-  <!-- Decap CMS auto-initializes from config.yml — do NOT call CMS.init() manually -->
+  <!-- Load Identity widget first -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Initialize Identity widget AFTER it has loaded -->
+  <script>
+    window.addEventListener("load", function() {
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.init({
+          APIUrl: "https://guileless-malasada-3d31ba.netlify.app/.netlify/identity"
+        });
+        window.netlifyIdentity.on("login", function() {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  </script>
+
+  <!-- Load Decap CMS after Identity widget is set up -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
