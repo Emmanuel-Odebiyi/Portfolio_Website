@@ -84,8 +84,146 @@ function parseCMSSection(raw: CMSSection): BlogSection {
   return section;
 }
 
+// ── Parse MDX inline components and build sections list (Approach 2) ──────────
+function parseAttributes(attrStr: string): Record<string, any> {
+  const attrs: Record<string, any> = {};
+  
+  // Match string attributes: key="value" or key='value'
+  const strRegex = /(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
+  let match;
+  while ((match = strRegex.exec(attrStr)) !== null) {
+    attrs[match[1]] = match[2] || match[3];
+  }
+  
+  // Match array/expression attributes: key={["a", "b"]}
+  const exprRegex = /(\w+)\s*=\s*\{([\s\S]*?)\}/g;
+  while ((match = exprRegex.exec(attrStr)) !== null) {
+    const key = match[1];
+    const valStr = match[2].trim();
+    try {
+      if (valStr.startsWith('[') && valStr.endsWith(']')) {
+        const jsonStr = valStr.replace(/'/g, '"');
+        attrs[key] = JSON.parse(jsonStr);
+      } else {
+        attrs[key] = valStr;
+      }
+    } catch (e) {
+      const strMatches = [...valStr.matchAll(/"([^"]*)"|'([^']*)'/g)].map(m => m[1] || m[2]);
+      attrs[key] = strMatches;
+    }
+  }
+  
+  return attrs;
+}
+
+function parseMarkdownBodyToSections(body: string): BlogSection[] {
+  const sections: BlogSection[] = [];
+  const lines = body.split('\n');
+  
+  let currentSection: BlogSection | null = null;
+  let contentBuffer: string[] = [];
+  let listBuffer: string[] = [];
+  
+  const flushBuffers = () => {
+    if (currentSection) {
+      if (contentBuffer.length > 0) {
+        currentSection.content = contentBuffer.join('\n').trim();
+        contentBuffer = [];
+      }
+      if (listBuffer.length > 0) {
+        currentSection.list = [...listBuffer];
+        listBuffer = [];
+      }
+    }
+  };
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    
+    // Check if it is a heading (## Heading or ### Heading or # Heading)
+    const headingMatch = line.match(/^(?:#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      flushBuffers();
+      
+      currentSection = {
+        heading: headingMatch[1].trim(),
+        content: ""
+      };
+      sections.push(currentSection);
+      continue;
+    }
+    
+    // If we haven't encountered a heading yet, start a default intro section
+    if (!currentSection) {
+      if (trimmed !== '' && !trimmed.startsWith('<')) {
+        currentSection = {
+          heading: "Introduction",
+          content: ""
+        };
+        sections.push(currentSection);
+      }
+    }
+    
+    if (!currentSection) continue;
+    
+    // Check if it is a list item: - Item or * Item
+    const listMatch = line.match(/^(\s*)(?:-|\*)\s+(.+)$/);
+    if (listMatch) {
+      listBuffer.push(listMatch[2].trim());
+      continue;
+    }
+    
+    // Check if it's a custom MDX tag
+    const tagMatch = trimmed.match(/^<([A-Z]\w+)\s+([\s\S]*?)\/>$/);
+    if (tagMatch) {
+      const tagName = tagMatch[1];
+      const attrStr = tagMatch[2];
+      const attrs = parseAttributes(attrStr);
+      
+      if (tagName === 'Example' && attrs.text) {
+        currentSection.example = attrs.text;
+      } else if (tagName === 'Highlight' && attrs.text) {
+        currentSection.highlight = attrs.text;
+      } else if (tagName === 'Simplification' && attrs.text) {
+        currentSection.simplification = {
+          label: attrs.label || "Simplification",
+          text: attrs.text
+        };
+      } else if (tagName === 'Quote' && attrs.text) {
+        currentSection.quote = {
+          text: attrs.text,
+          author: attrs.author || "Unknown"
+        };
+      } else if (tagName === 'Table' && attrs.headers && attrs.rows) {
+        currentSection.table = {
+          headers: attrs.headers,
+          rows: attrs.rows.map((row: string) => row.split(',').map((cell: string) => cell.trim()))
+        };
+      }
+      continue;
+    }
+    
+    // Otherwise it's a standard text line
+    if (trimmed !== '' || contentBuffer.length > 0) {
+      contentBuffer.push(line);
+    }
+  }
+  
+  flushBuffers();
+  return sections;
+}
+
 // ── Parse a single frontmatter object into BlogPostType ───────────────────────
-function parseCMSPost(frontmatter: CMSFrontmatter, slug: string): BlogPostType {
+function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): BlogPostType {
+  let parsedSections: BlogSection[] = [];
+  
+  if (frontmatter.sections && frontmatter.sections.length > 0) {
+    parsedSections = frontmatter.sections.map(parseCMSSection);
+  } else {
+    parsedSections = parseMarkdownBodyToSections(body);
+  }
+
   return {
     id: slug,
     title: frontmatter.title,
@@ -99,7 +237,7 @@ function parseCMSPost(frontmatter: CMSFrontmatter, slug: string): BlogPostType {
     heroImage: frontmatter.heroImage,
     tags: frontmatter.tags || [],
     hook: frontmatter.hook,
-    sections: (frontmatter.sections || []).map(parseCMSSection),
+    sections: parsedSections,
     takeaways: frontmatter.takeaways || [],
   };
 }
@@ -356,13 +494,13 @@ function loadCMSPosts(): BlogPostType[] {
       // Extract slug from filename: /content/blog/my-post.md → my-post
       const slug = path.split('/').pop()?.replace('.md', '') || '';
 
-      const { frontmatter } = parseFrontmatter(rawContent);
+      const { frontmatter, body } = parseFrontmatter(rawContent);
       const cmsFM = frontmatter as unknown as CMSFrontmatter;
 
       // Validate minimum required fields
       if (!cmsFM.title || !cmsFM.date) continue;
 
-      posts.push(parseCMSPost(cmsFM, slug));
+      posts.push(parseCMSPost(cmsFM, body, slug));
     } catch (err) {
       console.warn(`[BlogLoader] Failed to parse ${path}:`, err);
     }
