@@ -21,7 +21,9 @@ takeaways:
 
 ## The Content Bottleneck
 
-Most content teams spend 80% of their time on mechanical operations—drafting, editing, reformatting, scheduling, and posting—and only 20% on actual distribution, audience research, and high-level strategy. Content automation flips this equation. By letting systems handle the mechanical steps, we can focus our human energy where it matters most: deep strategy and unique perspectives.
+Most content teams spend 80% of their time on mechaniuoihj/'juxcvhj'?\<M.n,. m,mb.n/m,MN
+
+'obn bnmn bnmcal operations—drafting, editing, reformatting, scheduling, and posting—and only 20% on actual distribution, audience research, and high-level strategy. Content automation flips this equation. By letting systems handle the mechanical steps, we can focus our human energy where it matters most: deep strategy and unique perspectives.
 
 <Example text="Imagine spending three hours formatting a blog post for LinkedIn, Twitter, and an email newsletter. With a structured automation workflow, this happens in seconds, saving you half a day's work every week." />
 
@@ -43,10 +45,6 @@ When explaining complex systems, clarity is the ultimate multiplier. If a team m
 
 <Simplification label="In plain terms" text="Record your ideas as voice notes -> automatically transcribing them to Notion -> triggers a webhook that reformats the transcript into an outline -> alerts you when it's ready for human polish -> schedules it globally with one click." />
 
-\<
-
-
-
 ```
 vnxvb nxbv
 vyjcghch'
@@ -54,8 +52,6 @@ ifgjhcghc
 ff
 
 ```
-
->
 
 ```arduino
 %% This won't render without implementing a rendering engine (e.g. mermaid on npm)
