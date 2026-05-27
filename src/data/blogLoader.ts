@@ -118,7 +118,7 @@ function parseAttributes(attrStr: string): Record<string, any> {
 
 function parseMarkdownBodyToSections(body: string): BlogSection[] {
   const sections: BlogSection[] = [];
-  const lines = body.split('\n');
+  const lines = body.split('\n').map(line => line.replace(/\r$/, ''));
   
   let currentSection: BlogSection | null = null;
   let contentBuffer: string[] = [];
