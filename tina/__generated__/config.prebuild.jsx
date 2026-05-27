@@ -24,7 +24,7 @@ var config_default = defineConfig({
         name: "blog",
         label: "Blog Posts",
         path: "content/blog",
-        format: "mdx",
+        format: "md",
         defaultItem: () => {
           return {
             author: "Emmanuel Odebiyi",
