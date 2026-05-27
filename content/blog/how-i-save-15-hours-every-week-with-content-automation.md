@@ -21,7 +21,9 @@ takeaways:
 
 ## The Content Bottleneck
 
-Most content teams spend 80% of their time on mechanical operations—drafting, editing, reformatting, scheduling, and posting—and only 20% on actual distribution, audience research, and high-level strategy. Content automation flips this equation. By letting systems handle the mechanical steps, we can focus our human energy where it matters most: deep strategy and unique perspectives.
+Most content teams spend 80% of their time on mechaniuoihj/'juxcvhj'?\<M.n,. m,mb.n/m,MN
+
+'obn bnmn bnmcal operations—drafting, editing, reformatting, scheduling, and posting—and only 20% on actual distribution, audience research, and high-level strategy. Content automation flips this equation. By letting systems handle the mechanical steps, we can focus our human energy where it matters most: deep strategy and unique perspectives.
 
 <Example text="Imagine spending three hours formatting a blog post for LinkedIn, Twitter, and an email newsletter. With a structured automation workflow, this happens in seconds, saving you half a day's work every week." />
 
@@ -34,10 +36,6 @@ A successful content automation workflow consists of three distinct pillars: ide
 ## The Tool Stack Behind the Magic
 
 To build a highly effective automation engine, you don't need a five-figure budget. A few well-integrated tools can bridge the gap perfectly. By connecting transcription tools, databases, and scheduling platforms via webhooks, you create a seamless pipeline.
-
-
-
-
 
 <Table headers={["Stage", "Primary Tool", "Role in Pipeline", "Time Saved / Wk"]} rows={["Capture,AudioPen / Otter.ai,Transcribe voice memos into structured thoughts,3 hours", "Database,Notion / Airtable,Centralized content calendar and asset library,4 hours", "Integration,n8n / Make,Pass drafts to AI engines and trigger publications,5 hours", "Distribution,Buffer / Clay,Pre-schedule and auto-post cross-platform cuts,3 hours"]} />
 
