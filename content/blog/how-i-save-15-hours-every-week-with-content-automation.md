@@ -43,8 +43,6 @@ When explaining complex systems, clarity is the ultimate multiplier. If a team m
 
 <Simplification label="In plain terms" text="Record your ideas as voice notes -> automatically transcribing them to Notion -> triggers a webhook that reformats the transcript into an outline -> alerts you when it's ready for human polish -> schedules it globally with one click." />
 
-\<
-
 
 
 ```
