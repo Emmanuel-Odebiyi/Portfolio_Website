@@ -480,7 +480,7 @@ function parseNestedObject(lines: string[], startIndex: number, baseIndent: numb
 }
 
 // ── Load all CMS posts from /content/blog/ ────────────────────────────────────
-const markdownModules = import.meta.glob('/content/blog/*.md', {
+const markdownModules = import.meta.glob('/content/blog/*.{md,mdx}', {
   eager: true,
   query: '?raw',
   import: 'default',
@@ -492,7 +492,7 @@ function loadCMSPosts(): BlogPostType[] {
   for (const [path, rawContent] of Object.entries(markdownModules)) {
     try {
       // Extract slug from filename: /content/blog/my-post.md → my-post
-      const slug = path.split('/').pop()?.replace('.md', '') || '';
+      const slug = path.split('/').pop()?.replace(/\.mdx?$/, '') || '';
 
       const { frontmatter, body } = parseFrontmatter(rawContent);
       const cmsFM = frontmatter as unknown as CMSFrontmatter;
