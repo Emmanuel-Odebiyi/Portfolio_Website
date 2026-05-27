@@ -208,6 +208,13 @@ var config_default = defineConfig({
         ]
       }
     ]
+  },
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN || ""
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 100
   }
 });
 export {
