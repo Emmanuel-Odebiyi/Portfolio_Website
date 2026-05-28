@@ -13,10 +13,358 @@ import {
   ClipboardCheck,
   Check,
   ChevronRight,
-  BookOpen
+  BookOpen,
+  Copy,
+  ArrowDown
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { allBlogPosts as blogPosts } from '../data/blogLoader';
+
+// ── Custom Monospace Terminal Code Block with Copy Action ─────────────────────
+interface TerminalCodeBlockProps {
+  code: string;
+  lang: string;
+}
+
+const TerminalCodeBlock: React.FC<TerminalCodeBlockProps> = ({ code, lang }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="my-8 rounded-2xl bg-[#0b0f19] border border-white/5 shadow-2xl overflow-hidden text-left font-mono">
+      <div className="flex items-center justify-between px-4 py-3 bg-[#0f1424] border-b border-white/5 select-none">
+        <div className="flex items-center gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+        </div>
+        <span className="text-[10px] text-zinc-500 uppercase tracking-widest">{lang || 'code'}</span>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1 text-[10px] text-zinc-400 hover:text-white transition-colors cursor-pointer"
+        >
+          {copied ? <Check size={10} /> : <Copy size={10} />}
+          <span>{copied ? 'Copied' : 'Copy'}</span>
+        </button>
+      </div>
+      <pre className="p-5 overflow-x-auto text-sm text-zinc-300 leading-relaxed font-light select-text">
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+};
+
+// ── Custom Flowchart & Diagram Renderer ──────────────────────────────────────
+interface FlowchartRendererProps {
+  code: string;
+}
+
+interface FlowNode {
+  id: string;
+  text: string;
+}
+
+interface FlowConnection {
+  from: string;
+  to: string;
+}
+
+const FlowchartRenderer: React.FC<FlowchartRendererProps> = ({ code }) => {
+  const nodes: FlowNode[] = [];
+  const connections: FlowConnection[] = [];
+  const nodeMap = new Map<string, string>();
+
+  // Strip out comment lines starting with % before scanning
+  const cleanCode = code
+    .split('\n')
+    .filter(line => !line.trim().startsWith('%'))
+    .join('\n');
+
+  // Pass 1: Extract all inline and explicit node definitions globally using regex on clean code
+  const nodeRegex = /(\w+)\s*(?:\(\s*"([^"]+)"\s*\)|\(\s*([^)]+)\s*\)|\[\s*"([^"]+)"\s*\]|\[\s*([^\]]+)\s*\])/g;
+  let match;
+  while ((match = nodeRegex.exec(cleanCode)) !== null) {
+    const id = match[1];
+    const text = match[2] || match[3] || match[4] || match[5] || id;
+    if (!nodeMap.has(id)) {
+      nodeMap.set(id, text);
+      nodes.push({ id, text });
+    }
+  }
+
+  // Pass 2: Tracing structural connection arrows for relational links
+  const lines = code.split('\n');
+  lines.forEach(line => {
+    const parts = line.split('-->');
+    if (parts.length > 1) {
+      for (let p = 0; p < parts.length - 1; p++) {
+        const fromPart = parts[p].trim();
+        const toPart = parts[p + 1].trim();
+
+        const fromMatch = fromPart.match(/(\w+)\s*$/) || fromPart.match(/^(\w+)/);
+        const toMatch = toPart.match(/^(\w+)/);
+
+        let fromId = fromMatch ? fromMatch[1] : null;
+        const toId = toMatch ? toMatch[1] : null;
+
+        if (!fromId && nodes.length > 0) {
+          fromId = nodes[nodes.length - 1].id;
+        }
+
+        if (fromId && toId) {
+          if (!nodeMap.has(fromId)) {
+            nodeMap.set(fromId, fromId);
+            nodes.push({ id: fromId, text: fromId });
+          }
+          if (!nodeMap.has(toId)) {
+            nodeMap.set(toId, toId);
+            nodes.push({ id: toId, text: toId });
+          }
+          connections.push({ from: fromId, to: toId });
+        }
+      }
+    }
+  });
+
+  if (nodes.length === 0) {
+    return (
+      <div className="p-4 rounded-xl border border-white/5 bg-[#0f1424] text-zinc-500 font-mono text-xs text-center select-text">
+        [Flowchart Definition Empty or Invalid]
+      </div>
+    );
+  }
+
+  return (
+    <div className="my-12 p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-b from-[#0a0f1e]/80 to-[#05070f]/90 border border-blue-500/10 shadow-2xl relative overflow-hidden text-center max-w-2xl mx-auto select-none">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
+      
+      <div className="relative z-10 flex flex-col items-center gap-8">
+        <div className="space-y-1.5 mb-2">
+          <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-blue-500 block">Growth Pipeline</span>
+          <h4 className="text-xl font-bold text-white tracking-tight">System Workflow Diagram</h4>
+        </div>
+
+        {nodes.map((node, index) => {
+          const isLast = index === nodes.length - 1;
+          
+          return (
+            <React.Fragment key={node.id}>
+              <div 
+                className="w-full p-6 md:p-8 rounded-2xl bg-zinc-950/60 border border-white/5 hover:border-blue-500/20 shadow-xl backdrop-blur-md transition-all duration-500 group relative overflow-hidden select-text"
+              >
+                <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-blue-500/30 rounded-tl" />
+                <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-blue-500/30 rounded-tr" />
+                <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-blue-500/30 rounded-bl" />
+                <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-blue-500/30 rounded-br" />
+
+                <div className="flex items-center gap-4 text-left">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-all duration-300 select-none">
+                    {index + 1}
+                  </div>
+                  <p className="text-base text-zinc-200 font-light leading-relaxed group-hover:text-white transition-colors duration-300">
+                    {node.text}
+                  </p>
+                </div>
+              </div>
+
+              {!isLast && (
+                <div className="flex flex-col items-center gap-1.5 my-1">
+                  <div className="w-[1.5px] h-6 bg-gradient-to-b from-blue-500/60 to-indigo-500/10" />
+                  <ArrowDown size={14} className="text-blue-500/60 animate-pulse" />
+                  <div className="w-[1.5px] h-6 bg-gradient-to-b from-indigo-500/10 to-blue-500/60" />
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// ── Recursive Inline Markdown Parser (Bold, Italic, Link, Inline Code) ─────────
+function renderInlineMarkdown(text: string): React.ReactNode[] {
+  const elements: React.ReactNode[] = [];
+  let remaining = text;
+  let keyIndex = 0;
+
+  while (remaining) {
+    const linkMatch = remaining.match(/\[([^\]]+)\]\(([^)]+)\)/);
+    const boldMatch = remaining.match(/\*\*([^*]+)\*\*/);
+    const italicMatch = remaining.match(/\*([^*]+)\*/);
+    const codeMatch = remaining.match(/`([^`]+)`/);
+
+    let earliest: { index: number; length: number; render: () => React.ReactNode } | null = null;
+
+    if (linkMatch && linkMatch.index !== undefined) {
+      if (!earliest || linkMatch.index < earliest.index) {
+        earliest = {
+          index: linkMatch.index,
+          length: linkMatch[0].length,
+          render: () => (
+            <a
+              key={`link-${keyIndex++}`}
+              href={linkMatch[2]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#60a5fa] hover:text-[#93c5fd] underline decoration-blue-500/40 hover:decoration-blue-400 transition-all font-medium select-text"
+            >
+              {linkMatch[1]}
+            </a>
+          )
+        };
+      }
+    }
+
+    if (boldMatch && boldMatch.index !== undefined) {
+      if (!earliest || boldMatch.index < earliest.index) {
+        earliest = {
+          index: boldMatch.index,
+          length: boldMatch[0].length,
+          render: () => (
+            <strong key={`bold-${keyIndex++}`} className="font-semibold text-white select-text">
+              {boldMatch[1]}
+            </strong>
+          )
+        };
+      }
+    }
+
+    if (italicMatch && italicMatch.index !== undefined) {
+      if (!earliest || italicMatch.index < earliest.index) {
+        earliest = {
+          index: italicMatch.index,
+          length: italicMatch[0].length,
+          render: () => (
+            <em key={`italic-${keyIndex++}`} className="italic text-zinc-100 select-text">
+              {italicMatch[1]}
+            </em>
+          )
+        };
+      }
+    }
+
+    if (codeMatch && codeMatch.index !== undefined) {
+      if (!earliest || codeMatch.index < earliest.index) {
+        earliest = {
+          index: codeMatch.index,
+          length: codeMatch[0].length,
+          render: () => (
+            <code
+              key={`code-${keyIndex++}`}
+              className="px-1.5 py-0.5 rounded bg-zinc-800/80 border border-white/5 text-pink-400 font-mono text-sm font-light select-text"
+            >
+              {codeMatch[1]}
+            </code>
+          )
+        };
+      }
+    }
+
+    if (earliest) {
+      if (earliest.index > 0) {
+        elements.push(remaining.substring(0, earliest.index));
+      }
+      elements.push(earliest.render());
+      remaining = remaining.substring(earliest.index + earliest.length);
+    } else {
+      elements.push(remaining);
+      break;
+    }
+  }
+
+  return elements.length > 0 ? elements : [text];
+}
+
+// ── Dynamic Markdown Block Renderer ──────────────────────────────────────────
+interface MarkdownRendererProps {
+  content: string;
+}
+
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+  const blocks: React.ReactNode[] = [];
+  const lines = content.split('\n');
+
+  let currentBlockType: 'paragraph' | 'code' | null = null;
+  let codeBuffer: string[] = [];
+  let codeLang = '';
+  let paragraphBuffer: string[] = [];
+  let blockKeyIndex = 0;
+
+  const flushParagraph = () => {
+    if (paragraphBuffer.length > 0) {
+      const text = paragraphBuffer.join('\n').trim();
+      if (text) {
+        blocks.push(
+          <p key={`p-${blockKeyIndex++}`} className="leading-relaxed text-zinc-300 font-light text-base md:text-lg text-left select-text">
+            {renderInlineMarkdown(text)}
+          </p>
+        );
+      }
+      paragraphBuffer = [];
+    }
+  };
+
+  const flushCodeBlock = () => {
+    if (codeBuffer.length > 0) {
+      const codeText = codeBuffer.join('\n').trim();
+      const isFlowchart = 
+        codeLang === 'mermaid' || 
+        codeLang === 'arduino' || 
+        codeText.includes('flowchart') || 
+        codeText.includes('graph') || 
+        codeText.includes('-->');
+
+      if (isFlowchart) {
+        blocks.push(<FlowchartRenderer key={`flow-${blockKeyIndex++}`} code={codeText} />);
+      } else {
+        blocks.push(<TerminalCodeBlock key={`code-${blockKeyIndex++}`} code={codeText} lang={codeLang} />);
+      }
+      
+      codeBuffer = [];
+      codeLang = '';
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    if (line.startsWith('```')) {
+      if (currentBlockType === 'code') {
+        flushCodeBlock();
+        currentBlockType = null;
+      } else {
+        flushParagraph();
+        currentBlockType = 'code';
+        codeLang = line.substring(3).trim();
+      }
+      continue;
+    }
+
+    if (currentBlockType === 'code') {
+      codeBuffer.push(line);
+      continue;
+    }
+
+    if (trimmed === '') {
+      flushParagraph();
+    } else {
+      paragraphBuffer.push(line);
+    }
+  }
+
+  flushParagraph();
+  flushCodeBlock();
+
+  return <div className="space-y-6">{blocks}</div>;
+};
 
 export default function BlogPost() {
   const { id } = useParams();
@@ -309,7 +657,7 @@ export default function BlogPost() {
                   </h2>
                   
                   <div className="prose prose-invert max-w-none text-zinc-300 font-light text-base md:text-lg leading-relaxed space-y-4">
-                    <p className="whitespace-pre-line">{section.content}</p>
+                    <MarkdownRenderer content={section.content} />
                   </div>
 
                   {/* Styled Section Extras */}
