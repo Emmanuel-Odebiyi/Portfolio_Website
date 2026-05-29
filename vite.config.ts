@@ -24,6 +24,9 @@ export default defineConfig(({mode}) => {
       })
     ],
     publicDir: 'public',
+    build: {
+      target: 'esnext',
+    },
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },

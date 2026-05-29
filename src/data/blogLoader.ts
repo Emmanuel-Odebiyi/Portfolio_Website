@@ -1,20 +1,17 @@
 /**
  * Blog Content Loader
  * 
- * Bridges Decap CMS Markdown content with the existing blogData interface.
+ * Dynamically queries Sanity CMS's fast edge CDN at runtime if credentials are present,
+ * and gracefully falls back to local pre-compiled Markdown files (.md/.mdx) if offline or
+ * in local-only development mode.
  * 
- * At build time, Vite's import.meta.glob eagerly loads every .md file from
- * /content/blog/. We parse the YAML frontmatter and merge it with the
- * hardcoded legacy posts from blogData.ts, producing a single unified array
- * that Blog.tsx and BlogPost.tsx already know how to render.
- * 
- * New CMS-authored posts get a slug-based ID derived from the filename, so
- * routes like /blog/my-new-article work out of the box.
+ * This gives you a premium, WordPress-like visual publishing experience while preserving
+ * 100% of your Vite portfolio performance, GSAP animations, and 3D scenes.
  */
 
 import { BlogPostType, BlogSection, blogPosts as legacyPosts } from './blogData';
 
-// ── Frontmatter shape coming out of the CMS YAML ──────────────────────────────
+// ── Frontmatter shape coming out of the CMS YAML / Sanity API ─────────────────
 interface CMSSection {
   heading: string;
   content: string;
@@ -25,7 +22,7 @@ interface CMSSection {
   quote?: { text?: string; author?: string } | null;
   table?: {
     headers?: string[];
-    rows?: string[];  // Decap stores each row as a comma-separated string
+    rows?: string[] | string[][];
   } | null;
 }
 
@@ -76,26 +73,26 @@ function parseCMSSection(raw: CMSSection): BlogSection {
   if (raw.table && raw.table.headers && raw.table.rows) {
     section.table = {
       headers: raw.table.headers,
-      // Decap CMS stores rows as comma-separated strings; split them into arrays
-      rows: raw.table.rows.map(row => row.split(',').map(cell => cell.trim())),
+      rows: raw.table.rows.map(row => {
+        if (Array.isArray(row)) {
+          return row.map(cell => String(cell).trim());
+        }
+        return String(row).split(',').map(cell => cell.trim());
+      }),
     };
   }
 
   return section;
 }
 
-// ── Parse MDX inline components and build sections list (Approach 2) ──────────
+// ── Parse MDX inline components and build sections list for Local Files ───────
 function parseAttributes(attrStr: string): Record<string, any> {
   const attrs: Record<string, any> = {};
-  
-  // Match string attributes: key="value" or key='value'
   const strRegex = /(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
   let match;
   while ((match = strRegex.exec(attrStr)) !== null) {
     attrs[match[1]] = match[2] || match[3];
   }
-  
-  // Match array/expression attributes: key={["a", "b"]}
   const exprRegex = /(\w+)\s*=\s*\{([\s\S]*?)\}/g;
   while ((match = exprRegex.exec(attrStr)) !== null) {
     const key = match[1];
@@ -112,18 +109,16 @@ function parseAttributes(attrStr: string): Record<string, any> {
       attrs[key] = strMatches;
     }
   }
-  
   return attrs;
 }
 
 function parseMarkdownBodyToSections(body: string): BlogSection[] {
   const sections: BlogSection[] = [];
   const lines = body.split('\n').map(line => line.replace(/\r$/, ''));
-  
   let currentSection: BlogSection | null = null;
   let contentBuffer: string[] = [];
   let listBuffer: string[] = [];
-  
+
   const flushBuffers = () => {
     if (currentSection) {
       if (contentBuffer.length > 0) {
@@ -136,16 +131,14 @@ function parseMarkdownBodyToSections(body: string): BlogSection[] {
       }
     }
   };
-  
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
-    
-    // Check if it is a heading (## Heading or ### Heading or # Heading)
+
     const headingMatch = line.match(/^(?:#{1,6})\s+(.+)$/);
     if (headingMatch) {
       flushBuffers();
-      
       currentSection = {
         heading: headingMatch[1].trim(),
         content: ""
@@ -153,8 +146,7 @@ function parseMarkdownBodyToSections(body: string): BlogSection[] {
       sections.push(currentSection);
       continue;
     }
-    
-    // If we haven't encountered a heading yet, start a default intro section
+
     if (!currentSection) {
       if (trimmed !== '' && !trimmed.startsWith('<')) {
         currentSection = {
@@ -164,23 +156,21 @@ function parseMarkdownBodyToSections(body: string): BlogSection[] {
         sections.push(currentSection);
       }
     }
-    
+
     if (!currentSection) continue;
-    
-    // Check if it is a list item: - Item or * Item
+
     const listMatch = line.match(/^(\s*)(?:-|\*)\s+(.+)$/);
     if (listMatch) {
       listBuffer.push(listMatch[2].trim());
       continue;
     }
-    
-    // Check if it's a custom MDX tag
+
     const tagMatch = trimmed.match(/^<([A-Z]\w+)\s+([\s\S]*?)\/>$/);
     if (tagMatch) {
       const tagName = tagMatch[1];
       const attrStr = tagMatch[2];
       const attrs = parseAttributes(attrStr);
-      
+
       if (tagName === 'Example' && attrs.text) {
         currentSection.example = attrs.text;
       } else if (tagName === 'Highlight' && attrs.text) {
@@ -203,21 +193,18 @@ function parseMarkdownBodyToSections(body: string): BlogSection[] {
       }
       continue;
     }
-    
-    // Otherwise it's a standard text line
+
     if (trimmed !== '' || contentBuffer.length > 0) {
       contentBuffer.push(line);
     }
   }
-  
+
   flushBuffers();
   return sections;
 }
 
-// ── Parse a single frontmatter object into BlogPostType ───────────────────────
 function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): BlogPostType {
   let parsedSections: BlogSection[] = [];
-  
   if (frontmatter.sections && frontmatter.sections.length > 0) {
     parsedSections = frontmatter.sections.map(parseCMSSection);
   } else {
@@ -242,31 +229,18 @@ function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): 
   };
 }
 
-// ── Vite glob import: eagerly load all .md frontmatter at build time ──────────
-// This uses Vite's built-in glob import with the `eager` flag.
-// Each module exposes a `frontmatter` property via the ?raw is not needed —
-// we parse YAML frontmatter ourselves since Vite doesn't do that natively.
-//
-// We use a simple frontmatter parser below instead of adding a dependency.
-
+// ── Frontmatter Parser for Local Markdown Files ───────────────────────────────
 function parseFrontmatter(raw: string): { frontmatter: Record<string, unknown>; body: string } {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return { frontmatter: {}, body: raw };
 
   const yamlStr = match[1];
   const body = raw.slice(match[0].length).trim();
-
-  // Simple YAML parser for flat + nested structures
-  // Handles: strings, lists (with - prefix), and nested objects
   const frontmatter = parseSimpleYAML(yamlStr);
 
   return { frontmatter, body };
 }
 
-/**
- * A lightweight YAML parser that handles the specific structures used
- * in our blog frontmatter. Not a general-purpose YAML parser.
- */
 function parseSimpleYAML(yaml: string): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   const lines = yaml.split('\n');
@@ -275,21 +249,16 @@ function parseSimpleYAML(yaml: string): Record<string, unknown> {
   while (i < lines.length) {
     const line = lines[i];
     const trimmed = line.trimEnd();
-
-    // Skip empty lines
     if (trimmed.trim() === '' || trimmed.trim().startsWith('#')) {
       i++;
       continue;
     }
 
-    // Top-level key-value: key: value or key: "value"
     const kvMatch = trimmed.match(/^(\w[\w\s]*\w|\w+):\s*(.+)$/);
     if (kvMatch) {
       const key = kvMatch[1].trim();
       let value: string = kvMatch[2].trim();
-      // Remove surrounding quotes
-      if ((value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith("'") && value.endsWith("'"))) {
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
         value = value.slice(1, -1);
       }
       result[key] = value;
@@ -297,7 +266,6 @@ function parseSimpleYAML(yaml: string): Record<string, unknown> {
       continue;
     }
 
-    // Key followed by block (list or nested object): key:
     const blockKeyMatch = trimmed.match(/^(\w[\w\s]*\w|\w+):$/);
     if (blockKeyMatch) {
       const key = blockKeyMatch[1].trim();
@@ -307,224 +275,125 @@ function parseSimpleYAML(yaml: string): Record<string, unknown> {
       i = nextIndex;
       continue;
     }
-
     i++;
   }
-
   return result;
 }
 
-function getIndent(line: string): number {
-  const match = line.match(/^(\s*)/);
-  return match ? match[1].length : 0;
-}
-
-function parseBlock(lines: string[], startIndex: number, baseIndent: number): { value: unknown; nextIndex: number } {
-  if (startIndex >= lines.length) return { value: null, nextIndex: startIndex };
-
-  const firstLine = lines[startIndex];
-  const firstTrimmed = firstLine.trimStart();
-
-  // It's a list (starts with -)
-  if (firstTrimmed.startsWith('- ')) {
-    return parseList(lines, startIndex, baseIndent);
-  }
-
-  // It's a nested object
-  return parseNestedObject(lines, startIndex, baseIndent);
-}
-
-function parseList(lines: string[], startIndex: number, baseIndent: number): { value: unknown[]; nextIndex: number } {
-  const result: unknown[] = [];
-  let i = startIndex;
-
-  while (i < lines.length) {
-    const line = lines[i];
-    const trimmed = line.trimEnd();
-
-    if (trimmed.trim() === '') { i++; continue; }
-
-    const currentIndent = getIndent(line);
-    if (currentIndent < baseIndent) break;
-
-    const listMatch = trimmed.trimStart().match(/^-\s+(.*)$/);
-    if (listMatch && currentIndent === baseIndent) {
-      const itemContent = listMatch[1].trim();
-
-      // Check if item is a key-value: - heading: "value"
-      // Or if it's a nested object starting with a key
-      const itemKVMatch = itemContent.match(/^(\w[\w\s]*\w|\w+):\s*(.+)$/);
-      if (itemKVMatch) {
-        // This list item starts an object — collect all subsequent indented lines as part of it
-        const obj: Record<string, unknown> = {};
-        const key = itemKVMatch[1].trim();
-        let val: string = itemKVMatch[2].trim();
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-          val = val.slice(1, -1);
-        }
-        obj[key] = val;
-        i++;
-
-        // Read additional keys for this object at deeper indent
-        const objIndent = baseIndent + 2;
-        while (i < lines.length) {
-          const objLine = lines[i];
-          const objTrimmed = objLine.trimEnd();
-          if (objTrimmed.trim() === '') { i++; continue; }
-          const objCurrentIndent = getIndent(objLine);
-          if (objCurrentIndent < objIndent) break;
-
-          const objKVMatch = objTrimmed.trimStart().match(/^(\w[\w\s]*\w|\w+):\s*(.+)$/);
-          if (objKVMatch) {
-            const oKey = objKVMatch[1].trim();
-            let oVal: string = objKVMatch[2].trim();
-            if ((oVal.startsWith('"') && oVal.endsWith('"')) || (oVal.startsWith("'") && oVal.endsWith("'"))) {
-              oVal = oVal.slice(1, -1);
-            }
-            obj[oKey] = oVal;
-            i++;
-            continue;
-          }
-
-          // Block key for nested
-          const objBlockMatch = objTrimmed.trimStart().match(/^(\w[\w\s]*\w|\w+):$/);
-          if (objBlockMatch) {
-            const bKey = objBlockMatch[1].trim();
-            i++;
-            const { value: bVal, nextIndex } = parseBlock(lines, i, objCurrentIndent + 2);
-            obj[bKey] = bVal;
-            i = nextIndex;
-            continue;
-          }
-
-          i++;
-        }
-
-        result.push(obj);
-        continue;
-      }
-
-      // Check if it's a block key (object starting): - heading:
-      const itemBlockMatch = itemContent.match(/^(\w[\w\s]*\w|\w+):$/);
-      if (itemBlockMatch) {
-        // Nested object inside list
-        const obj: Record<string, unknown> = {};
-        const key = itemBlockMatch[1].trim();
-        i++;
-        const { value: bVal, nextIndex } = parseBlock(lines, i, baseIndent + 4);
-        obj[key] = bVal;
-        i = nextIndex;
-        result.push(obj);
-        continue;
-      }
-
-      // Simple string value
-      let value = itemContent;
-      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      result.push(value);
-      i++;
-      continue;
-    }
-
-    // Not a list item at this indent — stop
-    if (currentIndent <= baseIndent && !trimmed.trimStart().startsWith('-')) break;
-
-    i++;
-  }
-
-  return { value: result, nextIndex: i };
-}
-
-function parseNestedObject(lines: string[], startIndex: number, baseIndent: number): { value: Record<string, unknown>; nextIndex: number } {
-  const result: Record<string, unknown> = {};
-  let i = startIndex;
-
-  while (i < lines.length) {
-    const line = lines[i];
-    const trimmed = line.trimEnd();
-
-    if (trimmed.trim() === '') { i++; continue; }
-
-    const currentIndent = getIndent(line);
-    if (currentIndent < baseIndent) break;
-
-    const kvMatch = trimmed.trimStart().match(/^(\w[\w\s]*\w|\w+):\s*(.+)$/);
-    if (kvMatch) {
-      const key = kvMatch[1].trim();
-      let value: string = kvMatch[2].trim();
-      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      result[key] = value;
-      i++;
-      continue;
-    }
-
-    const blockMatch = trimmed.trimStart().match(/^(\w[\w\s]*\w|\w+):$/);
-    if (blockMatch) {
-      const key = blockMatch[1].trim();
-      i++;
-      const nextLineIndent = i < lines.length ? getIndent(lines[i]) : baseIndent;
-      const { value, nextIndex } = parseBlock(lines, i, nextLineIndent);
-      result[key] = value;
-      i = nextIndex;
-      continue;
-    }
-
-    i++;
-  }
-
-  return { value: result, nextIndex: i };
-}
-
-// ── Load all CMS posts from /content/blog/ ────────────────────────────────────
+// Eager glob import of local markdown content as the baseline fallback
 const markdownModules = import.meta.glob('/content/blog/*.{md,mdx}', {
   eager: true,
   query: '?raw',
   import: 'default',
 }) as Record<string, string>;
 
-function loadCMSPosts(): BlogPostType[] {
+function loadLocalCMSPosts(): BlogPostType[] {
   const posts: BlogPostType[] = [];
-
   for (const [path, rawContent] of Object.entries(markdownModules)) {
     try {
-      // Extract slug from filename: /content/blog/my-post.md → my-post
       const slug = path.split('/').pop()?.replace(/\.mdx?$/, '') || '';
-
       const { frontmatter, body } = parseFrontmatter(rawContent);
       const cmsFM = frontmatter as unknown as CMSFrontmatter;
 
-      // Validate minimum required fields
       if (!cmsFM.title || !cmsFM.date) continue;
-
       posts.push(parseCMSPost(cmsFM, body, slug));
     } catch (err) {
-      console.warn(`[BlogLoader] Failed to parse ${path}:`, err);
+      console.warn(`[BlogLoader] Failed to parse local post ${path}:`, err);
     }
   }
-
-  // Sort by date (newest first)
-  posts.sort((a, b) => {
-    const dateA = new Date(a.date).getTime();
-    const dateB = new Date(b.date).getTime();
-    // If dates can't be parsed, keep original order
-    if (isNaN(dateA) || isNaN(dateB)) return 0;
-    return dateB - dateA;
-  });
-
   return posts;
 }
 
-// ── Unified export: CMS posts first, then legacy hardcoded posts ──────────────
-// CMS posts take priority. If a CMS post has the same title as a legacy post,
-// the CMS version wins (so you can migrate legacy posts to CMS over time).
-const cmsPosts = loadCMSPosts();
+// ── Sanity CDN Fetch Layer ───────────────────────────────────────────────────
+async function fetchSanityPosts(): Promise<BlogPostType[]> {
+  const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
+  const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
+
+  if (!projectId) {
+    return loadLocalCMSPosts();
+  }
+
+  try {
+    const query = `*[_type == "post"] | order(date desc) {
+      "id": slug.current,
+      title,
+      author,
+      authorBio,
+      authorImage,
+      readTime,
+      excerpt,
+      "image": image.asset->url,
+      "heroImage": heroImage.asset->url,
+      tags,
+      hook,
+      takeaways,
+      sections[] {
+        heading,
+        content,
+        example,
+        highlight,
+        simplification {
+          label,
+          text
+        },
+        list,
+        quote {
+          text,
+          author
+        },
+        table {
+          headers,
+          "rows": rows[]
+        }
+      }
+    }`;
+
+    const url = `https://${projectId}.apicdn.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    if (result.result && Array.isArray(result.result)) {
+      return result.result.map((post: any) => ({
+        id: post.id,
+        title: post.title || 'Untitled Post',
+        author: post.author || 'Emmanuel Odebiyi',
+        authorImage: post.authorImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel',
+        authorBio: post.authorBio || '',
+        date: post.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+        readTime: post.readTime || '5 min read',
+        excerpt: post.excerpt || '',
+        image: post.image || '/images/blog/placeholder.jpg',
+        heroImage: post.heroImage || post.image || '/images/blog/placeholder.jpg',
+        tags: post.tags || [],
+        hook: post.hook || '',
+        takeaways: post.takeaways || [],
+        sections: (post.sections || []).map((sec: any) => parseCMSSection(sec)),
+      }));
+    }
+    
+    return loadLocalCMSPosts();
+  } catch (err) {
+    console.warn('[BlogLoader] Sanity CDN fetch failed, falling back to local files:', err);
+    return loadLocalCMSPosts();
+  }
+}
+
+// ── Top-Level Await Execution ────────────────────────────────────────────────
+const cmsPosts = await fetchSanityPosts();
 
 const legacyTitles = new Set(cmsPosts.map(p => p.title.toLowerCase()));
 const uniqueLegacyPosts = legacyPosts.filter(p => !legacyTitles.has(p.title.toLowerCase()));
 
-/** All blog posts — CMS-authored + legacy hardcoded (deduplicated) */
-export const allBlogPosts: BlogPostType[] = [...cmsPosts, ...uniqueLegacyPosts];
+// Deduplicate legacy posts and modern CMS posts
+const finalPostsList = [...cmsPosts, ...uniqueLegacyPosts];
+
+// Sort final array by date (newest first)
+finalPostsList.sort((a, b) => {
+  const dateA = new Date(a.date).getTime();
+  const dateB = new Date(b.date).getTime();
+  if (isNaN(dateA) || isNaN(dateB)) return 0;
+  return dateB - dateA;
+});
+
+/** All blog posts — Cloud Sanity CMS + Local Markdown fallback + Legacy hardcoded */
+export const allBlogPosts: BlogPostType[] = finalPostsList;

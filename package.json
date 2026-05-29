@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tinacms dev -c \"vite --port=3000 --host=0.0.0.0\"",
-    "build": "tinacms build --skip-cloud-checks && vite build",
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
@@ -17,7 +17,6 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@tailwindcss/vite": "^4.1.14",
-    "@tinacms/cli": "^2.4.0",
     "@vitejs/plugin-react": "^5.0.4",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
@@ -40,7 +39,6 @@
     "slate-react": "^0.114.2",
     "tailwind-merge": "^3.5.0",
     "three": "^0.183.2",
-    "tinacms": "^3.8.2",
     "vite": "^6.2.0",
     "vite-plugin-pwa": "^1.2.0"
   },
