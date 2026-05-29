@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/admin(.*)", "destination": "https://emmanuelodebiyi.sanity.studio", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

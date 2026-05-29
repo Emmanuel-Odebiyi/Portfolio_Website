@@ -8,7 +8,7 @@ export default defineConfig({
 
   // Replace these placeholders with your actual Sanity Project ID and dataset
   // once you sign up for your free account at sanity.io/manage
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'ytfufk96',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '96ilx2qv',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [structureTool()],
