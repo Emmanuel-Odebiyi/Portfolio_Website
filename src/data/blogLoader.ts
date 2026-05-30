@@ -306,7 +306,7 @@ function loadLocalCMSPosts(): BlogPostType[] {
 
 // ── Sanity CDN Fetch Layer ───────────────────────────────────────────────────
 async function fetchSanityPosts(): Promise<BlogPostType[]> {
-  const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
+  const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || '96ilx2qv';
   const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
 
   if (!projectId) {
