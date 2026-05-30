@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Odebiyi - Premium OG Flyer</title>
+    <!-- Outfit Google Font (Modern Grotesque) & Playfair (Premium Serif) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neon-gold-border {
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.15);
+        }
+    </style>
+</head>
+
+<body class="bg-[#030712] min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main OG Card Container (Designed at exact 1200x630 Facebook/LinkedIn ratio) -->
+    <div
+        class="relative w-[1200px] h-[630px] bg-[#080d1a] border border-white/5 rounded-[2.5rem] overflow-hidden flex flex-col justify-between p-16 shadow-2xl relative">
+
+        <!-- Ambient glowing backgrounds -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 blur-[150px] rounded-full"></div>
+        <div class="absolute -bottom-40 right-20 w-[500px] h-[500px] bg-yellow-500/5 blur-[180px] rounded-full"></div>
+
+        <!-- Top Body Section -->
+        <div class="grid grid-cols-12 gap-8 items-center h-full">
+
+            <!-- Left Editorial Column -->
+            <div class="col-span-7 flex flex-col justify-center space-y-6 text-left relative z-10 pr-6">
+                <h1 class="text-7xl font-bold tracking-tight text-white font-display leading-[0.95] drop-shadow-sm">
+                    Content <br>
+                    <span class="text-yellow-500 font-sans italic font-normal tracking-wide">Engines</span>
+                </h1>
+
+                <div class="h-[2px] w-48 bg-gradient-to-r from-yellow-500 to-transparent"></div>
+
+                <p class="text-xl text-zinc-300 font-light leading-relaxed max-w-xl">
+                    I build automated content marketing systems that deliver up to <strong
+                        class="text-white font-semibold">520% ROI in 90 days</strong> — publishing consistently and
+                    driving traffic on autopilot.
+                </p>
+            </div>
+
+            <!-- Right Photo & Framing Column -->
+            <div class="col-span-5 flex justify-end items-center relative">
+                <!-- Playful yellow organic shape behind -->
+                <svg class="absolute -left-10 top-1/3 w-20 h-20 text-yellow-500/80 animate-pulse" viewBox="0 0 100 100"
+                    fill="currentColor">
+                    <path d="M50 0C60 20 80 40 100 50C80 60 60 80 50 100C40 80 20 60 0 50C20 40 40 20 50 0Z" />
+                </svg>
+
+                <!-- Dynamic Frame -->
+                <div
+                    class="relative bg-yellow-500 rounded-[2rem] p-4 neon-gold-border transform rotate-2 hover:rotate-0 transition-transform duration-500 w-[360px] h-[440px] flex flex-col justify-between">
+                    <!-- Top Tag Sticker -->
+                    <div
+                        class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-zinc-50 border border-zinc-200 text-zinc-900 px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span class="text-[10px] font-mono font-bold tracking-widest uppercase">AVAILABLE NOW</span>
+                    </div>
+
+                    <!-- The Image Wrapper -->
+                    <div class="w-full h-[85%] rounded-[1.5rem] bg-zinc-950 overflow-hidden border border-black/10">
+                        <!-- REPLACE WITH YOUR PICTURE -->
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600"
+                            alt="Emmanuel Odebiyi"
+                            class="w-full h-full object-cover grayscale contrast-115 hover:grayscale-0 transition-all duration-700" />
+                    </div>
+
+                    <!-- Polaroid-style bottom holes -->
+                    <div class="flex justify-around items-center px-4 pb-1">
+                        <div class="w-4 h-4 rounded-full bg-[#080d1a]"></div>
+                        <div class="w-4 h-4 rounded-full bg-[#080d1a]"></div>
+                        <div class="w-4 h-4 rounded-full bg-[#080d1a]"></div>
+                        <div class="w-4 h-4 rounded-full bg-[#080d1a]"></div>
+                        <div class="w-4 h-4 rounded-full bg-[#080d1a]"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Metadata Panel -->
+        <div class="flex flex-row justify-between items-center pt-8 border-t border-white/5 relative z-20">
+
+            <!-- Contact Button & Link -->
+            <div class="flex items-center gap-4">
+                <a href="https://www.emmanuelodebiyi.name.ng"
+                    class="px-6 py-3 rounded-full bg-yellow-500 text-zinc-950 font-bold text-xs uppercase tracking-widest font-mono hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/10">
+                    Book Strategic Call
+                </a>
+                <span class="text-zinc-500 font-mono text-sm tracking-wide">
+                    emmanuelodebiyi.name.ng
+                </span>
+            </div>
+
+            <!-- Glassmorphic Services Box -->
+            <div class="glass-panel rounded-2xl px-6 py-4 flex items-center gap-6">
+                <div class="text-left">
+                    <span class="text-[9px] font-mono uppercase tracking-[0.25em] text-yellow-500 block">Core
+                        Expertises</span>
+                    <span class="text-base font-bold text-white font-display">Done-For-You Services</span>
+                </div>
+                <div class="h-8 w-px bg-white/10"></div>
+                <ul class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-xs text-zinc-400 font-light text-left">
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-500">✓</span> Content Marketing Automation
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-500">✓</span> SEO Strategy & Topic Clusters
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-500">✓</span> Workflow Integration (n8n)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-yellow-500">✓</span> Brand Voice Preservation
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -99,20 +99,22 @@ export const tableBlock = defineType({
       name: 'rows',
       title: 'Table Rows',
       type: 'array',
-      of: {
-        type: 'object',
-        name: 'tableRow',
-        title: 'Row Cells',
-        fields: [
-          defineField({
-            name: 'cells',
-            title: 'Cells (Ordered)',
-            type: 'array',
-            of: [{ type: 'string' }],
-            description: 'Provide cell values in column order.',
-          })
-        ]
-      },
+      of: [
+        {
+          type: 'object',
+          name: 'tableRow',
+          title: 'Row Cells',
+          fields: [
+            defineField({
+              name: 'cells',
+              title: 'Cells (Ordered)',
+              type: 'array',
+              of: [{ type: 'string' }],
+              description: 'Provide cell values in column order.',
+            })
+          ]
+        }
+      ],
       description: 'The rows containing ordered column values.',
     }),
   ],

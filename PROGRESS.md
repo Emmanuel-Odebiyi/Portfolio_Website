@@ -28,9 +28,10 @@ This file serves as a persistent, single source of truth tracking the developmen
 ## 🗺️ 3. How to Access & Manage Your Sanity CMS
 Because we have migrated from **Tina/Decap** (which embedded the admin panel under `/admin` in the frontend SPA bundle) to **Sanity CMS**, there are two modern options for accessing your CMS admin studio:
 
-### 🔹 Option A: Standalone Cloud Hosting (Recommended & Standard) - 🟢 COMPLETED
+### 🔹 Option A: Standalone Cloud Hosting (Recommended & Standard) - 🟢 COMPLETED (Fully Upgraded)
 * **Hosted Studio URL:** [https://emmanuelodebiyi.sanity.studio](https://emmanuelodebiyi.sanity.studio)
 * **Custom Domain Redirect:** Configured in `vercel.json` so visiting `/admin` on your website seamlessly redirects to your hosted Studio.
+* **Tech Stack Alignment:** Fully upgraded to **Sanity v5 (`^5.28.0`)** and **React 19 (`^19.2.2`)** to achieve 100% native compatibility with the online Sanity Manage Dashboard.
 * **How we deployed:** Ran `npm run deploy` inside the `/sanity-studio` directory (using the custom subdomain `emmanuelodebiyi`).
 
 ### 🔹 Option B: Local Development Access
@@ -42,5 +43,6 @@ Because we have migrated from **Tina/Decap** (which embedded the admin panel und
 
 ## 📋 4. Next Action Items & Backlog
 1. [x] **Deploy Sanity Studio to the Web:** Successfully set up the project ID (`96ilx2qv`), created the organization, deployed the studio, and hooked up `/admin` redirects.
-2. [ ] **Verify Live CDN Synchronization:** Test writing a blog post inside your new live studio ([emmanuelodebiyi.sanity.studio](https://emmanuelodebiyi.sanity.studio)) and verify it renders instantly on the live website.
-3. [ ] **Setup Vercel Build Triggers (Optional):** Sanity's live CDN fetches dynamically at runtime, so standard page loads will display new posts instantly without needing a full rebuild. If static regeneration is needed in the future, we can configure webhook triggers.
+2. [x] **Upgrade to Sanity v5 & React 19:** Resolved the "Partially compatible" warning by upgrading core dependencies to achieve 100% full dashboard features.
+3. [ ] **Verify Live CDN Synchronization:** Test writing a blog post inside your new live studio ([emmanuelodebiyi.sanity.studio](https://emmanuelodebiyi.sanity.studio)) and verify it renders instantly on the live website.
+4. [ ] **Setup Vercel Build Triggers (Optional):** Sanity's live CDN fetches dynamically at runtime, so standard page loads will display new posts instantly without needing a full rebuild. If static regeneration is needed in the future, we can configure webhook triggers.
