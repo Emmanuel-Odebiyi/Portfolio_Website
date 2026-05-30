@@ -44,5 +44,15 @@ Because we have migrated from **Tina/Decap** (which embedded the admin panel und
 ## 📋 4. Next Action Items & Backlog
 1. [x] **Deploy Sanity Studio to the Web:** Successfully set up the project ID (`96ilx2qv`), created the organization, deployed the studio, and hooked up `/admin` redirects.
 2. [x] **Upgrade to Sanity v5 & React 19:** Resolved the "Partially compatible" warning by upgrading core dependencies to achieve 100% full dashboard features.
-3. [ ] **Verify Live CDN Synchronization:** Test writing a blog post inside your new live studio ([emmanuelodebiyi.sanity.studio](https://emmanuelodebiyi.sanity.studio)) and verify it renders instantly on the live website.
-4. [ ] **Setup Vercel Build Triggers (Optional):** Sanity's live CDN fetches dynamically at runtime, so standard page loads will display new posts instantly without needing a full rebuild. If static regeneration is needed in the future, we can configure webhook triggers.
+3. [x] **Fix Blog Loader for Production:** Added hardcoded fallback Sanity Project ID (`96ilx2qv`) in `src/data/blogLoader.ts` so the frontend queries Sanity's CDN even when `VITE_SANITY_PROJECT_ID` env var is not set on the hosting platform. Verified locally that `vite build` correctly embeds both the project ID and `apicdn.sanity.io` in the output bundle.
+4. [x] **Fix Redirect for Cloudflare Pages:** Updated `public/_redirects` (Cloudflare's redirect mechanism) to redirect `/admin` to `https://emmanuelodebiyi.sanity.studio` with a 302. The previous `vercel.json` redirect does not apply on Cloudflare Pages.
+5. [ ] **Trigger Cloudflare Pages Rebuild:** The live site is still serving an old bundle (`index-FesnnD0s.js`) from before the Sanity integration commits. **Cloudflare Pages must rebuild** with the latest commits (`d5546bd`, `4359679`) for blog posts published in Sanity Studio to appear on the live site. If auto-deploy from GitHub is not active, manually trigger a deployment in the Cloudflare Pages dashboard.
+6. [ ] **Verify Live CDN Synchronization:** After Cloudflare rebuilds, test that posts published at [emmanuelodebiyi.sanity.studio](https://emmanuelodebiyi.sanity.studio) appear instantly on the live website's `/blog` page.
+
+## 🏗️ 5. Deployment Platform
+* **Hosting:** Cloudflare Pages (NOT Vercel)
+* **Domain:** `emmanuelodebiyi.name.ng`
+* **Build Command:** `vite build` (defined in Cloudflare Pages project settings)
+* **Output Directory:** `dist`
+* **Redirect Config:** `public/_redirects` (Cloudflare format, copied to `dist/` during build)
+* **Environment Variables Needed on Cloudflare:** None required — the Sanity Project ID is hardcoded as a fallback in `blogLoader.ts`. Optionally set `VITE_SANITY_PROJECT_ID=96ilx2qv` in Cloudflare Pages settings for explicitness.
