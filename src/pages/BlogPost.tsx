@@ -289,7 +289,7 @@ interface MarkdownRendererProps {
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   const blocks: React.ReactNode[] = [];
-  const lines = content.split('\n');
+  const lines = (content || '').split('\n');
 
   let currentBlockType: 'paragraph' | 'code' | null = null;
   let codeBuffer: string[] = [];

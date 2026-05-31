@@ -44,9 +44,12 @@ interface CMSFrontmatter {
 
 // ── Parse a CMS section into the existing BlogSection interface ────────────────
 function parseCMSSection(raw: CMSSection): BlogSection {
+  if (!raw) {
+    return { heading: '', content: '' };
+  }
   const section: BlogSection = {
-    heading: raw.heading,
-    content: raw.content,
+    heading: raw.heading || '',
+    content: raw.content || '',
   };
 
   if (raw.example) section.example = raw.example;
@@ -76,6 +79,9 @@ function parseCMSSection(raw: CMSSection): BlogSection {
       rows: raw.table.rows.map(row => {
         if (Array.isArray(row)) {
           return row.map(cell => String(cell).trim());
+        }
+        if (row && typeof row === 'object' && 'cells' in row && Array.isArray((row as any).cells)) {
+          return (row as any).cells.map((cell: any) => String(cell).trim());
         }
         return String(row).split(',').map(cell => cell.trim());
       }),
@@ -381,7 +387,7 @@ async function fetchSanityPosts(): Promise<BlogPostType[]> {
         },
         table {
           headers,
-          "rows": rows[]
+          "rows": rows[].cells
         }
       }
     }`;
