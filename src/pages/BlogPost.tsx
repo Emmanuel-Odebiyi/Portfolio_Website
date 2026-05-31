@@ -18,7 +18,7 @@ import {
   ArrowDown
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { allBlogPosts as blogPosts } from '../data/blogLoader';
+import { allBlogPosts as blogPosts, type ExtendedBlogPostType, type PortableTextNode, type PortableTextBlock, type PortableTextSpan } from '../data/blogLoader';
 
 // ── Custom Monospace Terminal Code Block with Copy Action ─────────────────────
 interface TerminalCodeBlockProps {
@@ -366,11 +366,238 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   return <div className="space-y-6">{blocks}</div>;
 };
 
+// ── Portable Text (WYSIWYG) Rich Block Renderer ──────────────────────────────
+// Zero-dependency custom renderer that maps Sanity Portable Text JSON blocks
+// directly to the existing premium UI components. No external libraries needed.
+
+function renderPortableSpan(span: PortableTextSpan, markDefs: { _key: string; _type: string; href?: string; blank?: boolean }[], keyPrefix: string): React.ReactNode {
+  let content: React.ReactNode = span.text;
+  const marks = span.marks || [];
+
+  for (const mark of marks) {
+    // Check if it's a decorator (bold, italic, etc.)
+    if (mark === 'strong') {
+      content = <strong key={`${keyPrefix}-strong`} className="font-semibold text-white">{content}</strong>;
+    } else if (mark === 'em') {
+      content = <em key={`${keyPrefix}-em`} className="italic text-zinc-100">{content}</em>;
+    } else if (mark === 'underline') {
+      content = <span key={`${keyPrefix}-u`} className="underline decoration-blue-500/40">{content}</span>;
+    } else if (mark === 'code') {
+      content = <code key={`${keyPrefix}-code`} className="px-1.5 py-0.5 rounded bg-zinc-800/80 border border-white/5 text-pink-400 font-mono text-sm font-light">{content}</code>;
+    } else if (mark === 'strike-through') {
+      content = <s key={`${keyPrefix}-s`} className="text-zinc-500">{content}</s>;
+    } else {
+      // Check if it's an annotation (link)
+      const def = markDefs.find(d => d._key === mark);
+      if (def && def._type === 'link' && def.href) {
+        content = (
+          <a key={`${keyPrefix}-link`} href={def.href} target={def.blank !== false ? '_blank' : '_self'} rel="noopener noreferrer" className="text-[#60a5fa] hover:text-[#93c5fd] underline decoration-blue-500/40 hover:decoration-blue-400 transition-all font-medium">
+            {content}
+          </a>
+        );
+      }
+    }
+  }
+  return content;
+}
+
+function renderPortableBlock(block: PortableTextBlock, keyPrefix: string): React.ReactNode {
+  const markDefs = block.markDefs || [];
+  const children = (block.children || []).map((span, si) =>
+    renderPortableSpan(span, markDefs, `${keyPrefix}-s${si}`)
+  );
+
+  const style = block.style || 'normal';
+
+  if (style === 'h2') {
+    return <h2 key={keyPrefix} className="text-3xl md:text-4xl font-bold tracking-tight text-white pt-8">{children}</h2>;
+  }
+  if (style === 'h3') {
+    return <h3 key={keyPrefix} className="text-2xl md:text-3xl font-bold tracking-tight text-white pt-6">{children}</h3>;
+  }
+  if (style === 'h4') {
+    return <h4 key={keyPrefix} className="text-xl md:text-2xl font-semibold text-white pt-4">{children}</h4>;
+  }
+  if (style === 'blockquote') {
+    return (
+      <blockquote key={keyPrefix} className="py-6 pl-8 border-l-4 border-blue-500 text-xl md:text-2xl font-light text-zinc-300 italic leading-relaxed">
+        {children}
+      </blockquote>
+    );
+  }
+
+  // List items
+  if (block.listItem === 'bullet') {
+    return (
+      <li key={keyPrefix} className="flex items-start gap-3.5 group">
+        <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+        <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{children}</span>
+      </li>
+    );
+  }
+  if (block.listItem === 'number') {
+    return (
+      <li key={keyPrefix} className="text-base md:text-lg text-zinc-300 font-light leading-relaxed list-decimal ml-6">
+        {children}
+      </li>
+    );
+  }
+
+  // Normal paragraph
+  return <p key={keyPrefix} className="leading-relaxed text-zinc-300 font-light text-base md:text-lg text-left select-text">{children}</p>;
+}
+
+interface PortableTextRendererProps {
+  blocks: PortableTextNode[];
+}
+
+const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) => {
+  const elements: React.ReactNode[] = [];
+  let listBuffer: React.ReactNode[] = [];
+  let listType: 'bullet' | 'number' | null = null;
+  let sectionIndex = 0;
+
+  const flushList = () => {
+    if (listBuffer.length > 0) {
+      const Tag = listType === 'number' ? 'ol' : 'ul';
+      const cls = listType === 'number' ? 'space-y-2 pt-2 pl-2' : 'space-y-3.5 pt-2 pl-2';
+      elements.push(<Tag key={`list-${elements.length}`} className={cls}>{listBuffer}</Tag>);
+      listBuffer = [];
+      listType = null;
+    }
+  };
+
+  for (let i = 0; i < blocks.length; i++) {
+    const block = blocks[i];
+    const key = `pt-${i}`;
+
+    // Handle standard text blocks
+    if (block._type === 'block') {
+      const textBlock = block as PortableTextBlock;
+
+      if (textBlock.listItem) {
+        if (listType && listType !== textBlock.listItem) flushList();
+        listType = textBlock.listItem;
+        listBuffer.push(renderPortableBlock(textBlock, key));
+        continue;
+      }
+
+      flushList();
+
+      // Add section IDs to headings for scrollspy
+      if (textBlock.style === 'h2' || textBlock.style === 'h3') {
+        const headingText = (textBlock.children || []).map(c => c.text).join('');
+        elements.push(
+          <div key={key} id={`section-${sectionIndex}`} className="scroll-mt-24">
+            <h2 className={`${
+              textBlock.style === 'h2' ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'
+            } font-bold tracking-tight text-white flex items-center gap-3 pt-8`}>
+              <span className="text-zinc-600 text-sm font-mono tracking-wider font-light">0{sectionIndex + 1}.</span>
+              {headingText}
+            </h2>
+          </div>
+        );
+        sectionIndex++;
+        continue;
+      }
+
+      elements.push(renderPortableBlock(textBlock, key));
+      continue;
+    }
+
+    flushList();
+
+    // Custom embed blocks
+    if (block._type === 'terminalEmbed') {
+      const b = block as any;
+      elements.push(<TerminalCodeBlock key={key} code={b.code || ''} lang={b.language || 'bash'} />);
+    } else if (block._type === 'flowchartEmbed') {
+      const b = block as any;
+      elements.push(<FlowchartRenderer key={key} code={b.code || ''} />);
+    } else if (block._type === 'exampleEmbed') {
+      const b = block as any;
+      elements.push(
+        <div key={key} className="p-8 rounded-3xl bg-[#0f172a]/50 border border-amber-500/20 shadow-lg shadow-amber-500/5 space-y-3 relative overflow-hidden">
+          <div className="flex items-center gap-2 text-amber-400 font-mono text-[10px] uppercase tracking-widest">
+            <Lightbulb size={14} /><span>Example Playbook</span>
+          </div>
+          <p className="text-base text-zinc-200 font-light leading-relaxed italic">"{b.text}"</p>
+        </div>
+      );
+    } else if (block._type === 'highlightEmbed') {
+      const b = block as any;
+      elements.push(
+        <div key={key} className="p-8 rounded-3xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 shadow-lg space-y-2">
+          <p className="text-lg md:text-xl font-medium text-white leading-snug">{b.text}</p>
+        </div>
+      );
+    } else if (block._type === 'simplificationEmbed') {
+      const b = block as any;
+      elements.push(
+        <div key={key} className="p-8 rounded-3xl bg-[#0a0f1e]/80 border border-white/5 text-white space-y-4 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
+          <div className="relative z-10 space-y-2">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] block">{b.label || 'In Plain Terms'}</span>
+            <p className="text-base md:text-lg font-light leading-relaxed text-zinc-300">{b.text}</p>
+          </div>
+        </div>
+      );
+    } else if (block._type === 'quoteEmbed') {
+      const b = block as any;
+      elements.push(
+        <div key={key} className="py-10 border-y border-white/5 my-10 relative">
+          <p className="text-2xl md:text-3xl font-display italic text-white leading-relaxed text-center max-w-2xl mx-auto">"{b.text}"</p>
+          <p className="text-center mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">— {b.author || 'Unknown'}</p>
+        </div>
+      );
+    } else if (block._type === 'tableEmbed') {
+      const b = block as any;
+      const headers: string[] = b.headers || [];
+      const rows: string[][] = (b.rows || []).map((r: any) => {
+        if (Array.isArray(r)) return r.map((c: any) => String(c));
+        if (r && r.cells) return r.cells.map((c: any) => String(c));
+        return [];
+      });
+      elements.push(
+        <div key={key} className="my-8 overflow-x-auto rounded-2xl border border-white/5 shadow-2xl shadow-black/20">
+          <table className="w-full text-left border-collapse">
+            <thead><tr className="bg-white/5 border-b border-white/5">
+              {headers.map((h, hi) => <th key={hi} className="px-6 py-4.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400">{h}</th>)}
+            </tr></thead>
+            <tbody>
+              {rows.map((row, ri) => (
+                <tr key={ri} className="border-b border-white/5 last:border-0 hover:bg-[#0f172a]/30 transition-colors">
+                  {row.map((cell, ci) => <td key={ci} className="px-6 py-5 text-sm text-zinc-300 font-light leading-relaxed">{cell}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    } else if (block._type === 'image') {
+      const b = block as any;
+      const imgUrl = b.asset?.url || '';
+      if (imgUrl) {
+        elements.push(
+          <figure key={key} className="my-10">
+            <img src={imgUrl} alt={b.alt || ''} className="w-full rounded-2xl border border-white/5 shadow-xl" loading="lazy" referrerPolicy="no-referrer" />
+            {b.caption && <figcaption className="text-center mt-3 text-zinc-500 text-xs font-mono">{b.caption}</figcaption>}
+          </figure>
+        );
+      }
+    }
+  }
+
+  flushList();
+  return <div className="space-y-6">{elements}</div>;
+};
+
 export default function BlogPost() {
   const { id } = useParams();
   
   // Find post dynamically
-  const post = blogPosts.find(p => p.id === id) || blogPosts[0];
+  const post = (blogPosts.find(p => p.id === id) || blogPosts[0]) as ExtendedBlogPostType;
+  const hasPortableContent = !!(post.portableContent && post.portableContent.length > 0);
 
   const [scrollPercent, setScrollPercent] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
@@ -643,109 +870,114 @@ export default function BlogPost() {
               </p>
             </section>
 
-            {/* Content Sections */}
-            <div className="space-y-20">
-              {post.sections.map((section, index) => (
-                <section 
-                  key={index} 
-                  id={`section-${index}`} 
-                  className="space-y-6 scroll-mt-24 transition-opacity"
-                >
-                  <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
-                    <span className="text-zinc-600 text-sm font-mono tracking-wider font-light">0{index + 1}.</span>
-                    {section.heading}
-                  </h2>
-                  
-                  <div className="prose prose-invert max-w-none text-zinc-300 font-light text-base md:text-lg leading-relaxed space-y-4">
-                    <MarkdownRenderer content={section.content} />
-                  </div>
-
-                  {/* Styled Section Extras */}
-                  {section.example && (
-                    <div className="p-8 rounded-3xl bg-[#0f172a]/50 border border-amber-500/20 shadow-lg shadow-amber-500/5 space-y-3 relative overflow-hidden">
-                      <div className="flex items-center gap-2 text-amber-400 font-mono text-[10px] uppercase tracking-widest">
-                        <Lightbulb size={14} />
-                        <span>Example Playbook</span>
-                      </div>
-                      <p className="text-base text-zinc-200 font-light leading-relaxed italic">
-                        "{section.example}"
-                      </p>
+            {/* Content Body — WYSIWYG Portable Text or Legacy Sections */}
+            {hasPortableContent ? (
+              <div className="space-y-6">
+                <PortableTextRenderer blocks={post.portableContent!} />
+              </div>
+            ) : (
+              <div className="space-y-20">
+                {post.sections.map((section, index) => (
+                  <section 
+                    key={index} 
+                    id={`section-${index}`} 
+                    className="space-y-6 scroll-mt-24 transition-opacity"
+                  >
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
+                      <span className="text-zinc-600 text-sm font-mono tracking-wider font-light">0{index + 1}.</span>
+                      {section.heading}
+                    </h2>
+                    
+                    <div className="prose prose-invert max-w-none text-zinc-300 font-light text-base md:text-lg leading-relaxed space-y-4">
+                      <MarkdownRenderer content={section.content} />
                     </div>
-                  )}
 
-                  {section.highlight && (
-                    <div className="p-8 rounded-3xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 shadow-lg space-y-2">
-                      <p className="text-lg md:text-xl font-medium text-white leading-snug">
-                        {section.highlight}
-                      </p>
-                    </div>
-                  )}
-
-                  {section.simplification && (
-                    <div className="p-8 rounded-3xl bg-[#0a0f1e]/80 border border-white/5 text-white space-y-4 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
-                      <div className="relative z-10 space-y-2">
-                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] block">
-                          {section.simplification.label}
-                        </span>
-                        <p className="text-base md:text-lg font-light leading-relaxed text-zinc-300">
-                          {section.simplification.text}
+                    {section.example && (
+                      <div className="p-8 rounded-3xl bg-[#0f172a]/50 border border-amber-500/20 shadow-lg shadow-amber-500/5 space-y-3 relative overflow-hidden">
+                        <div className="flex items-center gap-2 text-amber-400 font-mono text-[10px] uppercase tracking-widest">
+                          <Lightbulb size={14} />
+                          <span>Example Playbook</span>
+                        </div>
+                        <p className="text-base text-zinc-200 font-light leading-relaxed italic">
+                          "{section.example}"
                         </p>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {section.list && (
-                    <ul className="space-y-3.5 pt-2 pl-2">
-                      {section.list.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3.5 group">
-                          <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-                          <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                    {section.highlight && (
+                      <div className="p-8 rounded-3xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 shadow-lg space-y-2">
+                        <p className="text-lg md:text-xl font-medium text-white leading-snug">
+                          {section.highlight}
+                        </p>
+                      </div>
+                    )}
 
-                  {section.quote && (
-                    <div className="py-10 border-y border-white/5 my-10 relative">
-                      <p className="text-2xl md:text-3xl font-display italic text-white leading-relaxed text-center max-w-2xl mx-auto">
-                        "{section.quote.text}"
-                      </p>
-                      <p className="text-center mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
-                        — {section.quote.author}
-                      </p>
-                    </div>
-                  )}
+                    {section.simplification && (
+                      <div className="p-8 rounded-3xl bg-[#0a0f1e]/80 border border-white/5 text-white space-y-4 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
+                        <div className="relative z-10 space-y-2">
+                          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] block">
+                            {section.simplification.label}
+                          </span>
+                          <p className="text-base md:text-lg font-light leading-relaxed text-zinc-300">
+                            {section.simplification.text}
+                          </p>
+                        </div>
+                      </div>
+                    )}
 
-                  {section.table && (
-                    <div className="my-8 overflow-x-auto rounded-2xl border border-white/5 shadow-2xl shadow-black/20">
-                      <table className="w-full text-left border-collapse">
-                        <thead>
-                          <tr className="bg-white/5 border-b border-white/5">
-                            {section.table.headers.map((header, i) => (
-                              <th key={i} className="px-6 py-4.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-                                {header}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {section.table.rows.map((row, i) => (
-                            <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-[#0f172a]/30 transition-colors">
-                              {row.map((cell, j) => (
-                                <td key={j} className="px-6 py-5 text-sm text-zinc-300 font-light leading-relaxed">
-                                  {cell}
-                                </td>
+                    {section.list && (
+                      <ul className="space-y-3.5 pt-2 pl-2">
+                        {section.list.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3.5 group">
+                            <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                            <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {section.quote && (
+                      <div className="py-10 border-y border-white/5 my-10 relative">
+                        <p className="text-2xl md:text-3xl font-display italic text-white leading-relaxed text-center max-w-2xl mx-auto">
+                          "{section.quote.text}"
+                        </p>
+                        <p className="text-center mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                          — {section.quote.author}
+                        </p>
+                      </div>
+                    )}
+
+                    {section.table && (
+                      <div className="my-8 overflow-x-auto rounded-2xl border border-white/5 shadow-2xl shadow-black/20">
+                        <table className="w-full text-left border-collapse">
+                          <thead>
+                            <tr className="bg-white/5 border-b border-white/5">
+                              {section.table.headers.map((header, i) => (
+                                <th key={i} className="px-6 py-4.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+                                  {header}
+                                </th>
                               ))}
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                </section>
-              ))}
-            </div>
+                          </thead>
+                          <tbody>
+                            {section.table.rows.map((row, i) => (
+                              <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-[#0f172a]/30 transition-colors">
+                                {row.map((cell, j) => (
+                                  <td key={j} className="px-6 py-5 text-sm text-zinc-300 font-light leading-relaxed">
+                                    {cell}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </section>
+                ))}
+              </div>
+            )}
 
             {/* Divider Element */}
             <div className="my-24 flex items-center justify-center gap-3">

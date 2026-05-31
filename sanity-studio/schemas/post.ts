@@ -4,11 +4,17 @@ export default defineType({
   name: 'post',
   title: 'Blog Article',
   type: 'document',
+  groups: [
+    { name: 'main', title: 'Article', default: true },
+    { name: 'meta', title: 'Metadata' },
+    { name: 'legacy', title: 'Legacy Sections', hidden: true },
+  ],
   fields: [
     defineField({
       name: 'title',
       title: 'Post Title',
       type: 'string',
+      group: 'main',
       validation: Rule => Rule.required(),
       description: 'The headline of your article (e.g. "How I Save 15 Hours Every Week With Content Automation").',
     }),
@@ -16,6 +22,7 @@ export default defineType({
       name: 'slug',
       title: 'URL Path Slug',
       type: 'slug',
+      group: 'main',
       options: {
         source: 'title',
         maxLength: 96,
@@ -27,6 +34,7 @@ export default defineType({
       name: 'date',
       title: 'Publish Date',
       type: 'date',
+      group: 'meta',
       options: {
         dateFormat: 'YYYY-MM-DD',
       },
@@ -37,6 +45,7 @@ export default defineType({
       name: 'author',
       title: 'Author Name',
       type: 'string',
+      group: 'meta',
       initialValue: 'Emmanuel Odebiyi',
       validation: Rule => Rule.required(),
     }),
@@ -44,6 +53,7 @@ export default defineType({
       name: 'authorImage',
       title: 'Author Avatar Image',
       type: 'image',
+      group: 'meta',
       options: {
         hotspot: true,
       },
@@ -53,6 +63,7 @@ export default defineType({
       name: 'authorBio',
       title: 'Author Biography',
       type: 'text',
+      group: 'meta',
       rows: 3,
       initialValue: 'Emmanuel is a Content Strategist and AI Automation Expert dedicated to helping B2B SaaS companies scale their organic growth through data-driven storytelling and systematic workflows.',
     }),
@@ -60,6 +71,7 @@ export default defineType({
       name: 'readTime',
       title: 'Estimated Read Time',
       type: 'string',
+      group: 'meta',
       initialValue: '5 min read',
       validation: Rule => Rule.required(),
       description: 'e.g. "6 min read" or "10 min read".',
@@ -68,6 +80,7 @@ export default defineType({
       name: 'excerpt',
       title: 'Listing Excerpt Summary',
       type: 'text',
+      group: 'main',
       rows: 2,
       validation: Rule => Rule.required(),
       description: 'A 1-2 sentence compelling summary displayed on your blog listing grid cards.',
@@ -76,6 +89,7 @@ export default defineType({
       name: 'image',
       title: 'Card Listing Image',
       type: 'image',
+      group: 'main',
       options: {
         hotspot: true,
       },
@@ -86,6 +100,7 @@ export default defineType({
       name: 'heroImage',
       title: 'Cinematic Hero Banner Image',
       type: 'image',
+      group: 'main',
       options: {
         hotspot: true,
       },
@@ -95,6 +110,7 @@ export default defineType({
       name: 'tags',
       title: 'Topic Tags',
       type: 'array',
+      group: 'meta',
       of: [{ type: 'string' }],
       initialValue: ['Automation'],
       description: 'Topic categories associated with this article (e.g. "Automation", "SEO", "Systems").',
@@ -103,22 +119,36 @@ export default defineType({
       name: 'hook',
       title: 'Opening Hook Intro',
       type: 'text',
+      group: 'main',
       rows: 3,
-      description: 'The italicized hook / opening paragraph displayed right before the table of contents.',
+      description: 'The italicized hook / opening paragraph displayed right before the article body.',
     }),
     defineField({
       name: 'takeaways',
       title: 'Quick Core Takeaways',
       type: 'array',
+      group: 'main',
       of: [{ type: 'string' }],
-      description: 'A list of 3-4 bulleted highlights displayed in the prominent golden "Core Takeaways" banner.',
+      description: 'A list of 3-4 bulleted highlights displayed in the prominent "Key Insights" banner at the end.',
     }),
+
+    // ── NEW: WordPress-style Visual Rich Text Editor ─────────────────────────
+    defineField({
+      name: 'content',
+      title: '📝 Article Body (Visual Editor)',
+      type: 'blockContent',
+      group: 'main',
+      description: 'Write your full article here using the visual editor. Use Ctrl+B for bold, Ctrl+I for italic, Ctrl+K for links. Click the + button between paragraphs to insert code consoles, flowcharts, quotes, tables, and more.',
+    }),
+
+    // ── LEGACY: Old segmented sections (hidden, kept for backward compat) ───
     defineField({
       name: 'sections',
-      title: 'Article Editorial Chapters',
+      title: 'Article Editorial Chapters (Legacy)',
       type: 'array',
+      group: 'legacy',
       of: [{ type: 'blogSection' }],
-      description: 'Build your article structure! Add, reorder, and visually style sections with custom Gutenberg block attachments.',
+      description: '⚠️ Legacy field — use the new visual "Article Body" editor above instead. This field is preserved for older articles.',
     }),
   ],
   preview: {
