@@ -241,6 +241,44 @@ function parseFrontmatter(raw: string): { frontmatter: Record<string, unknown>; 
   return { frontmatter, body };
 }
 
+function getIndent(line: string): number {
+  const match = line.match(/^(\s*)/);
+  return match ? match[1].length : 0;
+}
+
+function parseBlock(lines: string[], startIndex: number, baseIndent: number): { value: any; nextIndex: number } {
+  const values: string[] = [];
+  let i = startIndex;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    const indent = getIndent(line);
+    
+    if (line.trim() === '') {
+      i++;
+      continue;
+    }
+    
+    if (indent < baseIndent) {
+      break;
+    }
+
+    const trimmed = line.trim();
+    if (trimmed.startsWith('- ')) {
+      let val = trimmed.slice(2).trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      values.push(val);
+    } else {
+      values.push(trimmed);
+    }
+    i++;
+  }
+
+  return { value: values, nextIndex: i };
+}
+
 function parseSimpleYAML(yaml: string): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   const lines = yaml.split('\n');
@@ -306,7 +344,7 @@ function loadLocalCMSPosts(): BlogPostType[] {
 
 // ── Sanity CDN Fetch Layer ───────────────────────────────────────────────────
 async function fetchSanityPosts(): Promise<BlogPostType[]> {
-  const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || '96ilx2qv';
+  const projectId = '96ilx2qv'; // Hardcoded current active Sanity project ID, bypasses Cloudflare dashboard env mismatch
   const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
 
   if (!projectId) {
