@@ -131,6 +131,15 @@ export default defineType({
       of: [{ type: 'string' }],
       description: 'A list of 3-4 bulleted highlights displayed in the prominent "Key Insights" banner at the end.',
     }),
+    defineField({
+      name: 'metaDescription',
+      title: 'SEO Meta Description',
+      type: 'text',
+      group: 'meta',
+      rows: 2,
+      description: 'Optional. A search-optimized description for Google & search engine results (Recommended: 120-160 characters). If left blank, listing excerpt will be used.',
+      validation: Rule => Rule.max(160),
+    }),
 
     // ── NEW: WordPress-style Visual Rich Text Editor ─────────────────────────
     defineField({

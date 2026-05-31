@@ -33,6 +33,7 @@ export interface BlogPostType {
   hook: string;
   sections: BlogSection[];
   takeaways: string[];
+  metaDescription?: string;
 }
 
 export const blogPosts: BlogPostType[] = [

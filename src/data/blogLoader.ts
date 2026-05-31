@@ -140,6 +140,7 @@ interface CMSFrontmatter {
   hook: string;
   takeaways: string[];
   sections: CMSSection[];
+  metaDescription?: string;
 }
 
 // ── Parse a CMS section into the existing BlogSection interface ────────────────
@@ -371,6 +372,7 @@ function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): 
     hook: frontmatter.hook,
     sections: parsedSections,
     takeaways: frontmatter.takeaways || [],
+    metaDescription: frontmatter.metaDescription,
   };
 }
 
@@ -512,6 +514,7 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
       hook,
       takeaways,
       date,
+      metaDescription,
       // New Portable Text content (WYSIWYG editor)
       content[] {
         ...,
@@ -546,8 +549,9 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
       }
     }`;
 
-    const url = `https://${projectId}.apicdn.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
-    const response = await fetch(url);
+    // Use a timestamp to prevent the browser and CDN from caching the JSON query response, ensuring immediate updates on publish
+    const url = `https://${projectId}.apicdn.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}&_t=${Date.now()}`;
+    const response = await fetch(url, { cache: 'no-store' });
     const result = await response.json();
 
     if (result.result && Array.isArray(result.result)) {
@@ -578,6 +582,7 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
           hook: post.hook || '',
           takeaways: post.takeaways || [],
           sections,
+          metaDescription: post.metaDescription,
           // Attach the raw Portable Text blocks for the new renderer
           portableContent: hasPortableContent ? post.content : undefined,
         } as ExtendedBlogPostType;

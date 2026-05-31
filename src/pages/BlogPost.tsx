@@ -708,7 +708,7 @@ export default function BlogPost() {
     <div className="min-h-screen bg-[#0a0f1e] text-[#f8fafc] overflow-hidden">
       <SEO 
         title={`${post.title} | Emmanuel Odebiyi`}
-        description={post.excerpt}
+        description={post.metaDescription || post.excerpt}
         keywords={post.tags.join(", ")}
       />
 
