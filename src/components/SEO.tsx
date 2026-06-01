@@ -12,8 +12,8 @@ interface SEOProps {
   withPersonSchema?: boolean;
 }
 
-const BASE_URL = 'https://emmanuelodebiyi.com';
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const BASE_URL = 'https://emmanuelodebiyi.name.ng';
+const DEFAULT_IMAGE = `${BASE_URL}/og-social.png`;
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let meta = document.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
