@@ -51,7 +51,7 @@ const PERSON_SCHEMA = {
   '@type': 'Person',
   name: 'Emmanuel Odebiyi',
   url: BASE_URL,
-  jobTitle: 'Content Marketing Strategist',
+  jobTitle: 'Content Marketing Automation Specialist',
   description:
     'I build automated content marketing systems for growing businesses — so you can publish consistently, rank higher, and generate revenue without burning out.',
   sameAs: [

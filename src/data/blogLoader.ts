@@ -489,6 +489,33 @@ function loadLocalCMSPosts(): ExtendedBlogPostType[] {
   return posts;
 }
 
+// ── Slug & Title Sanitizers ─────────────────────────────────────────────────
+/**
+ * Converts any string into a valid URL slug.
+ * Handles broken Sanity slugs that contain spaces, capital letters, or
+ * trailing punctuation artefacts (e.g. "Week With Content Automation").
+ */
+function slugify(raw: string): string {
+  return raw
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')   // strip non-word chars except spaces & hyphens
+    .replace(/[\s_]+/g, '-')    // spaces / underscores → hyphens
+    .replace(/-{2,}/g, '-')     // collapse multiple hyphens
+    .replace(/^-+|-+$/g, '');   // trim leading/trailing hyphens
+}
+
+/**
+ * Strips common Sanity placeholder artefacts from titles.
+ * e.g. 'How I Save 15 Hours Every Week With Content Automation").'
+ *   → 'How I Save 15 Hours Every Week With Content Automation'
+ */
+function sanitizeTitle(raw: string): string {
+  return raw
+    .replace(/["')\].]+$/, '')  // strip trailing quote / bracket / dot chars
+    .trim();
+}
+
 // ── Sanity CDN Fetch Layer ───────────────────────────────────────────────────
 async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
   const projectId = '96ilx2qv'; // Hardcoded current active Sanity project ID, bypasses Cloudflare dashboard env mismatch
@@ -567,9 +594,17 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
           sections = portableTextToSections(post.content);
         }
 
+        // ── Sanitize slug: use the CMS slug if it's already a valid kebab-case
+        // slug, otherwise derive one from the title so the article always has a
+        // routable URL regardless of how the editor filled in the Slug field.
+        const rawSlug: string = post.id || '';
+        const cleanTitle = sanitizeTitle(post.title || 'Untitled Post');
+        const isValidSlug = /^[a-z0-9]+(-[a-z0-9]+)*$/.test(rawSlug);
+        const id = isValidSlug ? rawSlug : slugify(cleanTitle);
+
         return {
-          id: post.id,
-          title: post.title || 'Untitled Post',
+          id,
+          title: cleanTitle,
           author: post.author || 'Emmanuel Odebiyi',
           authorImage: post.authorImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel',
           authorBio: post.authorBio || '',
