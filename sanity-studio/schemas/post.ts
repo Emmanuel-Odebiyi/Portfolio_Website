@@ -15,7 +15,23 @@ export default defineType({
       title: 'Post Title',
       type: 'string',
       group: 'main',
-      validation: Rule => Rule.required(),
+      validation: Rule => Rule.required()
+        .min(10).error('Title must be at least 10 characters.')
+        .max(120).warning('Title is getting long — aim for under 120 characters.')
+        .custom((title: string | undefined) => {
+          if (!title) return true;
+          // Flag trailing punctuation artefacts: )  .  "  '  ]  ;
+          if (/[)"\]'.;]+$/.test(title.trim())) {
+            return '⚠️ Title ends with stray punctuation — remove trailing characters like ) " \' . ] before publishing.';
+          }
+          // Flag unbalanced parentheses/brackets
+          const open = (title.match(/\(/g) || []).length;
+          const close = (title.match(/\)/g) || []).length;
+          if (open !== close) {
+            return '⚠️ Title has unbalanced parentheses — check for stray ( or ) characters.';
+          }
+          return true;
+        }),
       description: 'The headline of your article (e.g. "How I Save 15 Hours Every Week With Content Automation").',
     }),
     defineField({
@@ -26,8 +42,34 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        slugify: (input: string) =>
+          input
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[\s_]+/g, '-')
+            .replace(/-{2,}/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .slice(0, 96),
       },
-      validation: Rule => Rule.required(),
+      validation: Rule => Rule.required()
+        .custom((slug: { current?: string } | undefined) => {
+          if (!slug?.current) return true;
+          const s = slug.current;
+          if (/[A-Z]/.test(s)) {
+            return '⚠️ Slug contains uppercase letters — click Generate to fix.';
+          }
+          if (/\s/.test(s)) {
+            return '⚠️ Slug contains spaces — click Generate to create a proper URL slug.';
+          }
+          if (/[^a-z0-9-]/.test(s)) {
+            return '⚠️ Slug contains special characters — only lowercase letters, numbers, and hyphens are allowed.';
+          }
+          if (s.length < 5) {
+            return '⚠️ Slug is too short — click Generate to rebuild from the title.';
+          }
+          return true;
+        }),
       description: 'The unique URL path name (e.g. "how-i-save-15-hours"). Click Generate to auto-build from title.',
     }),
     defineField({
@@ -82,7 +124,16 @@ export default defineType({
       type: 'text',
       group: 'main',
       rows: 2,
-      validation: Rule => Rule.required(),
+      validation: Rule => Rule.required()
+        .min(20).error('Excerpt must be at least 20 characters — write a compelling summary.')
+        .max(300).warning('Excerpt is getting long — keep it under 300 characters for card layouts.')
+        .custom((text: string | undefined) => {
+          if (!text) return true;
+          if (/[)"\]'.;]+$/.test(text.trim())) {
+            return '⚠️ Excerpt ends with stray punctuation — clean up trailing ) " \' . ] characters.';
+          }
+          return true;
+        }),
       description: 'A 1-2 sentence compelling summary displayed on your blog listing grid cards.',
     }),
     defineField({
@@ -147,7 +198,7 @@ export default defineType({
       title: '📝 Article Body (Visual Editor)',
       type: 'blockContent',
       group: 'main',
-      description: 'Write your full article here using the visual editor. Use Ctrl+B for bold, Ctrl+I for italic, Ctrl+K for links. Click the + button between paragraphs to insert code consoles, flowcharts, quotes, tables, and more.',
+      description: 'Write your full article here. Shortcuts: Ctrl+B bold · Ctrl+I italic · Ctrl+K link · Ctrl+\' code · Ctrl+Alt+2 H2 · Ctrl+Alt+3 H3 · Ctrl+Alt+0 normal. Markdown: ## H2 · ### H3 · `code` · > quote. Click + to insert embeds.',
     }),
 
     // ── LEGACY: Old segmented sections (hidden, kept for backward compat) ───

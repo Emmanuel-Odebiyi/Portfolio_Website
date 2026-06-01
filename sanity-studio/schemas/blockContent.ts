@@ -5,17 +5,29 @@ import { defineType, defineArrayMember } from 'sanity';
  * 
  * This schema defines a single, unified rich text canvas that replaces the old
  * segmented "sections" array. Authors write their entire article in one visual
- * stream with full WYSIWYG formatting:
+ * stream with full WYSIWYG formatting.
  * 
- *   • Ctrl+B  → Bold
- *   • Ctrl+I  → Italic
- *   • Ctrl+U  → Underline
- *   • Ctrl+K  → Insert Link
- *   • "/"     → Insert custom embed block (Terminal, Flowchart, Quote, etc.)
+ * ── Keyboard Shortcuts ──────────────────────────────────────────────────────
+ *   Ctrl+B        → Bold
+ *   Ctrl+I        → Italic
+ *   Ctrl+U        → Underline
+ *   Ctrl+K        → Insert Link
+ *   Ctrl+'        → Inline Code
+ *   Ctrl+Alt+2    → Heading 2     (Mac: ⌘+⌥+2)
+ *   Ctrl+Alt+3    → Heading 3     (Mac: ⌘+⌥+3)
+ *   Ctrl+Alt+4    → Heading 4     (Mac: ⌘+⌥+4)
+ *   Ctrl+Alt+0    → Normal Text   (Mac: ⌘+⌥+0)
  * 
- * Custom visual embeds (terminal consoles, flowcharts, callout cards, tables)
- * are inserted as block-level objects between paragraphs — only when needed,
- * not forced on every section.
+ * ── Markdown Triggers (type at line start) ──────────────────────────────────
+ *   ##  + space   → Heading 2
+ *   ### + space   → Heading 3
+ *   -   + space   → Bullet list
+ *   1.  + space   → Numbered list
+ *   >   + space   → Block quote
+ *   `text`        → Inline code
+ * 
+ * ── Custom Embeds ───────────────────────────────────────────────────────────
+ *   "/" or "+"     → Insert custom embed block (Terminal, Flowchart, Quote, etc.)
  */
 export default defineType({
   name: 'blockContent',

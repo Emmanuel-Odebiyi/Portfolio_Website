@@ -576,9 +576,14 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
       }
     }`;
 
-    // Use a timestamp to prevent the browser and CDN from caching the JSON query response, ensuring immediate updates on publish
-    const url = `https://${projectId}.apicdn.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}&_t=${Date.now()}`;
-    const response = await fetch(url, { cache: 'no-store' });
+    // Use the non-CDN API endpoint (api.sanity.io, not apicdn) for zero-cache
+    // reads — guarantees published articles reflect within seconds, not minutes.
+    // The browser-level cache: 'no-store' prevents any local HTTP caching too.
+    const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+    const response = await fetch(url, {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+    });
     const result = await response.json();
 
     if (result.result && Array.isArray(result.result)) {
