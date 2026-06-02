@@ -198,7 +198,7 @@ export default defineType({
       title: '📝 Article Body (Visual Editor)',
       type: 'blockContent',
       group: 'main',
-      description: 'Write your full article here. Shortcuts: Ctrl+B bold · Ctrl+I italic · Ctrl+K link · Ctrl+\' code · Ctrl+Alt+2 H2 · Ctrl+Alt+3 H3 · Ctrl+Alt+0 normal. Markdown: ## H2 · ### H3 · `code` · > quote. Click + to insert embeds.',
+      description: 'Write your full article here. Ctrl+B bold · Ctrl+I italic · Ctrl+K link · Ctrl+\' code. ⚠️ Windows: Ctrl+Alt shortcuts are blocked — use Markdown instead: ## + space = H2 · ### + space = H3 · > + space = Quote · - + space = Bullet. Or use the Style dropdown. Click + to insert embeds.',
     }),
 
     // ── LEGACY: Old segmented sections (hidden, kept for backward compat) ───

@@ -13,18 +13,21 @@ import { defineType, defineArrayMember } from 'sanity';
  *   Ctrl+U        → Underline
  *   Ctrl+K        → Insert Link
  *   Ctrl+'        → Inline Code
- *   Ctrl+Alt+2    → Heading 2     (Mac: ⌘+⌥+2)
- *   Ctrl+Alt+3    → Heading 3     (Mac: ⌘+⌥+3)
- *   Ctrl+Alt+4    → Heading 4     (Mac: ⌘+⌥+4)
- *   Ctrl+Alt+0    → Normal Text   (Mac: ⌘+⌥+0)
+ *
+ *   ⚠️  WINDOWS NOTE: Ctrl+Alt+2/3/4/0 for headings DO NOT work on Windows.
+ *   On Windows, Ctrl+Alt is treated as AltGr by the OS and is intercepted
+ *   before the browser sees it. Use Markdown triggers or the toolbar dropdown.
+ *
+ *   Mac only:  ⌘+⌥+2 → H2 | ⌘+⌥+3 → H3 | ⌘+⌥+4 → H4 | ⌘+⌥+0 → Normal
  * 
- * ── Markdown Triggers (type at line start) ──────────────────────────────────
- *   ##  + space   → Heading 2
- *   ### + space   → Heading 3
+ * ── Markdown Triggers — RECOMMENDED (type at line start, always works) ──────
+ *   ##  + space   → Heading 2     ✅ Use this on Windows instead of Ctrl+Alt+2
+ *   ### + space   → Heading 3     ✅ Use this on Windows instead of Ctrl+Alt+3
  *   -   + space   → Bullet list
  *   1.  + space   → Numbered list
  *   >   + space   → Block quote
  *   `text`        → Inline code
+ *   Or use the Style dropdown in the toolbar ("Normal" / "Heading 2" etc.)
  * 
  * ── Custom Embeds ───────────────────────────────────────────────────────────
  *   "/" or "+"     → Insert custom embed block (Terminal, Flowchart, Quote, etc.)
