@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Search, Zap, Cpu, Mail, BarChart3, LucideIcon } from 'lucide-react';
 
 // ─── Solution Data ────────────────────────────────────────────────────────────
@@ -73,38 +73,124 @@ const SOLUTIONS: Solution[] = [
   },
 ];
 
+// ─── Line-by-Line Reveal Text ─────────────────────────────────────────────────
+
+const LineReveal = ({
+  lines,
+  scrollYProgress,
+  startP,
+  endP,
+}: {
+  lines: string[];
+  scrollYProgress: any;
+  startP: number;
+  endP: number;
+}) => {
+  const step = (endP - startP) / Math.max(lines.length, 1);
+  return (
+    <>
+      {lines.map((line, i) => {
+        const ls = startP + i * step;
+        const le = Math.min(ls + step * 1.5, endP);
+        const opacity = useTransform(scrollYProgress, [ls, le], [0.15, 1]);
+        const y = useTransform(scrollYProgress, [ls, le], [20, 0]);
+        const filter = useTransform(scrollYProgress, [ls, le], ['blur(4px)', 'blur(0px)']);
+        return (
+          <motion.span
+            key={i}
+            className="block overflow-hidden"
+            style={{ opacity, y, filter }}
+          >
+            {line}
+          </motion.span>
+        );
+      })}
+    </>
+  );
+};
+
+// ─── Main Intersection Observer Hook ───────────────────────────────────────────
+
+const useElementVisibility = (ref: React.RefObject<HTMLElement | null>) => {
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref]);
+  return isVisible;
+};
+
 // ─── Main SolutionSection ─────────────────────────────────────────────────────
 
 export const SolutionSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const SCROLL_HEIGHT = `${SOLUTIONS.length * 180}vh`;
+
+  const { scrollYProgress: rawProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const scrollYProgress = useSpring(rawProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   const [activeIndex, setActiveIndex] = useState(0);
 
-  return (
-    <section className="relative py-24 bg-[var(--dark-mid)] overflow-hidden">
-      {/* Aurora glowing background blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="aurora-orb-1 absolute rounded-full" style={{ width: '60vw', height: '60vw', maxWidth: 700, maxHeight: 700, top: '-20%', left: '-10%', background: 'radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        <div className="aurora-orb-2 absolute rounded-full" style={{ width: '45vw', height: '45vw', maxWidth: 600, maxHeight: 600, bottom: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%)', filter: 'blur(90px)' }} />
-        <div className="aurora-orb-3 absolute rounded-full" style={{ width: '35vw', height: '35vw', maxWidth: 450, maxHeight: 450, top: '30%', right: '20%', background: 'radial-gradient(circle, rgba(5,150,105,0.12) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-      </div>
+  useEffect(() => {
+    return scrollYProgress.on('change', (p: number) => {
+      setActiveIndex(Math.min(Math.floor(p * SOLUTIONS.length), SOLUTIONS.length - 1));
+    });
+  }, [scrollYProgress]);
 
-      <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col h-auto min-h-[85vh] relative z-10">
-        
-        {/* Headline Block */}
-        <div className="shrink-0 text-center pb-12">
-          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-4" style={{ color: 'rgba(251,191,36,0.95)' }}>
-            The Solution
-          </p>
-          <h2 className="text-3xl md:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-4">
-            What If Your Marketing<br />Could Run Itself?
-          </h2>
-          <p className="text-sm md:text-xl max-w-2xl mx-auto leading-relaxed text-slate-300">
-            I build intelligent content marketing systems that produce consistent,
-            high-quality output — without you lifting a finger after setup.
-          </p>
+  return (
+    <div
+      ref={containerRef}
+      className="relative"
+      style={{ height: SCROLL_HEIGHT }}
+      aria-label="The Solution Section"
+    >
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col bg-[var(--dark-mid)]">
+
+        {/* Aurora blobs for the solution section */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="aurora-orb-1 absolute rounded-full" style={{ width: '60vw', height: '60vw', maxWidth: 700, maxHeight: 700, top: '-20%', left: '-10%', background: 'radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          <div className="aurora-orb-2 absolute rounded-full" style={{ width: '45vw', height: '45vw', maxWidth: 600, maxHeight: 600, bottom: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(245,158,11,0.20) 0%, transparent 70%)', filter: 'blur(90px)' }} />
+          <div className="aurora-orb-3 absolute rounded-full" style={{ width: '35vw', height: '35vw', maxWidth: 450, maxHeight: 450, top: '30%', right: '20%', background: 'radial-gradient(circle, rgba(5,150,105,0.15) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         </div>
 
-        {/* Accordion Panels — Stacks vertically on mobile/tablet, horizontal on desktop */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden pb-4 gap-4 lg:gap-3 min-h-[480px]">
+        {/* ── Headline Block ── */}
+        <div className="shrink-0 pt-24 md:pt-28 pb-4 md:pb-6 px-6 md:px-16 text-center z-10">
+          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-2 md:mb-4" style={{ color: 'rgba(251,191,36,0.95)' }}>
+            The Solution
+          </p>
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-2 md:mb-4">
+            <LineReveal
+              lines={['What If Your Marketing', 'Could Run Itself?']}
+              scrollYProgress={scrollYProgress}
+              startP={0}
+              endP={0.15}
+            />
+          </h2>
+          <motion.p 
+            style={{
+              opacity: useTransform(scrollYProgress, [0.05, 0.15], [0, 1]),
+              y: useTransform(scrollYProgress, [0.05, 0.15], [10, 0]),
+              color: 'rgba(226,232,240,0.9)',
+            }}
+            className="text-xs md:text-lg max-w-2xl mx-auto leading-relaxed"
+          >
+            I build intelligent content marketing systems that produce consistent,
+            high-quality output — without you lifting a finger after setup.
+          </motion.p>
+        </div>
+
+        {/* ── Accordion Panels — Stacks vertically on mobile/tablet, horizontal on desktop ── */}
+        <div className="flex-1 flex flex-col md:flex-row overflow-hidden px-4 pb-4 md:px-8 md:pb-8 gap-2 md:gap-0">
           {SOLUTIONS.map((solution, index) => {
             const isActive = index === activeIndex;
             const SolutionIcon = solution.Icon;
@@ -112,23 +198,20 @@ export const SolutionSection = () => {
             return (
               <motion.div
                 key={solution.id}
-                onMouseEnter={() => {
-                  if (window.innerWidth > 1024) setActiveIndex(index);
-                }}
-                onClick={() => setActiveIndex(index)}
-                className="relative overflow-hidden rounded-[1.5rem] lg:rounded-[2.5rem] border flex-1 cursor-pointer transition-all"
+                className="relative overflow-hidden rounded-[1.5rem] md:rounded-[3rem] mx-0 md:mx-2 first:ml-0 last:mr-0 border border-zinc-100 flex-1"
                 animate={{ 
-                  flex: isActive ? 6 : 1.2,
-                  filter: isActive ? 'brightness(110%) saturate(120%)' : 'brightness(65%) saturate(80%)',
-                  scale: isActive ? 1 : 0.98,
-                  boxShadow: isActive ? `0 0 60px ${solution.accentColor}25` : 'none'
+                    flex: isActive ? 8 : 1,
+                    // High-end glassmorphism effect
+                    filter: isActive ? 'brightness(110%) saturate(120%)' : 'brightness(70%) saturate(80%)',
+                    scale: isActive ? 1 : 0.98,
+                    boxShadow: isActive ? `0 0 80px ${solution.accentColor}20` : 'none'
                 }}
-                transition={{ type: 'spring', stiffness: 140, damping: 22 }}
+                transition={{ type: 'spring', stiffness: 150, damping: 25 }}
                 style={{ 
-                  backgroundColor: 'rgba(15, 23, 42, 0.45)', // Dark slate glass
+                  backgroundColor: 'rgba(15, 23, 42, 0.4)', // Dark slate glass
                   backdropFilter: 'blur(20px)',
-                  border: isActive ? `1.5px solid ${solution.accentColor}60` : '1px solid rgba(255,255,255,0.06)',
-                  minHeight: isActive ? '260px' : '64px',
+                  border: isActive ? `1.5px solid ${solution.accentColor}60` : '1px solid rgba(255,255,255,0.05)',
+                  minHeight: isActive ? '240px' : '48px', // Prevent collapsing into nothing on short phone screens
                 }}
               >
                 {/* Collapsed label (horizontal on mobile, vertical vertical text on desktop) */}
@@ -136,22 +219,19 @@ export const SolutionSection = () => {
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="absolute inset-0 flex flex-row lg:flex-col items-center justify-between lg:justify-center p-5 gap-3"
+                    className="absolute inset-0 flex flex-row md:flex-col items-center justify-center p-2 gap-3"
                   >
                     <SolutionIcon 
-                      size={20} 
+                      size={18} 
                       style={{ color: solution.accentColor }} 
                       className="drop-shadow-sm shrink-0" 
                     />
                     <span
-                      className="text-[10px] font-bold uppercase tracking-[0.25em] lg:tracking-[0.4em] lg:[writing-mode:vertical-lr] lg:rotate-180 whitespace-nowrap"
+                      className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.4em] md:[writing-mode:vertical-lr] md:rotate-180 whitespace-nowrap"
                       style={{ color: solution.accentColor }}
                     >
                       {solution.title}
                     </span>
-                    <div className="w-5 h-5 rounded-full border border-white/10 flex items-center justify-center lg:hidden">
-                      <span className="text-[10px] text-white/40">+</span>
-                    </div>
                   </motion.div>
                 )}
 
@@ -159,41 +239,41 @@ export const SolutionSection = () => {
                 {isActive && (
                   <motion.div
                     key={`content-${solution.id}`}
-                    className="absolute inset-0 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-8"
+                    className="absolute inset-0 flex flex-col justify-center px-6 md:px-16 py-4 md:py-0"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <div className="max-w-2xl relative z-10 text-left">
-                      {/* saturated icon wrapper */}
+                    <div className="max-w-3xl">
+                      {/* Highly popped, bouncy icon wrapper with full saturation */}
                       <motion.div
-                        className="w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-[1.25rem] flex items-center justify-center mb-4 md:mb-6"
+                        className="w-10 h-10 md:w-20 md:h-20 rounded-xl md:rounded-[1.5rem] flex items-center justify-center mb-3 md:mb-8"
                         style={{ 
                           backgroundColor: solution.accentColor, 
                           boxShadow: `0 8px 24px -6px ${solution.accentColor}` 
                         }}
-                        initial={{ scale: 0.7, opacity: 0, rotate: -10 }}
+                        initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
                         animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                        transition={{ type: 'spring', delay: 0.1, bounce: 0.4, duration: 0.5 }}
+                        transition={{ type: 'spring', delay: 0.15, bounce: 0.5, duration: 0.6 }}
                       >
-                        <SolutionIcon className="w-5 h-5 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
+                        <SolutionIcon className="w-5 h-5 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
                       </motion.div>
                       
                       <span
-                        className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] block mb-2 opacity-80"
+                        className="text-[9px] md:text-xs font-bold uppercase tracking-[0.3em] block mb-1 md:mb-3 opacity-60"
                         style={{ color: solution.accentColor }}
                       >
                         {solution.title}
                       </span>
                       
                       <h3
-                        className="text-xl md:text-4xl lg:text-5xl font-black mb-4 leading-[1.15] tracking-tight text-white font-sans"
+                        className="text-xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-8 leading-[1.1] tracking-tight text-white"
                       >
                         {solution.subtitle}
                       </h3>
                       
                       <p
-                        className="text-xs md:text-base lg:text-lg leading-relaxed max-w-xl font-light text-slate-200"
+                        className="text-xs md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light text-slate-200"
                       >
                         {solution.description}
                       </p>
@@ -201,20 +281,37 @@ export const SolutionSection = () => {
 
                     {/* Giant 3D Perspective Faint Decorative Icon */}
                     <motion.div
-                      className="hidden xl:block absolute -right-24 -bottom-24 pointer-events-none"
+                      className="hidden xl:block absolute -right-20 -bottom-24 pointer-events-none"
                       style={{ color: solution.accentColor }}
-                      initial={{ opacity: 0, scale: 0.6, rotateX: 30, rotateY: 15, rotateZ: -10, x: 80, y: 80 }}
-                      animate={{ opacity: 0.1, scale: 1, rotateX: 10, rotateY: -15, rotateZ: -5, x: 0, y: 0 }}
-                      transition={{ type: 'spring', damping: 20, stiffness: 80, delay: 0.15 }}
+                      initial={{ 
+                        opacity: 0, 
+                        scale: 0.6, 
+                        rotateX: 45, 
+                        rotateY: 25, 
+                        rotateZ: -10,
+                        x: 100,
+                        y: 100
+                      }}
+                      animate={{ 
+                        opacity: 0.15, 
+                        scale: 1, 
+                        rotateX: 10, 
+                        rotateY: -15, 
+                        rotateZ: -5,
+                        x: 0,
+                        y: 0 
+                      }}
+                      transition={{ type: 'spring', damping: 18, stiffness: 90, delay: 0.2 }}
                     >
                       <SolutionIcon 
-                        size={480} 
+                        size={600} 
                         strokeWidth={0.8} 
+                        // Simulate a 3D extrusion and deep glowing shadow
                         style={{ 
                           filter: `
-                            drop-shadow(-2px 4px 0px ${solution.accentColor}40)
-                            drop-shadow(-4px 8px 0px ${solution.accentColor}20)
-                            drop-shadow(-15px 25px 30px ${solution.accentColor}60)
+                            drop-shadow(-2px 4px 0px ${solution.accentColor}50)
+                            drop-shadow(-4px 8px 0px ${solution.accentColor}30)
+                            drop-shadow(-15px 25px 30px ${solution.accentColor}80)
                           `
                         }} 
                       />
@@ -226,6 +323,6 @@ export const SolutionSection = () => {
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
