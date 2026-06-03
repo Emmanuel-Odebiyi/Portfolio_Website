@@ -6,7 +6,7 @@ This roadmap defines the execution phases to clean up legacy Tina CMS dependenci
 
 ## Phases
 
-- [ ] **Phase 1: Dependency Cleanup** - Purge Tina CMS remnants and standardize local markdown post schemas.
+- [x] **Phase 1: Dependency Cleanup** - Purge Tina CMS remnants and standardize local markdown post schemas.
 - [ ] **Phase 2: Configuration Consolidation** - Centralize Sanity CMS client queries and Project ID definitions.
 - [ ] **Phase 3: Mobile Viewport Tuning** - Optimize WebGL Globe viewport boundaries and shader render loops on mobile.
 - [ ] **Phase 4: Test Infrastructure** - Setup Vitest runner configurations and write initial loaders test suites.
@@ -23,7 +23,7 @@ This roadmap defines the execution phases to clean up legacy Tina CMS dependenci
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: Remove unused Tina packages and align blog markdown keys
+- [x] 01-01: Remove unused Tina packages and align blog markdown keys
 
 ### Phase 2: Configuration Consolidation
 **Goal**: Unify API calls and edge caching configurations.
@@ -68,7 +68,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dependency Cleanup | 0/1 | Not started | - |
+| 1. Dependency Cleanup | 1/1 | Completed | 2026-06-03 |
 | 2. Configuration Consolidation | 0/1 | Not started | - |
 | 3. Mobile Viewport Tuning | 0/1 | Not started | - |
 | 4. Test Infrastructure | 0/1 | Not started | - |
