@@ -109,6 +109,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -117,11 +119,14 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 #root {
   position: relative;
   width: 100%;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -427,7 +432,7 @@ h4, h5, h6 {
 @media (min-width: 1024px) {
   .hero-layout-grid {
     display: grid !important;
-    grid-template-columns: 26% 48% 26% !important;
+    grid-template-columns: 26fr 48fr 26fr !important;
     align-items: center !important;
     gap: 2rem !important;
   }

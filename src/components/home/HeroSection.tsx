@@ -162,7 +162,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="mb-4 sm:mb-6 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass-card text-[10px] sm:text-xs font-mono tracking-[0.22em] uppercase text-white/90"
+              className="mb-3 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass-card text-xs sm:text-sm font-mono tracking-[0.22em] uppercase text-white/90"
             >
               <span
                 className="w-2 h-2 rounded-full animate-pulse"
@@ -170,14 +170,14 @@ export const HeroSection = () => {
               />
               Content Marketing Automation Specialist
             </motion.div>
-
+ 
             {/* Headline & Subtitle Container */}
-            <div className="mb-6 sm:mb-8 space-y-4 sm:space-y-5">
+            <div className="mb-5 space-y-3 sm:space-y-4">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 1, ease: 'easeOut' }}
-                className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.05] text-white"
+                className="font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight leading-[0.95] text-white"
               >
                 Your Competitors Are{' '}
                 <br />
@@ -193,7 +193,7 @@ export const HeroSection = () => {
                   Publishing 40+ Articles.
                 </span>
               </motion.h1>
-
+ 
               {/* Subheadline */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -205,21 +205,21 @@ export const HeroSection = () => {
                   <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.2)' }} />
                 </div>
                 <h2
-                  className="relative z-10 text-xl sm:text-3xl lg:text-3xl xl:text-4xl font-extrabold tracking-tight px-8 italic text-zinc-300"
+                  className="relative z-10 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight px-8 italic text-zinc-300 leading-snug"
                 >
                   While you're still writing one at 11 PM on a Sunday.
                 </h2>
               </motion.div>
             </div>
-
+ 
             {/* Body Copy */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.9 }}
-              className="mb-6 sm:mb-8 max-w-2xl mx-auto"
+              className="mb-5 max-w-3xl mx-auto"
             >
-              <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-zinc-400">
+              <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed text-zinc-400">
                 I build{' '}
                 <span
                   style={{
@@ -239,7 +239,7 @@ export const HeroSection = () => {
                 <strong className="font-bold text-white">generate revenue</strong> without hiring a team or burning out trying.
               </p>
             </motion.div>
-
+ 
             {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -259,7 +259,7 @@ export const HeroSection = () => {
                 See Real Client Results
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-
+ 
               {/* Secondary — glass ghost */}
               <Link
                 to="/contact"
@@ -268,16 +268,16 @@ export const HeroSection = () => {
                 Book a Free Strategy Call
               </Link>
             </motion.div>
-
-            {/* Scroll Indicator */}
+ 
+            {/* Scroll Indicator - positioned absolutely to save vertical flow space */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="mt-8 sm:mt-10 flex flex-col items-center gap-2"
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-20"
             >
               <motion.div
-                animate={{ y: [0, 6, 0] }}
+                animate={{ y: [0, 5, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 className="w-5 h-8 rounded-full flex justify-center p-1.5 border border-[var(--dark-border)]"
               >
@@ -287,7 +287,7 @@ export const HeroSection = () => {
                 scroll
               </span>
             </motion.div>
-
+ 
           </div>
 
           {/* ── Right Card: Autopilot Compounding ── */}
