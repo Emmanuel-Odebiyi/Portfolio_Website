@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls, Sphere, Stars, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -207,6 +207,15 @@ const GlobeScene: React.FC<GlobeSceneProps> = ({ theme }) => {
 
 export const Globe: React.FC = () => {
   const [theme, setTheme] = useState<'hologram' | 'political'>('political');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
 
   return (
     <div className="w-full h-[320px] sm:h-[500px] md:h-[700px] relative group/globe">
@@ -235,30 +244,46 @@ export const Globe: React.FC = () => {
         </button>
       </div>
 
-      <Canvas
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
-        camera={{ position: [0, 0, 6], fov: 45 }}
-      >
-        <React.Suspense
-          fallback={
-            <Sphere args={[RADIUS, 32, 32]}>
-              <meshBasicMaterial color="#0d1b3e" wireframe />
-            </Sphere>
-          }
+      {isMobile ? (
+        <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-[#0a0f1e]/40 rounded-[2.5rem] border border-white/5 p-6 sm:p-8">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.06),transparent_70%)] pointer-events-none" />
+          <img
+            src={theme === 'hologram' ? '/world-map.webp' : '/world-map-political.jpg'}
+            alt="World Map Grid"
+            className="w-full h-auto object-contain max-h-[260px] sm:max-h-[400px] opacity-35 filter drop-shadow-[0_0_15px_rgba(56,189,248,0.15)] rounded-2xl"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-x-6 bottom-6 flex flex-col items-start gap-1 select-none">
+            <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-blue-400/90 block">Nigeria HQ to Global SaaS</span>
+            <p className="text-[11px] sm:text-xs font-mono text-zinc-500 tracking-wider">Timezone coordinates mapped successfully</p>
+          </div>
+        </div>
+      ) : (
+        <Canvas
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true }}
+          camera={{ position: [0, 0, 6], fov: 45 }}
         >
-          <ambientLight intensity={theme === 'hologram' ? 0.6 : 0.85} />
-          <pointLight position={[8, 8, 8]} intensity={theme === 'hologram' ? 1.8 : 2.2} />
-          <pointLight position={[-8, -8, -6]} intensity={0.4} color={theme === 'hologram' ? '#38bdf8' : '#fbbf24'} />
+          <React.Suspense
+            fallback={
+              <Sphere args={[RADIUS, 32, 32]}>
+                <meshBasicMaterial color="#0d1b3e" wireframe />
+              </Sphere>
+            }
+          >
+            <ambientLight intensity={theme === 'hologram' ? 0.6 : 0.85} />
+            <pointLight position={[8, 8, 8]} intensity={theme === 'hologram' ? 1.8 : 2.2} />
+            <pointLight position={[-8, -8, -6]} intensity={0.4} color={theme === 'hologram' ? '#38bdf8' : '#fbbf24'} />
 
-          <GlobeScene theme={theme} />
+            <GlobeScene theme={theme} />
 
-          {/* User can drag to spin */}
-          <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
+            {/* User can drag to spin */}
+            <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
 
-          <Stars radius={100} depth={50} count={1800} factor={4} saturation={0} fade speed={1} />
-        </React.Suspense>
-      </Canvas>
+            <Stars radius={100} depth={50} count={1800} factor={4} saturation={0} fade speed={1} />
+          </React.Suspense>
+        </Canvas>
+      )}
 
       {/* Top/bottom fade into page background */}
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]" />

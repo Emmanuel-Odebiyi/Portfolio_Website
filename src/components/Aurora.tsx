@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -66,6 +66,27 @@ const InfiniteGrid = () => {
 };
 
 export const Aurora: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div 
+        className="fixed inset-0 z-[-1] pointer-events-none bg-[#0a0f1e] aurora-canvas-container"
+        style={{
+          backgroundImage: 'radial-gradient(circle at 50% -20%, rgba(217, 119, 6, 0.05), transparent 70%), radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.04), transparent 50%)'
+        }}
+      />
+    );
+  }
+
   return (
     /* Dynamic base color using var(--dark-base) and custom selector hook */
     <div className="fixed inset-0 z-[-1] pointer-events-none bg-[var(--dark-base)] aurora-canvas-container">
