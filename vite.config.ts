@@ -13,7 +13,7 @@ export default defineConfig(({mode}) => {
       VitePWA({
         registerType: 'autoUpdate',
         workbox: {
-          maximumFileSizeToCacheInBytes: 15000000 // Allow up to 15MB for large TinaCMS assets
+          maximumFileSizeToCacheInBytes: 15000000 // Allow up to 15MB for large assets
         },
         manifest: {
           name: 'Emmanuel Odebiyi Portfolio',
