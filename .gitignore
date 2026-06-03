@@ -23,3 +23,7 @@ everything-claude-code/
 .idea/
 *.swp
 *.swo
+
+# Submodules and temporary scratch directories
+scratch/get-shit-done/
+
