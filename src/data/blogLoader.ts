@@ -467,7 +467,7 @@ function parseSimpleYAML(yaml: string): Record<string, unknown> {
 }
 
 // Eager glob import of local markdown content as the baseline fallback
-const markdownModules = import.meta.glob('/content/blog/*.{md,mdx}', {
+const markdownModules = import.meta.glob('../../content/blog/*.{md,mdx}', {
   eager: true,
   query: '?raw',
   import: 'default',
