@@ -3,6 +3,27 @@ import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'fra
 import { Users, Building2, Bot, PenTool } from 'lucide-react';
 import Lottie from 'lottie-react';
 
+const LottieLoader = ({ path, style }: { path: string; style?: React.CSSProperties }) => {
+  const [animationData, setAnimationData] = useState<any>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetch(path)
+      .then((res) => res.json())
+      .then((data) => {
+        if (active) setAnimationData(data);
+      })
+      .catch((err) => console.error("Error loading Lottie animation:", err));
+    return () => {
+      active = false;
+    };
+  }, [path]);
+
+  if (!animationData) return null;
+
+  return <Lottie animationData={animationData} loop={true} autoplay={true} style={style} />;
+};
+
 // ─── Problem Data ─────────────────────────────────────────────────────────────
 
 interface Problem {
@@ -353,10 +374,8 @@ const ProblemCard: React.FC<{
               style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}
             >
               {problem.animationPath ? (
-                <Lottie 
+                <LottieLoader 
                   path={problem.animationPath} 
-                  loop={true} 
-                  autoplay={true} 
                   style={{ width: '100%', height: '100%', background: 'transparent' }}
                 />
               ) : (

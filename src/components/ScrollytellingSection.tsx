@@ -150,6 +150,7 @@ const AnimatedMilestone = ({
   index: number;
   total: number;
   scrollYProgress: MotionValue<number>;
+  key?: React.Key;
 }) => {
   const block = 1 / total;
   const start = index * block;

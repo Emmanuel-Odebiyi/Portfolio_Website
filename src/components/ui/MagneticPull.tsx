@@ -7,6 +7,7 @@ interface MagneticPullProps extends React.HTMLAttributes<HTMLDivElement> {
   strength?: number;
   radius?: number;
   className?: string;
+  key?: React.Key;
 }
 
 export const MagneticPull = ({ 

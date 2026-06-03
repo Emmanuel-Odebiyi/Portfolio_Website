@@ -124,6 +124,7 @@ const DimensionSlider = ({
   dimKey, value, onChange
 }: {
   dimKey: keyof DimensionScores; value: number; onChange: (v: number) => void;
+  key?: React.Key;
 }) => {
   const info = DIMENSION_LABELS[dimKey];
   const colors = ['bg-emerald-500', 'bg-lime-500', 'bg-amber-500', 'bg-orange-500', 'bg-rose-500'];

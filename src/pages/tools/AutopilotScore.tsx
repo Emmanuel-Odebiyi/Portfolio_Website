@@ -754,7 +754,7 @@ export default function AutopilotScore() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {Object.values(results.pillarScores).map((pillar) => (
+                    {(Object.values(results.pillarScores) as PillarScore[]).map((pillar) => (
                       <div key={pillar.label} className="p-10 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-md space-y-8">
                         <div className="flex items-center justify-between">
                           <h4 className="text-xl font-bold text-white font-display">{pillar.label}</h4>
