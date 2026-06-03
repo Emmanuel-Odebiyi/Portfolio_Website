@@ -478,7 +478,7 @@ h4, h5, h6 {
   .hero-layout-grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 2.5rem !important;
+    gap: 2rem !important;
     align-items: center !important;
   }
   .hero-grid-text {
@@ -489,13 +489,13 @@ h4, h5, h6 {
     order: 2 !important;
     display: flex !important;
     width: 100% !important;
-    max-width: 450px !important;
+    max-width: 420px !important;
   }
   .hero-grid-compound {
     order: 3 !important;
     display: flex !important;
     width: 100% !important;
-    max-width: 450px !important;
+    max-width: 420px !important;
   }
 }
 

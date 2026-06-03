@@ -5,7 +5,7 @@ import { ArrowRight, AlertCircle, TrendingDown, TrendingUp, Search, FileText, Do
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen lg:h-screen lg:max-h-screen flex items-center overflow-hidden grain-overlay bg-transparent pt-24 lg:pt-32 pb-8 lg:pb-6">
+    <section className="relative min-h-screen lg:h-screen lg:max-h-screen flex items-center overflow-hidden grain-overlay bg-transparent pt-20 lg:pt-32 pb-8 lg:pb-6">
 
       {/* ── Subtle Ambient Glow Aurora Orbs (Option B - Adjusted Opacity) ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.25]">
@@ -107,7 +107,7 @@ export const HeroSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 1, ease: 'easeOut' }}
-                className="font-display text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.02] text-white"
+                className="font-display text-3xl sm:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.02] text-white"
               >
                 Your Competitors Are{' '}
                 <br />
@@ -135,7 +135,7 @@ export const HeroSection = () => {
                   <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.2)' }} />
                 </div>
                 <h2
-                  className="relative z-10 text-lg sm:text-xl lg:text-3xl xl:text-4xl font-extrabold tracking-tight px-6 italic text-zinc-300 leading-snug"
+                  className="relative z-10 text-base sm:text-xl lg:text-3xl xl:text-4xl font-extrabold tracking-tight px-4 sm:px-6 italic text-zinc-300 leading-snug"
                 >
                   While you're still writing one at 11 PM on a Sunday.
                 </h2>
@@ -147,9 +147,9 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.9 }}
-              className="mb-6 lg:mb-10 max-w-3xl mx-auto"
+              className="mb-4 lg:mb-10 max-w-3xl mx-auto"
             >
-              <p className="text-base sm:text-lg lg:text-xl xl:text-2xl leading-relaxed text-zinc-400">
+              <p className="text-sm sm:text-lg lg:text-xl xl:text-2xl leading-relaxed text-zinc-400">
                 I build{' '}
                 <span
                   style={{
