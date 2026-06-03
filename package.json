@@ -14,6 +14,7 @@
   "dependencies": {
     "@google/genai": "^1.29.0",
     "@heroicons/react": "^2.2.0",
+    "@lottiefiles/dotlottie-react": "^0.19.4",
     "@lottiefiles/lottie-interactivity": "^1.6.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
@@ -40,6 +41,7 @@
     "slate-react": "^0.114.2",
     "tailwind-merge": "^3.5.0",
     "three": "^0.183.2",
+    "undraw-react": "^0.0.4",
     "vite": "^6.2.0",
     "vite-plugin-pwa": "^1.2.0"
   },
