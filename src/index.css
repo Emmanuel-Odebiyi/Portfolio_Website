@@ -109,7 +109,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -119,14 +119,13 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
 #root {
   position: relative;
   width: 100%;
-  overflow-x: hidden;
 }
 
 ::selection {
@@ -432,9 +431,9 @@ h4, h5, h6 {
 @media (min-width: 1024px) {
   .hero-layout-grid {
     display: grid !important;
-    grid-template-columns: 26fr 48fr 26fr !important;
+    grid-template-columns: 20fr 60fr 20fr !important;
     align-items: center !important;
-    gap: 2rem !important;
+    gap: 4.5rem !important;
   }
   .hero-grid-text {
     grid-column: 2 !important;
@@ -443,10 +442,60 @@ h4, h5, h6 {
   .hero-grid-chaos {
     grid-column: 1 !important;
     grid-row: 1 !important;
+    display: flex !important;
   }
   .hero-grid-compound {
     grid-column: 3 !important;
     grid-row: 1 !important;
+    display: flex !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-layout-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+    align-items: start !important;
+  }
+  .hero-grid-text {
+    grid-column: 1 / span 2 !important;
+    grid-row: 1 !important;
+  }
+  .hero-grid-chaos {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+  }
+  .hero-grid-compound {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-layout-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+    align-items: center !important;
+  }
+  .hero-grid-text {
+    order: 1 !important;
+    width: 100% !important;
+  }
+  .hero-grid-chaos {
+    order: 2 !important;
+    display: flex !important;
+    width: 100% !important;
+    max-width: 450px !important;
+  }
+  .hero-grid-compound {
+    order: 3 !important;
+    display: flex !important;
+    width: 100% !important;
+    max-width: 450px !important;
   }
 }
 
@@ -542,4 +591,18 @@ h4, h5, h6 {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Hide scroll indicator on screens with shorter heights to prevent collision with CTA */
+@media (max-height: 800px) {
+  .scroll-indicator {
+    display: none !important;
+  }
+}
+
+/* Hide scroll indicator on mobile/tablets where width is under 1024px */
+@media (max-width: 1023px) {
+  .scroll-indicator {
+    display: none !important;
+  }
 }
