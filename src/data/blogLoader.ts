@@ -259,7 +259,7 @@ function parseAttributes(attrStr: string): Record<string, any> {
   return attrs;
 }
 
-function parseMarkdownBodyToSections(body: string): BlogSection[] {
+export function parseMarkdownBodyToSections(body: string): BlogSection[] {
   const sections: BlogSection[] = [];
   const lines = body.split('\n').map(line => line.replace(/\r$/, ''));
   let currentSection: BlogSection | null = null;
@@ -378,7 +378,7 @@ function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): 
 }
 
 // ── Frontmatter Parser for Local Markdown Files ───────────────────────────────
-function parseFrontmatter(raw: string): { frontmatter: Record<string, unknown>; body: string } {
+export function parseFrontmatter(raw: string): { frontmatter: Record<string, unknown>; body: string } {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return { frontmatter: {}, body: raw };
 
@@ -496,7 +496,7 @@ function loadLocalCMSPosts(): ExtendedBlogPostType[] {
  * Handles broken Sanity slugs that contain spaces, capital letters, or
  * trailing punctuation artefacts (e.g. "Week With Content Automation").
  */
-function slugify(raw: string): string {
+export function slugify(raw: string): string {
   return raw
     .toLowerCase()
     .trim()
@@ -511,7 +511,7 @@ function slugify(raw: string): string {
  * e.g. 'How I Save 15 Hours Every Week With Content Automation").'
  *   → 'How I Save 15 Hours Every Week With Content Automation'
  */
-function sanitizeTitle(raw: string): string {
+export function sanitizeTitle(raw: string): string {
   return raw
     .replace(/["')\].]+$/, '')  // strip trailing quote / bracket / dot chars
     .trim();
