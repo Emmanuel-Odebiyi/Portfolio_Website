@@ -238,7 +238,7 @@ export default function Contact() {
   return (
     <div className="pt-32 pb-24 bg-[#0a0f1e] text-[#f8fafc] min-h-screen relative overflow-hidden flex flex-col justify-center">
       <SEO 
-        title="Collaborate with Emmanuel Odebiyi | Design Your Custom Growth Blueprint"
+        title="Collaborate with Emmanuel Odebiyi | Contact"
         description="Initiate your organic scaling discussion. Analyze bottlenecks, outline target vision milestones, define budgets, and construct a bespoke technical pipeline."
         keywords="growth marketing automation, B2B organic lead strategies, n8n workflow consultant, Emmanuel Odebiyi"
       />

@@ -284,7 +284,7 @@ export default function ROITimeMachine() {
   return (
     <div className="pt-32 pb-20 bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden print-area">
       <SEO 
-        title="Time & Dollar Savings Predictor — Quantify Automation ROI | Emmanuel Odebiyi"
+        title="Time & Dollar Savings Predictor | Emmanuel Odebiyi"
         description="Quantify exact hours and dollars you will reclaim by automating repetitive tasks. 12-month projections with breakeven analysis and industry benchmarks."
         keywords="ROI calculator, automation savings predictor, time savings estimator, operations cost reduction"
       />

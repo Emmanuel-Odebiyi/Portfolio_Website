@@ -137,7 +137,7 @@ export default function Resume() {
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white pt-32 pb-20 font-sans">
       <SEO 
-        title="Resume — Emmanuel Odebiyi | AI Automation Specialist & SEO Strategist"
+        title="Resume | Emmanuel Odebiyi"
         description="Download Emmanuel Odebiyi's resume. AI Automation Specialist & SEO Strategist building autonomous growth engines for B2B SaaS companies."
         keywords="emmanuel odebiyi resume, AI automation specialist, SEO strategist, content marketing resume"
       />

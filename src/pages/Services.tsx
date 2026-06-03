@@ -67,8 +67,8 @@ export default function Services() {
   return (
     <div className="bg-[#0a0f1e] text-white selection:bg-indigo-500 selection:text-white min-h-screen relative overflow-hidden">
       <SEO 
-        title="DFY Marketing Systems | Content Marketing Automation, SEO & Workflow Systems"
-        description="Done-for-you content marketing automation, technical SEO strategy, and workflow process automations. Month-to-month contracts. High ROI systems for growing businesses."
+        title="Done-For-You Marketing Systems | Emmanuel Odebiyi"
+        description="Done-for-you content marketing automation, technical SEO, and process workflows. Month-to-month contracts. High ROI systems for growing businesses."
         keywords="marketing automation Nigeria, B2B content automation, technical SEO architecture, n8n workflows"
       />
 

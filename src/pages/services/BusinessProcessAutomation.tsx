@@ -66,7 +66,7 @@ export default function BusinessProcessAutomation() {
     <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
       <SEO
         title="Business Process Automation | Emmanuel Odebiyi"
-        description="The hours you're losing to repetitive tasks are hours you're not growing. I map your inefficient workflows and build the automation systems that eliminate them — reclaiming 10–20 hours per week."
+        description="Eliminate repetitive tasks and reclaim 10–20 hours per week. I map your inefficient workflows and build stable custom automation systems."
         keywords="business process automation, n8n automation Nigeria, workflow automation, Zapier Make HubSpot integration"
       />
 

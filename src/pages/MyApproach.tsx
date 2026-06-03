@@ -138,7 +138,7 @@ export default function MyApproach() {
   return (
     <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
       <SEO 
-        title="My Approach — Data-Driven Systems Architecture | Emmanuel Odebiyi"
+        title="My Approach | Emmanuel Odebiyi"
         description="Every recommendation backed by data, every result measured precisely. Explore Emmanuel Odebiyi's 5-phase methodology for building autonomous growth engines."
         keywords="marketing methodology, data-driven approach, automation architecture, SEO strategy framework"
       />

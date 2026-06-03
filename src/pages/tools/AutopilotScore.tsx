@@ -333,7 +333,7 @@ export default function AutopilotScore() {
   return (
     <div className="pt-32 pb-20 bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden print-area">
       <SEO 
-        title="Business Freedom Calculator — Score Your Readiness | Emmanuel Odebiyi"
+        title="Business Freedom Calculator | Emmanuel Odebiyi"
         description="Find out exactly how close your business is to running smoothly without you. Score across 5 pillars: process, integration, autonomy, data, and customer journey."
         keywords="business freedom calculator, autopilot score, automation maturity assessment, operations readiness"
       />

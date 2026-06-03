@@ -85,7 +85,7 @@ export default function About() {
   return (
     <div className="pt-0 pb-20 bg-[#0B0F19] text-white min-h-screen">
       <SEO 
-        title="About Emmanuel Odebiyi | From Burnout Writer to Marketing Automation Specialist"
+        title="About Emmanuel Odebiyi | Automation Specialist"
         description="How I went from drowning in content deadlines to building AI-powered marketing systems that deliver 520% ROI. My story, methodology, and why it works."
         keywords="marketing automation expert, content automation specialist, AI content systems, SEO and content strategist Nigeria"
       />

@@ -310,7 +310,7 @@ export default function GrowthSimulator() {
   return (
     <div className="pt-32 pb-20 bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden print-area">
       <SEO 
-        title="Revenue Scaling Planner — 12-Month Growth Projections | Emmanuel Odebiyi"
+        title="Revenue Scaling Planner | Emmanuel Odebiyi"
         description="Model different growth scenarios to map the easiest path to scaling your revenue. Compare manual vs automated growth trajectories across 12 months."
         keywords="revenue scaling planner, growth simulator, T2D3 growth model, automation ROI projections"
       />

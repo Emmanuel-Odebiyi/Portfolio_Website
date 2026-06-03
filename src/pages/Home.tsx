@@ -39,8 +39,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Emmanuel Odebiyi | Content Marketing Automation — 520% ROI, 65% Traffic Growth"
-        description="I build automated content marketing systems for growing businesses. Real results: 520% ROI in 90 days, 65% traffic growth in 3 months, 15+ hours saved weekly. See the proof."
+        title="Emmanuel Odebiyi | Content Marketing Automation"
+        description="I build automated content marketing systems. Real results: 520% ROI in 90 days, 65% traffic growth in 3 months, and 15+ hours saved weekly."
         keywords="content marketing strategist, content automation, SEO systems, B2B content marketing, marketing automation"
         withPersonSchema
       />

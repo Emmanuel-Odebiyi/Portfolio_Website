@@ -131,7 +131,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white">
       <SEO 
-        title="Proven Results | 520% ROI, 65% Traffic Growth, 70% Time Savings"
+        title="Proven Results & Case Studies | Emmanuel Odebiyi"
         description="Real case studies from real clients. TechFlow Solutions: 520% ROI in 90 days. The Scoove Africa: 65% traffic growth in 3 months. See exactly how it was done."
         keywords="marketing automation case studies, content automation results, SEO case studies, automation ROI"
       />

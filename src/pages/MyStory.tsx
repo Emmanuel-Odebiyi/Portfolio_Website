@@ -139,7 +139,7 @@ export default function MyStory() {
   return (
     <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
       <SEO 
-        title="My Story — From Burnout Writer to Systems Architect | Emmanuel Odebiyi"
+        title="My Story | Emmanuel Odebiyi"
         description="Discover how Emmanuel Odebiyi went from drowning in deadlines to building automated marketing engines that deliver 520% ROI on autopilot."
         keywords="emmanuel odebiyi story, content marketing transformation, AI automation journey, burnout to systems architect"
       />

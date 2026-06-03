@@ -132,7 +132,7 @@ export default function SEOStrategyOptimization() {
     <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
       <SEO
         title="SEO Strategy & Optimization | Emmanuel Odebiyi"
-        description="Ranking higher isn't luck — it's architecture. I build SEO foundations from keyword research to technical health to content strategy that earns you the right traffic."
+        description="Ranking higher is architecture. I build SEO foundations from keyword research and technical health to content strategy that earns the right traffic."
         keywords="SEO strategy Nigeria, technical SEO audit, keyword architecture, topical authority, SERP ranking strategy"
       />
 

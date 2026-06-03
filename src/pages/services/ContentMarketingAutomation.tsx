@@ -100,7 +100,7 @@ export default function ContentMarketingAutomation() {
     <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
       <SEO
         title="Content Marketing Automation | Emmanuel Odebiyi"
-        description="Stop publishing when you have time. Start publishing on a system. I build fully automated content marketing engines — 8 to 40+ articles monthly, distributed across all channels, on autopilot."
+        description="I build fully automated content marketing engines publishing 8 to 40+ articles monthly, distributed across your channels on autopilot."
         keywords="content marketing automation, AI content system, automated publishing, brand voice AI, content engine"
       />
 

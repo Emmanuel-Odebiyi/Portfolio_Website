@@ -51,12 +51,21 @@ const PERSON_SCHEMA = {
   '@type': 'Person',
   name: 'Emmanuel Odebiyi',
   url: BASE_URL,
-  jobTitle: 'Content Marketing Automation Specialist',
+  jobTitle: 'Content Marketing Automation Specialist & SEO Strategist',
   description:
-    'I build automated content marketing systems for growing businesses — so you can publish consistently, rank higher, and generate revenue without burning out.',
+    'I build automated content marketing systems and technical SEO strategies for high-growth B2B SaaS and agency brands to scale organic traffic and reclaim hours.',
   sameAs: [
-    'https://twitter.com/emmanuelodebiyi',
-    'https://linkedin.com/in/emmanuel-odebiyi',
+    'https://x.com/Bobowrites_',
+    'https://www.linkedin.com/in/emmanuel-odebiyi',
+    'https://www.instagram.com/emmanuelodebiyi_/',
+  ],
+  knowsAbout: [
+    'Content Marketing Automation',
+    'Search Engine Optimization (SEO)',
+    'Workflow Automation',
+    'B2B SaaS Growth',
+    'Generative Engine Optimization (GEO)',
+    'API Integration',
   ],
   image: DEFAULT_IMAGE,
 };

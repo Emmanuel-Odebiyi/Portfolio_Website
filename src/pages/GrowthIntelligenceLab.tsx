@@ -247,7 +247,7 @@ export default function GrowthIntelligenceLab() {
   return (
     <div className="pt-36 pb-24 bg-[#030712] text-white min-h-screen relative overflow-hidden">
       <SEO 
-        title="Growth Intelligence Lab — Interactive Business Diagnostics | Emmanuel Odebiyi"
+        title="Growth Intelligence Lab | Emmanuel Odebiyi"
         description="Interactive simulators to calculate bottlenecks, forecast scaling potential, and evaluate process maturity for your business operations."
         keywords="growth intelligence lab, automation diagnostics, business scaling simulator, operations audit tool"
       />

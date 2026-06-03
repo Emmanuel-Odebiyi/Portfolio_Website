@@ -365,7 +365,7 @@ export default function AutomationRadar() {
   return (
     <div className="min-h-screen bg-[#0a0f1e] text-white pt-32 pb-20 relative overflow-hidden print-area">
       <SEO 
-        title="Automation Radar — Find Hidden Bottlenecks | Emmanuel Odebiyi"
+        title="Automation Radar | Emmanuel Odebiyi"
         description="Map your current marketing stack, uncover hidden bottlenecks, and get a prioritized automation roadmap with ROI estimates for each opportunity."
         keywords="automation radar, marketing bottleneck finder, operations audit tool, automation ROI estimator"
       />
