@@ -13,6 +13,7 @@
  */
 
 import { BlogPostType, BlogSection, blogPosts as legacyPosts } from './blogData';
+import { fetchSanityQuery } from './sanityClient';
 
 // ── Portable Text block types from the new WYSIWYG editor ─────────────────────
 export interface PortableTextSpan {
@@ -518,13 +519,6 @@ function sanitizeTitle(raw: string): string {
 
 // ── Sanity CDN Fetch Layer ───────────────────────────────────────────────────
 async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
-  const projectId = '96ilx2qv'; // Hardcoded current active Sanity project ID, bypasses Cloudflare dashboard env mismatch
-  const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
-
-  if (!projectId) {
-    return loadLocalCMSPosts();
-  }
-
   try {
     // Query supports BOTH new Portable Text content AND legacy sections
     const query = `*[_type == "post"] | order(date desc) {
@@ -576,18 +570,10 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
       }
     }`;
 
-    // Use the non-CDN API endpoint (api.sanity.io, not apicdn) for zero-cache
-    // reads — guarantees published articles reflect within seconds, not minutes.
-    // The browser-level cache: 'no-store' prevents any local HTTP caching too.
-    const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
-    const response = await fetch(url, {
-      cache: 'no-store',
-      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
-    });
-    const result = await response.json();
+    const result = await fetchSanityQuery<any[]>(query);
 
-    if (result.result && Array.isArray(result.result)) {
-      return result.result.map((post: any) => {
+    if (result && Array.isArray(result)) {
+      return result.map((post: any) => {
         const hasPortableContent = post.content && Array.isArray(post.content) && post.content.length > 0;
         const hasLegacySections = post.sections && Array.isArray(post.sections) && post.sections.length > 0;
 
