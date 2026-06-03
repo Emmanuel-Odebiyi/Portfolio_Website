@@ -223,16 +223,16 @@ const VerticalNavigator = ({
 
 // ─── Problem Card (full-screen, fade in/out per scroll block) ─────────────────
 
-const ProblemCard = ({
-  problem,
-  index,
-  total,
-  scrollYProgress,
-}: {
+const ProblemCard: React.FC<{
   problem: Problem;
   index: number;
   total: number;
   scrollYProgress: any;
+}> = ({
+  problem,
+  index,
+  total,
+  scrollYProgress,
 }) => {
   const block = 1 / total;
   const start = index * block;

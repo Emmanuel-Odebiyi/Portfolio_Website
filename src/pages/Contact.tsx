@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, 
@@ -165,6 +166,12 @@ const OptionCard = ({ selected, onClick, icon: Icon, label, desc, badge }: any) 
   </button>
 );
 
+interface Step4Fields {
+  name: string;
+  email: string;
+  companyUrl: string;
+}
+
 export default function Contact() {
   const [step, setStep] = useState<Step>(1);
   const [loading, setLoading] = useState(false);
@@ -179,21 +186,33 @@ export default function Contact() {
     companyUrl: '',
   });
 
+  // react-hook-form for Step 4 contact detail fields
+  const {
+    register,
+    handleSubmit: rhfHandleSubmit,
+    formState: { errors: step4Errors, isValid: isStep4Valid },
+    getValues: getStep4Values,
+  } = useForm<Step4Fields>({
+    mode: 'onChange',
+    defaultValues: { name: '', email: '', companyUrl: '' },
+  });
+
   const nextStep = () => setStep((prev) => (prev as number + 1) as Step);
   const prevStep = () => setStep((prev) => (prev as number - 1) as Step);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = rhfHandleSubmit(async (step4Data) => {
     setLoading(true);
     setSubmitError(null);
+    const payload = { ...formData, ...step4Data };
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xreywnvb';
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
       if (response.ok) {
+        setFormData((prev) => ({ ...prev, ...step4Data }));
         setStep('success');
       } else {
         const data = await response.json();
@@ -204,15 +223,14 @@ export default function Contact() {
     } finally {
       setLoading(false);
     }
-  };
+  });
 
   const isStepValid = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     switch(step) {
       case 1: return !!formData.bottleneck && (formData.bottleneck !== 'other' || !!formData.customBottleneck);
       case 2: return !!formData.successVision && formData.successVision.trim().length > 5;
       case 3: return !!formData.budget;
-      case 4: return !!formData.name && emailRegex.test(formData.email) && !!formData.companyUrl;
+      case 4: return isStep4Valid;
       default: return true;
     }
   };
@@ -418,15 +436,18 @@ export default function Contact() {
                           </label>
                           <div className="relative group">
                             <input 
-                              required
                               type="text"
                               placeholder="E.g., John Doe"
-                              value={formData.name}
-                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                              className="w-full bg-[#0f172a]/60 border border-white/10 rounded-2xl px-5 py-4 pl-12 text-white placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/40 transition-all text-sm font-sans"
+                              {...register('name', { required: 'Full name is required' })}
+                              className={`w-full bg-[#0f172a]/60 border rounded-2xl px-5 py-4 pl-12 text-white placeholder:text-zinc-600 focus:outline-none transition-all text-sm font-sans ${step4Errors.name ? 'border-red-500/50 focus:border-red-500/70' : 'border-white/10 focus:border-blue-500/40'}`}
                             />
                             <User size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-blue-400 transition-colors" />
                           </div>
+                          {step4Errors.name && (
+                            <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-[10px] text-red-400 font-mono pl-1">
+                              {step4Errors.name.message}
+                            </motion.p>
+                          )}
                         </div>
 
                         {/* Email Input */}
@@ -436,15 +457,21 @@ export default function Contact() {
                           </label>
                           <div className="relative group">
                             <input 
-                              required
                               type="email"
                               placeholder="E.g., john@yourcompany.com"
-                              value={formData.email}
-                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                              className="w-full bg-[#0f172a]/60 border border-white/10 rounded-2xl px-5 py-4 pl-12 text-white placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/40 transition-all text-sm font-sans"
+                              {...register('email', {
+                                required: 'Business email is required',
+                                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address' }
+                              })}
+                              className={`w-full bg-[#0f172a]/60 border rounded-2xl px-5 py-4 pl-12 text-white placeholder:text-zinc-600 focus:outline-none transition-all text-sm font-sans ${step4Errors.email ? 'border-red-500/50 focus:border-red-500/70' : 'border-white/10 focus:border-blue-500/40'}`}
                             />
                             <Mail size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-blue-400 transition-colors" />
                           </div>
+                          {step4Errors.email && (
+                            <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-[10px] text-red-400 font-mono pl-1">
+                              {step4Errors.email.message}
+                            </motion.p>
+                          )}
                         </div>
 
                         {/* Company URL Input */}
@@ -454,15 +481,21 @@ export default function Contact() {
                           </label>
                           <div className="relative group">
                             <input 
-                              required
                               type="url"
                               placeholder="E.g., https://yourcompany.com"
-                              value={formData.companyUrl}
-                              onChange={(e) => setFormData({ ...formData, companyUrl: e.target.value })}
-                              className="w-full bg-[#0f172a]/60 border border-white/10 rounded-2xl px-5 py-4 pl-12 text-white placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/40 transition-all text-sm font-sans"
+                              {...register('companyUrl', {
+                                required: 'Company URL is required',
+                                pattern: { value: /^https?:\/\/.+/, message: 'Must start with https://' }
+                              })}
+                              className={`w-full bg-[#0f172a]/60 border rounded-2xl px-5 py-4 pl-12 text-white placeholder:text-zinc-600 focus:outline-none transition-all text-sm font-sans ${step4Errors.companyUrl ? 'border-red-500/50 focus:border-red-500/70' : 'border-white/10 focus:border-blue-500/40'}`}
                             />
                             <LinkIcon size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-blue-400 transition-colors" />
                           </div>
+                          {step4Errors.companyUrl && (
+                            <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="text-[10px] text-red-400 font-mono pl-1">
+                              {step4Errors.companyUrl.message}
+                            </motion.p>
+                          )}
                         </div>
 
                       </div>
@@ -499,7 +532,7 @@ export default function Contact() {
                   ) : (
                     <button 
                       disabled={!isStepValid() || loading}
-                      onClick={handleSubmit}
+                      onClick={() => handleSubmit()}
                       className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-blue-500/10 disabled:opacity-30 font-mono text-xs uppercase tracking-widest ml-auto relative overflow-hidden"
                     >
                       {loading ? (
@@ -522,8 +555,21 @@ export default function Contact() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center space-y-10 py-6"
             >
-              <div className="w-20 h-20 rounded-full bg-blue-500/15 border border-blue-500/30 text-[#60a5fa] flex items-center justify-center mx-auto shadow-2xl shadow-blue-500/5">
-                <CheckCircle2 size={36} />
+              <div className="relative w-24 h-24 mx-auto">
+                {/* Pulsing ring */}
+                <motion.div
+                  className="absolute inset-0 rounded-full border-2 border-blue-400/40"
+                  animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
+                  className="w-24 h-24 rounded-full bg-blue-500/15 border border-blue-500/30 text-[#60a5fa] flex items-center justify-center shadow-2xl shadow-blue-500/10"
+                >
+                  <CheckCircle2 size={40} />
+                </motion.div>
               </div>
               
               <div className="space-y-4">

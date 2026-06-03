@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, 
   ExternalLink, 
@@ -82,6 +82,16 @@ const projects = [
   }
 ];
 
+const CATEGORY_FILTERS = ['All', 'SEO', 'Automation', 'AI'] as const;
+type Category = typeof CATEGORY_FILTERS[number];
+
+const PROJECT_CATEGORIES: Record<string, Category[]> = {
+  'TechFlow Solutions': ['Automation'],
+  'The Scoove Africa': ['SEO'],
+  'Emergency Response Africa': ['SEO'],
+  'OAU Library': ['AI'],
+};
+
 const smallResults = [
   {
     title: "Lead Magnet Delivery + CRM Sync",
@@ -110,6 +120,14 @@ const smallResults = [
 ];
 
 export default function Portfolio() {
+  const [activeFilter, setActiveFilter] = useState<Category>('All');
+
+  const filteredProjects = useMemo(() =>
+    activeFilter === 'All'
+      ? projects
+      : projects.filter(p => PROJECT_CATEGORIES[p.title]?.includes(activeFilter)),
+  [activeFilter]);
+
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white">
       <SEO 
@@ -201,84 +219,110 @@ export default function Portfolio() {
 
       {/* Featured Projects Grid */}
       <section className="max-w-7xl mx-auto px-6 mb-32">
-        <div className="grid grid-cols-1 gap-12">
-          {projects.map((project, i) => (
-            <Link key={i} to={project.path} className="block group">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className={`relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-16 rounded-[4rem] ${project.color} border border-white/10 hover:border-white/20 overflow-hidden shadow-2xl transition-all`}
-              >
-                <div className={`space-y-10 relative z-10 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-mono uppercase tracking-widest text-gray-300">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-3xl md:text-5xl font-bold text-white leading-snug">
-                      {project.subtitle}
-                    </h3>
-                    <p className="text-sm font-mono text-gray-400 uppercase tracking-widest">
-                      {project.title} • {project.industry}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">The Challenge</p>
-                      <p className="text-gray-300 font-light leading-relaxed">{project.problem}</p>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">The Solution</p>
-                      <p className="text-gray-300 font-light leading-relaxed">{project.solution}</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-8 border-t border-white/10">
-                    {/* Key Outcome Highlights */}
-                    <div className={`p-6 rounded-2xl border-l-2 ${
-                      project.accent === 'blue' ? 'border-blue-500 bg-blue-500/5' :
-                      project.accent === 'teal' ? 'border-teal-500 bg-teal-500/5' :
-                      project.accent === 'rose' ? 'border-rose-500 bg-rose-500/5' : 'border-amber-500 bg-amber-500/5'
-                    } space-y-2`}>
-                      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">Key Outcome & ROI</p>
-                      <p className="text-base font-semibold text-white leading-relaxed">{project.result}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={`flex flex-col justify-between space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[16/10] bg-zinc-950 flex items-center justify-center">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-                    
-                    {/* Floating Glass Metric Badge */}
-                    <div className="absolute bottom-6 right-6 px-6 py-3 rounded-2xl bg-[#0B0F19]/90 border border-white/10 backdrop-blur-md shadow-xl flex flex-col items-end">
-                      <span className="text-2xl font-black text-white">{project.metrics}</span>
-                      <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Proven Outcome</span>
-                    </div>
-                  </div>
-
-                  {/* Premium Call to Action under the image */}
-                  <div className="flex items-center lg:justify-end justify-start">
-                    <div className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-white shadow-xl group-hover:bg-white/10 group-hover:border-white/25 transition-all duration-300">
-                      <span>Read Case Study</span>
-                      <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </Link>
+        {/* Category Filter Tabs with animated layoutId pill */}
+        <div className="flex items-center gap-2 mb-12 flex-wrap">
+          {CATEGORY_FILTERS.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className="relative px-5 py-2 rounded-full text-sm font-mono font-bold transition-colors duration-200 outline-none"
+              style={{ color: activeFilter === cat ? '#0B0F19' : 'rgba(161,161,170,1)' }}
+            >
+              {activeFilter === cat && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 rounded-full bg-white"
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{cat}</span>
+            </button>
           ))}
         </div>
+
+        <AnimatePresence mode="popLayout">
+          <div className="grid grid-cols-1 gap-12">
+            {filteredProjects.map((project, i) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+              >
+                <Link to={project.path} className="block group">
+                  <div
+                    className={`relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-16 rounded-[4rem] ${project.color} border border-white/10 hover:border-white/20 overflow-hidden shadow-2xl transition-all`}
+                  >
+                    <div className={`space-y-10 relative z-10 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                      <div className="space-y-4">
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map(tag => (
+                            <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-mono uppercase tracking-widest text-gray-300">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <h3 className="text-3xl md:text-5xl font-bold text-white leading-snug">
+                          {project.subtitle}
+                        </h3>
+                        <p className="text-sm font-mono text-gray-400 uppercase tracking-widest">
+                          {project.title} • {project.industry}
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-2">
+                          <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">The Challenge</p>
+                          <p className="text-gray-300 font-light leading-relaxed">{project.problem}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-xs font-mono text-gray-400 uppercase tracking-widest text-zinc-500">The Solution</p>
+                          <p className="text-gray-300 font-light leading-relaxed">{project.solution}</p>
+                        </div>
+                      </div>
+
+                      <div className="pt-8 border-t border-white/10">
+                        <div className={`p-6 rounded-2xl border-l-2 ${
+                          project.accent === 'blue' ? 'border-blue-500 bg-blue-500/5' :
+                          project.accent === 'teal' ? 'border-teal-500 bg-teal-500/5' :
+                          project.accent === 'rose' ? 'border-rose-500 bg-rose-500/5' : 'border-amber-500 bg-amber-500/5'
+                        } space-y-2`}>
+                          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">Key Outcome & ROI</p>
+                          <p className="text-base font-semibold text-white leading-relaxed">{project.result}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={`flex flex-col justify-between space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                      <div className="relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[16/10] bg-zinc-950 flex items-center justify-center">
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                        
+                        <div className="absolute bottom-6 right-6 px-6 py-3 rounded-2xl bg-[#0B0F19]/90 border border-white/10 backdrop-blur-md shadow-xl flex flex-col items-end">
+                          <span className="text-2xl font-black text-white">{project.metrics}</span>
+                          <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">Proven Outcome</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center lg:justify-end justify-start">
+                        <div className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-white shadow-xl group-hover:bg-white/10 group-hover:border-white/25 transition-all duration-300">
+                          <span>Read Case Study</span>
+                          <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </AnimatePresence>
       </section>
 
       {/* More Results - Bento Grid */}
