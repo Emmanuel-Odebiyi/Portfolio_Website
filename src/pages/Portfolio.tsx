@@ -300,6 +300,8 @@ export default function Portfolio() {
                         <img 
                           src={project.image} 
                           alt={project.title} 
+                          width={600}
+                          height={375}
                           className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />

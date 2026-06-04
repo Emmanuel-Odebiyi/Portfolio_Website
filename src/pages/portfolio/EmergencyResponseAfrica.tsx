@@ -177,6 +177,8 @@ export default function EmergencyResponseAfrica() {
           <img 
             src="/images/era_dispatch_dashboard.png" 
             alt="Emergency Response Africa Medical Dispatch Center Dashboard Mockup" 
+            width={1280}
+            height={800}
             className="w-full h-auto rounded-2xl object-cover group-hover:scale-[1.01] transition-transform duration-700"
           />
         </motion.div>
@@ -256,9 +258,9 @@ export default function EmergencyResponseAfrica() {
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-6">
-                <h4 className="text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-2xl font-bold text-white tracking-tight">
                   {tactics[activeTab].title}
-                </h4>
+                </h3>
                 <p className="text-zinc-400 font-light leading-relaxed">
                   {tactics[activeTab].desc}
                 </p>

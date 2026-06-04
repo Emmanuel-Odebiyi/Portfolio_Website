@@ -67,6 +67,8 @@ export function WorldMap({
     <div className="w-full aspect-[2/1] relative overflow-visible">
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+        width={1000}
+        height={500}
         className="h-full w-full pointer-events-none select-none object-contain opacity-40 filter drop-shadow-sm"
         alt="world map"
         draggable={false}

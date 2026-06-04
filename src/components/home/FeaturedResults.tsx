@@ -144,7 +144,9 @@ const FeaturedResults = () => {
                 >
                   <img 
                     src={nodesImg}
-                    alt="Nodes Network" 
+                    alt="Nodes Network Map" 
+                    width={350}
+                    height={280}
                     className="w-full h-full object-contain brightness-125 contrast-125 transition-transform duration-700 group-hover:scale-105"
                   />
                 </motion.div>
@@ -218,7 +220,9 @@ const FeaturedResults = () => {
               >
                 <img 
                   src={discoveryImg} 
-                  alt="Discovery Globe" 
+                  alt="Discovery Globe Visualization" 
+                  width={400}
+                  height={280}
                   className="w-full h-full object-contain brightness-125 contrast-125 transition-transform duration-750 group-hover:scale-105" 
                 />
               </motion.div>
@@ -239,7 +243,7 @@ const FeaturedResults = () => {
 
             <div className="relative z-10 space-y-2">
               <span className="text-6xl font-black text-brand-gradient tracking-tighter block leading-none">40+</span>
-              <h4 className="text-white text-lg font-bold leading-none">Articles Monthly</h4>
+              <h3 className="text-white text-lg font-bold leading-none">Articles Monthly</h3>
               <p className="text-slate-300 text-xs font-mono uppercase tracking-[0.2em]">Proprietary AI Pipeline</p>
             </div>
           </BentoCard>
@@ -258,12 +262,12 @@ const FeaturedResults = () => {
 
             <div className="relative z-10 space-y-2">
               <span className="text-6xl font-black text-brand-gradient tracking-tighter block leading-none">40%</span>
-              <h4 className="text-white text-lg font-bold leading-none">CTR Improvement</h4>
+              <h3 className="text-white text-lg font-bold leading-none">CTR Improvement</h3>
               <p className="text-slate-300 text-xs font-mono uppercase tracking-[0.2em]">Across SEO Portfolio</p>
             </div>
             
             <div className="absolute right-3 bottom-[-15%] w-[120px] h-[120px] opacity-[0.08] group-hover:opacity-20 transition-opacity pointer-events-none">
-              <img src={growthImg} alt="" className="w-full h-full object-contain brightness-200" />
+              <img src={growthImg} alt="Growth Curve Graph" width={120} height={120} className="w-full h-full object-contain brightness-200" />
             </div>
           </BentoCard>
 

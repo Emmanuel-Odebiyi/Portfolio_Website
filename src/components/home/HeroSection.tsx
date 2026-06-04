@@ -5,7 +5,7 @@ import { ArrowRight, AlertCircle, TrendingDown, TrendingUp, Search, FileText, Do
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen lg:h-screen lg:max-h-screen flex items-start lg:items-center overflow-hidden grain-overlay bg-transparent pt-32 md:pt-40 lg:pt-36 pb-8 lg:pb-6">
+    <section className="relative min-h-screen lg:min-h-screen flex items-start lg:items-center overflow-hidden grain-overlay bg-transparent pt-36 md:pt-44 lg:pt-48 xl:pt-52 pb-12 lg:pb-12">
 
       {/* ── Subtle Ambient Glow Aurora Orbs (Option B - Adjusted Opacity) ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.25]">

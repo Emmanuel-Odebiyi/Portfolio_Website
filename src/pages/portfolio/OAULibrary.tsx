@@ -160,6 +160,8 @@ export default function OAULibrary() {
           <img 
             src="/images/oau_library_automation.png" 
             alt="OAU Library AI Academic Cataloging System Dashboard Mockup" 
+            width={1280}
+            height={800}
             className="w-full h-auto rounded-2xl object-cover group-hover:scale-[1.01] transition-transform duration-700"
           />
         </motion.div>

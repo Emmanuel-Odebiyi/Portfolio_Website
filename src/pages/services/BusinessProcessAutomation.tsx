@@ -379,7 +379,7 @@ export default function BusinessProcessAutomation() {
             {TOOLS.map((t) => (
               <motion.div key={t.name} variants={fadeUp}
                 className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/30 hover:bg-white/8 transition-all">
-                <img src={t.logo} alt={t.name} className="w-7 h-7 object-contain grayscale hover:grayscale-0 transition-all" />
+                <img src={t.logo} alt={t.name} width={28} height={28} className="w-7 h-7 object-contain grayscale hover:grayscale-0 transition-all" />
                 <span className="font-bold text-white text-sm">{t.name}</span>
               </motion.div>
             ))}

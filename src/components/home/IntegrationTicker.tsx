@@ -34,6 +34,8 @@ const TickerRow: React.FC<TickerRowProps> = ({ icons, speed, reverse = false }) 
             <img 
                src={url} 
                alt="Integration Logo" 
+               width={40}
+               height={40}
                className="w-8 h-8 md:w-10 md:h-10 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110" 
                referrerPolicy="no-referrer"
                loading="lazy"

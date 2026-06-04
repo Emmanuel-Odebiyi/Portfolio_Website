@@ -250,6 +250,8 @@ export const Globe: React.FC = () => {
           <img
             src={theme === 'hologram' ? '/world-map.webp' : '/world-map-political.jpg'}
             alt="World Map Grid"
+            width={640}
+            height={320}
             className="w-full h-auto object-contain max-h-[260px] sm:max-h-[400px] opacity-35 filter drop-shadow-[0_0_15px_rgba(56,189,248,0.15)] rounded-2xl"
             referrerPolicy="no-referrer"
           />

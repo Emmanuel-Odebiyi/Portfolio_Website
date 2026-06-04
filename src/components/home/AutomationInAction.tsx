@@ -263,6 +263,8 @@ export const AutomationInAction = () => {
                              <img 
                                 src={activeProvider.image} 
                                 alt={activeProvider.name} 
+                                width={800}
+                                height={600}
                                 className="w-full h-full object-cover"
                              />
                            </motion.div>

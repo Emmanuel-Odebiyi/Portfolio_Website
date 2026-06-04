@@ -86,7 +86,7 @@ export default function Home() {
                 <div key={i} className="flex items-center gap-4 group cursor-default">
                   <div className="p-3 w-14 h-14 bg-white/10 rounded-xl shadow-sm border border-white/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 flex items-center justify-center overflow-hidden relative">
                     <div className="absolute inset-0 bg-transparent group-hover:bg-brand-gradient/5 transition-colors duration-500 pointer-events-none" />
-                    <img src={tool.icon} alt={tool.name} className="w-8 h-8 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+                    <img src={tool.icon} alt={tool.name} width={32} height={32} className="w-8 h-8 object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
                   </div>
                   <span className="text-2xl md:text-3xl font-black text-white tracking-tighter italic opacity-80 group-hover:opacity-100 transition-opacity">
                     {tool.name}

@@ -45,7 +45,9 @@ const StoryView = ({ progress }: { progress: any }) => {
         <div className="absolute top-[10%] left-[6%] md:left-[8%] z-50 pointer-events-none">
           <img
             src="/logo.svg"
-            alt="Branding"
+            alt="Emmanuel Odebiyi Logo"
+            width={48}
+            height={48}
             className="w-10 h-10 md:w-12 md:h-12 opacity-100 select-none grayscale"
           />
         </div>

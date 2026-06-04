@@ -611,9 +611,9 @@ export default function MyStory() {
 
           {/* Intro statement */}
           <div className="p-8 md:p-12 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl relative z-10">
-            <h4 className="text-zinc-300 font-light leading-relaxed text-lg md:text-xl max-w-4xl">
+            <blockquote className="text-zinc-300 font-light leading-relaxed text-lg md:text-xl max-w-4xl">
               "I design and build automated marketing systems that deliver enterprise-level content output — without the enterprise price tag, the management overhead, or the constant scramble to keep things moving. <strong>Marketing that runs while you build. That's what I create.</strong>"
-            </h4>
+            </blockquote>
           </div>
 
           {/* Chapter 1 */}

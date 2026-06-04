@@ -77,6 +77,8 @@ export default function Blog() {
             <img 
               src={featuredPost.image} 
               alt={featuredPost.title} 
+              width={1920}
+              height={1080}
               className="w-full h-full object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-103"
               referrerPolicy="no-referrer"
             />
@@ -116,6 +118,8 @@ export default function Blog() {
                   <img 
                     src={featuredPost.authorImage} 
                     alt={featuredPost.author} 
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full border border-white/10 shadow-lg shadow-black/30"
                   />
                   <div>
@@ -235,6 +239,8 @@ export default function Blog() {
                         <img 
                           src={post.image} 
                           alt={post.title} 
+                          width={380}
+                          height={240}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
                           referrerPolicy="no-referrer"
                           loading="lazy"
@@ -279,6 +285,8 @@ export default function Blog() {
                           <img 
                             src={post.authorImage} 
                             alt={post.author} 
+                            width={32}
+                            height={32}
                             className="w-8 h-8 rounded-full border border-white/10"
                           />
                           <div>

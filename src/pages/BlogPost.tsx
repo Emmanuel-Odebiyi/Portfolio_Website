@@ -580,7 +580,7 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
       if (imgUrl) {
         elements.push(
           <figure key={key} className="my-10">
-            <img src={imgUrl} alt={b.alt || ''} className="w-full rounded-2xl border border-white/5 shadow-xl" loading="lazy" referrerPolicy="no-referrer" />
+            <img src={imgUrl} alt={b.alt || 'Blog Post Content Illustration'} width={640} height={360} className="w-full rounded-2xl border border-white/5 shadow-xl" loading="lazy" referrerPolicy="no-referrer" />
             {b.caption && <figcaption className="text-center mt-3 text-zinc-500 text-xs font-mono">{b.caption}</figcaption>}
           </figure>
         );
@@ -746,6 +746,8 @@ export default function BlogPost() {
           <img 
             src={post.heroImage} 
             alt={post.title}
+            width={1920}
+            height={1080}
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
@@ -775,6 +777,8 @@ export default function BlogPost() {
                 <img 
                   src={post.authorImage} 
                   alt={post.author} 
+                  width={40}
+                  height={40}
                   className="w-10 h-10 rounded-full border border-white/10" 
                 />
                 <div>
@@ -1011,6 +1015,8 @@ export default function BlogPost() {
                 <img 
                   src={post.authorImage} 
                   alt={post.author} 
+                  width={80}
+                  height={80}
                   className="w-20 h-20 rounded-full border border-white/10 object-cover shadow-lg shadow-black/20" 
                 />
                 <div className="space-y-3 flex-1 text-left">
@@ -1063,6 +1069,8 @@ export default function BlogPost() {
                     <img 
                       src={related.image} 
                       alt={related.title} 
+                      width={380}
+                      height={240}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
                       referrerPolicy="no-referrer"
                       loading="lazy"
@@ -1077,9 +1085,9 @@ export default function BlogPost() {
                         </span>
                       ))}
                     </div>
-                    <h4 className="text-lg font-bold text-white leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold text-white leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
                       {related.title}
-                    </h4>
+                    </h3>
                     <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono pt-3 border-t border-white/5">
                       <span>{related.date}</span>
                       <span className="flex items-center gap-1 group-hover:text-white transition-colors">

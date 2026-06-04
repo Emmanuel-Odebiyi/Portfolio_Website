@@ -50,6 +50,8 @@ export const Footer: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
+                width={375}
+                height={375}
                 className="h-20 md:h-32 w-auto brightness-0 invert"
               />
             </div>

@@ -230,6 +230,8 @@ export default function ScooveAfrica() {
           <img 
             src="/images/scoove_analytics.png" 
             alt="The Scoove Africa SEO Ranking Climber and SERP Analytics Mockup" 
+            width={1280}
+            height={800}
             className="w-full h-auto rounded-2xl object-cover group-hover:scale-[1.01] transition-transform duration-700"
           />
         </motion.div>
@@ -297,7 +299,7 @@ export default function ScooveAfrica() {
                 <div className="lg:col-span-3 flex items-center gap-4">
                   <div className="text-5xl font-black text-zinc-700 font-mono">{tactic.step}</div>
                   <div>
-                    <h4 className="font-bold text-white text-lg leading-snug">{tactic.title}</h4>
+                    <h3 className="font-bold text-white text-lg leading-snug">{tactic.title}</h3>
                     <span className="text-[10px] font-mono text-teal-400 uppercase tracking-widest px-2 py-0.5 rounded-md bg-teal-500/10 border border-teal-500/20 mt-1 inline-block">
                       {tactic.badge}
                     </span>
@@ -335,7 +337,7 @@ export default function ScooveAfrica() {
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
                 <Globe size={24} />
               </div>
-              <h4 className="font-bold text-white text-lg">Value & Discovery Go Together</h4>
+              <h3 className="font-bold text-white text-lg">Value & Discovery Go Together</h3>
               <p className="text-zinc-400 font-light text-sm leading-relaxed">
                 Even the most creative, high-quality copy cannot convert or build an audience if it is not discoverable through organic search parameters.
               </p>
@@ -345,7 +347,7 @@ export default function ScooveAfrica() {
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
                 <TrendingDown size={24} />
               </div>
-              <h4 className="font-bold text-white text-lg">Format for High Cognitive Load</h4>
+              <h3 className="font-bold text-white text-lg">Format for High Cognitive Load</h3>
               <p className="text-zinc-400 font-light text-sm leading-relaxed">
                 Dropping bounce rates by 25% was achieved by re-formatting text into responsive lists, micro paragraphs, and clean visual cards that invite reading.
               </p>
@@ -355,7 +357,7 @@ export default function ScooveAfrica() {
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
                 <Zap size={24} />
               </div>
-              <h4 className="font-bold text-white text-lg">Micro Changes Compound</h4>
+              <h3 className="font-bold text-white text-lg">Micro Changes Compound</h3>
               <p className="text-zinc-400 font-light text-sm leading-relaxed">
                 Small adjustments like structured metadata, context-rich alt text, and logical internal links create massive search performance leaps.
               </p>
