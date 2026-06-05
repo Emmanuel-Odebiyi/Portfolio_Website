@@ -96,33 +96,33 @@ export default function About() {
           HERO SECTION — Cinematic Split
       ═══════════════════════════════════════════ */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-zinc-950">
-        <div className="absolute inset-0 z-0 flex flex-col md:flex-row">
+        <div className="absolute inset-0 z-0 flex flex-row">
           {/* Left — Monochrome Burnout */}
-          <div className="w-full h-1/2 md:w-1/2 md:h-full relative overflow-hidden text-zinc-400">
+          <div className="w-1/2 h-full relative overflow-hidden text-zinc-400">
             <motion.img 
               src="/about-transformation.jpg"
               alt="Emmanuel Odebiyi — the burnout era" 
               animate={{ opacity: hoverSide === 'burnout' ? 0.6 : 0.4 }}
               style={{ filter: `brightness(${hoverSide === 'burnout' ? 1.25 : 1.1}) contrast(1.5) grayscale(100%)` }}
-              className="absolute left-0 top-0 h-[200%] w-full md:h-full md:w-[200%] max-w-none object-cover object-[center_15%] md:object-[25%_20%] transition-all duration-700"
+              className="absolute left-0 top-0 h-full w-[200%] max-w-none object-cover object-[38%_20%] md:object-[30%_20%] lg:object-[25%_20%] transition-all duration-700"
             />
             <div className={`absolute inset-0 bg-zinc-950/20 transition-opacity duration-700 ${hoverSide === 'burnout' ? 'opacity-100' : 'opacity-0'}`} />
           </div>
           {/* Right — Color Reveal */}
-          <div className="w-full h-1/2 md:w-1/2 md:h-full relative overflow-hidden">
+          <div className="w-1/2 h-full relative overflow-hidden">
             <motion.img 
               src="/about-transformation.jpg"
               alt="Emmanuel Odebiyi — the balance era" 
               animate={{ opacity: hoverSide === 'balance' ? 0 : 0.4 }}
               style={{ filter: 'brightness(1.1) contrast(1.6) grayscale(100%)' }}
-              className="absolute right-0 bottom-0 h-[200%] w-full md:h-full md:w-[200%] max-w-none object-cover object-[center_15%] md:object-[75%_20%] transition-all duration-1000"
+              className="absolute right-0 bottom-0 h-full w-[200%] max-w-none object-cover object-[62%_20%] md:object-[70%_20%] lg:object-[75%_20%] transition-all duration-1000"
             />
             <motion.img 
               src="/about-transformation.jpg"
               alt="Emmanuel Odebiyi — in color" 
               animate={{ opacity: hoverSide === 'balance' ? 0.9 : 0, scale: hoverSide === 'balance' ? 1.05 : 1 }}
               style={{ filter: `brightness(${hoverSide === 'balance' ? 0.8 : 1.1}) contrast(1.4)` }}
-              className="absolute right-0 bottom-0 h-[200%] w-full md:h-full md:w-[200%] max-w-none object-cover object-[center_15%] md:object-[75%_20%] transition-all duration-1000"
+              className="absolute right-0 bottom-0 h-full w-[200%] max-w-none object-cover object-[62%_20%] md:object-[70%_20%] lg:object-[75%_20%] transition-all duration-1000"
             />
             <div className={`absolute inset-0 bg-zinc-950/40 transition-opacity duration-700 ${hoverSide === 'balance' ? 'opacity-100' : 'opacity-0'}`} />
             <div className={`absolute inset-0 bg-blue-500/5 transition-opacity duration-700 ${hoverSide === 'balance' ? 'opacity-100' : 'opacity-0'}`} />
@@ -142,7 +142,7 @@ export default function About() {
             className="flex flex-col gap-2 lg:gap-4 text-left pointer-events-none max-w-lg"
           >
             <span className="text-[10px] md:text-[11px] font-mono text-gray-300 tracking-[0.4em] uppercase">The Origin Story</span>
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-white leading-[0.9] md:leading-[0.85] drop-shadow-2xl">
               <motion.span 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -176,7 +176,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
-              className={`text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white' : 'text-zinc-100'}`}
+              className={`text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] md:leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white' : 'text-zinc-100'}`}
             >
               Now I Build
             </motion.h2>
@@ -184,7 +184,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.3 }}
-              className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic text-blue-400"
+              className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] md:leading-[0.85] italic text-blue-400"
             >
               The Machine.
             </motion.h2>
@@ -200,9 +200,9 @@ export default function About() {
         </div>
 
         {/* Hover Zones */}
-        <div className="absolute inset-0 z-40 flex flex-col md:flex-row pointer-events-auto cursor-default">
-           <div className="w-full h-1/2 md:w-1/2 md:h-full" onMouseEnter={() => setHoverSide('burnout')} onMouseLeave={() => setHoverSide(null)} />
-           <div className="w-full h-1/2 md:w-1/2 md:h-full" onMouseEnter={() => setHoverSide('balance')} onMouseLeave={() => setHoverSide(null)} />
+        <div className="absolute inset-0 z-40 flex flex-row pointer-events-auto cursor-default">
+           <div className="w-1/2 h-full" onMouseEnter={() => setHoverSide('burnout')} onMouseLeave={() => setHoverSide(null)} />
+           <div className="w-1/2 h-full" onMouseEnter={() => setHoverSide('balance')} onMouseLeave={() => setHoverSide(null)} />
         </div>
         {/* Scroll Indicator */}
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-2 z-50">

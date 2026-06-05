@@ -196,7 +196,7 @@ export const Header: React.FC = () => {
                   const isExpanded = expandedMobileLink === link.name;
 
                   return (
-                    <div key={link.name} className="flex flex-col rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden">
+                    <div key={link.name} className="flex flex-col shrink-0 rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden">
                       {hasDropdown ? (
                         <button
                           onClick={() => setExpandedMobileLink(isExpanded ? null : link.name)}
@@ -271,7 +271,7 @@ export const Header: React.FC = () => {
                 <Link 
                   to="/contact" 
                   onClick={() => setIsMobileMenuOpen(false)} 
-                  className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-zinc-900 hover:text-white font-black rounded-xl text-center shadow-[0_4px_20px_rgba(245,158,11,0.30)] transition-colors mt-2"
+                  className="w-full shrink-0 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-zinc-900 hover:text-white font-black rounded-xl text-center shadow-[0_4px_20px_rgba(245,158,11,0.30)] transition-colors mt-2"
                 >
                   Contact Me
                 </Link>
