@@ -1,225 +1,81 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Bot, PenTool } from 'lucide-react';
+import Lottie from 'lottie-react';
 
-// ─── Custom Premium React / SVG animations ───────────────────────────────────
+// ─── Lottie Loader component with smooth entry transition ───────────────────
 
-const FreelancerAnimation = () => {
+const LottieLoader = ({ path, style }: { path: string; style?: React.CSSProperties }) => {
+  const [animationData, setAnimationData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    setIsLoading(true);
+    fetch(path)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (active) {
+          setAnimationData(data);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error("Error loading Lottie animation:", err);
+        if (active) {
+          setIsLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [path]);
+
   return (
-    <svg viewBox="0 0 200 200" className="w-full h-full text-[#e85d4a] fill-none">
-      <circle cx="100" cy="100" r="16" className="fill-zinc-900 stroke-current stroke-2" />
-      <circle cx="100" cy="100" r="6" className="fill-current" />
-      <g>
-        <line x1="100" y1="100" x2="50" y2="70" className="stroke-zinc-700 stroke-2" strokeDasharray="4,4" />
-        <circle cx="50" cy="70" r="10" className="fill-zinc-900 stroke-zinc-700 stroke-2" />
-      </g>
-      <g>
-        <line x1="100" y1="100" x2="150" y2="70" className="stroke-zinc-700 stroke-2" strokeDasharray="4,4" />
-        <circle cx="150" cy="70" r="10" className="fill-zinc-900 stroke-zinc-700 stroke-2" />
-      </g>
-      <g>
-        <motion.line 
-          x1="100" y1="100" 
-          animate={{ x2: [100, 100, 100, 100], y2: [150, 150, 180, 180], opacity: [1, 1, 0, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="stroke-[#e85d4a] stroke-2"
-          strokeDasharray="4,4"
-        />
-        <motion.g
-          animate={{ 
-            x: [0, 0, 0, 0], 
-            y: [0, 0, 30, 30],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <motion.circle 
-            cx="100" cy="150" r="16" 
-            animate={{ 
-              scale: [1, 1.4, 1, 1], 
-              opacity: [0.4, 0, 0.4, 0.4],
-              stroke: ["#10b981", "#10b981", "#e85d4a", "#e85d4a"]
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="fill-none stroke-2" 
-          />
-          <motion.circle 
-            cx="100" cy="150" r="10" 
-            animate={{ 
-              stroke: ["#10b981", "#10b981", "#e85d4a", "#e85d4a"],
-              fill: ["rgba(16,185,129,0.1)", "rgba(16,185,129,0.1)", "rgba(232,93,74,0.1)", "rgba(232,93,74,0.1)"]
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="stroke-2" 
-          />
-          <motion.text
-            x="100" y="175"
-            textAnchor="middle"
-            className="text-[10px] font-mono fill-zinc-500 font-bold"
-            animate={{
-              opacity: [0, 0, 1, 1],
-              fill: ["#10b981", "#10b981", "#e85d4a", "#e85d4a"]
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
+    <div className="w-full h-full flex items-center justify-center relative">
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <motion.div
+            key="spinner"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 flex items-center justify-center"
           >
-            OFFLINE
-          </motion.text>
-        </motion.g>
-      </g>
-    </svg>
+            <div className="w-8 h-8 rounded-full border-2 border-white/10 border-t-current animate-spin" />
+          </motion.div>
+        ) : animationData ? (
+          <motion.div
+            key="lottie"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="w-full h-full flex items-center justify-center"
+          >
+            <Lottie 
+              animationData={animationData} 
+              loop={true} 
+              autoplay={true} 
+              style={style} 
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="error"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-zinc-500 font-mono text-[10px]"
+          >
+            Failed to load animation
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
-};
-
-const AgencyAnimation = () => {
-  return (
-    <svg viewBox="0 0 200 200" className="w-full h-full text-[#f59e0b] fill-none">
-      <rect x="20" y="20" width="160" height="130" rx="16" className="stroke-zinc-700 stroke-2 fill-zinc-900/60" />
-      <line x1="20" y1="50" x2="180" y2="50" className="stroke-zinc-700 stroke-2" />
-      <circle cx="35" cy="35" r="4" className="fill-red-500" />
-      <circle cx="47" cy="35" r="4" className="fill-yellow-500" />
-      <circle cx="59" cy="35" r="4" className="fill-green-500" />
-      <motion.path 
-        d="M 40 110 L 70 80 L 100 95 L 130 65 L 160 80" 
-        className="stroke-[#f59e0b] stroke-2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        animate={{
-          pathLength: [0, 1, 1, 0],
-          opacity: [1, 1, 0, 0],
-        }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.path 
-        d="M 40 110 Q 55 130 70 110 T 100 120 T 130 100 T 160 130" 
-        className="stroke-red-400 stroke-2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeDasharray="4,4"
-        animate={{
-          pathLength: [0, 0, 1, 1],
-          opacity: [0, 0, 1, 0],
-        }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.g
-        className="fill-zinc-950"
-        animate={{
-          opacity: [0, 0, 1, 0],
-          scale: [0.8, 0.8, 1, 0.8],
-        }}
-        transition={{ duration: 5, repeat: Infinity }}
-        style={{ transformOrigin: "100px 90px" }}
-      >
-        <rect x="70" y="75" width="60" height="24" rx="6" className="stroke-red-500/50 stroke fill-zinc-950" />
-        <text x="100" y="90" textAnchor="middle" className="text-[8px] font-mono font-bold fill-red-400">JUNIOR WORK</text>
-      </motion.g>
-    </svg>
-  );
-};
-
-const AIToolsAnimation = () => {
-  return (
-    <svg viewBox="0 0 200 200" className="w-full h-full text-[#8b5cf6] fill-none">
-      <motion.line
-        x1="20" x2="180"
-        animate={{ y: [40, 160, 40] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="stroke-[#8b5cf6] stroke-2"
-        style={{ filter: "drop-shadow(0 0 8px #8b5cf6)" }}
-      />
-      <g>
-        <path d="M 30 50 Q 55 20 80 50 T 130 50 T 170 50" className="stroke-blue-400 stroke-2" strokeLinecap="round" />
-        <path d="M 30 70 Q 60 90 90 60 T 150 70" className="stroke-indigo-400 stroke-2" strokeLinecap="round" />
-      </g>
-      <g>
-        <rect x="30" y="110" width="140" height="8" rx="2" className="fill-zinc-800/80 stroke-zinc-700 stroke" />
-        <rect x="30" y="125" width="140" height="8" rx="2" className="fill-zinc-800/80 stroke-zinc-700 stroke" />
-        <rect x="30" y="140" width="110" height="8" rx="2" className="fill-zinc-800/80 stroke-zinc-700 stroke" />
-      </g>
-      <motion.g
-        animate={{
-          opacity: [0.1, 0.9, 0.1],
-        }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <text x="100" y="175" textAnchor="middle" className="text-[10px] font-mono font-black fill-zinc-500 tracking-[0.25em]">AI SLOP DETECTED</text>
-      </motion.g>
-    </svg>
-  );
-};
-
-const DIYAnimation = () => {
-  return (
-    <svg viewBox="0 0 200 200" className="w-full h-full text-[#10b981] fill-none">
-      <motion.g
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="origin-[100px_90px]"
-      >
-        <circle cx="100" cy="90" r="24" className="stroke-[#10b981] stroke-2 fill-zinc-900/60" />
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-          <rect
-            key={angle}
-            x="96" y="58" width="8" height="12" rx="2"
-            transform={`rotate(${angle} 100 90)`}
-            className="fill-[#10b981]"
-          />
-        ))}
-        <circle cx="100" cy="90" r="8" className="fill-zinc-950 stroke-[#10b981] stroke" />
-      </motion.g>
-      <g>
-        <motion.g
-          animate={{
-            x: [180, 128, 180],
-            y: [40, 75, 40],
-            scale: [1, 0.9, 1],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <circle cx="0" cy="0" r="18" className="fill-zinc-950 stroke-red-500/50 stroke" />
-          <text x="0" y="3" textAnchor="middle" className="text-[6px] font-mono font-bold fill-red-400">FIRE 🔥</text>
-        </motion.g>
-        <motion.g
-          animate={{
-            x: [20, 72, 20],
-            y: [50, 85, 50],
-            scale: [1, 0.9, 1],
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        >
-          <circle cx="0" cy="0" r="22" className="fill-zinc-950 stroke-amber-500/50 stroke" />
-          <text x="0" y="3" textAnchor="middle" className="text-[6px] font-mono font-bold fill-amber-400">SALES 📞</text>
-        </motion.g>
-      </g>
-      <g>
-        <rect x="30" y="150" width="140" height="8" rx="4" className="fill-zinc-800/80 stroke-zinc-700 stroke" />
-        <motion.rect
-          x="32" y="152"
-          height="4" rx="2"
-          animate={{
-            width: ["0%", "40%", "40%", "0%"],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="fill-red-400"
-        />
-        <text x="100" y="174" textAnchor="middle" className="text-[9px] font-mono font-bold fill-zinc-500">BLOG POST: 40% (STUCK)</text>
-      </g>
-    </svg>
-  );
-};
-
-const ProblemAnimation = ({ id }: { id: number }) => {
-  switch (id) {
-    case 1:
-      return <FreelancerAnimation />;
-    case 2:
-      return <AgencyAnimation />;
-    case 3:
-      return <AIToolsAnimation />;
-    case 4:
-      return <DIYAnimation />;
-    default:
-      return null;
-  }
 };
 
 // ─── Problem Data ─────────────────────────────────────────────────────────────
@@ -231,6 +87,7 @@ interface Problem {
   body: string;
   detail: string;
   icon: React.ElementType;
+  animationPath: string;
   accentColor: string;
 }
 
@@ -242,6 +99,7 @@ const PROBLEMS: Problem[] = [
     body: "You hired a freelancer. They were great for a while. Then they got overloaded, quality dropped, and one day — they just stopped responding.",
     detail: "Now you're back to square one, sifting through proposals and hoping this one sticks.",
     icon: Users,
+    animationPath: '/animation/freelancer.json',
     accentColor: '#e85d4a',
   },
   {
@@ -251,6 +109,7 @@ const PROBLEMS: Problem[] = [
     body: "You tried an agency. Slick deck. Impressive pitch. Then the invoice arrived: $8,000/month, six-month minimum.",
     detail: "Three months later you're getting junior work at senior prices, and a simple revision takes two weeks.",
     icon: Building2,
+    animationPath: '/animation/agency.json',
     accentColor: '#f59e0b',
   },
   {
@@ -260,6 +119,7 @@ const PROBLEMS: Problem[] = [
     body: "It sounded like every other bland, generic article online. Worse, it sounded nothing like you.",
     detail: "Your brand voice? Gone. Your differentiation? Erased. Your audience can tell — and they're clicking away.",
     icon: Bot,
+    animationPath: '/animation/ai-tools.json',
     accentColor: '#8b5cf6',
   },
   {
@@ -269,6 +129,7 @@ const PROBLEMS: Problem[] = [
     body: "Except you're also the one running sales calls, managing the team, solving operational fires, and keeping clients happy.",
     detail: "So the blog post gets written at 11 PM — when it gets written at all. Three weeks later, nothing published. Again.",
     icon: PenTool,
+    animationPath: '/animation/diy.json',
     accentColor: '#10b981',
   },
 ];
@@ -567,7 +428,10 @@ const ProblemCard: React.FC<{
               style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}
             >
               <div className="w-full h-full flex items-center justify-center">
-                <ProblemAnimation id={problem.id} />
+                <LottieLoader 
+                  path={problem.animationPath} 
+                  style={{ width: '100%', height: '100%', background: 'transparent' }} 
+                />
               </div>
             </motion.div>
           </div>
