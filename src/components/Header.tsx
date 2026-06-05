@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Workflow, Search, Cpu, Globe, Activity, Calculator, TrendingUp, User, Microscope, FileText } from 'lucide-react';
+import { Menu, X, ChevronDown, Workflow, Search, Cpu, Globe, Activity, Calculator, TrendingUp, User, Microscope, FileText, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
@@ -42,6 +42,7 @@ export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [expandedMobileLink, setExpandedMobileLink] = useState<string | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -84,7 +85,8 @@ export const Header: React.FC = () => {
                 alt="Emmanuel Odebiyi Logo" 
                 width={375}
                 height={375}
-                className="h-8 md:h-12 w-auto transition-all brightness-0 invert"
+                className="h-8 md:h-12 w-auto transition-all"
+                style={{ filter: 'brightness(0) invert(1)' }}
               />
             </Link>
           </motion.div>
@@ -188,33 +190,89 @@ export const Header: React.FC = () => {
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden bg-[#0B0F19]/95 backdrop-blur-3xl border-b border-white/10 overflow-hidden rounded-b-3xl shadow-2xl"
             >
-              <div className="px-6 py-8 flex flex-col gap-6">
-                {navLinks.map((link) => (
-                  <div key={link.name} className="flex flex-col gap-2">
-                    <Link
-                      to={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-lg font-black text-white hover:text-blue-400 transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                    {link.dropdown && (
-                      <div className="pl-4 flex flex-col gap-3 border-l border-white/10">
-                        {link.dropdown.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            to={sub.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+              <div className="px-5 py-6 flex flex-col gap-4 max-h-[75vh] overflow-y-auto">
+                {navLinks.map((link) => {
+                  const hasDropdown = !!link.dropdown;
+                  const isExpanded = expandedMobileLink === link.name;
+
+                  return (
+                    <div key={link.name} className="flex flex-col rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden">
+                      {hasDropdown ? (
+                        <button
+                          onClick={() => setExpandedMobileLink(isExpanded ? null : link.name)}
+                          className="flex items-center justify-between w-full p-4 text-left font-black text-white hover:text-blue-400 transition-colors"
+                        >
+                          <span className="text-base tracking-tight">{link.name}</span>
+                          <ChevronDown 
+                            size={16} 
+                            className={`text-zinc-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-blue-400' : ''}`} 
+                          />
+                        </button>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block p-4 font-black text-white hover:text-blue-400 transition-colors text-base tracking-tight"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+
+                      <AnimatePresence initial={false}>
+                        {hasDropdown && isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: 'easeInOut' }}
+                            className="overflow-hidden border-t border-white/5 bg-zinc-950/40"
                           >
-                            {sub.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-zinc-900 hover:text-white font-black rounded-xl text-center shadow-[0_4px_20px_rgba(245,158,11,0.30)] transition-colors">
+                            <div className="p-3 flex flex-col gap-2">
+                              {/* Overview Link */}
+                              <Link
+                                to={link.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-white/5"
+                              >
+                                <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                                  <ArrowRight size={14} />
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="font-black text-xs text-white">Overview</span>
+                                  <span className="text-[10px] text-zinc-400 font-medium">Go to {link.name} main page</span>
+                                </div>
+                              </Link>
+
+                              {/* Dropdown Links */}
+                              {link.dropdown?.map((sub) => (
+                                <Link
+                                  key={sub.name}
+                                  to={sub.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="flex items-start gap-3 p-3 rounded-xl transition-all hover:bg-white/5"
+                                >
+                                  <div className="mt-0.5 p-2 rounded-lg bg-white/5 border border-white/10 text-white">
+                                    {sub.icon}
+                                  </div>
+                                  <div className="flex flex-col gap-0.5">
+                                    <span className="font-black text-xs text-white leading-tight">{sub.name}</span>
+                                    <span className="text-[10px] text-zinc-400 font-medium leading-tight">{sub.desc}</span>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+
+                <Link 
+                  to="/contact" 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-zinc-900 hover:text-white font-black rounded-xl text-center shadow-[0_4px_20px_rgba(245,158,11,0.30)] transition-colors mt-2"
+                >
                   Contact Me
                 </Link>
               </div>

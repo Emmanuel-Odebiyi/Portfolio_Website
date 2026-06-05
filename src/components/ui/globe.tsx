@@ -208,13 +208,31 @@ const GlobeScene: React.FC<GlobeSceneProps> = ({ theme }) => {
 export const Globe: React.FC = () => {
   const [theme, setTheme] = useState<'hologram' | 'political'>('political');
   const [isMobile, setIsMobile] = useState(false);
+  const [cameraZ, setCameraZ] = useState(6);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 768px)');
     setIsMobile(media.matches);
     const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
+
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setCameraZ(8.5);
+      } else if (width < 1024) {
+        setCameraZ(7.8);
+      } else {
+        setCameraZ(6.0);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      media.removeEventListener('change', listener);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -264,7 +282,7 @@ export const Globe: React.FC = () => {
         <Canvas
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
-          camera={{ position: [0, 0, 6], fov: 45 }}
+          camera={{ position: [0, 0, cameraZ], fov: 45 }}
         >
           <React.Suspense
             fallback={

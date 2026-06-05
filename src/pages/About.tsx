@@ -132,68 +132,71 @@ export default function About() {
         <div className="absolute inset-0 z-15 opacity-40 pointer-events-none mix-blend-multiply" 
              style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
         
-        {/* Left Text — absolutely positioned, independent of right side */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }} 
-          animate={{ opacity: 1, x: 0 }} 
-          transition={{ duration: 0.8 }}
-          className="absolute bottom-24 md:bottom-32 left-8 md:left-24 z-30 flex flex-col gap-4 text-left pointer-events-none"
-        >
-          <span className="text-[10px] md:text-[11px] font-mono text-gray-300 tracking-[0.4em] uppercase">The Origin Story</span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="block"
-            >
-              I Used to Be
-            </motion.span>
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="block"
-            >
-              the
-            </motion.span>
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className={`block transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100' : 'text-zinc-400'}`}
-            >
-              Burnout.
-            </motion.span>
-          </h1>
-        </motion.div>
+        {/* Left and Right stacked/split text container */}
+        <div className="absolute inset-x-0 bottom-20 md:bottom-28 lg:bottom-32 z-30 px-6 md:px-12 lg:px-24 pointer-events-none flex flex-col lg:flex-row lg:justify-between lg:items-end gap-8 lg:gap-0">
+          {/* Left Text — Origin Story */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8 }}
+            className="flex flex-col gap-2 lg:gap-4 text-left pointer-events-none max-w-lg"
+          >
+            <span className="text-[10px] md:text-[11px] font-mono text-gray-300 tracking-[0.4em] uppercase">The Origin Story</span>
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-white leading-[0.85] drop-shadow-2xl">
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="block"
+              >
+                I Used to Be
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="block"
+              >
+                the
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                className={`block transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100' : 'text-zinc-400'}`}
+              >
+                Burnout.
+              </motion.span>
+            </h1>
+          </motion.div>
 
-        {/* Right Text — absolutely positioned, independent of left side */}
-        <div className="absolute bottom-24 md:bottom-32 right-8 md:right-24 z-30 flex flex-col items-end gap-3 text-right pointer-events-none">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
-            className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white' : 'text-zinc-100'}`}
-          >
-            Now I Build
-          </motion.h2>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic text-blue-400"
-          >
-            The Machine.
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
-            className="text-sm md:text-lg text-zinc-300 font-medium max-w-[320px] leading-relaxed mt-2"
-          >
-            Transforming chaos into <strong className="text-blue-400 font-extrabold">520% ROI</strong> through battle-tested automation.
-          </motion.p>
+          {/* Right Text — Now I Build The Machine */}
+          <div className="flex flex-col items-end gap-2 lg:gap-3 text-right pointer-events-none max-w-lg">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+              className={`text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white' : 'text-zinc-100'}`}
+            >
+              Now I Build
+            </motion.h2>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.3 }}
+              className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.85] italic text-blue-400"
+            >
+              The Machine.
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+              className="text-xs md:text-sm lg:text-base text-zinc-300 font-medium max-w-[280px] md:max-w-[320px] leading-relaxed mt-1"
+            >
+              Transforming chaos into <strong className="text-blue-400 font-extrabold">520% ROI</strong> through battle-tested automation.
+            </motion.p>
+          </div>
         </div>
 
         {/* Hover Zones */}
@@ -352,8 +355,8 @@ export default function About() {
           </p>
 
           {/* 2AM Pull-Quote — full-bleed sticky text reveal */}
-          <div className="-mx-6 md:-mx-24 mt-20 mb-8">
-            <div className="flex items-center gap-3 mb-8 px-6 md:px-0">
+          <div className="-mx-6 lg:-mx-24 mt-20 mb-8">
+            <div className="flex items-center gap-3 mb-8 px-6 lg:px-0">
               <div className="w-6 h-px bg-red-400/60" />
               <span className="text-[10px] font-mono text-red-400/60 uppercase tracking-[0.4em]">2:00 AM</span>
             </div>

@@ -52,7 +52,8 @@ export const Footer: React.FC = () => {
                 alt="Emmanuel Odebiyi Logo" 
                 width={375}
                 height={375}
-                className="h-20 md:h-32 w-auto brightness-0 invert"
+                className="h-20 md:h-32 w-auto"
+                style={{ filter: 'brightness(0) invert(1)' }}
               />
             </div>
             
