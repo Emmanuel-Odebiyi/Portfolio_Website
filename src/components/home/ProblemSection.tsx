@@ -404,7 +404,7 @@ const ProblemCard: React.FC<{
         </div>
 
         {/* Icon Illustration — right side, matching the screenshot */}
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end -mb-4 md:mb-0">
+        <div className="order-1 lg:order-2 flex justify-center lg:justify-end mt-16 lg:mt-0 -mb-4 md:mb-0">
           <div className="relative group/icon">
             {/* Subtle White "Lift" Gradient — separates from deep background without sharp edges */}
             <div 
