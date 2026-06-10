@@ -15,17 +15,13 @@ import {
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { NumberTicker } from '../components/NumberTicker';
-import { TypewriterEffect } from '../components/ui/typewriter-effect';
 import { BlurFade } from '../components/ui/blur-fade';
 import { ContainerScroll } from '../components/ui/container-scroll-animation';
 import { useTransform } from 'motion/react';
-import { GSAPTextReveal } from '../components/ui/gsap-text-reveal';
-import { Globe } from '../components/ui/globe';
+import { FramerTextReveal } from '../components/ui/framer-text-reveal';
 import { TextRevealByWord } from '../components/ui/text-reveal';
 import { TextEffect } from '../components/ui/text-effect';
-import { KineticText } from '../components/animations/KineticText';
 import { ScrollMaskText } from '../components/animations/ScrollMaskText';
-import { GooeyText } from '../components/ui/gooey-text-morphing';
 
 const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\nAnd honestly? It was magic.`;
 
@@ -39,7 +35,7 @@ const StoryView = ({ progress }: { progress: any }) => {
         <motion.div style={{ width: progressWidth }} className="h-full bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
       </div>
 
-      {/* Story Content — GSAP takes over the perfect internal scroll and stagger matching the real DOM height! */}
+      {/* Story Content — Framer Motion scroll and stagger matching responsive DOM height! */}
       <div className="px-6 md:px-12 lg:px-16 w-full h-full flex flex-col items-center justify-start overflow-hidden relative">
         {/* Miniature UI Logo — Positioned on the far left 'binding' side of the tab */}
         <div className="absolute top-[10%] left-[6%] md:left-[8%] z-50 pointer-events-none">
@@ -53,9 +49,10 @@ const StoryView = ({ progress }: { progress: any }) => {
         </div>
 
         <div className="max-w-2xl w-full h-full pb-4">
-          <GSAPTextReveal 
+          <FramerTextReveal 
             text={STORY_TEXT}
-            textClassName="text-[14px] sm:text-[15px] md:text-[17px] lg:text-[19px] text-zinc-900 font-sans leading-[2] lg:leading-[2.2] tracking-normal font-medium"
+            progress={progress}
+            textClassName="text-[14px] sm:text-[15px] md:text-[17px] lg:text-[19px] font-sans leading-[2] lg:leading-[2.2] tracking-normal font-medium"
           />
         </div>
       </div>
@@ -85,7 +82,7 @@ export default function About() {
   const [hoverSide, setHoverSide] = useState<'burnout' | 'balance' | null>(null);
   
   return (
-    <div className="pt-0 pb-20 bg-[#0B0F19] text-white min-h-screen">
+    <div className="pt-0 pb-20 min-h-screen" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="About Emmanuel Odebiyi | Automation Specialist"
         description="How I went from drowning in content deadlines to building AI-powered marketing systems that deliver 520% ROI. My story, methodology, and why it works."
@@ -141,7 +138,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="flex flex-col gap-2 lg:gap-4 text-left pointer-events-none max-w-lg"
           >
-            <span className="text-[10px] md:text-[11px] font-mono text-gray-300 tracking-[0.4em] uppercase">The Origin Story</span>
+            <span className="text-[10px] md:text-[11px] font-sans font-bold text-white/60 tracking-[0.4em] uppercase">The Origin Story</span>
             <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-white leading-[0.9] md:leading-[0.85] drop-shadow-2xl">
               <motion.span 
                 initial={{ opacity: 0, y: 20 }}
@@ -214,32 +211,36 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 1 — "Hey, I'm Emmanuel." (dark)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#0B0F19] relative z-20">
+      <section className="py-24 md:py-32 relative z-20" style={{ backgroundColor: 'var(--bg-page)' }}>
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <div className="min-h-[140px] flex flex-col justify-start">
-            <TypewriterEffect 
-              words={[{ text: "Hey," }, { text: "I'm" }, { text: "Emmanuel." }]} 
-              className="text-left text-4xl md:text-5xl font-black text-white tracking-tight leading-tight" 
-              cursorClassName="bg-blue-500 h-8 md:h-12" 
-            />
-            <BlurFade delay={0.8} yOffset={20}>
-              <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed mt-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-left text-4xl md:text-5xl font-bold font-display tracking-tight leading-tight"
+              style={{ color: 'var(--text-body)' }}
+            >
+              Hey, I'm Emmanuel.
+            </motion.h2>
+            <BlurFade delay={0.5} yOffset={20}>
+              <p className="text-xl md:text-2xl font-light leading-relaxed mt-6" style={{ color: 'var(--text-muted)' }}>
                 I automate content marketing for businesses that are tired of the chaos.
               </p>
             </BlurFade>
           </div>
 
           {/* Empathy pull-quote */}
-          <blockquote className="border-l-4 border-blue-500 pl-6 py-2 text-lg md:text-xl text-gray-400 italic leading-relaxed mt-10">
+          <blockquote className="border-l-4 pl-6 py-2 text-lg md:text-xl italic leading-relaxed mt-10" style={{ borderColor: 'var(--accent-amber)', color: 'var(--text-muted)' }}>
             <ScrollMaskText text="You know the feeling—it's Sunday night, you're staring at a blank document that should've been written three days ago, and you're wondering why something that's supposed to drive growth feels more like drowning in quicksand." />
           </blockquote>
 
-          <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mt-10">
+          <p className="text-lg md:text-xl font-light leading-relaxed mt-10" style={{ color: 'var(--text-muted)' }}>
             <ScrollMaskText text="I've been there. Actually lived there for years." />
           </p>
 
-          <motion.p {...stagger(4)} className="text-2xl md:text-3xl font-bold text-white tracking-tight mt-10">
-            Now? I build the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">systems</span> that got me out—and I build them for businesses like yours.
+          <motion.p {...stagger(4)} className="text-2xl md:text-3xl font-bold tracking-tight mt-10" style={{ color: 'var(--text-body)' }}>
+            Now? I build the <span className="italic" style={{ color: 'var(--accent-amber)' }}>systems</span> that got me out—and I build them for businesses like yours.
           </motion.p>
         </article>
       </section>
@@ -248,13 +249,13 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 2 — Proof Bar
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-zinc-950/40 text-white overflow-hidden">
+      <section className="py-24 md:py-32 overflow-hidden" style={{ backgroundColor: 'var(--bg-surface-alt)', color: 'var(--text-body)' }}>
         <div className="max-w-6xl mx-auto px-6 space-y-16">
           {/* Section Label */}
           <motion.div {...fadeUp} className="text-center space-y-4">
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">The Short Version</span>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              I help growing businesses <span className="text-white font-semibold">(5–50 people, $500K–$10M revenue)</span> automate their content marketing so they can stop managing chaos and start seeing predictable results.
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>The Short Version</span>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light" style={{ color: 'var(--text-muted)' }}>
+              I help growing businesses <span className="font-semibold" style={{ color: 'var(--text-body)' }}>(5–50 people, $500K–$10M revenue)</span> automate their content marketing so they can stop managing chaos and start seeing predictable results.
             </p>
           </motion.div>
 
@@ -268,31 +269,25 @@ export default function About() {
               <motion.div
                 key={stat.label}
                 {...stagger(i)}
-                className="text-center p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-500 shadow-xl"
+                className="text-center p-8 rounded-3xl border transition-all duration-500"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                <motion.div 
-                  animate={{ backgroundPosition: ['200% center', '-200% center'] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                  className="text-6xl md:text-8xl font-black text-transparent bg-[length:200%_auto] bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-200 to-indigo-600 leading-none mb-3 drop-shadow-[0_0_20px_rgba(59,130,246,0.15)]"
-                >
-                  <NumberTicker value={stat.value} delay={0.3 + i * 0.2} className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-inherit" />
+                <div className="text-6xl md:text-8xl font-black leading-none mb-3 font-display" style={{ color: 'var(--accent-amber)' }}>
+                  <NumberTicker value={stat.value} delay={0.3 + i * 0.2} className="text-6xl md:text-8xl font-black font-display" />
                   <span>{stat.suffix}</span>
-                </motion.div>
-                <p className="text-sm font-mono text-gray-400 uppercase tracking-widest mb-2">{stat.label}</p>
-                <p className="text-xs text-gray-300">{stat.sub}</p>
+                </div>
+                <p className="text-sm font-sans font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>{stat.label}</p>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{stat.sub}</p>
               </motion.div>
             ))}
           </div>
 
-          {/* 3D Globe — between stats and global text */}
-          <div className="relative w-full py-12">
-            <Globe />
-          </div>
+
 
           {/* Global Badge */}
-          <motion.p {...fadeUp} className="text-center text-sm md:text-base font-semibold text-gray-300 tracking-wider">
+          <motion.p {...fadeUp} className="text-center text-sm md:text-base font-medium tracking-wider" style={{ color: 'var(--text-muted)' }}>
             Working remotely from Nigeria with businesses globally — US, UK, Canada, and beyond. <br className="hidden md:block" />
-            <span className="text-white font-bold block mt-2 text-lg">Time zones don't matter when you build systems that run 24/7.</span>
+            <span className="font-bold block mt-2 text-lg" style={{ color: 'var(--text-body)' }}>Time zones don't matter when you build systems that run 24/7.</span>
           </motion.p>
         </div>
       </section>
@@ -307,7 +302,7 @@ export default function About() {
             <>
               <motion.div {...fadeUp} className="space-y-4 mb-8">
                 <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">The Origin</span>
-                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tight leading-tight">
+                <h2 className="text-4xl md:text-7xl font-black text-zinc-900 dark:text-white tracking-tight leading-tight">
                   How a Kid from Osogbo <br />
                   <span className="text-blue-600">Ended Up Here</span>
                 </h2>
@@ -325,11 +320,11 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 4 — Breaking Point
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#0B0F19] border-t border-white/10">
+      <section className="py-24 md:py-32 border-t" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
-            <span className="text-xs font-mono text-red-400/80 uppercase tracking-[0.3em]">The Breaking Point</span>
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight">
+            <span className="text-xs font-sans font-bold text-red-500/80 uppercase tracking-[0.3em]">The Breaking Point</span>
+            <h2 className="text-4xl md:text-6xl font-bold font-display tracking-tight leading-tight" style={{ color: 'var(--text-body)' }}>
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -342,15 +337,15 @@ export default function About() {
           </h2>
           </motion.div>
 
-          <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mt-10">
+          <p className="text-lg md:text-xl font-light leading-relaxed mt-10" style={{ color: 'var(--text-muted)' }}>
             <ScrollMaskText text="The work never stops. The budgets never match the effort. And the pressure? Relentless." />
           </p>
 
-          <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mt-10">
+          <p className="text-lg md:text-xl font-light leading-relaxed mt-10" style={{ color: 'var(--text-muted)' }}>
             <ScrollMaskText text="I'd have clients wanting 10 blog posts by Friday with a budget that barely covered research for one. I'd spend 8 hours crafting the perfect piece, only to have the client ghost when it was time to pay." />
           </p>
 
-          <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mt-10">
+          <p className="text-lg md:text-xl font-light leading-relaxed mt-10" style={{ color: 'var(--text-muted)' }}>
             <ScrollMaskText text="Because there were only 24 hours in a day. And I was already using most of them." />
           </p>
 
@@ -363,12 +358,12 @@ export default function About() {
             <TextRevealByWord
               text="I remember writing at 2 AM because it was the only quiet time I had. I remember choosing between sleep and deadlines. Deadlines always won."
               className="h-[180vh]"
-              textClassName="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
+              textClassName="text-2xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white leading-tight"
             />
           </div>
 
-          <motion.p {...stagger(5)} className="text-lg md:text-xl text-gray-300 font-medium leading-relaxed">
-            <span className="text-red-600 font-black">The irony?</span> My clients were drowning in the exact same struggle.
+          <motion.p {...stagger(5)} className="text-lg md:text-xl font-medium leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            <span className="font-black" style={{ color: '#dc2626' }}>The irony?</span> My clients were drowning in the exact same struggle.
           </motion.p>
 
           {/* Full-width dark callout */}
@@ -377,9 +372,10 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white/5 text-white py-10 px-8 rounded-2xl text-center border border-white/10 backdrop-blur-md"
+            className="py-10 px-8 rounded-2xl text-center border"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
-            <p className="text-xl md:text-2xl font-bold leading-relaxed">
+            <p className="text-xl md:text-2xl font-bold leading-relaxed" style={{ color: 'var(--text-body)' }}>
               We were all trapped in the same broken system.
             </p>
           </motion.div>
@@ -390,65 +386,59 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 5 — The Pivot Moment
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-zinc-950/40 text-white border-y border-white/10">
+      <section className="py-24 md:py-32 border-y" style={{ backgroundColor: 'var(--bg-surface-alt)', color: 'var(--text-body)', borderColor: 'var(--border-card)' }}>
         <article className="max-w-4xl mx-auto px-6 space-y-12">
           <motion.div {...fadeUp} className="text-center space-y-4">
-            <span className="text-xs font-mono text-blue-600 uppercase tracking-[0.3em]">The Moment Everything Changed</span>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85]">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--accent-amber)' }}>The Moment Everything Changed</span>
+            <h2 className="text-5xl md:text-7xl font-bold font-display tracking-tighter leading-[0.85]" style={{ color: 'var(--text-body)' }}>
               November 2022.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">ChatGPT launched.</span>
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>ChatGPT launched.</span>
             </h2>
           </motion.div>
 
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-gray-300 font-light leading-relaxed text-center max-w-2xl mx-auto">
+          <motion.p {...stagger(1)} className="text-lg md:text-xl font-light leading-relaxed text-center max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Half the writers I knew panicked. "AI is going to replace us!" I had a different thought:
           </motion.p>
 
           {/* Pivotal Question */}
           <motion.p 
-            initial={{ opacity: 0, scale: 0.8, rotateX: 20 }}
-            whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.05, rotateX: 10, rotateY: -5 }}
-            transition={{ duration: 0.8, ease: [0.21, 0.45, 0.32, 0.9] }}
-            className="text-3xl md:text-4xl lg:text-5xl font-black italic text-center text-blue-600 drop-shadow-sm leading-tight py-6"
+            transition={{ duration: 0.6, ease: [0.21, 0.45, 0.32, 0.9] }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold font-display italic text-center leading-tight py-6"
+            style={{ color: 'var(--accent-amber)' }}
           >
             "Wait... could this actually solve my&nbsp;problem?"
           </motion.p>
 
-          <motion.p {...stagger(2)} className="text-lg md:text-xl text-gray-300 font-light leading-relaxed text-center max-w-2xl mx-auto">
-            My problem wasn't lack of skill. <span className="text-white font-semibold">It was lack of scale.</span>
+          <motion.p {...stagger(2)} className="text-lg md:text-xl font-light leading-relaxed text-center max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+            My problem wasn't lack of skill. <span className="font-semibold" style={{ color: 'var(--text-body)' }}>It was lack of scale.</span>
           </motion.p>
 
           {/* Mindset Shift Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             <motion.div 
               {...stagger(3)}
-              className="p-8 rounded-2xl bg-white/5 border border-red-500/20 shadow-xl backdrop-blur-md space-y-4"
+              className="p-8 rounded-2xl border space-y-4"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
-              <span className="text-xs font-mono text-red-500 uppercase tracking-widest">Old Thinking</span>
-              <p className="text-xl md:text-2xl font-bold text-gray-300 italic leading-snug">"How do I write faster?"</p>
-              <p className="text-xl md:text-2xl font-bold text-gray-300 italic leading-snug">"How do I manage more clients?"</p>
+              <span className="text-xs font-sans font-bold text-red-500/80 uppercase tracking-widest">Old Thinking</span>
+              <p className="text-xl md:text-2xl font-bold italic leading-snug" style={{ color: 'var(--text-muted)' }}>"How do I write faster?"</p>
+              <p className="text-xl md:text-2xl font-bold italic leading-snug" style={{ color: 'var(--text-muted)' }}>"How do I manage more clients?"</p>
             </motion.div>
             <motion.div 
               {...stagger(4)}
-              className="p-8 rounded-2xl bg-white/5 border border-blue-500/20 ring-1 ring-blue-500/10 shadow-xl backdrop-blur-md space-y-4"
+              className="p-8 rounded-2xl border space-y-4"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--accent-amber)' }}
             >
-              <span className="text-xs font-mono text-blue-600 uppercase tracking-widest">New Thinking</span>
-              <p className="text-xl md:text-2xl font-bold text-white italic leading-snug">"How do I build systems that write automatically?"</p>
-              <p className="text-xl md:text-2xl font-bold text-white italic leading-snug">"How do I build systems that manage themselves?"</p>
+              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>New Thinking</span>
+              <p className="text-xl md:text-2xl font-bold italic leading-snug" style={{ color: 'var(--text-body)' }}>"How do I build systems that write automatically?"</p>
+              <p className="text-xl md:text-2xl font-bold italic leading-snug" style={{ color: 'var(--text-body)' }}>"How do I build systems that manage themselves?"</p>
             </motion.div>
           </div>
 
-          <div className="h-[200px] md:h-[250px] flex items-center justify-center my-12 w-full overflow-hidden relative">
-            <GooeyText 
-              texts={["Writing Articles", "Building Engines", "Trading Time", "Scaling Impact", "Freelancer", "Automator"]} 
-              textClassName="text-white font-black italic tracking-tighter text-4xl md:text-6xl lg:text-7xl drop-shadow-sm"
-              morphTime={1.2}
-              cooldownTime={1.5}
-            />
-          </div>
-          <motion.p {...stagger(5)} className="text-center text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 pt-4">
+          <motion.p {...stagger(5)} className="text-center text-2xl md:text-3xl font-bold font-display italic pt-4" style={{ color: 'var(--accent-amber)' }}>
             That shift changed everything.
           </motion.p>
         </article>
@@ -458,11 +448,11 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 6 — Testimonials
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#0B0F19]">
+      <section className="py-24 md:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
         <div className="max-w-4xl mx-auto px-6 space-y-12">
           <motion.div {...fadeUp} className="text-center space-y-2">
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">What People Say</span>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Real Words from Real People</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>What People Say</span>
+            <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>Real words from real people.</h2>
           </motion.div>
 
           <div className="space-y-8">
@@ -486,19 +476,20 @@ export default function About() {
               <motion.figure
                 key={testimonial.name}
                 {...stagger(i)}
-                className="relative rounded-3xl bg-white/5 border border-white/10 p-8 md:p-10 hover:border-white/20 hover:shadow-2xl transition-all duration-500"
+                className="relative rounded-3xl border p-8 md:p-10 transition-all duration-500"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                <Quote className="absolute top-6 right-8 w-10 h-10 text-white/10" />
-                <blockquote className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mb-6 relative z-10 mt-6">
+                <Quote className="absolute top-6 right-8 w-10 h-10" style={{ color: 'var(--border-card)' }} />
+                <blockquote className="text-lg md:text-xl font-light leading-relaxed mb-6 relative z-10 mt-6" style={{ color: 'var(--text-muted)' }}>
                   <ScrollMaskText text={`"${testimonial.quote}"`} />
                 </blockquote>
                 <figcaption className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style={{ backgroundColor: 'var(--accent-amber)', color: '#fff' }}>
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-bold text-white">{testimonial.name}</p>
-                    <p className="text-sm text-gray-400">{testimonial.title}</p>
+                    <p className="font-bold" style={{ color: 'var(--text-body)' }}>{testimonial.name}</p>
+                    <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{testimonial.title}</p>
                   </div>
                 </figcaption>
               </motion.figure>
@@ -511,10 +502,10 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 7 — What I Believe
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#0B0F19] text-white border-y border-white/10">
+      <section className="py-24 md:py-32 border-y" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)', borderColor: 'var(--border-card)' }}>
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
-            <span className="text-xs font-mono text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 uppercase tracking-[0.3em]">What I Believe</span>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--accent-amber)' }}>What I Believe</span>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight min-h-[100px]">
               <TextEffect per="word" preset="slide">
                 Working harder doesn't guarantee better results.
@@ -522,23 +513,23 @@ export default function About() {
             </h2>
           </motion.div>
 
-          <motion.p {...stagger(1)} className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
+          <motion.p {...stagger(1)} className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             I know. In a world obsessed with hustle culture, that sounds almost blasphemous. But I've seen it play out too many times. You can grind 80-hour weeks and get nowhere. Or you can build the right system and get exceptional results with 20 hours of focused work.
           </motion.p>
 
-          <motion.p {...stagger(2)} className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">
+          <motion.p {...stagger(2)} className="text-2xl md:text-3xl font-bold font-display italic" style={{ color: 'var(--accent-amber)' }}>
             The difference isn't effort. It's systems.
           </motion.p>
 
           {/* Scripture */}
-          <motion.blockquote {...stagger(3)} className="border-l-4 border-blue-500 pl-6 py-3">
-            <p className="text-xl md:text-2xl text-gray-300 italic leading-relaxed">
+          <motion.blockquote {...stagger(3)} className="border-l-4 pl-6 py-3" style={{ borderColor: 'var(--accent-amber)' }}>
+            <p className="text-xl md:text-2xl italic leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               "Do you see someone skilled in their work? They will serve before kings; they will not serve before officials of low rank."
             </p>
-            <cite className="block mt-3 text-sm font-mono text-gray-400 not-italic">— Proverbs 22:29</cite>
+            <cite className="block mt-3 text-sm font-sans not-italic" style={{ color: 'var(--text-muted)' }}>— Proverbs 22:29</cite>
           </motion.blockquote>
 
-          <motion.p {...stagger(4)} className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
+          <motion.p {...stagger(4)} className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             My faith shapes how I work. I believe in doing exceptional work, using the gifts God's given me wisely, and serving others with integrity. That means building systems that genuinely work—not just collecting fees and disappearing.
           </motion.p>
         </article>
@@ -548,11 +539,11 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 8 — Personal Life
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-zinc-950/40 border-b border-white/10">
+      <section className="py-24 md:py-32 border-b" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-4xl mx-auto px-6 space-y-12">
           <motion.div {...fadeUp} className="text-center space-y-2">
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">Beyond the Keyboard</span>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">When I'm Not Building Systems</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>Beyond the Keyboard</span>
+            <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>When I'm not building systems.</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -564,18 +555,19 @@ export default function About() {
             ].map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.02, rotate: i % 2 === 0 ? 1 : -1 }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: [0.21, 0.45, 0.32, 0.9] }}
-                className="relative overflow-hidden p-8 rounded-3xl bg-white/5 border border-white/10 transition-all duration-500 group shadow-xl hover:shadow-2xl hover:border-white/20 hover:shadow-blue-500/10 cursor-default backdrop-blur-md"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="relative overflow-hidden p-8 rounded-3xl border transition-all duration-300 cursor-default"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 text-gray-300 group-hover:bg-blue-500/10 group-hover:border-blue-500/50 transition-colors duration-300 shadow-sm">
+                <div className="w-12 h-12 rounded-2xl border flex items-center justify-center mb-6" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)', color: 'var(--accent-amber)' }}>
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all duration-300">{item.title}</h3>
-                <p className="text-sm text-gray-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: item.desc }} />
+                <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--text-body)' }}>{item.title}</h3>
+                <p className="text-sm font-light leading-relaxed" style={{ color: 'var(--text-muted)' }} dangerouslySetInnerHTML={{ __html: item.desc }} />
               </motion.div>
             ))}
           </div>
@@ -586,11 +578,11 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 9 — Where I'm Going
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#0B0F19]">
+      <section className="py-24 md:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
         <article className="max-w-3xl mx-auto px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">Where I'm Going</span>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>Where I'm Going</span>
+            <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight leading-tight" style={{ color: 'var(--text-body)' }}>
              <motion.span
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -603,34 +595,34 @@ export default function About() {
           </h2>
           </motion.div>
 
-          <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mt-10">
+          <p className="text-lg md:text-xl font-light leading-relaxed mt-10" style={{ color: 'var(--text-muted)' }}>
             <ScrollMaskText text="Today, I build content marketing automation systems for businesses across continents. I'm certified in AI automation (n8n Academy), advanced SEO (Semrush), and marketing automation." />
           </p>
 
           {/* Certification badges */}
           <motion.div {...stagger(2)} className="flex flex-wrap gap-3">
             {['AI Automation · n8n', 'Advanced SEO · Semrush', 'Marketing Automation · Coursera', 'Prompt Engineering · LinkedIn'].map(cert => (
-              <span key={cert} className="px-4 py-2 rounded-full bg-white/5 text-gray-300 text-xs font-mono tracking-wide border border-white/10 backdrop-blur-sm">{cert}</span>
+              <span key={cert} className="px-4 py-2 rounded-full text-xs font-sans font-medium tracking-wide border" style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-muted)', borderColor: 'var(--border-card)' }}>{cert}</span>
             ))}
           </motion.div>
 
-          <motion.p {...stagger(3)} className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-            But honestly? The metrics matter less than the mission. I get to solve the exact problem I once lived. The overwhelmed business owner juggling 47 priorities? <strong className="text-white font-semibold">Been there.</strong> The person who knows what needs to happen but doesn't have bandwidth? <strong className="text-white font-semibold">Lived that.</strong>
+          <motion.p {...stagger(3)} className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            But honestly? The metrics matter less than the mission. I get to solve the exact problem I once lived. The overwhelmed business owner juggling 47 priorities? <strong className="font-semibold" style={{ color: 'var(--text-body)' }}>Been there.</strong> The person who knows what needs to happen but doesn't have bandwidth? <strong className="font-semibold" style={{ color: 'var(--text-body)' }}>Lived that.</strong>
           </motion.p>
 
           <motion.div {...stagger(4)} className="space-y-6">
-            <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-              <strong className="text-white font-bold">Future focus:</strong> I'm targeting opportunities with businesses in the US, UK, and Canada—operating at a global standard and working with companies pushing boundaries.
+            <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <strong className="font-bold" style={{ color: 'var(--text-body)' }}>Future focus:</strong> I'm targeting opportunities with businesses in the US, UK, and Canada—operating at a global standard and working with companies pushing boundaries.
             </p>
-            <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-              I'm expanding into <strong className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 font-bold">motion graphics and 3D visualization</strong> for content marketing. Because the future of content isn't just written—it's visual, interactive, immersive.
+            <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              I'm expanding into <strong className="font-bold italic" style={{ color: 'var(--accent-amber)' }}>motion graphics and 3D visualization</strong> for content marketing. Because the future of content isn't just written—it's visual, interactive, immersive.
             </p>
-            <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-              And I'm <strong className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 font-bold">building in public</strong>, sharing what I learn, showing other professionals what's possible when you combine traditional marketing skills with modern automation.
+            <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              And I'm <strong className="font-bold italic" style={{ color: 'var(--accent-amber)' }}>building in public</strong>, sharing what I learn, showing other professionals what's possible when you combine traditional marketing skills with modern automation.
             </p>
           </motion.div>
 
-          <motion.p {...stagger(5)} className="text-2xl md:text-3xl font-black italic text-white tracking-tight pt-4">
+          <motion.p {...stagger(5)} className="text-2xl md:text-3xl font-bold font-display italic tracking-tight pt-4" style={{ color: 'var(--text-body)' }}>
             Now I build the solution I wish I'd had back then.
           </motion.p>
         </article>
@@ -640,11 +632,11 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           JOURNEY CARDS — My Story / My Approach
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#0B0F19] relative">
+      <section className="py-24 md:py-32 relative" style={{ backgroundColor: 'var(--bg-surface-alt)' }}>
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <motion.div {...fadeUp} className="text-center space-y-2 mb-16">
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">Want to Go Deeper?</span>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Explore the Full Picture</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>Want to Go Deeper?</span>
+            <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>Explore the full picture.</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
@@ -696,31 +688,33 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           CTA SECTION
       ═══════════════════════════════════════════ */}
-      <section id="contact-cta" className="py-24 md:py-32 bg-zinc-950/50 border-t border-white/10 backdrop-blur-sm">
+      <section id="contact-cta" className="py-24 md:py-32 border-t" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-4xl mx-auto px-6 text-center space-y-12">
           <motion.div {...fadeUp} className="space-y-4">
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-[0.3em]">Next Steps</span>
-            <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight leading-snug">Ready to Build <br/>Something That Works?</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>Next Steps</span>
+            <h2 className="text-5xl md:text-6xl font-bold font-display tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>Ready to Build <br/>Something That Works?</h2>
           </motion.div>
 
           <motion.div {...stagger(1)} className="flex flex-col sm:flex-row justify-center gap-8">
             <Link 
               to="/resume"
-              className="px-10 py-5 border border-white/20 text-white font-bold rounded-[2rem] hover:bg-white/10 bg-white/5 transition-all flex items-center justify-center gap-3"
+              className="px-10 py-5 font-bold rounded-[2rem] transition-all flex items-center justify-center gap-3 border"
+              style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)', color: 'var(--text-body)' }}
             >
               View My Resume <ArrowRight size={20} />
             </Link>
             <Link 
               to="/contact"
-              className="px-10 py-5 bg-brand-gradient text-zinc-900 font-bold rounded-[2rem] hover:brightness-110 transition-all shadow-xl shadow-indigo-500/20 flex items-center justify-center gap-3"
+              className="px-10 py-5 font-bold rounded-[2rem] transition-all hover:brightness-110 flex items-center justify-center gap-3"
+              style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
             >
               Book Your Call <ArrowRight size={20} />
             </Link>
           </motion.div>
           
-          <motion.div {...stagger(2)} className="flex justify-center flex-wrap items-center gap-8 text-gray-400 font-mono text-xs uppercase tracking-widest pt-8">
-            <span className="flex items-center gap-2"><Mail size={14} className="text-brand-gradient" /> Free 30-minute call</span>
-            <span className="flex items-center gap-2"><MessageSquare size={14} className="text-brand-gradient" /> No pitch, just strategy</span>
+          <motion.div {...stagger(2)} className="flex justify-center flex-wrap items-center gap-8 text-xs font-sans font-bold uppercase tracking-widest pt-8" style={{ color: 'var(--text-muted)' }}>
+            <span className="flex items-center gap-2"><Mail size={14} style={{ color: 'var(--accent-amber)' }} /> Free 30-minute call</span>
+            <span className="flex items-center gap-2"><MessageSquare size={14} style={{ color: 'var(--accent-amber)' }} /> No pitch, just strategy</span>
           </motion.div>
         </div>
       </section>

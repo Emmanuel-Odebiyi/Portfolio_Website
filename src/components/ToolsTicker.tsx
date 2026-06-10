@@ -17,7 +17,7 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
   const duplicatedTools = [...tools, ...tools, ...tools];
 
   return (
-    <div className="relative w-full overflow-hidden bg-transparent py-16 border-y border-white/5 flex justify-center">
+    <div className="relative w-full overflow-hidden bg-transparent py-16 border-y flex justify-center" style={{ borderColor: 'var(--border-card)' }}>
       <div className="flex whitespace-nowrap overflow-hidden max-w-[100vw]">
         <motion.div
           className="flex gap-6 md:gap-8 items-center min-w-max"
@@ -34,7 +34,8 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
           {duplicatedTools.map((tool, i) => (
             <MagneticPull key={i} strength={0.25} radius={14}>
               <div
-                className="flex items-center gap-4 px-6 py-4.5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group transition-all duration-300 hover:border-indigo-500/30 hover:bg-white/10 hover:shadow-2xl hover:shadow-indigo-500/10"
+                className="flex items-center gap-4 px-6 py-4.5 rounded-2xl border group transition-all duration-300 shadow-sm hover:shadow-md"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
                 {tool.logo ? (
                   <img
@@ -46,11 +47,11 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-7 h-7 flex items-center justify-center text-zinc-400 group-hover:text-indigo-400 transition-colors duration-500">
+                  <div className="w-7 h-7 flex items-center justify-center transition-colors duration-500" style={{ color: 'var(--text-muted)' }}>
                     {tool.icon}
                   </div>
                 )}
-                <span className="text-lg font-bold text-zinc-400 group-hover:text-white transition-colors duration-500">
+                <span className="text-lg font-bold transition-colors duration-500" style={{ color: 'var(--text-muted)' }}>
                   {tool.name}
                 </span>
               </div>
@@ -59,9 +60,9 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
         </motion.div>
       </div>
 
-      {/* Gradient Overlays for smooth fade in dark theme */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0f1e] via-[#0a0f1e]/70 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0f1e] via-[#0a0f1e]/70 to-transparent z-10 pointer-events-none" />
+      {/* Gradient Overlays for smooth fade in theme color */}
+      <div className="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--bg-page), transparent)' }} />
+      <div className="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--bg-page), transparent)' }} />
     </div>
   );
 };

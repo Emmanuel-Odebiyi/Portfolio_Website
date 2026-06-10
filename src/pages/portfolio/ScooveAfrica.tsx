@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowLeft, 
@@ -62,7 +62,7 @@ export default function ScooveAfrica() {
       title: "Topic Cluster Architecture",
       desc: "Structured H1, H2, H3 headings and built dense internal links to relative reviews.",
       before: "Isolated pages without context",
-      after: "Interconnected hubs signaling deep topic expertise",
+      after: "Interconnected hubs signaling topic expertise",
       badge: "Topical Authority"
     },
     {
@@ -84,16 +84,12 @@ export default function ScooveAfrica() {
   ];
 
   return (
-    <div className="bg-[#0B0F19] text-white min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="The Scoove Africa SEO Case Study | Emmanuel Odebiyi"
         description="Read how I boosted organic traffic by 150% and moved Google search rankings from Position 45 to #8 for The Scoove Africa."
         keywords="entertainment SEO strategy, organic traffic growth, keyword mapping case study, click-through rate optimization, Lagos SEO specialist"
       />
-
-      {/* Ambient glows */}
-      <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] bg-teal-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-[20%] left-[-10%] w-[50vw] h-[50vw] bg-blue-500/5 rounded-full blur-[130px] pointer-events-none z-0" />
 
       <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
         
@@ -101,7 +97,8 @@ export default function ScooveAfrica() {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
           <Link 
             to="/portfolio" 
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-16 group font-medium px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm"
+            className="inline-flex items-center gap-2 transition-colors mb-16 group font-sans font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full border backdrop-blur-md"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
           >
             <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform" />
             Back to Portfolio
@@ -110,111 +107,121 @@ export default function ScooveAfrica() {
 
         {/* Hero Section */}
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 text-xs font-mono text-teal-400 tracking-[0.2em] uppercase">
-              <Sparkles size={12} className="text-teal-400" />
+          <div className="lg:col-span-7 space-y-8 text-left">
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-teal)' }}
+            >
+              <Sparkles size={12} />
               Featured Case Study · SEO Strategy
             </div>
             
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05]">
-              Attracting the Right Audience, <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400">Step by Structured Step.</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] font-display" style={{ color: 'var(--text-body)' }}>
+              Attracting the Right Audience, <br />
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>Step by Structured Step.</span>
             </h1>
 
-            <p className="text-xl text-zinc-400 font-light leading-relaxed">
+            <p className="text-xl font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
               The Scoove Africa was publishing beautiful, creative articles that weren't optimized for discovery. By aligning content with intent, optimizing structure, and fixing speed barriers, I drove a 150% traffic spike in 4 months.
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Local SEO</span>
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">On-Page Strategy</span>
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Topic Clusters</span>
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Media & Entertainment</span>
+              {["Local SEO", "On-Page Strategy", "Topic Clusters", "Media & Entertainment"].map((tag) => (
+                <span 
+                  key={tag} 
+                  className="px-4 py-1.5 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+                  style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
 
           <div className="lg:col-span-5 relative">
-            <div className="p-8 rounded-[2.5rem] bg-zinc-950/80 border border-white/10 backdrop-blur-md shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-[60px] pointer-events-none" />
-              
+            <div 
+              className="p-8 rounded-[2.5rem] border backdrop-blur-md shadow-2xl relative overflow-hidden text-left"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
               <div className="space-y-6">
-                <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block text-center lg:text-left">Project Metadata</span>
+                <span className="text-xs font-sans font-bold uppercase tracking-widest block text-center lg:text-left" style={{ color: 'var(--text-muted)' }}>Project Metadata</span>
                 
-                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Client</p>
-                    <p className="text-base font-semibold text-white">The Scoove Africa</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Client</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>The Scoove Africa</p>
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Timeline</p>
-                    <p className="text-base font-semibold text-white">4 Months</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Timeline</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>4 Months</p>
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Industry</p>
-                    <p className="text-base font-semibold text-white">Entertainment Media</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Industry</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>Entertainment Media</p>
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Key Metric</p>
-                    <p className="text-base font-semibold text-teal-400">+150% Traffic</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Key Metric</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--accent-teal)' }}>+150% Traffic</p>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-white/5 text-center">
-                  <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">{impressionAnim.toLocaleString()}+</div>
-                  <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Monthly Search Impressions</div>
+                <div className="pt-6 border-t text-center" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="text-5xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{impressionAnim.toLocaleString()}+</div>
+                  <div className="text-[10px] font-sans font-bold uppercase tracking-wider mt-1" style={{ color: 'var(--text-muted)' }}>Monthly Search Impressions</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Counters & Live climbing Simulation */}
-        <div className="mb-32 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="p-10 rounded-[2.5rem] bg-zinc-950/80 border border-white/10 backdrop-blur-md shadow-2xl flex flex-col items-center justify-center gap-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-[60px] pointer-events-none" />
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">Live SERP Climber Demo</span>
+        {/* Stats Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-16">
+          {[
+            { val: '+150%', title: 'Organic Traffic', sub: 'Within 4 Months' },
+            { val: '-25%', title: 'Bounce Rate', sub: 'Longer user sessions' },
+            { val: '+40%', title: 'Click-Through Rate', sub: 'Optimized metadata' },
+            { val: '20+', title: 'Page 1 Keywords', sub: 'Topical authority hubs' }
+          ].map((card, i) => (
+            <div 
+              key={i}
+              className="p-6 rounded-2xl border text-center flex flex-col justify-center interactive-card"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div className="text-3xl font-bold font-display mb-1" style={{ color: 'var(--accent-teal)' }}>{card.val}</div>
+              <div className="text-sm font-bold" style={{ color: 'var(--text-body)' }}>{card.title}</div>
+              <div className="text-xs font-sans font-bold" style={{ color: 'var(--text-muted)' }}>{card.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Live climbing Simulation */}
+        <div className="mb-32 max-w-3xl mx-auto">
+          <div 
+            className="p-10 rounded-[2.5rem] border backdrop-blur-md shadow-2xl flex flex-col items-center justify-center gap-6 relative overflow-hidden"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Live SERP Climber Demo</span>
             <div className="flex items-end gap-6">
               <div className="text-center">
-                <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Starting Spot</div>
-                <div className="text-6xl font-black text-red-400 line-through opacity-60">#45</div>
+                <div className="text-sm font-sans font-bold uppercase mb-2" style={{ color: 'var(--text-muted)' }}>Starting Spot</div>
+                <div className="text-6xl font-bold font-display line-through opacity-40" style={{ color: 'var(--text-body)' }}>#45</div>
               </div>
-              <ArrowRight className="text-zinc-600 mb-3" size={32} />
+              <ArrowRight className="mb-3" size={32} style={{ color: 'var(--border-card)' }} />
               <div className="text-center">
-                <div className="text-sm font-mono text-zinc-500 uppercase mb-2">Optimized Rank</div>
+                <div className="text-sm font-sans font-bold uppercase mb-2" style={{ color: 'var(--text-muted)' }}>Optimized Rank</div>
                 <motion.div 
                   animate={{ scale: rankingAnim === 8 ? [1, 1.15, 1] : 1 }}
                   transition={{ duration: 0.4 }}
-                  className="text-7xl font-black text-teal-400"
+                  className="text-7xl font-bold font-display"
+                  style={{ color: 'var(--accent-teal)' }}
                 >
                   #{rankingAnim}
                 </motion.div>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+            <div className="flex items-center gap-2 text-xs font-sans font-bold" style={{ color: 'var(--accent-teal)' }}>
               <TrendingUp size={12} />
               Target article moved to Page 1 in 90 days!
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-              <div className="text-3xl font-black text-teal-400 mb-1">+150%</div>
-              <div className="text-sm font-semibold text-white">Organic Traffic</div>
-              <div className="text-xs text-zinc-500 font-mono">Within 4 Months</div>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-              <div className="text-3xl font-black text-teal-400 mb-1">-25%</div>
-              <div className="text-sm font-semibold text-white">Bounce Rate</div>
-              <div className="text-xs text-zinc-500 font-mono">Longer user sessions</div>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-              <div className="text-3xl font-black text-teal-400 mb-1">+40%</div>
-              <div className="text-sm font-semibold text-white">Click-Through Rate</div>
-              <div className="text-xs text-zinc-500 font-mono">Optimized metadata</div>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-              <div className="text-3xl font-black text-teal-400 mb-1">20+</div>
-              <div className="text-sm font-semibold text-white">Page 1 Keywords</div>
-              <div className="text-xs text-zinc-500 font-mono">Topical authority hubs</div>
             </div>
           </div>
         </div>
@@ -224,9 +231,9 @@ export default function ScooveAfrica() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-32 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group bg-zinc-950/40 p-4"
+          className="mb-32 rounded-[2.5rem] overflow-hidden border shadow-2xl relative group p-4"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent z-10 pointer-events-none" />
           <img 
             src="/images/scoove_analytics.png" 
             alt="The Scoove Africa SEO Ranking Climber and SERP Analytics Mockup" 
@@ -237,47 +244,53 @@ export default function ScooveAfrica() {
         </motion.div>
 
         {/* The Challenge & The Solution */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
-          <div className="p-8 sm:p-12 rounded-3xl bg-white/5 border border-white/10 space-y-6">
-            <span className="text-xs font-mono text-red-400 uppercase tracking-widest">The Problem</span>
-            <h3 className="text-3xl font-bold text-white tracking-tight">Sporadic Publishing & Stagnant Reach</h3>
-            <p className="text-zinc-300 font-light leading-relaxed">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32 text-left">
+          <div 
+            className="p-8 sm:p-12 rounded-3xl border space-y-6"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--color-danger)' }}>The Problem</span>
+            <h3 className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Sporadic Publishing & Stagnant Reach</h3>
+            <p className="font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
               Despite publishing excellent, creative local content, the website had a hard time ranking. When I conducted an in-depth audit of their site content, three key gaps stood out:
             </p>
-            <ul className="space-y-3 text-sm text-zinc-400 font-light">
+            <ul className="space-y-3 text-sm font-light" style={{ color: 'var(--text-body)' }}>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                <strong>Lack of search-intent matching:</strong> Content was written purely on feelings, missing targeted terms.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ backgroundColor: 'var(--color-danger)' }} />
+                <span><strong>Lack of search-intent matching:</strong> Content was written purely on feelings, missing targeted terms.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                <strong>Inconsistent structure:</strong> Pages lacked structural H2/H3 layouts, missing metadata, and had poor image tagging.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ backgroundColor: 'var(--color-danger)' }} />
+                <span><strong>Inconsistent structure:</strong> Pages lacked structural H2/H3 layouts, missing metadata, and had poor image tagging.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                <strong>High bounce rates:</strong> Readers who landed on the site left quickly as there was no clear internal linking structure to hold them.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ backgroundColor: 'var(--color-danger)' }} />
+                <span><strong>High bounce rates:</strong> Readers who landed on the site left quickly as there was no clear internal linking structure to hold them.</span>
               </li>
             </ul>
           </div>
 
-          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-teal-500/10 to-emerald-500/5 border border-teal-500/20 space-y-6">
-            <span className="text-xs font-mono text-teal-400 uppercase tracking-widest">The SEO Strategy</span>
-            <h3 className="text-3xl font-bold text-white tracking-tight">Structured Content Alignment & Technical Audits</h3>
-            <p className="text-zinc-300 font-light leading-relaxed">
+          <div 
+            className="p-8 sm:p-12 rounded-3xl border space-y-6"
+            style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-teal)' }}>The SEO Strategy</span>
+            <h3 className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Structured Content Alignment & Technical Audits</h3>
+            <p className="font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
               I designed a 4-layered framework prioritizing topical authority, readability optimization, and technical performance corrections:
             </p>
-            <ul className="space-y-3 text-sm text-zinc-400 font-light">
+            <ul className="space-y-3 text-sm font-light" style={{ color: 'var(--text-body)' }}>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400 mt-2 shrink-0" />
-                <strong>Geographical targeting:</strong> Aligned topics with high-intent keywords (e.g. \"best restaurants on Lagos Mainland\").
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ backgroundColor: 'var(--accent-teal)' }} />
+                <span><strong>Geographical targeting:</strong> Aligned topics with high-intent keywords (e.g. \"best restaurants on Lagos Mainland\").</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400 mt-2 shrink-0" />
-                <strong>Topic clustering:</strong> Grouped reviews around core pillars with strict parent/child page relationship structures.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ backgroundColor: 'var(--accent-teal)' }} />
+                <span><strong>Topic clustering:</strong> Grouped reviews around core pillars with parent/child relationship structures.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400 mt-2 shrink-0" />
-                <strong>Core Speed Auditing:</strong> Compressed heavy imagery, configured browser caching, and set structured article schemas.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ backgroundColor: 'var(--accent-teal)' }} />
+                <span><strong>Core Speed Auditing:</strong> Compressed heavy imagery, configured browser caching, and set structured article schemas.</span>
               </li>
             </ul>
           </div>
@@ -286,38 +299,42 @@ export default function ScooveAfrica() {
         {/* Tactic Table */}
         <div className="mb-32">
           <div className="text-center mb-16 space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">Before & After</span>
-            <h2 className="text-4xl font-bold text-white tracking-tight">Tactic Execution & Enhancements</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Before & After</span>
+            <h2 className="text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Tactic Execution & Enhancements</h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-6 text-left">
             {seoTactics.map((tactic, i) => (
               <div 
                 key={i}
-                className="p-8 rounded-3xl bg-zinc-950/40 border border-white/10 hover:border-teal-500/30 transition-all grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                className="p-8 rounded-3xl border transition-all grid grid-cols-1 lg:grid-cols-12 gap-8 items-center interactive-card"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
                 <div className="lg:col-span-3 flex items-center gap-4">
-                  <div className="text-5xl font-black text-zinc-700 font-mono">{tactic.step}</div>
+                  <div className="text-5xl font-bold font-sans" style={{ color: 'var(--border-card)' }}>{tactic.step}</div>
                   <div>
-                    <h3 className="font-bold text-white text-lg leading-snug">{tactic.title}</h3>
-                    <span className="text-[10px] font-mono text-teal-400 uppercase tracking-widest px-2 py-0.5 rounded-md bg-teal-500/10 border border-teal-500/20 mt-1 inline-block">
+                    <h3 className="font-bold text-lg leading-snug" style={{ color: 'var(--text-body)' }}>{tactic.title}</h3>
+                    <span 
+                      className="text-[10px] font-sans font-bold uppercase tracking-widest px-2 py-0.5 rounded-md border mt-1 inline-block"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-teal)' }}
+                    >
                       {tactic.badge}
                     </span>
                   </div>
                 </div>
 
-                <p className="lg:col-span-4 text-zinc-400 font-light text-sm leading-relaxed">
+                <p className="lg:col-span-4 font-light text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                   {tactic.desc}
                 </p>
 
                 <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-white/5 border border-white/5 text-xs">
-                    <p className="text-zinc-500 font-mono uppercase text-[9px] mb-1">Before</p>
-                    <p className="text-zinc-400 line-through font-light leading-relaxed">{tactic.before}</p>
+                  <div className="p-4 rounded-xl border text-xs" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                    <p className="font-sans font-bold uppercase text-[9px] mb-1" style={{ color: 'var(--text-muted)' }}>Before</p>
+                    <p className="font-light leading-relaxed line-through" style={{ color: 'var(--text-muted)' }}>{tactic.before}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-teal-500/5 border border-teal-500/20 text-xs">
-                    <p className="text-teal-400 font-mono uppercase text-[9px] mb-1">After Optimization</p>
-                    <p className="text-white font-semibold leading-relaxed">{tactic.after}</p>
+                  <div className="p-4 rounded-xl border text-xs" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
+                    <p className="font-sans font-bold uppercase text-[9px] mb-1" style={{ color: 'var(--accent-teal)' }}>After Optimization</p>
+                    <p className="font-bold leading-relaxed" style={{ color: 'var(--text-body)' }}>{tactic.after}</p>
                   </div>
                 </div>
               </div>
@@ -328,40 +345,31 @@ export default function ScooveAfrica() {
         {/* Takeaway Bento Grid */}
         <div className="mb-32 space-y-12">
           <div className="text-center space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">Important Lessons</span>
-            <h2 className="text-4xl font-bold text-white tracking-tight">Key Takeaways</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Important Lessons</span>
+            <h2 className="text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Key Takeaways</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-3xl bg-zinc-950/40 border border-white/10 space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
-                <Globe size={24} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            {[
+              { icon: <Globe size={24} />, title: 'Value & Discovery Go Together', desc: 'Even the most creative, high-quality copy cannot convert or build an audience if it is not discoverable through organic search parameters.' },
+              { icon: <TrendingDown size={24} />, title: 'Format for High Cognitive Load', desc: 'Dropping bounce rates by 25% was achieved by re-formatting text into responsive lists, micro paragraphs, and clean visual cards that invite reading.' },
+              { icon: <Zap size={24} />, title: 'Micro Changes Compound', desc: 'Small adjustments like structured metadata, context-rich alt text, and logical internal links create massive search performance leaps.' }
+            ].map((takeaway, i) => (
+              <div 
+                key={i}
+                className="p-8 rounded-3xl border space-y-4 interactive-card"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <div 
+                  className="w-12 h-12 rounded-2xl border flex items-center justify-center"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-teal)' }}
+                >
+                  {takeaway.icon}
+                </div>
+                <h3 className="font-bold text-lg" style={{ color: 'var(--text-body)' }}>{takeaway.title}</h3>
+                <p className="font-light text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{takeaway.desc}</p>
               </div>
-              <h3 className="font-bold text-white text-lg">Value & Discovery Go Together</h3>
-              <p className="text-zinc-400 font-light text-sm leading-relaxed">
-                Even the most creative, high-quality copy cannot convert or build an audience if it is not discoverable through organic search parameters.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-zinc-950/40 border border-white/10 space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
-                <TrendingDown size={24} />
-              </div>
-              <h3 className="font-bold text-white text-lg">Format for High Cognitive Load</h3>
-              <p className="text-zinc-400 font-light text-sm leading-relaxed">
-                Dropping bounce rates by 25% was achieved by re-formatting text into responsive lists, micro paragraphs, and clean visual cards that invite reading.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-zinc-950/40 border border-white/10 space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
-                <Zap size={24} />
-              </div>
-              <h3 className="font-bold text-white text-lg">Micro Changes Compound</h3>
-              <p className="text-zinc-400 font-light text-sm leading-relaxed">
-                Small adjustments like structured metadata, context-rich alt text, and logical internal links create massive search performance leaps.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -371,18 +379,19 @@ export default function ScooveAfrica() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center space-y-6 pt-12 border-t border-white/10"
+          className="text-center space-y-6 pt-12 border-t"
+          style={{ borderColor: 'var(--border-card)' }}
         >
-          <span className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em] block">SEO Engineering</span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+          <span className="text-xs font-sans font-bold uppercase tracking-[0.3em] block" style={{ color: 'var(--text-muted)' }}>SEO Engineering</span>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
             Ready to Build Your Search Visibility?
           </h2>
-          <p className="text-zinc-400 font-light max-w-xl mx-auto">
+          <p className="font-light max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Book a free 30-minute search strategy audit and let's uncover your site's keyword potential and competitor ranking gaps.
           </p>
           <Link 
             to="/contact"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 text-white font-black text-lg hover:brightness-110 shadow-2xl shadow-teal-500/20 active:scale-95 transition-all"
+            className="btn-cta text-lg cursor-pointer"
           >
             Claim Your Free Audit Call
             <ArrowRight size={20} />

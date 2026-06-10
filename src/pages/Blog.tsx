@@ -52,21 +52,15 @@ export default function Blog() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e] text-[#f8fafc] overflow-hidden">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Growth Intelligence Blog | Emmanuel Odebiyi"
         description="Practical, no-fluff guides on content marketing automation, organic SEO frameworks, and AI workflows for B2B SaaS and high-growth businesses."
         keywords="marketing automation blog, SEO strategies, AI content implementation, B2B organic growth, Emmanuel Odebiyi"
       />
-      
-      {/* Dynamic Background Aurora */}
-      <div className="absolute top-0 left-0 w-full h-[500px] overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[80%] rounded-full bg-blue-600/10 blur-[120px] aurora-orb-1" />
-        <div className="absolute top-[-10%] right-[-10%] w-[45%] h-[75%] rounded-full bg-indigo-600/10 blur-[120px] aurora-orb-2" />
-      </div>
 
       {/* Full Viewport Cinematic Featured Post Hero */}
-      <section className="relative h-[90vh] md:h-screen w-full overflow-hidden group z-10 border-b border-white/5">
+      <section className="relative h-[90vh] md:h-screen w-full overflow-hidden group z-10 border-b" style={{ borderColor: 'var(--border-card)' }}>
         <Link to={`/blog/${featuredPost.id}`}>
           <motion.div 
             initial={{ scale: 1.05 }}
@@ -82,9 +76,11 @@ export default function Blog() {
               className="w-full h-full object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-103"
               referrerPolicy="no-referrer"
             />
+            {/* Top-down dark overlay to bring out the header text and logo */}
+            <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/70 via-[#0E1C2A]/30 to-transparent pointer-events-none z-10" />
             {/* Dark glassmorphic gradient overlay for crisp readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/60 to-black/30" />
-            <div className="absolute inset-0 bg-[#0a0f1e]/20" />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-page) 0%, transparent 100%)', opacity: 0.8 }} />
+            <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-page)', opacity: 0.15 }} />
           </motion.div>
 
           <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12">
@@ -97,19 +93,22 @@ export default function Blog() {
               >
                 {/* Tag and read time badge */}
                 <div className="flex items-center gap-3">
-                  <span className="px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-[#60a5fa] bg-blue-500/10 border border-blue-500/20 rounded-full backdrop-blur-md">
+                  <span 
+                    className="px-3.5 py-1 text-xs font-sans font-bold uppercase tracking-widest border rounded-full backdrop-blur-md"
+                    style={{ color: 'var(--accent-amber)', borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}
+                  >
                     Featured Insight
                   </span>
-                  <span className="text-xs text-zinc-400 font-mono flex items-center gap-1.5">
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
                     <Clock size={12} /> {featuredPost.readTime}
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[0.95] font-display">
+                <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] font-display" style={{ color: 'var(--text-body)' }}>
                   {featuredPost.title}
                 </h1>
                 
-                <p className="text-lg md:text-2xl text-zinc-300 font-light max-w-3xl leading-relaxed">
+                <p className="text-lg md:text-2xl font-light max-w-3xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                   {featuredPost.excerpt}
                 </p>
                 
@@ -120,16 +119,20 @@ export default function Blog() {
                     alt={featuredPost.author} 
                     width={48}
                     height={48}
-                    className="w-12 h-12 rounded-full border border-white/10 shadow-lg shadow-black/30"
+                    className="w-12 h-12 rounded-full border shadow-lg"
+                    style={{ borderColor: 'var(--border-card)' }}
                   />
                   <div>
-                    <p className="font-bold text-white tracking-tight">{featuredPost.author}</p>
-                    <p className="text-xs text-zinc-400 font-mono uppercase tracking-widest flex items-center gap-1.5 mt-0.5">
+                    <p className="font-bold tracking-tight" style={{ color: 'var(--text-body)' }}>{featuredPost.author}</p>
+                    <p className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5" style={{ color: 'var(--text-muted)' }}>
                       <Calendar size={11} /> {featuredPost.date}
                     </p>
                   </div>
-                  <div className="ml-auto md:ml-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#2563eb] group-hover:border-[#2563eb] transition-all duration-300">
-                    <ArrowUpRight size={20} className="text-white group-hover:scale-110 transition-transform" />
+                  <div 
+                    className="ml-auto md:ml-8 w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 hover:brightness-110"
+                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+                  >
+                    <ArrowUpRight size={20} style={{ color: 'var(--text-body)' }} className="group-hover:scale-110 transition-transform" />
                   </div>
                 </div>
               </motion.div>
@@ -141,10 +144,11 @@ export default function Blog() {
         <motion.div 
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 cursor-pointer hidden md:flex flex-col items-center gap-1"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 cursor-pointer hidden md:flex flex-col items-center gap-1"
+          style={{ color: 'var(--text-muted)' }}
           onClick={() => window.scrollTo({ top: window.innerHeight - 80, behavior: 'smooth' })}
         >
-          <span className="text-[10px] uppercase font-mono tracking-widest">Explore Insights</span>
+          <span className="text-[10px] uppercase font-sans font-bold tracking-widest">Explore Insights</span>
           <ChevronDown size={20} />
         </motion.div>
       </section>
@@ -156,35 +160,35 @@ export default function Blog() {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
           <div className="space-y-4 max-w-2xl text-left">
             <div className="inline-flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">Knowledge Lab</span>
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Knowledge Lab</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+            <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
               Organic Growth & Systems Architecture
             </h2>
-            <p className="text-lg text-zinc-400 font-light leading-relaxed">
+            <p className="text-lg font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               Tactical blueprints, automation templates, and case studies detailing how we build high-converting content frameworks and technical SEO foundations.
             </p>
           </div>
           
           {/* Enhanced Search Input */}
           <div className="relative w-full lg:w-96 group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur-md opacity-20 group-focus-within:opacity-40 transition-opacity duration-300" />
             <div className="relative">
               <input 
                 type="text" 
                 placeholder="Search by topic, tag, keyword..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#0f172a]/80 border border-white/10 rounded-2xl px-6 py-4.5 pl-14 text-white text-sm focus:outline-none focus:border-blue-500/50 placeholder-zinc-500 backdrop-blur-md transition-all font-sans"
+                className="w-full border rounded-2xl px-6 py-4 pl-14 text-sm focus:outline-none placeholder-zinc-500 transition-all font-sans"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
               />
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-blue-400 transition-colors" size={18} />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 transition-colors" style={{ color: 'var(--text-muted)' }} size={18} />
             </div>
           </div>
         </div>
 
         {/* Premium Topic Filters */}
-        <div className="flex flex-wrap gap-2.5 mb-16 border-b border-white/5 pb-8">
+        <div className="flex flex-wrap gap-2.5 mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
           {allTags.map(tag => (
             <button
               key={tag}
@@ -192,11 +196,12 @@ export default function Blog() {
                 setSelectedTag(tag);
                 setVisibleCount(4); // Reset pagination on filter change
               }}
-              className={`px-5 py-2.5 rounded-xl text-xs font-bold font-mono tracking-wider uppercase transition-all border ${
-                selectedTag === tag
-                  ? 'bg-blue-500 text-white border-blue-400/20 shadow-lg shadow-blue-500/15'
-                  : 'bg-white/5 text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
-              }`}
+              className="px-5 py-2.5 rounded-xl text-xs font-bold font-sans tracking-widest uppercase transition-all border"
+              style={{
+                backgroundColor: selectedTag === tag ? 'var(--text-body)' : 'var(--bg-surface)',
+                color: selectedTag === tag ? 'var(--bg-page)' : 'var(--text-muted)',
+                borderColor: selectedTag === tag ? 'var(--text-body)' : 'var(--border-card)'
+              }}
             >
               {tag}
             </button>
@@ -226,7 +231,8 @@ export default function Blog() {
                       isLargeCard 
                         ? 'md:col-span-2 lg:col-span-3 lg:grid lg:grid-cols-12 gap-8' 
                         : 'col-span-1'
-                    } group bg-[#0f172a]/30 border border-white/5 rounded-[2rem] overflow-hidden hover:border-white/10 hover:bg-[#0f172a]/50 transition-all duration-300 flex flex-col justify-between`}
+                    } group border rounded-[2rem] overflow-hidden transition-all duration-300 flex flex-col justify-between`}
+                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
                   >
                     <Link to={`/blog/${post.id}`} className={`block h-full ${isLargeCard ? 'lg:flex col-span-12' : ''}`}>
                       
@@ -245,12 +251,13 @@ export default function Blog() {
                           referrerPolicy="no-referrer"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/60 to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                         <div className="absolute top-5 left-5 flex gap-2">
                           {post.tags.map(tag => (
                             <span 
                               key={tag} 
-                              className="px-2.5 py-1 text-[9px] font-mono uppercase tracking-widest text-[#f8fafc] bg-black/40 backdrop-blur-md rounded border border-white/10"
+                              className="px-2.5 py-1 text-[9px] font-sans font-bold uppercase tracking-widest border rounded"
+                              style={{ color: 'var(--text-body)', backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
                             >
                               {tag}
                             </span>
@@ -263,39 +270,46 @@ export default function Blog() {
                         isLargeCard ? 'lg:w-[45%] lg:p-12' : 'flex-1'
                       }`}>
                         <div className="space-y-4">
-                          <div className="flex items-center gap-3 text-zinc-500 text-xs font-mono">
+                          <div className="flex items-center gap-3 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                             <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
                             <span>•</span>
                             <span className="flex items-center gap-1"><Clock size={12} /> {post.readTime}</span>
                           </div>
 
-                          <h3 className={`${
-                            isLargeCard ? 'text-3xl md:text-5xl font-display leading-tight' : 'text-2xl font-bold leading-snug'
-                          } text-white group-hover:text-blue-400 transition-colors`}>
+                          <h3 
+                            className={`${
+                              isLargeCard ? 'text-3xl md:text-5xl font-display leading-tight' : 'text-2xl font-bold font-display leading-snug'
+                            } transition-colors group-hover:text-[var(--accent-amber)]`}
+                            style={{ color: 'var(--text-body)' }}
+                          >
                             {post.title}
                           </h3>
 
-                          <p className="text-zinc-400 font-light text-sm md:text-base leading-relaxed line-clamp-3">
+                          <p className="font-light text-sm md:text-base leading-relaxed line-clamp-3" style={{ color: 'var(--text-muted)' }}>
                             {post.excerpt}
                           </p>
                         </div>
 
                         {/* Author Footer */}
-                        <div className="flex items-center gap-3 pt-8 mt-6 border-t border-white/5">
+                        <div className="flex items-center gap-3 pt-8 mt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
                           <img 
                             src={post.authorImage} 
                             alt={post.author} 
                             width={32}
                             height={32}
-                            className="w-8 h-8 rounded-full border border-white/10"
+                            className="w-8 h-8 rounded-full border"
+                            style={{ borderColor: 'var(--border-card)' }}
                           />
                           <div>
-                            <p className="text-xs font-bold text-white">{post.author}</p>
-                            <p className="text-[10px] text-zinc-500 font-mono uppercase">Author</p>
+                            <p className="text-xs font-bold" style={{ color: 'var(--text-body)' }}>{post.author}</p>
+                            <p className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Author</p>
                           </div>
                           
-                          <div className="ml-auto w-8 h-8 rounded-full bg-white/5 border border-white/15 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-300">
-                            <ChevronRight size={16} className="text-white" />
+                          <div 
+                            className="ml-auto w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:brightness-110"
+                            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+                          >
+                            <ChevronRight size={16} style={{ color: 'var(--text-body)' }} />
                           </div>
                         </div>
 
@@ -310,17 +324,19 @@ export default function Blog() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-24 bg-[#0f172a]/20 border border-white/5 rounded-3xl backdrop-blur-sm"
+              className="text-center py-24 border rounded-3xl"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               <div className="max-w-md mx-auto space-y-4">
-                <p className="text-zinc-500 text-sm font-mono uppercase tracking-widest">No articles found</p>
-                <h3 className="text-2xl font-bold text-white">We couldn't find matching insights</h3>
-                <p className="text-zinc-400 font-light text-sm">
+                <p className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>No articles found</p>
+                <h3 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>We couldn't find matching insights</h3>
+                <p className="font-light text-sm" style={{ color: 'var(--text-muted)' }}>
                   Try adjusting your search keywords or choosing a different category filter.
                 </p>
                 <button 
                   onClick={() => { setSelectedTag("All"); setSearchQuery(""); }}
-                  className="px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-xs font-bold text-white mt-4 font-mono transition-colors"
+                  className="px-6 py-2.5 border rounded-xl text-xs font-sans font-bold tracking-widest uppercase mt-4 transition-colors"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                 >
                   Clear All Filters
                 </button>
@@ -334,35 +350,32 @@ export default function Blog() {
           <div className="mt-20 flex justify-center">
             <button 
               onClick={handleLoadMore}
-              className="px-10 py-4.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-blue-500/10 flex items-center gap-3 group relative overflow-hidden"
+              className="px-10 py-5 font-bold rounded-2xl transition-all shadow-xl flex items-center gap-3 group hover:brightness-110"
+              style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
             >
-              <span className="relative z-10 flex items-center gap-2 text-sm font-mono tracking-wider uppercase">
+              <span className="relative z-10 flex items-center gap-2 text-sm font-sans uppercase tracking-widest">
                 Load More Insights
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
           </div>
         )}
       </section>
 
       {/* Stateful interactive Newsletter Section */}
-      <section className="bg-zinc-950/60 border-t border-white/5 py-28 px-6 overflow-hidden relative">
-        {/* Background Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
-
+      <section className="border-t py-28 px-6 overflow-hidden relative" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-4xl mx-auto text-center space-y-10 relative z-10">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <span className="text-xs font-mono uppercase tracking-widest text-[#60a5fa]">Organic Scale Insights</span>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Organic Scale Insights</span>
             </div>
             
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-none font-display">
-              Get Weekly Systems That <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 italic">Actually Scale</span>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-none font-display" style={{ color: 'var(--text-body)' }}>
+              Get weekly systems that <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>actually scale</span>
             </h2>
             
-            <p className="text-zinc-400 font-light max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+            <p className="font-light max-w-2xl mx-auto text-sm md:text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               Join 500+ marketers and business owners getting actionable marketing automation frameworks, customized technical SEO audits, and AI workflows straight to their inbox.
             </p>
           </div>
@@ -376,8 +389,10 @@ export default function Blog() {
                 exit={{ opacity: 0, y: -10 }}
                 className="max-w-lg mx-auto relative group"
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur-md opacity-25 group-focus-within:opacity-50 transition-opacity duration-300" />
-                <div className="relative flex flex-col md:flex-row gap-3 bg-[#0f172a]/95 border border-white/10 p-2.5 rounded-2xl backdrop-blur-md">
+                <div 
+                  className="relative flex flex-col md:flex-row gap-3 border p-2.5 rounded-2xl backdrop-blur-md"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                >
                   <input 
                     type="email" 
                     required
@@ -385,12 +400,14 @@ export default function Blog() {
                     placeholder="Enter your professional email address" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 bg-transparent px-5 py-4 text-white text-sm focus:outline-none placeholder-zinc-500 disabled:opacity-50"
+                    className="flex-1 bg-transparent px-5 py-4 text-sm focus:outline-none placeholder-zinc-500 disabled:opacity-50"
+                    style={{ color: 'var(--text-body)' }}
                   />
                   <button 
                     type="submit"
                     disabled={subscribing}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-xs uppercase tracking-wider font-mono shadow-lg disabled:opacity-50"
+                    className="font-bold text-xs uppercase tracking-widest font-sans shadow-lg disabled:opacity-50 px-8 py-4 rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
                   >
                     {subscribing ? (
                       <span className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -407,14 +424,15 @@ export default function Blog() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="max-w-md mx-auto p-8 rounded-3xl bg-[#0f172a]/60 border border-blue-500/20 flex flex-col items-center gap-4 backdrop-blur-md shadow-2xl shadow-blue-500/5"
+                className="max-w-md mx-auto p-8 rounded-3xl border flex flex-col items-center gap-4 backdrop-blur-md shadow-2xl"
+                style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
               >
-                <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--accent-amber)' }}>
                   <CheckCircle size={32} />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="text-lg font-bold text-white">You're in the loop!</h4>
-                  <p className="text-zinc-400 text-xs font-light">
+                  <h4 className="text-lg font-bold" style={{ color: 'var(--text-body)' }}>You're in the loop!</h4>
+                  <p className="text-xs font-light" style={{ color: 'var(--text-muted)' }}>
                     We've sent a confirmation email to join the newsletter circle.
                   </p>
                 </div>

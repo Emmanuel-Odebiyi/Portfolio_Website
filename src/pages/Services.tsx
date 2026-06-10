@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-  Zap, Search, Cpu, Layers, ArrowRight, CheckCircle2, Workflow,
-  Plus, Minus, Sparkles, Sliders, Calendar, ArrowUpRight, Code,
-  Settings, Clock, Award, ShieldCheck, HelpCircle
+  Search, Cpu, ArrowRight, CheckCircle2, Workflow,
+  Plus, Minus, Sliders, Calendar, Settings, Clock, Award
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { TextEffect } from '../components/ui/text-effect';
 import { ToolsTicker, Tool } from '../components/ToolsTicker';
 
 const toolData: Tool[] = [
@@ -24,16 +22,11 @@ export default function Services() {
   const [articlesCount, setArticlesCount] = useState(12);
   const [manualHours, setManualHours] = useState(25);
   const [customerValue, setCustomerValue] = useState(1500);
-
-  // Accordion active capability blueprint state
   const [activeBlueprint, setActiveBlueprint] = useState<'content' | 'seo' | 'automation'>('content');
-
-  // FAQ state
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Calculations
   const reclaimedHours = Math.round(manualHours * 0.8);
-  // Organic growth is assumed to bring a standard factor conversion: 3.5 conversions per 10 items
   const valueGenerated = Math.round((articlesCount * 2.8 * customerValue * 0.04));
   const efficiencyScore = Math.max(10, Math.round(100 - (manualHours * 1.5) + (articlesCount * 1.2)));
 
@@ -65,517 +58,496 @@ export default function Services() {
   ];
 
   return (
-    <div className="bg-[#0a0f1e] text-white selection:bg-indigo-500 selection:text-white min-h-screen relative overflow-hidden">
+    <div
+      className="min-h-screen relative overflow-hidden"
+      style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}
+    >
       <SEO 
         title="Done-For-You Marketing Systems | Emmanuel Odebiyi"
         description="Done-for-you content marketing automation, technical SEO, and process workflows. Month-to-month contracts. High ROI systems for growing businesses."
         keywords="marketing automation Nigeria, B2B content automation, technical SEO architecture, n8n workflows"
       />
 
-      {/* Decorative Aura Overlays */}
-      <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none z-0" />
-      <div className="absolute top-[30%] right-[-10%] w-[50vw] h-[50vw] bg-teal-500/5 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-[-5%] left-[20%] w-[55vw] h-[55vw] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
-
       <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
 
-        {/* Header Block */}
-        <div className="max-w-4xl mx-auto mb-24 text-center flex flex-col items-center justify-center space-y-6">
+        {/* ── Page Header — Editorial left-aligned ── */}
+        <div className="mb-24 border-b pb-12" style={{ borderColor: 'var(--border-card)' }}>
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-400 tracking-[0.2em] uppercase"
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-            Bespoke Growth Architecture
+            <span
+              className="text-xs font-sans font-bold uppercase tracking-widest block mb-4"
+              style={{ color: 'var(--accent-amber)' }}
+            >
+              Done-For-You Systems
+            </span>
+            <h1
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6 font-display"
+              style={{ color: 'var(--text-body)' }}
+            >
+              Marketing that{' '}
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                runs itself.
+              </span>
+            </h1>
+            <p
+              className="text-xl font-light leading-relaxed max-w-2xl"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Consistent content. Higher rankings. Time back in your week. No team required.
+            </p>
           </motion.div>
-          
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white">
-            Done-For-You <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400">
-              Marketing Systems
-            </span> <br />
-            That Produce Revenue.
-          </h1>
-          
-          <p className="text-xl sm:text-2xl text-zinc-400 font-light leading-relaxed max-w-2xl pt-2 mx-auto">
-            Consistent content. Higher rankings. Time back in your week. No team required.
-          </p>
         </div>
 
-        {/* Intro Manifesto Panel */}
-        <div className="p-8 sm:p-12 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl mb-32">
+        {/* ── Intro Panel ── */}
+        <div
+          className="p-8 sm:p-12 rounded-[2rem] border mb-32"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                Growing businesses don't need more marketing advice. <br className="hidden sm:block" />
-                <span className="text-indigo-400">They need a system that actually runs.</span>
+            <div className="lg:col-span-8 space-y-4">
+              <h2
+                className="text-2xl sm:text-3xl font-bold tracking-tight"
+                style={{ color: 'var(--text-body)' }}
+              >
+                Growing businesses don't need more marketing advice.{' '}
+                <span style={{ color: 'var(--accent-amber)' }}>They need a system that actually runs.</span>
               </h2>
-              <p className="text-zinc-400 font-light leading-relaxed">
+              <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                 One that publishes consistently, ranks in search, and generates leads on autopilot. That's what I build. Custom-engineered marketing systems that deliver enterprise output without enterprise complexity, cost, or management overhead.
               </p>
             </div>
-            <div className="lg:col-span-4 flex flex-col gap-3 justify-center border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8 font-mono text-xs uppercase tracking-widest text-zinc-400">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                <span>No retainers</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                <span>No bloated contracts</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                <span>Just measurable growth</span>
-              </div>
+            <div
+              className="lg:col-span-4 flex flex-col gap-3 justify-center border-t lg:border-t-0 lg:border-l pt-6 lg:pt-0 lg:pl-8"
+              style={{ borderColor: 'var(--border-card)' }}
+            >
+              {['No retainers', 'No bloated contracts', 'Just measurable growth'].map((item) => (
+                <div key={item} className="flex items-center gap-3">
+                  <CheckCircle2 size={16} style={{ color: 'var(--accent-teal)' }} className="shrink-0" />
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* ── INTERACTIVE IMPACT ESTIMATOR (Calculator Widget) ── */}
+        {/* ── IMPACT ESTIMATOR ── */}
         <div className="mb-32">
-          <div className="text-center mb-16 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500">Autopilot Calculator</span>
-            <h3 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
-              Estimate Your System's Impact
-            </h3>
-            <p className="text-zinc-400 font-light max-w-xl mx-auto">
-              Drag the parameters below based on your current manual resource overhead to see the direct returns of upgrading to an autonomous setup.
+          <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
+            <span
+              className="text-xs font-sans font-bold uppercase tracking-widest block mb-3"
+              style={{ color: 'var(--accent-amber)' }}
+            >
+              Free Estimator
+            </span>
+            <h2
+              className="text-4xl sm:text-5xl font-bold tracking-tight font-display mb-3"
+              style={{ color: 'var(--text-body)' }}
+            >
+              What could your system{' '}
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                return?
+              </span>
+            </h2>
+            <p className="font-light max-w-xl" style={{ color: 'var(--text-muted)' }}>
+              Adjust the parameters below based on your current workload to see what switching to an automated setup could realistically return.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
-            {/* Control Panel (Left) */}
-            <div className="lg:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 p-6 sm:p-10 space-y-8 backdrop-blur-md">
-              <h4 className="text-xl font-bold flex items-center gap-2.5">
-                <Sliders size={18} className="text-indigo-400" />
-                System Input Parameters
-              </h4>
+            {/* Control Panel */}
+            <div
+              className="lg:col-span-7 rounded-[2rem] p-6 sm:p-10 space-y-8 border"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <h3
+                className="text-xl font-bold flex items-center gap-2.5"
+                style={{ color: 'var(--text-body)' }}
+              >
+                <Sliders size={18} style={{ color: 'var(--accent-amber)' }} />
+                Your current situation
+              </h3>
 
-              {/* Slider 1: Article Count */}
+              {/* Slider 1 */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <label className="text-sm font-semibold text-zinc-300">Target Monthly Content Volume</label>
-                  <span className="px-3 py-1 bg-indigo-500/10 rounded-lg text-indigo-400 font-mono text-sm font-bold border border-indigo-500/20">
-                    {articlesCount} Articles / mo
+                  <label className="text-sm font-semibold" style={{ color: 'var(--text-body)' }}>
+                    Target monthly content volume
+                  </label>
+                  <span
+                    className="px-3 py-1 rounded-lg text-sm font-bold border font-sans"
+                    style={{
+                      backgroundColor: 'color-mix(in srgb, var(--accent-amber) 10%, transparent)',
+                      color: 'var(--accent-amber)',
+                      borderColor: 'color-mix(in srgb, var(--accent-amber) 25%, transparent)'
+                    }}
+                  >
+                    {articlesCount} articles / mo
                   </span>
                 </div>
-                <input 
-                  type="range" 
-                  min="4" 
-                  max="40" 
-                  value={articlesCount} 
+                <input
+                  type="range" min="4" max="40" value={articlesCount}
                   onChange={(e) => setArticlesCount(Number(e.target.value))}
-                  className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                  style={{ accentColor: 'var(--accent-amber)' }}
                 />
-                <div className="flex justify-between text-[10px] font-mono text-zinc-500 uppercase">
-                  <span>4 (Conservative)</span>
-                  <span>40 (Enterprise-Level Scale)</span>
+                <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                  <span>4 (conservative)</span>
+                  <span>40 (full scale)</span>
                 </div>
               </div>
 
-              {/* Slider 2: Manual Work Hours */}
+              {/* Slider 2 */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <label className="text-sm font-semibold text-zinc-300">Current Monthly Hours Spent on Manual Formatting & Writing</label>
-                  <span className="px-3 py-1 bg-amber-500/10 rounded-lg text-amber-400 font-mono text-sm font-bold border border-amber-500/20">
-                    {manualHours} Hours / mo
+                  <label className="text-sm font-semibold" style={{ color: 'var(--text-body)' }}>
+                    Monthly hours spent on manual writing & formatting
+                  </label>
+                  <span
+                    className="px-3 py-1 rounded-lg text-sm font-bold border font-sans"
+                    style={{
+                      backgroundColor: 'color-mix(in srgb, var(--cta-blue) 10%, transparent)',
+                      color: 'var(--cta-blue)',
+                      borderColor: 'color-mix(in srgb, var(--cta-blue) 25%, transparent)'
+                    }}
+                  >
+                    {manualHours} hrs / mo
                   </span>
                 </div>
-                <input 
-                  type="range" 
-                  min="5" 
-                  max="60" 
-                  value={manualHours} 
+                <input
+                  type="range" min="5" max="60" value={manualHours}
                   onChange={(e) => setManualHours(Number(e.target.value))}
-                  className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                  style={{ accentColor: 'var(--cta-blue)' }}
                 />
-                <div className="flex justify-between text-[10px] font-mono text-zinc-500 uppercase">
-                  <span>5 Hrs</span>
-                  <span>60 Hrs (High Burnout Risk)</span>
+                <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                  <span>5 hrs</span>
+                  <span>60 hrs (burnout zone)</span>
                 </div>
               </div>
 
-              {/* Slider 3: Customer Value */}
+              {/* Slider 3 */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <label className="text-sm font-semibold text-zinc-300">Average Lifetime Value of One Client (LTV)</label>
-                  <span className="px-3 py-1 bg-teal-500/10 rounded-lg text-teal-400 font-mono text-sm font-bold border border-teal-500/20">
+                  <label className="text-sm font-semibold" style={{ color: 'var(--text-body)' }}>
+                    Average lifetime value of one client (LTV)
+                  </label>
+                  <span
+                    className="px-3 py-1 rounded-lg text-sm font-bold border font-sans"
+                    style={{
+                      backgroundColor: 'color-mix(in srgb, var(--accent-teal) 10%, transparent)',
+                      color: 'var(--accent-teal)',
+                      borderColor: 'color-mix(in srgb, var(--accent-teal) 25%, transparent)'
+                    }}
+                  >
                     ${customerValue.toLocaleString()} USD
                   </span>
                 </div>
-                <input 
-                  type="range" 
-                  min="500" 
-                  max="5000" 
-                  step="250"
-                  value={customerValue} 
+                <input
+                  type="range" min="500" max="5000" step="250" value={customerValue}
                   onChange={(e) => setCustomerValue(Number(e.target.value))}
-                  className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                  style={{ accentColor: 'var(--accent-teal)' }}
                 />
-                <div className="flex justify-between text-[10px] font-mono text-zinc-500 uppercase">
+                <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                   <span>$500</span>
-                  <span>$5,000 (Premium Offer)</span>
+                  <span>$5,000</span>
                 </div>
               </div>
             </div>
 
-            {/* Results Display Panel (Right) */}
-            <div className="lg:col-span-5 rounded-[2.5rem] bg-zinc-950 border border-white/10 p-6 sm:p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-[50px] pointer-events-none" />
-              
+            {/* Results Panel */}
+            <div
+              className="lg:col-span-5 rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between border"
+              style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+            >
               <div className="space-y-6">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase block">Simulated Output</span>
-                
-                {/* Generated Value */}
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Estimated Generated Value / mo</span>
-                  <span className="text-3xl sm:text-4xl font-black text-indigo-400">${valueGenerated.toLocaleString()}</span>
-                  <p className="text-[10px] text-zinc-500 font-light leading-relaxed">
-                    *Calculated based on traffic growth and Conversion-to-LTV pipeline scaling curves.
+                <span
+                  className="text-[10px] font-sans font-bold uppercase tracking-widest block"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Estimated returns
+                </span>
+
+                <div className="p-5 rounded-2xl border space-y-1" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider block" style={{ color: 'var(--text-muted)' }}>Value generated / mo</span>
+                  <span className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--accent-amber)' }}>
+                    ${valueGenerated.toLocaleString()}
+                  </span>
+                  <p className="text-[10px] font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                    Based on traffic growth and conversion-to-LTV pipeline scaling.
                   </p>
                 </div>
 
-                {/* Reclaimed Hours */}
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Manual Hours Reclaimed / mo</span>
-                  <span className="text-3xl sm:text-4xl font-black text-emerald-400">{reclaimedHours} Hours Saved</span>
-                  <p className="text-[10px] text-zinc-500 font-light leading-relaxed">
-                    Equivalent to recovering over {Math.round(reclaimedHours / 8)} full business workdays every single month.
+                <div className="p-5 rounded-2xl border space-y-1" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <span className="text-xs font-sans font-bold uppercase tracking-wider block" style={{ color: 'var(--text-muted)' }}>Hours reclaimed / mo</span>
+                  <span className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--accent-teal)' }}>
+                    {reclaimedHours} saved
+                  </span>
+                  <p className="text-[10px] font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                    That's {Math.round(reclaimedHours / 8)} full business days back every month.
                   </p>
                 </div>
 
-                {/* Efficiency Gauge */}
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                  <div className="flex justify-between items-center text-xs font-mono text-zinc-400 uppercase tracking-wider">
-                    <span>Workflow Efficiency Score</span>
-                    <span className={efficiencyScore > 75 ? 'text-emerald-400 font-bold' : efficiencyScore > 45 ? 'text-amber-400' : 'text-red-400'}>
+                <div className="p-5 rounded-2xl border space-y-2" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <div className="flex justify-between items-center text-xs font-sans font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                    <span>Workflow efficiency</span>
+                    <span style={{ color: efficiencyScore > 75 ? 'var(--accent-teal)' : efficiencyScore > 45 ? 'var(--accent-amber)' : '#ef4444', fontWeight: 700 }}>
                       {efficiencyScore}%
                     </span>
                   </div>
-                  <div className="h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full transition-all duration-500 ${efficiencyScore > 75 ? 'bg-emerald-500' : efficiencyScore > 45 ? 'bg-amber-500' : 'bg-red-500'}`}
-                      style={{ width: `${efficiencyScore}%` }}
+                  <div className="h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--border-card)' }}>
+                    <div
+                      className="h-full transition-all duration-500 rounded-full"
+                      style={{
+                        width: `${efficiencyScore}%`,
+                        backgroundColor: efficiencyScore > 75 ? 'var(--accent-teal)' : efficiencyScore > 45 ? 'var(--accent-amber)' : '#ef4444'
+                      }}
                     />
                   </div>
                 </div>
               </div>
 
-              <Link 
-                to="/contact" 
-                className="mt-8 py-4.5 rounded-xl bg-brand-gradient text-zinc-900 font-bold text-center block hover:brightness-110 shadow-lg shadow-indigo-500/20 active:scale-95 transition-all text-sm uppercase tracking-wider"
+              <Link
+                to="/contact"
+                className="mt-8 py-4 rounded-xl font-bold text-center block transition-all text-sm uppercase tracking-wider hover:brightness-110 hover:shadow-lg"
+                style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
               >
-                Claim My System Setup
+                Get my custom system built
               </Link>
             </div>
-
           </div>
         </div>
 
-        {/* ── CORE SERVICES ARCHITECTURE BLUEPRINTS (Process Maps) ── */}
+        {/* ── CORE SERVICES ── */}
         <div className="mb-32">
-          <div className="text-center mb-16 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500">Core Services</span>
-            <h3 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
-              Core Capabilities & Blueprints
-            </h3>
-            <p className="text-zinc-400 font-light max-w-xl mx-auto">
-              Click a capability tab to review the exact visual operational blueprint I design, build, and support for your business.
-            </p>
+          <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
+            <span
+              className="text-xs font-sans font-bold uppercase tracking-widest block mb-3"
+              style={{ color: 'var(--accent-amber)' }}
+            >
+              Core Services
+            </span>
+            <h2
+              className="text-4xl sm:text-5xl font-bold tracking-tight font-display"
+              style={{ color: 'var(--text-body)' }}
+            >
+              What I{' '}
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                actually build.
+              </span>
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
-            {/* Selector column (Left) */}
-            <div className="lg:col-span-4 flex flex-col gap-3 justify-center">
-              <div className="flex items-center gap-2 mb-2 px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-400 uppercase tracking-widest w-fit animate-pulse">
-                <Sparkles size={12} className="fill-indigo-400" />
-                Click below to view blueprint ➔
-              </div>
+            {/* Selector */}
+            <div className="lg:col-span-4 flex flex-col gap-2">
               {[
-                { id: 'content', title: 'Content Marketing Automation', desc: 'Stop Publishing When You Have Time. Start Publishing on a System.', icon: <Workflow size={20} /> },
-                { id: 'seo', title: 'SEO Strategy & Optimization', desc: "Ranking Higher Isn't Luck. It's Architecture.", icon: <Search size={20} /> },
-                { id: 'automation', title: 'Business Process Automation', desc: "Reclaim 10–20 Hours Reclaimed Per Week.", icon: <Cpu size={20} /> }
+                { id: 'content', title: 'Content Marketing Automation', desc: 'Stop publishing when you have time. Start publishing on a system.', icon: <Workflow size={20} /> },
+                { id: 'seo', title: 'SEO Strategy & Optimization', desc: "Ranking higher isn't luck. It's architecture.", icon: <Search size={20} /> },
+                { id: 'automation', title: 'Business Process Automation', desc: "Reclaim 10–20 hours back every week.", icon: <Cpu size={20} /> }
               ].map((service) => (
                 <button
                   key={service.id}
                   onClick={() => setActiveBlueprint(service.id as any)}
-                  className={`w-full text-left p-6 rounded-2xl transition-all duration-300 border flex gap-4 items-start group relative ${
-                    activeBlueprint === service.id
-                      ? 'bg-white/10 border-white/20 text-white font-bold shadow-xl'
-                      : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10 hover:text-white'
-                  }`}
+                  className="w-full text-left p-6 rounded-2xl transition-all duration-300 border flex gap-4 items-start"
+                  style={{
+                    backgroundColor: activeBlueprint === service.id ? 'var(--bg-surface)' : 'transparent',
+                    borderColor: activeBlueprint === service.id ? 'var(--border-card)' : 'transparent',
+                    boxShadow: activeBlueprint === service.id ? '0 4px 16px rgba(0,0,0,0.05)' : 'none',
+                  }}
                 >
-                  <div className={`p-3 rounded-xl border shrink-0 ${activeBlueprint === service.id ? 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400' : 'bg-white/5 border-white/10'}`}>
+                  <div
+                    className="p-3 rounded-xl border shrink-0 transition-all"
+                    style={{
+                      backgroundColor: activeBlueprint === service.id ? 'color-mix(in srgb, var(--accent-amber) 12%, transparent)' : 'var(--bg-surface-alt)',
+                      borderColor: 'var(--border-card)',
+                      color: activeBlueprint === service.id ? 'var(--accent-amber)' : 'var(--text-muted)',
+                    }}
+                  >
                     {service.icon}
                   </div>
-                  <div className="space-y-1 flex-1 pr-6">
-                    <h4 className="text-lg font-bold text-white tracking-tight leading-snug">{service.title}</h4>
-                    <p className="text-xs text-zinc-400 font-light leading-relaxed">{service.desc.substring(0, 55)}...</p>
+                  <div className="flex-grow">
+                    <h3
+                      className="text-sm font-bold mb-1"
+                      style={{ color: activeBlueprint === service.id ? 'var(--text-body)' : 'var(--text-muted)' }}
+                    >
+                      {service.title}
+                    </h3>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      {service.desc}
+                    </p>
                   </div>
-                  {activeBlueprint !== service.id && (
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-indigo-400">
-                      View <ArrowRight size={10} />
-                    </div>
-                  )}
                 </button>
               ))}
             </div>
 
-            {/* Visual process detail window (Right) */}
+            {/* Detail Panel */}
             <div className="lg:col-span-8">
-              <div className="rounded-[2.5rem] bg-zinc-950/70 border border-white/10 p-6 sm:p-10 flex flex-col justify-between h-full backdrop-blur-md shadow-2xl text-left relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-[60px] pointer-events-none" />
-                
+              <div
+                className="rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between h-full border text-left"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
                 <AnimatePresence mode="wait">
                   {activeBlueprint === 'content' && (
-                    <motion.div
-                      key="content"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      className="space-y-6"
-                    >
-                      <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase block">Content Engine Flow Map</span>
-                      <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
-                        Stop Publishing When You Have Time. <span className="text-indigo-400">Start Publishing on a System.</span>
-                      </h4>
-                      <p className="text-zinc-400 font-light leading-relaxed">
+                    <motion.div key="content" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} className="space-y-6">
+                      <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--accent-amber)' }}>How it works</span>
+                      <h3 className="text-2xl sm:text-3xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+                        Stop publishing when you have time.{' '}
+                        <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>Start publishing on a system.</span>
+                      </h3>
+                      <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                         Most businesses don't have a content problem. They have a consistency problem. Great ideas, no reliable engine to get them out. I build the engine.
                       </p>
-
-                      {/* Content Pipeline diagram */}
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 grid grid-cols-1 sm:grid-cols-5 gap-3 text-center text-xs font-mono">
-                        <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-lg">
-                          1. Keyword & Cluster Audit
-                        </div>
-                        <div className="flex items-center justify-center text-zinc-500">
-                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
-                        </div>
-                        <div className="p-3 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg">
-                          2. AI Brand-Voice Writing
-                        </div>
-                        <div className="flex items-center justify-center text-zinc-500">
-                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
-                        </div>
-                        <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg">
-                          3. Multi-Channel Distribution
+                      <div className="p-4 rounded-xl border grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs font-sans font-semibold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)' }}>
+                        {['1. Keyword & cluster audit', '2. AI brand-voice writing', '3. Multi-channel distribution'].map((step, i) => (
+                          <div key={i} className="p-3 rounded-lg border" style={{ borderColor: 'var(--border-card)', color: 'var(--text-body)' }}>
+                            {step}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="space-y-3 border-t pt-6" style={{ borderColor: 'var(--border-card)' }}>
+                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>What's included:</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-light" style={{ color: 'var(--text-muted)' }}>
+                          {['Full content strategy & editorial calendar', 'AI-assisted content creation — brand tuned', 'Automated publishing workflow (8–40+ posts)', 'Blog, LinkedIn, Email multi-distribution'].map((item) => (
+                            <div key={item} className="flex items-center gap-2.5">
+                              <CheckCircle2 size={14} style={{ color: 'var(--accent-teal)' }} className="shrink-0" />
+                              <span>{item}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
-
-                      <div className="space-y-3 border-t border-white/10 pt-6">
-                        <h5 className="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">What's Included:</h5>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300 font-light">
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Full content strategy & editorial calendar</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>AI-assisted content creation — brand tuned</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Automated publishing workflow (8-40+ posts)</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Blog, LinkedIn, Email multi-distribution</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
+                      <div className="p-4 rounded-xl border font-bold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--accent-amber) 8%, transparent)', color: 'var(--text-body)' }}>
                         Result: Your audience sees you everywhere, every week — without you writing a single word.
                       </div>
-                      <Link
-                        to="/services/content-marketing-automation"
-                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-bold text-sm hover:brightness-110 shadow-lg shadow-indigo-500/20 active:scale-95 transition-all uppercase tracking-wider mt-2"
-                      >
-                        Let's Build Your Content Engine <ArrowRight size={16} />
+                      <Link to="/services/content-marketing-automation" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all hover:brightness-110" style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}>
+                        Build my content engine <ArrowRight size={16} />
                       </Link>
                     </motion.div>
                   )}
 
                   {activeBlueprint === 'seo' && (
-                    <motion.div
-                      key="seo"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      className="space-y-6"
-                    >
-                      <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase block">Search Architecture Blueprint</span>
-                      <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
-                        Ranking Higher Isn't Luck. <span className="text-indigo-400">It's Architecture.</span>
-                      </h4>
-                      <p className="text-zinc-400 font-light leading-relaxed">
+                    <motion.div key="seo" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} className="space-y-6">
+                      <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--accent-amber)' }}>How it works</span>
+                      <h3 className="text-2xl sm:text-3xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+                        Ranking higher isn't luck.{' '}
+                        <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>It's architecture.</span>
+                      </h3>
+                      <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                         You can publish great content and still get zero traffic. SEO is what determines whether your content gets found — or gets buried. I build SEO strategies from the foundation up.
                       </p>
-
-                      {/* SEO flow diagram */}
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 grid grid-cols-1 sm:grid-cols-5 gap-3 text-center text-xs font-mono">
-                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-lg">
-                          1. Keyword Gap Scan
-                        </div>
-                        <div className="flex items-center justify-center text-zinc-500">
-                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
-                        </div>
-                        <div className="p-3 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-lg">
-                          2. Topic Cluster Layout
-                        </div>
-                        <div className="flex items-center justify-center text-zinc-500">
-                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
-                        </div>
-                        <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-lg">
-                          3. Technical Audit Sync
+                      <div className="p-4 rounded-xl border grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs font-sans font-semibold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)' }}>
+                        {['1. Keyword gap scan', '2. Topic cluster layout', '3. Technical audit sync'].map((step, i) => (
+                          <div key={i} className="p-3 rounded-lg border" style={{ borderColor: 'var(--border-card)', color: 'var(--text-body)' }}>
+                            {step}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="space-y-3 border-t pt-6" style={{ borderColor: 'var(--border-card)' }}>
+                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>What's included:</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-light" style={{ color: 'var(--text-muted)' }}>
+                          {['In-depth keyword & competitor gap scan', 'Topic cluster architecture for authority', 'On-page optimization across all posts', 'Technical SEO audit & indexing optimization'].map((item) => (
+                            <div key={item} className="flex items-center gap-2.5">
+                              <CheckCircle2 size={14} style={{ color: 'var(--accent-teal)' }} className="shrink-0" />
+                              <span>{item}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
-
-                      <div className="space-y-3 border-t border-white/10 pt-6">
-                        <h5 className="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">What's Included:</h5>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300 font-light">
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>In-depth keyword & competitor gap scan</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Topic cluster architecture for authority</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>On-page optimization across all posts</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Technical SEO audit & indexing optimization</span>
-                          </div>
-                        </div>
+                      <div className="p-4 rounded-xl border font-bold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--cta-blue) 8%, transparent)', color: 'var(--text-body)' }}>
+                        Result: Content that doesn't just exist — it ranks, gets clicked, and brings in the right traffic.
                       </div>
-
-                      <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
-                        Result: Content that doesn't just exist — it ranks, it gets clicked, and it brings in the right traffic.
-                      </div>
-                      <Link
-                        to="/services/seo-strategy-optimization"
-                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 via-teal-500 to-indigo-500 text-white font-bold text-sm hover:brightness-110 shadow-lg shadow-blue-500/20 active:scale-95 transition-all uppercase tracking-wider mt-2"
-                      >
-                        Build My SEO Foundation <ArrowRight size={16} />
+                      <Link to="/services/seo-strategy-optimization" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all hover:brightness-110" style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}>
+                        Build my SEO foundation <ArrowRight size={16} />
                       </Link>
                     </motion.div>
                   )}
 
                   {activeBlueprint === 'automation' && (
-                    <motion.div
-                      key="automation"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      className="space-y-6"
-                    >
-                      <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase block">Process Automation Core</span>
-                      <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
-                        The Hours You're Losing to Repetitive Tasks <span className="text-indigo-400">Are Hours You're Not Growing.</span>
-                      </h4>
-                      <p className="text-zinc-400 font-light leading-relaxed">
+                    <motion.div key="automation" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} className="space-y-6">
+                      <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--accent-amber)' }}>How it works</span>
+                      <h3 className="text-2xl sm:text-3xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+                        The hours you lose to repetitive tasks{' '}
+                        <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>are hours you're not growing.</span>
+                      </h3>
+                      <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                         Marketing isn't the only place where manual, repetitive work is stealing your time. Most growing businesses have entire workflows that could — and should — be automated.
                       </p>
-
-                      {/* Process flow diagram */}
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/5 grid grid-cols-1 sm:grid-cols-5 gap-3 text-center text-xs font-mono">
-                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-lg">
-                          1. Task Audit Map
-                        </div>
-                        <div className="flex items-center justify-center text-zinc-500">
-                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
-                        </div>
-                        <div className="p-3 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg">
-                          2. n8n/Zapier Building
-                        </div>
-                        <div className="flex items-center justify-center text-zinc-500">
-                          <ArrowRight size={16} className="rotate-90 sm:rotate-0" />
-                        </div>
-                        <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg">
-                          3. API Sync Launch
+                      <div className="p-4 rounded-xl border grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs font-sans font-semibold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)' }}>
+                        {['1. Task audit map', '2. n8n/Zapier build', '3. API sync & launch'].map((step, i) => (
+                          <div key={i} className="p-3 rounded-lg border" style={{ borderColor: 'var(--border-card)', color: 'var(--text-body)' }}>
+                            {step}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="space-y-3 border-t pt-6" style={{ borderColor: 'var(--border-card)' }}>
+                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>What's included:</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-light" style={{ color: 'var(--text-muted)' }}>
+                          {['Full workflow audit and process mapping', 'Custom n8n, Zapier & Make.com integrations', 'Integration of CRM (HubSpot), Sheets & DBs', 'Ongoing workflow training & technical logs'].map((item) => (
+                            <div key={item} className="flex items-center gap-2.5">
+                              <CheckCircle2 size={14} style={{ color: 'var(--accent-teal)' }} className="shrink-0" />
+                              <span>{item}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
-
-                      <div className="space-y-3 border-t border-white/10 pt-6">
-                        <h5 className="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">What's Included:</h5>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-300 font-light">
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Full workflow audit and process mapping</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Custom n8n, Zapier & Make.com integrations</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Integration of CRM (HubSpot), Sheets & DBs</span>
-                          </div>
-                          <div className="flex items-center gap-2.5">
-                            <CheckCircle2 size={14} className="text-indigo-400 shrink-0" />
-                            <span>Ongoing workflow training & technical logs</span>
-                          </div>
-                        </div>
+                      <div className="p-4 rounded-xl border font-bold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--accent-teal) 8%, transparent)', color: 'var(--text-body)' }}>
+                        Result: Reclaim 10–20 hours per week — so your team can focus on building, not administrating.
                       </div>
-
-                      <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 font-bold text-white text-base">
-                        Result: Reclaim 10–20 hours per week, allowing your team to stop doing manual entry and focus on building.
-                      </div>
-                      <Link
-                        to="/services/business-process-automation"
-                        className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-bold text-sm hover:brightness-110 shadow-lg shadow-amber-500/20 active:scale-95 transition-all uppercase tracking-wider mt-2"
-                      >
-                        Automate My Business Processes <ArrowRight size={16} />
+                      <Link to="/services/business-process-automation" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all hover:brightness-110" style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}>
+                        Automate my business <ArrowRight size={16} />
                       </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
-
               </div>
             </div>
-
           </div>
         </div>
 
-        {/* ── ROADMAP DELIVERABLES (Week-by-Week Engagement) ── */}
+        {/* ── ENGAGEMENT MODEL ── */}
         <div className="mb-32">
-          <div className="text-center mb-20 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500">Engagement Model</span>
-            <h3 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
-              Month-to-Month. No Lock-In. No Surprises.
-            </h3>
-            <p className="text-zinc-400 font-light max-w-xl mx-auto">
+          <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-3" style={{ color: 'var(--accent-amber)' }}>
+              Engagement Model
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+              Month-to-month.{' '}
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>No lock-in.</span>
+            </h2>
+            <p className="mt-3 font-light max-w-xl" style={{ color: 'var(--text-muted)' }}>
               I don't believe in locking clients into long-term retainers. Everything I offer is transparent, month-to-month, and measured on deliverables.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: 'Week 1 setup', icon: <Settings className="text-indigo-400" size={24} />, desc: 'System Audit & Tech stack connection. We audit existing software accounts, identify integrations gaps, establish n8n connections, and deploy brand voice parameters.' },
-              { title: 'Month 1 Deliverables', icon: <Clock className="text-purple-400" size={24} />, desc: 'Workflow testing & Content rollout. We execute keyword topic clusters, configure automatic publishing webhooks to HubSpot/WordPress, and ship initial batches of articles.' },
-              { title: 'Ongoing Scaling', icon: <Award className="text-emerald-400" size={24} />, desc: 'Continuous optimization & ROI traces. We analyze active SERP positions, trace lead capture loops, refine prompts to protect content standards, and deliver performance charts.' }
-            ].map((step, idx) => (
-              <div 
+              { title: 'Week 1 setup', icon: <Settings style={{ color: 'var(--accent-amber)' }} size={24} />, step: '01', desc: 'System audit & tech stack connection. We audit existing software accounts, identify integration gaps, establish n8n connections, and deploy brand voice parameters.' },
+              { title: 'Month 1 deliverables', icon: <Clock style={{ color: 'var(--cta-blue)' }} size={24} />, step: '02', desc: 'Workflow testing & content rollout. We execute keyword topic clusters, configure automatic publishing webhooks to HubSpot/WordPress, and ship initial batches of articles.' },
+              { title: 'Ongoing scaling', icon: <Award style={{ color: 'var(--accent-teal)' }} size={24} />, step: '03', desc: 'Continuous optimization & performance tracking. We analyze SERP positions, trace lead capture loops, refine prompts to protect content standards, and deliver performance reports.' }
+            ].map((step) => (
+              <div
                 key={step.title}
-                className="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-white/20 shadow-xl transition-all relative flex flex-col justify-between group"
+                className="p-8 rounded-[2rem] border flex flex-col justify-between transition-all hover:shadow-md"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
                 <div className="space-y-6">
                   <div className="flex justify-between items-center">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl border flex items-center justify-center" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)' }}>
                       {step.icon}
                     </div>
-                    <span className="font-mono text-xs text-zinc-600 font-bold group-hover:text-zinc-500 transition-colors">PHASE // 0{idx + 1}</span>
+                    <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                      Step {step.step}
+                    </span>
                   </div>
                   <div className="space-y-3 text-left">
-                    <h4 className="text-xl font-bold text-white capitalize tracking-tight">{step.title}</h4>
-                    <p className="text-zinc-400 font-light text-sm leading-relaxed">{step.desc}</p>
+                    <h3 className="text-xl font-bold capitalize tracking-tight" style={{ color: 'var(--text-body)' }}>{step.title}</h3>
+                    <p className="text-sm font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>{step.desc}</p>
                   </div>
                 </div>
               </div>
@@ -583,41 +555,58 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Specialized Tools Ticker Stack */}
-        <div className="py-20 flex flex-col items-center border-y border-white/10 mb-32">
+        {/* ── TOOLS TICKER ── */}
+        <div className="py-20 flex flex-col items-center border-y mb-32" style={{ borderColor: 'var(--border-card)' }}>
           <div className="text-center space-y-4 mb-16 px-6">
-             <span className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500">Tech Ecosystem</span>
-             <h3 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-                Specialized SEO & <br className="sm:hidden" /> Automation Stack.
-             </h3>
-             <p className="text-lg text-zinc-400 font-light">
-               We leverage industry-leading tools to build indestructible workflows.
-             </p>
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>
+              Tech Ecosystem
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+              The tools that{' '}
+              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                power the systems.
+              </span>
+            </h2>
           </div>
           <ToolsTicker tools={toolData} />
         </div>
 
-        {/* ── FAQS SECTION (All 5 Copy doc FAQs) ── */}
+        {/* ── FAQs ── */}
         <div className="max-w-3xl mx-auto mb-32">
-          <div className="text-center space-y-4 mb-16">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em]">Common Queries</span>
-            <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight">FAQ</h3>
+          <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-3" style={{ color: 'var(--accent-amber)' }}>
+              Common Questions
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Things people ask.
+            </h2>
           </div>
-          
+
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <motion.div 
-                key={i} 
-                className="bg-white/5 rounded-3xl border border-white/10 overflow-hidden"
+              <motion.div
+                key={i}
+                className="rounded-3xl border overflow-hidden"
+                style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}
               >
                 <button
                   onClick={() => toggleFaq(i)}
                   className="w-full flex items-center justify-between p-8 text-left focus:outline-none"
                 >
-                  <span className={`text-lg font-bold pr-8 transition-colors ${openFaq === i ? 'text-white' : 'text-zinc-300'}`}>
+                  <span
+                    className="text-lg font-bold pr-8 transition-colors"
+                    style={{ color: 'var(--text-body)' }}
+                  >
                     {faq.question}
                   </span>
-                  <div className={`w-9 h-9 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-indigo-500 text-zinc-900 border-none rotate-180' : 'bg-white/10 border-white/20 text-zinc-400'}`}>
+                  <div
+                    className="w-9 h-9 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300"
+                    style={{
+                      backgroundColor: openFaq === i ? 'var(--accent-amber)' : 'transparent',
+                      borderColor: openFaq === i ? 'var(--accent-amber)' : 'var(--border-card)',
+                      color: openFaq === i ? '#fff' : 'var(--text-muted)',
+                    }}
+                  >
                     {openFaq === i ? <Minus size={14} /> : <Plus size={14} />}
                   </div>
                 </button>
@@ -630,7 +619,10 @@ export default function Services() {
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="px-8 pb-8 text-zinc-400 font-light leading-relaxed text-base pt-2 border-t border-white/10 mt-2 mx-8">
+                      <div
+                        className="px-8 pb-8 font-light leading-relaxed text-base pt-2 border-t mt-2 mx-8"
+                        style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+                      >
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -641,30 +633,36 @@ export default function Services() {
           </div>
         </div>
 
-        {/* ── SERVICES PAGE DUAL CTA ── */}
-        <motion.div 
-          initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="relative rounded-[3rem] p-12 md:p-16 border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden shadow-2xl"
+        {/* ── BOTTOM CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative rounded-[2rem] p-12 md:p-16 border overflow-hidden"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
         >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none" />
-          
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-left">
             <div className="flex-1 space-y-4">
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">No obligations</span>
-              <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-                Not Sure Which Service Is Right for You?
-              </h3>
-              <p className="text-lg text-zinc-400 font-light max-w-xl">
+              <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>No obligations</span>
+              <h2
+                className="text-3xl sm:text-5xl font-bold font-display tracking-tight leading-tight"
+                style={{ color: 'var(--text-body)' }}
+              >
+                Not sure which service is right for you?
+              </h2>
+              <p className="text-lg font-light max-w-xl" style={{ color: 'var(--text-muted)' }}>
                 Let's figure it out together. Book a free 30-minute call and I'll tell you exactly what I'd build — and what results to expect.
               </p>
             </div>
 
             <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
-              <Link 
+              <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-5 rounded-2xl bg-brand-gradient text-zinc-900 font-bold hover:brightness-110 shadow-lg shadow-indigo-500/25 transition-all text-center group"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-5 rounded-2xl font-bold transition-all text-center group hover:brightness-110"
+                style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
               >
-                Book Your Free Strategy Call
+                Book a free strategy call
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

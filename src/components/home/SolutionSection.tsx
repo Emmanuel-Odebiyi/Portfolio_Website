@@ -154,21 +154,14 @@ export const SolutionSection = () => {
       aria-label="The Solution Section"
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col bg-[var(--dark-mid)]">
-
-        {/* Aurora blobs for the solution section */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="aurora-orb-1 absolute rounded-full" style={{ width: '60vw', height: '60vw', maxWidth: 700, maxHeight: 700, top: '-20%', left: '-10%', background: 'radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-          <div className="aurora-orb-2 absolute rounded-full" style={{ width: '45vw', height: '45vw', maxWidth: 600, maxHeight: 600, bottom: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(245,158,11,0.20) 0%, transparent 70%)', filter: 'blur(90px)' }} />
-          <div className="aurora-orb-3 absolute rounded-full" style={{ width: '35vw', height: '35vw', maxWidth: 450, maxHeight: 450, top: '30%', right: '20%', background: 'radial-gradient(circle, rgba(5,150,105,0.15) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        </div>
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-surface-alt) 80%, transparent)' }}>
 
         {/* ── Headline Block ── */}
         <div className="shrink-0 pt-24 md:pt-28 pb-4 md:pb-6 px-6 md:px-16 text-center z-10">
-          <p className="text-[10px] font-mono font-bold tracking-[0.4em] uppercase mb-2 md:mb-4" style={{ color: 'rgba(251,191,36,0.95)' }}>
+          <p className="text-[10px] font-sans font-bold tracking-[0.4em] uppercase mb-2 md:mb-4" style={{ color: 'var(--accent-amber)' }}>
             The Solution
           </p>
-          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-2 md:mb-4">
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-2 md:mb-4" style={{ color: 'var(--text-body)' }}>
             <LineReveal
               lines={['What If Your Marketing', 'Could Run Itself?']}
               scrollYProgress={scrollYProgress}
@@ -180,7 +173,7 @@ export const SolutionSection = () => {
             style={{
               opacity: useTransform(scrollYProgress, [0.05, 0.15], [0, 1]),
               y: useTransform(scrollYProgress, [0.05, 0.15], [10, 0]),
-              color: 'rgba(226,232,240,0.9)',
+              color: 'var(--text-muted)',
             }}
             className="text-xs md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
@@ -198,19 +191,24 @@ export const SolutionSection = () => {
             return (
               <motion.div
                 key={solution.id}
-                className="relative overflow-hidden rounded-[1.5rem] md:rounded-[3rem] mx-0 md:mx-2 first:ml-0 last:mr-0 border border-zinc-100 flex-1"
+                className="relative overflow-hidden rounded-[1.5rem] md:rounded-[3rem] mx-0 md:mx-2 first:ml-0 last:mr-0 flex-1 shadow-sm transition-shadow duration-300"
                 animate={{ 
                     flex: isActive ? 8 : 1,
-                    // High-end glassmorphism effect
-                    filter: isActive ? 'brightness(110%) saturate(120%)' : 'brightness(70%) saturate(80%)',
                     scale: isActive ? 1 : 0.98,
-                    boxShadow: isActive ? `0 0 80px ${solution.accentColor}20` : 'none'
+                    boxShadow: isActive ? `0 12px 40px rgba(17,31,46,0.06), 0 0 80px ${solution.accentColor}15` : 'none'
                 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 25 }}
                 style={{ 
-                  backgroundColor: 'rgba(15, 23, 42, 0.4)', // Dark slate glass
-                  backdropFilter: 'blur(20px)',
-                  border: isActive ? `1.5px solid ${solution.accentColor}60` : '1px solid rgba(255,255,255,0.05)',
+                  border: '1px solid transparent',
+                  backgroundClip: 'padding-box, border-box',
+                  backgroundImage: `linear-gradient(
+                    color-mix(in srgb, ${solution.accentColor} ${isActive ? '8%' : '4%'}, var(--bg-surface)), 
+                    color-mix(in srgb, ${solution.accentColor} ${isActive ? '8%' : '4%'}, var(--bg-surface))
+                  ), ${
+                    isActive 
+                      ? `linear-gradient(135deg, ${solution.accentColor}80, ${solution.accentColor}20)`
+                      : `linear-gradient(135deg, color-mix(in srgb, ${solution.accentColor} 20%, var(--border-card)), var(--border-card))`
+                  }`,
                   minHeight: isActive ? '240px' : '48px', // Prevent collapsing into nothing on short phone screens
                 }}
               >
@@ -267,13 +265,15 @@ export const SolutionSection = () => {
                       </span>
                       
                       <h3
-                        className="text-xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-8 leading-[1.1] tracking-tight text-white"
+                        className="text-xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-8 leading-[1.1] tracking-tight"
+                        style={{ color: 'var(--text-body)' }}
                       >
                         {solution.subtitle}
                       </h3>
                       
                       <p
-                        className="text-xs md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light text-slate-200"
+                        className="text-xs md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light"
+                        style={{ color: 'var(--text-muted)' }}
                       >
                         {solution.description}
                       </p>

@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   Lightbulb,
   ArrowUpRight,
-  ClipboardCheck,
   Check,
   ChevronRight,
   BookOpen,
@@ -36,23 +35,24 @@ const TerminalCodeBlock: React.FC<TerminalCodeBlockProps> = ({ code, lang }) => 
   };
 
   return (
-    <div className="my-8 rounded-2xl bg-[#0b0f19] border border-white/5 shadow-2xl overflow-hidden text-left font-mono">
-      <div className="flex items-center justify-between px-4 py-3 bg-[#0f1424] border-b border-white/5 select-none">
+    <div className="my-8 rounded-2xl border shadow-2xl overflow-hidden text-left font-mono" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+      <div className="flex items-center justify-between px-4 py-3 border-b select-none" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
         <div className="flex items-center gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
         </div>
-        <span className="text-[10px] text-zinc-500 uppercase tracking-widest">{lang || 'code'}</span>
+        <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>{lang || 'code'}</span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1 text-[10px] text-zinc-400 hover:text-white transition-colors cursor-pointer"
+          className="flex items-center gap-1 text-[10px] transition-colors cursor-pointer"
+          style={{ color: 'var(--text-muted)' }}
         >
           {copied ? <Check size={10} /> : <Copy size={10} />}
           <span>{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
-      <pre className="p-5 overflow-x-auto text-sm text-zinc-300 leading-relaxed font-light select-text">
+      <pre className="p-5 overflow-x-auto text-sm leading-relaxed font-light select-text" style={{ color: 'var(--text-body)' }}>
         <code>{code}</code>
       </pre>
     </div>
@@ -133,21 +133,24 @@ const FlowchartRenderer: React.FC<FlowchartRendererProps> = ({ code }) => {
 
   if (nodes.length === 0) {
     return (
-      <div className="p-4 rounded-xl border border-white/5 bg-[#0f1424] text-zinc-500 font-mono text-xs text-center select-text">
+      <div 
+        className="p-4 rounded-xl border text-xs text-center select-text"
+        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+      >
         [Flowchart Definition Empty or Invalid]
       </div>
     );
   }
 
   return (
-    <div className="my-12 p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-b from-[#0a0f1e]/80 to-[#05070f]/90 border border-blue-500/10 shadow-2xl relative overflow-hidden text-center max-w-2xl mx-auto select-none">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
-      
+    <div 
+      className="my-12 p-8 md:p-12 rounded-[2rem] border shadow-2xl relative overflow-hidden text-center max-w-2xl mx-auto select-none"
+      style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+    >
       <div className="relative z-10 flex flex-col items-center gap-8">
         <div className="space-y-1.5 mb-2">
-          <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-blue-500 block">Growth Pipeline</span>
-          <h4 className="text-xl font-bold text-white tracking-tight">System Workflow Diagram</h4>
+          <span className="text-[9px] font-sans font-bold tracking-[0.3em] uppercase block" style={{ color: 'var(--accent-amber)' }}>Growth Pipeline</span>
+          <h4 className="text-xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>System Workflow Diagram</h4>
         </div>
 
         {nodes.map((node, index) => {
@@ -156,18 +159,17 @@ const FlowchartRenderer: React.FC<FlowchartRendererProps> = ({ code }) => {
           return (
             <React.Fragment key={node.id}>
               <div 
-                className="w-full p-6 md:p-8 rounded-2xl bg-zinc-950/60 border border-white/5 hover:border-blue-500/20 shadow-xl backdrop-blur-md transition-all duration-500 group relative overflow-hidden select-text"
+                className="w-full p-6 md:p-8 rounded-2xl border shadow-xl transition-all duration-500 group relative overflow-hidden select-text"
+                style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
               >
-                <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-blue-500/30 rounded-tl" />
-                <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-blue-500/30 rounded-tr" />
-                <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-blue-500/30 rounded-bl" />
-                <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-blue-500/30 rounded-br" />
-
                 <div className="flex items-center gap-4 text-left">
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-all duration-300 select-none">
+                  <div 
+                    className="w-8 h-8 rounded-lg border text-xs flex items-center justify-center flex-shrink-0 transition-all duration-300 select-none font-bold"
+                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
+                  >
                     {index + 1}
                   </div>
-                  <p className="text-base text-zinc-200 font-light leading-relaxed group-hover:text-white transition-colors duration-300">
+                  <p className="text-base font-light leading-relaxed transition-colors duration-300" style={{ color: 'var(--text-body)' }}>
                     {node.text}
                   </p>
                 </div>
@@ -175,9 +177,9 @@ const FlowchartRenderer: React.FC<FlowchartRendererProps> = ({ code }) => {
 
               {!isLast && (
                 <div className="flex flex-col items-center gap-1.5 my-1">
-                  <div className="w-[1.5px] h-6 bg-gradient-to-b from-blue-500/60 to-indigo-500/10" />
-                  <ArrowDown size={14} className="text-blue-500/60 animate-pulse" />
-                  <div className="w-[1.5px] h-6 bg-gradient-to-b from-indigo-500/10 to-blue-500/60" />
+                  <div className="w-[1.5px] h-12" style={{ backgroundColor: 'var(--border-card)' }} />
+                  <ArrowDown size={14} style={{ color: 'var(--accent-amber)' }} />
+                  <div className="w-[1.5px] h-12" style={{ backgroundColor: 'var(--border-card)' }} />
                 </div>
               )}
             </React.Fragment>
@@ -213,7 +215,8 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
               href={linkMatch[2]}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#60a5fa] hover:text-[#93c5fd] underline decoration-blue-500/40 hover:decoration-blue-400 transition-all font-medium select-text"
+              className="underline transition-all font-medium select-text"
+              style={{ color: 'var(--accent-amber)', textDecorationColor: 'var(--border-card)' }}
             >
               {linkMatch[1]}
             </a>
@@ -228,7 +231,7 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
           index: boldMatch.index,
           length: boldMatch[0].length,
           render: () => (
-            <strong key={`bold-${keyIndex++}`} className="font-semibold text-white select-text">
+            <strong key={`bold-${keyIndex++}`} className="font-semibold select-text" style={{ color: 'var(--text-body)' }}>
               {boldMatch[1]}
             </strong>
           )
@@ -242,7 +245,7 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
           index: italicMatch.index,
           length: italicMatch[0].length,
           render: () => (
-            <em key={`italic-${keyIndex++}`} className="italic text-zinc-100 select-text">
+            <em key={`italic-${keyIndex++}`} className="italic select-text" style={{ color: 'var(--text-muted)' }}>
               {italicMatch[1]}
             </em>
           )
@@ -258,7 +261,8 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
           render: () => (
             <code
               key={`code-${keyIndex++}`}
-              className="px-1.5 py-0.5 rounded bg-zinc-800/80 border border-white/5 text-pink-400 font-mono text-sm font-light select-text"
+              className="px-1.5 py-0.5 rounded font-mono text-sm font-light select-text border"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
             >
               {codeMatch[1]}
             </code>
@@ -302,7 +306,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
       const text = paragraphBuffer.join('\n').trim();
       if (text) {
         blocks.push(
-          <p key={`p-${blockKeyIndex++}`} className="leading-relaxed text-zinc-300 font-light text-base md:text-lg text-left select-text">
+          <p key={`p-${blockKeyIndex++}`} className="leading-relaxed font-light text-base md:text-lg text-left select-text" style={{ color: 'var(--text-body)' }}>
             {renderInlineMarkdown(text)}
           </p>
         );
@@ -367,31 +371,33 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
 };
 
 // ── Portable Text (WYSIWYG) Rich Block Renderer ──────────────────────────────
-// Zero-dependency custom renderer that maps Sanity Portable Text JSON blocks
-// directly to the existing premium UI components. No external libraries needed.
-
 function renderPortableSpan(span: PortableTextSpan, markDefs: { _key: string; _type: string; href?: string; blank?: boolean }[], keyPrefix: string): React.ReactNode {
   let content: React.ReactNode = span.text;
   const marks = span.marks || [];
 
   for (const mark of marks) {
-    // Check if it's a decorator (bold, italic, etc.)
     if (mark === 'strong') {
-      content = <strong key={`${keyPrefix}-strong`} className="font-semibold text-white">{content}</strong>;
+      content = <strong key={`${keyPrefix}-strong`} className="font-semibold" style={{ color: 'var(--text-body)' }}>{content}</strong>;
     } else if (mark === 'em') {
-      content = <em key={`${keyPrefix}-em`} className="italic text-zinc-100">{content}</em>;
+      content = <em key={`${keyPrefix}-em`} className="italic" style={{ color: 'var(--text-muted)' }}>{content}</em>;
     } else if (mark === 'underline') {
-      content = <span key={`${keyPrefix}-u`} className="underline decoration-blue-500/40">{content}</span>;
+      content = <span key={`${keyPrefix}-u`} className="underline" style={{ textDecorationColor: 'var(--border-card)' }}>{content}</span>;
     } else if (mark === 'code') {
-      content = <code key={`${keyPrefix}-code`} className="px-1.5 py-0.5 rounded bg-zinc-800/80 border border-white/5 text-pink-400 font-mono text-sm font-light">{content}</code>;
+      content = <code key={`${keyPrefix}-code`} className="px-1.5 py-0.5 rounded font-mono text-sm font-light border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>{content}</code>;
     } else if (mark === 'strike-through') {
-      content = <s key={`${keyPrefix}-s`} className="text-zinc-500">{content}</s>;
+      content = <s key={`${keyPrefix}-s`} style={{ color: 'var(--text-muted)' }}>{content}</s>;
     } else {
-      // Check if it's an annotation (link)
       const def = markDefs.find(d => d._key === mark);
       if (def && def._type === 'link' && def.href) {
         content = (
-          <a key={`${keyPrefix}-link`} href={def.href} target={def.blank !== false ? '_blank' : '_self'} rel="noopener noreferrer" className="text-[#60a5fa] hover:text-[#93c5fd] underline decoration-blue-500/40 hover:decoration-blue-400 transition-all font-medium">
+          <a 
+            key={`${keyPrefix}-link`} 
+            href={def.href} 
+            target={def.blank !== false ? '_blank' : '_self'} 
+            rel="noopener noreferrer" 
+            className="underline transition-all font-medium"
+            style={{ color: 'var(--accent-amber)', textDecorationColor: 'var(--border-card)' }}
+          >
             {content}
           </a>
         );
@@ -410,41 +416,39 @@ function renderPortableBlock(block: PortableTextBlock, keyPrefix: string): React
   const style = block.style || 'normal';
 
   if (style === 'h2') {
-    return <h2 key={keyPrefix} className="text-3xl md:text-4xl font-bold tracking-tight text-white pt-8">{children}</h2>;
+    return <h2 key={keyPrefix} className="text-3xl md:text-4xl font-bold font-display pt-8" style={{ color: 'var(--text-body)' }}>{children}</h2>;
   }
   if (style === 'h3') {
-    return <h3 key={keyPrefix} className="text-2xl md:text-3xl font-bold tracking-tight text-white pt-6">{children}</h3>;
+    return <h3 key={keyPrefix} className="text-2xl md:text-3xl font-bold font-display pt-6" style={{ color: 'var(--text-body)' }}>{children}</h3>;
   }
   if (style === 'h4') {
-    return <h4 key={keyPrefix} className="text-xl md:text-2xl font-semibold text-white pt-4">{children}</h4>;
+    return <h4 key={keyPrefix} className="text-xl md:text-2xl font-semibold font-display pt-4" style={{ color: 'var(--text-body)' }}>{children}</h4>;
   }
   if (style === 'blockquote') {
     return (
-      <blockquote key={keyPrefix} className="py-6 pl-8 border-l-4 border-blue-500 text-xl md:text-2xl font-light text-zinc-300 italic leading-relaxed">
+      <blockquote key={keyPrefix} className="py-6 pl-8 border-l-4 text-xl md:text-2xl font-light italic leading-relaxed" style={{ borderLeftColor: 'var(--accent-amber)', color: 'var(--text-body)' }}>
         {children}
       </blockquote>
     );
   }
 
-  // List items
   if (block.listItem === 'bullet') {
     return (
       <li key={keyPrefix} className="flex items-start gap-3.5 group">
-        <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-        <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{children}</span>
+        <div className="mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--accent-amber)' }} />
+        <span className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>{children}</span>
       </li>
     );
   }
   if (block.listItem === 'number') {
     return (
-      <li key={keyPrefix} className="text-base md:text-lg text-zinc-300 font-light leading-relaxed list-decimal ml-6">
+      <li key={keyPrefix} className="text-base md:text-lg font-light leading-relaxed list-decimal ml-6" style={{ color: 'var(--text-body)' }}>
         {children}
       </li>
     );
   }
 
-  // Normal paragraph
-  return <p key={keyPrefix} className="leading-relaxed text-zinc-300 font-light text-base md:text-lg text-left select-text">{children}</p>;
+  return <p key={keyPrefix} className="leading-relaxed font-light text-base md:text-lg text-left select-text" style={{ color: 'var(--text-body)' }}>{children}</p>;
 }
 
 interface PortableTextRendererProps {
@@ -471,7 +475,6 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
     const block = blocks[i];
     const key = `pt-${i}`;
 
-    // Handle standard text blocks
     if (block._type === 'block') {
       const textBlock = block as PortableTextBlock;
 
@@ -484,15 +487,14 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
 
       flushList();
 
-      // Add section IDs to headings for scrollspy
       if (textBlock.style === 'h2' || textBlock.style === 'h3') {
         const headingText = (textBlock.children || []).map(c => c.text).join('');
         elements.push(
           <div key={key} id={`section-${sectionIndex}`} className="scroll-mt-24">
             <h2 className={`${
               textBlock.style === 'h2' ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'
-            } font-bold tracking-tight text-white flex items-center gap-3 pt-8`}>
-              <span className="text-zinc-600 text-sm font-mono tracking-wider font-light">0{sectionIndex + 1}.</span>
+            } font-bold font-display flex items-center gap-3 pt-8`} style={{ color: 'var(--text-body)' }}>
+              <span className="text-sm font-sans font-bold tracking-widest" style={{ color: 'var(--text-muted)' }}>0{sectionIndex + 1}.</span>
               {headingText}
             </h2>
           </div>
@@ -507,7 +509,6 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
 
     flushList();
 
-    // Custom embed blocks
     if (block._type === 'terminalEmbed') {
       const b = block as any;
       elements.push(<TerminalCodeBlock key={key} code={b.code || ''} lang={b.language || 'bash'} />);
@@ -517,37 +518,48 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
     } else if (block._type === 'exampleEmbed') {
       const b = block as any;
       elements.push(
-        <div key={key} className="p-8 rounded-3xl bg-[#0f172a]/50 border border-amber-500/20 shadow-lg shadow-amber-500/5 space-y-3 relative overflow-hidden">
-          <div className="flex items-center gap-2 text-amber-400 font-mono text-[10px] uppercase tracking-widest">
+        <div 
+          key={key} 
+          className="p-8 rounded-[2rem] border shadow-lg space-y-3 relative overflow-hidden"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+        >
+          <div className="flex items-center gap-2 font-sans text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
             <Lightbulb size={14} /><span>Example Playbook</span>
           </div>
-          <p className="text-base text-zinc-200 font-light leading-relaxed italic">"{b.text}"</p>
+          <p className="text-base font-light leading-relaxed italic" style={{ color: 'var(--text-body)' }}>"{b.text}"</p>
         </div>
       );
     } else if (block._type === 'highlightEmbed') {
       const b = block as any;
       elements.push(
-        <div key={key} className="p-8 rounded-3xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 shadow-lg space-y-2">
-          <p className="text-lg md:text-xl font-medium text-white leading-snug">{b.text}</p>
+        <div 
+          key={key} 
+          className="p-8 rounded-[2rem] border shadow-lg space-y-2"
+          style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+        >
+          <p className="text-lg md:text-xl font-medium leading-snug" style={{ color: 'var(--text-body)' }}>{b.text}</p>
         </div>
       );
     } else if (block._type === 'simplificationEmbed') {
       const b = block as any;
       elements.push(
-        <div key={key} className="p-8 rounded-3xl bg-[#0a0f1e]/80 border border-white/5 text-white space-y-4 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
+        <div 
+          key={key} 
+          className="p-8 rounded-[2rem] border space-y-4 relative overflow-hidden"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+        >
           <div className="relative z-10 space-y-2">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] block">{b.label || 'In Plain Terms'}</span>
-            <p className="text-base md:text-lg font-light leading-relaxed text-zinc-300">{b.text}</p>
+            <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--accent-amber)' }}>{b.label || 'In Plain Terms'}</span>
+            <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>{b.text}</p>
           </div>
         </div>
       );
     } else if (block._type === 'quoteEmbed') {
       const b = block as any;
       elements.push(
-        <div key={key} className="py-10 border-y border-white/5 my-10 relative">
-          <p className="text-2xl md:text-3xl font-display italic text-white leading-relaxed text-center max-w-2xl mx-auto">"{b.text}"</p>
-          <p className="text-center mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">— {b.author || 'Unknown'}</p>
+        <div key={key} className="py-10 border-y my-10 relative" style={{ borderColor: 'var(--border-card)' }}>
+          <p className="text-2xl md:text-3xl font-display italic leading-relaxed text-center max-w-2xl mx-auto" style={{ color: 'var(--text-body)' }}>"{b.text}"</p>
+          <p className="text-center mt-4 font-sans font-bold text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>— {b.author || 'Unknown'}</p>
         </div>
       );
     } else if (block._type === 'tableEmbed') {
@@ -559,15 +571,25 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
         return [];
       });
       elements.push(
-        <div key={key} className="my-8 overflow-x-auto rounded-2xl border border-white/5 shadow-2xl shadow-black/20">
+        <div className="my-8 overflow-x-auto rounded-2xl border shadow-2xl" style={{ borderColor: 'var(--border-card)' }}>
           <table className="w-full text-left border-collapse">
-            <thead><tr className="bg-white/5 border-b border-white/5">
-              {headers.map((h, hi) => <th key={hi} className="px-6 py-4.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400">{h}</th>)}
-            </tr></thead>
+            <thead>
+              <tr className="border-b" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                {headers.map((h, hi) => (
+                  <th key={hi} className="px-6 py-4.5 text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
             <tbody>
               {rows.map((row, ri) => (
-                <tr key={ri} className="border-b border-white/5 last:border-0 hover:bg-[#0f172a]/30 transition-colors">
-                  {row.map((cell, ci) => <td key={ci} className="px-6 py-5 text-sm text-zinc-300 font-light leading-relaxed">{cell}</td>)}
+                <tr key={ri} className="border-b last:border-0 transition-colors" style={{ borderColor: 'var(--border-card)' }}>
+                  {row.map((cell, ci) => (
+                    <td key={ci} className="px-6 py-5 text-sm font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>
+                      {cell}
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
@@ -580,8 +602,8 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
       if (imgUrl) {
         elements.push(
           <figure key={key} className="my-10">
-            <img src={imgUrl} alt={b.alt || 'Blog Post Content Illustration'} width={640} height={360} className="w-full rounded-2xl border border-white/5 shadow-xl" loading="lazy" referrerPolicy="no-referrer" />
-            {b.caption && <figcaption className="text-center mt-3 text-zinc-500 text-xs font-mono">{b.caption}</figcaption>}
+            <img src={imgUrl} alt={b.alt || 'Blog Post Content Illustration'} width={640} height={360} className="w-full rounded-2xl border shadow-xl" style={{ borderColor: 'var(--border-card)' }} loading="lazy" referrerPolicy="no-referrer" />
+            {b.caption && <figcaption className="text-center mt-3 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>{b.caption}</figcaption>}
           </figure>
         );
       }
@@ -595,7 +617,6 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
 export default function BlogPost() {
   const { id } = useParams();
   
-  // Find post dynamically
   const post = (blogPosts.find(p => p.id === id) || blogPosts[0]) as ExtendedBlogPostType;
   const hasPortableContent = !!(post.portableContent && post.portableContent.length > 0);
 
@@ -605,7 +626,6 @@ export default function BlogPost() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  // Check and manage bookmarks from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem('blog_bookmarks');
@@ -655,7 +675,6 @@ export default function BlogPost() {
     }, 2500);
   };
 
-  // Scroll percent calculations for progress bar
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -668,7 +687,6 @@ export default function BlogPost() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scrollspy to set active Table of Contents header
   useEffect(() => {
     const handleScrollSpy = () => {
       const scrollPosition = window.scrollY + 180;
@@ -685,15 +703,13 @@ export default function BlogPost() {
     };
 
     window.addEventListener('scroll', handleScrollSpy);
-    // Initial call
     setTimeout(handleScrollSpy, 200);
 
     return () => window.removeEventListener('scroll', handleScrollSpy);
   }, [post.sections]);
 
-  // Logic to find related articles based on tags overlap
   const relatedPosts = blogPosts
-    .filter(p => p.id !== post.id) // Exclude current post
+    .filter(p => p.id !== post.id)
     .map(p => {
       let score = 0;
       p.tags.forEach(tag => {
@@ -701,11 +717,11 @@ export default function BlogPost() {
       });
       return { ...p, score };
     })
-    .sort((a, b) => b.score - a.score) // Sort by relevance
-    .slice(0, 3); // Take top 3
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e] text-[#f8fafc] overflow-hidden">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title={`${post.title} | Emmanuel Odebiyi`}
         description={post.metaDescription || post.excerpt}
@@ -713,10 +729,10 @@ export default function BlogPost() {
       />
 
       {/* Floating Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-white/5 z-50">
+      <div className="fixed top-0 left-0 w-full h-1 z-50 animate-pulse" style={{ backgroundColor: 'var(--border-card)' }}>
         <div 
-          className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-75"
-          style={{ width: `${scrollPercent}%` }}
+          className="h-full transition-all duration-75 animate-none"
+          style={{ width: `${scrollPercent}%`, backgroundColor: 'var(--accent-amber)' }}
         />
       </div>
 
@@ -727,16 +743,17 @@ export default function BlogPost() {
             initial={{ opacity: 0, y: 50, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: 20, x: '-50%' }}
-            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 bg-[#0f172a] border border-blue-500/30 text-white px-6 py-3.5 rounded-2xl shadow-2xl shadow-blue-500/10 flex items-center gap-3 backdrop-blur-md"
+            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 border px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-md"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
           >
-            <Check size={16} className="text-blue-400" />
-            <span className="text-sm font-mono tracking-wide">{toastMessage}</span>
+            <Check size={16} style={{ color: 'var(--accent-amber)' }} />
+            <span className="text-sm font-sans font-bold uppercase tracking-widest">{toastMessage}</span>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Article Hero Banner */}
-      <section className="relative h-[80vh] w-full overflow-hidden">
+      <section className="relative h-[80vh] w-full overflow-hidden border-b" style={{ borderColor: 'var(--border-card)' }}>
         <motion.div 
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
@@ -751,9 +768,10 @@ export default function BlogPost() {
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          {/* Crisp, deep overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/70 to-black/35" />
-          <div className="absolute inset-0 bg-[#0a0f1e]/15" />
+          {/* Top-down dark overlay to bring out the header text and logo */}
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/70 via-[#0E1C2A]/30 to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-page) 0%, transparent 100%)', opacity: 0.9 }} />
+          <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-page)', opacity: 0.1 }} />
         </motion.div>
 
         <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-20 max-w-7xl mx-auto w-full relative z-10">
@@ -763,12 +781,12 @@ export default function BlogPost() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="space-y-6 max-w-4xl text-left"
           >
-            <Link to="/blog" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-2 group font-mono text-xs uppercase tracking-widest">
+            <Link to="/blog" className="inline-flex items-center gap-2 transition-colors mb-2 group font-sans text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
               Back to Insights
             </Link>
             
-            <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tight leading-[0.95] font-display">
+            <h1 className="text-4xl md:text-7xl font-bold tracking-tight leading-[0.95] font-display" style={{ color: 'var(--text-body)' }}>
               {post.title}
             </h1>
 
@@ -779,31 +797,32 @@ export default function BlogPost() {
                   alt={post.author} 
                   width={40}
                   height={40}
-                  className="w-10 h-10 rounded-full border border-white/10" 
+                  className="w-10 h-10 rounded-full border" 
+                  style={{ borderColor: 'var(--border-card)' }}
                 />
                 <div>
-                  <p className="text-white font-bold text-sm leading-none">{post.author}</p>
-                  <p className="text-zinc-500 text-[10px] font-mono uppercase tracking-wider mt-1">{post.date}</p>
+                  <p className="font-bold text-sm leading-none" style={{ color: 'var(--text-body)' }}>{post.author}</p>
+                  <p className="text-[10px] font-sans font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-muted)' }}>{post.date}</p>
                 </div>
               </div>
               
-              <div className="h-4 w-px bg-white/10 hidden sm:block" />
+              <div className="h-4 w-px hidden sm:block" style={{ backgroundColor: 'var(--border-card)' }} />
 
-              <div className="flex items-center gap-6 text-zinc-400 text-xs font-mono">
+              <div className="flex items-center gap-6 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                 <span className="flex items-center gap-1.5"><Clock size={13} /> {post.readTime}</span>
                 <button 
                   onClick={copyShareLink}
-                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none"
+                  className="flex items-center gap-1.5 hover:text-[var(--text-body)] transition-colors focus:outline-none"
                   title="Share Link"
                 >
                   <Share2 size={13} /> Share
                 </button>
                 <button 
                   onClick={toggleBookmark}
-                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none"
+                  className="flex items-center gap-1.5 hover:text-[var(--text-body)] transition-colors focus:outline-none"
                   title="Bookmark post"
                 >
-                  <Bookmark size={13} className={isBookmarked ? "fill-blue-500 text-blue-500" : ""} /> Bookmark
+                  <Bookmark size={13} style={{ color: isBookmarked ? 'var(--accent-amber)' : 'inherit', fill: isBookmarked ? 'var(--accent-amber)' : 'none' }} /> Bookmark
                 </button>
               </div>
             </div>
@@ -816,13 +835,13 @@ export default function BlogPost() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* Sticky Left Table of Contents */}
-          <aside className="hidden lg:block lg:col-span-3 sticky top-28 h-fit space-y-8 text-left border-r border-white/5 pr-6">
+          <aside className="hidden lg:block lg:col-span-3 sticky top-28 h-fit space-y-8 text-left border-r pr-6" style={{ borderColor: 'var(--border-card)' }}>
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 font-sans text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                 <BookOpen size={12} />
                 <span>Reading Guide</span>
               </div>
-              <h4 className="text-sm font-bold text-white font-sans">Core Framework</h4>
+              <h4 className="text-sm font-bold font-sans" style={{ color: 'var(--text-body)' }}>Core Framework</h4>
             </div>
             
             <nav className="flex flex-col gap-2 relative">
@@ -830,11 +849,12 @@ export default function BlogPost() {
                 <a
                   key={idx}
                   href={`#section-${idx}`}
-                  className={`text-sm font-light py-2 pl-4 border-l transition-all duration-300 ${
-                    activeSection === idx
-                      ? 'text-blue-400 border-blue-500 font-medium'
-                      : 'text-zinc-500 border-white/5 hover:text-zinc-300 hover:border-white/10'
-                  }`}
+                  className="text-sm font-light py-2 pl-4 border-l transition-all duration-300"
+                  style={{
+                    color: activeSection === idx ? 'var(--accent-amber)' : 'var(--text-muted)',
+                    borderLeftColor: activeSection === idx ? 'var(--accent-amber)' : 'var(--border-card)',
+                    fontWeight: activeSection === idx ? 'bold' : 'normal'
+                  }}
                   onClick={(e) => {
                     e.preventDefault();
                     document.getElementById(`section-${idx}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -846,20 +866,22 @@ export default function BlogPost() {
             </nav>
 
             {/* Quick Actions Panel */}
-            <div className="pt-8 border-t border-white/5 space-y-4">
+            <div className="pt-8 border-t space-y-4" style={{ borderColor: 'var(--border-card)' }}>
               <button 
                 onClick={copyShareLink}
-                className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/8 transition-all text-xs font-mono text-zinc-300 hover:text-white"
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all text-xs font-sans font-bold uppercase tracking-widest"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
               >
                 <span>Share Insight</span>
                 <Share2 size={12} />
               </button>
               <button 
                 onClick={toggleBookmark}
-                className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/8 transition-all text-xs font-mono text-zinc-300 hover:text-white"
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all text-xs font-sans font-bold uppercase tracking-widest"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
               >
                 <span>{isBookmarked ? "Bookmarked" : "Bookmark Insight"}</span>
-                <Bookmark size={12} className={isBookmarked ? "fill-blue-500 text-blue-500" : ""} />
+                <Bookmark size={12} style={{ color: isBookmarked ? 'var(--accent-amber)' : 'inherit', fill: isBookmarked ? 'var(--accent-amber)' : 'none' }} />
               </button>
             </div>
           </aside>
@@ -869,7 +891,7 @@ export default function BlogPost() {
             
             {/* Hook / Introduction */}
             <section className="mb-16">
-              <p className="text-2xl md:text-3xl font-light text-zinc-300 leading-relaxed italic border-l-4 border-blue-500 pl-8 font-sans">
+              <p className="text-2xl md:text-3xl font-light leading-relaxed italic border-l-4 pl-8 font-sans" style={{ borderLeftColor: 'var(--accent-amber)', color: 'var(--text-body)' }}>
                 "{post.hook}"
               </p>
             </section>
@@ -887,43 +909,51 @@ export default function BlogPost() {
                     id={`section-${index}`} 
                     className="space-y-6 scroll-mt-24 transition-opacity"
                   >
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
-                      <span className="text-zinc-600 text-sm font-mono tracking-wider font-light">0{index + 1}.</span>
+                    <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight flex items-center gap-3" style={{ color: 'var(--text-body)' }}>
+                      <span className="text-sm font-sans font-bold tracking-widest" style={{ color: 'var(--text-muted)' }}>0{index + 1}.</span>
                       {section.heading}
                     </h2>
                     
-                    <div className="prose prose-invert max-w-none text-zinc-300 font-light text-base md:text-lg leading-relaxed space-y-4">
+                    <div className="prose prose-invert max-w-none font-light text-base md:text-lg leading-relaxed space-y-4" style={{ color: 'var(--text-body)' }}>
                       <MarkdownRenderer content={section.content} />
                     </div>
 
                     {section.example && (
-                      <div className="p-8 rounded-3xl bg-[#0f172a]/50 border border-amber-500/20 shadow-lg shadow-amber-500/5 space-y-3 relative overflow-hidden">
-                        <div className="flex items-center gap-2 text-amber-400 font-mono text-[10px] uppercase tracking-widest">
+                      <div 
+                        className="p-8 rounded-[2rem] border shadow-lg space-y-3 relative overflow-hidden"
+                        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+                      >
+                        <div className="flex items-center gap-2 font-sans text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
                           <Lightbulb size={14} />
                           <span>Example Playbook</span>
                         </div>
-                        <p className="text-base text-zinc-200 font-light leading-relaxed italic">
+                        <p className="text-base font-light leading-relaxed italic" style={{ color: 'var(--text-body)' }}>
                           "{section.example}"
                         </p>
                       </div>
                     )}
 
                     {section.highlight && (
-                      <div className="p-8 rounded-3xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 shadow-lg space-y-2">
-                        <p className="text-lg md:text-xl font-medium text-white leading-snug">
+                      <div 
+                        className="p-8 rounded-[2rem] border shadow-lg space-y-2"
+                        style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+                      >
+                        <p className="text-lg md:text-xl font-medium leading-snug" style={{ color: 'var(--text-body)' }}>
                           {section.highlight}
                         </p>
                       </div>
                     )}
 
                     {section.simplification && (
-                      <div className="p-8 rounded-3xl bg-[#0a0f1e]/80 border border-white/5 text-white space-y-4 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-2xl rounded-full" />
+                      <div 
+                        className="p-8 rounded-[2rem] border space-y-4 relative overflow-hidden"
+                        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+                      >
                         <div className="relative z-10 space-y-2">
-                          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] block">
+                          <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--accent-amber)' }}>
                             {section.simplification.label}
                           </span>
-                          <p className="text-base md:text-lg font-light leading-relaxed text-zinc-300">
+                          <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>
                             {section.simplification.text}
                           </p>
                         </div>
@@ -934,31 +964,31 @@ export default function BlogPost() {
                       <ul className="space-y-3.5 pt-2 pl-2">
                         {section.list.map((item, i) => (
                           <li key={i} className="flex items-start gap-3.5 group">
-                            <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-                            <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{item}</span>
+                            <div className="mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--accent-amber)' }} />
+                            <span className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>{item}</span>
                           </li>
                         ))}
                       </ul>
                     )}
 
                     {section.quote && (
-                      <div className="py-10 border-y border-white/5 my-10 relative">
-                        <p className="text-2xl md:text-3xl font-display italic text-white leading-relaxed text-center max-w-2xl mx-auto">
+                      <div key={index} className="py-10 border-y my-10 relative" style={{ borderColor: 'var(--border-card)' }}>
+                        <p className="text-2xl md:text-3xl font-display italic leading-relaxed text-center max-w-2xl mx-auto" style={{ color: 'var(--text-body)' }}>
                           "{section.quote.text}"
                         </p>
-                        <p className="text-center mt-4 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                        <p className="text-center mt-4 font-sans font-bold text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                           — {section.quote.author}
                         </p>
                       </div>
                     )}
 
                     {section.table && (
-                      <div className="my-8 overflow-x-auto rounded-2xl border border-white/5 shadow-2xl shadow-black/20">
+                      <div className="my-8 overflow-x-auto rounded-2xl border shadow-2xl" style={{ borderColor: 'var(--border-card)' }}>
                         <table className="w-full text-left border-collapse">
                           <thead>
-                            <tr className="bg-white/5 border-b border-white/5">
+                            <tr className="border-b font-sans text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                               {section.table.headers.map((header, i) => (
-                                <th key={i} className="px-6 py-4.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+                                <th key={i} className="px-6 py-4.5" style={{ color: 'var(--text-muted)' }}>
                                   {header}
                                 </th>
                               ))}
@@ -966,9 +996,9 @@ export default function BlogPost() {
                           </thead>
                           <tbody>
                             {section.table.rows.map((row, i) => (
-                              <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-[#0f172a]/30 transition-colors">
+                              <tr key={i} className="border-b last:border-0 transition-colors" style={{ borderColor: 'var(--border-card)' }}>
                                 {row.map((cell, j) => (
-                                  <td key={j} className="px-6 py-5 text-sm text-zinc-300 font-light leading-relaxed">
+                                  <td key={j} className="px-6 py-5 text-sm font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>
                                     {cell}
                                   </td>
                                 ))}
@@ -985,46 +1015,56 @@ export default function BlogPost() {
 
             {/* Divider Element */}
             <div className="my-24 flex items-center justify-center gap-3">
-              <div className="h-px w-10 bg-white/10" />
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <div className="h-px w-10 bg-white/10" />
+              <div className="h-px w-10" style={{ backgroundColor: 'var(--border-card)' }} />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+              <div className="h-px w-10" style={{ backgroundColor: 'var(--border-card)' }} />
             </div>
 
             {/* Key Takeaways Section */}
-            <section className="p-8 md:p-16 rounded-[2.5rem] bg-[#0f172a]/40 border border-white/5 shadow-xl space-y-10">
+            <section 
+              className="p-8 md:p-16 rounded-[2.5rem] border shadow-xl space-y-10"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
               <div className="space-y-3">
-                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-zinc-500 block">Executive Summary</span>
-                <h2 className="text-3xl font-bold text-white tracking-tight">Key Insights</h2>
+                <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Executive Summary</span>
+                <h2 className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Key Insights</h2>
               </div>
               
               <ul className="space-y-5">
                 {post.takeaways.map((takeaway, i) => (
                   <li key={i} className="flex items-start gap-4 group">
-                    <div className="mt-1.5 w-5 h-5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                    <div 
+                      className="mt-1.5 w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
+                    >
                       <CheckCircle2 size={12} />
                     </div>
-                    <span className="text-base md:text-lg text-zinc-300 font-light leading-relaxed">{takeaway}</span>
+                    <span className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>{takeaway}</span>
                   </li>
                 ))}
               </ul>
             </section>
 
             {/* Dynamic Author Bio Card */}
-            <section className="mt-24 pt-12 border-t border-white/5">
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 bg-[#0f172a]/20 border border-white/5 p-8 rounded-3xl backdrop-blur-sm">
+            <section className="mt-24 pt-12 border-t" style={{ borderColor: 'var(--border-card)' }}>
+              <div 
+                className="flex flex-col md:flex-row items-start md:items-center gap-6 border p-8 rounded-3xl backdrop-blur-sm"
+                style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+              >
                 <img 
                   src={post.authorImage} 
                   alt={post.author} 
                   width={80}
                   height={80}
-                  className="w-20 h-20 rounded-full border border-white/10 object-cover shadow-lg shadow-black/20" 
+                  className="w-20 h-20 rounded-full border object-cover shadow-lg" 
+                  style={{ borderColor: 'var(--border-card)' }}
                 />
                 <div className="space-y-3 flex-1 text-left">
                   <div>
-                    <p className="text-xl font-bold text-white leading-none">{post.author}</p>
-                    <p className="text-zinc-500 text-xs font-mono uppercase mt-1 tracking-wider">{post.date} • Author</p>
+                    <p className="text-xl font-bold leading-none" style={{ color: 'var(--text-body)' }}>{post.author}</p>
+                    <p className="text-xs font-sans font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-muted)' }}>{post.date} • Author</p>
                   </div>
-                  <p className="text-sm md:text-base text-zinc-400 font-light leading-relaxed">
+                  <p className="text-sm md:text-base font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                     {post.authorBio}
                   </p>
                 </div>
@@ -1032,16 +1072,16 @@ export default function BlogPost() {
             </section>
 
             {/* Bottom Actions Router */}
-            <section className="mt-16 p-8 border-t border-white/5 text-zinc-400 font-light text-sm text-left flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <p className="max-w-md">
+            <section className="mt-16 p-8 border-t text-zinc-400 font-light text-sm text-left flex flex-col md:flex-row items-start md:items-center justify-between gap-6" style={{ borderColor: 'var(--border-card)' }}>
+              <p className="max-w-md" style={{ color: 'var(--text-muted)' }}>
                 Want to build automated pipelines like these for your business? Explore my solutions or reach out.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/portfolio" className="text-white hover:text-blue-400 font-bold hover:underline inline-flex items-center gap-1 font-mono text-xs uppercase tracking-widest transition-colors">
+                <Link to="/portfolio" className="hover:text-[var(--accent-amber)] font-bold font-sans text-xs uppercase tracking-widest transition-colors" style={{ color: 'var(--text-body)' }}>
                   Case Studies <ArrowUpRight size={14} />
                 </Link>
-                <span className="text-white/10 hidden md:inline">|</span>
-                <Link to="/contact" className="text-blue-400 hover:text-blue-300 font-bold hover:underline inline-flex items-center gap-1 font-mono text-xs uppercase tracking-widest transition-colors">
+                <span className="hidden md:inline" style={{ color: 'var(--border-card)' }}>|</span>
+                <Link to="/contact" className="hover:text-[var(--accent-amber)] font-bold font-sans text-xs uppercase tracking-widest transition-colors" style={{ color: 'var(--accent-amber)' }}>
                   Let's Connect <ArrowUpRight size={14} />
                 </Link>
               </div>
@@ -1052,10 +1092,10 @@ export default function BlogPost() {
 
         {/* Dynamic Related Articles Section */}
         {relatedPosts.length > 0 && (
-          <section className="mt-32 pt-20 border-t border-white/5 space-y-10 text-left">
+          <section className="mt-32 pt-20 border-t space-y-10 text-left" style={{ borderColor: 'var(--border-card)' }}>
             <div className="space-y-3">
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-zinc-500 block">Next Up</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Related Insights</h2>
+              <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Next Up</span>
+              <h2 className="text-3xl md:text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Related Insights</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1063,7 +1103,8 @@ export default function BlogPost() {
                 <Link 
                   key={related.id} 
                   to={`/blog/${related.id}`}
-                  className="group bg-[#0f172a]/20 hover:bg-[#0f172a]/50 border border-white/5 hover:border-white/10 rounded-3xl p-6 block transition-all duration-300 hover:y-[-4px]"
+                  className="group border rounded-3xl p-6 block transition-all duration-300"
+                  style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
                 >
                   <div className="aspect-[16/10] rounded-2xl overflow-hidden relative mb-6">
                     <img 
@@ -1080,17 +1121,21 @@ export default function BlogPost() {
                   <div className="space-y-3">
                     <div className="flex flex-wrap gap-1.5">
                       {related.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[8px] font-mono uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded">
+                        <span 
+                          key={tag} 
+                          className="text-[8px] font-sans font-bold uppercase tracking-widest border px-2 py-0.5 rounded"
+                          style={{ color: 'var(--text-muted)', backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                        >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-lg font-bold text-white leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold font-display leading-snug transition-colors group-hover:text-[var(--accent-amber)] line-clamp-2" style={{ color: 'var(--text-body)' }}>
                       {related.title}
                     </h3>
-                    <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono pt-3 border-t border-white/5">
+                    <div className="flex items-center justify-between text-[10px] font-sans font-bold uppercase tracking-widest pt-3 border-t" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
                       <span>{related.date}</span>
-                      <span className="flex items-center gap-1 group-hover:text-white transition-colors">
+                      <span className="flex items-center gap-1 group-hover:text-[var(--text-body)] transition-colors">
                         Read
                         <ChevronRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
                       </span>
@@ -1104,30 +1149,34 @@ export default function BlogPost() {
       </section>
 
       {/* Embedded unified bottom newsletter to match footer flow */}
-      <section className="bg-zinc-950/60 border-t border-white/5 py-24 px-6 overflow-hidden relative">
+      <section className="border-t py-24 px-6 overflow-hidden relative" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
           <div className="space-y-3">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#60a5fa]">Organic Scale Insights</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-none font-display">
+            <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Organic Scale Insights</span>
+            <h2 className="text-3xl md:text-5xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
               Join the Growth Lab
             </h2>
-            <p className="text-zinc-400 font-light max-w-xl mx-auto text-sm leading-relaxed">
+            <p className="font-light max-w-xl mx-auto text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               Get raw automated workflows, operational templates, and technical SEO frameworks delivered weekly. No spam, only engineering-grade growth strategy.
             </p>
           </div>
 
           <div className="max-w-md mx-auto relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur-md opacity-20 group-focus-within:opacity-40 transition-opacity duration-300" />
-            <div className="relative flex bg-[#0f172a]/90 border border-white/10 p-2 rounded-xl">
+            <div 
+              className="relative flex border p-2 rounded-xl"
+              style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+            >
               <input 
                 type="email" 
                 placeholder="Enter email address" 
-                className="flex-1 bg-transparent px-4 text-white text-xs focus:outline-none placeholder-zinc-500"
+                className="flex-1 bg-transparent px-4 text-xs focus:outline-none placeholder-zinc-500"
+                style={{ color: 'var(--text-body)' }}
                 disabled
               />
               <Link
                 to="/blog"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-[10px] uppercase tracking-wider font-mono shadow-md"
+                className="text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-[10px] uppercase tracking-widest font-sans shadow-md"
+                style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
               >
                 Sign Up
               </Link>

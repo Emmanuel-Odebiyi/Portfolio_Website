@@ -60,8 +60,8 @@ export const ResultsTypographySection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative grain-overlay bg-[var(--dark-base)]"
-      style={{ height: '250vh' }}
+      className="relative grain-overlay"
+      style={{ height: '250vh', backgroundColor: 'color-mix(in srgb, var(--bg-page) 80%, transparent)' }}
     >
       {/* Sticky viewport bounds the text to the center area */}
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-24">
@@ -69,14 +69,14 @@ export const ResultsTypographySection = () => {
         {/* We constrain the max-width to center it and apply pure text-center for alignment */}
         <div className="max-w-4xl w-full px-6 md:px-12 text-center">
           
-          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.25] text-white">
+          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.25]" style={{ color: 'var(--text-body)' }}>
             {SENTENCES.map((line, i) => {
               // Calculate stagger logic: Each line gets a 15% window of the scroll length to fade in
               const step = 1 / SENTENCES.length;
               const start = i * step * 0.8; // multiplying by 0.8 condenses the reveal so it finishes before the absolute bottom
               const end = start + step;
 
-              const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
+              const opacity = useTransform(scrollYProgress, [start, end], [0.3, 1]);
               const y = useTransform(scrollYProgress, [start, end], [30, 0]);
               const filter = useTransform(scrollYProgress, [start, end], ['blur(12px)', 'blur(0px)']);
               

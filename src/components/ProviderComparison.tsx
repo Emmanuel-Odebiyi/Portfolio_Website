@@ -5,7 +5,7 @@ import { CheckCircle2, Building2, UserX, MousePointer2, Users } from 'lucide-rea
 const comparisonData = [
   {
     title: "Agencies",
-    icon: <Building2 size={24} className="text-amber-400" />,
+    icon: <Building2 size={24} style={{ color: 'var(--accent-amber)' }} />,
     advantages: [
       "You work directly with me — not a rotating junior team",
       "30–50% lower cost — no inflated agency overhead",
@@ -15,7 +15,7 @@ const comparisonData = [
   },
   {
     title: "Freelancers",
-    icon: <UserX size={24} className="text-indigo-400" />,
+    icon: <UserX size={24} style={{ color: 'var(--accent-blue)' }} />,
     advantages: [
       "Complete systems — not fragmented, one-off deliverables",
       "Strategic thinking — not just execution without a plan",
@@ -25,7 +25,7 @@ const comparisonData = [
   },
   {
     title: "DIY",
-    icon: <MousePointer2 size={24} className="text-purple-400" />,
+    icon: <MousePointer2 size={24} style={{ color: '#8b5cf6' }} />,
     advantages: [
       "Expert-built from day one — no learning curves on your time",
       "Proven frameworks — not trial-and-error guesswork",
@@ -35,7 +35,7 @@ const comparisonData = [
   },
   {
     title: "In-House Hiring",
-    icon: <Users size={24} className="text-blue-400" />,
+    icon: <Users size={24} style={{ color: 'var(--accent-teal)' }} />,
     advantages: [
       "$30K–$50K annually — not $80K–$120K+ with benefits and HR costs",
       "Broader expertise: SEO + content + automation + AI — not one specialty",
@@ -47,7 +47,7 @@ const comparisonData = [
 
 export const ProviderComparison: React.FC = () => {
   return (
-    <section className="py-32 bg-transparent text-white relative overflow-hidden z-10">
+    <section className="py-32 relative overflow-hidden z-10" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-page) 80%, transparent)' }}>
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-brand-gradient/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2" />
       
@@ -57,7 +57,8 @@ export const ProviderComparison: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 font-mono text-[10px] uppercase tracking-[0.4em] font-black"
+            className="inline-block px-4 py-1.5 rounded-full border font-sans text-[10px] uppercase tracking-[0.4em] font-black"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
           >
             The Difference
           </motion.h2>
@@ -66,7 +67,8 @@ export const ProviderComparison: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-black tracking-tighter text-white max-w-4xl mx-auto leading-[1.1]"
+            className="text-4xl md:text-6xl font-black tracking-tighter max-w-4xl mx-auto leading-[1.1]"
+            style={{ color: 'var(--text-body)' }}
           >
             Why This Works When <br className="hidden md:block" />
             <span className="text-brand-gradient">Everything Else Hasn't.</span>
@@ -81,13 +83,19 @@ export const ProviderComparison: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 lg:p-10 transition-all duration-300 hover:bg-white/10 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1"
+              className="group rounded-[2.5rem] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              style={{
+                backgroundColor: 'var(--bg-surface)',
+                border: '1px solid transparent',
+                backgroundClip: 'padding-box, border-box',
+                backgroundImage: 'linear-gradient(var(--bg-surface), var(--bg-surface)), linear-gradient(135deg, var(--border-card), var(--border-card))'
+              }}
             >
-              <div className="flex items-center gap-5 mb-10 pb-8 border-b border-white/10">
-                <div className="p-4 bg-white/5 rounded-2xl shadow-sm border border-white/10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+              <div className="flex items-center gap-5 mb-10 pb-8 border-b" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="p-4 rounded-2xl shadow-sm border group-hover:scale-110 group-hover:rotate-3 transition-all duration-500" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                   {col.icon}
                 </div>
-                <h4 className="text-xl lg:text-2xl font-black text-white tracking-tight italic opacity-80 group-hover:opacity-100 transition-opacity">vs. {col.title}</h4>
+                <h4 className="text-xl lg:text-2xl font-black tracking-tight italic opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text-body)' }}>vs. {col.title}</h4>
               </div>
               
               <ul className="space-y-8">
@@ -96,14 +104,17 @@ export const ProviderComparison: React.FC = () => {
                   const parts = adv.split(' — ');
                   return (
                     <li key={j} className="flex gap-4 items-start group/item">
-                      <div className="mt-1 flex-none w-5 h-5 rounded-full bg-brand-gradient/10 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                        <CheckCircle2 size={12} className="text-indigo-400" />
+                      <div 
+                        className="mt-1 flex-none w-5 h-5 rounded-full flex items-center justify-center group-hover/item:scale-110 transition-transform"
+                        style={{ backgroundColor: 'color-mix(in srgb, var(--accent-teal) 10%, transparent)' }}
+                      >
+                        <CheckCircle2 size={12} style={{ color: 'var(--accent-teal)' }} />
                       </div>
-                      <span className="text-gray-400 text-sm lg:text-base leading-relaxed font-medium group-hover/item:text-white transition-colors">
+                      <span className="text-sm lg:text-base leading-relaxed font-medium transition-colors" style={{ color: 'var(--text-muted)' }}>
                         {parts.length > 1 ? (
                           <>
-                            <span className="font-bold text-white">{parts[0]}</span>
-                            <span className="opacity-60 block mt-1 text-xs lg:text-sm font-semibold">— {parts[1]}</span>
+                            <span className="font-bold" style={{ color: 'var(--text-body)' }}>{parts[0]}</span>
+                            <span className="opacity-70 block mt-1 text-xs lg:text-sm font-semibold">— {parts[1]}</span>
                           </>
                         ) : (
                           adv

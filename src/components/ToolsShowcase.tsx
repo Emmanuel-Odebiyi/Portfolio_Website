@@ -71,9 +71,10 @@ const MarqueeRow = ({ items, reverse = false, speed = 40 }: { items: Tool[], rev
            <div 
              key={i} 
              title={tool.name}
-             className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-white/5 border border-white/10 rounded-2xl shrink-0 hover:bg-white/10 hover:scale-[1.02] transition-all cursor-pointer group/item shadow-sm hover:shadow-md backdrop-blur-sm"
+             className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center border rounded-2xl shrink-0 hover:scale-[1.02] transition-all cursor-pointer group/item shadow-sm hover:shadow-md backdrop-blur-sm"
+             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
            >
-              <span className="grayscale group-hover/item:grayscale-0 transition-all opacity-50 group-hover/item:opacity-100 text-white">
+              <span className="grayscale group-hover/item:grayscale-0 transition-all opacity-50 group-hover/item:opacity-100" style={{ color: 'var(--text-body)' }}>
                 <tool.Icon className="w-8 h-8 text-current" />
               </span>
            </div>
@@ -90,10 +91,10 @@ export function ToolsShowcase() {
 
   return (
     <>
-      <section className="relative py-32 overflow-hidden bg-[#0B0F19] text-white flex flex-col items-center justify-center">
+      <section className="relative py-32 overflow-hidden flex flex-col items-center justify-center" style={{ backgroundColor: 'var(--bg-surface-alt)', color: 'var(--text-body)' }}>
         {/* Subtle background glow */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center" aria-hidden="true">
-          <div className="w-[800px] h-[400px] bg-brand-gradient/10 blur-[120px] rounded-full" />
+          <div className="w-[800px] h-[400px] blur-[120px] rounded-full" style={{ backgroundColor: 'color-mix(in srgb, var(--cta-blue) 8%, transparent)' }} />
         </div>
 
         <div className="relative z-10 w-full">
@@ -103,20 +104,20 @@ export function ToolsShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-20 px-6"
+            className="text-center mb-20 px-6 font-sans"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight" style={{ color: 'var(--text-body)' }}>
               Over 500 integrations
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed font-light">
+            <p className="max-w-2xl mx-auto text-base md:text-lg leading-relaxed font-light" style={{ color: 'var(--text-muted)' }}>
               Use pre-built nodes for common apps. Custom API connections for everything else.
             </p>
           </motion.div>
 
           {/* Marquee Container with fade edge masks */}
           <div className="w-full relative">
-            <div className="absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-[#0B0F19] to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-[#0B0F19] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-24 sm:w-48 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--bg-surface-alt), transparent)' }} />
+            <div className="absolute inset-y-0 right-0 w-24 sm:w-48 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--bg-surface-alt), transparent)' }} />
             
             <div className="flex flex-col gap-2">
               <MarqueeRow items={row1} speed={60} />
@@ -133,7 +134,12 @@ export function ToolsShowcase() {
           >
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="px-6 py-3 bg-brand-gradient hover:bg-deep-space-blue-400 text-white text-sm font-semibold rounded-xl transition-all shadow-[0_4px_20px_rgba(0,166,255,0.2)] hover:shadow-[0_8px_30px_rgba(0,166,255,0.3)]"
+              className="px-6 py-3 text-sm font-semibold rounded-xl transition-all"
+              style={{ 
+                background: 'var(--btn-cta-bg)', 
+                color: 'var(--btn-cta-text)',
+                boxShadow: '0 4px 20px var(--btn-cta-shadow)' 
+              }}
             >
               Browse all integrations
             </button>
@@ -161,17 +167,19 @@ export function ToolsShowcase() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-5xl bg-[#0B0F19] border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] backdrop-blur-md"
+              className="relative w-full max-w-5xl border rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] backdrop-blur-md"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 md:px-8 border-b border-white/10 shrink-0">
+              <div className="flex items-center justify-between p-6 md:px-8 border-b shrink-0" style={{ borderColor: 'var(--border-card)' }}>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-1">Tools & Integrations</h3>
-                  <p className="text-gray-400 text-sm">The core stack running the automated systems.</p>
+                  <h3 className="text-2xl font-bold mb-1" style={{ color: 'var(--text-body)' }}>Tools & Integrations</h3>
+                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>The core stack running the automated systems.</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="p-2.5 bg-white/5 hover:bg-white/10 rounded-full text-gray-500 hover:text-white transition-colors"
+                  className="p-2.5 rounded-full transition-colors border"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
                   aria-label="Close modal"
                 >
                   <X size={20} />
@@ -190,14 +198,15 @@ export function ToolsShowcase() {
                   {tools.map((tool, i) => (
                     <div 
                       key={i} 
-                      className="flex gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:shadow-sm transition-all group backdrop-blur-sm"
+                      className="flex gap-4 p-5 rounded-2xl border transition-all group shadow-sm hover:shadow-md"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
                     >
-                      <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm text-gray-400">
+                      <div className="w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}>
                         <tool.Icon className="w-6 h-6 text-current" />
                       </div>
                       <div>
-                        <h4 className="text-white font-semibold mb-1 group-hover:text-brand-gradient transition-colors">{tool.name}</h4>
-                        <p className="text-gray-400 text-sm leading-relaxed">{tool.description}</p>
+                        <h4 className="font-semibold mb-1 group-hover:text-[var(--cta-blue)] transition-colors" style={{ color: 'var(--text-body)' }}>{tool.name}</h4>
+                        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{tool.description}</p>
                       </div>
                     </div>
                   ))}

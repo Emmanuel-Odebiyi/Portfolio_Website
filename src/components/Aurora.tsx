@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
-const ParticleSwarm = () => {
+const ParticleSwarm = ({ isDark }: { isDark: boolean }) => {
   const ref = useRef<THREE.Points>(null);
 
   const sphere = useMemo(() => {
@@ -31,19 +31,20 @@ const ParticleSwarm = () => {
     <group rotation={[0, 0, Math.PI / 4]} position={[0, 0, -2.8]}>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
+          key={isDark ? 'dark-particles' : 'light-particles'}
           transparent
           color="#d97706"   /* Amber/Gold — warm authority accent */
-          size={0.018}
+          size={isDark ? 0.018 : 0.015}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.25}
+          opacity={isDark ? 0.25 : 0.16}
         />
       </Points>
     </group>
   );
 };
 
-const InfiniteGrid = () => {
+const InfiniteGrid = ({ isDark }: { isDark: boolean }) => {
   const gridRef = useRef<THREE.GridHelper>(null);
 
   useFrame((_, delta) => {
@@ -58,8 +59,9 @@ const InfiniteGrid = () => {
   return (
     <gridHelper
       ref={gridRef}
-      /* Dark navy grid lines to match new dark palette */
-      args={[100, 100, '#1e3a5f', '#0f2035']}
+      key={isDark ? 'dark-grid' : 'light-grid'}
+      /* Subtle slate-blue lines in light mode to not look harsh */
+      args={[100, 100, isDark ? '#1e3a5f' : 'rgba(17, 31, 46, 0.12)', isDark ? '#0f2035' : 'rgba(17, 31, 46, 0.04)']}
       position={[0, -3.5, -20]}
     />
   );
@@ -67,6 +69,15 @@ const InfiniteGrid = () => {
 
 export const Aurora: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 768px)');
@@ -79,24 +90,35 @@ export const Aurora: React.FC = () => {
   if (isMobile) {
     return (
       <div 
-        className="fixed inset-0 z-[-1] pointer-events-none bg-[#0a0f1e] aurora-canvas-container"
+        className="fixed inset-0 z-[-1] pointer-events-none aurora-canvas-container transition-colors duration-500"
         style={{
-          backgroundImage: 'radial-gradient(circle at 50% -20%, rgba(217, 119, 6, 0.05), transparent 70%), radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.04), transparent 50%)'
+          backgroundColor: isDark ? '#111f2e' : '#f4f5f7',
+          backgroundImage: isDark 
+            ? 'radial-gradient(circle at 50% -20%, rgba(217, 119, 6, 0.18), transparent 65%), radial-gradient(circle at 15% 85%, rgba(59, 125, 235, 0.12), transparent 55%)'
+            : 'radial-gradient(circle at 50% -20%, rgba(217, 119, 6, 0.10), transparent 65%), radial-gradient(circle at 15% 85%, rgba(59, 125, 235, 0.08), transparent 55%)'
         }}
       />
     );
   }
 
+  const bgColor = isDark ? '#111f2e' : '#f4f5f7';
+
   return (
-    /* Dynamic base color using var(--dark-base) and custom selector hook */
-    <div className="fixed inset-0 z-[-1] pointer-events-none bg-[var(--dark-base)] aurora-canvas-container">
+    <div 
+      className="fixed inset-0 z-[-1] pointer-events-none aurora-canvas-container transition-colors duration-500"
+      style={{ 
+        backgroundColor: bgColor,
+        backgroundImage: isDark 
+          ? 'radial-gradient(circle at 50% -25%, rgba(217, 119, 6, 0.18), transparent 65%), radial-gradient(circle at 15% 85%, rgba(59, 125, 235, 0.12), transparent 55%)'
+          : 'radial-gradient(circle at 50% -25%, rgba(217, 119, 6, 0.10), transparent 65%), radial-gradient(circle at 15% 85%, rgba(59, 125, 235, 0.08), transparent 55%)'
+      }}
+    >
       <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-        {/* Fog fades grid into the active base color */}
-        <fog attach="fog" args={['#0a0f1e', 5, 25]} />
-        <ParticleSwarm />
-        <InfiniteGrid />
+        {/* Dynamic fog that matches active background color */}
+        <fog attach="fog" args={[bgColor, 5, 25]} />
+        <ParticleSwarm isDark={isDark} />
+        <InfiniteGrid isDark={isDark} />
       </Canvas>
     </div>
   );
 };
-

@@ -1,20 +1,20 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Compass, Sparkles, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Compass, Sparkles } from 'lucide-react';
 import { SEO } from '../components/SEO';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#0a0f1e] text-[#f8fafc] flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] flex items-center justify-center p-6 relative overflow-hidden transition-colors duration-300">
       <SEO 
         title="404 Page Not Found | Emmanuel Odebiyi"
         description="Drifted off course. The page you are looking for has been moved or automated into space."
       />
 
       {/* Floating Aurora Glows */}
-      <div className="absolute top-[20%] left-[10%] w-[35%] h-[35%] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
-      <div className="absolute bottom-[20%] right-[10%] w-[35%] h-[35%] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="absolute top-[20%] left-[10%] w-[35%] h-[35%] bg-[var(--cta-blue)]/5 blur-[120px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
+      <div className="absolute bottom-[20%] right-[10%] w-[35%] h-[35%] bg-[var(--accent-amber)]/5 blur-[120px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
 
       <div className="max-w-xl w-full text-center space-y-12 relative z-10">
         
@@ -26,7 +26,7 @@ export default function NotFound() {
           className="relative inline-block"
         >
           {/* Compass Rings */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 blur-3xl rounded-full scale-150 animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--cta-blue)]/5 to-[var(--accent-amber)]/5 blur-3xl rounded-full scale-150 animate-pulse" />
           
           <motion.div
             animate={{ 
@@ -38,10 +38,10 @@ export default function NotFound() {
               repeat: Infinity, 
               ease: "easeInOut" 
             }}
-            className="w-32 h-32 md:w-40 md:h-40 rounded-[2.5rem] bg-[#0f172a]/80 border border-white/10 flex items-center justify-center mx-auto shadow-2xl relative"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-[2.5rem] bg-[var(--bg-surface)] border border-[var(--border-card)] flex items-center justify-center mx-auto shadow-2xl relative"
           >
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[2.6rem] blur-md opacity-20" />
-            <Compass size={72} className="text-zinc-200 relative z-10 animate-spin" style={{ animationDuration: '30s' }} strokeWidth={1} />
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--cta-blue)] to-[var(--accent-amber)] rounded-[2.6rem] blur-md opacity-10" />
+            <Compass size={72} className="relative z-10 animate-spin" style={{ animationDuration: '30s', color: 'var(--text-body)' }} strokeWidth={1} />
           </motion.div>
         </motion.div>
 
@@ -52,24 +52,25 @@ export default function NotFound() {
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[9px] font-mono text-zinc-400 tracking-[0.2em] uppercase"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[9px] font-mono tracking-[0.2em] uppercase"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
-              <Sparkles size={10} className="text-blue-400" />
+              <Sparkles size={10} className="text-[var(--accent-amber)] animate-pulse" />
               Sitemap Offline
             </motion.div>
             
-            <h1 className="text-8xl md:text-9xl font-bold tracking-tighter leading-none mt-2">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-indigo-500">
+            <h1 className="text-8xl md:text-9xl font-bold tracking-tighter leading-none mt-2 font-display">
+              <span className="text-amber-gradient font-bold">
                 404
               </span>
             </h1>
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight font-sans">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-sans" style={{ color: 'var(--text-body)' }}>
               Drifted Off Course
             </h2>
-            <p className="text-sm md:text-base text-zinc-400 font-light max-w-sm mx-auto leading-relaxed">
+            <p className="text-sm md:text-base font-light max-w-sm mx-auto leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               The framework you are looking for has either been refactored, automated into space, or never existed in the sitemap.
             </p>
           </div>
@@ -84,7 +85,7 @@ export default function NotFound() {
         >
           <Link
             to="/"
-            className="w-full px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-blue-500/10 flex items-center justify-center gap-2 group font-mono text-xs uppercase tracking-widest"
+            className="btn-cta w-full flex items-center justify-center gap-2 group font-mono text-xs uppercase tracking-widest text-center"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
             Return Home
@@ -92,7 +93,7 @@ export default function NotFound() {
           
           <Link
             to="/portfolio"
-            className="w-full px-6 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/5 rounded-2xl transition-all font-mono text-xs uppercase tracking-widest text-center"
+            className="w-full px-6 py-4 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-alt)] border border-[var(--border-card)] text-[var(--text-body)] rounded-2xl transition-all font-mono text-xs uppercase tracking-widest text-center hover-glow-text"
           >
             View Projects
           </Link>

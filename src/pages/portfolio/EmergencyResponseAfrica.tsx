@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowLeft, 
   ArrowRight, 
-  Search, 
-  TrendingUp, 
   PhoneCall, 
-  ShieldCheck, 
   CheckCircle2, 
   Activity, 
-  Globe, 
-  Settings, 
-  MapPin,
-  Clock
+  MapPin
 } from 'lucide-react';
 import { SEO } from '../../components/SEO';
 
@@ -54,16 +48,12 @@ export default function EmergencyResponseAfrica() {
   };
 
   return (
-    <div className="bg-[#0B0F19] text-white min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Emergency Response Africa SEO Case Study | Emmanuel Odebiyi"
         description="How I helped healthcare startup Emergency Response Africa increase organic traffic by 180% and direct emergency calls by 30% through targeted SEO."
         keywords="healthcare startup SEO, local SEO ambulance service, medical schema markup, organic lead generation, Lagos SEO engineer"
       />
-
-      {/* Ambient glows */}
-      <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] bg-rose-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-[20%] left-[-10%] w-[50vw] h-[50vw] bg-indigo-500/5 rounded-full blur-[130px] pointer-events-none z-0" />
 
       <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
         
@@ -71,7 +61,8 @@ export default function EmergencyResponseAfrica() {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
           <Link 
             to="/portfolio" 
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-16 group font-medium px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm"
+            className="inline-flex items-center gap-2 transition-colors mb-16 group font-sans font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full border backdrop-blur-md"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
           >
             <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform" />
             Back to Portfolio
@@ -80,61 +71,71 @@ export default function EmergencyResponseAfrica() {
 
         {/* Hero Section */}
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/10 border border-rose-500/20 text-xs font-mono text-rose-400 tracking-[0.2em] uppercase">
-              <Activity size={12} className="text-rose-400 animate-pulse" />
+          <div className="lg:col-span-7 space-y-8 text-left">
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
+            >
+              <Activity size={12} className="text-rose-500 animate-pulse" />
               Featured Case Study · Healthcare SEO
             </div>
             
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05]">
-              Connecting Fast Care With <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-400 to-indigo-400">Those Who Need It.</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] font-display" style={{ color: 'var(--text-body)' }}>
+              Connecting Fast Care With <br />
+              <span className="italic font-medium text-rose-500">Those Who Need It.</span>
             </h1>
 
-            <p className="text-xl text-zinc-400 font-light leading-relaxed">
+            <p className="text-xl font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
               Emergency Response Africa provides life-saving medical dispatch services, but lacked search discoverability. By engineering a solid local SEO framework and deep on-page optimizations, I boosted their organic traffic by 180% and direct emergency requests by 30%.
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Local Search SEO</span>
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Google My Business</span>
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Medical Schemas</span>
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">Conversion CRO</span>
+              {["Local Search SEO", "Google My Business", "Medical Schemas", "Conversion CRO"].map((tag) => (
+                <span 
+                  key={tag}
+                  className="px-4 py-1.5 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+                  style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
 
           <div className="lg:col-span-5 relative">
-            <div className="p-8 rounded-[2.5rem] bg-zinc-950/80 border border-white/10 backdrop-blur-md shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full blur-[60px] pointer-events-none" />
-              
+            <div 
+              className="p-8 rounded-[2.5rem] border backdrop-blur-md shadow-2xl relative overflow-hidden text-left"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
               <div className="space-y-6">
-                <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block text-center lg:text-left">Project Metadata</span>
+                <span className="text-xs font-sans font-bold uppercase tracking-widest block text-center lg:text-left" style={{ color: 'var(--text-muted)' }}>Project Metadata</span>
                 
-                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Client</p>
-                    <p className="text-base font-semibold text-white">Emergency Response Africa</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Client</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>Emergency Response Africa</p>
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Timeline</p>
-                    <p className="text-base font-semibold text-white">60 Days</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Timeline</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>60 Days</p>
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Industry</p>
-                    <p className="text-base font-semibold text-white">Healthcare / MedTech</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Industry</p>
+                    <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>Healthcare / MedTech</p>
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-mono uppercase">Key Metric</p>
-                    <p className="text-base font-semibold text-rose-400">+180% Organic</p>
+                    <p className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Key Metric</p>
+                    <p className="text-base font-bold text-rose-500">+180% Organic</p>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-white/5 text-center flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                <div className="pt-6 border-t text-center flex items-center justify-center gap-4" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-500">
                     <PhoneCall size={20} className="animate-bounce" />
                   </div>
                   <div className="text-left">
-                    <div className="text-3xl font-black text-white">+30%</div>
-                    <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Emergency Call Volume</div>
+                    <div className="text-3xl font-black" style={{ color: 'var(--text-body)' }}>+30%</div>
+                    <div className="text-[10px] font-sans font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Emergency Call Volume</div>
                   </div>
                 </div>
               </div>
@@ -144,26 +145,22 @@ export default function EmergencyResponseAfrica() {
 
         {/* Dense outcomes summary grids */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-32">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-            <div className="text-3xl font-black text-rose-400 mb-1">+180%</div>
-            <div className="text-sm font-semibold text-white">Organic Traffic Spike</div>
-            <div className="text-xs text-zinc-500 font-mono">2 months after changes</div>
-          </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-            <div className="text-3xl font-black text-rose-400 mb-1">10+</div>
-            <div className="text-sm font-semibold text-white">Page 1 Target Keywords</div>
-            <div className="text-xs text-zinc-500 font-mono">Moved from page 3+</div>
-          </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-            <div className="text-3xl font-black text-rose-400 mb-1">+30%</div>
-            <div className="text-sm font-semibold text-white">Emergency Call Requests</div>
-            <div className="text-xs text-zinc-500 font-mono">Direct GMB conversion clicks</div>
-          </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center flex flex-col justify-center">
-            <div className="text-3xl font-black text-rose-400 mb-1">-25%</div>
-            <div className="text-sm font-semibold text-white">Bounce Rate Drop</div>
-            <div className="text-xs text-zinc-500 font-mono">Engaging content architecture</div>
-          </div>
+          {[
+            { val: '+180%', title: 'Organic Traffic Spike', sub: '2 months after changes' },
+            { val: '10+', title: 'Page 1 Target Keywords', sub: 'Moved from page 3+' },
+            { val: '+30%', title: 'Emergency Call Requests', sub: 'Direct GMB conversion clicks' },
+            { val: '-25%', title: 'Bounce Rate Drop', sub: 'Engaging content architecture' }
+          ].map((card, i) => (
+            <div 
+              key={i}
+              className="p-6 rounded-2xl border text-center flex flex-col justify-center interactive-card"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div className="text-3xl font-bold font-display mb-1 text-rose-500">{card.val}</div>
+              <div className="text-sm font-bold" style={{ color: 'var(--text-body)' }}>{card.title}</div>
+              <div className="text-xs font-sans font-bold" style={{ color: 'var(--text-muted)' }}>{card.sub}</div>
+            </div>
+          ))}
         </div>
 
         {/* Full-width interactive preview mockup */}
@@ -171,9 +168,9 @@ export default function EmergencyResponseAfrica() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-32 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group bg-zinc-950/40 p-4"
+          className="mb-32 rounded-[2.5rem] overflow-hidden border shadow-2xl relative group p-4"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent z-10 pointer-events-none" />
           <img 
             src="/images/era_dispatch_dashboard.png" 
             alt="Emergency Response Africa Medical Dispatch Center Dashboard Mockup" 
@@ -184,47 +181,53 @@ export default function EmergencyResponseAfrica() {
         </motion.div>
 
         {/* The Problem & Context */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
-          <div className="p-8 sm:p-12 rounded-3xl bg-white/5 border border-white/10 space-y-6">
-            <span className="text-xs font-mono text-red-400 uppercase tracking-widest">The Problem</span>
-            <h3 className="text-3xl font-bold text-white tracking-tight">Search Invisibility for Critical Keywords</h3>
-            <p className="text-zinc-300 font-light leading-relaxed">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32 text-left">
+          <div 
+            className="p-8 sm:p-12 rounded-3xl border space-y-6"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: '#f43f5e' }}>The Problem</span>
+            <h3 className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Search Invisibility for Critical Keywords</h3>
+            <p className="font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
               When people need emergency medical care, they turn to Google first. However, despite offering advanced private medical responses, Emergency Response Africa was invisible online:
             </p>
-            <ul className="space-y-3 text-sm text-zinc-400 font-light">
+            <ul className="space-y-3 text-sm font-light" style={{ color: 'var(--text-body)' }}>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                Missing high-intent keywords: Not ranking for vital searches like 'emergency ambulance Lagos' or 'private ambulance service Abuja'.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-rose-500" />
+                <span>Missing high-intent keywords: Not ranking for vital searches like 'emergency ambulance Lagos' or 'private ambulance service Abuja'.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                Thin service pages: Landing content was sparse, leaving both crawler bots and prospective users without information.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-rose-500" />
+                <span>Thin service pages: Landing content was sparse, leaving both crawler bots and prospective users without information.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
-                Core technical bottlenecks: Poor mobile response times (40% slower) and missing structured medical schema elements.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-rose-500" />
+                <span>Core technical bottlenecks: Poor mobile response times (40% slower) and missing structured medical schema elements.</span>
               </li>
             </ul>
           </div>
 
-          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-rose-500/10 to-indigo-500/5 border border-rose-500/20 space-y-6">
-            <span className="text-xs font-mono text-rose-400 uppercase tracking-widest">The Solution</span>
-            <h3 className="text-3xl font-bold text-white tracking-tight">Deploying The Location-Based Search Architecture</h3>
-            <p className="text-zinc-300 font-light leading-relaxed">
+          <div 
+            className="p-8 sm:p-12 rounded-3xl border space-y-6"
+            style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-blue)' }}>The Solution</span>
+            <h3 className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Deploying The Location-Based Search Architecture</h3>
+            <p className="font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
               I mapped out and deployed a geo-targeted Local SEO and Schema-rich structure tailored to rapid user medical inquiry needs:
             </p>
-            <ul className="space-y-3 text-sm text-zinc-400 font-light">
+            <ul className="space-y-3 text-sm font-light" style={{ color: 'var(--text-body)' }}>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
-                <strong>Local search optimization:</strong> Built geographical target service landing matrices and GMB hooks.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-blue-500" />
+                <span><strong>Local search optimization:</strong> Built geographical target service landing matrices and GMB hooks.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
-                <strong>Educational content guides:</strong> Authored SEO-first problem solvers targeting first-aid and medical emergencies.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-blue-500" />
+                <span><strong>Educational content guides:</strong> Authored SEO-first problem solvers targeting first-aid and medical emergencies.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
-                <strong>Structured Schema insertion:</strong> Injected structured schemas recognizing local dispatch details directly into code.
+                <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-blue-500" />
+                <span><strong>Structured Schema insertion:</strong> Injected structured schemas recognizing local dispatch details directly into code.</span>
               </li>
             </ul>
           </div>
@@ -233,8 +236,8 @@ export default function EmergencyResponseAfrica() {
         {/* Tabbed Tactic Details */}
         <div className="mb-32">
           <div className="text-center mb-16 space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">Implementation Focus</span>
-            <h2 className="text-4xl font-bold text-white tracking-tight">The Three-Pronged Execution</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.2em] block" style={{ color: 'var(--text-muted)' }}>Implementation Focus</span>
+            <h2 className="text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>The Three-Pronged Execution</h2>
           </div>
 
           <div className="flex flex-wrap gap-2 justify-center mb-12">
@@ -242,83 +245,105 @@ export default function EmergencyResponseAfrica() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-6 py-3 rounded-xl text-sm font-bold border transition-all ${
-                  activeTab === tab 
-                    ? 'bg-rose-500/10 border-rose-500/30 text-rose-400 shadow-xl' 
-                    : 'bg-white/5 border-white/10 text-zinc-400 hover:border-white/20'
-                }`}
+                className="px-6 py-3 rounded-xl text-sm font-bold border transition-all cursor-pointer"
+                style={{
+                  backgroundColor: activeTab === tab ? 'var(--bg-surface-alt)' : 'var(--bg-surface)',
+                  borderColor: activeTab === tab ? 'var(--text-body)' : 'var(--border-card)',
+                  color: activeTab === tab ? 'var(--text-body)' : 'var(--text-muted)'
+                }}
               >
                 {tab === 'local' ? 'Local SEO Optimization' : tab === 'content' ? 'Problem-Solving Content' : 'Technical & Schema'}
               </button>
             ))}
           </div>
 
-          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-zinc-950/80 border border-white/10 backdrop-blur-md shadow-2xl relative overflow-hidden">
+          <div 
+            className="p-8 sm:p-12 rounded-[2.5rem] border backdrop-blur-md shadow-2xl relative overflow-hidden text-left"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
             <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full blur-[60px] pointer-events-none" />
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-6">
-                <h3 className="text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
                   {tactics[activeTab].title}
                 </h3>
-                <p className="text-zinc-400 font-light leading-relaxed">
+                <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                   {tactics[activeTab].desc}
                 </p>
                 <div className="space-y-3 pt-2">
                   {tactics[activeTab].bullets.map((bullet, idx) => (
-                    <div key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
-                      <CheckCircle2 size={16} className="text-rose-400 shrink-0 mt-0.5" />
+                    <div key={idx} className="flex items-start gap-3 text-sm" style={{ color: 'var(--text-body)' }}>
+                      <CheckCircle2 size={16} className="text-rose-500 shrink-0 mt-0.5" />
                       <span className="font-light leading-relaxed">{bullet}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="lg:col-span-4 text-center p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-center items-center">
-                <div className="text-5xl font-black text-rose-400 mb-1">{tactics[activeTab].stat}</div>
-                <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mt-1">Impact Result</div>
+              <div 
+                className="lg:col-span-4 text-center p-8 rounded-2xl border flex flex-col justify-center items-center"
+                style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="text-5xl font-bold font-display text-rose-500">{tactics[activeTab].stat}</div>
+                <div className="text-[10px] font-sans font-bold uppercase tracking-widest mt-2" style={{ color: 'var(--text-muted)' }}>Impact Result</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Localized GMB Mock Visualization */}
-        <div className="mb-32 p-10 sm:p-16 rounded-[3rem] bg-gradient-to-br from-rose-500/10 to-transparent border border-white/10 relative overflow-hidden text-center lg:text-left">
+        <div 
+          className="mb-32 p-10 sm:p-16 rounded-[3rem] border relative overflow-hidden text-center lg:text-left"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+        >
           <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/5 rounded-full blur-[90px] pointer-events-none" />
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest block">Geotargeted Results</span>
-              <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Geotargeted Results</span>
+              <h3 className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
                 Winning Local Search Placements
               </h3>
-              <p className="text-zinc-400 font-light leading-relaxed">
+              <p className="font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
                 When an emergency call request is placed, speed is everything. By capturing top positions in local search bundles and mapping precise services, we allowed patients to trigger a call straight from search results pages.
               </p>
               
-              <div className="flex items-center gap-3 justify-center lg:justify-start">
-                <MapPin size={18} className="text-rose-400" />
-                <span className="text-sm font-mono text-zinc-300">Optimized locations: Lagos · Abuja · Port Harcourt</span>
+              <div className="flex items-center gap-3 justify-center lg:justify-start" style={{ color: 'var(--text-body)' }}>
+                <MapPin size={18} className="text-rose-500" />
+                <span className="text-sm font-sans font-bold">Optimized locations: Lagos · Abuja · Port Harcourt</span>
               </div>
             </div>
 
-            <div className="lg:col-span-5 p-6 rounded-2xl bg-zinc-950 border border-white/10 shadow-2xl space-y-4 text-left">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <span className="text-xs font-mono text-zinc-500 uppercase">Search Placements</span>
-                <span className="text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-400/10 border border-emerald-400/20">Verified #1</span>
+            <div 
+              className="lg:col-span-5 p-6 rounded-2xl border shadow-2xl space-y-4 text-left"
+              style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+            >
+              <div className="flex items-center justify-between pb-3 border-b" style={{ borderColor: 'var(--border-card)' }}>
+                <span className="text-xs font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>Search Placements</span>
+                <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500">Verified #1</span>
               </div>
               <div className="space-y-3">
-                <div className="p-3 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between">
-                  <span className="text-sm text-white font-medium">'best ambulance service in Lagos'</span>
-                  <span className="text-xs font-mono text-rose-400 font-bold">Position #1</span>
+                <div 
+                  className="p-3 rounded-lg border flex items-center justify-between"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                >
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-body)' }}>'best ambulance service in Lagos'</span>
+                  <span className="text-xs font-sans font-bold text-rose-500">Position #1</span>
                 </div>
-                <div className="p-3 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between">
-                  <span className="text-sm text-white font-medium">'24/7 private ambulance Abuja'</span>
-                  <span className="text-xs font-mono text-rose-400 font-bold">Position #2</span>
+                <div 
+                  className="p-3 rounded-lg border flex items-center justify-between"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                >
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-body)' }}>'24/7 private ambulance Abuja'</span>
+                  <span className="text-xs font-sans font-bold text-rose-500">Position #2</span>
                 </div>
-                <div className="p-3 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between">
-                  <span className="text-sm text-white font-medium">'emergency medical care Nigeria'</span>
-                  <span className="text-xs font-mono text-rose-400 font-bold">Position #1</span>
+                <div 
+                  className="p-3 rounded-lg border flex items-center justify-between"
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                >
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-body)' }}>'emergency medical care Nigeria'</span>
+                  <span className="text-xs font-sans font-bold text-rose-500">Position #1</span>
                 </div>
               </div>
             </div>
@@ -331,18 +356,24 @@ export default function EmergencyResponseAfrica() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center space-y-6 pt-12 border-t border-white/10"
+          className="text-center space-y-6 pt-12 border-t"
+          style={{ borderColor: 'var(--border-card)' }}
         >
-          <span className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em] block">Healthcare SEO</span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+          <span className="text-xs font-sans font-bold uppercase tracking-[0.3em] block" style={{ color: 'var(--text-muted)' }}>Healthcare SEO</span>
+          <h2 className="text-4xl sm:text-5xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
             Ready to Accelerate Your Organic Leads?
           </h2>
-          <p className="text-zinc-400 font-light max-w-xl mx-auto">
+          <p className="font-light max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Book a free 30-minute system walkthrough and local keyword gap analysis to build search rankings that convert organic views into direct business queries.
           </p>
           <Link 
             to="/contact"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-indigo-500 text-white font-black text-lg hover:brightness-110 shadow-2xl shadow-rose-500/20 active:scale-95 transition-all"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-lg hover:brightness-110 shadow-2xl transition-all font-sans font-bold uppercase tracking-wider"
+            style={{ 
+              backgroundColor: 'var(--btn-cta-bg)', 
+              color: 'var(--btn-cta-text)',
+              boxShadow: '0 12px 24px -4px var(--btn-cta-shadow)'
+            }}
           >
             Claim Your Local Strategy Audit
             <ArrowRight size={20} />

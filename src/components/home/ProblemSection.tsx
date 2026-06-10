@@ -45,7 +45,13 @@ const LottieLoader = ({ path, style }: { path: string; style?: React.CSSProperti
             exit={{ opacity: 0 }}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <div className="w-8 h-8 rounded-full border-2 border-white/10 border-t-current animate-spin" />
+            <div 
+              className="w-8 h-8 rounded-full border-2 animate-spin" 
+              style={{
+                borderColor: 'color-mix(in srgb, var(--text-body) 10%, transparent)',
+                borderTopColor: 'var(--text-body)'
+              }}
+            />
           </motion.div>
         ) : animationData ? (
           <motion.div
@@ -238,7 +244,7 @@ const VerticalNavigator = ({
       {/* Background track line */}
       <div
         className="absolute left-1/2 -translate-x-1/2 w-[4px] rounded-full z-0"
-        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: 'rgba(255,255,255,0.25)' }}
+        style={{ top: 28, height: TRACK_HEIGHT, backgroundColor: 'var(--border-card)' }}
       />
 
       {/* Filled progress line - Using scaleY for GPU acceleration */}
@@ -270,18 +276,19 @@ const VerticalNavigator = ({
               <motion.div
                 animate={{
                   scale: isActive ? 1.25 : 1, // Enlarge active node
-                  backgroundColor: isActive || isPast ? problem.accentColor : '#e4e4e7',
+                  backgroundColor: isActive || isPast ? problem.accentColor : 'var(--bg-surface-alt)',
+                  borderColor: isActive || isPast ? problem.accentColor : 'var(--border-card)',
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg origin-center"
+                className="w-12 h-12 rounded-full flex items-center justify-center border shadow-lg origin-center"
                 style={{
-                  boxShadow: isActive ? `0 0 20px ${problem.accentColor}55` : '0 1px 4px rgba(0,0,0,0.1)',
+                  boxShadow: isActive ? `0 0 20px ${problem.accentColor}55` : '0 1px 4px rgba(0,0,0,0.05)',
                 }}
               >
                 <motion.span
                   className="text-xl font-black leading-none"
                   animate={{
-                    color: isActive || isPast ? '#fff' : '#d4d4d8',
+                    color: isActive || isPast ? '#fff' : 'var(--text-muted)',
                   }}
                   transition={{ duration: 0.3 }}
                 >
@@ -355,8 +362,12 @@ const ProblemCard: React.FC<{
 
           {/* Tag pill — left aligned */}
           <span
-            className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[9px] md:text-xs font-bold tracking-[0.2em] uppercase"
-            style={{ backgroundColor: `${problem.accentColor}20`, color: problem.accentColor }}
+            className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[9px] md:text-xs font-bold tracking-[0.2em] uppercase border"
+            style={{ 
+              backgroundColor: `color-mix(in srgb, ${problem.accentColor} 12%, transparent)`, 
+              borderColor: `color-mix(in srgb, ${problem.accentColor} 25%, transparent)`,
+              color: problem.accentColor 
+            }}
           >
             {problem.tag}
           </span>
@@ -372,7 +383,7 @@ const ProblemCard: React.FC<{
           </div>
 
           {/* Headline — word-by-word reveal */}
-          <h2 className="text-2xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4">
+          <h2 className="text-2xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4" style={{ color: 'var(--text-body)' }}>
             <ScrollRevealText
               text={problem.headline}
               scrollYProgress={scrollYProgress}
@@ -382,7 +393,7 @@ const ProblemCard: React.FC<{
           </h2>
 
           {/* Body — word-by-word reveal */}
-          <p className="text-sm md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'rgba(241,245,249,0.95)' }}>
+          <p className="text-sm md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             <ScrollRevealText
               text={problem.body}
               scrollYProgress={scrollYProgress}
@@ -403,29 +414,14 @@ const ProblemCard: React.FC<{
           </p>
         </div>
 
-        {/* Icon Illustration — right side, matching the screenshot */}
+        {/* Icon Illustration — right side */}
         <div className="order-1 lg:order-2 flex justify-center lg:justify-end mt-16 lg:mt-0 -mb-4 md:mb-0">
           <div className="relative group/icon">
-            {/* Subtle White "Lift" Gradient — separates from deep background without sharp edges */}
-            <div 
-              className="absolute inset-0 rounded-full blur-[60px] md:blur-[100px] opacity-40 group-hover/icon:opacity-50 transition-opacity duration-700"
-              style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)' }}
-            />
-            
-            {/* Primary Accent Glow (Existing) */}
-            <motion.div
-              animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute inset-0 rounded-full blur-3xl -z-10"
-              style={{ backgroundColor: problem.accentColor }}
-            />
-
-            {/* Icon container — ensured no background and added subtle drop-shadow */}
+            {/* Icon container — clean, no background glow */}
             <motion.div
               animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               className="w-28 h-28 md:w-80 md:h-80 flex items-center justify-center relative z-10"
-              style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}
             >
               <div className="w-full h-full flex items-center justify-center">
                 <LottieLoader 
@@ -521,22 +517,23 @@ export const ProblemSection: React.FC = () => {
       aria-label="The Problem Section"
     >
       {/* Sticky full-screen viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[var(--dark-surface)]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-surface-alt) 80%, transparent)' }}>
         {/* Section label — top center */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.35em] uppercase" style={{ color: 'rgba(251,191,36,1)', background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', padding: '6px 16px', borderRadius: '999px', backdropFilter: 'blur(8px)', display: 'inline-block' }}>
+          <span 
+            className="text-[10px] sm:text-xs font-sans font-bold tracking-[0.35em] uppercase border" 
+            style={{ 
+              color: 'var(--accent-amber)', 
+              backgroundColor: 'color-mix(in srgb, var(--accent-amber) 10%, transparent)', 
+              borderColor: 'color-mix(in srgb, var(--accent-amber) 25%, transparent)',
+              padding: '6px 16px', 
+              borderRadius: '999px', 
+              display: 'inline-block' 
+            }}
+          >
             The Problem
           </span>
         </div>
-
-        {/* Radial accent glow — shifts with active problem color, stronger on dark bg */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            background: `radial-gradient(ellipse 55% 55% at 65% 50%, ${PROBLEMS[activeIndex].accentColor}18 0%, transparent 70%)`,
-          }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-        />
 
         {/* Problem cards stacked */}
         <div className="absolute inset-0">
@@ -559,7 +556,7 @@ export const ProblemSection: React.FC = () => {
               animate={{
                 width: i === activeIndex ? 24 : 6,
                 opacity: i === activeIndex ? 1 : 0.25,
-                backgroundColor: i === activeIndex ? p.accentColor : 'rgba(255,255,255,0.3)',
+                backgroundColor: i === activeIndex ? p.accentColor : 'var(--text-muted)',
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 24 }}
               className="h-1.5 rounded-full"

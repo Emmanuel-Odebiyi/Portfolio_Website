@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft, ArrowRight, CheckCircle2, Workflow, Sparkles,
@@ -44,10 +44,10 @@ const DELIVERABLES = [
 ];
 
 const CHANNELS = [
-  { icon: <Rss size={20} />, name: 'Blog / CMS', color: 'indigo' },
-  { icon: <Linkedin size={20} />, name: 'LinkedIn', color: 'blue' },
-  { icon: <Mail size={20} />, name: 'Email Newsletter', color: 'purple' },
-  { icon: <Globe size={20} />, name: 'Social Media', color: 'teal' },
+  { icon: <Rss size={20} />, name: 'Blog / CMS', color: 'var(--accent-blue)' },
+  { icon: <Linkedin size={20} />, name: 'LinkedIn', color: 'var(--accent-blue)' },
+  { icon: <Mail size={20} />, name: 'Email Newsletter', color: 'var(--accent-amber)' },
+  { icon: <Globe size={20} />, name: 'Social Media', color: 'var(--accent-teal)' },
 ];
 
 export default function ContentMarketingAutomation() {
@@ -79,15 +79,6 @@ export default function ContentMarketingAutomation() {
     }, 60);
   };
 
-  const colorMap: Record<string, string> = {
-    indigo: 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400',
-    purple: 'bg-purple-500/10 border-purple-500/30 text-purple-400',
-    blue: 'bg-blue-500/10 border-blue-500/30 text-blue-400',
-    teal: 'bg-teal-500/10 border-teal-500/30 text-teal-400',
-    emerald: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
-    amber: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
-  };
-
   const faqs = [
     { q: 'How long before I see results?', a: 'Most clients see measurable content output improvements within the first 14 days. Organic traffic compounding typically begins in 45–90 days as published content indexes and ranks.' },
     { q: 'Will the content actually sound like me?', a: 'Absolutely. Before we build anything, I run a comprehensive brand voice audit — reviewing your existing copy, tone guides, and audience data. Every piece is reviewed to ensure it reflects your positioning, not generic AI output.' },
@@ -97,17 +88,12 @@ export default function ContentMarketingAutomation() {
   ];
 
   return (
-    <div className="bg-[#0a0f1e] text-white min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO
         title="Content Marketing Automation | Emmanuel Odebiyi"
         description="I build fully automated content marketing engines publishing 8 to 40+ articles monthly, distributed across your channels on autopilot."
         keywords="content marketing automation, AI content system, automated publishing, brand voice AI, content engine"
       />
-
-      {/* Decorative aurora glow */}
-      <div className="absolute top-[-15%] left-[-5%] w-[70vw] h-[70vw] bg-indigo-600/8 rounded-full blur-[150px] pointer-events-none z-0" />
-      <div className="absolute top-[40%] right-[-10%] w-[50vw] h-[50vw] bg-purple-500/5 rounded-full blur-[130px] pointer-events-none z-0" />
-      <div className="absolute bottom-[10%] left-[30%] w-[40vw] h-[40vw] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
 
       <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
 
@@ -115,7 +101,8 @@ export default function ContentMarketingAutomation() {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-16 group font-medium px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm"
+            className="inline-flex items-center gap-2 transition-colors mb-16 group font-sans font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full border backdrop-blur-md"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
           >
             <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform" />
             Back to Services
@@ -132,55 +119,50 @@ export default function ContentMarketingAutomation() {
             transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
             className="relative hidden lg:block"
           >
-            {/* Ambient glow behind the card */}
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/15 to-blue-500/10 rounded-[2.5rem] blur-[60px] scale-110 pointer-events-none" />
-            
             {/* Dashboard card */}
-            <div className="relative rounded-[2rem] bg-zinc-950/90 border border-white/10 backdrop-blur-xl shadow-2xl p-6 overflow-hidden">
+            <div 
+              className="relative rounded-[2rem] border backdrop-blur-xl shadow-2xl p-6 overflow-hidden"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
               {/* Top bar */}
-              <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/10">
+              <div className="flex items-center justify-between mb-5 pb-4 border-b" style={{ borderColor: 'var(--border-card)' }}>
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                  <span className="ml-3 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Content Engine Dashboard</span>
+                  <span className="ml-3 text-[10px] font-sans font-bold text-zinc-500 uppercase tracking-widest">Content Engine Dashboard</span>
                 </div>
-                <span className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="flex items-center gap-1.5 text-[10px] font-sans font-bold uppercase" style={{ color: 'var(--accent-teal)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-teal)] animate-pulse" />
                   LIVE
                 </span>
               </div>
 
               {/* Queue of publishing articles */}
-              <div className="space-y-2.5 mb-5">
+              <div className="space-y-2.5 mb-5 text-left">
                 {[
-                  { title: '7 SaaS Pricing Strategies That Convert', channel: 'Blog', status: 'Published', color: 'emerald', delay: 0 },
-                  { title: 'How We Grew Organic Traffic 520%', channel: 'LinkedIn', status: 'Scheduled', color: 'blue', delay: 0.15 },
-                  { title: 'Top 10 Content Tools for 2025', channel: 'Newsletter', status: 'Writing...', color: 'purple', delay: 0.3 },
-                  { title: 'The Automation Stack Every SMB Needs', channel: 'Blog', status: 'Research', color: 'indigo', delay: 0.45 },
+                  { title: '7 SaaS Pricing Strategies That Convert', channel: 'Blog', status: 'Published', color: 'var(--accent-teal)', delay: 0 },
+                  { title: 'How We Grew Organic Traffic 520%', channel: 'LinkedIn', status: 'Scheduled', color: 'var(--accent-blue)', delay: 0.15 },
+                  { title: 'Top 10 Content Tools for 2025', channel: 'Newsletter', status: 'Writing...', color: 'var(--accent-amber)', delay: 0.3 },
+                  { title: 'The Automation Stack Every SMB Needs', channel: 'Blog', status: 'Research', color: 'var(--accent-blue)', delay: 0.45 },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.6 + item.delay, duration: 0.5 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8 hover:border-white/15 transition-all group"
+                    className="flex items-center gap-3 p-3 rounded-xl border transition-all interactive-card"
+                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
                   >
-                    <div className={`w-1.5 h-8 rounded-full shrink-0 ${
-                      item.color === 'emerald' ? 'bg-emerald-500' :
-                      item.color === 'blue' ? 'bg-blue-500' :
-                      item.color === 'purple' ? 'bg-purple-500' : 'bg-indigo-500'
-                    }`} />
+                    <div className="w-1.5 h-8 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-white truncate">{item.title}</p>
-                      <p className="text-[10px] text-zinc-500 font-mono">{item.channel}</p>
+                      <p className="text-xs font-bold truncate" style={{ color: 'var(--text-body)' }}>{item.title}</p>
+                      <p className="text-[10px] font-sans font-bold" style={{ color: 'var(--text-muted)' }}>{item.channel}</p>
                     </div>
-                    <span className={`text-[9px] font-mono px-2 py-1 rounded-md border shrink-0 ${
-                      item.color === 'emerald' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
-                      item.color === 'blue' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' :
-                      item.color === 'purple' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' :
-                      'bg-indigo-500/10 border-indigo-500/30 text-indigo-400'
-                    }`}>
+                    <span 
+                      className="text-[9px] font-sans font-bold px-2 py-1 rounded-md border shrink-0"
+                      style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: item.color }}
+                    >
                       {item.status}
                     </span>
                   </motion.div>
@@ -192,7 +174,8 @@ export default function ContentMarketingAutomation() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.1, duration: 0.5 }}
-                className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10"
+                className="grid grid-cols-3 gap-3 pt-4 border-t"
+                style={{ borderColor: 'var(--border-card)' }}
               >
                 {[
                   { val: '40', label: 'articles/mo' },
@@ -200,8 +183,8 @@ export default function ContentMarketingAutomation() {
                   { val: '0hrs', label: 'manual work' },
                 ].map((s, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">{s.val}</div>
-                    <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">{s.label}</div>
+                    <div className="text-lg font-bold font-display" style={{ color: 'var(--text-body)' }}>{s.val}</div>
+                    <div className="text-[9px] font-sans font-bold text-zinc-500 uppercase tracking-wider">{s.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -214,25 +197,25 @@ export default function ContentMarketingAutomation() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
-              <Workflow size={12} className="animate-pulse" />
+              <Workflow size={12} className="animate-pulse" style={{ color: 'var(--accent-blue)' }} />
               Service 01 — Content Engine
             </motion.div>
 
-            <div>
+            <div className="text-left">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display"
+                style={{ color: 'var(--text-body)' }}
               >
                 Your content,{' '}
                 <br />
-                <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-500">
-                    published everywhere
-                  </span>
+                <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                  published everywhere
                 </span>
                 <br />
                 — while you sleep.
@@ -243,11 +226,12 @@ export default function ContentMarketingAutomation() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed"
+              className="text-lg sm:text-xl font-light leading-relaxed text-left"
+              style={{ color: 'var(--text-muted)' }}
             >
               Most businesses don't have a content problem. They have a 
               consistency problem. Great ideas, no engine to get them out.{' '}
-              <strong className="text-white font-semibold">I build the engine.</strong>
+              <strong className="font-bold" style={{ color: 'var(--text-body)' }}>I build the engine.</strong>
             </motion.p>
 
             {/* Live output ticker */}
@@ -255,10 +239,11 @@ export default function ContentMarketingAutomation() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex items-center gap-3 py-3 px-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 w-fit"
+              className="flex items-center gap-3 py-3 px-4 rounded-2xl border w-fit"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">Engine Active — 3 articles published today</span>
+              <span className="w-2 h-2 rounded-full bg-[var(--accent-teal)] animate-ping shrink-0" />
+              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-teal)' }}>Engine Active — 3 articles published today</span>
             </motion.div>
 
             <motion.div
@@ -269,14 +254,15 @@ export default function ContentMarketingAutomation() {
             >
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-bold text-base hover:brightness-110 shadow-2xl shadow-indigo-500/30 active:scale-95 transition-all group"
+                className="btn-cta text-base group"
               >
-                Let's Build Your Content Engine
+                Let's Build Your Engine
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <a
                 href="#how-it-works"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-300 font-medium text-base hover:bg-white/10 hover:text-white transition-all"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border text-base transition-all font-bold"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
               >
                 See How It Works
                 <ChevronDown size={16} />
@@ -298,11 +284,12 @@ export default function ContentMarketingAutomation() {
             <motion.div
               key={r.label}
               variants={fadeUp}
-              className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center hover:border-indigo-500/30 transition-colors"
+              className="p-6 rounded-2xl border backdrop-blur-md text-center transition-colors interactive-card"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
-              <div className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 mb-1">{r.val}</div>
-              <div className="text-sm font-semibold text-white mb-1">{r.label}</div>
-              <div className="text-xs text-zinc-500 font-mono">{r.sub}</div>
+              <div className="text-3xl sm:text-4xl font-bold font-display mb-1" style={{ color: 'var(--accent-blue)' }}>{r.val}</div>
+              <div className="text-sm font-bold" style={{ color: 'var(--text-body)' }}>{r.label}</div>
+              <div className="text-xs font-sans font-bold" style={{ color: 'var(--text-muted)' }}>{r.sub}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -316,13 +303,13 @@ export default function ContentMarketingAutomation() {
             viewport={{ once: true }}
             className="text-center mb-16 space-y-4"
           >
-            <motion.span variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 block">
+            <motion.span variants={fadeUp} className="text-xs font-sans font-bold uppercase tracking-[0.2em] block" style={{ color: 'var(--text-muted)' }}>
               The System Architecture
             </motion.span>
-            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
               Your Content Engine, Step by Step
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-zinc-400 font-light max-w-xl mx-auto">
+            <motion.p variants={fadeUp} className="font-light max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
               Watch the full pipeline run — from research to publication to reporting — in real time.
             </motion.p>
           </motion.div>
@@ -334,26 +321,33 @@ export default function ContentMarketingAutomation() {
                 <button
                   key={step.id}
                   onClick={() => setActiveStep(idx)}
-                  className={`w-full text-left p-5 rounded-2xl transition-all duration-300 border flex items-center gap-4 group ${
-                    activeStep === idx
-                      ? 'bg-white/10 border-white/20 shadow-xl'
-                      : 'bg-white/5 border-white/5 hover:bg-white/8 hover:border-white/10'
-                  }`}
+                  className="w-full text-left p-5 rounded-2xl transition-all duration-300 border flex items-center gap-4 group cursor-pointer interactive-card"
+                  style={{
+                    backgroundColor: activeStep === idx ? 'var(--bg-surface-alt)' : 'var(--bg-surface)',
+                    borderColor: activeStep === idx ? 'var(--text-body)' : 'var(--border-card)'
+                  }}
                 >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-black border transition-all shrink-0 ${
-                    activeStep === idx
-                      ? colorMap[step.color]
-                      : 'bg-white/5 border-white/10 text-zinc-500'
-                  }`}>
+                  <div 
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border transition-all shrink-0"
+                    style={{
+                      backgroundColor: 'var(--bg-page)',
+                      borderColor: 'var(--border-card)',
+                      color: activeStep === idx ? 'var(--accent-blue)' : 'var(--text-muted)'
+                    }}
+                  >
                     {step.id}
                   </div>
-                  <span className={`font-semibold text-sm tracking-tight transition-colors ${activeStep === idx ? 'text-white' : 'text-zinc-400 group-hover:text-white'}`}>
+                  <span 
+                    className="font-bold text-sm tracking-tight transition-colors"
+                    style={{ color: activeStep === idx ? 'var(--text-body)' : 'var(--text-muted)' }}
+                  >
                     {step.label}
                   </span>
                   {activeStep === idx && (
                     <motion.div
                       layoutId="activePip"
-                      className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-400"
+                      className="ml-auto w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: 'var(--accent-blue)' }}
                     />
                   )}
                 </button>
@@ -362,8 +356,10 @@ export default function ContentMarketingAutomation() {
 
             {/* Step detail panel */}
             <div className="lg:col-span-7">
-              <div className="rounded-[2.5rem] bg-zinc-950/80 border border-white/10 p-8 sm:p-12 h-full backdrop-blur-md shadow-2xl flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/5 rounded-full blur-[60px] pointer-events-none" />
+              <div 
+                className="rounded-[2.5rem] border p-8 sm:p-12 h-full backdrop-blur-md shadow-2xl flex flex-col justify-between relative overflow-hidden"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStep}
@@ -371,37 +367,42 @@ export default function ContentMarketingAutomation() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.35 }}
-                    className="space-y-6"
+                    className="space-y-6 text-left"
                   >
-                    <span className={`text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full border ${colorMap[PIPELINE_STEPS[activeStep].color]}`}>
+                    <span 
+                      className="text-xs font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-full border inline-block"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-blue)' }}
+                    >
                       Step {PIPELINE_STEPS[activeStep].id} of {PIPELINE_STEPS.length}
                     </span>
-                    <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug">
+                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
                       {PIPELINE_STEPS[activeStep].label}
                     </h3>
-                    <p className="text-zinc-400 font-light leading-relaxed text-lg">
+                    <p className="font-light leading-relaxed text-lg" style={{ color: 'var(--text-muted)' }}>
                       {PIPELINE_STEPS[activeStep].desc}
                     </p>
                   </motion.div>
                 </AnimatePresence>
 
                 {/* Pipeline run simulation */}
-                <div className="mt-10 space-y-3">
-                  <div className="flex items-center justify-between text-xs font-mono text-zinc-500 uppercase tracking-widest">
+                <div className="mt-10 space-y-3 text-left">
+                  <div className="flex items-center justify-between text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                     <span>Automation Progress</span>
                     <span>{pipelineProgress}%</span>
                   </div>
-                  <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
                     <motion.div
                       animate={{ width: `${pipelineProgress}%` }}
                       transition={{ duration: 0.1 }}
-                      className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-full"
+                      className="h-full rounded-full"
+                      style={{ backgroundColor: 'var(--accent-blue)' }}
                     />
                   </div>
                   <button
                     onClick={handleRunPipeline}
                     disabled={runningPipeline}
-                    className="flex items-center gap-2 text-xs font-mono text-indigo-400 hover:text-indigo-300 transition-colors disabled:opacity-50 mt-2"
+                    className="flex items-center gap-2 text-xs font-sans font-bold hover:brightness-110 transition-all disabled:opacity-50 mt-2 cursor-pointer"
+                    style={{ color: 'var(--accent-blue)' }}
                   >
                     <Play size={12} className={runningPipeline ? 'animate-pulse' : ''} />
                     {runningPipeline ? 'Pipeline Running...' : 'Simulate Pipeline Run →'}
@@ -421,20 +422,20 @@ export default function ContentMarketingAutomation() {
             viewport={{ once: true }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
           >
-            <div className="lg:col-span-5 space-y-6">
-              <motion.span variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 block">
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <motion.span variants={fadeUp} className="text-xs font-sans font-bold uppercase tracking-[0.3em] block" style={{ color: 'var(--text-muted)' }}>
                 Complete Deliverable Scope
               </motion.span>
-              <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-snug">
+              <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold tracking-tight leading-snug font-display" style={{ color: 'var(--text-body)' }}>
                 Everything That Comes With the Engine
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-zinc-400 font-light leading-relaxed text-lg">
+              <motion.p variants={fadeUp} className="font-light leading-relaxed text-lg" style={{ color: 'var(--text-muted)' }}>
                 This isn't a tool subscription or a content brief template. It's a fully operational marketing system — built, deployed, and optimized for your business.
               </motion.p>
               <motion.div variants={fadeUp}>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-bold hover:brightness-110 shadow-xl shadow-indigo-500/20 transition-all"
+                  className="btn-cta cursor-pointer"
                 >
                   Let's Build Your Content Engine <ArrowRight size={16} />
                 </Link>
@@ -453,12 +454,16 @@ export default function ContentMarketingAutomation() {
                   <motion.div
                     key={i}
                     variants={fadeUp}
-                    className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/30 hover:bg-white/8 transition-all group"
+                    className="flex items-center gap-4 p-5 rounded-2xl border transition-all group interactive-card"
+                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
                   >
-                    <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 group-hover:bg-indigo-500/20 transition-colors">
+                    <div 
+                      className="w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 transition-colors"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-blue)' }}
+                    >
                       {d.icon}
                     </div>
-                    <span className="text-zinc-300 font-medium text-sm leading-relaxed">{d.text}</span>
+                    <span className="font-bold text-sm leading-relaxed text-left" style={{ color: 'var(--text-body)' }}>{d.text}</span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -475,10 +480,10 @@ export default function ContentMarketingAutomation() {
             variants={stagger}
             className="text-center mb-12 space-y-4"
           >
-            <motion.span variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 block">
+            <motion.span variants={fadeUp} className="text-xs font-sans font-bold uppercase tracking-[0.3em] block" style={{ color: 'var(--text-muted)' }}>
               Multi-Channel Distribution
             </motion.span>
-            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
               One System. Every Channel.
             </motion.h2>
           </motion.div>
@@ -494,11 +499,12 @@ export default function ContentMarketingAutomation() {
               <motion.div
                 key={ch.name}
                 variants={fadeUp}
-                className={`p-6 rounded-2xl text-center flex flex-col items-center gap-3 border ${colorMap[ch.color]} hover:scale-[1.03] transition-all cursor-default`}
+                className="p-6 rounded-2xl text-center flex flex-col items-center gap-3 border transition-all cursor-default interactive-card"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                {ch.icon}
-                <span className="font-bold text-white text-sm">{ch.name}</span>
-                <span className="text-xs text-zinc-500 font-mono">Automated</span>
+                <div style={{ color: ch.color }}>{ch.icon}</div>
+                <span className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>{ch.name}</span>
+                <span className="text-xs font-sans font-bold" style={{ color: 'var(--text-muted)' }}>Automated</span>
               </motion.div>
             ))}
           </motion.div>
@@ -510,22 +516,22 @@ export default function ContentMarketingAutomation() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-32 p-10 sm:p-16 rounded-[3rem] bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-transparent border border-indigo-500/20 text-center relative overflow-hidden"
+          className="mb-32 p-10 sm:p-16 rounded-[3rem] border text-center relative overflow-hidden"
+          style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
         >
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-500/5 to-transparent pointer-events-none" />
-          <TrendingUp className="mx-auto text-indigo-400 mb-6" size={40} />
-          <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-snug mb-4">
+          <TrendingUp className="mx-auto mb-6 animate-pulse" size={40} style={{ color: 'var(--accent-blue)' }} />
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight leading-snug mb-4 font-display" style={{ color: 'var(--text-body)' }}>
             Your audience sees you everywhere, every week —{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+            <span className="italic font-medium" style={{ color: 'var(--accent-blue)' }}>
               without you writing a single word.
             </span>
           </h3>
-          <p className="text-zinc-400 font-light max-w-2xl mx-auto text-lg mb-8">
+          <p className="font-light max-w-2xl mx-auto text-lg mb-8" style={{ color: 'var(--text-muted)' }}>
             That's not a marketing claim. It's the engineered outcome of a system that runs for you — from research, to writing, to publishing, to reporting.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-black text-lg hover:brightness-110 shadow-2xl shadow-indigo-500/30 active:scale-95 transition-all"
+            className="btn-cta text-lg cursor-pointer"
           >
             Let's Build Your Content Engine
             <ArrowRight size={20} />
@@ -541,10 +547,10 @@ export default function ContentMarketingAutomation() {
             variants={stagger}
             className="text-center mb-12 space-y-4"
           >
-            <motion.span variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 block">
+            <motion.span variants={fadeUp} className="text-xs font-sans font-bold uppercase tracking-[0.3em] block" style={{ color: 'var(--text-muted)' }}>
               Common Questions
             </motion.span>
-            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
               Questions About the Content Engine
             </motion.h2>
           </motion.div>
@@ -557,16 +563,19 @@ export default function ContentMarketingAutomation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07, duration: 0.5 }}
-                className="rounded-2xl border border-white/10 overflow-hidden bg-white/5 backdrop-blur-md"
+                className="rounded-2xl border overflow-hidden transition-all interactive-card"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/5 transition-colors group"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:brightness-95 transition-all cursor-pointer"
+                  style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--text-body)' }}
                 >
-                  <span className="font-semibold text-white pr-4">{faq.q}</span>
+                  <span className="font-bold pr-4">{faq.q}</span>
                   <ChevronDown
                     size={18}
-                    className={`text-zinc-400 shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180 text-indigo-400' : ''}`}
+                    className={`shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                    style={{ color: 'var(--text-muted)' }}
                   />
                 </button>
                 <AnimatePresence>
@@ -578,7 +587,7 @@ export default function ContentMarketingAutomation() {
                       transition={{ duration: 0.35 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-6 pb-5 text-zinc-400 font-light leading-relaxed">{faq.a}</p>
+                      <p className="px-6 pb-5 font-light leading-relaxed text-left" style={{ color: 'var(--text-muted)' }}>{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -595,21 +604,21 @@ export default function ContentMarketingAutomation() {
           transition={{ duration: 0.7 }}
           className="text-center space-y-6"
         >
-          <span className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em] block">Ready?</span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+          <span className="text-xs font-sans font-bold uppercase tracking-[0.3em] block" style={{ color: 'var(--text-muted)' }}>Ready?</span>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
             Book a Free Strategy Call
           </h2>
-          <p className="text-zinc-400 font-light max-w-xl mx-auto">
+          <p className="font-light max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             30 minutes. No pitch. I'll walk you through exactly what I'd build for your business and what results to expect.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-black text-lg hover:brightness-110 shadow-2xl shadow-indigo-500/20 active:scale-95 transition-all"
+            className="btn-cta text-lg cursor-pointer"
           >
             Book Your Free Strategy Call
             <ArrowRight size={20} />
           </Link>
-          <p className="text-xs text-zinc-600 font-mono mt-3">No commitment. No sales pressure. Just strategy.</p>
+          <p className="text-xs font-sans font-bold mt-3" style={{ color: 'var(--text-muted)' }}>No commitment. No sales pressure. Just strategy.</p>
         </motion.div>
 
       </div>
