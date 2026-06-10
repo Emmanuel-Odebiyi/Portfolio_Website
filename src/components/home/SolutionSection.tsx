@@ -183,7 +183,7 @@ export const SolutionSection = () => {
         </div>
 
         {/* ── Accordion Panels — Stacks vertically on mobile/tablet, horizontal on desktop ── */}
-        <div className="flex-1 flex flex-col md:flex-row overflow-hidden px-4 pb-4 md:px-8 md:pb-8 gap-2 md:gap-0">
+        <div className="flex-1 flex flex-col md:flex-row solution-accordion-flex overflow-hidden px-4 pb-4 md:px-8 md:pb-8 gap-2 md:gap-0 max-h-[750px] my-auto w-full">
           {SOLUTIONS.map((solution, index) => {
             const isActive = index === activeIndex;
             const SolutionIcon = solution.Icon;

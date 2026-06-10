@@ -653,47 +653,6 @@ h4, h5, h6 {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-/* Hide scroll indicator on screens with shorter heights to prevent collision with CTA */
-@media (max-height: 800px) {
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
 
 .dark {
   --background: oklch(0.145 0 0);
@@ -900,4 +859,51 @@ p, li, span.body-text, .text-body-copy {
     display: block;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   PORTRAIT-RESPONSIVE LAYOUT ADJUSTMENTS FOR DESKTOP MODE
+   Protects layouts when requested as "Desktop Site" in portrait
+   orientation on mobile/tablets, preventing squished vertical columns
+   and infinite vertical height stretching.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Force vertical card stacking in portrait desktop views */
+@media (min-width: 768px) {
+  .solution-accordion-flex {
+    flex-direction: column !important;
+  }
+}
+
+/* Restore side-by-side sliding layout ONLY in landscape desktop views */
+@media (min-width: 768px) and (orientation: landscape) {
+  .solution-accordion-flex {
+    flex-direction: row !important;
+  }
+}
+
+/* Force vertical stacking for the hero grid in portrait desktop views */
+@media (min-width: 1024px) and (orientation: portrait) {
+  .hero-grid-responsive {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  .hero-grid-responsive > div:first-child {
+    grid-column: span 1 / span 1 !important;
+  }
+  .hero-grid-responsive > div:last-child {
+    grid-column: span 1 / span 1 !important;
+    justify-content: center !important;
+  }
+}
+
+/* Results section scroll height adjustments to prevent massive portrait gaps */
+.results-typography-section {
+  height: 250vh;
+}
+
+@media (orientation: portrait) {
+  .results-typography-section {
+    height: 160vh !important;
+  }
+}
+
 

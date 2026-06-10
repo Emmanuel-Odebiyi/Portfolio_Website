@@ -60,8 +60,8 @@ export const ResultsTypographySection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative grain-overlay"
-      style={{ height: '250vh', backgroundColor: 'color-mix(in srgb, var(--bg-page) 80%, transparent)' }}
+      className="relative grain-overlay results-typography-section"
+      style={{ backgroundColor: 'color-mix(in srgb, var(--bg-page) 80%, transparent)' }}
     >
       {/* Sticky viewport bounds the text to the center area */}
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-24">

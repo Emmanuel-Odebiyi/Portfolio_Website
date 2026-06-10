@@ -15,7 +15,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 hero-grid-responsive gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Headline, Subheadline, CTAs, and Trust Indicators */}
           <div className="lg:col-span-6 flex flex-col items-start text-left space-y-8">
