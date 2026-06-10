@@ -26,4 +26,6 @@ everything-claude-code/
 
 # Submodules and temporary scratch directories
 scratch/get-shit-done/
-
+.scratch/
+/*.png
+*Codex Context Chat*
