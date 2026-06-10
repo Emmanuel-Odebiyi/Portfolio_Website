@@ -906,4 +906,38 @@ p, li, span.body-text, .text-body-copy {
   }
 }
 
+/* Prevent vertical overflow on screens with short heights (e.g. height < 850px) */
+@media (max-height: 850px) {
+  .problem-card-content {
+    gap: 1rem !important;
+  }
+  .problem-card-lottie {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  .problem-card-number {
+    font-size: 3.5rem !important;
+  }
+  .problem-card-headline {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+  .problem-card-body {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+  .problem-card-detail {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+  /* Reduce vertical spacing within the text content */
+  .problem-card-text {
+    margin-top: 0 !important;
+  }
+  .problem-card-text > * + * {
+    margin-top: 0.4rem !important;
+  }
+}
+
+
 

@@ -64,12 +64,12 @@ export const ResultsTypographySection = () => {
       style={{ backgroundColor: 'color-mix(in srgb, var(--bg-page) 80%, transparent)' }}
     >
       {/* Sticky viewport bounds the text to the center area */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-24">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-12 md:py-16 lg:py-20">
         
         {/* We constrain the max-width to center it and apply pure text-center for alignment */}
         <div className="max-w-4xl w-full px-6 md:px-12 text-center">
           
-          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.25]" style={{ color: 'var(--text-body)' }}>
+          <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.2]" style={{ color: 'var(--text-body)' }}>
             {SENTENCES.map((line, i) => {
               // Calculate stagger logic: Each line gets a 15% window of the scroll length to fade in
               const step = 1 / SENTENCES.length;

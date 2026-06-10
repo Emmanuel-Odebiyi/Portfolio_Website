@@ -356,9 +356,9 @@ const ProblemCard: React.FC<{
       className="absolute inset-0 flex items-center justify-center px-6 md:px-16 lg:px-24 pointer-events-none"
       style={{ opacity }}
     >
-      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-16 lg:gap-20 items-center problem-card-content">
         {/* Text Content — matches the screenshot layout */}
-        <div className="space-y-4 md:space-y-6 order-2 lg:order-1 text-left">
+        <div className="space-y-4 md:space-y-6 order-2 md:order-1 text-left problem-card-text">
 
           {/* Tag pill — left aligned */}
           <span
@@ -375,7 +375,7 @@ const ProblemCard: React.FC<{
           {/* Large number — improved contrast and numeric variant */}
           <div className="select-none pointer-events-none -mb-2 md:mb-0">
             <span
-              className="text-6xl sm:text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-85"
+              className="text-6xl sm:text-7xl md:text-[7rem] lg:text-[10rem] font-black leading-none tracking-tighter block opacity-85 problem-card-number"
               style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
             >
               {String(problem.id).padStart(2, '0')}
@@ -383,7 +383,7 @@ const ProblemCard: React.FC<{
           </div>
 
           {/* Headline — word-by-word reveal */}
-          <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4" style={{ color: 'var(--text-body)' }}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4 problem-card-headline" style={{ color: 'var(--text-body)' }}>
             <ScrollRevealText
               text={problem.headline}
               scrollYProgress={scrollYProgress}
@@ -393,7 +393,7 @@ const ProblemCard: React.FC<{
           </h2>
 
           {/* Body — word-by-word reveal */}
-          <p className="text-sm sm:text-base md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl leading-relaxed problem-card-body" style={{ color: 'var(--text-muted)' }}>
             <ScrollRevealText
               text={problem.body}
               scrollYProgress={scrollYProgress}
@@ -403,7 +403,7 @@ const ProblemCard: React.FC<{
           </p>
 
           {/* Detail — word-by-word reveal, colored italic */}
-          <p className="text-sm sm:text-base md:text-xl italic font-semibold max-w-3xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl italic font-semibold max-w-3xl leading-relaxed problem-card-detail">
             <ScrollRevealText
               text={problem.detail}
               scrollYProgress={scrollYProgress}
@@ -415,13 +415,13 @@ const ProblemCard: React.FC<{
         </div>
 
         {/* Icon Illustration — right side */}
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end mt-16 lg:mt-0 -mb-4 md:mb-0">
+        <div className="order-1 md:order-2 flex justify-center md:justify-end mt-10 md:mt-0 -mb-4 md:mb-0">
           <div className="relative group/icon">
             {/* Icon container — clean, no background glow */}
             <motion.div
               animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-28 h-28 md:w-80 md:h-80 flex items-center justify-center relative z-10"
+              className="w-28 h-28 md:w-60 md:h-60 lg:w-80 lg:h-80 flex items-center justify-center relative z-10 problem-card-lottie"
             >
               <div className="w-full h-full flex items-center justify-center">
                 <LottieLoader 
