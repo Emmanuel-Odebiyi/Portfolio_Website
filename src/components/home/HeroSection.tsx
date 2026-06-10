@@ -6,7 +6,11 @@ import { HeroPhoto } from '../HeroPhoto';
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-36 pb-28 md:py-40" style={{ backgroundColor: 'var(--bg-page)' }}>
+    <section
+      className="relative min-h-screen flex items-center overflow-hidden pt-36 pb-16 md:pb-28 lg:py-40"
+      style={{ backgroundColor: 'var(--bg-page)' }}
+      data-section="hero"
+    >
       {/* Background Subtle Accent */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
@@ -61,7 +65,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+              className="flex flex-col sm:flex-row items-stretch gap-4 w-full sm:w-auto"
             >
               <Link
                 to="/portfolio"

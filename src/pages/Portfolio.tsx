@@ -125,8 +125,8 @@ export default function Portfolio() {
       />
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 pt-32 pb-12 mb-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <section className="max-w-7xl mx-auto px-6 pt-28 md:pt-32 pb-8 md:pb-12 mb-12 md:mb-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-center">
           {/* Left Column: Narrative (Span 7) */}
           <div className="lg:col-span-7 space-y-8">
             <motion.div
@@ -204,7 +204,7 @@ export default function Portfolio() {
       </section>
 
       {/* Featured Projects Grid */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
+      <section className="max-w-7xl mx-auto px-6 mb-16 md:mb-32">
         {/* Category Filter Tabs with animated layoutId pill */}
         <div className="flex items-center gap-2 mb-12 flex-wrap">
           {CATEGORY_FILTERS.map((cat) => (
@@ -329,7 +329,7 @@ export default function Portfolio() {
       </section>
 
       {/* More Results - Grid */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
+      <section className="max-w-7xl mx-auto px-6 mb-16 md:mb-32">
         <div className="text-center space-y-4 mb-20">
           <span className="font-sans font-bold text-xs uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Micro Case Studies</span>
           <h2 className="text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>More client results.</h2>
@@ -361,7 +361,7 @@ export default function Portfolio() {
       </section>
 
       {/* Resume CTA Section - High Priority */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
+      <section className="max-w-7xl mx-auto px-6 mb-16 md:mb-32">
         <div 
           className="border rounded-[2.5rem] p-12 md:p-24 relative overflow-hidden text-center md:text-left"
           style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}

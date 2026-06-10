@@ -7,7 +7,7 @@ export const CTASection = () => {
   return (
     <section
       id="contact"
-      className="relative py-40 grain-overlay overflow-hidden"
+      className="relative py-16 sm:py-24 lg:py-40 grain-overlay overflow-hidden"
       style={{ backgroundColor: 'color-mix(in srgb, var(--bg-page) 80%, transparent)' }}
     >
 
@@ -21,12 +21,12 @@ export const CTASection = () => {
           >
             Next Steps
           </span>
-          <h2 className="text-4xl md:text-7xl font-bold tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>
             Your Window Is Open. <br />
             <span>Your Competitors Are Already Moving.</span>
           </h2>
           <p
-            className="text-2xl font-light max-w-3xl mx-auto"
+            className="text-base sm:text-xl md:text-2xl font-light max-w-3xl mx-auto"
             style={{ color: 'var(--text-muted)' }}
           >
             Every week without a system is a week they're showing up where you aren't.

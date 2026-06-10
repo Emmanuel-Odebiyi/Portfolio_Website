@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
       {/* Top subtle highlight */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--cta-blue)]/30 to-transparent" />
       
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 lg:gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 relative z-10">
         
         {/* Brand Section (Left) */}
         <div className="lg:col-span-2 flex flex-col justify-between">
@@ -120,7 +120,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-[var(--border-card)] flex flex-col md:flex-row justify-between items-center gap-4 text-[var(--text-muted)] text-xs font-mono tracking-widest uppercase relative z-10">
+      <div className="max-w-7xl mx-auto mt-16 md:mt-24 pt-8 border-t border-[var(--border-card)] flex flex-col md:flex-row justify-between items-center gap-4 text-[var(--text-muted)] text-xs font-mono tracking-widest uppercase relative z-10 text-center md:text-left">
         <div className="flex items-center gap-3">
           <span>© {new Date().getFullYear()} Emmanuel Odebiyi</span>
           <span className="w-1 h-1 rounded-full bg-[var(--border-card)]" />

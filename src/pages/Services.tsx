@@ -68,10 +68,10 @@ export default function Services() {
         keywords="marketing automation Nigeria, B2B content automation, technical SEO architecture, n8n workflows"
       />
 
-      <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 pt-28 md:pt-32 pb-16 md:pb-24 max-w-7xl mx-auto px-6">
 
         {/* ── Page Header — Editorial left-aligned ── */}
-        <div className="mb-24 border-b pb-12" style={{ borderColor: 'var(--border-card)' }}>
+        <div className="mb-16 md:mb-24 border-b pb-12" style={{ borderColor: 'var(--border-card)' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function Services() {
               Done-For-You Systems
             </span>
             <h1
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6 font-display"
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6 font-display"
               style={{ color: 'var(--text-body)' }}
             >
               Marketing that{' '}
@@ -135,7 +135,7 @@ export default function Services() {
         </div>
 
         {/* ── IMPACT ESTIMATOR ── */}
-        <div className="mb-32">
+        <div className="mb-16 md:mb-32">
           <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
             <span
               className="text-xs font-sans font-bold uppercase tracking-widest block mb-3"
@@ -324,7 +324,7 @@ export default function Services() {
         </div>
 
         {/* ── CORE SERVICES ── */}
-        <div className="mb-32">
+        <div className="mb-16 md:mb-32">
           <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
             <span
               className="text-xs font-sans font-bold uppercase tracking-widest block mb-3"
@@ -511,7 +511,7 @@ export default function Services() {
         </div>
 
         {/* ── ENGAGEMENT MODEL ── */}
-        <div className="mb-32">
+        <div className="mb-16 md:mb-32">
           <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
             <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-3" style={{ color: 'var(--accent-amber)' }}>
               Engagement Model
@@ -572,7 +572,7 @@ export default function Services() {
         </div>
 
         {/* ── FAQs ── */}
-        <div className="max-w-3xl mx-auto mb-32">
+        <div className="max-w-3xl mx-auto mb-16 md:mb-32">
           <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
             <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-3" style={{ color: 'var(--accent-amber)' }}>
               Common Questions

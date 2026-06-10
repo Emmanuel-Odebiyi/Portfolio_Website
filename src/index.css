@@ -797,3 +797,107 @@ h4, h5, h6 {
   transform: translateY(-1px) !important;
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE AUDIT FIX PASS — Global Safety Rules
+   Applied per codex-responsiveness-audit-prompt.md
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Rule 8: Overflow Safety — cap all major containers so nothing escapes */
+main,
+section,
+article,
+.container {
+  max-width: 100%;
+}
+
+/* Rule 7: iOS Safari Zoom Fix — all form inputs must be 16px minimum.
+   iOS Safari zooms the viewport on focus if font-size < 16px. */
+input,
+textarea,
+select {
+  font-size: 1rem !important; /* 16px — prevents iOS zoom */
+}
+
+/* S4: Sticky Nav Anchor Fix — sections that are scroll targets need
+   scroll-margin-top so the sticky header doesn't obscure them. */
+section[id],
+div[id] {
+  scroll-margin-top: 5rem; /* Matches the ~64px nav height + buffer */
+}
+
+/* M6: Footer & small link tap targets — ensure all footer list links
+   meet the 44px minimum touch target via transparent padding. */
+footer li a,
+footer li > a,
+footer ul a {
+  display: inline-block;
+  padding-block: 0.5rem; /* ~8px top + bottom; with 18px text = ~34px, +line-height ≈ 44px */
+  min-height: 2.75rem;   /* Explicit 44px minimum */
+}
+
+/* S9: Landscape Mobile Hero Override — reduce hero vertical padding
+   when the viewport is short (phone in landscape mode). This prevents
+   the hero from forcing a full scroll before content is visible. */
+@media (max-height: 500px) {
+  /* Hero section landscape fix */
+  section.hero-landscape-fix,
+  section[data-section="hero"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* S3: Ensure nav doesn't collapse at wrong breakpoint — provide a
+   comfortable rendering of nav links up to the md breakpoint (768px). */
+@media (max-width: 767px) {
+  /* Hamburger button minimum tap target */
+  header button[aria-label] {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+}
+
+/* S1: Consistent section padding token — applies to sections that need
+   a standard clamp-based vertical rhythm. Opt-in via class name. */
+.section-pad {
+  padding-block: clamp(3rem, 6vw, 6rem);
+}
+
+/* M3: Prevent any body text from going below 14px (0.875rem).
+   Catches any utility class that could slip through. */
+p, li, span.body-text, .text-body-copy {
+  font-size: max(0.875rem, 1em); /* No smaller than 14px */
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE SECTION HEADING CENTERING
+   On mobile (< 640px / before sm breakpoint), all section-level
+   headings and eyebrow labels are centered for visual hierarchy.
+   Body text (p, li) is never affected — it always stays left-aligned.
+   At sm+ the rule stops and each element's own classes take over.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 639px) {
+  /* Section / page-level headings */
+  section h1,
+  section h2,
+  article h1,
+  article h2 {
+    text-align: center;
+  }
+
+  /* Eyebrow / overline labels — standard tracking-widest utility */
+  section span.tracking-widest,
+  article span.tracking-widest {
+    text-align: center;
+    display: block;
+  }
+
+  /* Eyebrow labels using arbitrary tracking values (e.g. tracking-[0.3em]) */
+  section span[class*="tracking-["],
+  article span[class*="tracking-["] {
+    text-align: center;
+    display: block;
+  }
+}
+

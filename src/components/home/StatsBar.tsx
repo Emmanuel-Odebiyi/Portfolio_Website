@@ -12,7 +12,7 @@ export const StatsBar = () => {
       }}
     >
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-16 gap-y-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-8 sm:gap-x-12 lg:gap-x-16 gap-y-8">
         {[
           { label: 'ROI delivered in 90 days',    value: 520, suffix: '%'  },
           { label: 'traffic growth in 3 months',  value: 65,  suffix: '%'  },

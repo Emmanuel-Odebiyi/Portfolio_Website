@@ -338,7 +338,7 @@ export default function Contact() {
                                 placeholder="Explain in detail what's holding you back..."
                                 value={formData.customBottleneck}
                                 onChange={(e) => setFormData({ ...formData, customBottleneck: e.target.value })}
-                                className="w-full border rounded-2xl px-5 py-4 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all min-h-[100px] resize-none text-sm font-sans"
+                                className="w-full border rounded-2xl px-5 py-4 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all min-h-[100px] resize-none text-base"
                                 style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                               />
                             </div>
@@ -370,7 +370,7 @@ export default function Contact() {
                           placeholder="e.g., We want to establish a content automation stack to publish twice weekly, rank top-10 for key industry terms, and automate leads distribution to Hubspot..."
                           value={formData.successVision}
                           onChange={(e) => setFormData({ ...formData, successVision: e.target.value })}
-                          className="w-full border rounded-2xl px-6 py-5 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all min-h-[160px] resize-none text-sm leading-relaxed font-sans"
+                          className="w-full border rounded-2xl px-6 py-5 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all min-h-[160px] resize-none text-base leading-relaxed"
                           style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                         />
                       </div>
@@ -469,7 +469,7 @@ export default function Contact() {
                               type="text"
                               placeholder="E.g., John Doe"
                               {...register('name', { required: 'Full name is required' })}
-                              className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-sm font-sans ${step4Errors.name ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
+                              className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-base ${step4Errors.name ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
                               style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}
                             />
                             <User size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 transition-colors" style={{ color: 'var(--text-muted)' }} />
@@ -494,7 +494,7 @@ export default function Contact() {
                                 required: 'Business email is required',
                                 pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address' }
                               })}
-                              className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-sm font-sans ${step4Errors.email ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
+                              className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-base ${step4Errors.email ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
                               style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}
                             />
                             <Mail size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 transition-colors" style={{ color: 'var(--text-muted)' }} />
@@ -519,7 +519,7 @@ export default function Contact() {
                                 required: 'Company URL is required',
                                 pattern: { value: /^https?:\/\/.+/, message: 'Must start with https://' }
                               })}
-                              className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-sm font-sans ${step4Errors.companyUrl ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
+                              className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-base ${step4Errors.companyUrl ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
                               style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}
                             />
                             <LinkIcon size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 transition-colors" style={{ color: 'var(--text-muted)' }} />

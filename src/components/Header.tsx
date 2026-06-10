@@ -202,7 +202,7 @@ export const Header: React.FC = () => {
                 <span className="relative z-10">Contact Me</span>
               </Link>
             </motion.div>
-            <button className="md:hidden p-2" style={{ color: 'var(--text-body)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
+            <button className="md:hidden p-3" style={{ color: 'var(--text-body)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>

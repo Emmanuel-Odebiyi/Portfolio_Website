@@ -179,7 +179,7 @@ export default function Blog() {
                 placeholder="Search by topic, tag, keyword..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full border rounded-2xl px-6 py-4 pl-14 text-sm focus:outline-none placeholder-zinc-500 transition-all font-sans"
+                className="w-full border rounded-2xl px-6 py-4 pl-14 text-base focus:outline-none placeholder-zinc-500 transition-all"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
               />
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 transition-colors" style={{ color: 'var(--text-muted)' }} size={18} />
@@ -400,7 +400,7 @@ export default function Blog() {
                     placeholder="Enter your professional email address" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 bg-transparent px-5 py-4 text-sm focus:outline-none placeholder-zinc-500 disabled:opacity-50"
+                    className="flex-1 bg-transparent px-5 py-4 text-base focus:outline-none placeholder-zinc-500 disabled:opacity-50"
                     style={{ color: 'var(--text-body)' }}
                   />
                   <button 

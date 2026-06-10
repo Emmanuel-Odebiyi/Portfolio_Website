@@ -218,7 +218,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-left text-4xl md:text-5xl font-bold font-display tracking-tight leading-tight"
+              className="text-center sm:text-left text-4xl md:text-5xl font-bold font-display tracking-tight leading-tight"
               style={{ color: 'var(--text-body)' }}
             >
               Hey, I'm Emmanuel.

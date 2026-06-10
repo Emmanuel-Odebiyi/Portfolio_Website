@@ -375,7 +375,7 @@ const ProblemCard: React.FC<{
           {/* Large number — improved contrast and numeric variant */}
           <div className="select-none pointer-events-none -mb-2 md:mb-0">
             <span
-              className="text-6xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-85"
+              className="text-6xl sm:text-8xl md:text-[10rem] font-black leading-none tracking-tighter block opacity-85"
               style={{ color: problem.accentColor, fontVariantNumeric: 'tabular-nums' }}
             >
               {String(problem.id).padStart(2, '0')}
@@ -383,7 +383,7 @@ const ProblemCard: React.FC<{
           </div>
 
           {/* Headline — word-by-word reveal */}
-          <h2 className="text-2xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4" style={{ color: 'var(--text-body)' }}>
+          <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl -mt-2 md:-mt-4" style={{ color: 'var(--text-body)' }}>
             <ScrollRevealText
               text={problem.headline}
               scrollYProgress={scrollYProgress}
@@ -393,7 +393,7 @@ const ProblemCard: React.FC<{
           </h2>
 
           {/* Body — word-by-word reveal */}
-          <p className="text-sm md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-sm sm:text-base md:text-2xl max-w-3xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             <ScrollRevealText
               text={problem.body}
               scrollYProgress={scrollYProgress}
@@ -403,7 +403,7 @@ const ProblemCard: React.FC<{
           </p>
 
           {/* Detail — word-by-word reveal, colored italic */}
-          <p className="text-sm md:text-xl italic font-semibold max-w-3xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-xl italic font-semibold max-w-3xl leading-relaxed">
             <ScrollRevealText
               text={problem.detail}
               scrollYProgress={scrollYProgress}
