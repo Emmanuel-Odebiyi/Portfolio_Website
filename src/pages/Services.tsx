@@ -70,22 +70,22 @@ export default function Services() {
 
       <div className="relative z-10 pt-28 md:pt-32 pb-16 md:pb-24 max-w-7xl mx-auto px-6">
 
-        {/* ── Page Header — Editorial left-aligned ── */}
-        <div className="mb-16 md:mb-24 border-b pb-12" style={{ borderColor: 'var(--border-card)' }}>
+        {/* ── Page Header — Centered ── */}
+        <div className="mb-16 md:mb-24 border-b pb-12 flex flex-col items-center text-center" style={{ borderColor: 'var(--border-card)' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            className="max-w-3xl mx-auto flex flex-col items-center text-center"
           >
             <span
-              className="text-xs font-sans font-bold uppercase tracking-widest block mb-4"
+              className="text-xs font-sans font-bold uppercase tracking-widest block mb-4 text-center"
               style={{ color: 'var(--accent-amber)' }}
             >
               Done-For-You Systems
             </span>
             <h1
-              className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6 font-display"
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6 font-display text-center"
               style={{ color: 'var(--text-body)' }}
             >
               Marketing that{' '}
@@ -94,7 +94,7 @@ export default function Services() {
               </span>
             </h1>
             <p
-              className="text-xl font-light leading-relaxed max-w-2xl"
+              className="text-xl font-light leading-relaxed max-w-2xl text-center mx-auto"
               style={{ color: 'var(--text-muted)' }}
             >
               Consistent content. Higher rankings. Time back in your week. No team required.

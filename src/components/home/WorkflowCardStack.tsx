@@ -52,7 +52,6 @@ const STACK_DEPTH = 3;
 
 export const WorkflowCardStack: React.FC = () => {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const total = CARDS.length;
 
@@ -66,24 +65,15 @@ export const WorkflowCardStack: React.FC = () => {
 
   // Auto-advance
   useEffect(() => {
-    if (paused) {
-      if (timerRef.current) clearInterval(timerRef.current);
-      return;
-    }
-
     timerRef.current = setInterval(next, INTERVAL);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [paused, next, active]);
+  }, [next, active]);
 
   return (
-    <div
-      className="relative w-full"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+    <div className="relative w-full">
       {/* ── Card stack ──────────────────────────────────────────────────── */}
       <div
         className="relative w-full rounded-2xl"
@@ -167,17 +157,7 @@ export const WorkflowCardStack: React.FC = () => {
               </span>
             </div>
 
-            {/* Pause overlay hint */}
-            {paused && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute top-3 right-3 text-[9px] font-mono text-white/60 bg-black/30 px-2 py-0.5 rounded-full"
-              >
-                paused
-              </motion.div>
-            )}
+            {/* No pause overlay hint */}
           </motion.div>
         </AnimatePresence>
       </div>

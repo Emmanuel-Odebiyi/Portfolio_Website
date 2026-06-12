@@ -159,33 +159,33 @@ export default function MyApproach() {
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh] pt-8">
 
           {/* LEFT: Approach Hook */}
-          <div className="space-y-8">
+          <div className="space-y-8 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest text-center"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
               The Methodology
             </motion.div>
 
-            <div>
+            <div className="flex flex-col items-center">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center"
                 style={{ color: 'var(--text-body)' }}
               >
                 Not a consultant.
                 <br />
-                <span className="italic font-medium animate-none" style={{ color: 'var(--accent-amber)' }}>
+                <span className="italic font-medium animate-none text-center" style={{ color: 'var(--accent-amber)' }}>
                   An architect.
                 </span>
                 <br />
-                <span className="text-3xl sm:text-4xl lg:text-5xl font-light" style={{ color: 'var(--text-muted)' }}>
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-light text-center" style={{ color: 'var(--text-muted)' }}>
                   Who engineers outcomes.
                 </span>
               </motion.h1>
@@ -195,7 +195,7 @@ export default function MyApproach() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl font-light leading-relaxed"
+              className="text-lg sm:text-xl font-light leading-relaxed text-center"
               style={{ color: 'var(--text-muted)' }}
             >
               I don't give you tools and leave. I don't hand over tactics and hope for the best.
@@ -208,7 +208,7 @@ export default function MyApproach() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="space-y-3"
+              className="space-y-3 w-full max-w-md mx-auto"
             >
               {[
                 { icon: <BarChart3 size={14} />, text: 'Every recommendation is backed by data' },
@@ -221,7 +221,7 @@ export default function MyApproach() {
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl border transition-all"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl border transition-all text-left"
                   style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
                 >
                   <div 
@@ -239,7 +239,7 @@ export default function MyApproach() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.65 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
                 to="/contact"

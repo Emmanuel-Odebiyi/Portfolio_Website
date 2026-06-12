@@ -1,13 +1,24 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Target, Settings, Zap } from 'lucide-react';
-
 const steps = [
   {
     number: "01",
     title: "Strategy Session",
     timeline: "Week 1",
-    icon: <Target size={32} className="text-[#FF6B6B]" />,
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="url(#strategy-grad)" strokeWidth="1.5" strokeDasharray="3 3" />
+        <circle cx="12" cy="12" r="6" stroke="url(#strategy-grad)" strokeWidth="2" />
+        <circle cx="12" cy="12" r="2" fill="url(#strategy-grad)" />
+        <path d="M12 2V5M12 19V22M2 12H5M19 12H22" stroke="url(#strategy-grad)" strokeWidth="2" strokeLinecap="round" />
+        <defs>
+          <linearGradient id="strategy-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FF6B6B" />
+            <stop offset="100%" stopColor="#FF8E53" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
     accentColor: "#FF6B6B",
     desc: "A 90-minute deep dive into your business, audience, and goals. I audit your current marketing, identify the gaps, and map your path to systematic growth.",
     investment: "90 minutes",
@@ -17,7 +28,23 @@ const steps = [
     number: "02",
     title: "System Build",
     timeline: "Weeks 2–4",
-    icon: <Settings size={32} className="text-[#FF9F43]" />,
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#build-grad)" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M2 17L12 22L22 17" stroke="url(#build-grad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2 12L12 17L22 12" stroke="url(#build-grad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2 7V17M22 7V17M12 12V22" stroke="url(#build-grad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="12" cy="7" r="2" fill="#FF9F43" />
+        <circle cx="6" cy="14" r="1.5" fill="#FF9F43" />
+        <circle cx="18" cy="14" r="1.5" fill="#FF9F43" />
+        <defs>
+          <linearGradient id="build-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FF9F43" />
+            <stop offset="100%" stopColor="#FEB236" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
     accentColor: "#FF9F43",
     desc: "I design and build everything: content creation workflows, SEO architecture, multi-platform distribution, and performance dashboards. Fully integrated.",
     investment: "Two 30-minute check-ins",
@@ -27,7 +54,23 @@ const steps = [
     number: "03",
     title: "Launch & Optimize",
     timeline: "Week 4+",
-    icon: <Zap size={32} className="text-[#9B59B6]" />,
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#launch-grad)" stroke="url(#launch-grad-stroke)" strokeWidth="1" strokeLinejoin="round" />
+        <path d="M5 20H19" stroke="#9B59B6" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
+        <path d="M8 17H16" stroke="#9B59B6" strokeWidth="1.5" strokeLinecap="round" />
+        <defs>
+          <linearGradient id="launch-grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#9B59B6" />
+            <stop offset="100%" stopColor="#8E44AD" />
+          </linearGradient>
+          <linearGradient id="launch-grad-stroke" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#B983FF" />
+            <stop offset="100%" stopColor="#9B59B6" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
     accentColor: "#9B59B6",
     desc: "Your content starts publishing automatically. I monitor performance, refine based on real data, and the system compounds over time. You focus on your business.",
     investment: "15 minutes per week (optional)",

@@ -79,8 +79,6 @@ const stagger = (i: number) => ({
 });
 
 export default function About() {
-  const [hoverSide, setHoverSide] = useState<'burnout' | 'balance' | null>(null);
-  
   return (
     <div className="pt-0 pb-20 min-h-screen" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
@@ -90,121 +88,86 @@ export default function About() {
       />
       
       {/* ═══════════════════════════════════════════
-          HERO SECTION — Cinematic Split
-      ═══════════════════════════════════════════ */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-zinc-950">
-        <div className="absolute inset-0 z-0 flex flex-row">
-          {/* Left — Monochrome Burnout */}
-          <div className="w-1/2 h-full relative overflow-hidden text-zinc-400">
-            <motion.img 
-              src="/about-transformation.jpg"
-              alt="Emmanuel Odebiyi — the burnout era" 
-              animate={{ opacity: hoverSide === 'burnout' ? 0.6 : 0.4 }}
-              style={{ filter: `brightness(${hoverSide === 'burnout' ? 1.25 : 1.1}) contrast(1.5) grayscale(100%)` }}
-              className="absolute left-0 top-0 h-full w-[200%] max-w-none object-cover object-[38%_20%] md:object-[30%_20%] lg:object-[25%_20%] transition-all duration-700"
-            />
-            <div className={`absolute inset-0 bg-zinc-950/20 transition-opacity duration-700 ${hoverSide === 'burnout' ? 'opacity-100' : 'opacity-0'}`} />
-          </div>
-          {/* Right — Color Reveal */}
-          <div className="w-1/2 h-full relative overflow-hidden">
-            <motion.img 
-              src="/about-transformation.jpg"
-              alt="Emmanuel Odebiyi — the balance era" 
-              animate={{ opacity: hoverSide === 'balance' ? 0 : 0.4 }}
-              style={{ filter: 'brightness(1.1) contrast(1.6) grayscale(100%)' }}
-              className="absolute right-0 bottom-0 h-full w-[200%] max-w-none object-cover object-[62%_20%] md:object-[70%_20%] lg:object-[75%_20%] transition-all duration-1000"
-            />
-            <motion.img 
-              src="/about-transformation.jpg"
-              alt="Emmanuel Odebiyi — in color" 
-              animate={{ opacity: hoverSide === 'balance' ? 0.9 : 0, scale: hoverSide === 'balance' ? 1.05 : 1 }}
-              style={{ filter: `brightness(${hoverSide === 'balance' ? 0.8 : 1.1}) contrast(1.4)` }}
-              className="absolute right-0 bottom-0 h-full w-[200%] max-w-none object-cover object-[62%_20%] md:object-[70%_20%] lg:object-[75%_20%] transition-all duration-1000"
-            />
-            <div className={`absolute inset-0 bg-zinc-950/40 transition-opacity duration-700 ${hoverSide === 'balance' ? 'opacity-100' : 'opacity-0'}`} />
-            <div className={`absolute inset-0 bg-blue-500/5 transition-opacity duration-700 ${hoverSide === 'balance' ? 'opacity-100' : 'opacity-0'}`} />
-          </div>
-        </div>
-        {/* Halftone */}
-        <div className="absolute inset-0 z-15 opacity-40 pointer-events-none mix-blend-multiply" 
-             style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
+           HERO SECTION
+         ═══════════════════════════════════════════ */}
+      <section className="relative h-screen min-h-[550px] sm:min-h-[600px] md:min-h-[750px] flex flex-col justify-end pb-10 sm:pb-12 md:pb-16 overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
         
-        {/* Left and Right stacked/split text container */}
-        <div className="absolute inset-x-0 bottom-20 md:bottom-28 lg:bottom-32 z-30 px-6 md:px-12 lg:px-24 pointer-events-none flex flex-col lg:flex-row lg:justify-between lg:items-end gap-8 lg:gap-0">
-          {/* Left Text — Origin Story */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.8 }}
-            className="flex flex-col gap-2 lg:gap-4 text-left pointer-events-none max-w-lg"
-          >
-            <span className="text-[10px] md:text-[11px] font-sans font-bold text-white/60 tracking-[0.4em] uppercase">The Origin Story</span>
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter text-white leading-[0.9] md:leading-[0.85] drop-shadow-2xl">
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="block"
-              >
-                I Used to Be
-              </motion.span>
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-                className="block"
-              >
-                the
-              </motion.span>
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
-                className={`block transition-all duration-700 line-through decoration-zinc-100 decoration-[6px] italic ${hoverSide === 'burnout' ? 'text-zinc-100' : 'text-zinc-400'}`}
-              >
-                Burnout.
-              </motion.span>
-            </h1>
-          </motion.div>
+        {/* Fullscreen Background Image */}
+        <div className="absolute inset-0 z-0 select-none">
+          <img
+            src="/images/about-hero-landscape.png"
+            alt="Emmanuel Odebiyi Portrait"
+            className="w-full h-full object-cover object-[50%_30%]"
+            draggable={false}
+          />
+          {/* Subtle Halftone Overlay for premium print effect */}
+          <div className="absolute inset-0 opacity-[0.12] dark:opacity-[0.22] pointer-events-none mix-blend-overlay" 
+               style={{ backgroundImage: 'radial-gradient(circle, #000 1.2px, transparent 1.2px)', backgroundSize: '6px 6px' }} />
+          
+          {/* Soft Blur overlay at the bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-36 backdrop-blur-[2px] pointer-events-none z-5" 
+               style={{ 
+                  maskImage: 'linear-gradient(to top, black, transparent)', 
+                  WebkitMaskImage: 'linear-gradient(to top, black, transparent)' 
+                }} />
 
-          {/* Right Text — Now I Build The Machine */}
-          <div className="flex flex-col items-end gap-2 lg:gap-3 text-right pointer-events-none max-w-lg">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className={`text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] md:leading-[0.85] italic transition-all duration-700 ${hoverSide === 'balance' ? 'text-white' : 'text-zinc-100'}`}
-            >
-              Now I Build
-            </motion.h2>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.3 }}
-              className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] md:leading-[0.85] italic text-blue-400"
-            >
-              The Machine.
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.6 }}
-              className="text-xs md:text-sm lg:text-base text-zinc-300 font-medium max-w-[280px] md:max-w-[320px] leading-relaxed mt-1"
-            >
-              Transforming chaos into <strong className="text-blue-400 font-extrabold">520% ROI</strong> through battle-tested automation.
-            </motion.p>
+          {/* Background Gradient Overlays for contrast & readability in light/dark themes */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-page)] via-[var(--bg-page)]/55 to-transparent dark:from-[var(--bg-page)] dark:via-[var(--bg-page)]/80 dark:to-black/40 z-5 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-page)]/20 via-transparent to-[var(--bg-page)]/20 z-5 pointer-events-none" />
+        </div>
+
+        {/* Floating Status Badge */}
+        <div className="absolute left-6 md:left-12 lg:left-24 top-32 z-20">
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] font-bold backdrop-blur-md shadow-lg"
+            style={{ 
+              backgroundColor: 'color-mix(in srgb, var(--bg-surface) 80%, transparent)', 
+              borderColor: 'var(--border-card)', 
+              color: 'var(--text-body)' 
+            }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Available for Automations</span>
+          </motion.div>
+        </div>
+
+        {/* Content container aligned at the bottom */}
+        <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-24 z-10 relative">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end pointer-events-none">
+            {/* Left - Headline */}
+            <div className="lg:col-span-8 text-left space-y-4 pointer-events-auto">
+              <h1 className="text-[1.35rem] sm:text-2xl md:text-3xl lg:text-[2.25rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm" style={{ color: 'var(--text-body)' }}>
+                Emmanuel is engineering <span className="text-brand-gradient">content marketing automation</span> systems that turn chaos into growth engines.
+              </h1>
+            </div>
+
+            {/* Right - Bio & CTA */}
+            <div className="lg:col-span-4 lg:col-start-9 text-left space-y-6 pointer-events-auto">
+              <p className="text-xs sm:text-sm md:text-base lg:text-[1.05rem] font-medium leading-relaxed drop-shadow-sm" style={{ color: 'var(--text-muted)' }}>
+                By integrating smart content workflows with systems built on n8n and Make, he constructs self-running pipelines that publish, distribute, and optimize content automatically.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <a 
+                  href="#contact-cta"
+                  className="px-6 py-3 rounded-full font-bold text-sm tracking-wide shadow-lg hover:scale-105 active:scale-95 transition-all"
+                  style={{ backgroundColor: 'var(--text-body)', color: 'var(--bg-page)' }}
+                >
+                  Email Me
+                </a>
+                <Link 
+                  to="/portfolio"
+                  className="px-6 py-3 rounded-full font-bold text-sm tracking-wide border hover:bg-[var(--bg-surface-alt)] transition-all"
+                  style={{ borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
+                >
+                  View My Work
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Hover Zones */}
-        <div className="absolute inset-0 z-40 flex flex-row pointer-events-auto cursor-default">
-           <div className="w-1/2 h-full" onMouseEnter={() => setHoverSide('burnout')} onMouseLeave={() => setHoverSide(null)} />
-           <div className="w-1/2 h-full" onMouseEnter={() => setHoverSide('balance')} onMouseLeave={() => setHoverSide(null)} />
-        </div>
-        {/* Scroll Indicator */}
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-2 z-50">
-          <div className="w-1 h-2 bg-blue-500 rounded-full" />
-        </motion.div>
       </section>
 
 
@@ -458,19 +421,40 @@ export default function About() {
           <div className="space-y-8">
             {[
               {
-                quote: "Emmanuel is a vast dynamic copywriter with a wealth of profound experience. While working with him, he was all about delivering the best possible quality and nothing less. His ability to make ethical research to input correct data is something I really admire. He's worth your money!",
+                quote: "Emmanuel is an exceptional systems builder and marketing architect. He built a content mapping database and automated syndication pipeline for us that drastically reduced our publishing overhead. His focus on data accuracy and quality assurance is something I really admire. Highly recommended!",
                 name: "Daniel Olutoki",
-                title: "Retail Merchandiser, Xiaomi Nigeria"
+                title: "Retail Merchandiser, Xiaomi Nigeria",
+                image: "/images/testimonials/Daniel.jpg"
               },
               {
-                quote: "Emmanuel is a great writer. He carefully and strategically researches his content. He executes his tasks excellently. Emmanuel is also best when it comes to meeting deadlines, as he works hard to make sure his clients are satisfied. I highly recommend Emmanuel as a Professional Content Writer.",
+                quote: "Emmanuel understands how to scale search engine visibility using technical SEO automation. He helped us research, optimize, and distribute articles using automated brand voice checks, guaranteeing speed without sacrificing editorial standards. He is outstanding at building workflows that deliver.",
                 name: "Adewunmi Adedayo",
-                title: "Journalist & SEO Content Writer"
+                title: "Journalist & SEO Content Writer",
+                image: "/images/testimonials/Adewunmi.jpg"
               },
               {
-                quote: "Emmanuel is a very creative and talented writer who puts in great amount of work and effort in anything that he does. His ability to pull in the attention of his audience through his words is second to none. Time after time, he has produced high quality work. His reliability and adaptability makes him great to work with.",
+                quote: "Emmanuel's approach to merging AI workflows with content strategy is brilliant. He doesn't just build scripts; he architects robust publishing engines using n8n and OpenAI that maintain brand voice at scale. His systems saved our team countless manual hours. An invaluable automation partner!",
                 name: "Nkemdirim Madueme",
-                title: "AI Automation Builder"
+                title: "AI Automation Builder",
+                image: "/images/testimonials/Nkemdirim.jpg"
+              },
+              {
+                quote: "Emmanuel is an exceptional strategist who perfectly blends SEO and content automation. He designed a system to automate our organic marketing and social media publishing pipeline. He's fast, understands distribution tech deeply, and delivers outstanding results. I'd recommend him to any growth team!",
+                name: "Esther Adeniji",
+                title: "Product Manager, UBA Group",
+                image: "/images/testimonials/Esther.jpg"
+              },
+              {
+                quote: "Emmanuel is a brilliant system developer and content architect. He built a custom workflow that allows us to generate, edit, and publish high-quality 2,000 to 5,000-word guides with perfect SEO integration. The traffic results are compounding, and the system runs smoothly.",
+                name: "Taiwo Sotikare",
+                title: "CEO, Business World Africa",
+                image: "/images/testimonials/Taiwo.jpg"
+              },
+              {
+                quote: "Emmanuel completely transformed the content pipeline at Scoove Africa. By designing custom n8n workflows integrated with Make, he automated our entire publishing cycle, boosting traffic by 65% in 3 months. His deep understanding of technical SEO and automation is state of the art.",
+                name: "Olayiide Bolaji-Daniel",
+                title: "Senior Technical SEO Manager, 360⁰ Growth Hacking & CEO, Scoove Africa",
+                image: "/images/testimonials/Bolaji.jpg"
               }
             ].map((testimonial, i) => (
               <motion.figure
@@ -483,10 +467,19 @@ export default function About() {
                 <blockquote className="text-lg md:text-xl font-light leading-relaxed mb-6 relative z-10 mt-6" style={{ color: 'var(--text-muted)' }}>
                   <ScrollMaskText text={`"${testimonial.quote}"`} />
                 </blockquote>
-                <figcaption className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style={{ backgroundColor: 'var(--accent-amber)', color: '#fff' }}>
-                    {testimonial.name.charAt(0)}
-                  </div>
+                <figcaption className="flex items-center gap-3 text-left">
+                  {testimonial.image ? (
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name} 
+                      className="w-10 h-10 rounded-full object-cover border" 
+                      style={{ borderColor: 'var(--border-card)' }}
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style={{ backgroundColor: 'var(--accent-amber)', color: '#fff' }}>
+                      {testimonial.name.charAt(0)}
+                    </div>
+                  )}
                   <div>
                     <p className="font-bold" style={{ color: 'var(--text-body)' }}>{testimonial.name}</p>
                     <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{testimonial.title}</p>

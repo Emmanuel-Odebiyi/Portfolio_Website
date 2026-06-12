@@ -162,34 +162,34 @@ export default function MyStory() {
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh] pt-8">
 
           {/* LEFT: Story Hook */}
-          <div className="space-y-8">
+          <div className="space-y-8 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border text-xs font-sans font-bold tracking-widest uppercase"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border text-xs font-sans font-bold tracking-widest uppercase text-center"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
               The Origin Story
             </motion.div>
 
-            <div>
+            <div className="flex flex-col items-center">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center"
                 style={{ color: 'var(--text-body)' }}
               >
                 The writer who got{' '}
                 <br />
-                <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                <span className="italic font-medium animate-none" style={{ color: 'var(--accent-amber)' }}>
                   tired of grinding.
                 </span>
                 <br />
                 So he built a{' '}
-                <span className="italic font-medium" style={{ color: 'var(--cta-blue)' }}>
+                <span className="italic font-medium text-[var(--cta-blue)]">
                   machine.
                 </span>
               </motion.h1>
@@ -199,7 +199,7 @@ export default function MyStory() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl font-light leading-relaxed"
+              className="text-lg sm:text-xl font-light leading-relaxed text-center"
               style={{ color: 'var(--text-muted)' }}
             >
               I went from drowning in deadlines and losing clients to pricing pressure — 
@@ -213,7 +213,7 @@ export default function MyStory() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap gap-3 justify-center"
             >
               {[
                 { val: '3 yrs', label: 'of building' },
@@ -225,7 +225,7 @@ export default function MyStory() {
                   initial={{ opacity: 0, scale: 0.7 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl border backdrop-blur-md"
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl border data-no-grayscale"
                   style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
                 >
                   <span className="text-base font-bold" style={{ color: 'var(--text-body)' }}>{b.val}</span>
@@ -238,7 +238,7 @@ export default function MyStory() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.55 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
                 to="/contact"

@@ -136,24 +136,24 @@ export default function SEOStrategyOptimization() {
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh] pt-8">
 
           {/* LEFT: Copy */}
-          <div className="space-y-8 text-left">
+          <div className="space-y-8 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest text-center"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
               <Search size={12} style={{ color: 'var(--accent-blue)' }} />
               Service 02 — SEO Architecture
             </motion.div>
 
-            <div>
+            <div className="flex flex-col items-center">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center"
                 style={{ color: 'var(--text-body)' }}
               >
                 Your customers{' '}
@@ -170,7 +170,7 @@ export default function SEOStrategyOptimization() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl font-light leading-relaxed"
+              className="text-lg sm:text-xl font-light leading-relaxed text-center"
               style={{ color: 'var(--text-muted)' }}
             >
               You can publish great content and still get zero traffic. SEO is what 
@@ -183,7 +183,7 @@ export default function SEOStrategyOptimization() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border max-w-sm interactive-card"
+              className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border max-w-sm mx-auto interactive-card"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               <Search size={15} className="shrink-0" style={{ color: 'var(--text-muted)' }} />
@@ -198,7 +198,7 @@ export default function SEOStrategyOptimization() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
                 to="/contact"

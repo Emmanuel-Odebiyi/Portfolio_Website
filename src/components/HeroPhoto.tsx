@@ -41,7 +41,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
         <img
           src="/images/home-hero.png"
           alt="Emmanuel Odebiyi — Automation Specialist"
-          className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          className="w-full h-auto object-cover transition-all duration-700"
         />
 
         {/* Bottom gradient overlay */}

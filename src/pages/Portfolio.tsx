@@ -128,25 +128,25 @@ export default function Portfolio() {
       <section className="max-w-7xl mx-auto px-6 pt-28 md:pt-32 pb-8 md:pb-12 mb-12 md:mb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-center">
           {/* Left Column: Narrative (Span 7) */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-8 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold tracking-widest uppercase"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold tracking-widest uppercase text-center"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
               Selected Work
             </motion.div>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] font-display" style={{ color: 'var(--text-body)' }}>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center" style={{ color: 'var(--text-body)' }}>
               If you want proof, <br />
               <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>here it is.</span>
             </h1>
-            <div className="space-y-4 max-w-2xl">
-              <p className="text-2xl font-medium leading-relaxed" style={{ color: 'var(--text-body)' }}>
+            <div className="space-y-4 max-w-2xl flex flex-col items-center">
+              <p className="text-2xl font-medium leading-relaxed text-center" style={{ color: 'var(--text-body)' }}>
                 520% ROI. 65% traffic growth. 70% time savings.
               </p>
-              <p className="text-xl font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-xl font-light leading-relaxed text-center" style={{ color: 'var(--text-muted)' }}>
                 Not estimates. Not projections. Results I delivered — for real businesses, with documented outcomes. Every case study below shows the exact situation, the system I built, and what happened. No cherry-picking. No spin.
               </p>
             </div>

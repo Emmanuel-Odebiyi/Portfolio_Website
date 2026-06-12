@@ -1,11 +1,18 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2, Building2, UserX, MousePointer2, Users } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 const comparisonData = [
   {
     title: "Agencies",
-    icon: <Building2 size={24} style={{ color: 'var(--accent-amber)' }} />,
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="7" height="18" rx="1.5" stroke="var(--accent-amber)" strokeWidth="1.5" />
+        <rect x="14" y="9" width="7" height="12" rx="1.5" stroke="var(--accent-amber)" strokeWidth="1.5" />
+        <path d="M10 6H14" stroke="var(--accent-amber)" strokeWidth="1.5" />
+        <path d="M6 7H7M6 11H7M6 15H7M17 12H18M17 16H18" stroke="var(--accent-amber)" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
     advantages: [
       "You work directly with me — not a rotating junior team",
       "30–50% lower cost — no inflated agency overhead",
@@ -15,7 +22,13 @@ const comparisonData = [
   },
   {
     title: "Freelancers",
-    icon: <UserX size={24} style={{ color: 'var(--accent-blue)' }} />,
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="var(--accent-blue)" strokeWidth="1.5" />
+        <path d="M6 21V19C6 16.7909 7.79086 15 10 15H14C16.2091 15 18 16.7909 18 19V21" stroke="var(--accent-blue)" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M21 7C21 5.5 19.5 4 18 5M3 7C3 5.5 4.5 4 6 5" stroke="var(--accent-blue)" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="2 2" />
+      </svg>
+    ),
     advantages: [
       "Complete systems — not fragmented, one-off deliverables",
       "Strategic thinking — not just execution without a plan",
@@ -25,7 +38,12 @@ const comparisonData = [
   },
   {
     title: "DIY",
-    icon: <MousePointer2 size={24} style={{ color: '#8b5cf6' }} />,
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="3" stroke="#8b5cf6" strokeWidth="1.5" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="#8b5cf6" strokeWidth="1.5" />
+      </svg>
+    ),
     advantages: [
       "Expert-built from day one — no learning curves on your time",
       "Proven frameworks — not trial-and-error guesswork",
@@ -35,7 +53,14 @@ const comparisonData = [
   },
   {
     title: "In-House Hiring",
-    icon: <Users size={24} style={{ color: 'var(--accent-teal)' }} />,
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="var(--accent-teal)" strokeWidth="1.5" />
+        <circle cx="9" cy="7" r="4" stroke="var(--accent-teal)" strokeWidth="1.5" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="var(--accent-teal)" strokeWidth="1.5" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="var(--accent-teal)" strokeWidth="1.5" />
+      </svg>
+    ),
     advantages: [
       "$30K–$50K annually — not $80K–$120K+ with benefits and HR costs",
       "Broader expertise: SEO + content + automation + AI — not one specialty",

@@ -192,24 +192,24 @@ export default function ContentMarketingAutomation() {
           </motion.div>
 
           {/* RIGHT: Copy */}
-          <div className="space-y-8">
+          <div className="space-y-8 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest text-center"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
               <Workflow size={12} className="animate-pulse" style={{ color: 'var(--accent-blue)' }} />
               Service 01 — Content Engine
             </motion.div>
 
-            <div className="text-left">
+            <div className="text-center flex flex-col items-center">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center"
                 style={{ color: 'var(--text-body)' }}
               >
                 Your content,{' '}
@@ -226,7 +226,7 @@ export default function ContentMarketingAutomation() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl font-light leading-relaxed text-left"
+              className="text-lg sm:text-xl font-light leading-relaxed text-center"
               style={{ color: 'var(--text-muted)' }}
             >
               Most businesses don't have a content problem. They have a 
@@ -239,7 +239,7 @@ export default function ContentMarketingAutomation() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex items-center gap-3 py-3 px-4 rounded-2xl border w-fit"
+              className="flex items-center gap-3 py-3 px-4 rounded-2xl border w-fit mx-auto"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               <span className="w-2 h-2 rounded-full bg-[var(--accent-teal)] animate-ping shrink-0" />
@@ -250,7 +250,7 @@ export default function ContentMarketingAutomation() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
                 to="/contact"

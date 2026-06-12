@@ -78,24 +78,24 @@ export default function BusinessProcessAutomation() {
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh] pt-8">
 
           {/* LEFT: Copy + Before/After Widget */}
-          <div className="space-y-8">
+          <div className="space-y-8 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sans font-bold uppercase tracking-widest text-center"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
             >
               <Cpu size={12} className="animate-spin" style={{ animationDuration: '3s', color: 'var(--accent-amber)' }} />
               Service 03 — Process Automation
             </motion.div>
 
-            <div className="text-left">
+            <div className="text-center flex flex-col items-center">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center"
                 style={{ color: 'var(--text-body)' }}
               >
                 Stop bleeding{' '}
@@ -112,7 +112,7 @@ export default function BusinessProcessAutomation() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl font-light leading-relaxed text-left"
+              className="text-lg sm:text-xl font-light leading-relaxed text-center"
               style={{ color: 'var(--text-muted)' }}
             >
               Most growing businesses have entire workflows that could — and should — be automated.
@@ -125,7 +125,7 @@ export default function BusinessProcessAutomation() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-2 gap-3 w-full max-w-md mx-auto"
             >
               <div 
                 className="p-4 rounded-2xl border space-y-2 text-left interactive-card"
@@ -155,7 +155,7 @@ export default function BusinessProcessAutomation() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.55 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
                 to="/contact"
