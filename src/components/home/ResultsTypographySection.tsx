@@ -52,6 +52,7 @@ const AnimatedLine = ({
   index: number;
   total: number;
   scrollYProgress: any;
+  key?: React.Key;
 }) => {
   const step = 1 / total;
   const start = index * step * 0.8;
