@@ -69,7 +69,7 @@
 
   /* ── Brand Accent Colors (from color swatch) ─────────────── */
   --accent-blue:  #3B82F6;   /* Brand blue */
-  --accent-amber: #F0B429;   /* Brand gold */
+  --accent-amber: #C97B0A;   /* Brand gold — deeper/richer for light-mode ivory legibility */
   --accent-teal:  #059669;   /* Brand emerald */
 
   /* ── Semantic Mappings ───────────────────────────────────── */
@@ -155,6 +155,8 @@ body {
   --btn-cta-bg:     #F0B429;
   --btn-cta-text:   #0E1C2A;
   --btn-cta-shadow: rgba(240, 175, 24, 0.30);
+  /* Restore brighter amber for dark navy backgrounds */
+  --accent-amber:   #F0B429;
 }
 
 #root {
@@ -860,22 +862,15 @@ p, li, span.body-text, .text-body-copy {
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   PORTRAIT-RESPONSIVE LAYOUT ADJUSTMENTS FOR DESKTOP MODE
-   Protects layouts when requested as "Desktop Site" in portrait
-   orientation on mobile/tablets, preventing squished vertical columns
-   and infinite vertical height stretching.
-   ══════════════════════════════════════════════════════════════════ */
-
-/* Force vertical card stacking in portrait desktop views */
-@media (min-width: 768px) {
+/* Force vertical card stacking in portrait desktop views — matches lg:flex-row in Tailwind */
+@media (min-width: 768px) and (max-width: 1023px) {
   .solution-accordion-flex {
     flex-direction: column !important;
   }
 }
 
-/* Restore side-by-side sliding layout ONLY in landscape desktop views */
-@media (min-width: 768px) and (orientation: landscape) {
+/* Restore side-by-side sliding layout at 1024px+ landscape */
+@media (min-width: 1024px) and (orientation: landscape) {
   .solution-accordion-flex {
     flex-direction: row !important;
   }
@@ -940,4 +935,63 @@ p, li, span.body-text, .text-body-copy {
 }
 
 
+/* ══════════════════════════════════════════════════════════════════
+   CODEX TYPOGRAPHY TOKEN SYSTEM
+   Parts 3.3–3.5, 6 — Spacing, Weight, Line Height, Letter Spacing,
+   and Measure tokens. No font-size clamp overrides (kept as-is).
+   No color token changes (kept as-is).
+   ══════════════════════════════════════════════════════════════════ */
 
+:root {
+  /* ── Font Weight Tokens (Part 3.3) ─────────────────────────────── */
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-black:     800;
+
+  /* ── Line Height Tokens (Part 3.4) ─────────────────────────────── */
+  --leading-display:  1.05;   /* Display / hero — punchy, tight */
+  --leading-heading:  1.2;    /* H1, H2 — slightly tight */
+  --leading-snug:     1.35;   /* H3, H4 — multi-line comfort */
+  --leading-body:     1.6;    /* Body paragraphs — reading standard */
+  --leading-body-lg:  1.65;   /* Body large / intro copy */
+  --leading-relaxed:  1.75;   /* Long-form / blog */
+  --leading-loose:    2.0;    /* Captions with lots of air */
+
+  /* ── Letter Spacing Tokens (Part 3.5) ──────────────────────────── */
+  --tracking-tight:   -0.03em;  /* Display & large H1 */
+  --tracking-snug:    -0.01em;  /* H2, H3 */
+  --tracking-normal:   0em;     /* Body — never track body negatively */
+  --tracking-wide:     0.04em;  /* Eyebrows, ALL-CAPS labels, mono stats */
+  --tracking-wider:    0.08em;  /* ALL-CAPS micro text, nav labels */
+
+  /* ── Measure / Max Line Length Tokens (Part 3.6) ───────────────── */
+  --measure-headline:  20ch;    /* Display/H1 — short, punchy */
+  --measure-subtitle:  42ch;    /* H2 section titles */
+  --measure-lead:      52ch;    /* Intro / body-large paragraphs */
+  --measure-body:      65ch;    /* Body text — reading comfort sweet spot */
+  --measure-wide:      80ch;    /* Absolute max — never exceed for body */
+
+  /* ── Spacing Scale — 8px base grid (Part 6.1) ──────────────────── */
+  --space-2:   0.125rem;   /*  2px */
+  --space-4:   0.25rem;    /*  4px */
+  --space-8:   0.5rem;     /*  8px */
+  --space-12:  0.75rem;    /* 12px */
+  --space-16:  1rem;       /* 16px */
+  --space-20:  1.25rem;    /* 20px */
+  --space-24:  1.5rem;     /* 24px */
+  --space-32:  2rem;       /* 32px */
+  --space-40:  2.5rem;     /* 40px */
+  --space-48:  3rem;       /* 48px */
+  --space-64:  4rem;       /* 64px */
+  --space-80:  5rem;       /* 80px */
+  --space-96:  6rem;       /* 96px */
+}
+
+/* ── Measure utility classes (opt-in only, no global side-effects) ──────── */
+.measure-body     { max-width: var(--measure-body); }
+.measure-lead     { max-width: var(--measure-lead); }
+.measure-headline { max-width: var(--measure-headline); }
+.measure-subtitle { max-width: var(--measure-subtitle); }

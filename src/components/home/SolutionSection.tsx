@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Search, Zap, Cpu, Mail, BarChart3, LucideIcon } from 'lucide-react';
 
 // ─── Solution Data ────────────────────────────────────────────────────────────
@@ -73,43 +73,9 @@ const SOLUTIONS: Solution[] = [
   },
 ];
 
-// ─── Line-by-Line Reveal Text ─────────────────────────────────────────────────
-
-const LineReveal = ({
-  lines,
-  scrollYProgress,
-  startP,
-  endP,
-}: {
-  lines: string[];
-  scrollYProgress: any;
-  startP: number;
-  endP: number;
-}) => {
-  const step = (endP - startP) / Math.max(lines.length, 1);
-  return (
-    <>
-      {lines.map((line, i) => {
-        const ls = startP + i * step;
-        const le = Math.min(ls + step * 1.5, endP);
-        const opacity = useTransform(scrollYProgress, [ls, le], [0.15, 1]);
-        const y = useTransform(scrollYProgress, [ls, le], [20, 0]);
-        const filter = useTransform(scrollYProgress, [ls, le], ['blur(4px)', 'blur(0px)']);
-        return (
-          <motion.span
-            key={i}
-            className="block overflow-hidden"
-            style={{ opacity, y, filter }}
-          >
-            {line}
-          </motion.span>
-        );
-      })}
-    </>
-  );
-};
 
 // ─── Main Intersection Observer Hook ───────────────────────────────────────────
+
 
 const useElementVisibility = (ref: React.RefObject<HTMLElement | null>) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -162,28 +128,20 @@ export const SolutionSection = () => {
             The Solution
           </p>
           <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.05] max-w-4xl mx-auto mb-2 md:mb-4" style={{ color: 'var(--text-body)' }}>
-            <LineReveal
-              lines={['What If Your Marketing', 'Could Run Itself?']}
-              scrollYProgress={scrollYProgress}
-              startP={0}
-              endP={0.15}
-            />
+            <span className="block">What If Your Marketing</span>
+            <span className="block">Could Run Itself?</span>
           </h2>
-          <motion.p 
-            style={{
-              opacity: useTransform(scrollYProgress, [0.05, 0.15], [0, 1]),
-              y: useTransform(scrollYProgress, [0.05, 0.15], [10, 0]),
-              color: 'var(--text-muted)',
-            }}
+          <p 
             className="text-xs md:text-lg max-w-2xl mx-auto leading-relaxed"
+            style={{ color: 'var(--text-muted)' }}
           >
             I build intelligent content marketing systems that produce consistent,
             high-quality output — without you lifting a finger after setup.
-          </motion.p>
+          </p>
         </div>
 
         {/* ── Accordion Panels — Stacks vertically on mobile/tablet, horizontal on desktop ── */}
-        <div className="flex-1 flex flex-col md:flex-row solution-accordion-flex overflow-hidden px-4 pb-4 md:px-8 md:pb-8 gap-2 md:gap-0 max-h-[750px] my-auto w-full">
+        <div className="flex-1 flex flex-col lg:flex-row solution-accordion-flex overflow-hidden px-4 pb-4 lg:px-8 lg:pb-8 gap-3 lg:gap-0 max-h-[750px] my-auto w-full">
           {SOLUTIONS.map((solution, index) => {
             const isActive = index === activeIndex;
             const SolutionIcon = solution.Icon;
@@ -191,7 +149,7 @@ export const SolutionSection = () => {
             return (
               <motion.div
                 key={solution.id}
-                className="relative overflow-hidden rounded-[1.5rem] md:rounded-[3rem] mx-0 md:mx-2 first:ml-0 last:mr-0 flex-1 shadow-sm transition-shadow duration-300"
+                className="relative overflow-hidden rounded-2xl lg:rounded-[3rem] mx-0 lg:mx-2 first:ml-0 last:mr-0 flex-1 shadow-sm transition-shadow duration-300"
                 animate={{ 
                     flex: isActive ? 8 : 1,
                     scale: isActive ? 1 : 0.98,
@@ -209,24 +167,40 @@ export const SolutionSection = () => {
                       ? `linear-gradient(135deg, ${solution.accentColor}80, ${solution.accentColor}20)`
                       : `linear-gradient(135deg, color-mix(in srgb, ${solution.accentColor} 20%, var(--border-card)), var(--border-card))`
                   }`,
-                  minHeight: isActive ? '240px' : '48px', // Prevent collapsing into nothing on short phone screens
+                  // Mobile/tablet: wide horizontal strip. Desktop: narrow vertical strip.
+                  minHeight: isActive ? '200px' : '56px',
                 }}
               >
-                {/* Collapsed label (horizontal on mobile, vertical vertical text on desktop) */}
+                {/* Collapsed label:
+                    - Mobile/Tablet (< lg): wide horizontal strip → icon left + text right in a row
+                    - Desktop (lg+): narrow vertical strip → icon top + text vertical writing-mode
+                */}
                 {!isActive && (
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="absolute inset-0 flex flex-row md:flex-col items-center justify-center p-2 gap-3"
+                    className="absolute inset-0 flex flex-row lg:flex-col items-center justify-center gap-3 lg:gap-2"
                   >
                     <SolutionIcon 
                       size={18} 
                       style={{ color: solution.accentColor }} 
                       className="drop-shadow-sm shrink-0" 
                     />
+                    {/* Mobile+Tablet: horizontal readable text */}
                     <span
-                      className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.4em] md:[writing-mode:vertical-lr] md:rotate-180 whitespace-nowrap"
+                      className="block lg:hidden text-[10px] font-bold uppercase tracking-[0.25em] whitespace-nowrap"
                       style={{ color: solution.accentColor }}
+                    >
+                      {solution.title}
+                    </span>
+                    {/* Desktop: vertical writing-mode text */}
+                    <span
+                      className="hidden lg:block text-[9px] font-bold uppercase tracking-[0.35em] whitespace-nowrap"
+                      style={{ 
+                        color: solution.accentColor,
+                        writingMode: 'vertical-lr',
+                        transform: 'rotate(180deg)',
+                      }}
                     >
                       {solution.title}
                     </span>
