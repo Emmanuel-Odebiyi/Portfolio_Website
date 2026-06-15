@@ -159,11 +159,11 @@ export default function TermsOfService() {
                 </p>
                 <div className="pt-4">
                   <a 
-                    href="mailto:emmanuelodebiyiwrites@gmail.com" 
+                    href="mailto:emmanuel@emmanuelodebiyi.name.ng" 
                     className="inline-flex items-center gap-2 font-bold font-mono text-xs uppercase tracking-widest border-b border-[var(--border-card)] hover:text-[var(--cta-blue)] hover:border-[var(--cta-blue)] pb-1 transition-all"
                     style={{ color: 'var(--text-body)' }}
                   >
-                    emmanuelodebiyiwrites@gmail.com
+                    emmanuel@emmanuelodebiyi.name.ng
                     <ArrowUpRight size={14} />
                   </a>
                 </div>

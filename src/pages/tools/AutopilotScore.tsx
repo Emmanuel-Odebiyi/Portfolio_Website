@@ -166,8 +166,8 @@ const ProgressBar = ({ current, total }: { current: number; total: number }) => 
     <motion.div 
       initial={{ width: 0 }}
       animate={{ width: `${(current / total) * 100}%` }}
-      className="h-full"
-      style={{ backgroundColor: 'var(--accent-amber)' }}
+      className="h-full rounded-full transition-all duration-500"
+      style={{ backgroundColor: 'var(--accent-blue)' }}
     />
   </div>
 );
@@ -376,7 +376,7 @@ export default function AutopilotScore() {
   };
 
   const PillarSlider = ({ qKey, label, tooltip, value, onChange }: { qKey: string; label: string; tooltip: string; value: number; onChange: (v: number) => void }) => {
-    const colors = ['bg-rose-500', 'bg-amber-500', 'bg-yellow-500', 'bg-lime-500', 'bg-emerald-500'];
+    const colors = ['bg-rose-500', 'bg-blue-500', 'bg-blue-500', 'bg-blue-500', 'bg-emerald-500'];
     const percentage = (value - 1) * 25;
     const helperText = PILLAR_HELPERS[qKey]?.[value - 1] || `${value}/5`;
     return (
@@ -388,14 +388,14 @@ export default function AutopilotScore() {
         <p className="text-[10px] font-light" style={{ color: 'var(--text-muted)' }}>{tooltip}</p>
         <input type="range" min={1} max={5} step={1} value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-amber-500 transition-all"
+          className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-blue-500 transition-all"
           style={{ 
-            background: `linear-gradient(to right, var(--accent-amber) 0%, var(--accent-amber) ${percentage}%, var(--bg-page) ${percentage}%, var(--bg-page) 100%)` 
+            background: `linear-gradient(to right, var(--accent-blue) 0%, var(--accent-blue) ${percentage}%, var(--bg-page) ${percentage}%, var(--bg-page) 100%)` 
           }}
         />
         <div className="flex justify-between items-center text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
           <span>Low</span>
-          <span className="font-bold text-amber-500 text-center px-1">{helperText}</span>
+          <span className="font-bold text-blue-500 text-center px-1">{helperText}</span>
           <span>High</span>
         </div>
       </div>
@@ -446,8 +446,8 @@ export default function AutopilotScore() {
           .text-zinc-400 {
             color: #64748b !important;
           }
-          .text-amber-500, .text-amber-400 {
-            color: #b45309 !important;
+          .text-blue-500, .text-blue-400 {
+            color: #2563eb !important;
             font-weight: bold !important;
           }
           .border-white\\/10 {
@@ -520,10 +520,10 @@ export default function AutopilotScore() {
               className="max-w-4xl mx-auto space-y-12"
             >
               {/* Onboarding Guide Banner */}
-              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
-                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
-                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
-                  <Zap size={16} className="animate-pulse text-amber-500" /> Scorecard Guide
+              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-blue-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-blue-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-blue-500" /> Scorecard Guide
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-1">
@@ -553,7 +553,7 @@ export default function AutopilotScore() {
                   Back to Lab
                 </Link>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
-                  Business Autopilot <span style={{ color: 'var(--accent-amber)' }}>Scorecard™</span>
+                  Business Autopilot <span style={{ color: 'var(--accent-blue)' }}>Scorecard™</span>
                 </h1>
                 <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>
                   Find out exactly how close your business is to running smoothly and profitably without you or your daily intervention.
@@ -576,8 +576,8 @@ export default function AutopilotScore() {
                           onClick={() => setFormStep(s)}
                           className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all border cursor-pointer`}
                           style={{
-                            backgroundColor: formStep === s ? 'var(--accent-amber)' : 'transparent',
-                            borderColor: formStep === s ? 'var(--accent-amber)' : 'transparent',
+                            backgroundColor: formStep === s ? 'var(--accent-blue)' : 'transparent',
+                            borderColor: formStep === s ? 'var(--accent-blue)' : 'transparent',
                             color: formStep === s ? '#0E1C2A' : 'var(--text-muted)'
                           }}
                           title={`Go to Step ${s}`}
@@ -599,7 +599,7 @@ export default function AutopilotScore() {
                         <label className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-body)' }}>Company Name</label>
                         <input type="text" placeholder="e.g. Acme Corp" value={formData.companyName}
                           onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                          className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all font-sans"
+                          className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all font-sans"
                           style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                         />
                       </div>
@@ -697,9 +697,9 @@ export default function AutopilotScore() {
               style={{ backgroundColor: 'var(--bg-page)' }}
             >
               <div className="relative">
-                <div className="w-24 h-24 rounded-full border-4 border-t-amber-500 animate-spin" style={{ borderColor: 'var(--border-card)' }} />
+                <div className="w-24 h-24 rounded-full border-4 border-t-blue-500 animate-spin" style={{ borderColor: 'var(--border-card)' }} />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Zap size={32} className="text-amber-500 animate-pulse" />
+                  <Zap size={32} className="text-blue-500 animate-pulse" />
                 </div>
               </div>
               <div className="text-center space-y-2">
@@ -747,7 +747,7 @@ export default function AutopilotScore() {
                         {results.summary}
                       </p>
                       <div className="pt-6 flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl flex items-center justify-center text-amber-500 shrink-0 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center text-blue-500 shrink-0 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                           <AlertCircle size={24} />
                         </div>
                         <div className="space-y-1">
@@ -761,7 +761,7 @@ export default function AutopilotScore() {
                   {/* Benchmark Comparison */}
                   <div className="p-10 rounded-[3rem] border backdrop-blur-md space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="flex items-center gap-3">
-                      <TrendingUp className="text-amber-500" size={24} />
+                      <TrendingUp className="text-blue-500" size={24} />
                       <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Benchmark Comparison</h4>
                     </div>
                     <p className="text-lg font-light" style={{ color: 'var(--text-muted)' }}>
@@ -770,14 +770,14 @@ export default function AutopilotScore() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div className="p-6 rounded-2xl border space-y-2" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <div className="flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
-                          <Clock size={16} className="text-amber-500" />
+                          <Clock size={16} className="text-blue-500" />
                           <span className="text-xs font-mono uppercase tracking-widest">Time Lost</span>
                         </div>
                         <p className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{Math.round((100 - results.score) * 0.25)} hrs<span className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>/week</span></p>
                       </div>
                       <div className="p-6 rounded-2xl border space-y-2" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <div className="flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
-                          <DollarSign size={16} className="text-amber-500" />
+                          <DollarSign size={16} className="text-blue-500" />
                           <span className="text-xs font-mono uppercase tracking-widest">Revenue Leak</span>
                         </div>
                         <p className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>${Math.round((100 - results.score) * 150)}<span className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>/month</span></p>
@@ -790,7 +790,7 @@ export default function AutopilotScore() {
                 <div className="lg:col-span-5">
                   <div className="sticky top-32 p-10 rounded-[3rem] border backdrop-blur-md shadow-2xl space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="space-y-4">
-                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-amber-500 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-blue-500 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         {isEmailUnlocked ? <Unlock size={28} /> : <Lock size={28} />}
                       </div>
                       <h4 className="text-2xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>Unlock Full Breakdown</h4>
@@ -809,7 +809,7 @@ export default function AutopilotScore() {
                             placeholder="John Doe"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full px-6 py-4 rounded-xl border placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all font-sans"
+                            className="w-full px-6 py-4 rounded-xl border placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all font-sans"
                             style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                           />
                         </div>
@@ -821,7 +821,7 @@ export default function AutopilotScore() {
                             placeholder="john@company.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-6 py-4 rounded-xl border placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all font-sans"
+                            className="w-full px-6 py-4 rounded-xl border placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all font-sans"
                             style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                           />
                         </div>
@@ -837,12 +837,12 @@ export default function AutopilotScore() {
                     ) : (
                       <div className="space-y-6">
                         <div className="p-6 rounded-2xl border flex items-start gap-4" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-                          <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-slate-950 shrink-0">
                             <CheckCircle2 size={20} />
                           </div>
                           <div>
                             <p className="text-sm font-bold" style={{ color: 'var(--text-body)' }}>Full Report Unlocked!</p>
-                            <p className="text-xs font-light mt-1" style={{ color: 'var(--text-muted)' }}>We've also sent a copy of your custom Autopilot roadmap to <span className="text-amber-400 font-semibold">{email}</span>.</p>
+                            <p className="text-xs font-light mt-1" style={{ color: 'var(--text-muted)' }}>We've also sent a copy of your custom Autopilot roadmap to <span className="text-blue-400 font-semibold">{email}</span>.</p>
                           </div>
                         </div>
                         <button
@@ -886,7 +886,7 @@ export default function AutopilotScore() {
                         </div>
                         <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
                           <div 
-                            className="h-full bg-gradient-to-r from-blue-400 to-amber-400 transition-all duration-1000" 
+                            className="h-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-1000" 
                             style={{ width: `${(pillar.score / 20) * 100}%` }}
                           />
                         </div>
@@ -896,7 +896,7 @@ export default function AutopilotScore() {
                             <p className="font-light animate-none text-sm" style={{ color: 'var(--text-muted)' }}>{pillar.gap}</p>
                           </div>
                           <div className="space-y-2">
-                            <p className="text-[10px] font-mono uppercase tracking-widest text-amber-500">The Fix</p>
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-blue-500">The Fix</p>
                             <p className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>{pillar.fix}</p>
                           </div>
                         </div>
@@ -908,7 +908,7 @@ export default function AutopilotScore() {
                   <div className="border rounded-[4rem] p-12 md:p-24 text-center space-y-12 relative overflow-hidden backdrop-blur-md" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
                       <h2 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
-                        Ready to move from <span className="text-amber-500">{results.level}</span> to Autopilot?
+                        Ready to move from <span className="text-blue-500">{results.level}</span> to Autopilot?
                       </h2>
                       <p className="text-xl font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
                         The score gives you the diagnosis. I provide the cure. Let's build the systems that allow your business to scale without your constant involvement.

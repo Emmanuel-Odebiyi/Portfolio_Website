@@ -41,8 +41,8 @@ const tools: Tool[] = [
     description: 'Scan your daily operations to pinpoint exactly what is slowing down your team and wasting hours.',
     benefit: 'Reclaim up to 14+ hours of weekly admin tasks.',
     icon: <Radar size={24} />,
-    accent: 'var(--cta-blue)',
-    glowColor: 'var(--btn-cta-shadow)',
+    accent: 'var(--accent-teal)',
+    glowColor: 'rgba(5, 150, 105, 0.15)',
     path: '/tools/automation-radar',
     outcomes: ['Hours Lost Location Map', 'Task Friction Analysis'],
     systemMetric: 'SCANNING FRICTION ACTIVE',
@@ -61,7 +61,7 @@ const tools: Tool[] = [
         {/* Radar rotating sweep line */}
         <div className="absolute w-20 h-20 origin-bottom-right bottom-1/2 right-1/2 overflow-hidden">
           <div 
-            className="w-20 h-20 rounded-tl-full bg-gradient-to-tr from-transparent to-[var(--cta-blue)]"
+            className="w-20 h-20 rounded-tl-full bg-gradient-to-tr from-transparent to-[var(--accent-teal)]"
             style={{
               animation: 'spin 4s linear infinite',
               transformOrigin: 'bottom right',
@@ -71,9 +71,9 @@ const tools: Tool[] = [
         </div>
 
         {/* Floating pulse targets */}
-        <div className="absolute top-1/3 left-1/4 w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: 'var(--cta-blue)' }} />
-        <div className="absolute bottom-1/3 right-1/3 w-2.5 h-2.5 rounded-full animate-pulse" style={{ backgroundColor: 'var(--accent-amber)' }} />
-        <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--cta-blue)' }} />
+        <div className="absolute top-1/3 left-1/4 w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: 'var(--accent-teal)' }} />
+        <div className="absolute bottom-1/3 right-1/3 w-2.5 h-2.5 rounded-full animate-pulse" style={{ backgroundColor: 'var(--accent-teal)' }} />
+        <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-teal)' }} />
 
         {/* CSS Spin Keyframes */}
         <style>{`
@@ -96,8 +96,8 @@ const tools: Tool[] = [
     description: 'Measure how close your business is to running smoothly on autopilot without your daily intervention.',
     benefit: 'Benchmark your scaling independence index.',
     icon: <Gauge size={24} />,
-    accent: 'var(--accent-amber)',
-    glowColor: 'var(--btn-cta-shadow)',
+    accent: 'var(--accent-blue)',
+    glowColor: 'rgba(59, 130, 246, 0.15)',
     path: '/tools/autopilot-score',
     outcomes: ['Founder Freedom Index Rating', 'Scale Bottleneck Index'],
     systemMetric: 'FREEDOM SCALE CALIBRATING',
@@ -106,7 +106,7 @@ const tools: Tool[] = [
         {/* Semi-circular gauge */}
         <div className="relative w-32 h-20 overflow-hidden flex items-end justify-center">
           <div className="absolute w-28 h-28 rounded-full border-[10px]" style={{ borderColor: 'var(--border-card)', clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)', opacity: 0.3 }} />
-          <div className="absolute w-28 h-28 rounded-full border-[10px] border-transparent border-t-[var(--accent-amber)] border-l-[var(--accent-amber)] animate-pulse" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)', transform: 'rotate(45deg)' }} />
+          <div className="absolute w-28 h-28 rounded-full border-[10px] border-transparent border-t-[var(--accent-blue)] border-l-[var(--accent-blue)] animate-pulse" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)', transform: 'rotate(45deg)' }} />
           
           {/* Needle indicator */}
           <div 
@@ -347,7 +347,7 @@ export default function GrowthIntelligenceLab() {
                         {tool.badge}
                       </span>
                       <span className="font-sans font-bold text-[9px] tracking-widest uppercase flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-teal)] animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: tool.accent }} />
                         {tool.systemMetric}
                       </span>
                     </div>
@@ -380,7 +380,7 @@ export default function GrowthIntelligenceLab() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
                         <span className="text-[9px] font-sans font-bold text-zinc-500 uppercase tracking-widest">Key Diagnostic Value</span>
-                        <p className="text-sm font-bold" style={{ color: 'var(--accent-teal)' }}>
+                        <p className="text-sm font-bold" style={{ color: tool.accent }}>
                           {tool.benefit}
                         </p>
                       </div>

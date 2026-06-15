@@ -163,7 +163,7 @@ export default function Resume() {
               className="space-y-4 text-right md:pt-4 text-left"
             >
               <div className="flex flex-col gap-2 text-sm font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="hover:text-[var(--text-body)] transition-colors">emmanuelodebiyiwrites@gmail.com</a>
+                <a href="mailto:emmanuel@emmanuelodebiyi.name.ng" className="hover:text-[var(--text-body)] transition-colors">emmanuel@emmanuelodebiyi.name.ng</a>
                 <a href="https://www.linkedin.com/in/emmanuel-odebiyi" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-body)] transition-colors">LinkedIn</a>
                 <a href="https://x.com/Bobowrites_" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-body)] transition-colors">Twitter</a>
                 <Link to="/portfolio" className="hover:text-[var(--text-body)] transition-colors">Portfolio</Link>
@@ -362,7 +362,7 @@ export default function Resume() {
               <div className="flex gap-8">
                 <a href="https://www.linkedin.com/in/emmanuel-odebiyi" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest transition-colors" style={{ color: 'var(--text-muted)' }}>LinkedIn</a>
                 <a href="https://x.com/Bobowrites_" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest transition-colors" style={{ color: 'var(--text-muted)' }}>Twitter</a>
-                <a href="mailto:emmanuelodebiyiwrites@gmail.com" className="text-xs font-bold uppercase tracking-widest transition-colors" style={{ color: 'var(--text-muted)' }}>Email</a>
+                <a href="mailto:emmanuel@emmanuelodebiyi.name.ng" className="text-xs font-bold uppercase tracking-widest transition-colors" style={{ color: 'var(--text-muted)' }}>Email</a>
               </div>
             </footer>
 

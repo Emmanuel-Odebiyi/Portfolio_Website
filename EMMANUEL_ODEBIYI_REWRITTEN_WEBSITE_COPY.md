@@ -854,7 +854,7 @@ What's your biggest content marketing or automation challenge right now? What ha
 
 ### DIRECT CONTACT
 
-**Email:** emmanuelodebiyiwrites@gmail.com
+**Email:** emmanuel@emmanuelodebiyi.name.ng
 **Phone:** +234 814 685 9033
 **Location:** Lagos, Nigeria — available for remote projects worldwide
 **LinkedIn:** linkedin.com/in/emmanuel-odebiyi
@@ -926,7 +926,7 @@ Open to senior content strategy, automation consulting, and remote partnerships 
 
 ### Column 4: Get In Touch
 
-📧 emmanuelodebiyiwrites@gmail.com
+📧 emmanuel@emmanuelodebiyi.name.ng
 📞 +234 814 685 9033
 📍 Lagos, Nigeria — Remote worldwide
 

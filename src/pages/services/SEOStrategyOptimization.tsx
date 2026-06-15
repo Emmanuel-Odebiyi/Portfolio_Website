@@ -421,7 +421,7 @@ export default function SEOStrategyOptimization() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Layer selector */}
-            <div className="lg:col-span-5 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 whitespace-nowrap lg:whitespace-normal scroll-smooth [-webkit-overflow-scrolling:touch] max-w-[95vw] md:max-w-full mx-auto lg:mx-0 relative">
+            <div className="lg:col-span-5 flex flex-wrap lg:flex-col gap-2 justify-center lg:justify-start pb-4 lg:pb-0 w-full relative">
               {SEO_LAYERS.map((layer, idx) => (
                 <button
                   key={layer.id}

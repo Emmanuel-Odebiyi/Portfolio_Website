@@ -53,31 +53,16 @@ const projects = [
     accent: "blue",
     path: "/portfolio/emergency-response-africa",
     image: "/images/headers/emergency_response_header.png"
-  },
-  {
-    title: "OAU Library",
-    subtitle: "Eliminated 3-Month Backlog With AI",
-    industry: "Education / Research",
-    timeline: "3 weeks",
-    problem: "Drowning in repetitive data extraction and manual indexing tasks.",
-    solution: "AI-powered cataloging system using OpenAI API and Python for automated data parsing and relational metadata indexing.",
-    result: "91% content cataloging accuracy, 80% time savings, and eliminated the entire 3-month backlog in weeks.",
-    tags: ["AI", "Python", "Workflow"],
-    metrics: "80% Time Saved",
-    accent: "amber",
-    path: "/portfolio/oau-library",
-    image: "/images/oau_library_automation.png"
   }
 ];
 
-const CATEGORY_FILTERS = ['All', 'SEO', 'Automation', 'AI'] as const;
+const CATEGORY_FILTERS = ['All', 'SEO', 'Automation'] as const;
 type Category = typeof CATEGORY_FILTERS[number];
 
 const PROJECT_CATEGORIES: Record<string, Category[]> = {
   'TechFlow Solutions': ['Automation'],
   'The Scoove Africa': ['SEO'],
   'Emergency Response Africa': ['SEO'],
-  'OAU Library': ['AI'],
 };
 
 const smallResults = [

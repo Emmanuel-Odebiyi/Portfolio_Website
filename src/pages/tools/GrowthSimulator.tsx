@@ -129,14 +129,14 @@ const INDUSTRY_PARAMS: Record<Industry, {
 const InputField = ({ label, icon: Icon, value, onChange, type = "number", min = 0 }: any) => (
   <div className="space-y-2">
     <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-      <Icon size={14} className="text-amber-500" /> {label}
+      <Icon size={14} className="text-emerald-500" /> {label}
     </label>
     <input 
       type={type}
       min={min}
       value={value}
       onChange={(e) => onChange(type === "number" ? Number(e.target.value) : e.target.value)}
-      className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all font-sans"
+      className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all font-sans"
       style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
     />
   </div>
@@ -145,7 +145,7 @@ const InputField = ({ label, icon: Icon, value, onChange, type = "number", min =
 const InsightCard = ({ title, description, type = 'info' }: { title: string; description: string; type?: 'info' | 'success' | 'warning' }) => {
   return (
     <div className="p-6 rounded-3xl border backdrop-blur-md flex gap-4 items-start interactive-card" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-      <div className={`mt-1 shrink-0 ${type === 'success' ? 'text-emerald-500' : 'text-amber-500'}`}>
+      <div className={`mt-1 shrink-0 ${type === 'success' ? 'text-emerald-500' : type === 'warning' ? 'text-amber-500' : 'text-emerald-500'}`}>
         {type === 'success' ? <CheckCircle2 size={20} /> : type === 'warning' ? <AlertCircle size={20} /> : <Info size={20} />}
       </div>
       <div className="space-y-1">
@@ -329,8 +329,8 @@ export default function GrowthSimulator() {
           .text-zinc-400 {
             color: #64748b !important;
           }
-          .text-amber-500, .text-amber-400 {
-            color: #b45309 !important;
+          .text-emerald-500, .text-emerald-400 {
+            color: #047857 !important;
             font-weight: bold !important;
           }
           .border-white\\/10 {
@@ -396,11 +396,11 @@ export default function GrowthSimulator() {
         {/* Header */}
         <div className="text-center space-y-4 mb-20 print-hide">
           <Link to="/growth-intelligence-lab" className="inline-flex items-center gap-2 transition-colors text-sm font-sans font-bold uppercase tracking-widest group border rounded-full px-4 py-1.5" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Back to Lab
           </Link>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
-            Revenue Scaling <span style={{ color: 'var(--accent-amber)' }}>Planner™</span>
+            Revenue Scaling <span style={{ color: 'var(--accent-teal)' }}>Planner™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>
             Model different growth scenarios to map the easiest path to scaling your revenue with zero guesswork.
@@ -408,10 +408,10 @@ export default function GrowthSimulator() {
         </div>
 
               {/* Onboarding Guide Banner */}
-              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
-                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
-                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
-                  <Zap size={16} className="animate-pulse text-amber-500" /> Simulator Guide
+              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-emerald-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-emerald-500" /> Simulator Guide
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-1">
@@ -449,7 +449,7 @@ export default function GrowthSimulator() {
                   {[1, 2, 3].map((s) => (
                     <div 
                       key={s} 
-                      className="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-mono font-bold bg-amber-500 text-slate-950"
+                      className="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-mono font-bold bg-emerald-500 text-slate-950"
                     >
                       {s}
                     </div>
@@ -461,19 +461,19 @@ export default function GrowthSimulator() {
                 {/* Step 1: Core Financials */}
                 <div className="space-y-6">
                   <div className="flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">1</span>
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">1</span>
                     <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 1: Baseline Metrics</h4>
                   </div>
                   
                   {/* Currency Selection */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                      <TrendingUp size={14} className="text-amber-500" /> Preferred Currency
+                      <TrendingUp size={14} className="text-emerald-500" /> Preferred Currency
                     </label>
                     <select
                       value={inputs.currency}
                       onChange={(e) => handleCurrencyChange(e.target.value)}
-                      className="w-full border rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all appearance-none cursor-pointer font-sans"
+                      className="w-full border rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all appearance-none cursor-pointer font-sans"
                       style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                     >
                       {CURRENCIES.map((curr) => (
@@ -507,11 +507,11 @@ export default function GrowthSimulator() {
                 {/* Step 2: Industry */}
                 <div className="space-y-4 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">2</span>
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">2</span>
                     <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 2: Industry Segment</h4>
                   </div>
                   <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <Briefcase size={14} className="text-amber-500" /> Industry
+                    <Briefcase size={14} className="text-emerald-500" /> Industry
                   </label>
                   <div className="grid grid-cols-1 gap-2">
                     {(['SaaS', 'E-commerce', 'Marketing Agency', 'Other'] as Industry[]).map((ind) => (
@@ -520,12 +520,12 @@ export default function GrowthSimulator() {
                         onClick={() => setInputs({ ...inputs, industry: ind })}
                         className={`px-6 py-4 rounded-2xl border text-sm font-medium transition-all text-left flex items-center justify-between cursor-pointer ${
                           inputs.industry === ind 
-                            ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-lg shadow-amber-500/10 font-bold' 
+                            ? 'bg-emerald-500 text-slate-950 border-emerald-500 shadow-lg shadow-emerald-500/10 font-bold' 
                             : 'text-zinc-400 hover:border-zinc-400'
                         }`}
                         style={{
-                          backgroundColor: inputs.industry === ind ? 'var(--accent-amber)' : 'var(--bg-page)',
-                          borderColor: inputs.industry === ind ? 'var(--accent-amber)' : 'var(--border-card)',
+                          backgroundColor: inputs.industry === ind ? 'var(--accent-teal)' : 'var(--bg-page)',
+                          borderColor: inputs.industry === ind ? 'var(--accent-teal)' : 'var(--border-card)',
                           color: inputs.industry === ind ? '#0E1C2A' : 'var(--text-muted)'
                         }}
                       >
@@ -558,7 +558,7 @@ export default function GrowthSimulator() {
                 {/* Step 3: Marketing Outputs */}
                 <div className="pt-6 border-t space-y-6" style={{ borderColor: 'var(--border-card)' }}>
                   <div className="flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">3</span>
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">3</span>
                     <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 3: Growth Catalysts</h4>
                   </div>
                   <InputField 
@@ -593,7 +593,7 @@ export default function GrowthSimulator() {
                     onClick={() => setMetricToggle('revenue')}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${metricToggle === 'revenue' ? 'text-slate-950 font-bold' : 'text-zinc-400 hover:text-white'}`}
                     style={{
-                      backgroundColor: metricToggle === 'revenue' ? 'var(--accent-amber)' : 'transparent',
+                      backgroundColor: metricToggle === 'revenue' ? 'var(--accent-teal)' : 'transparent',
                       color: metricToggle === 'revenue' ? '#0E1C2A' : 'var(--text-muted)'
                     }}
                   >
@@ -603,7 +603,7 @@ export default function GrowthSimulator() {
                     onClick={() => setMetricToggle('visitors')}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${metricToggle === 'visitors' ? 'text-slate-950 font-bold' : 'text-zinc-400 hover:text-white'}`}
                     style={{
-                      backgroundColor: metricToggle === 'visitors' ? 'var(--accent-amber)' : 'transparent',
+                      backgroundColor: metricToggle === 'visitors' ? 'var(--accent-teal)' : 'transparent',
                       color: metricToggle === 'visitors' ? '#0E1C2A' : 'var(--text-muted)'
                     }}
                   >
@@ -649,7 +649,7 @@ export default function GrowthSimulator() {
                       name="Manual Path"
                       type="monotone" 
                       dataKey={metricToggle === 'revenue' ? 'manualRevenue' : 'manualVisitors'} 
-                      stroke="#f59e0b" 
+                      stroke="#059669" 
                       strokeWidth={3} 
                       dot={false}
                       strokeDasharray="5 5"
@@ -658,9 +658,9 @@ export default function GrowthSimulator() {
                       name="Autopilot Path"
                       type="monotone" 
                       dataKey={metricToggle === 'revenue' ? 'autopilotRevenue' : 'autopilotVisitors'} 
-                      stroke="#fbbf24" 
+                      stroke="#34d399" 
                       strokeWidth={5} 
-                      dot={{ r: 4, fill: '#fbbf24', strokeWidth: 2, stroke: '#0a0f1e' }}
+                      dot={{ r: 4, fill: '#34d399', strokeWidth: 2, stroke: '#0a0f1e' }}
                       activeDot={{ r: 8, strokeWidth: 0 }}
                     />
                   </LineChart>
@@ -672,7 +672,7 @@ export default function GrowthSimulator() {
                 <div className="space-y-2">
                   <p className="text-xs font-mono uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>The Opportunity Gap</p>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-bold text-amber-500 font-display">+{gap.percent}%</span>
+                    <span className="text-4xl font-bold text-emerald-500 font-display">+{gap.percent}%</span>
                     <span style={{ color: 'var(--text-muted)' }} className="font-light">Growth Potential</span>
                   </div>
                 </div>
@@ -721,7 +721,7 @@ export default function GrowthSimulator() {
               <div className="rounded-[3rem] p-10 md:p-16 border backdrop-blur-md relative overflow-hidden shadow-2xl" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                 <div className="relative z-10 space-y-10 max-w-xl">
                   <div className="space-y-4">
-                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-amber-500 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-emerald-500 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                       <Lock size={32} />
                     </div>
                     <h3 className="text-3xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>See Full Growth Breakdown</h3>
@@ -740,7 +740,7 @@ export default function GrowthSimulator() {
                           placeholder="Full Name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className="w-full border rounded-2xl pl-12 pr-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all font-sans"
+                          className="w-full border rounded-2xl pl-12 pr-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-sans"
                           style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                         />
                       </div>
@@ -752,7 +752,7 @@ export default function GrowthSimulator() {
                           placeholder="Work Email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full border rounded-2xl pl-12 pr-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all font-sans"
+                          className="w-full border rounded-2xl pl-12 pr-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-sans"
                           style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                         />
                       </div>
@@ -765,7 +765,7 @@ export default function GrowthSimulator() {
                         placeholder="Company Name"
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
-                        className="w-full border rounded-2xl pl-12 pr-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all font-sans"
+                        className="w-full border rounded-2xl pl-12 pr-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-sans"
                         style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                       />
                     </div>
@@ -788,13 +788,13 @@ export default function GrowthSimulator() {
               >
                 {/* Success Feedback Card */}
                 <div className="p-8 rounded-[2.5rem] border backdrop-blur-md flex items-start gap-4 shadow-xl print-hide animate-none" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                  <div className="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 shrink-0 shadow-lg shadow-amber-500/20">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-slate-950 shrink-0 shadow-lg shadow-emerald-500/20">
                     <CheckCircle2 size={24} />
                   </div>
                   <div>
                     <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Growth Projections Unlocked!</h4>
                     <p className="text-sm font-light mt-1" style={{ color: 'var(--text-muted)' }}>
-                      We've also emailed a copy of your custom growth projections report to <span className="text-amber-400 font-semibold">{email}</span>.
+                      We've also emailed a copy of your custom growth projections report to <span className="text-emerald-400 font-semibold">{email}</span>.
                     </p>
                   </div>
                 </div>
@@ -805,7 +805,7 @@ export default function GrowthSimulator() {
                     <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Monthly Performance Comparison</h4>
                     <div className="flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                       <div className="flex items-center gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-amber-500" /> Autopilot
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" /> Autopilot
                       </div>
                       <div className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded-full bg-zinc-600" /> Manual
@@ -829,7 +829,7 @@ export default function GrowthSimulator() {
                               <div className="space-y-1">
                                 <span className="font-bold" style={{ color: 'var(--text-body)' }}>Month {row.month}</span>
                                 {row.milestone && (
-                                  <p className="text-[10px] text-amber-500 font-bold uppercase tracking-tighter flex items-center gap-1">
+                                  <p className="text-[10px] text-emerald-500 font-bold uppercase tracking-tighter flex items-center gap-1">
                                     <Zap size={10} /> {row.milestone}
                                   </p>
                                 )}
@@ -838,19 +838,19 @@ export default function GrowthSimulator() {
                             <td className="px-8 py-6">
                               <div className="flex flex-col">
                                 <span className="text-zinc-500 text-xs line-through">{row.manualVisitors.toLocaleString()}</span>
-                                <span className="text-amber-400 font-bold">{row.autopilotVisitors.toLocaleString()}</span>
+                                <span className="text-emerald-400 font-bold">{row.autopilotVisitors.toLocaleString()}</span>
                               </div>
                             </td>
                             <td className="px-8 py-6">
                               <div className="flex flex-col">
                                 <span className="text-zinc-500 text-xs line-through">{row.manualLeads.toLocaleString()}</span>
-                                <span className="text-amber-400 font-bold">{row.autopilotLeads.toLocaleString()}</span>
+                                <span className="text-emerald-400 font-bold">{row.autopilotLeads.toLocaleString()}</span>
                               </div>
                             </td>
                             <td className="px-8 py-6">
                               <div className="flex flex-col">
                                 <span className="text-zinc-500 text-xs line-through">{formatCurrency(row.manualRevenue)}</span>
-                                <span className="text-amber-400 font-bold">{formatCurrency(row.autopilotRevenue)}</span>
+                                <span className="text-emerald-400 font-bold">{formatCurrency(row.autopilotRevenue)}</span>
                               </div>
                             </td>
                           </tr>
@@ -862,20 +862,20 @@ export default function GrowthSimulator() {
 
                 {/* Benchmark Note */}
                 <div className="p-8 rounded-3xl border backdrop-blur-md flex items-start gap-4 shadow-xl" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-amber-500 shrink-0 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-emerald-500 shrink-0 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                     <BarChart3 size={20} />
                   </div>
                   <p className="text-sm font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
                     <span className="font-bold" style={{ color: 'var(--text-body)' }}>Benchmark Note:</span> These projections are modelled on real client results across {inputs.industry === 'Other' ? (inputs.otherIndustryName || 'various') : inputs.industry} sectors. Actual outcomes depend on niche competition, content quality, and your starting baseline.
                   </p>
                 </div>
-
+ 
                 {/* Final CTA */}
                 <div className="border rounded-[4rem] p-12 md:p-20 text-center space-y-10 relative overflow-hidden shadow-2xl backdrop-blur-lg" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <div className="relative z-10 max-w-2xl mx-auto space-y-8">
                     <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
                       See what this looks like <br />
-                      <span className="text-amber-500 font-bold">for your business.</span>
+                      <span className="text-emerald-500 font-bold">for your business.</span>
                     </h2>
                     <p className="text-lg font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
                       The simulator shows the math. We show you the strategy. Book a free call to map your specific automation growth path.

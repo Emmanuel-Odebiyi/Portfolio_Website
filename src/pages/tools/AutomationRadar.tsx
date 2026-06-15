@@ -163,14 +163,14 @@ const DimensionSlider = ({
       <input
         type="range" min={1} max={5} step={1} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-amber-500 transition-all"
+        className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-emerald-500 transition-all"
         style={{ 
-          background: `linear-gradient(to right, var(--accent-amber) 0%, var(--accent-amber) ${percentage}%, var(--bg-page) ${percentage}%, var(--bg-page) 100%)` 
+          background: `linear-gradient(to right, var(--accent-teal) 0%, var(--accent-teal) ${percentage}%, var(--bg-page) ${percentage}%, var(--bg-page) 100%)` 
         }}
       />
       <div className="flex justify-between items-center text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
         <span>Low</span>
-        <span className="font-bold text-amber-500 text-center px-1">{DIMENSION_HELPERS[dimKey][value - 1]}</span>
+        <span className="font-bold text-emerald-500 text-center px-1">{DIMENSION_HELPERS[dimKey][value - 1]}</span>
         <span>High</span>
       </div>
     </div>
@@ -346,9 +346,9 @@ export default function AutomationRadar() {
           <motion.div
             animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-amber-500/20 rounded-full"
+            className="absolute inset-0 bg-emerald-500/20 rounded-full"
           />
-          <div className="absolute inset-0 flex items-center justify-center text-amber-500">
+          <div className="absolute inset-0 flex items-center justify-center text-emerald-500">
             <RadarIcon size={40} className="animate-pulse" />
           </div>
         </div>
@@ -419,8 +419,8 @@ export default function AutomationRadar() {
           .text-zinc-400 {
             color: #64748b !important;
           }
-          .text-amber-500, .text-amber-400 {
-            color: #b45309 !important;
+          .text-emerald-500, .text-emerald-400 {
+            color: #047857 !important;
             font-weight: bold !important;
           }
           .border-white\\/10 {
@@ -491,7 +491,7 @@ export default function AutomationRadar() {
               Back to Lab
             </Link>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
-              Workday Bottleneck Finder<span style={{ color: 'var(--accent-amber)' }}>™</span>
+              Workday Bottleneck Finder<span style={{ color: 'var(--accent-teal)' }}>™</span>
             </h1>
             <p className="text-xl font-light max-w-2xl animate-none" style={{ color: 'var(--text-muted)' }}>
               Scan your daily operations to pinpoint exactly what is slowing down your team and wasting hours.
@@ -518,10 +518,10 @@ export default function AutomationRadar() {
             {/* Form Section */}
             <div className="lg:col-span-7 space-y-12">
               {/* Onboarding Guide Banner */}
-              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl" style={{ borderColor: 'var(--border-card)' }}>
-                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
-                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
-                  <Zap size={16} className="animate-pulse text-amber-500" /> Onboarding Guide
+              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent shadow-xl" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-emerald-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-emerald-500" /> Onboarding Guide
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-1">
@@ -562,7 +562,7 @@ export default function AutomationRadar() {
                         const el = document.getElementById(s.id);
                         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       }}
-                      className="flex items-center gap-2 p-2 rounded-xl transition-all border hover:border-amber-500/50 cursor-pointer text-left"
+                      className="flex items-center gap-2 p-2 rounded-xl transition-all border hover:border-emerald-500/50 cursor-pointer text-left"
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         borderColor: 'var(--border-card)',
@@ -572,7 +572,7 @@ export default function AutomationRadar() {
                         className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold"
                         style={{
                           backgroundColor: 'var(--bg-page)',
-                          color: 'var(--accent-amber)'
+                          color: 'var(--accent-teal)'
                         }}
                       >
                         {idx + 1}
@@ -593,7 +593,7 @@ export default function AutomationRadar() {
                       placeholder="e.g. Acme Corp"
                       value={formData.companyName}
                       onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                      className="w-full rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all border font-sans"
+                      className="w-full rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all border font-sans"
                       style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                     />
                   </div>
@@ -603,7 +603,7 @@ export default function AutomationRadar() {
                       <select 
                         value={formData.industry}
                         onChange={(e) => setFormData({...formData, industry: e.target.value as Industry})}
-                        className="w-full rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all cursor-pointer font-sans border"
+                        className="w-full rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all cursor-pointer font-sans border"
                         style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                       >
                         <option value="SaaS">SaaS</option>
@@ -617,7 +617,7 @@ export default function AutomationRadar() {
                       <select 
                         value={formData.teamSize}
                         onChange={(e) => setFormData({...formData, teamSize: e.target.value as TeamSize})}
-                        className="w-full rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all cursor-pointer font-sans border"
+                        className="w-full rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all cursor-pointer font-sans border"
                         style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                       >
                         <option value="Solo">Solo</option>
@@ -642,7 +642,7 @@ export default function AutomationRadar() {
                           placeholder="e.g. Real Estate, Healthcare..."
                           value={formData.customIndustry}
                           onChange={(e) => setFormData({...formData, customIndustry: e.target.value})}
-                          className="w-full rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all border font-sans"
+                          className="w-full rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all border font-sans"
                           style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                         />
                       </motion.div>
@@ -710,7 +710,7 @@ export default function AutomationRadar() {
             {/* Info Section */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-32 text-left">
               <div className="p-10 rounded-[2.5rem] border backdrop-blur-md space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-amber-500 shadow-xl border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-emerald-500 shadow-xl border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                   <RadarIcon size={32} />
                 </div>
                 <div className="space-y-4">
@@ -727,7 +727,7 @@ export default function AutomationRadar() {
                     'Estimated time-saving impact'
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm font-light" style={{ color: 'var(--text-body)' }}>
-                      <CheckCircle2 size={18} className="text-amber-500 shrink-0" />
+                      <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -757,8 +757,8 @@ export default function AutomationRadar() {
                     <Radar
                       name="Opportunity"
                       dataKey="value"
-                      stroke="#fbbf24"
-                      fill="#fbbf24"
+                      stroke="#10b981"
+                      fill="#10b981"
                       fillOpacity={0.3}
                     />
                     <Tooltip content={<CustomTooltip />} />
@@ -776,7 +776,7 @@ export default function AutomationRadar() {
                     <span className="text-8xl font-bold tracking-tighter font-display" style={{ color: 'var(--text-body)' }}>{results.readinessScore}</span>
                     <div className="space-y-1">
                       <span className="text-2xl font-bold" style={{ color: 'var(--text-muted)' }}>/ 100</span>
-                      <p className="text-sm font-sans font-bold uppercase tracking-widest text-amber-500">Friction Index</p>
+                      <p className="text-sm font-sans font-bold uppercase tracking-widest text-emerald-500">Friction Index</p>
                     </div>
                   </div>
                 </div>
@@ -809,19 +809,19 @@ export default function AutomationRadar() {
                            initial={{ scale: 0 }}
                            animate={{ scale: 1 }}
                            transition={{ type: "spring", damping: 12, stiffness: 200 }}
-                           className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20"
+                           className="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/20"
                         >
                            <CheckCircle2 size={40} />
                         </motion.div>
                         <div className="space-y-2 px-4">
                           <h4 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Roadmap Unlocked!</h4>
-                          <p className="font-light" style={{ color: 'var(--text-muted)' }}>We've also emailed a copy of your custom automation roadmap to <span className="text-amber-500 font-semibold">{email}</span>.</p>
+                          <p className="font-light" style={{ color: 'var(--text-muted)' }}>We've also emailed a copy of your custom automation roadmap to <span className="text-emerald-500 font-semibold">{email}</span>.</p>
                         </div>
                         {!isEmailUnlocked && (
                           <motion.div 
                             animate={{ x: [0, 10, 0] }}
                             transition={{ duration: 1.5, repeat: Infinity }}
-                            className="text-amber-500 flex items-center gap-2 text-sm font-bold"
+                            className="text-emerald-500 flex items-center gap-2 text-sm font-bold"
                           >
                             Unlocking full report...
                           </motion.div>
@@ -836,7 +836,7 @@ export default function AutomationRadar() {
                         className="space-y-8"
                       >
                         <div className="flex items-center gap-4" style={{ color: 'var(--text-body)' }}>
-                          <Lock size={20} className="text-amber-500 shrink-0" />
+                          <Lock size={20} className="text-emerald-500 shrink-0" />
                           <p className="text-sm font-light">Unlock the full department breakdown and tool roadmap.</p>
                         </div>
                         <form onSubmit={handleUnlockReport} className="space-y-4">
@@ -847,7 +847,7 @@ export default function AutomationRadar() {
                               placeholder="First Name" 
                               value={name}
                               onChange={(e) => setName(e.target.value)}
-                              className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all font-sans"
+                              className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all font-sans"
                               style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                             />
                             <input 
@@ -856,7 +856,7 @@ export default function AutomationRadar() {
                               placeholder="Email Address" 
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all font-sans"
+                              className="w-full border rounded-2xl px-6 py-4 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all font-sans"
                               style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                             />
                           </div>
@@ -938,7 +938,7 @@ export default function AutomationRadar() {
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-8">
                         <div className="space-y-2">
-                          <p className="text-6xl font-bold tracking-tighter font-display text-amber-500">{results.hoursSaved * 12}</p>
+                          <p className="text-6xl font-bold tracking-tighter font-display text-emerald-500">{results.hoursSaved * 12}</p>
                           <p className="text-sm font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Hours Saved / Year</p>
                         </div>
                         <div className="space-y-2">
