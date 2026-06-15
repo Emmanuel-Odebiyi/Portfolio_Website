@@ -302,8 +302,83 @@ export default function AutopilotScore() {
     }
   };
 
-  const PillarSlider = ({ label, tooltip, value, onChange }: { label: string; tooltip: string; value: number; onChange: (v: number) => void }) => {
+  const PILLAR_HELPERS: Record<string, string[]> = {
+    processDocumented: [
+      "Nothing documented",
+      "Some sticky notes",
+      "Key tasks written",
+      "Organized SOP library",
+      "Fully mapped digital playbook"
+    ],
+    processFollowable: [
+      "Needs constant help",
+      "Frequent questions",
+      "Gets by with minor help",
+      "90% independent",
+      "100% self-serve execution"
+    ],
+    toolsCommunicate: [
+      "Totally separated",
+      "Manual file uploads",
+      "Some Zapier integrations",
+      "Fully connected core hub",
+      "Seamless ecosystem APIs"
+    ],
+    dataFlowAutomatic: [
+      "Constant copy-paste",
+      "Daily data re-entry",
+      "Occasional manual sync",
+      "Rare manual bridging",
+      "Never - data flows automatically"
+    ],
+    teamDecisions: [
+      "Founder must approve everything",
+      "Team asks for most things",
+      "Team decides simple things",
+      "Team manages daily ops",
+      "Fully decentralized team autonomy"
+    ],
+    guardrailsExist: [
+      "No rules defined",
+      "Some verbal rules",
+      "Written 'If-Then' rules",
+      "Automated alert flags",
+      "Self-correcting system workflows"
+    ],
+    dashboardAutomatic: [
+      "Completely manual entry",
+      "Weekly manual updates",
+      "Partially automated sheets",
+      "Live tracking dashboard",
+      "Instant automated updates"
+    ],
+    metricsTracked: [
+      "No tracking at all",
+      "Monthly review only",
+      "Weekly updates",
+      "Daily performance clear",
+      "Real-time live metrics stream"
+    ],
+    onboardingAutomated: [
+      "Fully manual emails",
+      "Onboarding templates",
+      "Triggered welcome sequence",
+      "Self-serve onboarding portal",
+      "Zero-touch client ingestion"
+    ],
+    supportRetention: [
+      "Ad-hoc manual follow-up",
+      "Calendar reminders",
+      "Automatic support tickets",
+      "Automated NPS & health check",
+      "AI-driven proactive retention"
+    ]
+  };
+
+  const PillarSlider = ({ qKey, label, tooltip, value, onChange }: { qKey: string; label: string; tooltip: string; value: number; onChange: (v: number) => void }) => {
     const colors = ['bg-rose-500', 'bg-amber-500', 'bg-yellow-500', 'bg-lime-500', 'bg-emerald-500'];
+    const percentage = (value - 1) * 25;
+    const helperText = PILLAR_HELPERS[qKey]?.[value - 1] || `${value}/5`;
     return (
       <div className="space-y-2">
         <div className="flex justify-between items-center">
@@ -313,9 +388,16 @@ export default function AutopilotScore() {
         <p className="text-[10px] font-light" style={{ color: 'var(--text-muted)' }}>{tooltip}</p>
         <input type="range" min={1} max={5} step={1} value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-amber-500"
-          style={{ backgroundColor: 'var(--bg-page)' }}
+          className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-amber-500 transition-all"
+          style={{ 
+            background: `linear-gradient(to right, var(--accent-amber) 0%, var(--accent-amber) ${percentage}%, var(--bg-page) ${percentage}%, var(--bg-page) 100%)` 
+          }}
         />
+        <div className="flex justify-between items-center text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
+          <span>Low</span>
+          <span className="font-bold text-amber-500 text-center px-1">{helperText}</span>
+          <span>High</span>
+        </div>
       </div>
     );
   };
@@ -437,6 +519,34 @@ export default function AutopilotScore() {
               exit={{ opacity: 0, y: -20 }}
               className="max-w-4xl mx-auto space-y-12"
             >
+              {/* Onboarding Guide Banner */}
+              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-amber-500" /> Scorecard Guide
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>1. What it is</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      An operations diagnostic score evaluating your business's ability to run without founder intervention.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>2. What to fill</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      Complete 3 rapid-fire pages mapping documentation, software connectivity, and customer flows.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>3. What you get</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      A maturity level rating (Manual to Autonomous), benchmark comparison stats, and a step-by-step scaling plan.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="text-center space-y-4">
                 <Link to="/growth-intelligence-lab" className="inline-flex items-center gap-2 transition-colors text-sm font-sans font-bold uppercase tracking-widest group border rounded-full px-4 py-1.5" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
                   <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -451,15 +561,34 @@ export default function AutopilotScore() {
               </div>
 
               <div className="rounded-[3rem] p-8 md:p-12 border backdrop-blur-md shadow-2xl space-y-10" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
                   <div className="space-y-1 text-left">
                     <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Step {formStep} of 3</span>
                     <h3 className="text-lg font-bold font-display" style={{ color: 'var(--text-body)' }}>
                       {formStep === 1 ? 'Foundation & Integration' : formStep === 2 ? 'Autonomy & Intelligence' : 'Customer & Execution'}
                     </h3>
                   </div>
-                  <div className="w-32">
-                    <ProgressBar current={formStep} total={3} />
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 border border-white/5 bg-black/10 px-3 py-1.5 rounded-2xl">
+                      {[1, 2, 3].map((s) => (
+                        <button
+                          key={s}
+                          onClick={() => setFormStep(s)}
+                          className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold transition-all border cursor-pointer`}
+                          style={{
+                            backgroundColor: formStep === s ? 'var(--accent-amber)' : 'transparent',
+                            borderColor: formStep === s ? 'var(--accent-amber)' : 'transparent',
+                            color: formStep === s ? '#0E1C2A' : 'var(--text-muted)'
+                          }}
+                          title={`Go to Step ${s}`}
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="w-24">
+                      <ProgressBar current={formStep} total={3} />
+                    </div>
                   </div>
                 </div>
 
@@ -476,16 +605,16 @@ export default function AutopilotScore() {
                       </div>
                       <div className="p-6 rounded-3xl border backdrop-blur-md space-y-5" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Pillar 1: Team & Workday Guidelines</h4>
-                        <PillarSlider label="Are your daily work steps clearly documented?" tooltip="1=Nothing is written down, 5=We have clear, written step-by-step guides for everything"
+                        <PillarSlider qKey="processDocumented" label="Are your daily work steps clearly documented?" tooltip="1=Nothing is written down, 5=We have clear, written step-by-step guides for everything"
                           value={formData.processDocumented} onChange={(v) => setFormData({...formData, processDocumented: v})} />
-                        <PillarSlider label="Can a new team member follow them without hand-holding?" tooltip="1=Requires constant supervision, 5=They can easily handle it 100% self-serve"
+                        <PillarSlider qKey="processFollowable" label="Can a new team member follow them without hand-holding?" tooltip="1=Requires constant supervision, 5=They can easily handle it 100% self-serve"
                           value={formData.processFollowable} onChange={(v) => setFormData({...formData, processFollowable: v})} />
                       </div>
                       <div className="p-6 rounded-3xl border backdrop-blur-md space-y-5" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Pillar 2: Software Communication</h4>
-                        <PillarSlider label="Do your software systems talk to each other automatically?" tooltip="1=All software is completely separated, 5=All our tools sync with each other seamlessly"
+                        <PillarSlider qKey="toolsCommunicate" label="Do your software systems talk to each other automatically?" tooltip="1=All software is completely separated, 5=All our tools sync with each other seamlessly"
                           value={formData.toolsCommunicate} onChange={(v) => setFormData({...formData, toolsCommunicate: v})} />
-                        <PillarSlider label="Do you copy-paste data between software manually?" tooltip="1=Yes, constantly copying data by hand, 5=No, data syncs automatically"
+                        <PillarSlider qKey="dataFlowAutomatic" label="Do you copy-paste data between software manually?" tooltip="1=Yes, constantly copying data by hand, 5=No, data syncs automatically"
                           value={formData.dataFlowAutomatic} onChange={(v) => setFormData({...formData, dataFlowAutomatic: v})} />
                       </div>
                     </motion.div>
@@ -495,16 +624,16 @@ export default function AutopilotScore() {
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
                       <div className="p-6 rounded-3xl border backdrop-blur-md space-y-5" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Pillar 3: Team Autonomy & Trust</h4>
-                        <PillarSlider label="Can your team handle daily issues without asking you?" tooltip="1=Everything needs founder approval, 5=Team is fully empowered to solve things"
+                        <PillarSlider qKey="teamDecisions" label="Can your team handle daily issues without asking you?" tooltip="1=Everything needs founder approval, 5=Team is fully empowered to solve things"
                           value={formData.teamDecisions} onChange={(v) => setFormData({...formData, teamDecisions: v})} />
-                        <PillarSlider label="Are there clear guidelines for handling common situations?" tooltip="1=No guidelines exist, 5=Comprehensive step-by-step rules are defined"
+                        <PillarSlider qKey="guardrailsExist" label="Are there clear guidelines for handling common situations?" tooltip="1=No guidelines exist, 5=Comprehensive step-by-step rules are defined"
                           value={formData.guardrailsExist} onChange={(v) => setFormData({...formData, guardrailsExist: v})} />
                       </div>
                       <div className="p-6 rounded-3xl border backdrop-blur-md space-y-5" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Pillar 4: Progress Visibility</h4>
-                        <PillarSlider label="Do your company progress boards update automatically?" tooltip="1=All updates are entered manually, 5=Fully live, self-updating boards"
+                        <PillarSlider qKey="dashboardAutomatic" label="Do your company progress boards update automatically?" tooltip="1=All updates are entered manually, 5=Fully live, self-updating boards"
                           value={formData.dashboardAutomatic} onChange={(v) => setFormData({...formData, dashboardAutomatic: v})} />
-                        <PillarSlider label="Do you know your business performance metrics in real-time?" tooltip="1=No tracking at all, 5=We know exactly how we are doing daily without manual calculation"
+                        <PillarSlider qKey="metricsTracked" label="Do you know your business performance metrics in real-time?" tooltip="1=No tracking at all, 5=We know exactly how we are doing daily without manual calculation"
                           value={formData.metricsTracked} onChange={(v) => setFormData({...formData, metricsTracked: v})} />
                       </div>
                     </motion.div>
@@ -514,9 +643,9 @@ export default function AutopilotScore() {
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
                       <div className="p-6 rounded-3xl border backdrop-blur-md space-y-5" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Pillar 5: Customer Journey Experience</h4>
-                        <PillarSlider label="Are new clients welcomed and onboarded automatically?" tooltip="1=Fully manual and ad-hoc email writing, 5=Smooth, self-serve automated onboarding"
+                        <PillarSlider qKey="onboardingAutomated" label="Are new clients welcomed and onboarded automatically?" tooltip="1=Fully manual and ad-hoc email writing, 5=Smooth, self-serve automated onboarding"
                           value={formData.onboardingAutomated} onChange={(v) => setFormData({...formData, onboardingAutomated: v})} />
-                        <PillarSlider label="Does software help you check in on clients automatically?" tooltip="1=All support/check-ins are manual, 5=Self-service flows + automated check-in triggers"
+                        <PillarSlider qKey="supportRetention" label="Does software help you check in on clients automatically?" tooltip="1=All support/check-ins are manual, 5=Self-service flows + automated check-in triggers"
                           value={formData.supportRetention} onChange={(v) => setFormData({...formData, supportRetention: v})} />
                       </div>
                     </motion.div>

@@ -21,11 +21,14 @@ export default function MyStory() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [sysLog, setSysLog] = useState<string[]>([]);
   const [clickForce, setClickForce] = useState<{ id: number; x: number; y: number }[]>([]);
+  const [modesTried, setModesTried] = useState<{ burnout: boolean; autopilot: boolean }>({ burnout: false, autopilot: false });
 
   // Skill Terminal State
   const [activeTab, setActiveTab] = useState<'seo' | 'ai' | 'automation'>('seo');
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
   const [isStreamingLog, setIsStreamingLog] = useState(false);
+  const [isTerminalAutoCycling, setIsTerminalAutoCycling] = useState(true);
+  const [terminalProgress, setTerminalProgress] = useState(0);
 
   // Manual Click handler for Stressed Mode
   const handleManualClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -135,6 +138,37 @@ export default function MyStory() {
     }, 1200);
     return () => clearInterval(interval);
   }, [simMode]);
+
+  // Update modesTried when tasks are completed
+  useEffect(() => {
+    if (simMode === 'burnout' && tasksDone > 0) {
+      setModesTried((prev) => ({ ...prev, burnout: true }));
+    } else if (simMode === 'autopilot' && tasksDone > 0) {
+      setModesTried((prev) => ({ ...prev, autopilot: true }));
+    }
+  }, [simMode, tasksDone]);
+
+  // Skill Terminal Auto-cycling
+  useEffect(() => {
+    if (!isTerminalAutoCycling) {
+      setTerminalProgress(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setTerminalProgress((prev) => {
+        if (prev >= 100) {
+          setActiveTab((current) => {
+            const tabs: ('seo' | 'ai' | 'automation')[] = ['seo', 'ai', 'automation'];
+            const nextIdx = (tabs.indexOf(current) + 1) % tabs.length;
+            return tabs[nextIdx];
+          });
+          return 0;
+        }
+        return prev + 2.5;
+      });
+    }, 100);
+    return () => clearInterval(interval);
+  }, [isTerminalAutoCycling]);
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
@@ -441,13 +475,17 @@ export default function MyStory() {
             {/* Right Simulator Card Box */}
             <div className="lg:col-span-7">
               <div 
-                className="rounded-[2rem] border overflow-hidden shadow-2xl p-6 sm:p-8 relative"
+                className="rounded-[2rem] border overflow-hidden shadow-2xl p-6 sm:p-8 relative text-left"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                
+                {/* Purpose Statement */}
+                <p className="text-xs font-light text-center mb-4 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  Try both modes below to feel the difference between manual content marketing and automated systems.
+                </p>
+
                 {/* Simulator Mode Header Slider */}
                 <div 
-                  className="flex p-1.5 rounded-full mb-8 relative border"
+                  className="flex p-1.5 rounded-full mb-4 relative border"
                   style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
                 >
                   <button 
@@ -472,6 +510,12 @@ export default function MyStory() {
                     <Sparkles size={16} />
                     Autonomous Autopilot
                   </button>
+                </div>
+
+                <div className="text-center mb-6">
+                  <span className="inline-block text-[10px] font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                    🎮 Choose a mode, then interact with it below
+                  </span>
                 </div>
 
                 {/* Simulator Display Screen */}
@@ -515,7 +559,7 @@ export default function MyStory() {
 
                       {/* Click sandbox */}
                       <div 
-                        className="h-40 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden text-center p-4"
+                        className="h-42 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden text-center p-4"
                         style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
                       >
                         {stressLevel >= 100 ? (
@@ -535,6 +579,9 @@ export default function MyStory() {
                             <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Active Manual Tasks Waiting</span>
                             <span className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{tasksDone} / 40</span>
                             <p className="text-xs font-light max-w-sm" style={{ color: 'var(--text-muted)' }}>Every draft is written manually. Press the button frantically to keep up!</p>
+                            <p className="text-[10px] font-bold tracking-wider text-[var(--accent-amber)] animate-pulse uppercase mt-1">
+                              👇 Click the button rapidly to simulate manual work — watch stress build
+                            </p>
                           </div>
                         )}
 
@@ -596,7 +643,7 @@ export default function MyStory() {
                         {sysLog.length === 0 ? (
                           <div className="text-zinc-500 flex flex-col items-center justify-center h-full text-center p-4">
                             <Cpu className="mb-2 animate-spin" style={{ color: 'var(--accent-amber)', animationDuration: '4s' }} />
-                            <span style={{ color: 'var(--text-muted)' }}>System is Idle. Click below to launch custom content micro-services.</span>
+                            <span style={{ color: 'var(--text-muted)' }}>System is Idle. Click "Launch Automation Engine" to watch the system work for you.</span>
                           </div>
                         ) : (
                           sysLog.map((log, index) => (
@@ -626,6 +673,25 @@ export default function MyStory() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {/* Comparison Summary */}
+                {modesTried.burnout && modesTried.autopilot && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-5 rounded-2xl border text-left mt-6 space-y-2"
+                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--accent-amber)' }}
+                  >
+                    <h4 className="font-bold text-xs uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--text-body)' }}>
+                      <CheckCircle2 size={14} style={{ color: 'var(--accent-teal)' }} />
+                      System Comparison Summary
+                    </h4>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      <span className="font-semibold" style={{ color: 'var(--text-body)' }}>Manual Hustle:</span> High stress (100% overload), low throughput, and high burnout risk. <br />
+                      <span className="font-semibold" style={{ color: 'var(--text-body)' }}>Autopilot:</span> Zero manual effort, 40+ articles queued, 0% stress, and 520% ROI velocity.
+                    </p>
+                  </motion.div>
+                )}
               </div>
             </div>
 
@@ -785,12 +851,15 @@ export default function MyStory() {
             {/* Left selector keys */}
             <div className="lg:col-span-4 flex flex-col gap-3 justify-center text-left">
               <div 
-                className="flex items-center gap-2 mb-2 px-4 py-2 rounded-xl border text-xs font-sans font-bold uppercase tracking-widest w-fit animate-pulse"
+                className="flex items-center gap-2 mb-2 px-4 py-2 rounded-xl border text-xs font-sans font-bold uppercase tracking-widest w-fit"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
               >
-                <Sparkles size={12} />
-                Click below to run trace ➔
+                <Sparkles size={12} className={isTerminalAutoCycling ? "animate-spin" : ""} style={{ animationDuration: '4s' }} />
+                <span>{isTerminalAutoCycling ? "Auto-Running Traces" : "Manual Exploration"}</span>
               </div>
+              <p className="text-[10.5px] font-sans font-bold uppercase tracking-widest mb-2 ml-1" style={{ color: 'var(--text-muted)' }}>
+                Watch each skill in action — or click to explore manually
+              </p>
               {[
                 { id: 'seo', title: 'SEO Expertise Core', desc: 'Making content discoverable & ranking.' },
                 { id: 'ai', title: 'AI Implementation Core', desc: 'Configuring prompt logic & quality gates.' },
@@ -798,8 +867,11 @@ export default function MyStory() {
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className="w-full text-left p-5 rounded-2xl transition-all duration-300 border group relative"
+                  onClick={() => {
+                    setActiveTab(tab.id as any);
+                    setIsTerminalAutoCycling(false);
+                  }}
+                  className="w-full text-left p-5 rounded-2xl transition-all duration-300 border group relative overflow-hidden"
                   style={{
                     backgroundColor: activeTab === tab.id ? 'var(--bg-surface)' : 'var(--bg-page)',
                     borderColor: activeTab === tab.id ? 'var(--text-body)' : 'var(--border-card)',
@@ -818,6 +890,9 @@ export default function MyStory() {
                     >
                       Run <ArrowRight size={10} />
                     </div>
+                  )}
+                  {activeTab === tab.id && isTerminalAutoCycling && (
+                    <div className="absolute bottom-0 left-0 h-1 bg-[var(--accent-amber)] transition-all duration-100" style={{ width: `${terminalProgress}%` }} />
                   )}
                 </button>
               ))}

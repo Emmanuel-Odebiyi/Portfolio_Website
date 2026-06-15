@@ -52,14 +52,14 @@ const StoryView = ({ progress }: { progress: any }) => {
           <FramerTextReveal 
             text={STORY_TEXT}
             progress={progress}
-            textClassName="text-[14px] sm:text-[15px] md:text-[17px] lg:text-[19px] font-sans leading-[2] lg:leading-[2.2] tracking-normal font-medium"
+            textClassName="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[19px] font-sans leading-[2.1] lg:leading-[2.2] tracking-normal font-medium"
           />
         </div>
       </div>
       
       {/* Fades */}
-      <div className="absolute top-0 left-0 w-full h-[15vh] bg-gradient-to-b from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-full h-[15vh] bg-gradient-to-t from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[6vh] md:h-[15vh] bg-gradient-to-b from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-[6vh] md:h-[15vh] bg-gradient-to-t from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
     </div>
   );
 };

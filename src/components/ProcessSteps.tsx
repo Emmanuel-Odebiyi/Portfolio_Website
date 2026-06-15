@@ -120,7 +120,7 @@ export const ProcessSteps: React.FC = () => {
           {/* Connecting Line (Desktop) - Enhanced Visibility */}
           <div className="hidden md:block absolute top-[5.5rem] left-0 w-full h-px -z-10" style={{ background: 'linear-gradient(to right, transparent, var(--border-card) 10%, var(--border-card) 90%, transparent)' }} />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
@@ -128,7 +128,7 @@ export const ProcessSteps: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2, duration: 0.6 }}
-                className="relative group cursor-default rounded-[2.5rem] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 overflow-hidden"
+                className={`relative group cursor-default rounded-[2.5rem] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 overflow-hidden ${i === 2 ? 'md:col-span-2 lg:col-span-1' : ''}`}
                 style={{
                   backgroundColor: 'var(--bg-surface)',
                   border: '1px solid transparent',

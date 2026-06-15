@@ -45,7 +45,7 @@ export const CTASection = () => {
             {
               title: 'Free Strategy Call',
               desc: '30 Minutes. No pitch. Just honest conversation about whether automation is the right move.',
-              btn: 'Book Your Call →',
+              btn: 'Book Your Call',
               accent: '#f59e0b',
               borderStyle: 'rgba(217,119,6,0.3)',
               glowColor: 'rgba(217,119,6,0.15)',
@@ -54,7 +54,7 @@ export const CTASection = () => {
             {
               title: 'Custom Proposal',
               desc: "Tell me about your business. I'll send back a clear action plan and investment breakdown.",
-              btn: 'Request Proposal →',
+              btn: 'Request Proposal',
               accent: '#2563eb',
               borderStyle: 'rgba(37,99,235,0.25)',
               glowColor: 'rgba(37,99,235,0.10)',
@@ -63,7 +63,7 @@ export const CTASection = () => {
             {
               title: 'Paid Audit ($500)',
               desc: 'A complete, no-fluff analysis of your content, SEO, and automation opportunities.',
-              btn: 'Book Your Audit →',
+              btn: 'Book Your Audit',
               accent: '#059669',
               borderStyle: 'rgba(5,150,105,0.25)',
               glowColor: 'rgba(5,150,105,0.10)',
@@ -114,7 +114,7 @@ export const CTASection = () => {
                       ? 'linear-gradient(135deg, #2563eb, #f59e0b)'
                       : 'var(--bg-page)',
                     border: item.isPrimary
-                      ? `1px solid transparent`
+                      ? 'none'
                       : `1px solid var(--border-card)`,
                     color: item.isPrimary ? '#fff' : 'var(--text-body)',
                   }}

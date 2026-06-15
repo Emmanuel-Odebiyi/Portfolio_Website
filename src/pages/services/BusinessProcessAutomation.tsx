@@ -43,6 +43,26 @@ const TOOLS = [
 export default function BusinessProcessAutomation() {
   const [activeStep, setActiveStep] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isAutoCycling, setIsAutoCycling] = useState(true);
+  const [cycleProgress, setCycleProgress] = useState(0);
+
+  // Auto-cycle workflow steps on mount with progress indicator
+  React.useEffect(() => {
+    if (!isAutoCycling) {
+      setCycleProgress(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setCycleProgress(prev => {
+        if (prev >= 100) {
+          setActiveStep(current => (current + 1) % WORKFLOW_STEPS.length);
+          return 0;
+        }
+        return prev + 2.857; // 3500ms -> 35 ticks of 100ms. 100 / 35 = 2.857
+      });
+    }, 100);
+    return () => clearInterval(interval);
+  }, [isAutoCycling]);
 
   const faqs = [
     { q: 'What kinds of tasks can actually be automated?', a: 'More than most people expect: lead capture and CRM updates, email follow-up sequences, report generation, invoice processing, social media scheduling, data entry between platforms, internal notifications, and much more. If a human is doing it the same way every time, it can almost certainly be automated.' },
@@ -317,28 +337,32 @@ export default function BusinessProcessAutomation() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            <div className="lg:col-span-5 flex flex-col gap-2">
+            {/* Step selector */}
+            <div className="lg:col-span-5 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 whitespace-nowrap lg:whitespace-normal scroll-smooth [-webkit-overflow-scrolling:touch] max-w-[95vw] md:max-w-full mx-auto lg:mx-0 relative">
               {WORKFLOW_STEPS.map((step, idx) => (
                 <button 
                   key={step.id} 
-                  onClick={() => setActiveStep(idx)}
-                  className="w-full text-left p-5 rounded-2xl transition-all duration-300 border flex items-center gap-4 group cursor-pointer interactive-card"
+                  onClick={() => {
+                    setActiveStep(idx);
+                    setIsAutoCycling(false);
+                  }}
+                  className="inline-flex shrink-0 lg:w-full text-left p-3.5 lg:p-5 rounded-full lg:rounded-2xl transition-all duration-300 border items-center gap-3 lg:gap-4 group cursor-pointer relative overflow-hidden"
                   style={{ 
                     backgroundColor: activeStep === idx ? 'var(--bg-surface-alt)' : 'var(--bg-surface)', 
                     borderColor: activeStep === idx ? 'var(--text-body)' : 'var(--border-card)' 
                   }}
                 >
                   <div 
-                    className="w-9 h-9 rounded-xl flex items-center justify-center border transition-all shrink-0"
+                    className="w-7 h-7 lg:w-9 lg:h-9 rounded-xl flex items-center justify-center border transition-all shrink-0"
                     style={{ 
                       backgroundColor: 'var(--bg-page)', 
                       borderColor: 'var(--border-card)', 
                       color: activeStep === idx ? 'var(--accent-amber)' : 'var(--text-muted)' 
                     }}
                   >{step.icon}</div>
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-grow lg:flex-1 min-w-0">
                     <span 
-                      className="font-bold text-sm tracking-tight block transition-colors"
+                      className="font-bold text-xs lg:text-sm tracking-tight block transition-colors"
                       style={{ color: activeStep === idx ? 'var(--text-body)' : 'var(--text-muted)' }}
                     >
                       Phase {step.id}: {step.label}
@@ -346,11 +370,14 @@ export default function BusinessProcessAutomation() {
                   </div>
                   {activeStep === idx && (
                     <span 
-                      className="text-[10px] font-sans font-bold px-2 py-1 rounded-md border shrink-0"
+                      className="text-[10px] font-sans font-bold px-2 py-1 rounded-md border shrink-0 hidden lg:inline-block"
                       style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-teal)' }}
                     >
                       {step.saves}
                     </span>
+                  )}
+                  {activeStep === idx && isAutoCycling && (
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-[var(--accent-amber)] transition-all duration-100" style={{ width: `${cycleProgress}%` }} />
                   )}
                 </button>
               ))}
@@ -400,10 +427,10 @@ export default function BusinessProcessAutomation() {
               <motion.div 
                 key={t.name} 
                 variants={fadeUp}
-                className="flex items-center gap-3 px-6 py-4 rounded-2xl border transition-all interactive-card"
+                className="flex items-center gap-3 px-6 py-4 rounded-2xl border transition-all hover:scale-[1.05] duration-300 shadow-sm hover:shadow-md cursor-default"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                <img src={t.logo} alt={t.name} width={28} height={28} className="w-7 h-7 object-contain grayscale hover:grayscale-0 transition-all" />
+                <img src={t.logo} alt={t.name} width={28} height={28} className="w-7 h-7 object-contain opacity-90 hover:opacity-100 hover:scale-110 hover:brightness-110 transition-all duration-300" />
                 <span className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>{t.name}</span>
               </motion.div>
             ))}

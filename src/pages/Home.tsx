@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Share2, TrendingUp, Zap, Search, Cpu, Layers, Rocket, Bot } from 'lucide-react';
+import { SiN8N, SiZapier, SiMake } from 'react-icons/si';
 
 import { ToolsTicker, Tool } from '../components/ToolsTicker';
 import { ProviderComparison } from '../components/ProviderComparison';
@@ -79,20 +80,23 @@ export default function Home() {
             
             <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 px-12 py-10 rounded-2xl border backdrop-blur-md" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-surface) 75%, transparent)', borderColor: 'var(--border-card)' }}>
               {[
-                { name: 'n8n', icon: 'https://cdn.simpleicons.org/n8n' },
-                { name: 'Zapier', icon: 'https://cdn.simpleicons.org/zapier' },
-                { name: 'Make.com', icon: 'https://cdn.simpleicons.org/make' }
-              ].map((tool, i) => (
-                <div key={i} className="flex items-center gap-4 group cursor-default">
-                  <div className="p-3 w-14 h-14 rounded-xl shadow-sm border group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 flex items-center justify-center overflow-hidden relative" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-brand-gradient/5 transition-colors duration-500 pointer-events-none" />
-                    <img src={tool.icon} alt={tool.name} width={32} height={32} className="w-8 h-8 object-contain transition-all duration-500" />
+                { name: 'n8n', icon: SiN8N, color: '#FF6C37' },
+                { name: 'Zapier', icon: SiZapier, color: '#FF4A00' },
+                { name: 'Make.com', icon: SiMake, color: '#E51284' }
+              ].map((tool, i) => {
+                const IconComponent = tool.icon as any;
+                return (
+                  <div key={i} className="flex items-center gap-4 group cursor-default">
+                    <div className="p-3 w-14 h-14 rounded-xl shadow-sm border group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 flex items-center justify-center overflow-hidden relative" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                      <div className="absolute inset-0 bg-transparent group-hover:bg-brand-gradient/5 transition-colors duration-500 pointer-events-none" />
+                      <IconComponent color={tool.color} className="w-8 h-8 object-contain transition-all duration-500 group-hover:scale-110" />
+                    </div>
+                    <span className="text-2xl md:text-3xl font-black tracking-tighter italic opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text-body)' }}>
+                      {tool.name}
+                    </span>
                   </div>
-                  <span className="text-2xl md:text-3xl font-black tracking-tighter italic opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text-body)' }}>
-                    {tool.name}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

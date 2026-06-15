@@ -15,7 +15,8 @@ import {
   Briefcase, 
   Settings, 
   BarChart3, 
-  Download
+  Download,
+  Zap
 } from 'lucide-react';
 import { 
   LineChart, 
@@ -387,121 +388,196 @@ export default function ROITimeMachine() {
             Quantify the exact hours and software expense you will reclaim by automating repetitive workday tasks.
           </p>
         </div>
+        
+        {/* Onboarding Guide Banner */}
+        <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-amber-500" /> Predictor Guide
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>1. What it is</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      An operations cost and return-on-investment modeling calculator.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>2. What to fill</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      Define your labor rates, time lost, setup cost, and industry vertical.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>3. What you get</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      Real-time net savings, payback periods, 12-month charts, and cost tables.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* Input Panel */}
           <div className="lg:col-span-5 space-y-10 text-left">
             <div className="bg-[var(--bg-surface)] rounded-[3rem] p-8 md:p-12 border border-[var(--border-card)] backdrop-blur-md shadow-2xl space-y-8">
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Calculator Inputs</h3>
-                <p className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>Adjust the values to see real-time ROI projections.</p>
+              <div className="flex items-center justify-between pb-4 border-b border-white/5">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Calculator Inputs</h3>
+                  <p className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>Adjust inputs to update ROI projections.</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3].map((s) => (
+                    <div 
+                      key={s} 
+                      className="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-mono font-bold bg-amber-500 text-slate-950"
+                    >
+                      {s}
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-8">
-                {/* Preferred Currency */}
-                <div className="space-y-4">
-                  <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <DollarSign size={14} className="text-[var(--accent-amber)]" /> Preferred Currency
-                  </label>
-                  <select
-                    value={inputs.currency}
-                    onChange={(e) => handleCurrencyChange(e.target.value)}
-                    className="w-full bg-[var(--bg-surface-alt)] border border-[var(--border-card)] rounded-2xl px-6 py-4 text-[var(--text-body)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)] transition-all appearance-none cursor-pointer"
-                  >
-                    {CURRENCIES.map((curr) => (
-                      <option key={curr.code} value={curr.code} className="bg-[var(--bg-surface)] text-[var(--text-body)]">
-                        {curr.code} - {curr.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Team Size */}
-                <div className="space-y-4">
-                  <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <Users size={14} className="text-[var(--accent-amber)]" /> Team Size
-                  </label>
-                  <div className="grid grid-cols-4 gap-2">
-                    {[1, 3, 7, 15].map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => setInputs({ ...inputs, teamSize: size })}
-                        className={`py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
-                          inputs.teamSize === size 
-                            ? 'bg-[var(--btn-cta-bg)] text-[var(--btn-cta-text)] border-[var(--btn-cta-bg)] font-bold shadow-lg' 
-                            : 'bg-[var(--bg-page)] text-[var(--text-muted)] border-[var(--border-card)] hover:border-[var(--text-body)]'
-                        }`}
-                      >
-                        {size === 1 ? '1' : size === 3 ? '2-3' : size === 7 ? '4-10' : '10+'}
-                      </button>
-                    ))}
+                {/* Step 1: Labor Profile */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">1</span>
+                    <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 1: Labor Profile</h4>
                   </div>
-                </div>
 
-                {/* Hourly Cost */}
-                <div className="space-y-4">
-                  <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <DollarSign size={14} className="text-[var(--accent-amber)]" /> Hourly Value of Time ({CURRENCIES.find(c => c.code === inputs.currency)?.symbol}/hr)
-                  </label>
-                  <input 
-                    type="number"
-                    value={inputs.hourlyCost}
-                    onChange={(e) => setInputs({ ...inputs, hourlyCost: Number(e.target.value) })}
-                    className="w-full bg-[var(--bg-surface-alt)] border border-[var(--border-card)] rounded-2xl px-6 py-4 text-[var(--text-body)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)] transition-all"
-                  />
-                </div>
-
-                {/* Weekly Hours */}
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+                  {/* Preferred Currency */}
+                  <div className="space-y-4">
                     <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                      <Clock size={14} className="text-[var(--accent-amber)]" /> Weekly Hours Lost to Repetitive Tasks
+                      <DollarSign size={14} className="text-[var(--accent-amber)]" /> Preferred Currency
                     </label>
-                    <span className="text-lg font-bold text-[var(--accent-amber)]">{inputs.weeklyHours}h</span>
+                    <select
+                      value={inputs.currency}
+                      onChange={(e) => handleCurrencyChange(e.target.value)}
+                      className="w-full bg-[var(--bg-surface-alt)] border border-[var(--border-card)] rounded-2xl px-6 py-4 text-[var(--text-body)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)] transition-all appearance-none cursor-pointer"
+                    >
+                      {CURRENCIES.map((curr) => (
+                        <option key={curr.code} value={curr.code} className="bg-[var(--bg-surface)] text-[var(--text-body)]">
+                          {curr.code} - {curr.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <input 
-                    type="range"
-                    min="1"
-                    max="60"
-                    value={inputs.weeklyHours}
-                    onChange={(e) => setInputs({ ...inputs, weeklyHours: Number(e.target.value) })}
-                    className="w-full h-2 bg-[var(--bg-surface-alt)] rounded-lg appearance-none cursor-pointer accent-[var(--accent-amber)]"
-                  />
+
+                  {/* Team Size */}
+                  <div className="space-y-4">
+                    <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
+                      <Users size={14} className="text-[var(--accent-amber)]" /> Team Size
+                    </label>
+                    <div className="grid grid-cols-4 gap-2">
+                      {[1, 3, 7, 15].map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setInputs({ ...inputs, teamSize: size })}
+                          className={`py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
+                            inputs.teamSize === size 
+                              ? 'bg-[var(--btn-cta-bg)] text-[var(--btn-cta-text)] border-[var(--btn-cta-bg)] font-bold shadow-lg' 
+                              : 'bg-[var(--bg-page)] text-[var(--text-muted)] border-[var(--border-card)] hover:border-[var(--text-body)]'
+                          }`}
+                        >
+                          {size === 1 ? '1' : size === 3 ? '2-3' : size === 7 ? '4-10' : '10+'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Hourly Cost */}
+                  <div className="space-y-4">
+                    <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
+                      <DollarSign size={14} className="text-[var(--accent-amber)]" /> Hourly Value of Time ({CURRENCIES.find(c => c.code === inputs.currency)?.symbol}/hr)
+                    </label>
+                    <input 
+                      type="number"
+                      value={inputs.hourlyCost}
+                      onChange={(e) => setInputs({ ...inputs, hourlyCost: Number(e.target.value) })}
+                      className="w-full bg-[var(--bg-surface-alt)] border border-[var(--border-card)] rounded-2xl px-6 py-4 text-[var(--text-body)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)] transition-all"
+                    />
+                  </div>
                 </div>
 
-                {/* Setup Investment */}
-                <div className="space-y-4">
-                  <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <Settings size={14} className="text-[var(--accent-amber)]" /> Automation Setup Investment ({CURRENCIES.find(c => c.code === inputs.currency)?.symbol})
-                  </label>
-                  <input 
-                    type="number"
-                    value={inputs.setupInvestment}
-                    onChange={(e) => setInputs({ ...inputs, setupInvestment: Number(e.target.value) })}
-                    className="w-full bg-[var(--bg-surface-alt)] border border-[var(--border-card)] rounded-2xl px-6 py-4 text-[var(--text-body)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)] transition-all"
-                  />
+                {/* Step 2: Time Friction */}
+                <div className="space-y-4 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">2</span>
+                    <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 2: Friction Metrics</h4>
+                  </div>
+                  {/* Weekly Hours */}
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
+                        <Clock size={14} className="text-[var(--accent-amber)]" /> Weekly Hours Lost to Repetitive Tasks
+                      </label>
+                      <span className="text-lg font-bold text-[var(--accent-amber)]">{inputs.weeklyHours}h</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="1"
+                      max="60"
+                      value={inputs.weeklyHours}
+                      onChange={(e) => setInputs({ ...inputs, weeklyHours: Number(e.target.value) })}
+                      className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[var(--accent-amber)] transition-all"
+                      style={{ 
+                        background: `linear-gradient(to right, var(--accent-amber) 0%, var(--accent-amber) ${((inputs.weeklyHours - 1) / 59) * 100}%, var(--bg-page) ${((inputs.weeklyHours - 1) / 59) * 100}%, var(--bg-page) 100%)` 
+                      }}
+                    />
+                    <div className="flex justify-between items-center text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
+                      <span>1h</span>
+                      <span className="font-bold text-[var(--accent-amber)] text-center px-1">
+                        {inputs.weeklyHours <= 10 ? "Minor distraction (1-2 hours a day)" :
+                         inputs.weeklyHours <= 20 ? "Part-time bottleneck (2-4 hours a day)" :
+                         inputs.weeklyHours <= 35 ? "Significant friction (Half of your week)" :
+                         "Critical drag (Equivalent to a full-time hire)"}
+                      </span>
+                      <span>60h</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Industry */}
-                <div className="space-y-4">
-                  <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <Briefcase size={14} className="text-[var(--accent-amber)]" /> Industry
-                  </label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {['SaaS', 'E-commerce', 'Other'].map((ind) => (
-                      <button
-                        key={ind}
-                        onClick={() => setInputs({ ...inputs, industry: ind as any })}
-                        className={`py-3 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
-                          inputs.industry === ind 
-                            ? 'bg-[var(--btn-cta-bg)] text-[var(--btn-cta-text)] border-[var(--btn-cta-bg)] font-bold shadow-lg' 
-                            : 'bg-[var(--bg-page)] text-[var(--text-muted)] border-[var(--border-card)] hover:border-[var(--text-body)]'
-                        }`}
-                      >
-                        {ind}
-                      </button>
-                    ))}
+                {/* Step 3: Investment Profile */}
+                <div className="space-y-4 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">3</span>
+                    <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 3: Setup & Benchmark</h4>
+                  </div>
+                  {/* Setup Investment */}
+                  <div className="space-y-4">
+                    <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
+                      <Settings size={14} className="text-[var(--accent-amber)]" /> Automation Setup Investment ({CURRENCIES.find(c => c.code === inputs.currency)?.symbol})
+                    </label>
+                    <input 
+                      type="number"
+                      value={inputs.setupInvestment}
+                      onChange={(e) => setInputs({ ...inputs, setupInvestment: Number(e.target.value) })}
+                      className="w-full bg-[var(--bg-surface-alt)] border border-[var(--border-card)] rounded-2xl px-6 py-4 text-[var(--text-body)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)] transition-all"
+                    />
+                  </div>
+
+                  {/* Industry */}
+                  <div className="space-y-4">
+                    <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
+                      <Briefcase size={14} className="text-[var(--accent-amber)]" /> Industry
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {['SaaS', 'E-commerce', 'Other'].map((ind) => (
+                        <button
+                          key={ind}
+                          onClick={() => setInputs({ ...inputs, industry: ind as any })}
+                          className={`py-3 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
+                            inputs.industry === ind 
+                              ? 'bg-[var(--btn-cta-bg)] text-[var(--btn-cta-text)] border-[var(--btn-cta-bg)] font-bold shadow-lg' 
+                              : 'bg-[var(--bg-page)] text-[var(--text-muted)] border-[var(--border-card)] hover:border-[var(--text-body)]'
+                          }`}
+                        >
+                          {ind}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

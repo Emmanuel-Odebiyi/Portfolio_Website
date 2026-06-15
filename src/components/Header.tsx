@@ -75,15 +75,15 @@ export const Header: React.FC = () => {
       <div 
         className={`w-full transition-all duration-500 pointer-events-auto ${
           showBg 
-            ? 'py-1.5 px-4 md:px-4 lg:px-6 backdrop-blur-xl border shadow-2xl rounded-[1.25rem]'
-            : 'py-2 px-6 md:px-5 lg:px-8 bg-transparent border-transparent backdrop-blur-sm rounded-[1.5rem]'
+            ? 'py-1.5 px-4 md:px-4 xl:px-6 backdrop-blur-xl border shadow-2xl rounded-[1.25rem]'
+            : 'py-2 px-6 md:px-5 xl:px-8 bg-transparent border-transparent backdrop-blur-sm rounded-[1.5rem]'
         }`}
         style={showBg ? {
           backgroundColor: 'color-mix(in srgb, var(--bg-surface) 92%, transparent)',
           borderColor: 'var(--border-card)',
         } : undefined}
       >
-        <div className="mx-auto grid grid-cols-2 md:grid-cols-[auto_1fr_auto] items-center gap-4">
+        <div className="mx-auto grid grid-cols-2 xl:grid-cols-[auto_1fr_auto] items-center gap-4">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex justify-start">
             <Link to="/" className="flex items-center gap-3 group">
               <img 
@@ -97,7 +97,7 @@ export const Header: React.FC = () => {
             </Link>
           </motion.div>
 
-          <nav className="hidden md:flex items-center justify-center md:gap-2.5 lg:gap-6">
+          <nav className="hidden xl:flex items-center justify-center xl:gap-6">
             {navLinks.map((link) => (
               <div 
                 key={link.name}
@@ -107,7 +107,7 @@ export const Header: React.FC = () => {
               >
                 <Link
                   to={link.href}
-                  className={`flex items-center md:gap-1 lg:gap-1.5 text-xs lg:text-sm font-black tracking-tight transition-all relative group`}
+                  className={`flex items-center md:gap-1 xl:gap-1.5 text-xs xl:text-sm font-black tracking-tight transition-all relative group`}
                   style={{
                     color: location.pathname === link.href
                       ? 'var(--accent-amber)'
@@ -182,17 +182,17 @@ export const Header: React.FC = () => {
           <div className="flex justify-end items-center gap-4 md:gap-6">
             <ThemeToggle />
             {/* Visual divider between toggle and CTA - spaced out to prevent crampness */}
-            <span className="hidden md:block w-px h-5 rounded-full mx-3" style={{ backgroundColor: 'var(--border-card)' }} />
+            <span className="hidden xl:block w-px h-5 rounded-full mx-3" style={{ backgroundColor: 'var(--border-card)' }} />
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }} 
               animate={{ opacity: 1, scale: 1 }} 
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:block"
+              className="hidden xl:block"
             >
               <Link
                 to="/contact"
-                className="inline-block px-4 lg:px-6 py-2.5 text-xs lg:text-sm font-black rounded-xl transition-all relative overflow-hidden group border-none"
+                className="inline-block px-4 xl:px-6 py-2.5 text-xs xl:text-sm font-black rounded-xl transition-all relative overflow-hidden group border-none"
                 style={{ 
                   background: 'var(--btn-cta-bg)', 
                   color: 'var(--btn-cta-text)',
@@ -202,7 +202,7 @@ export const Header: React.FC = () => {
                 <span className="relative z-10">Contact Me</span>
               </Link>
             </motion.div>
-            <button className="md:hidden p-3" style={{ color: 'var(--text-body)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
+            <button className="xl:hidden p-3" style={{ color: 'var(--text-body)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -215,7 +215,7 @@ export const Header: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden backdrop-blur-3xl border-b overflow-hidden rounded-b-3xl shadow-2xl"
+              className="xl:hidden backdrop-blur-3xl border-b overflow-hidden rounded-b-3xl shadow-2xl"
               style={{ 
                 backgroundColor: 'color-mix(in srgb, var(--bg-surface) 95%, transparent)', 
                 borderColor: 'var(--border-card)' 

@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Bot, PenTool } from 'lucide-react';
-import Lottie from 'lottie-react';
+
+const Lottie = lazy(() => import('lottie-react'));
 
 // ─── Lottie Loader component with smooth entry transition ───────────────────
 
@@ -62,12 +63,22 @@ const LottieLoader = ({ path, style }: { path: string; style?: React.CSSProperti
             transition={{ duration: 0.5, ease: 'easeOut' }}
             className="w-full h-full flex items-center justify-center"
           >
-            <Lottie 
-              animationData={animationData} 
-              loop={true} 
-              autoplay={true} 
-              style={style} 
-            />
+            <Suspense fallback={
+              <div 
+                className="w-8 h-8 rounded-full border-2 animate-spin" 
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--text-body) 10%, transparent)',
+                  borderTopColor: 'var(--text-body)'
+                }}
+              />
+            }>
+              <Lottie 
+                animationData={animationData} 
+                loop={true} 
+                autoplay={true} 
+                style={style} 
+              />
+            </Suspense>
           </motion.div>
         ) : (
           <motion.div

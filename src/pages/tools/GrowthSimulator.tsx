@@ -407,60 +407,113 @@ export default function GrowthSimulator() {
           </p>
         </div>
 
+              {/* Onboarding Guide Banner */}
+              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-amber-500" /> Simulator Guide
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>1. What it is</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      A growth engine mapping 12-month scaling trajectories based on operational models.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>2. What to fill</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      Input your current traffic, leads, revenue, content outputs, and ad budget.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>3. What you get</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      Interactive charts, automatic benchmark comparison reports, and simulated growth metrics.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* Inputs */}
           <div className="lg:col-span-4 space-y-8">
             <div className="rounded-[2.5rem] p-8 border backdrop-blur-md shadow-2xl space-y-8 text-left" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-              <div className="space-y-1">
-                <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Growth Inputs</h3>
-                <p className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>Define your current baseline metrics.</p>
+              <div className="flex items-center justify-between pb-4 border-b border-white/5">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Growth Inputs</h3>
+                  <p className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>Define your current baseline.</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3].map((s) => (
+                    <div 
+                      key={s} 
+                      className="w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-mono font-bold bg-amber-500 text-slate-950"
+                    >
+                      {s}
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="space-y-6">
-                {/* Currency Selection */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
-                    <TrendingUp size={14} className="text-amber-500" /> Preferred Currency
-                  </label>
-                  <select
-                    value={inputs.currency}
-                    onChange={(e) => handleCurrencyChange(e.target.value)}
-                    className="w-full border rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all appearance-none cursor-pointer font-sans"
-                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-                  >
-                    {CURRENCIES.map((curr) => (
-                      <option key={curr.code} value={curr.code}>
-                        {curr.code} - {curr.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="space-y-8">
+                {/* Step 1: Core Financials */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">1</span>
+                    <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 1: Baseline Metrics</h4>
+                  </div>
+                  
+                  {/* Currency Selection */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
+                      <TrendingUp size={14} className="text-amber-500" /> Preferred Currency
+                    </label>
+                    <select
+                      value={inputs.currency}
+                      onChange={(e) => handleCurrencyChange(e.target.value)}
+                      className="w-full border rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition-all appearance-none cursor-pointer font-sans"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
+                    >
+                      {CURRENCIES.map((curr) => (
+                        <option key={curr.code} value={curr.code}>
+                          {curr.code} - {curr.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <InputField 
-                  label="Monthly Website Visitors" 
-                  icon={Globe} 
-                  value={inputs.visitors} 
-                  onChange={(v: number) => setInputs({ ...inputs, visitors: v })} 
-                />
-                <InputField 
-                  label="Monthly New Leads / Signups" 
-                  icon={MousePointer2} 
-                  value={inputs.leads} 
-                  onChange={(v: number) => setInputs({ ...inputs, leads: v })} 
-                />
-                <InputField 
-                  label={`Monthly Sales / Revenue (${CURRENCIES.find(c => c.code === inputs.currency)?.symbol})`} 
-                  icon={TrendingUp} 
-                  value={inputs.revenue} 
-                  onChange={(v: number) => setInputs({ ...inputs, revenue: v })} 
-                />
+                  <InputField 
+                    label="Monthly Website Visitors" 
+                    icon={Globe} 
+                    value={inputs.visitors} 
+                    onChange={(v: number) => setInputs({ ...inputs, visitors: v })} 
+                  />
+                  <InputField 
+                    label="Monthly New Leads / Signups" 
+                    icon={MousePointer2} 
+                    value={inputs.leads} 
+                    onChange={(v: number) => setInputs({ ...inputs, leads: v })} 
+                  />
+                  <InputField 
+                    label={`Monthly Sales / Revenue (${CURRENCIES.find(c => c.code === inputs.currency)?.symbol})`} 
+                    icon={TrendingUp} 
+                    value={inputs.revenue} 
+                    onChange={(v: number) => setInputs({ ...inputs, revenue: v })} 
+                  />
+                </div>
                 
-                <div className="space-y-2">
+                {/* Step 2: Industry */}
+                <div className="space-y-4 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">2</span>
+                    <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 2: Industry Segment</h4>
+                  </div>
                   <label className="text-xs font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
                     <Briefcase size={14} className="text-amber-500" /> Industry
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 gap-2">
                     {(['SaaS', 'E-commerce', 'Marketing Agency', 'Other'] as Industry[]).map((ind) => (
                       <button
                         key={ind}
@@ -502,7 +555,12 @@ export default function GrowthSimulator() {
                   )}
                 </AnimatePresence>
 
-                <div className="pt-4 border-t space-y-6" style={{ borderColor: 'var(--border-card)' }}>
+                {/* Step 3: Marketing Outputs */}
+                <div className="pt-6 border-t space-y-6" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">3</span>
+                    <h4 className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>Step 3: Growth Catalysts</h4>
+                  </div>
                   <InputField 
                     label="Articles / Month" 
                     icon={Zap} 

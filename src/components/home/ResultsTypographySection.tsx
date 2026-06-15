@@ -92,7 +92,7 @@ export const ResultsTypographySection = () => {
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden py-12 md:py-16 lg:py-20">
         <div className="max-w-6xl w-full px-6 md:px-12 text-center">
           <div
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.15]"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.15]"
             style={{ color: 'var(--text-body)' }}
           >
             {SENTENCES.map((line, i) => (

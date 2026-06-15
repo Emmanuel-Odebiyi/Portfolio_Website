@@ -55,7 +55,9 @@ export default function ScooveAfrica() {
       desc: "Swapped out general topics for localized search queries matching immediate intent.",
       before: "A generic entertainment review",
       after: "\"Top 15 Restaurants on Lagos Mainland (2026 Review)\"",
-      badge: "Commercial Intent"
+      badge: "Commercial Intent",
+      evidenceImage: "/images/scoove/scoove_keyword_planning.jpg",
+      evidenceLabel: "Notion keyword volume planner and editorial calendar"
     },
     {
       step: "02",
@@ -71,7 +73,9 @@ export default function ScooveAfrica() {
       desc: "Re-formatted posts into brief paragraphs, visual grids, bullets, and sharp calls-to-action.",
       before: "Dense blocks of plain text",
       after: "Immersive layout with interactive media",
-      badge: "UX Improvement"
+      badge: "UX Improvement",
+      evidenceImage: "/images/scoove/scoove_wordpress_diff.jpg",
+      evidenceLabel: "WordPress revision history showing on-page readability tuning and heading structure optimization"
     },
     {
       step: "04",
@@ -79,7 +83,11 @@ export default function ScooveAfrica() {
       desc: "Compressed images, stripped redundant plugins, and implemented structured schema.",
       before: "PageSpeed Index: 38 (Failed Vitals)",
       after: "PageSpeed Index: 74 (Medical/Structured Schemas)",
-      badge: "Web Vitals Pass"
+      badge: "Web Vitals Pass",
+      evidenceImages: [
+        { src: "/images/scoove/scoove_pagespeed_mobile.jpg", label: "Mobile Performance score: 74" },
+        { src: "/images/scoove/scoove_pagespeed_desktop.jpg", label: "Desktop Performance score: 96" }
+      ]
     }
   ];
 
@@ -91,7 +99,17 @@ export default function ScooveAfrica() {
         keywords="entertainment SEO strategy, organic traffic growth, keyword mapping case study, click-through rate optimization, Lagos SEO specialist"
       />
 
-      <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
+      {/* Full-bleed Header Banner */}
+      <div className="w-full h-[250px] sm:h-[350px] md:h-[450px] relative overflow-hidden">
+        <img 
+          src="/images/headers/scoove_header.jpg" 
+          alt="The Scoove Africa Header Banner" 
+          className="w-full h-full object-cover" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-page)] via-[var(--bg-page)]/30 to-transparent" />
+      </div>
+
+      <div className="relative z-10 pb-24 max-w-7xl mx-auto px-6 -mt-16 sm:-mt-24 md:-mt-32">
         
         {/* Back navigation */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
@@ -226,22 +244,109 @@ export default function ScooveAfrica() {
           </div>
         </div>
 
-        {/* Full-width interactive preview mockup */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-32 rounded-[2.5rem] overflow-hidden border shadow-2xl relative group p-4"
-          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-        >
-          <img 
-            src="/images/scoove_analytics.png" 
-            alt="The Scoove Africa SEO Ranking Climber and SERP Analytics Mockup" 
-            width={1280}
-            height={800}
-            className="w-full h-auto rounded-2xl object-cover group-hover:scale-[1.01] transition-transform duration-700"
-          />
-        </motion.div>
+        {/* Real GA4 Metrics Before/After Comparison */}
+        <div className="mb-32 space-y-12">
+          <div className="text-center space-y-4">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.2em] block text-[var(--accent-teal)]">Verified Analytics Evidence</span>
+            <h2 className="text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>GA4 Traffic Comparison</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: -25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-[2.5rem] border shadow-2xl flex flex-col justify-between space-y-6"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div>
+                <span className="px-3 py-1 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider bg-rose-500/10 text-rose-500 border border-rose-500/20">Before: Sept 2024</span>
+                <h4 className="text-2xl font-bold font-display mt-4" style={{ color: 'var(--text-body)' }}>Flatline Engagement</h4>
+                <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>GA4 tracked 0 active users and 0 views before implementing structural SEO optimizations.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                <img 
+                  src="/images/scoove/scoove_ga4_engagement_before.jpg" 
+                  alt="GA4 engagement report before optimization showing zero traffic" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-[2.5rem] border shadow-2xl flex flex-col justify-between space-y-6"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div>
+                <span className="px-3 py-1 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">After: Jan 2025</span>
+                <h4 className="text-2xl font-bold font-display mt-4" style={{ color: 'var(--text-body)' }}>6.4K+ Active Growth</h4>
+                <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>Organic traffic soared to 6.4K active users with 5.2K generated directly via organic search channels.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                <img 
+                  src="/images/scoove/scoove_ga4_acquisition_after.jpg" 
+                  alt="GA4 acquisition report after optimization showing 6.4K active users" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Real GSC Performance Before/After Comparison */}
+        <div className="mb-32 space-y-12">
+          <div className="text-center space-y-4">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.2em] block text-[var(--accent-teal)]">Google Search Console Verification</span>
+            <h2 className="text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Search Clicks & Impressions Spike</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-[2.5rem] border shadow-2xl flex flex-col justify-between space-y-6"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div>
+                <span className="px-3 py-1 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider bg-rose-500/10 text-rose-500 border border-rose-500/20">Before: Sept 2024</span>
+                <h4 className="text-2xl font-bold font-display mt-4" style={{ color: 'var(--text-body)' }}>6.89K Clicks / 458K Impressions</h4>
+                <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>Initial Search Console data showing stagnant positions for lyrics and media searches before structured cluster modeling.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                <img 
+                  src="/images/scoove/scoove_gsc_before.jpg" 
+                  alt="Search Console report showing 6.89K clicks and 458K impressions before SEO project" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-[2.5rem] border shadow-2xl flex flex-col justify-between space-y-6"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div>
+                <span className="px-3 py-1 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">After: Feb 2025</span>
+                <h4 className="text-2xl font-bold font-display mt-4" style={{ color: 'var(--text-body)' }}>15.3K Clicks / 979K Impressions</h4>
+                <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>Over +120% growth in search clicks and impressions in a matching period following optimized content formatting.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                <img 
+                  src="/images/scoove/scoove_gsc_after.jpg" 
+                  alt="Search Console report showing 15.3K clicks and 979K impressions after SEO project" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
         {/* The Challenge & The Solution */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32 text-left">
@@ -337,6 +442,44 @@ export default function ScooveAfrica() {
                     <p className="font-bold leading-relaxed" style={{ color: 'var(--text-body)' }}>{tactic.after}</p>
                   </div>
                 </div>
+
+                {/* Optional Tactic Evidence Visuals */}
+                {tactic.evidenceImage && (
+                  <div className="lg:col-span-12 mt-6 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                    <div className="space-y-2">
+                      <span className="text-[10px] font-sans font-bold uppercase tracking-wider block" style={{ color: 'var(--text-muted)' }}>Verified Evidence: {tactic.evidenceLabel}</span>
+                      <div className="rounded-2xl overflow-hidden border max-h-[400px] overflow-y-auto" style={{ borderColor: 'var(--border-card)' }}>
+                        <img 
+                          src={tactic.evidenceImage} 
+                          alt={tactic.evidenceLabel} 
+                          className="w-full h-auto object-cover object-top"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {tactic.evidenceImages && (
+                  <div className="lg:col-span-12 mt-6 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                    <div className="space-y-4">
+                      <span className="text-[10px] font-sans font-bold uppercase tracking-wider block" style={{ color: 'var(--text-muted)' }}>Verified Performance Audits</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {tactic.evidenceImages.map((img, idx) => (
+                          <div key={idx} className="space-y-1.5">
+                            <span className="text-[9px] font-sans font-bold uppercase" style={{ color: 'var(--text-muted)' }}>{img.label}</span>
+                            <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                              <img 
+                                src={img.src} 
+                                alt={img.label} 
+                                className="w-full h-auto object-cover"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -24,7 +24,7 @@ const projects = [
     metrics: "520% ROI",
     accent: "amber",
     path: "/portfolio/techflow-solutions",
-    image: "/images/techflow_dashboard.png"
+    image: "/images/headers/techflow_header.png"
   },
   {
     title: "The Scoove Africa",
@@ -38,7 +38,7 @@ const projects = [
     metrics: "150% Growth",
     accent: "blue",
     path: "/portfolio/scoove-africa",
-    image: "/images/scoove_analytics.png"
+    image: "/images/headers/scoove_header.jpg"
   },
   {
     title: "Emergency Response Africa",
@@ -52,7 +52,7 @@ const projects = [
     metrics: "180% Growth",
     accent: "blue",
     path: "/portfolio/emergency-response-africa",
-    image: "/images/era_dispatch_dashboard.png"
+    image: "/images/headers/emergency_response_header.png"
   },
   {
     title: "OAU Library",

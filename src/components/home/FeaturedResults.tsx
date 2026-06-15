@@ -85,8 +85,12 @@ export const FeaturedResults = () => {
             <div className="pt-8 flex items-center justify-between border-t mt-8" style={{ borderColor: 'var(--border-card)' }}>
               <Link 
                 to="/portfolio/techflow-solutions" 
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider group"
-                style={{ color: 'var(--text-body)' }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-xs font-bold uppercase tracking-wider group hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-sm hover:shadow-md hover:bg-[var(--text-body)] hover:text-[var(--bg-page)] hover:border-[var(--text-body)]"
+                style={{ 
+                  backgroundColor: 'var(--bg-surface-alt)', 
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-body)' 
+                }}
               >
                 Read Full Case Study 
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -151,8 +155,12 @@ export const FeaturedResults = () => {
             <div className="pt-8 flex items-center justify-between border-t mt-8" style={{ borderColor: 'var(--border-card)' }}>
               <Link 
                 to="/portfolio/scoove-africa" 
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider group"
-                style={{ color: 'var(--text-body)' }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-xs font-bold uppercase tracking-wider group hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-sm hover:shadow-md hover:bg-[var(--text-body)] hover:text-[var(--bg-page)] hover:border-[var(--text-body)]"
+                style={{ 
+                  backgroundColor: 'var(--bg-surface-alt)', 
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-body)' 
+                }}
               >
                 Read Full Case Study 
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

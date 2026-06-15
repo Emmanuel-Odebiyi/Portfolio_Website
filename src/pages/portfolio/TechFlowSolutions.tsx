@@ -87,7 +87,17 @@ export default function TechFlowSolutions() {
         keywords="SaaS growth automation, B2B content marketing automation, n8n workflows, HubSpot CMS API, AI content strategy"
       />
 
-      <div className="relative z-10 pt-32 pb-24 max-w-7xl mx-auto px-6">
+      {/* Full-bleed Header Banner */}
+      <div className="w-full h-[250px] sm:h-[350px] md:h-[450px] relative overflow-hidden">
+        <img 
+          src="/images/headers/techflow_header.png" 
+          alt="TechFlow Solutions Header Banner" 
+          className="w-full h-full object-cover" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-page)] via-[var(--bg-page)]/30 to-transparent" />
+      </div>
+
+      <div className="relative z-10 pb-24 max-w-7xl mx-auto px-6 -mt-16 sm:-mt-24 md:-mt-32">
         
         {/* Back navigation */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
@@ -170,22 +180,57 @@ export default function TechFlowSolutions() {
           </div>
         </div>
 
-        {/* Full-width interactive preview screenshot */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-32 rounded-[2.5rem] overflow-hidden border shadow-2xl relative group p-4"
-          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-        >
-          <img 
-            src="/images/techflow_dashboard.png" 
-            alt="TechFlow Content Automation Analytics Dashboard Mockup" 
-            width={1280}
-            height={800}
-            className="w-full h-auto rounded-2xl object-cover group-hover:scale-[1.01] transition-transform duration-700"
-          />
-        </motion.div>
+        {/* GA4 Metrics Dual Panel */}
+        <div className="mb-32 space-y-12">
+          <div className="text-center space-y-4">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.2em] block text-[var(--accent-blue)]">Verified Analytics Evidence</span>
+            <h2 className="text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>GA4 Performance Dashboards</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: -25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-[2.5rem] border shadow-2xl flex flex-col justify-between space-y-6"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div>
+                <span className="px-3 py-1 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/20">Organic Traffic Acquisition</span>
+                <h4 className="text-2xl font-bold font-display mt-4" style={{ color: 'var(--text-body)' }}>+80% Organic Sessions</h4>
+                <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>GA4 traffic report showing the expansion of search-driven users after keyword gaps and topical clusters were automated.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                <img 
+                  src="/images/techflow_ga4_traffic.png" 
+                  alt="Google Analytics GA4 Acquisition report showing +80% organic sessions" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-[2.5rem] border shadow-2xl flex flex-col justify-between space-y-6"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+            >
+              <div>
+                <span className="px-3 py-1 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/20">Revenue & ROI Attribution</span>
+                <h4 className="text-2xl font-bold font-display mt-4" style={{ color: 'var(--text-body)' }}>$127K Revenue / 520% ROI</h4>
+                <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>Conversion tracking report displaying directly attributed sales conversions and campaign return-on-investment indicators.</p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
+                <img 
+                  src="/images/techflow_ga4_conversions.png" 
+                  alt="Google Analytics GA4 Conversions report showing attributed revenue and ROI" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
         {/* The Challenge & The Solution */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">

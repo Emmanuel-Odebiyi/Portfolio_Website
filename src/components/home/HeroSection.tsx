@@ -81,12 +81,7 @@ export const HeroSection = () => {
 
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-sm transition-all duration-300 border hover:bg-[var(--text-body)] hover:text-[var(--bg-surface)] hover:border-transparent"
-                style={{
-                  backgroundColor: 'var(--bg-surface)',
-                  borderColor: 'var(--border-card)',
-                  color: 'var(--text-body)',
-                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-sm transition-all duration-300 border border-[var(--border-card)] bg-[var(--bg-surface)] text-[var(--text-body)] hover:bg-[var(--text-body)] hover:text-[var(--bg-surface)] hover:border-transparent shadow-sm hover:shadow-md"
               >
                 Book a Free Strategy Call
               </Link>

@@ -107,6 +107,44 @@ const DIMENSION_LABELS: Record<keyof DimensionScores, { label: string; tooltip: 
   toolGap: { label: 'Do you have to manually copy-paste data?', tooltip: 'Are you copy-pasting info or bridging disconnected software manually? (1=No, fully automated, 5=Yes, constant copy-paste)' },
 };
 
+const DIMENSION_HELPERS: Record<keyof DimensionScores, string[]> = {
+  taskVolume: [
+    "Rarely / Occasional",
+    "Weekly repeat",
+    "Daily task",
+    "Multi-times daily",
+    "Near-constant repetition"
+  ],
+  timeConsumption: [
+    "< 2 hours/week",
+    "2-5 hours/week",
+    "5-10 hours/week",
+    "10-20 hours/week",
+    "20+ hours/week"
+  ],
+  errorRate: [
+    "Virtually never",
+    "Rare occurrence",
+    "Occasional corrections needed",
+    "Frequent typos/rework",
+    "Constant errors/double-checks"
+  ],
+  handoffs: [
+    "1 person (direct)",
+    "2 people/systems",
+    "3-4 steps/transfers",
+    "5+ steps/handoffs",
+    "Complex chain of tools/people"
+  ],
+  toolGap: [
+    "Fully integrated APIs",
+    "Minor manual export",
+    "Regular copy-pasting",
+    "Heavy manual bridging",
+    "Constant copy-paste across tabs"
+  ]
+};
+
 const DimensionSlider = ({
   dimKey, value, onChange
 }: {
@@ -114,6 +152,7 @@ const DimensionSlider = ({
 }) => {
   const info = DIMENSION_LABELS[dimKey];
   const colors = ['bg-emerald-500', 'bg-lime-500', 'bg-amber-500', 'bg-orange-500', 'bg-rose-500'];
+  const percentage = (value - 1) * 25;
   return (
     <div className="space-y-2 group">
       <div className="flex justify-between items-center">
@@ -124,11 +163,15 @@ const DimensionSlider = ({
       <input
         type="range" min={1} max={5} step={1} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-amber-500"
-        style={{ backgroundColor: 'var(--bg-page)' }}
+        className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-amber-500 transition-all"
+        style={{ 
+          background: `linear-gradient(to right, var(--accent-amber) 0%, var(--accent-amber) ${percentage}%, var(--bg-page) ${percentage}%, var(--bg-page) 100%)` 
+        }}
       />
-      <div className="flex justify-between text-[9px] font-mono" style={{ color: 'var(--text-muted)' }}>
-        <span>Low</span><span>High</span>
+      <div className="flex justify-between items-center text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
+        <span>Low</span>
+        <span className="font-bold text-amber-500 text-center px-1">{DIMENSION_HELPERS[dimKey][value - 1]}</span>
+        <span>High</span>
       </div>
     </div>
   );
@@ -474,8 +517,74 @@ export default function AutomationRadar() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             {/* Form Section */}
             <div className="lg:col-span-7 space-y-12">
+              {/* Onboarding Guide Banner */}
+              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
+                <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
+                  <Zap size={16} className="animate-pulse text-amber-500" /> Onboarding Guide
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>1. What it is</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      A precision diagnostic engine mapping friction points in your daily work tasks.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>2. What to fill</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      Rate the frequency, time loss, errors, and manual tasks for each department on a 1-5 scale.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>3. What you get</p>
+                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                      An interactive radar map, custom time savings estimates, and a curated tools list.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Progress Stepper & Dots */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/5 text-left no-print">
+                <span className="text-xs font-mono uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Assessment Sections</span>
+                <div className="flex flex-wrap items-center gap-3">
+                  {[
+                    { label: 'Profile', id: 'step-profile' },
+                    { label: 'Marketing', id: 'step-cm' },
+                    { label: 'Sales', id: 'step-ls' },
+                    { label: 'Ops', id: 'step-oa' },
+                    { label: 'Success', id: 'step-cs' }
+                  ].map((s, idx) => (
+                    <button
+                      key={s.id}
+                      onClick={() => {
+                        const el = document.getElementById(s.id);
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }}
+                      className="flex items-center gap-2 p-2 rounded-xl transition-all border hover:border-amber-500/50 cursor-pointer text-left"
+                      style={{
+                        backgroundColor: 'var(--bg-surface)',
+                        borderColor: 'var(--border-card)',
+                      }}
+                    >
+                      <div 
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-bold"
+                        style={{
+                          backgroundColor: 'var(--bg-page)',
+                          color: 'var(--accent-amber)'
+                        }}
+                      >
+                        {idx + 1}
+                      </div>
+                      <span className="text-[10px] font-sans font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>{s.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="space-y-8">
-                <div className="space-y-4 text-left">
+                <div id="step-profile" className="space-y-4 text-left scroll-mt-28">
                   <h3 className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>01. Business Profile</h3>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-body)' }}>Company Name</label>
@@ -550,7 +659,7 @@ export default function AutomationRadar() {
                 ]).map((dept) => {
                   const deptKey = dept.key;
                   return (
-                    <div key={deptKey} className="space-y-4 p-6 rounded-3xl border text-left" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                    <div id={`step-${deptKey}`} key={deptKey} className="scroll-mt-28 space-y-4 p-6 rounded-3xl border text-left" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                       <div className="space-y-1">
                         <h3 className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-body)' }}>{dept.num}. {dept.title}</h3>
                         <p className="text-[11px] font-light" style={{ color: 'var(--text-muted)' }}>{dept.desc}</p>

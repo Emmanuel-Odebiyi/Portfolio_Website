@@ -123,7 +123,7 @@ export const SolutionSection = () => {
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-surface-alt) 80%, transparent)' }}>
 
         {/* ── Headline Block ── */}
-        <div className="shrink-0 pt-24 md:pt-28 pb-4 md:pb-6 px-6 md:px-16 text-center z-10">
+        <div className="shrink-0 pt-20 md:pt-24 pb-2 md:pb-4 px-6 md:px-16 text-center z-10">
           <p className="text-[10px] font-sans font-bold tracking-[0.4em] uppercase mb-2 md:mb-4" style={{ color: 'var(--accent-amber)' }}>
             The Solution
           </p>
@@ -168,7 +168,7 @@ export const SolutionSection = () => {
                       : `linear-gradient(135deg, color-mix(in srgb, ${solution.accentColor} 20%, var(--border-card)), var(--border-card))`
                   }`,
                   // Mobile/tablet: wide horizontal strip. Desktop: narrow vertical strip.
-                  minHeight: isActive ? '200px' : '56px',
+                  minHeight: isActive ? 'clamp(280px, 45vh, 420px)' : '56px',
                 }}
               >
                 {/* Collapsed label:
@@ -195,11 +195,9 @@ export const SolutionSection = () => {
                     </span>
                     {/* Desktop: vertical writing-mode text */}
                     <span
-                      className="hidden lg:block text-[9px] font-bold uppercase tracking-[0.35em] whitespace-nowrap"
+                      className="hidden lg:block text-[9px] font-bold uppercase tracking-[0.35em] whitespace-nowrap vertical-text"
                       style={{ 
                         color: solution.accentColor,
-                        writingMode: 'vertical-lr',
-                        transform: 'rotate(180deg)',
                       }}
                     >
                       {solution.title}
@@ -211,7 +209,7 @@ export const SolutionSection = () => {
                 {isActive && (
                   <motion.div
                     key={`content-${solution.id}`}
-                    className="absolute inset-0 flex flex-col justify-center px-6 md:px-16 py-4 md:py-0"
+                    className="absolute inset-0 flex flex-col justify-start lg:justify-center px-6 md:px-16 py-6 lg:py-0 overflow-y-auto lg:overflow-visible no-scrollbar"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -219,7 +217,7 @@ export const SolutionSection = () => {
                     <div className="max-w-3xl">
                       {/* Highly popped, bouncy icon wrapper with full saturation */}
                       <motion.div
-                        className="w-10 h-10 md:w-20 md:h-20 rounded-xl md:rounded-[1.5rem] flex items-center justify-center mb-3 md:mb-8"
+                        className="w-10 h-10 md:w-12 md:h-12 lg:w-20 lg:h-20 rounded-xl lg:rounded-[1.5rem] flex items-center justify-center mb-3 lg:mb-8"
                         style={{ 
                           backgroundColor: solution.accentColor, 
                           boxShadow: `0 8px 24px -6px ${solution.accentColor}` 
@@ -228,25 +226,25 @@ export const SolutionSection = () => {
                         animate={{ scale: 1, opacity: 1, rotate: 0 }}
                         transition={{ type: 'spring', delay: 0.15, bounce: 0.5, duration: 0.6 }}
                       >
-                        <SolutionIcon className="w-5 h-5 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
+                        <SolutionIcon className="w-5 h-5 md:w-6 md:h-6 lg:w-10 lg:h-10 text-white" strokeWidth={2.5} />
                       </motion.div>
                       
                       <span
-                        className="text-[9px] md:text-xs font-bold uppercase tracking-[0.3em] block mb-1 md:mb-3 opacity-60"
+                        className="text-[9px] md:text-xs font-bold uppercase tracking-[0.3em] block mb-1 lg:mb-3 opacity-60"
                         style={{ color: solution.accentColor }}
                       >
                         {solution.title}
                       </span>
                       
                       <h3
-                        className="text-xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-8 leading-[1.1] tracking-tight"
+                        className="text-xl md:text-3xl lg:text-5xl xl:text-6xl font-black mb-2 lg:mb-8 leading-[1.1] tracking-tight"
                         style={{ color: 'var(--text-body)' }}
                       >
                         {solution.subtitle}
                       </h3>
                       
                       <p
-                        className="text-xs md:text-xl lg:text-2xl leading-relaxed max-w-2xl font-light"
+                        className="text-xs md:text-base lg:text-lg xl:text-2xl leading-relaxed max-w-2xl font-light"
                         style={{ color: 'var(--text-muted)' }}
                       >
                         {solution.description}

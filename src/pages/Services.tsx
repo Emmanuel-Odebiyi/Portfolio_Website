@@ -23,12 +23,29 @@ export default function Services() {
   const [manualHours, setManualHours] = useState(25);
   const [customerValue, setCustomerValue] = useState(1500);
   const [activeBlueprint, setActiveBlueprint] = useState<'content' | 'seo' | 'automation'>('content');
+  const [isAutoCycling, setIsAutoCycling] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  React.useEffect(() => {
+    if (!isAutoCycling) return;
+    const services: ('content' | 'seo' | 'automation')[] = ['content', 'seo', 'automation'];
+    const timer = setInterval(() => {
+      setActiveBlueprint((prev) => {
+        const nextIdx = (services.indexOf(prev) + 1) % services.length;
+        return services[nextIdx];
+      });
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [isAutoCycling]);
 
   // Calculations
   const reclaimedHours = Math.round(manualHours * 0.8);
   const valueGenerated = Math.round((articlesCount * 2.8 * customerValue * 0.04));
   const efficiencyScore = Math.max(10, Math.round(100 - (manualHours * 1.5) + (articlesCount * 1.2)));
+
+  const articlesPercent = ((articlesCount - 4) / 36) * 100;
+  const hoursPercent = ((manualHours - 5) / 55) * 100;
+  const valuePercent = ((customerValue - 500) / 4500) * 100;
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -161,22 +178,30 @@ export default function Services() {
             
             {/* Control Panel */}
             <div
-              className="lg:col-span-7 rounded-[2rem] p-6 sm:p-10 space-y-8 border"
+              className="lg:col-span-7 rounded-[2rem] p-6 sm:p-10 space-y-8 border text-left"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
-              <h3
-                className="text-xl font-bold flex items-center gap-2.5"
-                style={{ color: 'var(--text-body)' }}
-              >
-                <Sliders size={18} style={{ color: 'var(--accent-amber)' }} />
-                Your current situation
-              </h3>
+              <div className="space-y-2">
+                <h3
+                  className="text-xl font-bold flex items-center gap-2.5"
+                  style={{ color: 'var(--text-body)' }}
+                >
+                  <Sliders size={18} style={{ color: 'var(--accent-amber)' }} />
+                  Your current situation
+                </h3>
+                <p className="text-xs font-light" style={{ color: 'var(--text-muted)' }}>
+                  Move the sliders below to match your current marketing workload. The panel on the right updates in real time.
+                </p>
+              </div>
 
               {/* Slider 1 */}
               <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm font-semibold" style={{ color: 'var(--text-body)' }}>
+                <div className="flex justify-between items-center relative">
+                  <label className="text-sm font-semibold flex items-center gap-2" style={{ color: 'var(--text-body)' }}>
                     Target monthly content volume
+                    <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-[var(--accent-amber)] font-bold tracking-wider animate-pulse uppercase">
+                      ← Drag to adjust
+                    </span>
                   </label>
                   <span
                     className="px-3 py-1 rounded-lg text-sm font-bold border font-sans"
@@ -192,8 +217,11 @@ export default function Services() {
                 <input
                   type="range" min="4" max="40" value={articlesCount}
                   onChange={(e) => setArticlesCount(Number(e.target.value))}
-                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                  style={{ accentColor: 'var(--accent-amber)' }}
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-transparent border border-zinc-200 dark:border-zinc-800"
+                  style={{ 
+                    accentColor: 'var(--accent-amber)',
+                    background: `linear-gradient(to right, var(--accent-amber) 0%, var(--accent-amber) ${articlesPercent}%, var(--border-card) ${articlesPercent}%, var(--border-card) 100%)`
+                  }}
                 />
                 <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                   <span>4 (conservative)</span>
@@ -221,8 +249,11 @@ export default function Services() {
                 <input
                   type="range" min="5" max="60" value={manualHours}
                   onChange={(e) => setManualHours(Number(e.target.value))}
-                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                  style={{ accentColor: 'var(--cta-blue)' }}
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-transparent border border-zinc-200 dark:border-zinc-800"
+                  style={{ 
+                    accentColor: 'var(--cta-blue)',
+                    background: `linear-gradient(to right, var(--cta-blue) 0%, var(--cta-blue) ${hoursPercent}%, var(--border-card) ${hoursPercent}%, var(--border-card) 100%)`
+                  }}
                 />
                 <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                   <span>5 hrs</span>
@@ -250,8 +281,11 @@ export default function Services() {
                 <input
                   type="range" min="500" max="5000" step="250" value={customerValue}
                   onChange={(e) => setCustomerValue(Number(e.target.value))}
-                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                  style={{ accentColor: 'var(--accent-teal)' }}
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-transparent border border-zinc-200 dark:border-zinc-800"
+                  style={{ 
+                    accentColor: 'var(--accent-teal)',
+                    background: `linear-gradient(to right, var(--accent-teal) 0%, var(--accent-teal) ${valuePercent}%, var(--border-card) ${valuePercent}%, var(--border-card) 100%)`
+                  }}
                 />
                 <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                   <span>$500</span>
@@ -262,7 +296,7 @@ export default function Services() {
 
             {/* Results Panel */}
             <div
-              className="lg:col-span-5 rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between border"
+              className="lg:col-span-5 rounded-[2rem] p-6 sm:p-10 flex flex-col justify-between border text-left"
               style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
             >
               <div className="space-y-6">
@@ -275,20 +309,38 @@ export default function Services() {
 
                 <div className="p-5 rounded-2xl border space-y-1" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <span className="text-xs font-sans font-bold uppercase tracking-wider block" style={{ color: 'var(--text-muted)' }}>Value generated / mo</span>
-                  <span className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--accent-amber)' }}>
-                    ${valueGenerated.toLocaleString()}
-                  </span>
-                  <p className="text-[10px] font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  <div className="overflow-hidden h-10 flex items-center">
+                    <motion.span
+                      key={valueGenerated}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="text-3xl sm:text-4xl font-bold font-display inline-block"
+                      style={{ color: 'var(--accent-amber)' }}
+                    >
+                      ${valueGenerated.toLocaleString()}
+                    </motion.span>
+                  </div>
+                  <p className="text-[10px] font-light leading-relaxed animate-fade-in" style={{ color: 'var(--text-muted)' }}>
                     Based on traffic growth and conversion-to-LTV pipeline scaling.
                   </p>
                 </div>
 
                 <div className="p-5 rounded-2xl border space-y-1" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <span className="text-xs font-sans font-bold uppercase tracking-wider block" style={{ color: 'var(--text-muted)' }}>Hours reclaimed / mo</span>
-                  <span className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--accent-teal)' }}>
-                    {reclaimedHours} saved
-                  </span>
-                  <p className="text-[10px] font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  <div className="overflow-hidden h-10 flex items-center">
+                    <motion.span
+                      key={reclaimedHours}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="text-3xl sm:text-4xl font-bold font-display inline-block"
+                      style={{ color: 'var(--accent-teal)' }}
+                    >
+                      {reclaimedHours} saved
+                    </motion.span>
+                  </div>
+                  <p className="text-[10px] font-light leading-relaxed animate-fade-in" style={{ color: 'var(--text-muted)' }}>
                     That's {Math.round(reclaimedHours / 8)} full business days back every month.
                   </p>
                 </div>
@@ -296,17 +348,23 @@ export default function Services() {
                 <div className="p-5 rounded-2xl border space-y-2" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <div className="flex justify-between items-center text-xs font-sans font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                     <span>Workflow efficiency</span>
-                    <span style={{ color: efficiencyScore > 75 ? 'var(--accent-teal)' : efficiencyScore > 45 ? 'var(--accent-amber)' : '#ef4444', fontWeight: 700 }}>
+                    <motion.span
+                      key={efficiencyScore}
+                      initial={{ scale: 0.8, opacity: 0.5 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      style={{ color: efficiencyScore > 75 ? 'var(--accent-teal)' : efficiencyScore > 45 ? 'var(--accent-amber)' : '#ef4444', fontWeight: 700 }}
+                    >
                       {efficiencyScore}%
-                    </span>
+                    </motion.span>
                   </div>
                   <div className="h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--border-card)' }}>
-                    <div
-                      className="h-full transition-all duration-500 rounded-full"
-                      style={{
+                    <motion.div
+                      className="h-full rounded-full"
+                      animate={{
                         width: `${efficiencyScore}%`,
                         backgroundColor: efficiencyScore > 75 ? 'var(--accent-teal)' : efficiencyScore > 45 ? 'var(--accent-amber)' : '#ef4444'
                       }}
+                      transition={{ type: "spring", stiffness: 100, damping: 15 }}
                     />
                   </div>
                 </div>
@@ -314,7 +372,7 @@ export default function Services() {
 
               <Link
                 to="/contact"
-                className="mt-8 py-4 rounded-xl font-bold text-center block transition-all text-sm uppercase tracking-wider hover:brightness-110 hover:shadow-lg"
+                className="mt-8 py-4 rounded-xl font-bold text-center block transition-all text-sm uppercase tracking-wider hover:scale-[1.02] active:scale-[0.98] hover:brightness-110 hover:shadow-lg duration-300"
                 style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
               >
                 Get my custom system built
@@ -327,20 +385,25 @@ export default function Services() {
         <div className="mb-16 md:mb-32">
           <div className="mb-16 border-b pb-8" style={{ borderColor: 'var(--border-card)' }}>
             <span
-              className="text-xs font-sans font-bold uppercase tracking-widest block mb-3"
+              className="text-xs font-sans font-bold uppercase tracking-widest block mb-3 text-left"
               style={{ color: 'var(--accent-amber)' }}
             >
               Core Services
             </span>
-            <h2
-              className="text-4xl sm:text-5xl font-bold tracking-tight font-display"
-              style={{ color: 'var(--text-body)' }}
-            >
-              What I{' '}
-              <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
-                actually build.
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left">
+              <h2
+                className="text-4xl sm:text-5xl font-bold tracking-tight font-display text-left"
+                style={{ color: 'var(--text-body)' }}
+              >
+                What I{' '}
+                <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+                  actually build.
+                </span>
+              </h2>
+              <span className="text-xs font-sans font-bold tracking-wider uppercase mb-1" style={{ color: 'var(--text-muted)' }}>
+                Click each service to see what's included →
               </span>
-            </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -354,7 +417,10 @@ export default function Services() {
               ].map((service) => (
                 <button
                   key={service.id}
-                  onClick={() => setActiveBlueprint(service.id as any)}
+                  onClick={() => {
+                    setActiveBlueprint(service.id as any);
+                    setIsAutoCycling(false);
+                  }}
                   className="w-full text-left p-6 rounded-2xl transition-all duration-300 border flex gap-4 items-start"
                   style={{
                     backgroundColor: activeBlueprint === service.id ? 'var(--bg-surface)' : 'transparent',
@@ -374,10 +440,13 @@ export default function Services() {
                   </div>
                   <div className="flex-grow">
                     <h3
-                      className="text-sm font-bold mb-1"
+                      className="text-sm font-bold mb-1 flex items-center gap-2"
                       style={{ color: activeBlueprint === service.id ? 'var(--text-body)' : 'var(--text-muted)' }}
                     >
                       {service.title}
+                      {activeBlueprint === service.id && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-amber)] animate-pulse shrink-0" />
+                      )}
                     </h3>
                     <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                       {service.desc}

@@ -88,6 +88,26 @@ export default function SEOStrategyOptimization() {
   const [activeLayer, setActiveLayer] = useState(0);
   const [rankingAnim, setRankingAnim] = useState(24);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isAutoCycling, setIsAutoCycling] = useState(true);
+  const [cycleProgress, setCycleProgress] = useState(0);
+
+  // Auto-cycle layers on mount with progress indicator
+  useEffect(() => {
+    if (!isAutoCycling) {
+      setCycleProgress(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setCycleProgress(prev => {
+        if (prev >= 100) {
+          setActiveLayer(current => (current + 1) % SEO_LAYERS.length);
+          return 0;
+        }
+        return prev + 2.857; // 3500ms -> 35 ticks of 100ms. 100 / 35 = 2.857
+      });
+    }, 100);
+    return () => clearInterval(interval);
+  }, [isAutoCycling]);
 
   // Animate ranking counter downward to show improvement
   useEffect(() => {
@@ -401,19 +421,22 @@ export default function SEOStrategyOptimization() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Layer selector */}
-            <div className="lg:col-span-5 flex flex-col gap-2">
+            <div className="lg:col-span-5 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 whitespace-nowrap lg:whitespace-normal scroll-smooth [-webkit-overflow-scrolling:touch] max-w-[95vw] md:max-w-full mx-auto lg:mx-0 relative">
               {SEO_LAYERS.map((layer, idx) => (
                 <button
                   key={layer.id}
-                  onClick={() => setActiveLayer(idx)}
-                  className="w-full text-left p-5 rounded-2xl transition-all duration-300 border flex items-center gap-4 group cursor-pointer interactive-card"
+                  onClick={() => {
+                    setActiveLayer(idx);
+                    setIsAutoCycling(false);
+                  }}
+                  className="inline-flex shrink-0 lg:w-full text-left p-3.5 lg:p-5 rounded-full lg:rounded-2xl transition-all duration-300 border items-center gap-3 lg:gap-4 group cursor-pointer relative overflow-hidden"
                   style={{
                     backgroundColor: activeLayer === idx ? 'var(--bg-surface-alt)' : 'var(--bg-surface)',
                     borderColor: activeLayer === idx ? 'var(--text-body)' : 'var(--border-card)'
                   }}
                 >
                   <div 
-                    className="w-9 h-9 rounded-xl flex items-center justify-center border transition-all shrink-0"
+                    className="w-7 h-7 lg:w-9 lg:h-9 rounded-xl flex items-center justify-center border transition-all shrink-0"
                     style={{
                       backgroundColor: 'var(--bg-page)',
                       borderColor: 'var(--border-card)',
@@ -423,11 +446,14 @@ export default function SEOStrategyOptimization() {
                     {layer.icon}
                   </div>
                   <span 
-                    className="font-bold text-sm tracking-tight transition-colors"
+                    className="font-bold text-xs lg:text-sm tracking-tight transition-colors"
                     style={{ color: activeLayer === idx ? 'var(--text-body)' : 'var(--text-muted)' }}
                   >
                     Layer {layer.id}: {layer.label}
                   </span>
+                  {activeLayer === idx && isAutoCycling && (
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-[var(--accent-blue)] transition-all duration-100" style={{ width: `${cycleProgress}%` }} />
+                  )}
                 </button>
               ))}
             </div>

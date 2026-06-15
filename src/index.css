@@ -995,3 +995,9 @@ p, li, span.body-text, .text-body-copy {
 .measure-lead     { max-width: var(--measure-lead); }
 .measure-headline { max-width: var(--measure-headline); }
 .measure-subtitle { max-width: var(--measure-subtitle); }
+
+.vertical-text {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}

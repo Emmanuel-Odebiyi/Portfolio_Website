@@ -42,6 +42,8 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           src="/images/home-hero.png"
           alt="Emmanuel Odebiyi — Automation Specialist"
           className="w-full h-auto object-cover transition-all duration-700"
+          fetchPriority="high"
+          decoding="async"
         />
 
         {/* Bottom gradient overlay */}

@@ -103,6 +103,7 @@ export const WorkflowCardStack: React.FC = () => {
                 className="w-full h-full object-cover object-top"
                 style={{ opacity: 0.35 }}
                 draggable={false}
+                loading="lazy"
               />
             </div>
           );
@@ -129,6 +130,7 @@ export const WorkflowCardStack: React.FC = () => {
               alt={CARDS[active].alt}
               className="w-full h-full object-cover object-top"
               draggable={false}
+              loading="lazy"
             />
 
             {/* Bottom gradient */}
