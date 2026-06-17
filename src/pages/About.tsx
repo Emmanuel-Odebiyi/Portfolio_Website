@@ -22,6 +22,7 @@ import { FramerTextReveal } from '../components/ui/framer-text-reveal';
 import { TextRevealByWord } from '../components/ui/text-reveal';
 import { TextEffect } from '../components/ui/text-effect';
 import { ScrollMaskText } from '../components/animations/ScrollMaskText';
+import { OrbitalTestimonials } from '../components/ui/OrbitalTestimonials';
 
 const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\nAnd honestly? It was magic.`;
 
@@ -411,95 +412,83 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 6 — Testimonials
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
-        <div className="max-w-4xl mx-auto px-6 space-y-12">
+      <section className="py-24 md:py-32 overflow-visible" style={{ backgroundColor: 'var(--bg-page)' }}>
+        <div className="max-w-6xl mx-auto px-6 space-y-12 overflow-visible">
           <motion.div {...fadeUp} className="text-center space-y-2">
             <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>What People Say</span>
             <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>Real words from real people.</h2>
           </motion.div>
 
-          <div className="space-y-8">
-            {[
-              {
-                quote: "Emmanuel is a bright spirit with oozing positivity. Everytime he submits work it's with a positive attitude and enthusiasm. He is thorough in his research and asks questions if he has any need to. I would be happy to work with him again in the future and I believe anyone else who gets the opportunity to as well is lucky.",
-                name: "Brock Yates",
-                title: "Operational Project Manager, Mel Technologies LLC (Switzerland)",
-                image: "/images/testimonials/Brock.jpg"
-              },
-              {
-                quote: "Emmanuel delivered great articles and content workflows, taking his time to research the subject thoroughly before designing our search strategy. The better you guide and the more precise you describe your tasks, the better output you'll get. Thank you, Emmanuel.",
-                name: "Phillip Stemann",
-                title: "Founder, Planzer.io",
-                image: "/images/testimonials/Phillip.jpg"
-              },
-              {
-                quote: "Emmanuel is an exceptional systems builder and marketing architect. He built a content mapping database and automated syndication pipeline for us that drastically reduced our publishing overhead. His focus on data accuracy and quality assurance is something I really admire. Highly recommended!",
-                name: "Daniel Olutoki",
-                title: "Retail Merchandiser, Xiaomi Nigeria",
-                image: "/images/testimonials/Daniel.jpg"
-              },
-              {
-                quote: "Emmanuel understands how to scale search engine visibility using technical SEO automation. He helped us research, optimize, and distribute articles using automated brand voice checks, guaranteeing speed without sacrificing editorial standards. He is outstanding at building workflows that deliver.",
-                name: "Adewunmi Adedayo",
-                title: "Journalist & SEO Content Writer",
-                image: "/images/testimonials/Adewunmi.jpg"
-              },
-              {
-                quote: "Emmanuel's approach to merging AI workflows with content strategy is brilliant. He doesn't just build scripts; he architects robust publishing engines using n8n and OpenAI that maintain brand voice at scale. His systems saved our team countless manual hours. An invaluable automation partner!",
-                name: "Nkemdirim Madueme",
-                title: "AI Automation Builder",
-                image: "/images/testimonials/Nkemdirim.jpg"
-              },
-              {
-                quote: "Emmanuel is an exceptional strategist who perfectly blends SEO and content automation. He designed a system to automate our organic marketing and social media publishing pipeline. He's fast, understands distribution tech deeply, and delivers outstanding results. I'd recommend him to any growth team!",
-                name: "Esther Adeniji",
-                title: "Product Manager, UBA Group",
-                image: "/images/testimonials/Esther.jpg"
-              },
-              {
-                quote: "Emmanuel is a brilliant system developer and content architect. He built a custom workflow that allows us to generate, edit, and publish high-quality 2,000 to 5,000-word guides with perfect SEO integration. The traffic results are compounding, and the system runs smoothly.",
-                name: "Taiwo Sotikare",
-                title: "CEO, Business World Africa",
-                image: "/images/testimonials/Taiwo.jpg"
-              },
-              {
-                quote: "Emmanuel completely transformed the content pipeline at Scoove Africa. By designing custom n8n workflows integrated with Make, he automated our entire publishing cycle, boosting traffic by 65% in 3 months. His deep understanding of technical SEO and automation is state of the art.",
-                name: "Olayiide Bolaji-Daniel",
-                title: "Senior Technical SEO Manager, 360⁰ Growth Hacking & CEO, Scoove Africa",
-                image: "/images/testimonials/Bolaji.jpg"
-              }
-            ].map((testimonial, i) => (
-              <motion.figure
-                key={testimonial.name}
-                {...stagger(i)}
-                className="relative rounded-3xl border p-8 md:p-10 transition-all duration-500"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-              >
-                <Quote className="absolute top-6 right-8 w-10 h-10" style={{ color: 'var(--border-card)' }} />
-                <blockquote className="text-lg md:text-xl font-light leading-relaxed mb-6 relative z-10 mt-6" style={{ color: 'var(--text-muted)' }}>
-                  <ScrollMaskText text={`"${testimonial.quote}"`} />
-                </blockquote>
-                <figcaption className="flex items-center gap-3 text-left">
-                  {testimonial.image ? (
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name} 
-                      className="w-10 h-10 rounded-full object-cover border" 
-                      style={{ borderColor: 'var(--border-card)' }}
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style={{ backgroundColor: 'var(--accent-amber)', color: '#fff' }}>
-                      {testimonial.name.charAt(0)}
-                    </div>
-                  )}
-                  <div>
-                    <p className="font-bold" style={{ color: 'var(--text-body)' }}>{testimonial.name}</p>
-                    <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{testimonial.title}</p>
-                  </div>
-                </figcaption>
-              </motion.figure>
-            ))}
-          </div>
+          <motion.div {...fadeUp} className="w-full">
+            <OrbitalTestimonials
+              testimonials={[
+                {
+                  headline: "Bright spirit & thorough researcher",
+                  quote: "Emmanuel is a bright spirit with oozing positivity. Everytime he submits work it's with a positive attitude and enthusiasm. He is thorough in his research and asks questions if he has any need to. I would be happy to work with him again in the future and I believe anyone else who gets the opportunity to as well is lucky.",
+                  name: "Brock Yates",
+                  title: "Operational Project Manager, Mel Technologies LLC (Switzerland)",
+                  image: "/images/testimonials/Brock.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Great articles & solid search strategy",
+                  quote: "Emmanuel delivered great articles and content workflows, taking his time to research the subject thoroughly before designing our search strategy. The better you guide and the more precise you describe your tasks, the better output you'll get. Thank you, Emmanuel.",
+                  name: "Phillip Stemann",
+                  title: "Founder, Planzer.io",
+                  image: "/images/testimonials/Phillip.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Exceptional systems & marketing builder",
+                  quote: "Emmanuel is an exceptional systems builder and marketing architect. He built a content mapping database and automated syndication pipeline for us that drastically reduced our publishing overhead. His focus on data accuracy and quality assurance is something I really admire. Highly recommended!",
+                  name: "Daniel Olutoki",
+                  title: "Retail Merchandiser, Xiaomi Nigeria",
+                  image: "/images/testimonials/Daniel.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Outstanding SEO & publishing workflows",
+                  quote: "Emmanuel understands how to scale search engine visibility using technical SEO automation. He helped us research, optimize, and distribute articles using automated brand voice checks, guaranteeing speed without sacrificing editorial standards. He is outstanding at building workflows that deliver.",
+                  name: "Adewunmi Adedayo",
+                  title: "Journalist & SEO Content Writer",
+                  image: "/images/testimonials/Adewunmi.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Brilliant AI automation partner",
+                  quote: "Emmanuel's approach to merging AI workflows with content strategy is brilliant. He doesn't just build scripts; he architects robust publishing engines using n8n and OpenAI that maintain brand voice at scale. His systems saved our team countless manual hours. An invaluable automation partner!",
+                  name: "Nkemdirim Madueme",
+                  title: "AI Automation Builder",
+                  image: "/images/testimonials/Nkemdirim.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Fast execution & distribution tech expert",
+                  quote: "Emmanuel is an exceptional strategist who perfectly blends SEO and content automation. He designed a system to automate our organic marketing and social media publishing pipeline. He's fast, understands distribution tech deeply, and delivers outstanding results. I'd recommend him to any growth team!",
+                  name: "Esther Adeniji",
+                  title: "Product Manager, UBA Group",
+                  image: "/images/testimonials/Esther.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Compounding results & smooth systems",
+                  quote: "Emmanuel is a brilliant system developer and content architect. He built a custom workflow that allows us to generate, edit, and publish high-quality 2,000 to 5,000-word guides with perfect SEO integration. The traffic results are compounding, and the system runs smoothly.",
+                  name: "Taiwo Sotikare",
+                  title: "CEO, Business World Africa",
+                  image: "/images/testimonials/Taiwo.jpg",
+                  rating: 5
+                },
+                {
+                  headline: "Completely transformed our content pipeline",
+                  quote: "Emmanuel completely transformed the content pipeline at Scoove Africa. By designing custom n8n workflows integrated with Make, he automated our entire publishing cycle, boosting traffic by 65% in 3 months. His deep understanding of technical SEO and automation is state of the art.",
+                  name: "Olayiide Bolaji-Daniel",
+                  title: "Senior Technical SEO Manager, 360⁰ Growth Hacking & CEO, Scoove Africa",
+                  image: "/images/testimonials/Bolaji.jpg",
+                  rating: 5
+                }
+              ]}
+            />
+          </motion.div>
         </div>
       </section>
 
