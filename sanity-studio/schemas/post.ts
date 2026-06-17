@@ -191,6 +191,35 @@ export default defineType({
       description: 'Optional. A search-optimized description for Google & search engine results (Recommended: 120-160 characters). If left blank, listing excerpt will be used.',
       validation: Rule => Rule.max(160),
     }),
+    defineField({
+      name: 'faqs',
+      title: 'Frequently Asked Questions (FAQs)',
+      type: 'array',
+      group: 'main',
+      of: [
+        {
+          type: 'object',
+          name: 'faq',
+          title: 'FAQ Item',
+          fields: [
+            {
+              name: 'question',
+              type: 'string',
+              title: 'Question',
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'answer',
+              type: 'text',
+              title: 'Answer',
+              rows: 3,
+              validation: Rule => Rule.required(),
+            },
+          ],
+        },
+      ],
+      description: 'Optional list of Frequently Asked Questions (FAQs) and answers specific to this article.',
+    }),
 
     // ── NEW: WordPress-style Visual Rich Text Editor ─────────────────────────
     defineField({

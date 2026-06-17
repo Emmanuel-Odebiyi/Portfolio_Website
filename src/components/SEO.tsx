@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { FAQType } from '../data/blogData';
 
 interface SEOProps {
   title: string;
@@ -10,6 +11,7 @@ interface SEOProps {
   canonical?: string;
   /** Pass true on the Home and About pages to inject JSON-LD Person schema */
   withPersonSchema?: boolean;
+  faqSchema?: FAQType[];
 }
 
 const BASE_URL = 'https://emmanuelodebiyi.name.ng';
@@ -79,6 +81,7 @@ export function SEO({
   type = 'website',
   canonical,
   withPersonSchema = false,
+  faqSchema,
 }: SEOProps) {
   useEffect(() => {
     const pageUrl = ogUrl ?? `${BASE_URL}${window.location.pathname}`;
@@ -112,7 +115,26 @@ export function SEO({
     if (withPersonSchema) {
       setJsonLd('json-ld-person', PERSON_SCHEMA);
     }
-  }, [title, description, keywords, ogImage, ogUrl, type, canonical, withPersonSchema]);
+
+    if (faqSchema && faqSchema.length > 0) {
+      const faqLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqSchema.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      };
+      setJsonLd('json-ld-faq', faqLd);
+    } else {
+      const existing = document.getElementById('json-ld-faq');
+      if (existing) existing.remove();
+    }
+  }, [title, description, keywords, ogImage, ogUrl, type, canonical, withPersonSchema, faqSchema]);
 
   return null;
 }

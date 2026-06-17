@@ -18,6 +18,11 @@ export interface BlogSection {
   };
 }
 
+export interface FAQType {
+  question: string;
+  answer: string;
+}
+
 export interface BlogPostType {
   id: string;
   title: string;
@@ -34,6 +39,7 @@ export interface BlogPostType {
   sections: BlogSection[];
   takeaways: string[];
   metaDescription?: string;
+  faqs?: FAQType[];
 }
 
 export const blogPosts: BlogPostType[] = [

@@ -12,7 +12,8 @@
  * 100% of your Vite portfolio performance, GSAP animations, and 3D scenes.
  */
 
-import { BlogPostType, BlogSection, blogPosts as legacyPosts } from './blogData';
+import { BlogPostType, BlogSection, FAQType, blogPosts as legacyPosts } from './blogData';
+export type { FAQType };
 import { fetchSanityQuery } from './sanityClient';
 
 // ── Portable Text block types from the new WYSIWYG editor ─────────────────────
@@ -142,6 +143,7 @@ interface CMSFrontmatter {
   takeaways: string[];
   sections: CMSSection[];
   metaDescription?: string;
+  faqs?: FAQType[];
 }
 
 // ── Parse a CMS section into the existing BlogSection interface ────────────────
@@ -374,6 +376,7 @@ function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): 
     sections: parsedSections,
     takeaways: frontmatter.takeaways || [],
     metaDescription: frontmatter.metaDescription,
+    faqs: frontmatter.faqs || [],
   };
 }
 
@@ -536,6 +539,7 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
       takeaways,
       date,
       metaDescription,
+      faqs,
       // New Portable Text content (WYSIWYG editor)
       content[] {
         ...,
@@ -609,6 +613,7 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
           takeaways: post.takeaways || [],
           sections,
           metaDescription: post.metaDescription,
+          faqs: post.faqs || [],
           // Attach the raw Portable Text blocks for the new renderer
           portableContent: hasPortableContent ? post.content : undefined,
         } as ExtendedBlogPostType;

@@ -14,10 +14,12 @@ import {
   ChevronRight,
   BookOpen,
   Copy,
-  ArrowDown
+  ArrowDown,
+  ChevronDown,
+  HelpCircle
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { allBlogPosts as blogPosts, type ExtendedBlogPostType, type PortableTextNode, type PortableTextBlock, type PortableTextSpan } from '../data/blogLoader';
+import { allBlogPosts as blogPosts, type ExtendedBlogPostType, type PortableTextNode, type PortableTextBlock, type PortableTextSpan, type FAQType } from '../data/blogLoader';
 
 // ── Custom Monospace Terminal Code Block with Copy Action ─────────────────────
 interface TerminalCodeBlockProps {
@@ -614,11 +616,123 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
   return <div className="space-y-6">{elements}</div>;
 };
 
+// ── FAQ Accordion Components ──────────────────────────────────────────────────
+interface FAQItemProps {
+  faq: FAQType;
+  isOpen: boolean;
+  onToggle: () => void;
+  index: number;
+}
+
+const FAQAccordionItem: React.FC<FAQItemProps> = ({ faq, isOpen, onToggle, index }) => {
+  return (
+    <div 
+      className="border rounded-2xl overflow-hidden transition-all duration-300"
+      style={{ 
+        backgroundColor: isOpen ? 'var(--bg-surface-alt)' : 'var(--bg-surface)', 
+        borderColor: isOpen ? 'var(--accent-amber)' : 'var(--border-card)' 
+      }}
+    >
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none transition-colors group cursor-pointer"
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-start gap-4">
+          <span 
+            className="text-sm font-sans font-bold select-none mt-0.5" 
+            style={{ color: isOpen ? 'var(--accent-amber)' : 'var(--text-muted)' }}
+          >
+            {index < 9 ? `0${index + 1}` : index + 1}
+          </span>
+          <h3 
+            className="text-base md:text-lg font-bold font-display transition-colors group-hover:text-[var(--accent-amber)]" 
+            style={{ color: 'var(--text-body)' }}
+          >
+            {faq.question}
+          </h3>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="flex-shrink-0 ml-4"
+          style={{ color: isOpen ? 'var(--accent-amber)' : 'var(--text-muted)' }}
+        >
+          <ChevronDown size={18} />
+        </motion.div>
+      </button>
+      
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="px-6 pb-6 pt-1 border-t pl-[3.5rem] md:pl-[3.5rem]" style={{ borderColor: 'var(--border-card)' }}>
+              <p className="text-sm md:text-base font-light leading-relaxed select-text" style={{ color: 'var(--text-muted)' }}>
+                {faq.answer}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+interface FAQAccordionProps {
+  faqs: FAQType[];
+}
+
+const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs }) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0); // Open the first FAQ by default
+
+  return (
+    <div className="space-y-4">
+      {faqs.map((faq, index) => (
+        <FAQAccordionItem
+          key={index}
+          faq={faq}
+          isOpen={openIndex === index}
+          onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+          index={index}
+        />
+      ))}
+    </div>
+  );
+};
+
+const DEFAULT_FAQS: FAQType[] = [
+  {
+    question: "What is content marketing automation?",
+    answer: "Content marketing automation involves using specialized software systems (such as n8n, Zapier, or custom APIs) to execute repetitive task flows, including drafts structuring, social media distribution, and formatting. Rather than replacing human creativity, it frees up time for strategy and high-fidelity editing."
+  },
+  {
+    question: "How does automation help in B2B SaaS growth?",
+    answer: "B2B SaaS requires consistent, high-quality, authoritative content. Automation ensures that you can repurpose a single major piece of content (like a whitepaper or long-form blog) into dozens of social snippets, email drafts, and cross-channel posts automatically, significantly increasing your brand presence with minimal manual overhead."
+  },
+  {
+    question: "Does automated distribution affect search engine rankings?",
+    answer: "No. Search engines rank content based on 'Information Gain,' unique perspective, and user engagement signals (like dwell time). Automated distribution merely speeds up how quickly you syndicate your posts to LinkedIn, X, newsletters, and other channels, helping you build faster organic authority."
+  },
+  {
+    question: "How do you maintain the 'human spark' when automating content?",
+    answer: "We advocate for a strict 'Human-in-the-Loop' editorial pipeline. Automation handles outline structuring, competitive research gathering, and syndication channels, but the ideation, key insights, personal stories, and final editorial edits are always executed by a human expert."
+  },
+  {
+    question: "How do I get started with a content automation tech stack?",
+    answer: "You don't need a five-figure enterprise budget. You can build a robust, modular content engine using affordable tools like Notion for planning, OpenAI/Claude APIs for drafting assistance, and n8n or Zapier for connecting pipelines, all for under $500/month."
+  }
+];
+
 export default function BlogPost() {
   const { id } = useParams();
   
   const post = (blogPosts.find(p => p.id === id) || blogPosts[0]) as ExtendedBlogPostType;
   const hasPortableContent = !!(post.portableContent && post.portableContent.length > 0);
+  const faqs = (post.faqs && post.faqs.length > 0) ? post.faqs : DEFAULT_FAQS;
 
   const [scrollPercent, setScrollPercent] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
@@ -726,6 +840,7 @@ export default function BlogPost() {
         title={`${post.title} | Emmanuel Odebiyi`}
         description={post.metaDescription || post.excerpt}
         keywords={post.tags.join(", ")}
+        faqSchema={faqs}
       />
 
       {/* Floating Scroll Progress Bar */}
@@ -1043,6 +1158,15 @@ export default function BlogPost() {
                   </li>
                 ))}
               </ul>
+            </section>
+
+            {/* FAQs Section */}
+            <section className="mt-24 space-y-10 text-left">
+              <div className="space-y-3">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Help & Context</span>
+                <h2 className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Frequently Asked Questions</h2>
+              </div>
+              <FAQAccordion faqs={faqs} />
             </section>
 
             {/* Dynamic Author Bio Card */}
