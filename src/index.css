@@ -988,6 +988,10 @@ p, li, span.body-text, .text-body-copy {
   --space-64:  4rem;       /* 64px */
   --space-80:  5rem;       /* 80px */
   --space-96:  6rem;       /* 96px */
+
+  /* ── Solution Section Card Height Tokens ───────────────────────── */
+  --solution-card-active-height: clamp(280px, 45vh, 420px);
+  --solution-card-inactive-height: 56px;
 }
 
 /* ── Measure utility classes (opt-in only, no global side-effects) ──────── */
@@ -1000,4 +1004,19 @@ p, li, span.body-text, .text-body-copy {
   writing-mode: vertical-lr;
   transform: rotate(180deg);
   white-space: nowrap;
+}
+
+/* ── Responsive Solution Accordion Card Heights ────────────────── */
+@media (max-width: 1023px) {
+  :root {
+    --solution-card-active-height: 240px;
+    --solution-card-inactive-height: 48px;
+  }
+}
+
+@media (max-height: 740px) and (max-width: 1023px) {
+  :root {
+    --solution-card-active-height: 200px;
+    --solution-card-inactive-height: 44px;
+  }
 }

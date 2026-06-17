@@ -123,7 +123,7 @@ export const SolutionSection = () => {
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-surface-alt) 80%, transparent)' }}>
 
         {/* ── Headline Block ── */}
-        <div className="shrink-0 pt-20 md:pt-24 pb-2 md:pb-4 px-6 md:px-16 text-center z-10">
+        <div className="shrink-0 pt-14 md:pt-24 pb-2 md:pb-4 px-6 md:px-16 text-center z-10">
           <p className="text-[10px] font-sans font-bold tracking-[0.4em] uppercase mb-2 md:mb-4" style={{ color: 'var(--accent-amber)' }}>
             The Solution
           </p>
@@ -132,7 +132,7 @@ export const SolutionSection = () => {
             <span className="block">Could Run Itself?</span>
           </h2>
           <p 
-            className="text-xs md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="hidden md:block text-xs md:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: 'var(--text-muted)' }}
           >
             I build intelligent content marketing systems that produce consistent,
@@ -141,7 +141,7 @@ export const SolutionSection = () => {
         </div>
 
         {/* ── Accordion Panels — Stacks vertically on mobile/tablet, horizontal on desktop ── */}
-        <div className="flex-1 flex flex-col lg:flex-row solution-accordion-flex overflow-hidden px-4 pb-4 lg:px-8 lg:pb-8 gap-3 lg:gap-0 max-h-[750px] my-auto w-full">
+        <div className="flex-1 flex flex-col lg:flex-row solution-accordion-flex overflow-hidden px-4 pb-4 lg:px-8 lg:pb-8 gap-2 md:gap-3 lg:gap-0 max-h-[750px] my-auto w-full">
           {SOLUTIONS.map((solution, index) => {
             const isActive = index === activeIndex;
             const SolutionIcon = solution.Icon;
@@ -168,7 +168,9 @@ export const SolutionSection = () => {
                       : `linear-gradient(135deg, color-mix(in srgb, ${solution.accentColor} 20%, var(--border-card)), var(--border-card))`
                   }`,
                   // Mobile/tablet: wide horizontal strip. Desktop: narrow vertical strip.
-                  minHeight: isActive ? 'clamp(280px, 45vh, 420px)' : '56px',
+                  minHeight: isActive 
+                    ? 'var(--solution-card-active-height, clamp(280px, 45vh, 420px))' 
+                    : 'var(--solution-card-inactive-height, 56px)',
                 }}
               >
                 {/* Collapsed label:

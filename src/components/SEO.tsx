@@ -55,9 +55,9 @@ const PERSON_SCHEMA = {
   description:
     'I build automated content marketing systems and technical SEO strategies for high-growth B2B SaaS and agency brands to scale organic traffic and reclaim hours.',
   sameAs: [
-    'https://x.com/Bobowrites_',
-    'https://www.linkedin.com/in/emmanuel-odebiyi',
-    'https://www.instagram.com/emmanuelodebiyi_/',
+    'https://x.com/emmanuelodebiy',
+    'https://www.linkedin.com/in/emmanuel-odebiyi/',
+    'https://www.instagram.com/emmanuel_odebiyi/',
   ],
   knowsAbout: [
     'Content Marketing Automation',
@@ -103,7 +103,7 @@ export function SEO({
 
     // ── Twitter Card ─────────────────────────────────────────────────────────
     setMeta('name', 'twitter:card', 'summary_large_image');
-    setMeta('name', 'twitter:site', '@emmanuelo_dev');
+    setMeta('name', 'twitter:site', '@emmanuelodebiy');
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
     setMeta('name', 'twitter:image', ogImage);

@@ -27,9 +27,9 @@ const footerLinks = [
   {
     title: 'Connect',
     links: [
-      { name: 'Twitter / X', href: 'https://x.com/Bobowrites_', icon: <Twitter size={16} /> },
-      { name: 'LinkedIn', href: 'https://www.linkedin.com/in/emmanuel-odebiyi', icon: <Linkedin size={16} /> },
-      { name: 'Instagram', href: 'https://www.instagram.com/emmanuelodebiyi_/', icon: <Instagram size={16} /> },
+      { name: 'Twitter / X', href: 'https://x.com/emmanuelodebiy', icon: <Twitter size={16} /> },
+      { name: 'LinkedIn', href: 'https://www.linkedin.com/in/emmanuel-odebiyi/', icon: <Linkedin size={16} /> },
+      { name: 'Instagram', href: 'https://www.instagram.com/emmanuel_odebiyi/', icon: <Instagram size={16} /> },
       { name: 'Email', href: 'mailto:emmanuel@emmanuelodebiyi.name.ng', icon: <Mail size={16} /> },
     ],
   },

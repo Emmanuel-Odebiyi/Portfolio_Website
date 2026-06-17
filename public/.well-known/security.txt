@@ -1,0 +1,4 @@
+Contact: mailto:emmanuel@emmanuelodebiyi.name.ng
+Expires: 2027-06-17T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://emmanuelodebiyi.name.ng/.well-known/security.txt
