@@ -884,24 +884,31 @@ export default function BlogPost() {
             referrerPolicy="no-referrer"
           />
           {/* Top-down dark overlay to bring out the header text and logo */}
-          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/70 via-[#0E1C2A]/30 to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-page) 0%, transparent 100%)', opacity: 0.9 }} />
-          <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-page)', opacity: 0.1 }} />
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/80 via-[#0E1C2A]/40 to-transparent pointer-events-none z-10" />
+          {/* Subtle bottom-up dark gradient fade */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0E1C2A] via-[#0E1C2A]/50 to-transparent z-10" />
+          {/* Subtle dark tint to dim the whole banner for high text contrast */}
+          <div className="absolute inset-0 bg-[#0E1C2A]/30 z-10" />
         </motion.div>
 
-        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-20 max-w-7xl mx-auto w-full relative z-10">
+        {/* Absolute content overlay with top padding constraint to prevent navbar overlap */}
+        <div className="absolute inset-0 flex flex-col justify-end pt-32 pb-10 md:pt-36 md:pb-16 px-6 md:px-20 max-w-7xl mx-auto w-full z-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
             className="space-y-6 max-w-4xl text-left"
           >
-            <Link to="/blog" className="inline-flex items-center gap-2 transition-colors mb-2 group font-sans text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+            <Link 
+              to="/blog" 
+              className="inline-flex items-center gap-2 transition-colors mb-2 group font-sans text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white"
+            >
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
               Back to Insights
             </Link>
             
-            <h1 className="text-4xl md:text-7xl font-bold tracking-tight leading-[0.95] font-display" style={{ color: 'var(--text-body)' }}>
+            {/* Title sized dynamically (balanced maximum at text-6xl) to prevent screen overcrowding */}
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] font-display text-white">
               {post.title}
             </h1>
 
@@ -912,29 +919,28 @@ export default function BlogPost() {
                   alt={post.author} 
                   width={40}
                   height={40}
-                  className="w-10 h-10 rounded-full border" 
-                  style={{ borderColor: 'var(--border-card)' }}
+                  className="w-10 h-10 rounded-full border border-white/20" 
                 />
                 <div>
-                  <p className="font-bold text-sm leading-none" style={{ color: 'var(--text-body)' }}>{post.author}</p>
-                  <p className="text-[10px] font-sans font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-muted)' }}>{post.date}</p>
+                  <p className="font-bold text-sm leading-none text-white">{post.author}</p>
+                  <p className="text-[10px] font-sans font-bold uppercase tracking-widest mt-1 text-zinc-400">{post.date}</p>
                 </div>
               </div>
               
-              <div className="h-4 w-px hidden sm:block" style={{ backgroundColor: 'var(--border-card)' }} />
+              <div className="h-4 w-px hidden sm:block bg-white/20" />
 
-              <div className="flex items-center gap-6 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                <span className="flex items-center gap-1.5"><Clock size={13} /> {post.readTime}</span>
+              <div className="flex items-center gap-6 text-xs font-sans font-bold uppercase tracking-widest text-zinc-300">
+                <span className="flex items-center gap-1.5"><Clock size={13} className="text-zinc-400" /> {post.readTime}</span>
                 <button 
                   onClick={copyShareLink}
-                  className="flex items-center gap-1.5 hover:text-[var(--text-body)] transition-colors focus:outline-none"
+                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none cursor-pointer"
                   title="Share Link"
                 >
-                  <Share2 size={13} /> Share
+                  <Share2 size={13} className="text-zinc-400" /> Share
                 </button>
                 <button 
                   onClick={toggleBookmark}
-                  className="flex items-center gap-1.5 hover:text-[var(--text-body)] transition-colors focus:outline-none"
+                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none cursor-pointer"
                   title="Bookmark post"
                 >
                   <Bookmark size={13} style={{ color: isBookmarked ? 'var(--accent-amber)' : 'inherit', fill: isBookmarked ? 'var(--accent-amber)' : 'none' }} /> Bookmark

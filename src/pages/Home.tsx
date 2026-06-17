@@ -69,6 +69,78 @@ export default function Home() {
       {/* ── Comparison Section ── */}
       <ProviderComparison />
 
+      {/* ── Client Testimonials ── */}
+      <section className="py-24 border-t" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+        <div className="max-w-5xl mx-auto px-6 space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>Upwork Verified</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Client Success Stories</h2>
+            <p className="font-light text-sm max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+              Real feedback from project managers and founders on content strategy, SEO execution, and workflow quality.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            {[
+              {
+                quote: "Emmanuel is a bright spirit with oozing positivity. Everytime he submits work it's with a positive attitude and enthusiasm. He is thorough in his research and asks questions if he has any need to. I would be happy to work with him again in the future and I believe anyone else who gets the opportunity to as well is lucky.",
+                name: "Brock Yates",
+                title: "Operational Project Manager, Mel Technologies LLC (Switzerland)",
+                image: "/images/testimonials/Brock.jpg"
+              },
+              {
+                quote: "Emmanuel delivered great articles and content workflows, taking his time to research the subject thoroughly before designing our search strategy. The better you guide and the more precise you describe your tasks, the better output you'll get. Thank you, Emmanuel.",
+                name: "Phillip Stemann",
+                title: "Founder, Planzer.io",
+                image: "/images/testimonials/Phillip.jpg"
+              }
+            ].map((testimonial, i) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                className="p-8 rounded-[2rem] border shadow-xl flex flex-col justify-between space-y-6 relative overflow-hidden backdrop-blur-sm"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="absolute top-6 right-8 text-4xl select-none opacity-[0.03] dark:opacity-[0.06] font-display pointer-events-none" style={{ color: 'var(--text-body)' }}>“</div>
+                
+                <p className="text-base font-light leading-relaxed italic" style={{ color: 'var(--text-muted)' }}>
+                  "{testimonial.quote}"
+                </p>
+                
+                <div className="flex items-center gap-4 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name} 
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full object-cover border" 
+                    style={{ borderColor: 'var(--border-card)' }}
+                  />
+                  <div>
+                    <h4 className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>{testimonial.name}</h4>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{testimonial.title}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center pt-4">
+            <Link 
+              to="/about"
+              className="inline-flex items-center gap-2 hover:text-[var(--accent-amber)] font-bold font-sans text-xs uppercase tracking-widest transition-colors"
+              style={{ color: 'var(--text-body)' }}
+            >
+              See all testimonials <span className="text-sm font-sans font-bold">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Integration Ticker ── */}
       <IntegrationTicker />
 

@@ -71,7 +71,7 @@ export const Header: React.FC = () => {
   const showBg = isScrolled || !isHomePage;
 
   return (
-    <header className={`fixed left-1/2 -translate-x-1/2 z-[500] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-5xl' : 'top-6 max-w-7xl'}`}>
+    <header className={`fixed left-1/2 -translate-x-1/2 z-[500] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-5xl' : 'top-6 max-w-5xl'}`}>
       <div 
         className={`w-full transition-all duration-500 pointer-events-auto ${
           showBg 
