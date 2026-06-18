@@ -112,6 +112,17 @@ export const SolutionSection = () => {
     });
   }, [scrollYProgress]);
 
+  const handleCardClick = (targetIndex: number) => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const rect = container.getBoundingClientRect();
+    const absoluteTop = window.scrollY + rect.top;
+    const totalScrollable = container.scrollHeight - window.innerHeight;
+    const blockHeight = totalScrollable / SOLUTIONS.length;
+    const targetScroll = absoluteTop + targetIndex * blockHeight + blockHeight * 0.35;
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  };
+
   return (
     <div
       ref={containerRef}
@@ -149,7 +160,15 @@ export const SolutionSection = () => {
             return (
               <motion.div
                 key={solution.id}
-                className="relative overflow-hidden rounded-2xl lg:rounded-[3rem] mx-0 lg:mx-2 first:ml-0 last:mr-0 flex-1 shadow-sm transition-shadow duration-300"
+                onClick={() => handleCardClick(index)}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick(index);
+                  }
+                }}
+                className="relative overflow-hidden rounded-2xl lg:rounded-[3rem] mx-0 lg:mx-2 first:ml-0 last:mr-0 flex-1 shadow-sm transition-shadow duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent-amber)] focus-visible:outline-offset-2"
                 animate={{ 
                     flex: isActive ? 8 : 1,
                     scale: isActive ? 1 : 0.98,

@@ -30,14 +30,10 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: animateDelay, duration: 0.8 }}
-      className={`relative p-3 rounded-[2rem] w-full ${maxWidth} shadow-xl ${className}`}
-      style={{
-        backgroundColor: 'var(--bg-surface)',
-        border: '1px solid var(--border-card)',
-      }}
+      className={`relative p-3 rounded-[2rem] w-full bg-[var(--bg-surface)] border border-[var(--border-card)] shadow-xl lg:p-0 lg:bg-transparent lg:border-none lg:shadow-none lg:max-w-none ${maxWidth} ${className}`}
     >
       {/* Inner clip container — maintains the rounded photo corners */}
-      <div className="relative w-full rounded-[1.75rem] overflow-hidden bg-zinc-200">
+      <div className="relative w-full rounded-[1.75rem] lg:rounded-[2.5rem] overflow-hidden bg-zinc-200 lg:max-w-[620px] lg:ml-auto">
         <img
           src="/images/home-hero.png"
           alt="Emmanuel Odebiyi — Automation Specialist"

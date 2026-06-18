@@ -175,8 +175,8 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 1 — "Hey, I'm Emmanuel." (dark)
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative z-20" style={{ backgroundColor: 'var(--bg-page)' }}>
-        <article className="max-w-3xl mx-auto px-6 space-y-10">
+      <section className="py-24 md:py-32 relative z-20 flex flex-col items-center" style={{ backgroundColor: 'var(--bg-page)' }}>
+        <article className="max-w-2xl w-full px-6 space-y-10">
           <div className="min-h-[140px] flex flex-col justify-start">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -284,8 +284,8 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 4 — Breaking Point
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 border-t" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-        <article className="max-w-3xl mx-auto px-6 space-y-10">
+      <section className="py-24 md:py-32 border-t flex flex-col items-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+        <article className="max-w-2xl w-full px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-sans font-bold text-red-500/80 uppercase tracking-[0.3em]">The Breaking Point</span>
             <h2 className="text-4xl md:text-6xl font-bold font-display tracking-tight leading-tight" style={{ color: 'var(--text-body)' }}>
@@ -496,8 +496,8 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 7 — What I Believe
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 border-y" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)', borderColor: 'var(--border-card)' }}>
-        <article className="max-w-3xl mx-auto px-6 space-y-10">
+      <section className="py-24 md:py-32 border-y flex flex-col items-center" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)', borderColor: 'var(--border-card)' }}>
+        <article className="max-w-2xl w-full px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--accent-amber)' }}>What I Believe</span>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight min-h-[100px]">
@@ -572,8 +572,8 @@ export default function About() {
       {/* ═══════════════════════════════════════════
           SECTION 9 — Where I'm Going
       ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
-        <article className="max-w-3xl mx-auto px-6 space-y-10">
+      <section className="py-24 md:py-32 flex flex-col items-center" style={{ backgroundColor: 'var(--bg-page)' }}>
+        <article className="max-w-2xl w-full px-6 space-y-10">
           <motion.div {...fadeUp} className="space-y-2">
             <span className="text-xs font-sans font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--text-muted)' }}>Where I'm Going</span>
             <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight leading-tight" style={{ color: 'var(--text-body)' }}>

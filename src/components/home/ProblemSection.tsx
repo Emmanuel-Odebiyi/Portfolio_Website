@@ -560,18 +560,24 @@ export const ProblemSection: React.FC = () => {
         </div>
 
         {/* Bottom progress dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
           {PROBLEMS.map((p, i) => (
-            <motion.div
+            <button
               key={p.id}
-              animate={{
-                width: i === activeIndex ? 24 : 6,
-                opacity: i === activeIndex ? 1 : 0.25,
-                backgroundColor: i === activeIndex ? p.accentColor : 'var(--text-muted)',
-              }}
-              transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-              className="h-1.5 rounded-full"
-            />
+              onClick={() => handleNodeClick(i)}
+              className="py-3 px-1 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent-amber)] focus-visible:outline-offset-2 rounded-sm"
+              aria-label={`Go to problem slide ${p.id}`}
+            >
+              <motion.div
+                animate={{
+                  width: i === activeIndex ? 24 : 6,
+                  opacity: i === activeIndex ? 1 : 0.25,
+                  backgroundColor: i === activeIndex ? p.accentColor : 'var(--text-muted)',
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+                className="h-1.5 rounded-full"
+              />
+            </button>
           ))}
         </div>
 

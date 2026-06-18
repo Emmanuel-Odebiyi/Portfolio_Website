@@ -2,7 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
+import { SiN8N, SiZapier, SiMake, SiOpenai, SiHubspot, SiAirtable } from 'react-icons/si';
 import { HeroPhoto } from '../HeroPhoto';
+
+const N8nIcon = SiN8N as any;
+const ZapierIcon = SiZapier as any;
+const MakeIcon = SiMake as any;
+const OpenaiIcon = SiOpenai as any;
+const HubspotIcon = SiHubspot as any;
+const AirtableIcon = SiAirtable as any;
 
 export const HeroSection = () => {
   return (
@@ -121,6 +129,46 @@ export const HeroSection = () => {
           </div>
 
         </div>
+
+        {/* Full-width Logo Ticker (Harvey & Chatlabs style) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-16 md:mt-24 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-6"
+          style={{ borderColor: 'var(--border-card)' }}
+        >
+          <span className="text-[10px] font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>
+            POWERED BY STANDARD-SETTING TECH
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-[var(--text-muted)] opacity-60">
+            <div className="flex items-center gap-2 text-xl font-bold font-sans">
+              <N8nIcon className="w-5 h-5 text-current hover:text-[var(--accent-amber)] transition-colors" />
+              <span>n8n</span>
+            </div>
+            <div className="flex items-center gap-2 text-xl font-bold font-sans">
+              <ZapierIcon className="w-5 h-5 text-current hover:text-[var(--accent-amber)] transition-colors" />
+              <span>Zapier</span>
+            </div>
+            <div className="flex items-center gap-2 text-xl font-bold font-sans">
+              <MakeIcon className="w-5 h-5 text-current hover:text-[var(--accent-amber)] transition-colors" />
+              <span>Make.com</span>
+            </div>
+            <div className="flex items-center gap-2 text-xl font-bold font-sans">
+              <OpenaiIcon className="w-5 h-5 text-current hover:text-[var(--accent-amber)] transition-colors" />
+              <span>OpenAI</span>
+            </div>
+            <div className="flex items-center gap-2 text-xl font-bold font-sans">
+              <HubspotIcon className="w-5 h-5 text-current hover:text-[var(--accent-amber)] transition-colors" />
+              <span>HubSpot</span>
+            </div>
+            <div className="flex items-center gap-2 text-xl font-bold font-sans">
+              <AirtableIcon className="w-5 h-5 text-current hover:text-[var(--accent-amber)] transition-colors" />
+              <span>Airtable</span>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
