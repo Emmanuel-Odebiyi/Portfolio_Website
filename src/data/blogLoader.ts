@@ -352,6 +352,23 @@ export function parseMarkdownBodyToSections(body: string): BlogSection[] {
   return sections;
 }
 
+// Helper to format ISO or raw date strings into "Month Day, Year"
+function formatDate(dateStr: string): string {
+  if (!dateStr) return '';
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    return d.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC'
+    });
+  } catch {
+    return dateStr;
+  }
+}
+
 function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): ExtendedBlogPostType {
   let parsedSections: BlogSection[] = [];
   if (frontmatter.sections && frontmatter.sections.length > 0) {
@@ -366,7 +383,7 @@ function parseCMSPost(frontmatter: CMSFrontmatter, body: string, slug: string): 
     author: frontmatter.author,
     authorImage: frontmatter.authorImage,
     authorBio: frontmatter.authorBio,
-    date: frontmatter.date,
+    date: formatDate(frontmatter.date),
     readTime: frontmatter.readTime,
     excerpt: frontmatter.excerpt,
     image: frontmatter.image,
@@ -470,7 +487,7 @@ function parseSimpleYAML(yaml: string): Record<string, unknown> {
 }
 
 // Eager glob import of local markdown content as the baseline fallback
-const markdownModules = import.meta.glob('../../content/blog/*.{md,mdx}', {
+const markdownModules = import.meta.glob('../content/blog/*.{md,mdx}', {
   eager: true,
   query: '?raw',
   import: 'default',
@@ -603,7 +620,7 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
           author: post.author || 'Emmanuel Odebiyi',
           authorImage: post.authorImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel',
           authorBio: post.authorBio || '',
-          date: post.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          date: formatDate(post.date) || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
           readTime: post.readTime || '5 min read',
           excerpt: post.excerpt || '',
           image: post.image || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop',

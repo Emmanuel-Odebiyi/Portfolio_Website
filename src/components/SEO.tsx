@@ -95,12 +95,17 @@ export function SEO({
     // ── Canonical ─────────────────────────────────────────────────────────────
     setLink('canonical', canonicalUrl);
 
+    // Resolve relative ogImage path to absolute URL
+    const absoluteOgImage = ogImage.startsWith('http') || ogImage.startsWith('//')
+      ? ogImage
+      : `${BASE_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+
     // ── Open Graph ───────────────────────────────────────────────────────────
     setMeta('property', 'og:type', type);
     setMeta('property', 'og:url', pageUrl);
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
-    setMeta('property', 'og:image', ogImage);
+    setMeta('property', 'og:image', absoluteOgImage);
     setMeta('property', 'og:site_name', 'Emmanuel Odebiyi');
     setMeta('property', 'og:locale', 'en_US');
 
@@ -109,7 +114,7 @@ export function SEO({
     setMeta('name', 'twitter:site', '@emmanuelodebiy');
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
-    setMeta('name', 'twitter:image', ogImage);
+    setMeta('name', 'twitter:image', absoluteOgImage);
 
     // ── JSON-LD ──────────────────────────────────────────────────────────────
     if (withPersonSchema) {

@@ -418,13 +418,38 @@ function renderPortableBlock(block: PortableTextBlock, keyPrefix: string): React
   const style = block.style || 'normal';
 
   if (style === 'h2') {
-    return <h2 key={keyPrefix} className="text-3xl md:text-4xl font-bold font-display pt-8" style={{ color: 'var(--text-body)' }}>{children}</h2>;
+    return (
+      <h2
+        key={keyPrefix}
+        className="flex items-center gap-3 font-bold font-display mt-12 mb-4 pb-3 border-b"
+        style={{ color: 'var(--text-body)', borderColor: 'var(--border-card)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}
+      >
+        <span className="flex-shrink-0 w-1.5 h-7 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+        {children}
+      </h2>
+    );
   }
   if (style === 'h3') {
-    return <h3 key={keyPrefix} className="text-2xl md:text-3xl font-bold font-display pt-6" style={{ color: 'var(--text-body)' }}>{children}</h3>;
+    return (
+      <h3
+        key={keyPrefix}
+        className="font-bold font-display mt-9 mb-3"
+        style={{ color: 'var(--accent-amber)', fontSize: 'clamp(1.2rem, 2.4vw, 1.65rem)' }}
+      >
+        {children}
+      </h3>
+    );
   }
   if (style === 'h4') {
-    return <h4 key={keyPrefix} className="text-xl md:text-2xl font-semibold font-display pt-4" style={{ color: 'var(--text-body)' }}>{children}</h4>;
+    return (
+      <h4
+        key={keyPrefix}
+        className="font-semibold font-display mt-7 mb-2"
+        style={{ color: 'var(--text-body)', opacity: 0.9, fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', letterSpacing: '0.01em' }}
+      >
+        {children}
+      </h4>
+    );
   }
   if (style === 'blockquote') {
     return (
@@ -489,16 +514,43 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
 
       flushList();
 
-      if (textBlock.style === 'h2' || textBlock.style === 'h3') {
+      if (textBlock.style === 'h2' || textBlock.style === 'h3' || textBlock.style === 'h4') {
         const headingText = (textBlock.children || []).map(c => c.text).join('');
-        elements.push(
-          <div key={key} id={`section-${sectionIndex}`} className="scroll-mt-24">
-            <h2 className={`${
-              textBlock.style === 'h2' ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'
-            } font-bold font-display flex items-center gap-3 pt-8`} style={{ color: 'var(--text-body)' }}>
-              <span className="text-sm font-sans font-bold tracking-widest" style={{ color: 'var(--text-muted)' }}>0{sectionIndex + 1}.</span>
+
+        let headingEl: React.ReactNode;
+        if (textBlock.style === 'h2') {
+          headingEl = (
+            <h2
+              className="flex items-center gap-3 font-bold font-display mt-12 mb-4 pb-3 border-b block"
+              style={{ color: 'var(--text-body)', borderColor: 'var(--border-card)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}
+            >
+              <span className="flex-shrink-0 w-1.5 h-7 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
               {headingText}
             </h2>
+          );
+        } else if (textBlock.style === 'h3') {
+          headingEl = (
+            <h3
+              className="font-bold font-display mt-9 mb-3 block"
+              style={{ color: 'var(--accent-amber)', fontSize: 'clamp(1.2rem, 2.4vw, 1.65rem)' }}
+            >
+              {headingText}
+            </h3>
+          );
+        } else {
+          headingEl = (
+            <h4
+              className="font-semibold font-display mt-7 mb-2 block"
+              style={{ color: 'var(--text-body)', opacity: 0.9, fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', letterSpacing: '0.01em' }}
+            >
+              {headingText}
+            </h4>
+          );
+        }
+
+        elements.push(
+          <div key={key} id={`section-${sectionIndex}`} className="scroll-mt-24">
+            {headingEl}
           </div>
         );
         sectionIndex++;
@@ -598,6 +650,43 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
           </table>
         </div>
       );
+    } else if (block._type === 'table') {
+      const b = block as any;
+      const rows: string[][] = (b.rows || []).map((r: any) => {
+        if (Array.isArray(r)) return r.map((c: any) => String(c));
+        if (r && r.cells) return r.cells.map((c: any) => String(c));
+        return [];
+      });
+      if (rows.length > 0) {
+        const headers = rows[0];
+        const bodyRows = rows.slice(1);
+        elements.push(
+          <div key={key} className="my-8 overflow-x-auto rounded-2xl border shadow-2xl" style={{ borderColor: 'var(--border-card)' }}>
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  {headers.map((h, hi) => (
+                    <th key={hi} className="px-6 py-4.5 text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {bodyRows.map((row, ri) => (
+                  <tr key={ri} className="border-b last:border-0 transition-colors hover:bg-[var(--bg-surface-alt)]" style={{ borderColor: 'var(--border-card)' }}>
+                    {row.map((cell, ci) => (
+                      <td key={ci} className="px-6 py-5 text-sm font-light leading-relaxed" style={{ color: 'var(--text-body)' }}>
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
     } else if (block._type === 'image') {
       const b = block as any;
       const imgUrl = b.asset?.url || '';
@@ -840,6 +929,7 @@ export default function BlogPost() {
         title={`${post.title} | Emmanuel Odebiyi`}
         description={post.metaDescription || post.excerpt}
         keywords={post.tags.join(", ")}
+        ogImage={post.image}
         faqSchema={faqs}
       />
 
@@ -1030,8 +1120,7 @@ export default function BlogPost() {
                     id={`section-${index}`} 
                     className="space-y-6 scroll-mt-24 transition-opacity"
                   >
-                    <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight flex items-center gap-3" style={{ color: 'var(--text-body)' }}>
-                      <span className="text-sm font-sans font-bold tracking-widest" style={{ color: 'var(--text-muted)' }}>0{index + 1}.</span>
+                    <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight pb-2 border-b border-[var(--border-card)]" style={{ color: 'var(--text-body)' }}>
                       {section.heading}
                     </h2>
                     

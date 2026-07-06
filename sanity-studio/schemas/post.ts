@@ -163,8 +163,11 @@ export default defineType({
       type: 'array',
       group: 'meta',
       of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
       initialValue: ['Automation'],
-      description: 'Topic categories associated with this article (e.g. "Automation", "SEO", "Systems").',
+      description: 'Type a tag and press Enter or comma to add it. Add multiple tags quickly without clicking "Add item" each time.',
     }),
     defineField({
       name: 'hook',

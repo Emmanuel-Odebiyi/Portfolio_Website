@@ -78,12 +78,19 @@ export default function Blog() {
             />
             {/* Top-down dark overlay to bring out the header text and logo */}
             <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/70 via-[#0E1C2A]/30 to-transparent pointer-events-none z-10" />
+            {/* Strong left-to-right gradient overlay to block out background image text on the left */}
+            <div 
+              className="absolute inset-y-0 left-0 w-full md:w-[70%] lg:w-[60%] pointer-events-none z-10" 
+              style={{ 
+                background: 'linear-gradient(to right, var(--bg-page) 0%, var(--bg-page) 35%, color-mix(in srgb, var(--bg-page) 80%, transparent) 65%, transparent 100%)' 
+              }} 
+            />
             {/* Dark glassmorphic gradient overlay for crisp readability */}
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-page) 0%, transparent 100%)', opacity: 0.8 }} />
             <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-page)', opacity: 0.15 }} />
           </motion.div>
 
-          <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12">
+          <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 z-20">
             <div className="max-w-7xl mx-auto w-full relative">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -252,16 +259,24 @@ export default function Blog() {
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-                        <div className="absolute top-5 left-5 flex gap-2">
-                          {post.tags.map(tag => (
-                            <span 
-                              key={tag} 
-                              className="px-2.5 py-1 text-[9px] font-sans font-bold uppercase tracking-widest border rounded"
-                              style={{ color: 'var(--text-body)', backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                        <div className="absolute top-4 left-4 flex items-center gap-1.5">
+                          {post.tags.slice(0, 2).map(tag => (
+                            <span
+                              key={tag}
+                              className="px-2 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider rounded-full backdrop-blur-sm"
+                              style={{ color: 'var(--accent-amber)', backgroundColor: 'rgba(0,0,0,0.55)' }}
                             >
                               {tag}
                             </span>
                           ))}
+                          {post.tags.length > 2 && (
+                            <span
+                              className="px-2 py-0.5 text-[9px] font-mono font-bold rounded-full backdrop-blur-sm"
+                              style={{ color: 'rgba(255,255,255,0.6)', backgroundColor: 'rgba(0,0,0,0.45)' }}
+                            >
+                              +{post.tags.length - 2}
+                            </span>
+                          )}
                         </div>
                       </div>
 

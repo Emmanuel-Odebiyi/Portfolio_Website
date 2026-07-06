@@ -16,20 +16,23 @@ export const ContainerScroll = ({
   });
 
   const [isMobile, setIsMobile] = React.useState(false);
+  const [isTablet, setIsTablet] = React.useState(false);
 
   React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+    const checkSize = () => {
+      const w = window.innerWidth;
+      setIsMobile(w <= 640);
+      setIsTablet(w > 640 && w <= 1024);
     };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    checkSize();
+    window.addEventListener("resize", checkSize);
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", checkSize);
     };
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.85, 1] : [1.05, 1];
+    return isMobile ? [0.85, 1] : isTablet ? [0.95, 1] : [1.05, 1];
   };
 
   // Phase 1 (0–5%): Tab rotates to tilted reading angle, title slides in
@@ -39,7 +42,7 @@ export const ContainerScroll = ({
   const rotate = useTransform(
     scrollYProgress,
     [0, 0.05, 0.8, 0.95],
-    isMobile ? [10, 8, 8, 0] : [20, 15, 15, 0]
+    isMobile ? [4, 2, 2, 0] : isTablet ? [10, 6, 6, 0] : [20, 15, 15, 0]
   );
   const scale = useTransform(scrollYProgress, [0, 0.05], scaleDimensions());
   const headerTranslate = useTransform(scrollYProgress, [0, 0.05], [100, 0]);
@@ -47,7 +50,7 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className={`flex items-start justify-center relative w-full ${isMobile ? "h-[250vh]" : "h-[400vh]"}`}
+      className={`flex items-start justify-center relative w-full ${isMobile ? "h-[650vh]" : isTablet ? "h-[550vh]" : "h-[400vh]"}`}
       ref={containerRef}
     >
       <div

@@ -90,6 +90,12 @@ export default defineType({
       },
     }),
 
+    // ── Native Table Block (supports Copy-Paste) ─────────────────────────────
+    defineArrayMember({
+      type: 'table',
+      title: 'Table',
+    }),
+
     // ── Inline Image Block ───────────────────────────────────────────────────
     defineArrayMember({
       type: 'image',

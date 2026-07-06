@@ -27,7 +27,7 @@ import { OrbitalTestimonials } from '../components/ui/OrbitalTestimonials';
 const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\nAnd honestly? It was magic.`;
 
 const StoryView = ({ progress }: { progress: any }) => {
-  const progressWidth = useTransform(progress, [0.05, 0.8], ["0%", "100%"]);
+  const progressWidth = useTransform(progress, [0.01, 0.88], ["0%", "100%"]);
 
   return (
     <div className="w-full h-full relative overflow-hidden bg-zinc-50 rounded-[inherit]">
@@ -38,8 +38,8 @@ const StoryView = ({ progress }: { progress: any }) => {
 
       {/* Story Content — Framer Motion scroll and stagger matching responsive DOM height! */}
       <div className="px-6 md:px-12 lg:px-16 w-full h-full flex flex-col items-center justify-start overflow-hidden relative">
-        {/* Miniature UI Logo — Positioned on the far left 'binding' side of the tab */}
-        <div className="absolute top-[10%] left-[6%] md:left-[8%] z-50 pointer-events-none">
+        {/* Miniature UI Logo — sits in the top strip, above the text zone */}
+        <div className="absolute top-[3%] sm:top-[3%] md:top-[5%] left-[6%] md:left-[8%] z-50 pointer-events-none">
           <img
             src="/logo.svg"
             alt="Emmanuel Odebiyi Logo"
@@ -59,7 +59,7 @@ const StoryView = ({ progress }: { progress: any }) => {
       </div>
       
       {/* Fades */}
-      <div className="absolute top-0 left-0 w-full h-[6vh] md:h-[15vh] bg-gradient-to-b from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[2vh] sm:h-[4vh] md:h-[8vh] lg:h-[15vh] bg-gradient-to-b from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-[6vh] md:h-[15vh] bg-gradient-to-t from-zinc-50 via-zinc-50/90 to-transparent z-40 pointer-events-none" />
     </div>
   );

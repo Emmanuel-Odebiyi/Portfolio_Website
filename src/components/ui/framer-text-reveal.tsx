@@ -20,37 +20,38 @@ export const FramerTextReveal: React.FC<FramerTextRevealProps> = ({
   const [maxScroll, setMaxScroll] = useState(0);
 
   const paragraphs = text.split(/\n+/).filter(Boolean);
-  
-  // Calculate total words
-  const totalWords = paragraphs.reduce((acc, p) => acc + p.split(" ").filter(Boolean).length, 0);
+  const totalWords = paragraphs.reduce((acc, p) => acc + p.split(' ').filter(Boolean).length, 0);
 
   useEffect(() => {
     const measure = () => {
       if (containerRef.current && textWrapperRef.current) {
         const viewportHeight = containerRef.current.clientHeight;
         const textHeight = textWrapperRef.current.clientHeight;
-        
-        // Ensure scroll amount dynamically maps based on viewport size.
-        // We add some bottom spacing padding to scroll slightly past the last line beautifully.
-        const extraPadding = viewportHeight * 0.15;
-        const scrollAmt = Math.max(0, textHeight - viewportHeight + extraPadding);
-        setMaxScroll(scrollAmt);
+
+        // Full scroll distance ensures ALL paragraphs eventually scroll into view.
+        // The section height (650vh mobile / 550vh tablet) is large enough that
+        // progress advances slowly, giving word reveals time to complete.
+        const extraPadding = viewportHeight * 0.08;
+        const fullScroll = Math.max(0, textHeight - viewportHeight + extraPadding);
+        setMaxScroll(fullScroll);
       }
     };
 
-    // Delay measurement slightly to ensure DOM layout has fully settled.
-    const timer = setTimeout(measure, 100);
-
-    window.addEventListener("resize", measure);
+    const timer = setTimeout(measure, 120);
+    window.addEventListener('resize', measure);
     return () => {
       clearTimeout(timer);
-      window.removeEventListener("resize", measure);
+      window.removeEventListener('resize', measure);
     };
   }, [text]);
 
-  // Scroll ranges: Active scrolling runs between progress 0.05 and 0.8
-  const rangeStart = 0.05;
-  const rangeEnd = 0.8;
+  // Scroll ranges: Active scrolling runs between progress 0.01 and 0.88
+  // Starting at 0.01 means words start revealing almost immediately.
+  // rangeEnd 0.88 gives the widest possible distribution — each word
+  // takes more scroll distance to reveal, which is critical on mobile
+  // where scroll progress advances faster per pixel.
+  const rangeStart = 0.01;
+  const rangeEnd = 0.88;
   const totalRange = rangeEnd - rangeStart;
 
   // Custom transformer for y scroll offset which responds to layout dimensions
@@ -68,7 +69,7 @@ export const FramerTextReveal: React.FC<FramerTextRevealProps> = ({
       <motion.div
         ref={textWrapperRef}
         style={{ y }}
-        className={cn("flex flex-col gap-6 pt-[20%] pb-20 relative z-10", textClassName)}
+        className={cn("flex flex-col gap-6 pt-[22%] sm:pt-[18%] md:pt-[15%] pb-20 relative z-10", textClassName)}
       >
         {paragraphs.map((p, pIndex) => {
           const words = p.split(" ").filter(Boolean);
@@ -77,7 +78,7 @@ export const FramerTextReveal: React.FC<FramerTextRevealProps> = ({
               {words.map((word, wIndex) => {
                 const index = globalWordIndex++;
                 const wordStart = rangeStart + (index / totalWords) * totalRange;
-                const wordEnd = Math.min(rangeEnd, wordStart + (1.3 / totalWords) * totalRange); // Overlap words slightly for organic transition flow
+                const wordEnd = Math.min(rangeEnd, wordStart + (2.0 / totalWords) * totalRange); // Wide overlap so each word takes more scroll distance to fully reveal
 
                 return (
                   <Word
@@ -105,9 +106,11 @@ interface WordProps {
 }
 
 const Word: React.FC<WordProps> = ({ word, progress, start, end }) => {
-  const opacity = useTransform(progress, [start, end], [0.15, 1]);
-  // Transitions from subtle gray watermark to a dark charcoal color, staying high-contrast regardless of site theme
-  const color = useTransform(progress, [start, end], ["#a1a1aa", "#18181b"]);
+  // Ghost state: 55% opacity medium gray — always readable even before reveal.
+  // Revealed state: 100% opacity deep charcoal — pops clearly off the white card.
+  // This ensures text is never invisible, only progressively brightened.
+  const opacity = useTransform(progress, [start, end], [0.55, 1]);
+  const color = useTransform(progress, [start, end], ["#52525b", "#18181b"]);
 
   return (
     <motion.span
