@@ -399,7 +399,7 @@ export default function GrowthSimulator() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Back to Lab
           </Link>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
             Revenue Scaling <span style={{ color: 'var(--accent-teal)' }}>Planner™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>

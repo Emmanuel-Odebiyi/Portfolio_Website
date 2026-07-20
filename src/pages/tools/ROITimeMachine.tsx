@@ -381,7 +381,7 @@ export default function ROITimeMachine() {
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-amber)] animate-pulse" />
             Savings Diagnostic
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
             Time & Dollar <span className="text-amber-gradient font-bold">Savings Predictor™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
