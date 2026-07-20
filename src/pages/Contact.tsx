@@ -241,7 +241,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-hidden flex flex-col justify-center transition-colors duration-300">
+    <div className="pt-32 pb-24 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-x-clip flex flex-col justify-center transition-colors duration-300">
       <SEO 
         title="Collaborate with Emmanuel Odebiyi | Contact"
         description="Initiate your organic scaling discussion. Analyze bottlenecks, outline target vision milestones, define budgets, and construct a bespoke technical pipeline."

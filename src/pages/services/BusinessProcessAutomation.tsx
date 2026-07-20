@@ -73,7 +73,7 @@ export default function BusinessProcessAutomation() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO
         title="Business Process Automation | Emmanuel Odebiyi"
         description="Eliminate repetitive tasks and reclaim 10–20 hours per week. I map your inefficient workflows and build stable custom automation systems."

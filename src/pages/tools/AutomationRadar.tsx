@@ -376,7 +376,7 @@ export default function AutomationRadar() {
   }
 
   return (
-    <div className="min-h-screen pt-32 pb-20 relative overflow-hidden print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen pt-32 pb-20 relative overflow-x-clip print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Automation Radar | Emmanuel Odebiyi"
         description="Map your current marketing stack, uncover hidden bottlenecks, and get a prioritized automation roadmap with ROI estimates for each opportunity."

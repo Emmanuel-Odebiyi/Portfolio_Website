@@ -92,7 +92,7 @@ export default function ScooveAfrica() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="The Scoove Africa SEO Case Study | Emmanuel Odebiyi"
         description="Read how I boosted organic traffic by 150% and moved Google search rankings from Position 45 to #8 for The Scoove Africa."

@@ -131,7 +131,7 @@ export default function SEOStrategyOptimization() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO
         title="SEO Strategy & Optimization | Emmanuel Odebiyi"
         description="Ranking higher is architecture. I build SEO foundations from keyword research and technical health to content strategy that earns the right traffic."

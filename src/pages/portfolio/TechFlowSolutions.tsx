@@ -80,7 +80,7 @@ export default function TechFlowSolutions() {
   const dollarsSaved = hoursSaved * 75; // Assuming $75/hr resource cost
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="B2B SaaS Content Automation Case Study | Emmanuel Odebiyi"
         description="How I built an automated content marketing engine that delivered a 520% ROI in 90 days for TechFlow Solutions."

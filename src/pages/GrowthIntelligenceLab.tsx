@@ -247,7 +247,7 @@ const tools: Tool[] = [
 
 export default function GrowthIntelligenceLab() {
   return (
-    <div className="pt-36 pb-24 min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="pt-36 pb-24 min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Growth Intelligence Lab | Emmanuel Odebiyi"
         description="Interactive simulators to calculate bottlenecks, forecast scaling potential, and evaluate process maturity for your business operations."

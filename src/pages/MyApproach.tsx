@@ -134,7 +134,7 @@ export default function MyApproach() {
   const [activeTab, setActiveTab] = useState('seo');
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="My Approach | Emmanuel Odebiyi"
         description="Every recommendation backed by data, every result measured precisely. Explore Emmanuel Odebiyi's 5-phase methodology for building autonomous growth engines."

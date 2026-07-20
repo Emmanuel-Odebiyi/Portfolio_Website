@@ -171,7 +171,7 @@ export default function MyStory() {
   }, [isTerminalAutoCycling]);
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="My Story | Emmanuel Odebiyi"
         description="Discover how Emmanuel Odebiyi went from drowning in deadlines to building automated marketing engines that deliver 520% ROI on autopilot."

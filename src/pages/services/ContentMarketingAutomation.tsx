@@ -88,7 +88,7 @@ export default function ContentMarketingAutomation() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO
         title="Content Marketing Automation | Emmanuel Odebiyi"
         description="I build fully automated content marketing engines publishing 8 to 40+ articles monthly, distributed across your channels on autopilot."

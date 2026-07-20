@@ -76,7 +76,7 @@ export default function Services() {
 
   return (
     <div
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-x-clip"
       style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}
     >
       <SEO 

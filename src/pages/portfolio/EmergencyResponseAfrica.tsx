@@ -48,7 +48,7 @@ export default function EmergencyResponseAfrica() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen relative overflow-x-clip font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Emergency Response Africa SEO Case Study | Emmanuel Odebiyi"
         description="How I helped healthcare startup Emergency Response Africa increase organic traffic by 180% and direct emergency calls by 30% through targeted SEO."

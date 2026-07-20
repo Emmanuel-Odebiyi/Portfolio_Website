@@ -14,7 +14,7 @@ export default function TermsOfService() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-hidden font-sans transition-colors duration-300">
+    <div className="pt-32 pb-24 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-x-clip font-sans transition-colors duration-300">
       <SEO 
         title="Terms of Service | Emmanuel Odebiyi"
         description="Terms and conditions for accessing Emmanuel Odebiyi's portfolio website, interactive optimization tools, and B2B growth consulting services."

@@ -286,7 +286,7 @@ export default function GrowthSimulator() {
     }).format(val);
 
   return (
-    <div className="pt-32 pb-20 min-h-screen relative overflow-hidden print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="pt-32 pb-20 min-h-screen relative overflow-x-clip print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Revenue Scaling Planner | Emmanuel Odebiyi"
         description="Model different growth scenarios to map the easiest path to scaling your revenue. Compare manual vs automated growth trajectories across 12 months."
@@ -399,7 +399,7 @@ export default function GrowthSimulator() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Back to Lab
           </Link>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
             Revenue Scaling <span style={{ color: 'var(--accent-teal)' }}>Planner™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>

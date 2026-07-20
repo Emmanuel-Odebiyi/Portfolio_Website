@@ -258,7 +258,7 @@ export default function ROITimeMachine() {
   };
 
   return (
-    <div className="pt-32 pb-20 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-hidden transition-colors duration-300 print-area">
+    <div className="pt-32 pb-20 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-x-clip transition-colors duration-300 print-area">
       <SEO 
         title="Time & Dollar Savings Predictor | Emmanuel Odebiyi"
         description="Quantify exact hours and dollars you will reclaim by automating repetitive tasks. 12-month projections with breakeven analysis and industry benchmarks."
@@ -381,7 +381,7 @@ export default function ROITimeMachine() {
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-amber)] animate-pulse" />
             Savings Diagnostic
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
             Time & Dollar <span className="text-amber-gradient font-bold">Savings Predictor™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>

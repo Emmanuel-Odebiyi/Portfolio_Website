@@ -403,7 +403,7 @@ export default function AutopilotScore() {
   };
 
   return (
-    <div className="pt-32 pb-20 min-h-screen relative overflow-hidden print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="pt-32 pb-20 min-h-screen relative overflow-x-clip print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="Business Freedom Calculator | Emmanuel Odebiyi"
         description="Find out exactly how close your business is to running smoothly without you. Score across 5 pillars: process, integration, autonomy, data, and customer journey."
@@ -552,7 +552,7 @@ export default function AutopilotScore() {
                   <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                   Back to Lab
                 </Link>
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
                   Business Autopilot <span style={{ color: 'var(--accent-blue)' }}>Scorecard™</span>
                 </h1>
                 <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>

@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-hidden font-sans transition-colors duration-300">
+    <div className="pt-32 pb-24 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-x-clip font-sans transition-colors duration-300">
       <SEO 
         title="Privacy Policy | Emmanuel Odebiyi"
         description="Privacy guidelines and secure data protection protocols governing Emmanuel Odebiyi's portfolio and Growth Intelligence Lab."
