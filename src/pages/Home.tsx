@@ -9,6 +9,7 @@ import { ProviderComparison } from '../components/ProviderComparison';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { ToolsShowcase } from '../components/ToolsShowcase';
 import { SEO } from '../components/SEO';
+import { OptimizedImage } from '../components/common/OptimizedImage';
 
 import { HeroSection } from '../components/home/HeroSection';
 import { StatsBar } from '../components/home/StatsBar';
@@ -112,7 +113,7 @@ export default function Home() {
                 </p>
                 
                 <div className="flex items-center gap-4 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
-                  <img 
+                  <OptimizedImage 
                     src={testimonial.image} 
                     alt={testimonial.name} 
                     width={48}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { OptimizedImage } from './common/OptimizedImage';
 
 interface HeroPhotoProps {
   className?: string;
@@ -19,7 +20,7 @@ interface HeroPhotoProps {
  */
 export const HeroPhoto: React.FC<HeroPhotoProps> = ({
   className = '',
-  maxWidth = 'max-w-[460px]',
+  maxWidth = 'max-w-full lg:max-w-[580px] xl:max-w-[640px]',
   captionLabel = 'Automation Specialist',
   animateDelay = 0.25,
 }) => {
@@ -37,42 +38,6 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           background: 'radial-gradient(ellipse at 60% 40%, var(--accent-amber) 0%, transparent 70%)',
         }}
       />
-
-      {/* ── Floating decorative sparks ────────────────────────────────────── */}
-      <motion.div
-        animate={{ y: [0, -9, 0], rotate: [0, 18, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-5 right-8 w-[18px] h-[18px] pointer-events-none z-30"
-      >
-        <svg viewBox="0 0 20 20">
-          <path
-            d="M10 1L12.3 7.7H19L13.6 11.7L15.9 18.4L10 14.4L4.1 18.4L6.4 11.7L1 7.7H7.7L10 1Z"
-            fill="var(--accent-amber)"
-            opacity="0.75"
-          />
-        </svg>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [0, 7, 0], rotate: [0, -12, 0] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
-        className="absolute top-1/2 -right-4 w-[10px] h-[10px] rounded-full pointer-events-none z-30"
-        style={{ backgroundColor: 'var(--accent-amber)', opacity: 0.5 }}
-      />
-
-      <motion.div
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-        className="absolute -bottom-3 left-10 w-[13px] h-[13px] pointer-events-none z-30"
-      >
-        <svg viewBox="0 0 20 20">
-          <path
-            d="M10 1L12.3 7.7H19L13.6 11.7L15.9 18.4L10 14.4L4.1 18.4L6.4 11.7L1 7.7H7.7L10 1Z"
-            fill="var(--accent-amber)"
-            opacity="0.45"
-          />
-        </svg>
-      </motion.div>
 
       {/* ── Outer decorative border ring ──────────────────────────────────── */}
       <div
@@ -99,7 +64,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
         }}
       >
         {/* ── Inner image clip ──────────────────────────────────────────────── */}
-        <div className="relative w-full rounded-[1.625rem] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
+        <div className="relative w-full aspect-[4/5] min-h-[440px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] xl:min-h-[650px] rounded-[1.625rem] overflow-hidden flex items-center justify-center" style={{ backgroundColor: 'var(--bg-page)' }}>
 
           {/* Subtle dot grid on image bg */}
           <div
@@ -110,11 +75,11 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
             }}
           />
 
-          {/* Photo */}
-          <img
+          {/* Photo with AVIF -> WebP -> PNG fallbacks */}
+          <OptimizedImage
             src="/images/home-hero.png"
             alt="Emmanuel Odebiyi — Automation Specialist"
-            className="relative z-10 w-full h-auto object-cover block"
+            className="relative z-10 w-full h-full object-cover object-center block"
             fetchPriority="high"
             decoding="async"
           />

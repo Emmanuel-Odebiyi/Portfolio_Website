@@ -123,7 +123,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Right Column: Editorial Portrait Visual Frame */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+          <div className="lg:col-span-6 flex justify-center lg:justify-end w-full">
             {/* HeroPhoto is the single source of truth for the portrait — see src/components/HeroPhoto.tsx */}
             <HeroPhoto />
           </div>

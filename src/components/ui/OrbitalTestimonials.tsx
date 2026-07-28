@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { OptimizedImage } from '../common/OptimizedImage';
 
 export interface TestimonialType {
   quote: string;
@@ -177,7 +178,7 @@ export const OrbitalTestimonials: React.FC<OrbitalTestimonialsProps> = ({
                   {/* Author Info */}
                   <div className="flex items-center gap-4 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
                     {testimonial.image ? (
-                      <img
+                      <OptimizedImage
                         src={testimonial.image}
                         alt={testimonial.name}
                         width={44}

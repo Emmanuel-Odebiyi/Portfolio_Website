@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import { OptimizedImage } from '../components/common/OptimizedImage';
 
 const projects = [
   {
@@ -277,7 +278,7 @@ export default function Portfolio() {
 
                     <div className={`flex flex-col justify-between space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                       <div className="relative rounded-[2rem] overflow-hidden border aspect-[16/10] flex items-center justify-center" style={{ borderColor: 'var(--border-card)' }}>
-                        <img 
+                        <OptimizedImage 
                           src={project.image} 
                           alt={project.title} 
                           width={600}

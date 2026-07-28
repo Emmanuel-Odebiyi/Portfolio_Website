@@ -23,6 +23,7 @@ import { TextRevealByWord } from '../components/ui/text-reveal';
 import { TextEffect } from '../components/ui/text-effect';
 import { ScrollMaskText } from '../components/animations/ScrollMaskText';
 import { OrbitalTestimonials } from '../components/ui/OrbitalTestimonials';
+import { OptimizedImage } from '../components/common/OptimizedImage';
 
 const STORY_TEXT = `I didn't grow up in Lagos. I grew up in Osogbo—solid city, great people, but not exactly the tech startup capital of Nigeria.\nI went to Obafemi Awolowo University to study Construction Economics. Safe choice. Practical degree.\nBut somewhere between structural analysis classes and building cost estimates, I discovered I had a knack for something completely different: writing words that made people want to read them.\nNot academic writing. The kind of writing that connects brands with real humans and turns strangers into customers.\nWhile my classmates were chasing construction internships, I was taking content writing gigs from anyone who'd pay me.\nAnd honestly? It was magic.`;
 
@@ -95,7 +96,7 @@ export default function About() {
         
         {/* Fullscreen Background Image */}
         <div className="absolute inset-0 z-0 select-none">
-          <img
+          <OptimizedImage
             src="/images/about-hero-landscape.png"
             alt="Emmanuel Odebiyi Portrait"
             className="w-full h-full object-cover object-[50%_30%]"

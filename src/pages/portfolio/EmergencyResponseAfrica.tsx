@@ -10,6 +10,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { SEO } from '../../components/SEO';
+import { OptimizedImage } from '../../components/common/OptimizedImage';
 
 export default function EmergencyResponseAfrica() {
   const [activeTab, setActiveTab] = useState<'local' | 'content' | 'technical'>('local');
@@ -57,7 +58,7 @@ export default function EmergencyResponseAfrica() {
 
       {/* Full-bleed Header Banner */}
       <div className="w-full h-[250px] sm:h-[350px] md:h-[450px] relative overflow-hidden">
-        <img 
+        <OptimizedImage 
           src="/images/headers/emergency_response_header.png" 
           alt="Emergency Response Africa Header Banner" 
           className="w-full h-full object-cover" 
@@ -194,7 +195,7 @@ export default function EmergencyResponseAfrica() {
                 <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>GA4 traffic report displaying the massive upward trajectory in search traffic over the 60-day optimization campaign.</p>
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
-                <img 
+                <OptimizedImage 
                   src="/images/era_ga4_traffic.png" 
                   alt="Google Analytics GA4 Acquisition report showing +180% organic growth" 
                   className="w-full h-auto object-cover"
@@ -215,7 +216,7 @@ export default function EmergencyResponseAfrica() {
                 <p className="text-sm font-light mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>Conversion tracking analytics highlighting the increase in direct patient clicks triggering emergency ambulance calls.</p>
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
-                <img 
+                <OptimizedImage 
                   src="/images/era_ga4_conversions.png" 
                   alt="Google Analytics GA4 Conversions report showing +30% call clicks" 
                   className="w-full h-auto object-cover"
