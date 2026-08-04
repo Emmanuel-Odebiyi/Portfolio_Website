@@ -53,7 +53,8 @@ The application is built using a modern frontend stack optimized for performance
 - **My Story (`/my-story`):** Narrative-driven background.
 - **My Approach (`/my-approach`):** Strategic methodology breakdown.
 - **Services (`/services`):** Service offerings and pricing/packages.
-- **Portfolio (`/portfolio`):** Case studies and past work.
+- **Portfolio (`/portfolio`):** Automation case studies and past client work. Accessible via "Portfolio → Automation Case Studies" dropdown in the header.
+- **Writing & SEO Portfolio (`/writing-portfolio`):** Dedicated landing page targeting content writing and SEO job applications. Features: hero with stats, brand logo strip (StoryChief, Herbvity, Scoove Africa, Emergency Response Africa, TechFlow Solutions), featured article showcase, writing samples grid with editorial cover images, about/bio section, expertise pillars, skills & tools, results wall, client testimonials (Sarah Mitchell, Olaylide Bolaji-Daniel, Paul Olaniyi), 35+ article archive, and a "Send a Brief" CTA. Accessible via "Portfolio → Writing & SEO Portfolio" dropdown in the header.
 - **Blog (`/blog`):** Content hub with filtering and search capabilities.
 
 ### Growth Intelligence Lab (`/growth-intelligence-lab`)

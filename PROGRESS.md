@@ -21,6 +21,8 @@ This document serves as a persistent, single source of truth tracking the develo
 | **Local Bookmarks / Storage** | 🟢 ACTIVE | HTML5 `localStorage` | Client-side bookmark saving |
 | **Related Insights Recommendation** | 🟢 ACTIVE | Custom tag intersection scoring | Suggests contextually relevant blog posts |
 | **Hosted Studio Redirects** | 🟢 ACTIVE | Cloudflare `public/_redirects` | Forwards website `/admin` requests to Cloud Sanity |
+| **Writing & SEO Portfolio Page** | 🟢 ACTIVE | React + TypeScript (`src/pages/ContentWriterPortfolio.tsx`) | Dedicated landing page at `/writing-portfolio` for content writing job applications — features brand logos, writing samples, testimonials, results wall & contact CTA |
+| **Portfolio Dropdown Navigation** | 🟢 ACTIVE | `src/components/Header.tsx` | Dropdown under "Portfolio" nav item linking to both Automation Case Studies (`/portfolio`) and Writing & SEO Portfolio (`/writing-portfolio`) |
 
 ---
 
@@ -132,10 +134,14 @@ If you are the next AI agent or developer picking up this project, please focus 
 1. **[ ] Trigger Cloudflare Pages Rebuild:**
    * The local code compiles and builds successfully (verified with Vite production output passing flawlessly on 2026-05-31).
    * Ensure that the latest master commits (specifically custom `BlogPost.tsx` enhancements and dynamic parser logic) are built and deployed on Cloudflare Pages. If auto-rebuild is not active, log in to the Cloudflare dashboard and trigger the build manually.
-2. **[ ] Verify Production CMS Sync:**
+2. **[ ] Verify Writing & SEO Portfolio on Live Site:**
+   * After deployment, visit `https://emmanuelodebiyi.com/writing-portfolio` and confirm the page loads with all images (brand logos, writing sample covers, testimonial headshots).
+   * Check the "Portfolio" dropdown in the header links correctly to both `/portfolio` and `/writing-portfolio`.
+   * Confirm the "Hire Me for Writing" and "Send a Brief" CTAs open `mailto:emmanuel@emmanuelodebiyi.name.ng` correctly.
+3. **[ ] Verify Production CMS Sync:**
    * After the live site rebuild completes, go to [emmanuelodebiyi.sanity.studio](https://emmanuelodebiyi.sanity.studio) and publish a test blog post.
    * Verify that the new post details card dynamically queries the Sanity Edge CDN and appears immediately on the live website `/blog` page without manual code deployment.
-3. **[ ] Audit Custom Diagram Parsing:**
+4. **[ ] Audit Custom Diagram Parsing:**
    * Test workflow diagrams in published articles. Write text containing `node1("Example Step") --> node2("Next Step")` inside Sanity editor sections and ensure the details page transforms them into the premium visual flowchart cards.
-4. **[ ] Test Offline Mode Performance:**
+5. **[ ] Test Offline Mode Performance:**
    * Go to the browser's developer tools Network tab, toggle **Offline Mode**, and verify that the blog loader gracefully falls back to local pre-compiled files (`/content/blog/how-i-save-15-hours-every-week-with-content-automation.md`), maintaining a 100% functional user experience.
