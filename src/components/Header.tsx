@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Workflow, Search, Cpu, Globe, Activity, Calculator, TrendingUp, User, Microscope, FileText, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, Workflow, Search, Cpu, Globe, Activity, Calculator, TrendingUp, User, Microscope, FileText, ArrowRight, PenTool } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 import { ThemeToggle } from './ThemeToggle';
@@ -35,7 +35,14 @@ const navLinks = [
       { name: 'Revenue Scaling Planner™', desc: 'Zero-risk future scaling forecaster', href: '/tools/growth-simulator', icon: <Cpu className="w-4 h-4" /> },
     ]
   },
-  { name: 'Portfolio', href: '/portfolio' },
+  { 
+    name: 'Portfolio', 
+    href: '/portfolio',
+    dropdown: [
+      { name: 'Automation Case Studies', desc: 'TechFlow, Scoove & ERA case studies', href: '/portfolio', icon: <Workflow className="w-4 h-4" /> },
+      { name: 'Writing & SEO Portfolio', desc: 'Published articles & SEO writing samples', href: '/writing-portfolio', icon: <PenTool className="w-4 h-4" /> },
+    ]
+  },
   { name: 'Blog', href: '/blog' },
 ];
 

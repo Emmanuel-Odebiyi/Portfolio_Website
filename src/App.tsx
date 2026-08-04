@@ -33,6 +33,9 @@ const ContentMarketingAutomation = lazy(() => import('./pages/services/ContentMa
 const SEOStrategyOptimization = lazy(() => import('./pages/services/SEOStrategyOptimization'));
 const BusinessProcessAutomation = lazy(() => import('./pages/services/BusinessProcessAutomation'));
 
+// ── Content Writer Portfolio (hidden from nav — direct link only) ────────────
+const ContentWriterPortfolio = lazy(() => import('./pages/ContentWriterPortfolio'));
+
 // ── Portfolio Case Studies ──────────────────────────────────────────────────
 const TechFlowSolutions = lazy(() => import('./pages/portfolio/TechFlowSolutions'));
 const ScooveAfrica = lazy(() => import('./pages/portfolio/ScooveAfrica'));
@@ -100,6 +103,7 @@ export default function App() {
             <Route path="/portfolio/techflow-solutions" element={<TechFlowSolutions />} />
             <Route path="/portfolio/scoove-africa" element={<ScooveAfrica />} />
             <Route path="/portfolio/emergency-response-africa" element={<EmergencyResponseAfrica />} />
+            <Route path="/writing-portfolio" element={<ContentWriterPortfolio />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />

@@ -152,9 +152,9 @@ export default function Portfolio() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: 'var(--accent-amber)' }}></span>
                   <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: 'var(--accent-amber)' }}></span>
                 </span>
-                <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Global Ledger</span>
+                <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Results Snapshot</span>
               </div>
-              <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Verified Outcomes</span>
+              <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Client Work</span>
             </div>
 
             <div className="space-y-6">
@@ -162,7 +162,7 @@ export default function Portfolio() {
               <div className="space-y-1 group/stat">
                 <div className="flex justify-between items-baseline">
                   <span className="text-3xl font-bold font-display tracking-tight transition-colors group-hover/stat:text-[var(--accent-amber)]" style={{ color: 'var(--text-body)' }}>$2.4M+</span>
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Automation Yield</span>
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Revenue Linked to Work</span>
                 </div>
                 <p className="text-xs font-light" style={{ color: 'var(--text-muted)' }}>Direct & attributed client revenue growth captured in 2025.</p>
               </div>

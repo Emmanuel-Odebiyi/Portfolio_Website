@@ -60,11 +60,11 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
             '0 32px 64px rgba(0,0,0,0.14)',
             'inset 0 1px 0 rgba(255,255,255,0.08)',
           ].join(', '),
-          padding: '10px',
+          padding: '0',
         }}
       >
         {/* ── Inner image clip ──────────────────────────────────────────────── */}
-        <div className="relative w-full aspect-[4/5] min-h-[440px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[600px] xl:min-h-[650px] rounded-[1.625rem] overflow-hidden flex items-center justify-center" style={{ backgroundColor: 'var(--bg-page)' }}>
+        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
 
           {/* Subtle dot grid on image bg */}
           <div
@@ -79,7 +79,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           <OptimizedImage
             src="/images/home-hero.png"
             alt="Emmanuel Odebiyi — Automation Specialist"
-            className="relative z-10 w-full h-full object-cover object-center block"
+            className="relative z-10 w-full h-full object-cover object-top block"
             fetchPriority="high"
             decoding="async"
           />
@@ -93,7 +93,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           />
 
           {/* ── Name badge — frosted glass bar ──────────────────────────────── */}
-          <div className="absolute bottom-0 left-0 right-0 z-30 px-6 py-5">
+          <div className="absolute bottom-0 left-0 right-0 z-30 px-6 py-5 rounded-b-[2rem]">
             {/* Frosted glass pill behind the text */}
             <div
               className="absolute inset-0 rounded-b-[1.625rem]"

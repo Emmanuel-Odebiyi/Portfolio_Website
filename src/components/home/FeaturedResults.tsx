@@ -22,7 +22,7 @@ export const FeaturedResults = () => {
           
           <div className="shrink-0 flex items-center gap-2 border px-4 py-2 rounded-full" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}>
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span className="text-[10px] font-sans font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Client Results Ledger</span>
+            <span className="text-[10px] font-sans font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>A Few Wins</span>
           </div>
         </div>
 

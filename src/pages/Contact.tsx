@@ -204,6 +204,31 @@ export default function Contact() {
 
   const nextStep = () => setStep((prev) => (prev as number + 1) as Step);
   const prevStep = () => setStep((prev) => (prev as number - 1) as Step);
+  const getStepValidationMessage = () => {
+    switch(step) {
+      case 1:
+        return formData.bottleneck === 'other' && !formData.customBottleneck
+          ? 'Tell me a little more about your custom challenge before moving on.'
+          : 'Choose the main bottleneck you want help with.';
+      case 2:
+        return 'Share a short version of what success should look like in six months.';
+      case 3:
+        return 'Choose the investment range that feels realistic right now.';
+      case 4:
+        return 'Add your name, business email, and company website before sending.';
+      default:
+        return null;
+    }
+  };
+
+  const handleNextStep = () => {
+    if (!isStepValid()) {
+      setSubmitError(getStepValidationMessage());
+      return;
+    }
+    setSubmitError(null);
+    nextStep();
+  };
 
   const handleSubmit = rhfHandleSubmit(async (step4Data) => {
     setLoading(true);
@@ -272,13 +297,13 @@ export default function Contact() {
                   style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
                 >
                   <Sparkles size={11} className="text-[var(--accent-amber)] animate-pulse" />
-                  Engineering Scale
+                  Tell me what you need
                 </motion.div>
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-none font-display" style={{ color: 'var(--text-body)' }}>
-                  Architect Your <span className="text-amber-gradient font-bold italic">Growth Engine</span>
+                  Let's Build Something <span className="text-amber-gradient font-bold italic">That Actually Helps</span>
                 </h1>
                 <p className="font-light max-w-xl mx-auto text-sm md:text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  Let's dissect your bottlenecks and construct an automated operational blueprint built exclusively for your business.
+                  Answer a few quick questions and I’ll use them to understand where your marketing or workflows are getting stuck.
                 </p>
               </div>
 
@@ -315,7 +340,10 @@ export default function Contact() {
                             <OptionCard 
                               key={opt.id}
                               selected={formData.bottleneck === opt.id}
-                              onClick={() => setFormData({ ...formData, bottleneck: opt.id })}
+                              onClick={() => {
+                                setSubmitError(null);
+                                setFormData({ ...formData, bottleneck: opt.id });
+                              }}
                               {...opt}
                             />
                           ))}
@@ -331,13 +359,19 @@ export default function Contact() {
                             className="overflow-hidden"
                           >
                             <div className="space-y-2.5 pt-4 text-left">
-                              <label className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--accent-amber)' }}>
+                              <label htmlFor="customBottleneck" className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--accent-amber)' }}>
                                 <MessageSquare size={12} /> Please specify your challenge
                               </label>
                               <textarea 
+                                id="customBottleneck"
+                                name="customBottleneck"
                                 placeholder="Explain in detail what's holding you back..."
                                 value={formData.customBottleneck}
-                                onChange={(e) => setFormData({ ...formData, customBottleneck: e.target.value })}
+                                onChange={(e) => {
+                                  setSubmitError(null);
+                                  setFormData({ ...formData, customBottleneck: e.target.value });
+                                }}
+                                autoComplete="off"
                                 className="w-full border rounded-2xl px-5 py-4 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all min-h-[100px] resize-none text-base"
                                 style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                               />
@@ -363,13 +397,19 @@ export default function Contact() {
                       </div>
                       
                       <div className="space-y-3.5 text-left">
-                        <label className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--accent-amber)' }}>
+                        <label htmlFor="successVision" className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-2" style={{ color: 'var(--accent-amber)' }}>
                           <Target size={12} /> Desired Outcomes & Target KPIs
                         </label>
                         <textarea 
+                          id="successVision"
+                          name="successVision"
                           placeholder="e.g., We want to establish a content automation stack to publish twice weekly, rank top-10 for key industry terms, and automate leads distribution to Hubspot..."
                           value={formData.successVision}
-                          onChange={(e) => setFormData({ ...formData, successVision: e.target.value })}
+                          onChange={(e) => {
+                            setSubmitError(null);
+                            setFormData({ ...formData, successVision: e.target.value });
+                          }}
+                          autoComplete="off"
                           className="w-full border rounded-2xl px-6 py-5 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all min-h-[160px] resize-none text-base leading-relaxed"
                           style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                         />
@@ -404,7 +444,10 @@ export default function Contact() {
                           {BUDGET_OPTIONS.map((opt) => (
                             <button
                               key={opt.range}
-                              onClick={() => setFormData({ ...formData, budget: opt.range })}
+                              onClick={() => {
+                                setSubmitError(null);
+                                setFormData({ ...formData, budget: opt.range });
+                              }}
                               className={`p-6 rounded-3xl border text-left transition-all duration-300 relative overflow-hidden group cursor-pointer ${
                                 formData.budget === opt.range 
                                   ? 'bg-[var(--bg-surface-alt)] border-[var(--accent-amber)] text-[var(--text-body)] shadow-xl' 
@@ -453,21 +496,23 @@ export default function Contact() {
                       className="space-y-8"
                     >
                       <div className="space-y-2 text-left">
-                        <h2 className="text-2xl font-bold font-sans" style={{ color: 'var(--text-body)' }}>Blueprint Handoff Details</h2>
-                        <p className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>Who should receive the initial review, audit points, and pipeline architecture recommendation?</p>
+                        <h2 className="text-2xl font-bold font-sans" style={{ color: 'var(--text-body)' }}>Where Should I Send the Reply?</h2>
+                        <p className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>Share the best contact details so I can review your notes and follow up with useful next steps.</p>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                         
                         {/* Name Input */}
                         <div className="space-y-2 col-span-1">
-                          <label className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
+                          <label htmlFor="contactName" className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
                             <User size={12} /> Full Name
                           </label>
                           <div className="relative group">
                             <input 
+                              id="contactName"
                               type="text"
                               placeholder="E.g., John Doe"
+                              autoComplete="name"
                               {...register('name', { required: 'Full name is required' })}
                               className={`w-full border rounded-2xl px-5 py-4 pl-12 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--accent-amber)]/30 transition-all text-base ${step4Errors.name ? 'border-red-500/50 focus:border-red-500/70' : 'border-[var(--border-card)]'}`}
                               style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}
@@ -483,13 +528,15 @@ export default function Contact() {
 
                         {/* Email Input */}
                         <div className="space-y-2 col-span-1">
-                          <label className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
+                          <label htmlFor="contactEmail" className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
                             <Mail size={12} /> Business Email
                           </label>
                           <div className="relative group">
                             <input 
+                              id="contactEmail"
                               type="email"
                               placeholder="E.g., john@yourcompany.com"
+                              autoComplete="email"
                               {...register('email', {
                                 required: 'Business email is required',
                                 pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address' }
@@ -508,13 +555,15 @@ export default function Contact() {
 
                         {/* Company URL Input */}
                         <div className="space-y-2 md:col-span-2">
-                          <label className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
+                          <label htmlFor="companyUrl" className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
                             <Building size={12} /> Company URL
                           </label>
                           <div className="relative group">
                             <input 
+                              id="companyUrl"
                               type="url"
                               placeholder="E.g., https://yourcompany.com"
+                              autoComplete="url"
                               {...register('companyUrl', {
                                 required: 'Company URL is required',
                                 pattern: { value: /^https?:\/\/.+/, message: 'Must start with https://' }
@@ -554,11 +603,15 @@ export default function Contact() {
                     </button>
                   ) : <div />}
                   
+                  <div className="sr-only" aria-live="polite">
+                    {!isStepValid() ? getStepValidationMessage() : ''}
+                  </div>
+
                   {step < 4 ? (
                     <button 
-                      disabled={!isStepValid()}
-                      onClick={nextStep}
-                      className="px-8 py-3.5 font-bold rounded-xl border transition-all flex items-center gap-2 disabled:opacity-30 font-mono text-xs uppercase tracking-widest ml-auto cursor-pointer hover:brightness-110"
+                      aria-disabled={!isStepValid()}
+                      onClick={handleNextStep}
+                      className={`px-8 py-3.5 font-bold rounded-xl border transition-all flex items-center gap-2 font-mono text-xs uppercase tracking-widest ml-auto cursor-pointer hover:brightness-110 ${!isStepValid() ? 'opacity-55' : ''}`}
                       style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
                     >
                       Next Step
@@ -566,15 +619,22 @@ export default function Contact() {
                     </button>
                   ) : (
                     <button 
-                      disabled={!isStepValid() || loading}
-                      onClick={() => handleSubmit()}
-                      className="btn-cta px-8 py-3.5 font-bold rounded-xl transition-all flex items-center gap-2 disabled:opacity-30 font-mono text-xs uppercase tracking-widest ml-auto relative overflow-hidden cursor-pointer"
+                      disabled={loading}
+                      aria-disabled={!isStepValid() || loading}
+                      onClick={() => {
+                        if (!isStepValid()) {
+                          setSubmitError(getStepValidationMessage());
+                          return;
+                        }
+                        handleSubmit();
+                      }}
+                      className={`btn-cta px-8 py-3.5 font-bold rounded-xl transition-all flex items-center gap-2 font-mono text-xs uppercase tracking-widest ml-auto relative overflow-hidden cursor-pointer ${!isStepValid() ? 'opacity-55' : ''}`}
                     >
                       {loading ? (
                         <span className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                       ) : (
                         <>
-                          Build Blueprint
+                          Send Project Details
                           <ArrowRight size={16} />
                         </>
                       )}
@@ -616,17 +676,17 @@ export default function Contact() {
               
               <div className="space-y-4">
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
-                  Configuration Logged, {formData.name.split(' ')[0]}.
+                  Thanks, {formData.name.split(' ')[0]}. I’ve Got It.
                 </h2>
                 <p className="font-light max-w-xl mx-auto text-sm md:text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  I am already reviewing your operational profile and company sitemap. Here is exactly how we construct your roadmap:
+                  Your answers are in. Here’s what usually happens next:
                 </p>
               </div>
               
               {/* Structured Success Roadmap */}
               <div className="max-w-2xl mx-auto text-left">
                 <div className="rounded-[2rem] p-8 md:p-10 border backdrop-blur-md space-y-6" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                  <h3 className="text-xs font-mono uppercase tracking-widest font-bold" style={{ color: 'var(--accent-amber)' }}>Onboarding Process</h3>
+                  <h3 className="text-xs font-mono uppercase tracking-widest font-bold" style={{ color: 'var(--accent-amber)' }}>Next Steps</h3>
                   
                   <div className="space-y-6">
                     <div className="flex gap-4">

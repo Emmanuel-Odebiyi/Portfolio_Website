@@ -1,0 +1,543 @@
+{
+  "name": "Leads outreach workflow (Enhanced with Verification & Multi-Tool Enrichment)",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -608
+      ],
+      "id": "5afd6c41-fa9e-4e2d-b737-31fe3a5d2a37",
+      "name": "When clicking \u2018Execute workflow\u2019"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Now, process the following raw lead data and produce the JSON output as specified. Use web search to enrich any missing information.\n\nRaw lead data:\n{{ $json.text }}\n\nYou MUST use the web_search tool for any question about current events, facts, news, or information that may have changed since your training. NEVER rely on your internal knowledge for temporal/curent data. When the search tool returns results, quote them directly. If the tool fails, say \"I couldn't search\" \u2014 never fill in from memory.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=### Role\nYou are a Lead Information Extractor and Proposal Preparation Assistant. Your primary goal is to meticulously parse raw lead data, extract critical company information, verify claimed content gaps against the company's actual website, and prepare comprehensive, accurate details for targeted outreach and proposal generation.\n\n### Context\n- Current: Extracting, enriching, and **verifying** company details from a given lead outreach list.\n- Before: Receiving a raw, unstructured list or document containing potential lead companies and their initial details.\n- After: Providing a structured JSON output of verified and enhanced company information \u2014 including a verification flag for each claimed content gap \u2014 ready to be split by an IF node into genuinely-in-need leads vs. everyone else.\n\n### Business / Product Overview\nThis agent is part of a lead outreach workflow aimed at identifying, researching, and preparing to contact potential client companies. The overall objective is to efficiently gather accurate data points to personalize outreach and maximize proposal success \u2014 which depends on the stated content gap actually being true, not just plausible. A false \"your blog is outdated\" claim in outreach to a company with an active blog kills credibility instantly, so verification is not optional.\n\n### Tools Available\n- `web_search`: To conduct internet searches for additional company information (website, LinkedIn, public company data, funding, team size).\n- `web_fetch` / website visit tool: **Required for verification.** Used to actually load the company's homepage and the specific page relevant to the claimed gap (e.g. `/blog`, `/resources`, `/news`, `/case-studies`) so the claim can be checked against real content, not inferred from general patterns. If your n8n setup only has an HTTP Request node available as a sub-tool, wire it in under this name \u2014 a `web_search` snippet alone is not sufficient for verification, since search indexes can be stale or miss subpages entirely.\n\n### Input Variables\n- `lead_data_raw`: {{ $json.text }}\nThe raw, unstructured text or content containing details about various companies, their priority levels, outreach urgency, and any claimed content gaps.\n\n### Instructions\n1. **Parse Input**: Carefully read and understand the `lead_data_raw` input, identifying individual company entries, any mentioned priorities or outreach levels, and any explicitly claimed content gap (e.g. \"blog is outdated,\" \"no case studies\").\n2. **Initial Extraction**: For each company, extract all explicitly stated information relevant to the required output fields.\n3. **Information Enrichment (Web Search)**: For any missing or incomplete fields (website, LinkedIn, tagline, funding stage, team size), use `web_search`. Prioritize accurate, up-to-date data.\n4. **Identify Content Gap**: If the input doesn't already state one, infer a candidate content gap from what you've gathered so far. This is a hypothesis at this stage, not a fact yet.\n5. **Verify the Content Gap (Website Visit \u2014 do not skip this step)**:\n   - Use `web_fetch` to load the company's actual website \u2014 the homepage and the specific page relevant to the claimed gap (blog, resources, news, case studies, etc).\n   - Check the real, current state: does the blog exist, and when was it last updated? Do the case studies/resources described as missing actually exist?\n   - Compare what you find against the claimed or inferred gap.\n   - Classify the result as one of:\n     - `TRUE` \u2014 the gap is confirmed real (e.g. blog exists but hasn't posted in 6+ months, or no blog/resources page found at all).\n     - `FALSE` \u2014 the claim doesn't hold up (e.g. blog is active with recent posts; resources they claimed were missing are present).\n     - `UNVERIFIED` \u2014 the site couldn't be checked (down, blocked, no clear content section to evaluate) or the result is genuinely ambiguous.\n   - Record a one-line `verification_evidence` note: what you actually found on the site that led to this classification.\n6. **Personalized Pitch Angle**: Write a concise, professional pitch angle for each company.\n   - If `content_gap_verified` is `TRUE`, build the pitch around the confirmed gap as stated.\n   - If `FALSE`, do not build the pitch around the disproven claim \u2014 either note that a different, verified angle is needed, or leave the pitch generic and flag it for manual review.\n   - If `UNVERIFIED`, phrase the pitch to avoid asserting the gap as fact (e.g. lead with a question rather than a claim).\n7. **Determine Outreach Priority**: Based on the input's explicit or implicit indications, assign an outreach priority level. Note: this is the *stated* urgency from the source list, independent of whether the gap turned out to be real \u2014 that's what `content_gap_verified` is for.\n8. **Structure Output**: Compile all extracted, enriched, and verified information into a valid JSON object.\n\n### Examples\n**Input**\n\"Company A (HIGH PRIORITY). Fast-growing tech startup. Recent funding announcement. Focuses on product but blog is outdated. Reach out ASAP.\"\n\nYou MUST use the web_search tool for any question about current events, facts, news, or information that may have changed since your training. NEVER rely on your internal knowledge for temporal/curent data. When the search tool returns results, quote them directly. If the tool fails, say \"I couldn't search\" \u2014 never fill in from memory.\n\n**Output fields** (all required, per company):\n- `company_name` (string)\n- `website` (string, valid URL starting with http:// or https://)\n- `tagline` (string)\n- `source` (string \u2014 e.g. \"Product Hunt\", \"Y Combinator\", \"LinkedIn\")\n- `batch_funding_stage` (string \u2014 e.g. \"W2025\", \"P2026\", \"Early Stage\", \"Seed\", \"Series A\")\n- `team_size_estimate` (string \u2014 e.g. \"Under 15\", \"10-20\", \"2 employees\")\n- `linkedin_page` (string, valid LinkedIn URL)\n- `content_gap_claimed` (string: the gap as originally stated or inferred, before verification)\n- `content_gap_verified` (string, exactly one of: `\"TRUE\"`, `\"FALSE\"`, `\"UNVERIFIED\"`)\n- `verification_evidence` (string: what was actually found on the site \u2014 e.g. \"Checked example.com/blog \u2014 4 posts in the last 30 days, contradicts 'outdated' claim\")\n- `personalized_pitch_angle` (string: tailored one-line hook, built per the rule in Instruction 6)\n- `outreach_priority_level` (string, exactly one of: `\"HIGH\"`, `\"MEDIUM\"`, `\"LOW\"`)\n\n**Sample output** (one company, for brevity):\n```json\n{\n  \"companies\": [\n    {\n      \"company_name\": \"Example Corp\",\n      \"website\": \"https://example.com\",\n      \"tagline\": \"AI-powered lead extraction\",\n      \"source\": \"Product Hunt\",\n      \"batch_funding_stage\": \"W2025\",\n      \"team_size_estimate\": \"Under 10\",\n      \"linkedin_page\": \"https://linkedin.com/company/example\",\n      \"content_gap_claimed\": \"Blog is outdated\",\n      \"content_gap_verified\": \"FALSE\",\n      \"verification_evidence\": \"Checked example.com/blog directly \u2014 6 posts published in the last 45 days, most recent 3 days ago. Claim does not hold up.\",\n      \"personalized_pitch_angle\": \"Generic \u2014 flagged for manual review, original gap claim disproven on verification.\",\n      \"outreach_priority_level\": \"HIGH\"\n    }\n  ]\n}\n```\n\n**Important output rules:**\n- Output **ONLY** the JSON object \u2014 no markdown, no ```json fences, no extra text, no surrounding commentary.\n- Do not add or omit any fields \u2014 the JSON must contain exactly these keys per company.\n- `content_gap_verified` must never be skipped or left as `TRUE` by default \u2014 it must reflect an actual `web_fetch` check of the live site.\n- If a field cannot be determined after a reasonable search, use a placeholder (e.g. \"Not found\") but still include the key.\n\n### Rules / Final Instructions\n- **Verify before asserting.** Never let a pitch angle state a content gap as fact unless `content_gap_verified` is `TRUE` for that company.\n- **Accuracy first.** Always prioritize the accuracy of extracted, researched, and verified information over speed.\n- **Valid JSON only.** The output must be a single, valid JSON object. No conversational filler outside the JSON.\n- **Handle missing data honestly.** If something can't be found after a reasonable search, mark it \"Not Found\" rather than fabricating it.\n- **Maintain tone.** The `personalized_pitch_angle` should be professional, persuasive, and consistent with the user's voice \u2014 but only when it's standing on a verified claim.\n- **Adhere to priority.** Strictly follow any explicit priority or urgency indicators in the input; this is separate from and unaffected by verification status.\n\n---\n\n### For your downstream IF node\nSplit on `content_gap_verified`:\n- `\"TRUE\"` \u2192 genuinely in need, route to outreach/proposal generation as-is.\n- `\"FALSE\"` \u2192 the original premise was wrong; route to a secondary branch for manual re-angling rather than sending outreach built on a false claim.\n- `\"UNVERIFIED\"` \u2192 route to manual review rather than either auto-sending or auto-discarding \u2014 a site being unreachable isn't the same as the gap being disproven."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        928,
+        -608
+      ],
+      "id": "9dd443e3-1563-4bd7-ae8e-c62b61025ba5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        864,
+        -368
+      ],
+      "id": "dfe21ef9-21f1-4e39-a2a7-0b444d119f5b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "qeUXjOYRbCWKlWR9",
+          "name": "emmayoodebiyi001 - Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1LFfNDyVZhWXkyxw3cmIMEq8KQ9lpVea_NzGIvwvYqqA",
+          "mode": "list",
+          "cachedResultName": "Potential Leads Outreach Sheet ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LFfNDyVZhWXkyxw3cmIMEq8KQ9lpVea_NzGIvwvYqqA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LFfNDyVZhWXkyxw3cmIMEq8KQ9lpVea_NzGIvwvYqqA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "company_name": "={{ $json.company_name }}",
+            "website": "={{ $json.website }}",
+            "tagline": "={{ $json.tagline }}",
+            "source": "={{ $json.source }}",
+            "batch_funding_stage": "={{ $json.batch_funding_stage }}",
+            "\r\nteam_size_estimate": "={{ $json.team_size_estimate }}",
+            "linkedin_page": "={{ $json.linkedin_page }}",
+            "content_gap_identified": "={{ $json.content_gap_identified }}",
+            "personalized_pitch_angle": "={{ $json.personalized_pitch_angle }}",
+            "outreach_priority_level": "={{ $json.outreach_priority_level }}",
+            "content_gap_verified": "={{ $json.content_gap_verified }}",
+            "verification_evidence": "={{ $json.verification_evidence }}"
+          },
+          "matchingColumns": [
+            "company_name"
+          ],
+          "schema": [
+            {
+              "id": "company_name",
+              "displayName": "company_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tagline",
+              "displayName": "tagline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "batch_funding_stage",
+              "displayName": "batch_funding_stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "\r\nteam_size_estimate",
+              "displayName": "\r\nteam_size_estimate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "linkedin_page",
+              "displayName": "linkedin_page",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "content_gap_identified",
+              "displayName": "content_gap_identified",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "personalized_pitch_angle",
+              "displayName": "personalized_pitch_angle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "outreach_priority_level",
+              "displayName": "outreach_priority_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2000,
+        -700
+      ],
+      "id": "10fb99e7-9460-4510-8db6-804f1a074a00",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hJlM6s0mGYi7G4Uj",
+          "name": "emmanuel@emmanuelodebiyi.name.ng - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"companies\": {\n      \"type\": \"array\",\n      \"description\": \"List of lead companies with verified intelligence and enriched contact data.\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"company_name\": {\n            \"type\": \"string\"\n          },\n          \"website\": {\n            \"type\": \"string\",\n            \"format\": \"uri\"\n          },\n          \"tagline\": {\n            \"type\": \"string\"\n          },\n          \"source\": {\n            \"type\": \"string\"\n          },\n          \"batch_funding_stage\": {\n            \"type\": \"string\"\n          },\n          \"team_size_estimate\": {\n            \"type\": \"string\"\n          },\n          \"linkedin_page\": {\n            \"type\": \"string\",\n            \"format\": \"uri\"\n          },\n          \"content_gap_claimed\": {\n            \"type\": \"string\"\n          },\n          \"content_gap_verified\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"TRUE\",\n              \"FALSE\",\n              \"UNVERIFIED\"\n            ]\n          },\n          \"verification_evidence\": {\n            \"type\": \"string\"\n          },\n          \"personalized_pitch_angle\": {\n            \"type\": \"string\"\n          },\n          \"outreach_priority_level\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"HIGH\",\n              \"MEDIUM\",\n              \"LOW\"\n            ]\n          },\n          \"apollo_organization_id\": {\n            \"type\": \"string\"\n          },\n          \"hunter_domain_status\": {\n            \"type\": \"string\"\n          }\n        },\n        \"required\": [\n          \"company_name\",\n          \"website\",\n          \"tagline\",\n          \"source\",\n          \"batch_funding_stage\",\n          \"team_size_estimate\",\n          \"linkedin_page\",\n          \"content_gap_claimed\",\n          \"content_gap_verified\",\n          \"verification_evidence\",\n          \"personalized_pitch_angle\",\n          \"outreach_priority_level\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"companies\"\n  ],\n  \"additionalProperties\": false\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1136,
+        -368
+      ],
+      "id": "95cf898d-d237-4ca1-8278-5b5650fcb1c3",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "url": "http://10.53.0.129:8888/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            },
+            {
+              "name": "format  ",
+              "value": "=json "
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": " User-Agent",
+              "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": " application/json"
+            },
+            {
+              "name": " X-Forwarded-For",
+              "value": " 127.0.0.1"
+            },
+            {
+              "name": "X-Real-IP",
+              "value": "127.0.0.1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1008,
+        -304
+      ],
+      "id": "24640b96-ccbb-4d97-8721-85c5cb843dea",
+      "name": "web_search"
+    },
+    {
+      "parameters": {
+        "path": "/Documents/Emmanuel_Odebiyi_Startup_Target_List.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.ftp",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -608
+      ],
+      "id": "f5464c70-055d-445d-90d8-2d5948771d1b",
+      "name": "List Personal Branding Files",
+      "credentials": {
+        "ftp": {
+          "id": "QCPE3JFGFdOZPuJB",
+          "name": "FTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        704,
+        -608
+      ],
+      "id": "81fe7d3a-d8f2-4e24-a680-fc4c989f20eb",
+      "name": "Extract from  the file"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.companies",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        -608
+      ],
+      "id": "16cbe99d-6234-47e0-8247-83ac44dc36f3",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.content_gap_verified }}",
+              "operation": "equals",
+              "value2": "TRUE"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        -608
+      ],
+      "id": "e2a4b891-7c9d-4e12-881a-verification-if",
+      "name": "Is Gap Verified (TRUE)?"
+    },
+    {
+      "parameters": {
+        "url": "https://api.apollo.io/v1/organizations/enrich",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "domain",
+              "value": "={{ $json.website.replace('https://','').replace('http://','').split('/')[0] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        -700
+      ],
+      "id": "c8b9d012-3e4f-5a6b-7c8d-apollo-hunter-node",
+      "name": "Apollo.io / Hunter.io Enrichment"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1LFfNDyVZhWXkyxw3cmIMEq8KQ9lpVea_NzGIvwvYqqA",
+          "mode": "list",
+          "cachedResultName": "Potential Leads Outreach Sheet ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LFfNDyVZhWXkyxw3cmIMEq8KQ9lpVea_NzGIvwvYqqA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Manual Review Needed",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LFfNDyVZhWXkyxw3cmIMEq8KQ9lpVea_NzGIvwvYqqA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "company_name": "={{ $json.company_name }}",
+            "website": "={{ $json.website }}",
+            "content_gap_claimed": "={{ $json.content_gap_claimed }}",
+            "content_gap_verified": "={{ $json.content_gap_verified }}",
+            "verification_evidence": "={{ $json.verification_evidence }}",
+            "review_reason": "Gap disproven or site unreachable - manual angle required"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1760,
+        -480
+      ],
+      "id": "d9c0e123-4f5a-6b7c-8d9e-manual-review-sheet",
+      "name": "Log to Manual Review Sheet"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking \u2018Execute workflow\u2019": {
+      "main": [
+        [
+          {
+            "node": "List Personal Branding Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "web_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "List Personal Branding Files": {
+      "main": [
+        [
+          {
+            "node": "Extract from  the file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from  the file": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Is Gap Verified (TRUE)?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Gap Verified (TRUE)?": {
+      "main": [
+        [
+          {
+            "node": "Apollo.io / Hunter.io Enrichment",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log to Manual Review Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apollo.io / Hunter.io Enrichment": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d6658845-edb6-4c8c-9229-79384649c255",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7158b830ecadd7e6dd9d780eb3ebb642c813632bf9ccc447d9d4fd4d8ced81ea"
+  },
+  "nodeGroups": [],
+  "id": "tE6MubDwi4YrhByZ",
+  "tags": []
+}
