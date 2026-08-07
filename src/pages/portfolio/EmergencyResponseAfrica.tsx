@@ -59,7 +59,7 @@ export default function EmergencyResponseAfrica() {
       {/* Full-bleed Header Banner */}
       <div className="w-full h-[250px] sm:h-[350px] md:h-[450px] relative overflow-hidden">
         <OptimizedImage 
-          src="/images/headers/emergency_response_header.png" 
+          src="/images/headers/emergency_response_header.webp" 
           alt="Emergency Response Africa Header Banner" 
           className="w-full h-full object-cover" 
         />
@@ -196,7 +196,7 @@ export default function EmergencyResponseAfrica() {
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
                 <OptimizedImage 
-                  src="/images/era_ga4_traffic.png" 
+                  src="/images/era_ga4_traffic.webp" 
                   alt="Google Analytics GA4 Acquisition report showing +180% organic growth" 
                   className="w-full h-auto object-cover"
                 />
@@ -217,7 +217,7 @@ export default function EmergencyResponseAfrica() {
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
                 <OptimizedImage 
-                  src="/images/era_ga4_conversions.png" 
+                  src="/images/era_ga4_conversions.webp" 
                   alt="Google Analytics GA4 Conversions report showing +30% call clicks" 
                   className="w-full h-auto object-cover"
                 />

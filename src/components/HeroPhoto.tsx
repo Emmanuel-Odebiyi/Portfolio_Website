@@ -77,7 +77,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
 
           {/* Photo with AVIF -> WebP -> PNG fallbacks */}
           <OptimizedImage
-            src="/images/home-hero.png"
+            src="/images/home-hero.webp"
             alt="Emmanuel Odebiyi — Automation Specialist"
             className="relative z-10 w-full h-full object-cover object-top block"
             fetchPriority="high"

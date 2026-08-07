@@ -57,7 +57,7 @@ const writingSamples = [
     type: 'Long-form Article', industry: 'Health & Wellness', readTime: '8 min',
     excerpt: 'Research-backed guide to herbal anxiety remedies — written to rank for high-intent search terms while genuinely serving readers seeking natural alternatives.',
     accent: 'green',
-    image: '/images/herbvity_anxiety_cover.png',
+    image: '/images/herbvity_anxiety_cover.webp',
   },
   {
     id: 3,
@@ -66,7 +66,7 @@ const writingSamples = [
     type: 'Health Content', industry: 'Health & Wellness', readTime: '10 min',
     excerpt: 'Health content that earns trust without sacrificing search performance — rigorous research made accessible.',
     accent: 'green',
-    image: '/images/herbvity_natural_cover.png',
+    image: '/images/herbvity_natural_cover.webp',
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ const writingSamples = [
     type: 'Case Study', industry: 'Entertainment Media', readTime: '5 min',
     excerpt: 'Led end-to-end content strategy for Nigeria\'s digital entertainment platform — taking it from Position 45 to Page 1 for 20+ competitive keywords.',
     accent: 'blue', isInternal: true,
-    image: '/images/scoove_writing_cover.png',
+    image: '/images/scoove_writing_cover.webp',
   },
   {
     id: 5,
@@ -84,7 +84,7 @@ const writingSamples = [
     type: 'Local SEO Copy', industry: 'Healthcare / MedTech', readTime: '4 min',
     excerpt: 'Geo-targeted landing page copy that pushed 10+ high-intent healthcare search terms to Page 1 and increased call volume by 30%.',
     accent: 'rose', isInternal: true,
-    image: '/images/era_writing_cover.png',
+    image: '/images/era_writing_cover.webp',
   },
   {
     id: 6,
@@ -93,7 +93,7 @@ const writingSamples = [
     type: 'Content Strategy', industry: 'B2B SaaS', readTime: '6 min',
     excerpt: 'Designed and wrote a full SEO content system for a B2B SaaS platform — scaling from 8 to 35+ articles monthly and attributing $127K in revenue to content.',
     accent: 'amber', isInternal: true,
-    image: '/images/techflow_ga4_traffic.png',
+    image: '/images/techflow_ga4_traffic.webp',
   },
 ];
 
@@ -149,7 +149,7 @@ const testimonials = [
   {
     quote: "Emmanuel didn't just improve our content — he transformed how our entire marketing operation works. The 520% ROI in the first quarter turned our entire board into believers. It's the best strategic investment we made all year.",
     name: 'Sarah Mitchell', role: 'VP of Marketing', company: 'TechFlow Solutions',
-    avatar: '/images/testimonials/sarah_mitchell.png',
+    avatar: '/images/testimonials/sarah_mitchell.webp',
     featured: true,
   },
   {
@@ -161,7 +161,7 @@ const testimonials = [
   {
     quote: "Emmanuel's localized health copy transformed how emergency services found us online. Pushing 10+ medical keywords to Page 1 increased direct emergency calls by 30% in under 60 days.",
     name: 'Paul Olaniyi', role: 'Marketing Director', company: 'Emergency Response Africa',
-    avatar: '/images/testimonials/paul_olaniyi.png',
+    avatar: '/images/testimonials/paul_olaniyi.webp',
     featured: false,
   },
 ];
@@ -172,35 +172,35 @@ const brands = [
     category: 'B2B MarTech Platform', 
     count: 'Published Author', 
     url: 'https://storychief.io/blog/author/emmanuel-odebiyi-ayomide', 
-    logo: '/images/logos/storychief.png',
+    logo: '/images/logos/storychief.webp',
   },
   { 
     name: 'Herbvity', 
     category: 'Health & Wellness', 
     count: '19 Articles Published', 
     url: 'https://herbvity.com/author/Emmanuel-Odebiyi/', 
-    logo: '/images/logos/herbvity.png',
+    logo: '/images/logos/herbvity.webp',
   },
   { 
     name: 'The Scoove Africa', 
     category: 'Entertainment & Media', 
     count: 'Content & SEO Strategy', 
     url: '/portfolio/scoove-africa', 
-    logo: '/images/logos/scoove.png',
+    logo: '/images/logos/scoove.webp',
   },
   { 
     name: 'Emergency Response Africa', 
     category: 'Healthcare / MedTech', 
     count: 'Local SEO Copywriting', 
     url: '/portfolio/emergency-response-africa', 
-    logo: '/images/logos/era.png',
+    logo: '/images/logos/era.webp',
   },
   { 
     name: 'TechFlow Solutions', 
     category: 'B2B SaaS', 
     count: '35+ Monthly Articles', 
     url: '/portfolio/techflow-solutions', 
-    logo: '/images/logos/techflow.jpg',
+    logo: '/images/logos/techflow.webp',
   },
 ];
 

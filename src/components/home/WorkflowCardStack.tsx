@@ -2,19 +2,19 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ── Workflow image imports (alternating n8n / Make / Zapier) ─────────────────
-import img01 from '../../assets/workflows/n8n-social-media-content-factory-workflow.png';
-import img02 from '../../assets/workflows/make-notion-google-calendar-automation.png';
-import img03 from '../../assets/workflows/zapier-biz-dev-call-briefer-agent.png';
-import img04 from '../../assets/workflows/n8n-langflow-chatbot-integration-workflow.png';
-import img05 from '../../assets/workflows/make-stripe-klicktipp-payment-automation.png';
-import img06 from '../../assets/workflows/zapier-linkedin-ads-idea-generation-zap.png';
-import img07 from '../../assets/workflows/n8n-ai-strategy-optimization-workflow.png';
-import img08 from '../../assets/workflows/make-video-publishing-traffic-funnel.png';
-import img09 from '../../assets/workflows/zapier-linkedin-webhook-calendar-zap.png';
-import img10 from '../../assets/workflows/n8n-seo-article-content-pipeline.png';
-import img11 from '../../assets/workflows/make-google-sheets-wordpress-blog-automation.png';
-import img12 from '../../assets/workflows/n8n-online-marketing-weekly-report.png';
-import img13 from '../../assets/workflows/make-wordpress-social-media-chatgpt.png';
+import img01 from '../../assets/workflows/n8n-social-media-content-factory-workflow.webp';
+import img02 from '../../assets/workflows/make-notion-google-calendar-automation.webp';
+import img03 from '../../assets/workflows/zapier-biz-dev-call-briefer-agent.webp';
+import img04 from '../../assets/workflows/n8n-langflow-chatbot-integration-workflow.webp';
+import img05 from '../../assets/workflows/make-stripe-klicktipp-payment-automation.webp';
+import img06 from '../../assets/workflows/zapier-linkedin-ads-idea-generation-zap.webp';
+import img07 from '../../assets/workflows/n8n-ai-strategy-optimization-workflow.webp';
+import img08 from '../../assets/workflows/make-video-publishing-traffic-funnel.webp';
+import img09 from '../../assets/workflows/zapier-linkedin-webhook-calendar-zap.webp';
+import img10 from '../../assets/workflows/n8n-seo-article-content-pipeline.webp';
+import img11 from '../../assets/workflows/make-google-sheets-wordpress-blog-automation.webp';
+import img12 from '../../assets/workflows/n8n-online-marketing-weekly-report.webp';
+import img13 from '../../assets/workflows/make-wordpress-social-media-chatgpt.webp';
 
 interface Card {
   src: string;

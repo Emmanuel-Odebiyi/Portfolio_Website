@@ -56,7 +56,7 @@ export default function ScooveAfrica() {
       before: "A generic entertainment review",
       after: "\"Top 15 Restaurants on Lagos Mainland (2026 Review)\"",
       badge: "Commercial Intent",
-      evidenceImage: "/images/scoove/scoove_keyword_planning.jpg",
+      evidenceImage: "/images/scoove/scoove_keyword_planning.webp",
       evidenceLabel: "Notion keyword volume planner and editorial calendar"
     },
     {
@@ -74,7 +74,7 @@ export default function ScooveAfrica() {
       before: "Dense blocks of plain text",
       after: "Immersive layout with interactive media",
       badge: "UX Improvement",
-      evidenceImage: "/images/scoove/scoove_wordpress_diff.jpg",
+      evidenceImage: "/images/scoove/scoove_wordpress_diff.webp",
       evidenceLabel: "WordPress revision history showing on-page readability tuning and heading structure optimization"
     },
     {
@@ -85,8 +85,8 @@ export default function ScooveAfrica() {
       after: "PageSpeed Index: 74 (Medical/Structured Schemas)",
       badge: "Web Vitals Pass",
       evidenceImages: [
-        { src: "/images/scoove/scoove_pagespeed_mobile.jpg", label: "Mobile Performance score: 74" },
-        { src: "/images/scoove/scoove_pagespeed_desktop.jpg", label: "Desktop Performance score: 96" }
+        { src: "/images/scoove/scoove_pagespeed_mobile.webp", label: "Mobile Performance score: 74" },
+        { src: "/images/scoove/scoove_pagespeed_desktop.webp", label: "Desktop Performance score: 96" }
       ]
     }
   ];
@@ -102,7 +102,7 @@ export default function ScooveAfrica() {
       {/* Full-bleed Header Banner */}
       <div className="w-full h-[250px] sm:h-[350px] md:h-[450px] relative overflow-hidden">
         <img 
-          src="/images/headers/scoove_header.jpg" 
+          src="/images/headers/scoove_header.webp" 
           alt="The Scoove Africa Header Banner" 
           className="w-full h-full object-cover" 
         />
@@ -266,7 +266,7 @@ export default function ScooveAfrica() {
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
                 <img 
-                  src="/images/scoove/scoove_ga4_engagement_before.jpg" 
+                  src="/images/scoove/scoove_ga4_engagement_before.webp" 
                   alt="GA4 engagement report before optimization showing zero traffic" 
                   className="w-full h-auto object-cover"
                 />
@@ -287,7 +287,7 @@ export default function ScooveAfrica() {
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
                 <img 
-                  src="/images/scoove/scoove_ga4_acquisition_after.jpg" 
+                  src="/images/scoove/scoove_ga4_acquisition_after.webp" 
                   alt="GA4 acquisition report after optimization showing 6.4K active users" 
                   className="w-full h-auto object-cover"
                 />
@@ -318,7 +318,7 @@ export default function ScooveAfrica() {
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
                 <img 
-                  src="/images/scoove/scoove_gsc_before.jpg" 
+                  src="/images/scoove/scoove_gsc_before.webp" 
                   alt="Search Console report showing 6.89K clicks and 458K impressions before SEO project" 
                   className="w-full h-auto object-cover"
                 />
@@ -339,7 +339,7 @@ export default function ScooveAfrica() {
               </div>
               <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)' }}>
                 <img 
-                  src="/images/scoove/scoove_gsc_after.jpg" 
+                  src="/images/scoove/scoove_gsc_after.webp" 
                   alt="Search Console report showing 15.3K clicks and 979K impressions after SEO project" 
                   className="w-full h-auto object-cover"
                 />

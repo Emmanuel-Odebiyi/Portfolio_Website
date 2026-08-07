@@ -97,7 +97,7 @@ export default function About() {
         {/* Fullscreen Background Image */}
         <div className="absolute inset-0 z-0 select-none">
           <OptimizedImage
-            src="/images/about-hero-landscape.png"
+            src="/images/about-hero-landscape.webp"
             alt="Emmanuel Odebiyi Portrait"
             className="w-full h-full object-cover object-[50%_30%]"
             draggable={false}
@@ -428,7 +428,7 @@ export default function About() {
                   quote: "Emmanuel is a bright spirit with oozing positivity. Everytime he submits work it's with a positive attitude and enthusiasm. He is thorough in his research and asks questions if he has any need to. I would be happy to work with him again in the future and I believe anyone else who gets the opportunity to as well is lucky.",
                   name: "Brock Yates",
                   title: "Operational Project Manager, Mel Technologies LLC (Switzerland)",
-                  image: "/images/testimonials/Brock.jpg",
+                  image: "/images/testimonials/Brock.webp",
                   rating: 5
                 },
                 {
@@ -436,7 +436,7 @@ export default function About() {
                   quote: "Emmanuel delivered great articles and content workflows, taking his time to research the subject thoroughly before designing our search strategy. The better you guide and the more precise you describe your tasks, the better output you'll get. Thank you, Emmanuel.",
                   name: "Phillip Stemann",
                   title: "Founder, Planzer.io",
-                  image: "/images/testimonials/Phillip.jpg",
+                  image: "/images/testimonials/Phillip.webp",
                   rating: 5
                 },
                 {
@@ -444,7 +444,7 @@ export default function About() {
                   quote: "Emmanuel is an exceptional systems builder and marketing architect. He built a content mapping database and automated syndication pipeline for us that drastically reduced our publishing overhead. His focus on data accuracy and quality assurance is something I really admire. Highly recommended!",
                   name: "Daniel Olutoki",
                   title: "Retail Merchandiser, Xiaomi Nigeria",
-                  image: "/images/testimonials/Daniel.jpg",
+                  image: "/images/testimonials/Daniel.webp",
                   rating: 5
                 },
                 {
@@ -452,7 +452,7 @@ export default function About() {
                   quote: "Emmanuel understands how to scale search engine visibility using technical SEO automation. He helped us research, optimize, and distribute articles using automated brand voice checks, guaranteeing speed without sacrificing editorial standards. He is outstanding at building workflows that deliver.",
                   name: "Adewunmi Adedayo",
                   title: "Journalist & SEO Content Writer",
-                  image: "/images/testimonials/Adewunmi.jpg",
+                  image: "/images/testimonials/Adewunmi.webp",
                   rating: 5
                 },
                 {
@@ -460,7 +460,7 @@ export default function About() {
                   quote: "Emmanuel's approach to merging AI workflows with content strategy is brilliant. He doesn't just build scripts; he architects robust publishing engines using n8n and OpenAI that maintain brand voice at scale. His systems saved our team countless manual hours. An invaluable automation partner!",
                   name: "Nkemdirim Madueme",
                   title: "AI Automation Builder",
-                  image: "/images/testimonials/Nkemdirim.jpg",
+                  image: "/images/testimonials/Nkemdirim.webp",
                   rating: 5
                 },
                 {
@@ -468,7 +468,7 @@ export default function About() {
                   quote: "Emmanuel is an exceptional strategist who perfectly blends SEO and content automation. He designed a system to automate our organic marketing and social media publishing pipeline. He's fast, understands distribution tech deeply, and delivers outstanding results. I'd recommend him to any growth team!",
                   name: "Esther Adeniji",
                   title: "Product Manager, UBA Group",
-                  image: "/images/testimonials/Esther.jpg",
+                  image: "/images/testimonials/Esther.webp",
                   rating: 5
                 },
                 {
@@ -476,7 +476,7 @@ export default function About() {
                   quote: "Emmanuel is a brilliant system developer and content architect. He built a custom workflow that allows us to generate, edit, and publish high-quality 2,000 to 5,000-word guides with perfect SEO integration. The traffic results are compounding, and the system runs smoothly.",
                   name: "Taiwo Sotikare",
                   title: "CEO, Business World Africa",
-                  image: "/images/testimonials/Taiwo.jpg",
+                  image: "/images/testimonials/Taiwo.webp",
                   rating: 5
                 },
                 {
@@ -484,7 +484,7 @@ export default function About() {
                   quote: "Emmanuel completely transformed the content pipeline at Scoove Africa. By designing custom n8n workflows integrated with Make, he automated our entire publishing cycle, boosting traffic by 65% in 3 months. His deep understanding of technical SEO and automation is state of the art.",
                   name: "Olayiide Bolaji-Daniel",
                   title: "Senior Technical SEO Manager, 360⁰ Growth Hacking & CEO, Scoove Africa",
-                  image: "/images/testimonials/Bolaji.jpg",
+                  image: "/images/testimonials/Bolaji.webp",
                   rating: 5
                 }
               ]}

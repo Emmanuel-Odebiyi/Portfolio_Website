@@ -87,13 +87,13 @@ export default function Home() {
                 quote: "Emmanuel is a bright spirit with oozing positivity. Everytime he submits work it's with a positive attitude and enthusiasm. He is thorough in his research and asks questions if he has any need to. I would be happy to work with him again in the future and I believe anyone else who gets the opportunity to as well is lucky.",
                 name: "Brock Yates",
                 title: "Operational Project Manager, Mel Technologies LLC (Switzerland)",
-                image: "/images/testimonials/Brock.jpg"
+                image: "/images/testimonials/Brock.webp"
               },
               {
                 quote: "Emmanuel delivered great articles and content workflows, taking his time to research the subject thoroughly before designing our search strategy. The better you guide and the more precise you describe your tasks, the better output you'll get. Thank you, Emmanuel.",
                 name: "Phillip Stemann",
                 title: "Founder, Planzer.io",
-                image: "/images/testimonials/Phillip.jpg"
+                image: "/images/testimonials/Phillip.webp"
               }
             ].map((testimonial, i) => (
               <motion.div
