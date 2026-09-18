@@ -131,7 +131,7 @@ export const SolutionSection = () => {
       aria-label="The Solution Section"
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-surface-alt) 80%, transparent)' }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col" style={{ backgroundColor: 'var(--bg-page)' }}>
 
         {/* ── Headline Block ── */}
         <div className="shrink-0 pt-14 md:pt-24 pb-2 md:pb-4 px-6 md:px-16 text-center z-10">
@@ -168,24 +168,22 @@ export const SolutionSection = () => {
                     handleCardClick(index);
                   }
                 }}
-                className="relative overflow-hidden rounded-2xl lg:rounded-[3rem] mx-0 lg:mx-2 first:ml-0 last:mr-0 flex-1 shadow-sm transition-shadow duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent-amber)] focus-visible:outline-offset-2"
+                className="relative overflow-hidden rounded-2xl lg:rounded-[2.5rem] mx-0 lg:mx-2 first:ml-0 last:mr-0 flex-1 border transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent-amber)] focus-visible:outline-offset-2"
                 animate={{ 
                     flex: isActive ? 8 : 1,
                     scale: isActive ? 1 : 0.98,
-                    boxShadow: isActive ? `0 12px 40px rgba(17,31,46,0.06), 0 0 80px ${solution.accentColor}15` : 'none'
                 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 25 }}
                 style={{ 
-                  border: '1px solid transparent',
-                  backgroundClip: 'padding-box, border-box',
-                  backgroundImage: `linear-gradient(
-                    color-mix(in srgb, ${solution.accentColor} ${isActive ? '8%' : '4%'}, var(--bg-surface)), 
-                    color-mix(in srgb, ${solution.accentColor} ${isActive ? '8%' : '4%'}, var(--bg-surface))
-                  ), ${
-                    isActive 
-                      ? `linear-gradient(135deg, ${solution.accentColor}80, ${solution.accentColor}20)`
-                      : `linear-gradient(135deg, color-mix(in srgb, ${solution.accentColor} 20%, var(--border-card)), var(--border-card))`
-                  }`,
+                  backgroundColor: isActive 
+                    ? 'var(--bg-surface)' 
+                    : 'color-mix(in srgb, var(--bg-surface) 60%, var(--bg-page))',
+                  borderColor: isActive 
+                    ? `color-mix(in srgb, ${solution.accentColor} 45%, var(--border-card))` 
+                    : 'var(--border-card)',
+                  boxShadow: isActive 
+                    ? `0 16px 40px rgba(0, 0, 0, 0.25), 0 0 36px ${solution.accentColor}18` 
+                    : 'none',
                   // Mobile/tablet: wide horizontal strip. Desktop: narrow vertical strip.
                   minHeight: isActive 
                     ? 'var(--solution-card-active-height, clamp(280px, 45vh, 420px))' 

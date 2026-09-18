@@ -958,7 +958,7 @@ export default function BlogPost() {
       </AnimatePresence>
 
       {/* Article Hero Banner */}
-      <section className="relative h-[80vh] w-full overflow-hidden border-b" style={{ borderColor: 'var(--border-card)' }}>
+      <section className="relative h-[80vh] w-full overflow-hidden border-b" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-page)' }}>
         <motion.div 
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
@@ -973,12 +973,42 @@ export default function BlogPost() {
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          {/* Top-down dark overlay to bring out the header text and logo */}
-          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/80 via-[#0E1C2A]/40 to-transparent pointer-events-none z-10" />
-          {/* Subtle bottom-up dark gradient fade */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0E1C2A] via-[#0E1C2A]/50 to-transparent z-10" />
-          {/* Subtle dark tint to dim the whole banner for high text contrast */}
-          <div className="absolute inset-0 bg-[#0E1C2A]/30 z-10" />
+
+          {/* ── Directional Transparent Frosted Blur with Ergonomic Alpha Distribution ── */}
+          {/* Smooth optical diffusion behind heading, author info, and reading tags */}
+          <div 
+            className="absolute inset-0 pointer-events-none z-10" 
+            style={{ 
+              backdropFilter: 'blur(30px)',
+              WebkitBackdropFilter: 'blur(30px)',
+              maskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)',
+              WebkitMaskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)'
+            }} 
+          />
+          {/* Diagonal alpha transition ensuring top-right visual telemetry remains 100% sharp */}
+          <div 
+            className="absolute inset-0 pointer-events-none z-10" 
+            style={{ 
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              maskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)',
+              WebkitMaskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)'
+            }} 
+          />
+          {/* Neutral contrast scrim behind left typography for razor-sharp legibility over light spots */}
+          <div 
+            className="absolute inset-y-0 left-0 w-full md:w-[75%] lg:w-[65%] pointer-events-none z-10" 
+            style={{ 
+              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0.1) 70%, transparent 100%)' 
+            }} 
+          />
+          {/* Subtle top-down fade for navbar floating clarity */}
+          <div 
+            className="absolute inset-x-0 top-0 h-36 pointer-events-none z-10"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
+            }}
+          />
         </motion.div>
 
         {/* Absolute content overlay with top padding constraint to prevent navbar overlap */}

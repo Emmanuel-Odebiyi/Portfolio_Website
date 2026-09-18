@@ -12,11 +12,14 @@ coverage/
 .agents/
 everything-claude-code/
 .claude/
+.claudeignore
 .cursor/
 .trae/
 .codex/
 .kiro/
 .antigravity/
+.planning/
+graphify-out/
 
 # IDE files
 .vscode/
@@ -25,7 +28,28 @@ everything-claude-code/
 *.swo
 
 # Submodules and temporary scratch directories
-scratch/get-shit-done/
+scratch/
 .scratch/
+.tmp-img/
 /*.png
+/*.jpg
+/*.mp4
+/*.zip
+/*.txt
 *Codex Context Chat*
+Portfolio-Redesign-Playbook.md
+*-plan.md
+
+# Non-website collateral & external project dumps
+Makarios Website/
+Upperclass AI/
+sanity-studio/
+wordpress-configs/
+Automation program in picture/
+The Scoove Image/
+Testimonials images/
+clean_logo.*
+copy-assets*.js
+makarios-*.html
+pre_deployment_checklist.html
+n8n-*.json

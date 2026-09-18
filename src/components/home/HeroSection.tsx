@@ -15,18 +15,18 @@ const AirtableIcon = SiAirtable as any;
 export const HeroSection = () => {
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden pt-36 pb-16 md:pb-28 lg:py-40"
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-32 sm:pt-36 lg:pt-36 pb-12 sm:pb-16"
       style={{ backgroundColor: 'var(--bg-page)' }}
       data-section="hero"
     >
       {/* Background Subtle Accent */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 hero-grid-responsive gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 hero-grid-responsive gap-8 lg:gap-12 items-center lg:items-end">
           
           {/* Left Column: Headline, Subheadline, CTAs, and Trust Indicators */}
-          <div className="lg:col-span-6 flex flex-col items-start text-left space-y-8">
+          <div className="lg:col-span-6 flex flex-col items-start text-left space-y-8 pb-4 lg:pb-8">
             
             {/* Elegant Badge */}
             <motion.div
@@ -122,10 +122,10 @@ export const HeroSection = () => {
 
           </div>
 
-          {/* Right Column: Editorial Portrait Visual Frame */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end w-full">
+          {/* Right Column: Editorial Portrait Stage (Leo Adam Template Adaptation) */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-start w-full items-end self-end relative">
             {/* HeroPhoto is the single source of truth for the portrait — see src/components/HeroPhoto.tsx */}
-            <HeroPhoto />
+            <HeroPhoto variant="cutout" />
           </div>
 
         </div>
@@ -135,7 +135,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-16 md:mt-24 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-8 lg:mt-12 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-6"
           style={{ borderColor: 'var(--border-card)' }}
         >
           <span className="text-[10px] font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>

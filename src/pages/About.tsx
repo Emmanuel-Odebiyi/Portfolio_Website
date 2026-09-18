@@ -94,28 +94,22 @@ export default function About() {
          ═══════════════════════════════════════════ */}
       <section className="relative h-screen min-h-[550px] sm:min-h-[600px] md:min-h-[750px] flex flex-col justify-end pb-10 sm:pb-12 md:pb-16 overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
         
-        {/* Fullscreen Background Image */}
+        {/* Fullscreen Background Image - Pure & Unshaded */}
         <div className="absolute inset-0 z-0 select-none">
           <OptimizedImage
             src="/images/about-hero-landscape.webp"
             alt="Emmanuel Odebiyi Portrait"
-            className="w-full h-full object-cover object-[50%_30%]"
+            className="w-full h-full object-cover object-[50%_25%]"
             draggable={false}
           />
-          {/* Subtle Halftone Overlay for premium print effect */}
-          <div className="absolute inset-0 opacity-[0.12] dark:opacity-[0.22] pointer-events-none mix-blend-overlay" 
-               style={{ backgroundImage: 'radial-gradient(circle, #000 1.2px, transparent 1.2px)', backgroundSize: '6px 6px' }} />
-          
-          {/* Soft Blur overlay at the bottom */}
-          <div className="absolute inset-x-0 bottom-0 h-36 backdrop-blur-[2px] pointer-events-none z-5" 
-               style={{ 
-                  maskImage: 'linear-gradient(to top, black, transparent)', 
-                  WebkitMaskImage: 'linear-gradient(to top, black, transparent)' 
-                }} />
 
-          {/* Background Gradient Overlays for contrast & readability in light/dark themes */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-page)] via-[var(--bg-page)]/55 to-transparent dark:from-[var(--bg-page)] dark:via-[var(--bg-page)]/80 dark:to-black/40 z-5 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-page)]/20 via-transparent to-[var(--bg-page)]/20 z-5 pointer-events-none" />
+          {/* Localized subtle bottom-only gradient strictly behind text baseline; face and upper photo are 100% clean and unshaded */}
+          <div 
+            className="absolute inset-x-0 bottom-0 h-64 md:h-72 pointer-events-none z-5"
+            style={{
+              background: 'linear-gradient(to top, rgba(14, 28, 42, 0.88) 0%, rgba(14, 28, 42, 0.4) 50%, transparent 100%)'
+            }}
+          />
         </div>
 
         {/* Floating Status Badge */}
@@ -126,12 +120,12 @@ export default function About() {
             transition={{ delay: 0.4 }}
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] font-bold backdrop-blur-md shadow-lg"
             style={{ 
-              backgroundColor: 'color-mix(in srgb, var(--bg-surface) 80%, transparent)', 
-              borderColor: 'var(--border-card)', 
-              color: 'var(--text-body)' 
+              backgroundColor: 'rgba(14, 28, 42, 0.75)', 
+              borderColor: 'rgba(255, 255, 255, 0.15)', 
+              color: '#ffffff' 
             }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Available for Automations</span>
           </motion.div>
         </div>
@@ -141,28 +135,26 @@ export default function About() {
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end pointer-events-none">
             {/* Left - Headline */}
             <div className="lg:col-span-8 text-left space-y-4 pointer-events-auto">
-              <h1 className="text-[1.35rem] sm:text-2xl md:text-3xl lg:text-[2.25rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm" style={{ color: 'var(--text-body)' }}>
-                Emmanuel is engineering <span className="text-brand-gradient">content marketing automation</span> systems that turn chaos into growth engines.
+              <h1 className="text-[1.35rem] sm:text-2xl md:text-3xl lg:text-[2.25rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.1] md:leading-[1.05] text-white [text-shadow:_0_2px_12px_rgba(0,0,0,0.85)]">
+                Emmanuel is engineering <span className="text-emerald-400 font-extrabold [text-shadow:_0_2px_14px_rgba(0,0,0,0.9)]">content marketing automation</span> systems that turn chaos into growth engines.
               </h1>
             </div>
 
             {/* Right - Bio & CTA */}
             <div className="lg:col-span-4 lg:col-start-9 text-left space-y-6 pointer-events-auto">
-              <p className="text-xs sm:text-sm md:text-base lg:text-[1.05rem] font-medium leading-relaxed drop-shadow-sm" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-xs sm:text-sm md:text-base lg:text-[1.05rem] font-medium leading-relaxed text-zinc-100 [text-shadow:_0_1px_8px_rgba(0,0,0,0.85)]">
                 By integrating smart content workflows with systems built on n8n and Make, he constructs self-running pipelines that publish, distribute, and optimize content automatically.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <a 
                   href="#contact-cta"
-                  className="px-6 py-3 rounded-full font-bold text-sm tracking-wide shadow-lg hover:scale-105 active:scale-95 transition-all"
-                  style={{ backgroundColor: 'var(--text-body)', color: 'var(--bg-page)' }}
+                  className="px-6 py-3 rounded-full font-bold text-sm tracking-wide shadow-lg hover:scale-105 active:scale-95 transition-all bg-white text-zinc-950 hover:bg-zinc-100"
                 >
                   Email Me
                 </a>
                 <Link 
                   to="/portfolio"
-                  className="px-6 py-3 rounded-full font-bold text-sm tracking-wide border hover:bg-[var(--bg-surface-alt)] transition-all"
-                  style={{ borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
+                  className="px-6 py-3 rounded-full font-bold text-sm tracking-wide border border-white/25 text-white bg-black/30 backdrop-blur-sm hover:bg-white/15 transition-all"
                 >
                   View My Work
                 </Link>

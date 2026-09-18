@@ -20,131 +20,111 @@ interface HeroPhotoProps {
  */
 export const HeroPhoto: React.FC<HeroPhotoProps> = ({
   className = '',
-  maxWidth = 'max-w-full lg:max-w-[580px] xl:max-w-[640px]',
+  maxWidth = 'w-full lg:w-[125%] xl:w-[135%] max-w-none',
   captionLabel = 'Automation Specialist',
-  animateDelay = 0.25,
+  animateDelay = 0.2,
+  variant = 'cutout',
+  imageSrc,
 }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: animateDelay, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative w-full ${maxWidth} ${className} select-none`}
-    >
-      {/* ── Ambient glow behind the card ─────────────────────────────────── */}
-      <div
-        className="absolute -inset-4 rounded-[2.5rem] blur-3xl opacity-[0.18] pointer-events-none -z-10"
-        style={{
-          background: 'radial-gradient(ellipse at 60% 40%, var(--accent-amber) 0%, transparent 70%)',
-        }}
-      />
-
-      {/* ── Outer decorative border ring ──────────────────────────────────── */}
-      <div
-        className="absolute -inset-[3px] rounded-[2.25rem] pointer-events-none z-0"
-        style={{
-          background: 'linear-gradient(135deg, color-mix(in srgb, var(--accent-amber) 40%, transparent), transparent 50%, color-mix(in srgb, var(--accent-amber) 15%, transparent))',
-          borderRadius: '2.25rem',
-        }}
-      />
-
-      {/* ── Main card ─────────────────────────────────────────────────────── */}
-      <div
-        className="relative z-10 rounded-[2rem] overflow-hidden"
-        style={{
-          backgroundColor: 'var(--bg-surface)',
-          border: '1px solid var(--border-card)',
-          boxShadow: [
-            '0 2px 4px rgba(0,0,0,0.06)',
-            '0 8px 24px rgba(0,0,0,0.10)',
-            '0 32px 64px rgba(0,0,0,0.14)',
-            'inset 0 1px 0 rgba(255,255,255,0.08)',
-          ].join(', '),
-          padding: '0',
-        }}
+  if (variant === 'card') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 28, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: animateDelay, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className={`relative w-full max-w-full lg:max-w-[640px] xl:max-w-[720px] ${className} select-none`}
       >
-        {/* ── Inner image clip ──────────────────────────────────────────────── */}
-        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
-
-          {/* Subtle dot grid on image bg */}
-          <div
-            className="absolute inset-0 opacity-[0.06] z-0 pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)',
-              backgroundSize: '18px 18px',
-            }}
-          />
-
-          {/* Photo with AVIF -> WebP -> PNG fallbacks */}
-          <OptimizedImage
-            src="/images/home-hero.webp"
-            alt="Emmanuel Odebiyi — Automation Specialist"
-            className="relative z-10 w-full h-full object-cover object-top block"
-            fetchPriority="high"
-            decoding="async"
-          />
-
-          {/* Bottom gradient vignette */}
-          <div
-            className="absolute inset-0 z-20 pointer-events-none"
-            style={{
-              background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 28%, transparent 55%)',
-            }}
-          />
-
-          {/* ── Name badge — frosted glass bar ──────────────────────────────── */}
-          <div className="absolute bottom-0 left-0 right-0 z-30 px-6 py-5 rounded-b-[2rem]">
-            {/* Frosted glass pill behind the text */}
-            <div
-              className="absolute inset-0 rounded-b-[1.625rem]"
-              style={{
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)',
-              }}
+        <div
+          className="absolute -inset-4 rounded-[2.5rem] blur-3xl opacity-[0.18] pointer-events-none -z-10"
+          style={{ background: 'radial-gradient(ellipse at 60% 40%, var(--accent-amber) 0%, transparent 70%)' }}
+        />
+        <div
+          className="relative z-10 rounded-[2rem] overflow-hidden"
+          style={{
+            backgroundColor: 'var(--bg-surface)',
+            border: '1px solid var(--border-card)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+          }}
+        >
+          <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
+            <OptimizedImage
+              src={imageSrc || "/images/home-hero.webp"}
+              alt="Emmanuel Odebiyi — Automation Specialist"
+              className="relative z-10 w-full h-full object-cover object-top block"
+              fetchPriority="high"
+              decoding="async"
             />
-
-            <div className="relative z-10">
-              {/* Amber pill label */}
-              <div className="flex items-center gap-1.5 mb-1.5">
-                <span
-                  className="w-1 h-1 rounded-full"
-                  style={{ backgroundColor: 'var(--accent-amber)' }}
-                />
-                <p
-                  className="text-[9px] font-mono font-bold tracking-[0.22em] uppercase"
-                  style={{ color: 'var(--accent-amber)' }}
-                >
-                  {captionLabel}
-                </p>
-              </div>
-
-              <h3 className="text-xl font-bold tracking-tight font-display" style={{ color: '#ffffff' }}>
-                Emmanuel Odebiyi
-              </h3>
-            </div>
           </div>
         </div>
-      </div>
+      </motion.div>
+    );
+  }
 
-      {/* ── Corner accent — thin amber arc top-left ───────────────────────── */}
+  // ── Leo Adam Template Aesthetic: Full-shoulder, edge-anchored transparent cutout ──
+  const finalSrc = imageSrc || '/images/emmanuel-cutout-full.webp';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay: animateDelay, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative w-full flex flex-col items-center lg:items-start justify-end ${maxWidth} ${className} select-none`}
+    >
+      {/* ── Ambient warm amber backlighting ─────────────────────────────────── */}
       <div
-        className="absolute top-2 left-2 w-14 h-14 rounded-tl-[1.75rem] pointer-events-none z-20"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[90%] rounded-full blur-[100px] md:blur-[140px] pointer-events-none -z-10"
         style={{
-          border: '1.5px solid color-mix(in srgb, var(--accent-amber) 35%, transparent)',
-          borderRight: 'none',
-          borderBottom: 'none',
+          background: 'radial-gradient(circle, color-mix(in srgb, var(--accent-amber) 30%, transparent) 0%, color-mix(in srgb, var(--accent-amber) 10%, transparent) 50%, transparent 75%)',
         }}
       />
-      {/* Corner accent — thin amber arc bottom-right */}
+
+      {/* ── Subtle tech micro-dot matrix behind portrait ───────────────────── */}
       <div
-        className="absolute bottom-2 right-2 w-14 h-14 rounded-br-[1.75rem] pointer-events-none z-20"
+        className="absolute inset-x-4 top-10 bottom-0 opacity-[0.07] pointer-events-none -z-10 rounded-t-3xl"
         style={{
-          border: '1.5px solid color-mix(in srgb, var(--accent-amber) 35%, transparent)',
-          borderLeft: 'none',
-          borderTop: 'none',
+          backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)',
+          backgroundSize: '18px 18px',
+          maskImage: 'radial-gradient(circle at 50% 45%, black 40%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(circle at 50% 45%, black 40%, transparent 80%)',
         }}
       />
+
+      {/* ── Main Subject Cutout: Full natural shoulders with soft feathered dissolves ── */}
+      <div className="relative w-full flex justify-center lg:justify-start items-end overflow-visible">
+        <OptimizedImage
+          src={finalSrc}
+          alt="Emmanuel Odebiyi — Automation Specialist"
+          className="relative z-10 w-[620px] sm:w-[720px] md:w-[800px] lg:w-[880px] xl:w-[960px] 2xl:w-[1020px] max-w-none h-auto object-contain object-bottom block pointer-events-none lg:-ml-16 xl:-ml-24"
+          style={{
+            filter: 'drop-shadow(0 20px 45px rgba(0, 0, 0, 0.5))',
+          }}
+          fetchPriority="high"
+          decoding="async"
+        />
+
+        {/* ── Sleek Glass Identity Badge (Grounded at the base) ─────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: animateDelay + 0.3, duration: 0.7 }}
+          className="absolute bottom-8 lg:bottom-10 right-4 lg:right-12 z-20 px-5 py-2.5 rounded-2xl backdrop-blur-xl border flex items-center gap-3 shadow-2xl"
+          style={{
+            backgroundColor: 'rgba(14, 28, 42, 0.86)',
+            borderColor: 'rgba(255, 255, 255, 0.14)',
+            boxShadow: '0 12px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)',
+          }}
+        >
+          <span className="w-2 h-2 rounded-full bg-[var(--accent-amber)] animate-pulse shrink-0" />
+          <div className="flex flex-col text-left">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.22em] text-[var(--accent-amber)]">
+              {captionLabel}
+            </span>
+            <span className="text-sm font-bold tracking-tight text-white font-display">
+              Emmanuel Odebiyi
+            </span>
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

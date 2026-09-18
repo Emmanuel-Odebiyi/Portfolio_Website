@@ -60,7 +60,7 @@ export default function Blog() {
       />
 
       {/* Full Viewport Cinematic Featured Post Hero */}
-      <section className="relative h-[90vh] md:h-screen w-full overflow-hidden group z-10 border-b" style={{ borderColor: 'var(--border-card)' }}>
+      <section className="relative h-[90vh] md:h-screen w-full overflow-hidden group z-10 border-b" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-page)' }}>
         <Link to={`/blog/${featuredPost.id}`}>
           <motion.div 
             initial={{ scale: 1.05 }}
@@ -76,18 +76,41 @@ export default function Blog() {
               className="w-full h-full object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-103"
               referrerPolicy="no-referrer"
             />
-            {/* Top-down dark overlay to bring out the header text and logo */}
-            <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E1C2A]/70 via-[#0E1C2A]/30 to-transparent pointer-events-none z-10" />
-            {/* Strong left-to-right gradient overlay to block out background image text on the left */}
+            {/* ── Directional Transparent Frosted Blur with Ergonomic Alpha Distribution ── */}
+            {/* Smooth optical diffusion behind heading, author info, and reading tags */}
             <div 
-              className="absolute inset-y-0 left-0 w-full md:w-[70%] lg:w-[60%] pointer-events-none z-10" 
+              className="absolute inset-0 pointer-events-none z-10" 
               style={{ 
-                background: 'linear-gradient(to right, var(--bg-page) 0%, var(--bg-page) 35%, color-mix(in srgb, var(--bg-page) 80%, transparent) 65%, transparent 100%)' 
+                backdropFilter: 'blur(30px)',
+                WebkitBackdropFilter: 'blur(30px)',
+                maskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)'
               }} 
             />
-            {/* Dark glassmorphic gradient overlay for crisp readability */}
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-page) 0%, transparent 100%)', opacity: 0.8 }} />
-            <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-page)', opacity: 0.15 }} />
+            {/* Diagonal alpha transition ensuring top-right visual telemetry remains 100% sharp */}
+            <div 
+              className="absolute inset-0 pointer-events-none z-10" 
+              style={{ 
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                maskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)',
+                WebkitMaskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)'
+              }} 
+            />
+            {/* Neutral contrast scrim behind left typography for razor-sharp legibility over light spots */}
+            <div 
+              className="absolute inset-y-0 left-0 w-full md:w-[75%] lg:w-[65%] pointer-events-none z-10" 
+              style={{ 
+                background: 'linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0.1) 70%, transparent 100%)' 
+              }} 
+            />
+            {/* Subtle top-down fade for navbar floating clarity */}
+            <div 
+              className="absolute inset-x-0 top-0 h-36 pointer-events-none z-10"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
+              }}
+            />
           </motion.div>
 
           <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 z-20">
@@ -102,20 +125,20 @@ export default function Blog() {
                 <div className="flex items-center gap-3">
                   <span 
                     className="px-3.5 py-1 text-xs font-sans font-bold uppercase tracking-widest border rounded-full backdrop-blur-md"
-                    style={{ color: 'var(--accent-amber)', borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}
+                    style={{ color: 'var(--accent-amber)', borderColor: 'rgba(255,255,255,0.15)', backgroundColor: 'rgba(0,0,0,0.5)' }}
                   >
                     Featured Insight
                   </span>
-                  <span className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 text-zinc-300">
                     <Clock size={12} /> {featuredPost.readTime}
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] font-display" style={{ color: 'var(--text-body)' }}>
+                <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] font-display text-white">
                   {featuredPost.title}
                 </h1>
                 
-                <p className="text-lg md:text-2xl font-light max-w-3xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                <p className="text-lg md:text-2xl font-light max-w-3xl leading-relaxed text-zinc-300">
                   {featuredPost.excerpt}
                 </p>
                 
@@ -126,12 +149,11 @@ export default function Blog() {
                     alt={featuredPost.author} 
                     width={48}
                     height={48}
-                    className="w-12 h-12 rounded-full border shadow-lg"
-                    style={{ borderColor: 'var(--border-card)' }}
+                    className="w-12 h-12 rounded-full border shadow-lg border-white/20"
                   />
                   <div>
-                    <p className="font-bold tracking-tight" style={{ color: 'var(--text-body)' }}>{featuredPost.author}</p>
-                    <p className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                    <p className="font-bold tracking-tight text-white">{featuredPost.author}</p>
+                    <p className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5 text-zinc-400">
                       <Calendar size={11} /> {featuredPost.date}
                     </p>
                   </div>

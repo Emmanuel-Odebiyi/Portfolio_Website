@@ -6,9 +6,14 @@ const STORAGE_KEY = 'eo-theme';
 
 const getInitialTheme = (): 'light' | 'dark' => {
   if (typeof window === 'undefined') return 'light';
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('theme') === 'dark') return 'dark';
+  if (urlParams.get('theme') === 'light') return 'light';
   const stored = localStorage.getItem(STORAGE_KEY) as 'light' | 'dark' | null;
   if (stored) return stored;
-  // Default: light
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
   return 'light';
 };
 
