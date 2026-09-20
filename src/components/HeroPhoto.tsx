@@ -70,25 +70,6 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
       transition={{ delay: animateDelay, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
       className={`relative w-full flex flex-col items-center lg:items-start justify-end ${maxWidth} ${className} select-none`}
     >
-      {/* ── Ambient warm amber backlighting ─────────────────────────────────── */}
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[90%] rounded-full blur-[100px] md:blur-[140px] pointer-events-none -z-10"
-        style={{
-          background: 'radial-gradient(circle, color-mix(in srgb, var(--accent-amber) 30%, transparent) 0%, color-mix(in srgb, var(--accent-amber) 10%, transparent) 50%, transparent 75%)',
-        }}
-      />
-
-      {/* ── Subtle tech micro-dot matrix behind portrait ───────────────────── */}
-      <div
-        className="absolute inset-x-4 top-10 bottom-0 opacity-[0.07] pointer-events-none -z-10 rounded-t-3xl"
-        style={{
-          backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)',
-          backgroundSize: '18px 18px',
-          maskImage: 'radial-gradient(circle at 50% 45%, black 40%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(circle at 50% 45%, black 40%, transparent 80%)',
-        }}
-      />
-
       {/* ── Main Subject Cutout: Full natural shoulders with soft feathered dissolves ── */}
       <div className="relative w-full flex justify-center lg:justify-start items-end overflow-visible">
         <OptimizedImage
@@ -96,7 +77,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           alt="Emmanuel Odebiyi — Automation Specialist"
           className="relative z-10 w-[620px] sm:w-[720px] md:w-[800px] lg:w-[880px] xl:w-[960px] 2xl:w-[1020px] max-w-none h-auto object-contain object-bottom block pointer-events-none lg:-ml-16 xl:-ml-24"
           style={{
-            filter: 'drop-shadow(0 20px 45px rgba(0, 0, 0, 0.5))',
+            filter: 'drop-shadow(0 16px 36px rgba(0, 0, 0, 0.18))',
           }}
           fetchPriority="high"
           decoding="async"
