@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, FileText } from 'lucide-react';
 import { SiN8N, SiZapier, SiMake, SiOpenai, SiHubspot, SiAirtable } from 'react-icons/si';
 import { HeroPhoto } from '../HeroPhoto';
 
@@ -92,6 +92,30 @@ export const HeroSection = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-sm transition-all duration-300 border border-[var(--border-card)] bg-[var(--bg-surface)] text-[var(--text-body)] hover:bg-[var(--text-body)] hover:text-[var(--bg-surface)] hover:border-transparent shadow-sm hover:shadow-md"
               >
                 Book a Free Strategy Call
+              </Link>
+            </motion.div>
+
+            {/* Direct Reference to Writing Samples */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.8 }}
+              className="w-full sm:w-auto"
+            >
+              <Link
+                to="/writing-portfolio"
+                className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold border transition-all duration-300 hover:border-[var(--accent-amber)] hover:shadow-sm"
+                style={{
+                  backgroundColor: 'color-mix(in srgb, var(--bg-surface) 80%, transparent)',
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-muted)'
+                }}
+              >
+                <FileText size={15} style={{ color: 'var(--accent-amber)' }} className="shrink-0" />
+                <span>Hiring for content writing or editorial?</span>
+                <span className="font-bold underline decoration-[var(--accent-amber)] underline-offset-4 group-hover:text-[var(--text-body)] transition-colors" style={{ color: 'var(--accent-amber)' }}>
+                  Jump straight to Writing Samples →
+                </span>
               </Link>
             </motion.div>
 

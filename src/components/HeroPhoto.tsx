@@ -83,16 +83,16 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           decoding="async"
         />
 
-        {/* ── Sleek Glass Identity Badge (Grounded at the base) ─────────────── */}
+        {/* ── Sleek Identity Badge (Theme-Adaptive) ─────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: animateDelay + 0.3, duration: 0.7 }}
-          className="absolute bottom-8 lg:bottom-10 right-4 lg:right-12 z-20 px-5 py-2.5 rounded-2xl backdrop-blur-xl border flex items-center gap-3 shadow-2xl"
+          className="absolute bottom-8 lg:bottom-10 right-4 lg:right-12 z-20 px-5 py-2.5 rounded-2xl border flex items-center gap-3 transition-colors duration-300 shadow-xl"
           style={{
-            backgroundColor: 'rgba(14, 28, 42, 0.86)',
-            borderColor: 'rgba(255, 255, 255, 0.14)',
-            boxShadow: '0 12px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)',
+            backgroundColor: 'var(--bg-surface)',
+            borderColor: 'var(--border-card)',
+            boxShadow: '0 12px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
           }}
         >
           <span className="w-2 h-2 rounded-full bg-[var(--accent-amber)] animate-pulse shrink-0" />
@@ -100,7 +100,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
             <span className="text-[9px] font-mono font-bold uppercase tracking-[0.22em] text-[var(--accent-amber)]">
               {captionLabel}
             </span>
-            <span className="text-sm font-bold tracking-tight text-white font-display">
+            <span className="text-sm font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
               Emmanuel Odebiyi
             </span>
           </div>

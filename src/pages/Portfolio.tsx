@@ -136,6 +136,30 @@ export default function Portfolio() {
                 Not estimates. Not projections. Results I delivered — for real businesses, with documented outcomes. Every case study below shows the exact situation, the system I built, and what happened. No cherry-picking. No spin.
               </p>
             </div>
+
+            {/* Direct Link to Writing Portfolio */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="pt-2"
+            >
+              <Link
+                to="/writing-portfolio"
+                className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full border text-xs sm:text-sm font-semibold transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-md"
+                style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-body)'
+                }}
+              >
+                <FileText className="w-4 h-4 shrink-0" style={{ color: 'var(--accent-amber)' }} />
+                <span style={{ color: 'var(--text-muted)' }}>Looking specifically for B2B SaaS writing &amp; thought leadership?</span>
+                <span className="inline-flex items-center gap-1 font-bold group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--accent-amber)' }}>
+                  View Writing Portfolio <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            </motion.div>
           </div>
 
           {/* Right Column: Dynamic Stats Console (Span 5) */}
