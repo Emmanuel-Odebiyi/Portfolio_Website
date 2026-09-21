@@ -76,44 +76,14 @@ export default function Blog() {
               className="w-full h-full object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-103"
               referrerPolicy="no-referrer"
             />
-            {/* ── Directional Transparent Frosted Blur with Ergonomic Alpha Distribution ── */}
-            {/* Smooth optical diffusion behind heading, author info, and reading tags */}
+            {/* ── Pure Colorless Transparent Glass Blur (Frosted 12px) ── */}
+            {/* Zero color pigment / pure optical glass blur localized to text area */}
             <div 
-              className="absolute inset-0 pointer-events-none z-10" 
-              style={{ 
-                backdropFilter: 'blur(30px)',
-                WebkitBackdropFilter: 'blur(30px)',
-                maskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)',
-                WebkitMaskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)'
-              }} 
-            />
-            {/* Diagonal alpha transition ensuring top-right visual telemetry remains 100% sharp */}
-            <div 
-              className="absolute inset-0 pointer-events-none z-10" 
-              style={{ 
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                maskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)',
-                WebkitMaskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)'
-              }} 
-            />
-            {/* Neutral contrast scrim behind left typography for razor-sharp legibility over light spots */}
-            <div 
-              className="absolute inset-y-0 left-0 w-full md:w-[75%] lg:w-[65%] pointer-events-none z-10" 
-              style={{ 
-                background: 'linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0.1) 70%, transparent 100%)' 
-              }} 
-            />
-            {/* Subtle top-down fade for navbar floating clarity */}
-            <div 
-              className="absolute inset-x-0 top-0 h-36 pointer-events-none z-10"
-              style={{
-                background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
-              }}
+              className="absolute inset-0 pointer-events-none z-10 backdrop-blur-md [mask-image:linear-gradient(to_right,black_0%,black_35%,transparent_70%)] [-webkit-mask-image:linear-gradient(to_right,black_0%,black_35%,transparent_70%)] max-md:[mask-image:linear-gradient(to_top,black_0%,black_50%,transparent_85%)] max-md:[-webkit-mask-image:linear-gradient(to_top,black_0%,black_50%,transparent_85%)]" 
             />
           </motion.div>
 
-          <div className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 z-20">
+          <div className="absolute inset-0 flex flex-col justify-end pt-28 md:pt-36 pb-16 md:pb-24 px-6 md:px-12 z-20">
             <div className="max-w-7xl mx-auto w-full relative">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -124,21 +94,20 @@ export default function Blog() {
                 {/* Tag and read time badge */}
                 <div className="flex items-center gap-3">
                   <span 
-                    className="px-3.5 py-1 text-xs font-sans font-bold uppercase tracking-widest border rounded-full backdrop-blur-md"
-                    style={{ color: 'var(--accent-amber)', borderColor: 'rgba(255,255,255,0.15)', backgroundColor: 'rgba(0,0,0,0.5)' }}
+                    className="px-3.5 py-1 text-xs font-sans font-bold uppercase tracking-widest border rounded-full backdrop-blur-md shadow-sm text-[var(--accent-amber)] border-[var(--border-card)] bg-[var(--bg-surface)]"
                   >
                     Featured Insight
                   </span>
-                  <span className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 text-zinc-300">
-                    <Clock size={12} /> {featuredPost.readTime}
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">
+                    <Clock size={12} className="text-[#0E1C2A] dark:text-[#F5F1EA]" /> {featuredPost.readTime}
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] font-display text-white">
+                <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] font-display text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">
                   {featuredPost.title}
                 </h1>
                 
-                <p className="text-lg md:text-2xl font-light max-w-3xl leading-relaxed text-zinc-300">
+                <p className="text-lg md:text-2xl font-normal max-w-3xl leading-relaxed text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">
                   {featuredPost.excerpt}
                 </p>
                 
@@ -149,19 +118,18 @@ export default function Blog() {
                     alt={featuredPost.author} 
                     width={48}
                     height={48}
-                    className="w-12 h-12 rounded-full border shadow-lg border-white/20"
+                    className="w-12 h-12 rounded-full border shadow-md border-[var(--border-card)]"
                   />
                   <div>
-                    <p className="font-bold tracking-tight text-white">{featuredPost.author}</p>
-                    <p className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5 text-zinc-400">
-                      <Calendar size={11} /> {featuredPost.date}
+                    <p className="font-bold tracking-tight text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">{featuredPost.author}</p>
+                    <p className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5 text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">
+                      <Calendar size={11} className="text-[#0E1C2A] dark:text-[#F5F1EA]" /> {featuredPost.date}
                     </p>
                   </div>
                   <div 
-                    className="ml-auto md:ml-8 w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 hover:brightness-110"
-                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+                    className="ml-auto md:ml-8 w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 hover:brightness-110 shadow-sm bg-[var(--bg-surface)] border-[var(--border-card)]"
                   >
-                    <ArrowUpRight size={20} style={{ color: 'var(--text-body)' }} className="group-hover:scale-110 transition-transform" />
+                    <ArrowUpRight size={20} className="text-[#0E1C2A] dark:text-[#F5F1EA] group-hover:scale-110 transition-transform" />
                   </div>
                 </div>
               </motion.div>
@@ -195,7 +163,7 @@ export default function Blog() {
             <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
               Organic Growth & Systems Architecture
             </h2>
-            <p className="text-lg font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            <p className="text-lg font-normal leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               Tactical blueprints, automation templates, and case studies detailing how we build high-converting content frameworks and technical SEO foundations.
             </p>
           </div>
@@ -322,7 +290,7 @@ export default function Blog() {
                             {post.title}
                           </h3>
 
-                          <p className="font-light text-sm md:text-base leading-relaxed line-clamp-3" style={{ color: 'var(--text-muted)' }}>
+                          <p className="font-normal text-sm md:text-base leading-relaxed line-clamp-3" style={{ color: 'var(--text-muted)' }}>
                             {post.excerpt}
                           </p>
                         </div>

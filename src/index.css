@@ -117,7 +117,7 @@
   --bg-surface:     #fffaf2;                  /* elevated ivory surface */
   --bg-surface-alt: #eee7dc;                  /* tactile chapter background */
   --text-body:      #0E1C2A;                  /* brand navy text */
-  --text-muted:     #465363;                  /* secondary text */
+  --text-muted:     #4b5a6a;                  /* balanced navy-slate secondary text — clear hierarchy on ivory */
   --border-card:    rgba(14,28,42,0.12);      /* card borders, dividers */
   --cta-blue:       #3B82F6;                  /* brand blue CTA */
   --logo-filter:    none;                     /* logo keeps original colors on light */
@@ -144,8 +144,8 @@ body {
 
 /* ── Dark Mode Overrides ────────────────────────────────────── */
 .dark {
-  --bg-page:        var(--dark-base);              /* #111f2e */
-  --bg-surface:     var(--dark-surface);           /* #212b3a */
+  --bg-page:        #0E1C2A;                        /* brand dark navy */
+  --bg-surface:     #142638;                        /* elevated navy surface */
   --bg-surface-alt: #1a2536;                        /* slightly darker panel */
   --text-body:      #F5F1EA;                        /* brand ivory */
   --text-muted:     #94a3b8;                        /* slate 400 */
@@ -431,6 +431,16 @@ h4, h5, h6 {
   }
   .bg-brand-gradient {
     background: var(--bg-gradient-brand);
+  }
+
+  /* 0.25px white hairline outline for hero text on dark artwork in light mode */
+  .hero-light-stroke {
+    -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
+  }
+  .dark .hero-light-stroke {
+    -webkit-text-stroke: 0px;
+    text-shadow: none;
   }
 }
 

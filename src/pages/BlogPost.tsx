@@ -974,40 +974,10 @@ export default function BlogPost() {
             referrerPolicy="no-referrer"
           />
 
-          {/* ── Directional Transparent Frosted Blur with Ergonomic Alpha Distribution ── */}
-          {/* Smooth optical diffusion behind heading, author info, and reading tags */}
+          {/* ── Pure Colorless Transparent Glass Blur (Frosted 12px) ── */}
+          {/* Zero color pigment / pure optical glass blur localized to text area */}
           <div 
-            className="absolute inset-0 pointer-events-none z-10" 
-            style={{ 
-              backdropFilter: 'blur(30px)',
-              WebkitBackdropFilter: 'blur(30px)',
-              maskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)',
-              WebkitMaskImage: 'radial-gradient(ellipse 95% 90% at 12% 70%, black 30%, rgba(0,0,0,0.65) 55%, transparent 82%)'
-            }} 
-          />
-          {/* Diagonal alpha transition ensuring top-right visual telemetry remains 100% sharp */}
-          <div 
-            className="absolute inset-0 pointer-events-none z-10" 
-            style={{ 
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              maskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)',
-              WebkitMaskImage: 'linear-gradient(125deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 60%, transparent 75%)'
-            }} 
-          />
-          {/* Neutral contrast scrim behind left typography for razor-sharp legibility over light spots */}
-          <div 
-            className="absolute inset-y-0 left-0 w-full md:w-[75%] lg:w-[65%] pointer-events-none z-10" 
-            style={{ 
-              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0.1) 70%, transparent 100%)' 
-            }} 
-          />
-          {/* Subtle top-down fade for navbar floating clarity */}
-          <div 
-            className="absolute inset-x-0 top-0 h-36 pointer-events-none z-10"
-            style={{
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
-            }}
+            className="absolute inset-0 pointer-events-none z-10 backdrop-blur-md [mask-image:linear-gradient(to_right,black_0%,black_35%,transparent_70%)] [-webkit-mask-image:linear-gradient(to_right,black_0%,black_35%,transparent_70%)] max-md:[mask-image:linear-gradient(to_top,black_0%,black_50%,transparent_85%)] max-md:[-webkit-mask-image:linear-gradient(to_top,black_0%,black_50%,transparent_85%)]" 
           />
         </motion.div>
 
@@ -1021,14 +991,14 @@ export default function BlogPost() {
           >
             <Link 
               to="/blog" 
-              className="inline-flex items-center gap-2 transition-colors mb-2 group font-sans text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-white"
+              className="inline-flex items-center gap-2 transition-colors mb-2 group font-sans text-xs font-bold uppercase tracking-widest hover:underline text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke"
             >
-              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-              Back to Insights
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform text-[#0E1C2A] dark:text-[#F5F1EA]" />
+              <span>Back to Insights</span>
             </Link>
             
             {/* Title sized dynamically (balanced maximum at text-6xl) to prevent screen overcrowding */}
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] font-display text-white">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] font-display text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">
               {post.title}
             </h1>
 
@@ -1039,28 +1009,29 @@ export default function BlogPost() {
                   alt={post.author} 
                   width={40}
                   height={40}
-                  className="w-10 h-10 rounded-full border border-white/20" 
+                  className="w-10 h-10 rounded-full border shadow-sm border-[var(--border-card)]" 
                 />
                 <div>
-                  <p className="font-bold text-sm leading-none text-white">{post.author}</p>
-                  <p className="text-[10px] font-sans font-bold uppercase tracking-widest mt-1 text-zinc-400">{post.date}</p>
+                  <p className="font-bold text-sm leading-none text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">{post.author}</p>
+                  <p className="text-[10px] font-sans font-bold uppercase tracking-widest mt-1 text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">{post.date}</p>
                 </div>
               </div>
               
-              <div className="h-4 w-px hidden sm:block bg-white/20" />
+              <div className="h-4 w-px hidden sm:block bg-[var(--border-card)]" />
 
-              <div className="flex items-center gap-6 text-xs font-sans font-bold uppercase tracking-widest text-zinc-300">
-                <span className="flex items-center gap-1.5"><Clock size={13} className="text-zinc-400" /> {post.readTime}</span>
+              <div className="flex items-center gap-6 text-xs font-sans font-bold uppercase tracking-widest text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke">
+                <span className="flex items-center gap-1.5"><Clock size={13} className="text-[#0E1C2A] dark:text-[#F5F1EA]" /> {post.readTime}</span>
                 <button 
                   onClick={copyShareLink}
-                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none cursor-pointer"
+                  className="flex items-center gap-1.5 transition-colors focus:outline-none cursor-pointer hover:opacity-80 text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke"
                   title="Share Link"
                 >
-                  <Share2 size={13} className="text-zinc-400" /> Share
+                  <Share2 size={13} className="text-[#0E1C2A] dark:text-[#F5F1EA]" /> Share
                 </button>
                 <button 
                   onClick={toggleBookmark}
-                  className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none cursor-pointer"
+                  className="flex items-center gap-1.5 transition-colors focus:outline-none cursor-pointer hover:opacity-80 text-[#0E1C2A] dark:text-[#F5F1EA] hero-light-stroke"
+                  style={{ color: isBookmarked ? 'var(--accent-amber)' : undefined }}
                   title="Bookmark post"
                 >
                   <Bookmark size={13} style={{ color: isBookmarked ? 'var(--accent-amber)' : 'inherit', fill: isBookmarked ? 'var(--accent-amber)' : 'none' }} /> Bookmark
