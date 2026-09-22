@@ -433,14 +433,16 @@ h4, h5, h6 {
     background: var(--bg-gradient-brand);
   }
 
-  /* 0.25px white hairline outline for hero text on dark artwork in light mode */
+  /* 0.25px hairline external edge stroke on hero text (outer boundary only via paint-order) */
   .hero-light-stroke {
-    -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.9);
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.95);
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
   }
   .dark .hero-light-stroke {
-    -webkit-text-stroke: 0px;
-    text-shadow: none;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.25px rgba(14, 28, 42, 0.95);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), 0 0 1px rgba(14, 28, 42, 0.9);
   }
 }
 
