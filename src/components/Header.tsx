@@ -187,10 +187,10 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
-          <div className="flex justify-end items-center gap-4 md:gap-6">
+          <div className="flex justify-end items-center gap-3 md:gap-4">
             <ThemeToggle />
-            {/* Visual divider between toggle and CTA - spaced out to prevent crampness */}
-            <span className="hidden xl:block w-px h-5 rounded-full mx-3" style={{ backgroundColor: 'var(--border-card)' }} />
+            {/* Visual divider between toggle and CTA */}
+            <span className="hidden xl:block w-px h-5 rounded-full" style={{ backgroundColor: 'var(--border-card)' }} />
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }} 
               animate={{ opacity: 1, scale: 1 }} 
@@ -210,7 +210,7 @@ export const Header: React.FC = () => {
                 <span className="relative z-10">Contact Me</span>
               </Link>
             </motion.div>
-            <button className="xl:hidden p-3" style={{ color: 'var(--text-body)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
+            <button className="xl:hidden p-2.5" style={{ color: 'var(--text-body)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>

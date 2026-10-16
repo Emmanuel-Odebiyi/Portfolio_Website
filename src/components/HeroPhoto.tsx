@@ -12,7 +12,7 @@ interface HeroPhotoProps {
 }
 
 /**
- * HeroPhoto — Premium Editorial Portrait Card
+ * HeroPhoto: Premium Editorial Portrait Card
  *
  * A beautifully crafted card frame for the hero portrait.
  * Features a layered glassmorphism border, subtle inner glow,
@@ -51,7 +51,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
           <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
             <OptimizedImage
               src={imageSrc || "/images/home-hero.webp"}
-              alt="Emmanuel Odebiyi — Automation Specialist"
+              alt="Emmanuel Odebiyi | Automation Specialist"
               className="relative z-10 w-full h-full object-cover object-top block"
               fetchPriority="high"
               decoding="async"
@@ -74,15 +74,40 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
     >
       {/* ── Main Subject Cutout: Full natural shoulders with soft feathered dissolves ── */}
       <div className="relative w-full flex justify-center lg:justify-start items-end overflow-visible">
-        <OptimizedImage
-          src={finalSrc}
-          alt="Emmanuel Odebiyi — Automation Specialist"
-          className="relative z-10 w-[620px] sm:w-[720px] md:w-[800px] lg:w-[880px] xl:w-[960px] 2xl:w-[1020px] max-w-none h-auto object-contain object-bottom block pointer-events-none lg:-ml-16 xl:-ml-24"
+        {/* Soft Ambient Radial Backlight behind portrait */}
+        <div
+          className="absolute inset-0 pointer-events-none -z-10 blur-3xl opacity-30 dark:opacity-15"
           style={{
-            filter: 'drop-shadow(0 16px 36px rgba(0, 0, 0, 0.18))',
+            background: 'radial-gradient(ellipse at 50% 60%, var(--accent-amber) 0%, transparent 70%)',
           }}
-          fetchPriority="high"
-          decoding="async"
+        />
+
+        {/* ── Main Subject Cutout with Multi-Stop Feather Mask ── */}
+        <div
+          className="relative z-10 w-[620px] sm:w-[720px] md:w-[800px] lg:w-[880px] xl:w-[960px] 2xl:w-[1020px] max-w-none h-auto block pointer-events-none lg:-ml-16 xl:-ml-24"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.4) 84%, rgba(0,0,0,0.08) 94%, rgba(0,0,0,0) 100%)',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.4) 84%, rgba(0,0,0,0.08) 94%, rgba(0,0,0,0) 100%)',
+          }}
+        >
+          <OptimizedImage
+            src={finalSrc}
+            alt="Emmanuel Odebiyi | Automation Specialist"
+            className="w-full h-auto object-contain object-bottom block"
+            style={{
+              filter: 'drop-shadow(0 10px 24px rgba(0, 0, 0, 0.08))',
+            }}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+
+        {/* ── Seamless Bottom Background Fog Overlay ── */}
+        <div
+          className="absolute -inset-x-12 bottom-0 h-28 sm:h-36 pointer-events-none z-[15]"
+          style={{
+            background: 'linear-gradient(to top, var(--bg-page) 15%, color-mix(in srgb, var(--bg-page) 65%, transparent) 50%, transparent 100%)',
+          }}
         />
 
         {/* ── Sleek Identity Badge (Theme-Adaptive) ─────────────── */}
