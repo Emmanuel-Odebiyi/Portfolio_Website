@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Aurora } from './components/Aurora';
@@ -94,6 +94,8 @@ export default function App() {
             <Route path="/services/business-process-automation" element={<BusinessProcessAutomation />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/growth-intelligence-lab" element={<GrowthIntelligenceLab />} />
+            <Route path="/tools" element={<Navigate to="/growth-intelligence-lab" replace />} />
+            <Route path="/tools/growth-intelligence-lab" element={<Navigate to="/growth-intelligence-lab" replace />} />
             <Route path="/tools/automation-radar" element={<AutomationRadar />} />
             <Route path="/tools/autopilot-score" element={<AutopilotScore />} />
             <Route path="/tools/roi-time-machine" element={<ROITimeMachine />} />

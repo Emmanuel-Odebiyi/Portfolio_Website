@@ -22,7 +22,7 @@ export const HeroSection = () => {
       {/* Background Subtle Accent */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 flex-1 flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-14 flex-1 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 hero-grid-responsive gap-8 lg:gap-12 items-center lg:items-end">
           
           {/* Left Column: Headline, Subheadline, CTAs, and Trust Indicators */}

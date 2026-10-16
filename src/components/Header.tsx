@@ -29,6 +29,7 @@ const navLinks = [
     name: 'Tools', 
     href: '/growth-intelligence-lab',
     dropdown: [
+      { name: 'Growth Intelligence Lab™', desc: 'Explore all interactive calculators & audits', href: '/growth-intelligence-lab', icon: <Microscope className="w-4 h-4" /> },
       { name: 'Workday Bottleneck Finder™', desc: 'Pinpoint daily friction & reclaim hours', href: '/tools/automation-radar', icon: <Activity className="w-4 h-4" /> },
       { name: 'Business Freedom Calculator™', desc: 'Benchmark your scaling independence', href: '/tools/autopilot-score', icon: <Calculator className="w-4 h-4" /> },
       { name: 'Time & Dollar Savings Predictor™', desc: 'Reclaimed hours & cash returns forecast', href: '/tools/roi-time-machine', icon: <TrendingUp className="w-4 h-4" /> },
