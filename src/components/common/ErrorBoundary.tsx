@@ -80,6 +80,22 @@ export class ErrorBoundary extends React.Component<Props, State> {
               </p>
             </div>
 
+            {this.state.error && (
+              <div 
+                className="p-3.5 rounded-xl border text-left font-mono text-xs overflow-auto max-h-40"
+                style={{ 
+                  backgroundColor: 'color-mix(in srgb, var(--danger) 10%, transparent)', 
+                  borderColor: 'color-mix(in srgb, var(--danger) 30%, transparent)',
+                  color: 'var(--danger)'
+                }}
+              >
+                <div className="font-bold text-[11px] mb-1">{this.state.error.name}: {this.state.error.message}</div>
+                {this.state.error.stack && (
+                  <pre className="text-[9px] opacity-80 whitespace-pre-wrap leading-tight">{this.state.error.stack}</pre>
+                )}
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <button
                 onClick={this.handleReset}

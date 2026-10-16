@@ -47,86 +47,40 @@ const comparisonLedger: ComparisonRow[] = [
   }
 ];
 
+const STREAMS: Record<'seo' | 'ai' | 'automation', string[]> = {
+  seo: [
+    'Connecting to Google Search Console API [Telemetry Endpoint]...',
+    'Extracting query impression matrices and cannibalization clusters...',
+    'Evaluating high-intent search gaps: "B2B automation ROI frameworks"...',
+    'Competitor SERP audit complete: 1,200/mo search volume (Keyword Difficulty: 24)',
+    'Synthesizing 1 Pillar Blueprint + 4 Supporting Semantic Cluster Nodes...',
+    'Status: Topical Authority score projected to increase +14.2% within 60 days.'
+  ],
+  ai: [
+    'Loading brand_voice_taxonomy.json [Tone: Editorial Authority & Precision]...',
+    'Executing multi-pass prompt chain via OpenAI GPT-4o API...',
+    'Streaming domain context and negative prompt constraints (Zero Corporate Clichés)...',
+    'Running Editorial Quality Guard: Readability Target = Grade 8.2 (Hemingway Index)...',
+    'Passing through Brand Voice Validation Filters: 100% Parameter Match.',
+    'Status: High-authority draft generated with complete data citations.'
+  ],
+  automation: [
+    'n8n orchestration workflow triggered: cron_daily_0900_GMT...',
+    'Ingesting validated draft payloads from Airtable Database...',
+    'Converting markdown structures to native CMS blocks (WordPress & Webflow REST API)...',
+    'Executing Tesseract OCR extraction on client technical diagrams... Complete.',
+    'Dispatching omnichannel syndication hooks to HubSpot, LinkedIn, and Email Subscribers...',
+    'Status: Pipeline execution finished in 1.42s (0 errors logged).'
+  ]
+};
+
 export default function MyStory() {
-  // Terminal state
   const [activeTab, setActiveTab] = useState<'seo' | 'ai' | 'automation'>('seo');
-  const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
-  const [isStreamingLog, setIsStreamingLog] = useState(false);
-  const [isTerminalAutoCycling, setIsTerminalAutoCycling] = useState(true);
-  const [terminalProgress, setTerminalProgress] = useState(0);
-
-  const runTerminalStream = (skillId: 'seo' | 'ai' | 'automation') => {
-    setIsStreamingLog(true);
-    setTerminalLogs([]);
-
-    const streams = {
-      seo: [
-        'Connecting to Google Search Console API [Telemetry Endpoint]...',
-        'Extracting query impression matrices and cannibalization clusters...',
-        'Evaluating high-intent search gaps: "B2B automation ROI frameworks"...',
-        'Competitor SERP audit complete: 1,200/mo search volume (Keyword Difficulty: 24)',
-        'Synthesizing 1 Pillar Blueprint + 4 Supporting Semantic Cluster Nodes...',
-        'Status: Topical Authority score projected to increase +14.2% within 60 days.'
-      ],
-      ai: [
-        'Loading brand_voice_taxonomy.json [Tone: Editorial Authority & Precision]...',
-        'Executing multi-pass prompt chain via OpenAI GPT-4o API...',
-        'Streaming domain context and negative prompt constraints (Zero Corporate Clichés)...',
-        'Running Editorial Quality Guard: Readability Target = Grade 8.2 (Hemingway Index)...',
-        'Passing through Brand Voice Validation Filters: 100% Parameter Match.',
-        'Status: High-authority draft generated with complete data citations.'
-      ],
-      automation: [
-        'n8n orchestration workflow triggered: cron_daily_0900_GMT...',
-        'Ingesting validated draft payloads from Airtable Database...',
-        'Converting markdown structures to native CMS blocks (WordPress & Webflow REST API)...',
-        'Executing Tesseract OCR extraction on client technical diagrams... Complete.',
-        'Dispatching omnichannel syndication hooks to HubSpot, LinkedIn, and Email Subscribers...',
-        'Status: Pipeline execution finished in 1.42s (0 errors logged).'
-      ]
-    };
-
-    let idx = 0;
-    const interval = setInterval(() => {
-      if (idx < streams[skillId].length) {
-        setTerminalLogs((prev) => [...prev, streams[skillId][idx]]);
-        idx++;
-      } else {
-        clearInterval(interval);
-        setIsStreamingLog(false);
-      }
-    }, 400);
-
-    return interval;
-  };
+  const [terminalLogs, setTerminalLogs] = useState<string[]>(STREAMS.seo);
 
   useEffect(() => {
-    const interval = runTerminalStream(activeTab);
-    return () => {
-      if (interval) clearInterval(interval);
-    };
+    setTerminalLogs(STREAMS[activeTab] || []);
   }, [activeTab]);
-
-  useEffect(() => {
-    if (!isTerminalAutoCycling) {
-      setTerminalProgress(0);
-      return;
-    }
-    const interval = setInterval(() => {
-      setTerminalProgress((prev) => {
-        if (prev >= 100) {
-          setActiveTab((current) => {
-            const tabs: ('seo' | 'ai' | 'automation')[] = ['seo', 'ai', 'automation'];
-            const nextIdx = (tabs.indexOf(current) + 1) % tabs.length;
-            return tabs[nextIdx];
-          });
-          return 0;
-        }
-        return prev + 2.5;
-      });
-    }, 100);
-    return () => clearInterval(interval);
-  }, [isTerminalAutoCycling]);
 
   return (
     <div className="min-h-screen relative overflow-x-clip" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
@@ -317,7 +271,7 @@ export default function MyStory() {
 
           {/* Chapter 01 */}
           <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px" }} variants={fadeUp}
             className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
@@ -363,7 +317,7 @@ export default function MyStory() {
 
           {/* Chapter 02 */}
           <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px" }} variants={fadeUp}
             className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
@@ -409,7 +363,7 @@ export default function MyStory() {
 
           {/* Chapter 03 */}
           <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px" }} variants={fadeUp}
             className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
@@ -455,7 +409,7 @@ export default function MyStory() {
 
           {/* Chapter 04 */}
           <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px" }} variants={fadeUp}
             className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
@@ -525,8 +479,8 @@ export default function MyStory() {
                 className="flex items-center gap-2 mb-1 px-3.5 py-1.5 rounded-lg border text-xs font-sans font-bold uppercase tracking-widest w-fit"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
               >
-                <Sparkles size={12} className={isTerminalAutoCycling ? "animate-spin" : ""} style={{ animationDuration: '4s' }} />
-                <span>{isTerminalAutoCycling ? "Telemetry Stream Active" : "Interactive Inspection"}</span>
+                <Sparkles size={12} />
+                <span>Interactive Telemetry Inspection</span>
               </div>
               <p className="text-[10px] font-sans font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)' }}>
                 Select a discipline to inspect its live execution stream:
@@ -538,14 +492,11 @@ export default function MyStory() {
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => {
-                    setActiveTab(tab.id as any);
-                    setIsTerminalAutoCycling(false);
-                  }}
-                  className="w-full text-left p-4 rounded-xl transition-all duration-200 border group relative overflow-hidden"
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className="w-full text-left p-4 rounded-xl transition-all duration-200 border group relative overflow-hidden cursor-pointer"
                   style={{
                     backgroundColor: activeTab === tab.id ? 'var(--bg-surface)' : 'var(--bg-page)',
-                    borderColor: activeTab === tab.id ? 'var(--text-body)' : 'var(--border-card)',
+                    borderColor: activeTab === tab.id ? 'var(--accent-amber)' : 'var(--border-card)',
                     color: activeTab === tab.id ? 'var(--text-body)' : 'var(--text-muted)'
                   }}
                 >
@@ -556,8 +507,8 @@ export default function MyStory() {
                     <h4 className="text-base font-bold tracking-tight" style={{ color: 'var(--text-body)' }}>{tab.title}</h4>
                     <p className="text-xs font-light mt-1" style={{ color: 'var(--text-muted)' }}>{tab.desc}</p>
                   </div>
-                  {activeTab === tab.id && isTerminalAutoCycling && (
-                    <div className="absolute bottom-0 left-0 h-1 bg-[var(--accent-amber)] transition-all duration-100" style={{ width: `${terminalProgress}%` }} />
+                  {activeTab === tab.id && (
+                    <div className="absolute bottom-0 left-0 h-1 w-full bg-[var(--accent-amber)]" />
                   )}
                 </button>
               ))}
@@ -589,21 +540,19 @@ export default function MyStory() {
                         key={index}
                         initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className={log.includes('100%') || log.includes('Complete') || log.includes('projected') ? 'text-emerald-500 font-bold' : 'text-zinc-300'}
-                        style={{ color: (log.includes('100%') || log.includes('Complete') || log.includes('projected')) ? '' : 'var(--text-body)' }}
+                        className={log && (log.includes('100%') || log.includes('Complete') || log.includes('projected')) ? 'text-emerald-500 font-bold' : 'text-zinc-300'}
+                        style={{ color: log && (log.includes('100%') || log.includes('Complete') || log.includes('projected')) ? '' : 'var(--text-body)' }}
                       >
                         <span className="text-zinc-500 mr-2">&gt;</span>{log}
                       </motion.div>
                     ))}
                   </AnimatePresence>
-                  {isStreamingLog && (
-                    <motion.span 
-                      animate={{ opacity: [1, 0, 1] }} 
-                      transition={{ repeat: Infinity, duration: 0.8 }}
-                      className="inline-block w-2 h-3.5 mt-1" 
-                      style={{ backgroundColor: 'var(--text-muted)' }}
-                    />
-                  )}
+                  <motion.span 
+                    animate={{ opacity: [1, 0, 1] }} 
+                    transition={{ repeat: Infinity, duration: 0.9 }}
+                    className="inline-block w-2 h-3.5 mt-1" 
+                    style={{ backgroundColor: 'var(--accent-amber)' }}
+                  />
                 </div>
 
                 {/* Explanatory footer */}
