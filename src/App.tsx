@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Aurora } from './components/Aurora';
 import { SkipLink } from './components/SkipLink';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 
 
 
@@ -82,38 +83,40 @@ export default function App() {
       <main id="main-content" className="relative bg-transparent">
         <Header />
 
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/my-story" element={<MyStory />} />
-            <Route path="/my-approach" element={<MyApproach />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/content-marketing-automation" element={<ContentMarketingAutomation />} />
-            <Route path="/services/seo-strategy-optimization" element={<SEOStrategyOptimization />} />
-            <Route path="/services/business-process-automation" element={<BusinessProcessAutomation />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/growth-intelligence-lab" element={<GrowthIntelligenceLab />} />
-            <Route path="/tools" element={<Navigate to="/growth-intelligence-lab" replace />} />
-            <Route path="/tools/growth-intelligence-lab" element={<Navigate to="/growth-intelligence-lab" replace />} />
-            <Route path="/tools/automation-radar" element={<AutomationRadar />} />
-            <Route path="/tools/autopilot-score" element={<AutopilotScore />} />
-            <Route path="/tools/roi-time-machine" element={<ROITimeMachine />} />
-            <Route path="/tools/growth-simulator" element={<GrowthSimulator />} />
-            <Route path="/tools/:toolId" element={<ToolPlaceholder />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/techflow-solutions" element={<TechFlowSolutions />} />
-            <Route path="/portfolio/scoove-africa" element={<ScooveAfrica />} />
-            <Route path="/portfolio/emergency-response-africa" element={<EmergencyResponseAfrica />} />
-            <Route path="/writing-portfolio" element={<ContentWriterPortfolio />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogPost />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/my-story" element={<MyStory />} />
+              <Route path="/my-approach" element={<MyApproach />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/content-marketing-automation" element={<ContentMarketingAutomation />} />
+              <Route path="/services/seo-strategy-optimization" element={<SEOStrategyOptimization />} />
+              <Route path="/services/business-process-automation" element={<BusinessProcessAutomation />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/growth-intelligence-lab" element={<GrowthIntelligenceLab />} />
+              <Route path="/tools" element={<Navigate to="/growth-intelligence-lab" replace />} />
+              <Route path="/tools/growth-intelligence-lab" element={<Navigate to="/growth-intelligence-lab" replace />} />
+              <Route path="/tools/automation-radar" element={<AutomationRadar />} />
+              <Route path="/tools/autopilot-score" element={<AutopilotScore />} />
+              <Route path="/tools/roi-time-machine" element={<ROITimeMachine />} />
+              <Route path="/tools/growth-simulator" element={<GrowthSimulator />} />
+              <Route path="/tools/:toolId" element={<ToolPlaceholder />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/portfolio/techflow-solutions" element={<TechFlowSolutions />} />
+              <Route path="/portfolio/scoove-africa" element={<ScooveAfrica />} />
+              <Route path="/portfolio/emergency-response-africa" element={<EmergencyResponseAfrica />} />
+              <Route path="/writing-portfolio" element={<ContentWriterPortfolio />} />
+              <Route path="/resume" element={<Resume />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
         <Footer />
       </main>
     </Router>

@@ -7,6 +7,7 @@ interface NumberTickerProps {
   delay?: number;
   className?: string;
   suffix?: string;
+  style?: React.CSSProperties;
 }
 
 export const NumberTicker: React.FC<NumberTickerProps> = ({
@@ -15,6 +16,7 @@ export const NumberTicker: React.FC<NumberTickerProps> = ({
   delay = 0,
   className = '',
   suffix = '',
+  style,
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(direction === 'down' ? value : 0);
@@ -45,6 +47,7 @@ export const NumberTicker: React.FC<NumberTickerProps> = ({
   return (
     <span
       ref={ref}
+      style={style}
       className={`inline-block tabular-nums tracking-tighter ${className}`}
     >
       0

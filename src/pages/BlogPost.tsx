@@ -650,7 +650,7 @@ const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ blocks }) =
           </table>
         </div>
       );
-    } else if (block._type === 'table') {
+    } else if ((block as any)._type === 'table') {
       const b = block as any;
       const rows: string[][] = (b.rows || []).map((r: any) => {
         if (Array.isArray(r)) return r.map((c: any) => String(c));

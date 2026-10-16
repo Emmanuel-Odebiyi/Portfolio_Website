@@ -7,6 +7,8 @@ interface HeroPhotoProps {
   maxWidth?: string;
   captionLabel?: string;
   animateDelay?: number;
+  variant?: 'card' | 'cutout';
+  imageSrc?: string;
 }
 
 /**
@@ -31,7 +33,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
       <motion.div
         initial={{ opacity: 0, y: 28, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: animateDelay, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: animateDelay, duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
         className={`relative w-full max-w-full lg:max-w-[640px] xl:max-w-[720px] ${className} select-none`}
       >
         <div
@@ -67,7 +69,7 @@ export const HeroPhoto: React.FC<HeroPhotoProps> = ({
     <motion.div
       initial={{ opacity: 0, y: 32, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: animateDelay, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: animateDelay, duration: 0.85, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       className={`relative w-full flex flex-col items-center lg:items-start justify-end ${maxWidth} ${className} select-none`}
     >
       {/* ── Main Subject Cutout: Full natural shoulders with soft feathered dissolves ── */}

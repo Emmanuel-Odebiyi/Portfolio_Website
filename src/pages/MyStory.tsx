@@ -96,10 +96,15 @@ export default function MyStory() {
         setIsStreamingLog(false);
       }
     }, 400);
+
+    return interval;
   };
 
   useEffect(() => {
-    runTerminalStream(activeTab);
+    const interval = runTerminalStream(activeTab);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [activeTab]);
 
   useEffect(() => {
