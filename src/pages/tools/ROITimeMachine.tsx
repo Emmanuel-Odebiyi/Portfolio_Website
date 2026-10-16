@@ -95,8 +95,8 @@ const MetricCard = ({ label, value, subValue, icon: Icon, colorClass }: {
   icon: any;
   colorClass: string;
 }) => (
-  <div className="bg-[var(--bg-surface)] p-6 md:p-8 rounded-[2.5rem] border border-[var(--border-card)] backdrop-blur-md shadow-2xl space-y-4 overflow-hidden relative interactive-card">
-    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-2xl ${colorClass} flex items-center justify-center shrink-0 border border-[var(--border-card)]`}>
+  <div className="bg-[var(--bg-surface)] p-6 md:p-8 rounded-2xl border border-[var(--border-card)] shadow-sm space-y-4 overflow-hidden relative interactive-card">
+    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl ${colorClass} flex items-center justify-center shrink-0 border border-[var(--border-card)]`}>
       <Icon size={20} className="md:w-6 md:h-6" />
     </div>
     <div className="space-y-1 min-w-0 text-left">
@@ -390,7 +390,7 @@ export default function ROITimeMachine() {
         </div>
         
         {/* Onboarding Guide Banner */}
-        <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+        <div className="p-6 sm:p-8 rounded-2xl border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent shadow-sm animate-none" style={{ borderColor: 'var(--border-card)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
                 <h4 className="text-sm font-mono uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2 font-bold">
                   <Zap size={16} className="animate-pulse text-amber-500" /> Predictor Guide
@@ -421,7 +421,7 @@ export default function ROITimeMachine() {
           
           {/* Input Panel */}
           <div className="lg:col-span-5 space-y-10 text-left">
-            <div className="bg-[var(--bg-surface)] rounded-[3rem] p-8 md:p-12 border border-[var(--border-card)] backdrop-blur-md shadow-2xl space-y-8">
+            <div className="bg-[var(--bg-surface)] rounded-2xl p-6 sm:p-10 border border-[var(--border-card)] shadow-sm space-y-8">
               <div className="flex items-center justify-between pb-4 border-b border-white/5">
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Calculator Inputs</h3>
@@ -611,7 +611,7 @@ export default function ROITimeMachine() {
             </div>
 
             {/* ROI Highlight */}
-            <div className="bg-[var(--bg-surface)] border border-[var(--border-card)] rounded-[3rem] p-10 text-[var(--text-body)] relative overflow-hidden backdrop-blur-md shadow-2xl">
+            <div className="bg-[var(--bg-surface)] border border-[var(--border-card)] rounded-2xl p-8 sm:p-10 text-[var(--text-body)] relative overflow-hidden shadow-sm">
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-left">
                 <div className="space-y-2 min-w-0">
                   <p className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-widest">Projected 12-Month ROI</p>
@@ -645,10 +645,10 @@ export default function ROITimeMachine() {
 
             {/* Email Gate */}
             {!isEmailUnlocked ? (
-              <div className="bg-[var(--bg-surface)] rounded-[3rem] p-10 border border-[var(--border-card)] shadow-2xl backdrop-blur-md space-y-8 text-left">
+              <div className="bg-[var(--bg-surface)] rounded-2xl p-8 sm:p-10 border border-[var(--border-card)] shadow-md space-y-8 text-left">
                 <div className="flex flex-col md:flex-row items-center gap-8">
-                  <div className="w-20 h-20 rounded-[2rem] bg-[var(--accent-amber)]/10 border border-[var(--accent-amber)]/20 flex items-center justify-center text-[var(--accent-amber)] shrink-0">
-                    <Lock size={32} />
+                  <div className="w-16 h-16 rounded-2xl bg-[var(--accent-amber)]/10 border border-[var(--accent-amber)]/20 flex items-center justify-center text-[var(--accent-amber)] shrink-0">
+                    <Lock size={28} />
                   </div>
                   <div className="space-y-2 text-center md:text-left">
                     <h4 className="text-2xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>See Full ROI Breakdown</h4>
@@ -691,7 +691,7 @@ export default function ROITimeMachine() {
                 className="space-y-12 animate-fade-in print-area"
               >
                 {/* Success Feedback Card */}
-                <div className="p-8 rounded-[2.5rem] bg-[var(--bg-surface)] border border-[var(--border-card)] backdrop-blur-md flex items-start gap-4 shadow-xl text-left print-hide">
+                <div className="p-6 sm:p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-card)] flex items-start gap-4 shadow-sm text-left print-hide">
                   <div className="w-12 h-12 rounded-full bg-[var(--accent-amber)] flex items-center justify-center text-[var(--btn-cta-text)] shrink-0 shadow-lg shadow-[var(--btn-cta-shadow)]">
                     <CheckCircle2 size={24} />
                   </div>
@@ -704,7 +704,7 @@ export default function ROITimeMachine() {
                 </div>
 
                 {/* Chart Section */}
-                <div className="bg-[var(--bg-surface)] p-10 rounded-[3rem] border border-[var(--border-card)] backdrop-blur-md shadow-2xl space-y-8 text-left">
+                <div className="bg-[var(--bg-surface)] p-6 sm:p-10 rounded-2xl border border-[var(--border-card)] shadow-sm space-y-8 text-left">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
                       <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>12-Month Savings Projection</h4>
@@ -794,7 +794,7 @@ export default function ROITimeMachine() {
                 </div>
 
                 {/* Monthly Breakdown Table */}
-                <div className="bg-[var(--bg-surface)] rounded-[3rem] border border-[var(--border-card)] shadow-2xl backdrop-blur-md overflow-hidden text-left">
+                <div className="bg-[var(--bg-surface)] rounded-2xl border border-[var(--border-card)] shadow-sm overflow-hidden text-left">
                   <div className="p-8 border-b border-[var(--border-card)]">
                     <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Monthly Cost Analysis</h4>
                   </div>
@@ -827,7 +827,7 @@ export default function ROITimeMachine() {
                 </div>
 
                 {/* Benchmark Comparison */}
-                <div className="p-10 rounded-[3rem] bg-[var(--bg-surface)] border border-[var(--border-card)] shadow-2xl backdrop-blur-md space-y-8 text-left">
+                <div className="p-6 sm:p-10 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-card)] shadow-sm space-y-8 text-left">
                   <div className="flex items-center gap-3">
                     <BarChart3 className="text-[var(--accent-amber)]" size={24} />
                     <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Benchmark Comparison</h4>
@@ -869,7 +869,7 @@ export default function ROITimeMachine() {
         </div>
 
         {/* Final CTA */}
-        <div className="mt-32 bg-[var(--bg-surface-alt)] rounded-[4rem] p-12 md:p-24 text-center space-y-12 relative overflow-hidden border border-[var(--border-card)] shadow-2xl backdrop-blur-md">
+        <div className="mt-24 bg-[var(--bg-surface-alt)] rounded-2xl p-8 sm:p-16 text-center space-y-8 relative overflow-hidden border border-[var(--border-card)] shadow-sm">
           <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
               Want us to build this <br />

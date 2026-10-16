@@ -408,7 +408,7 @@ export default function GrowthSimulator() {
         </div>
 
               {/* Onboarding Guide Banner */}
-              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+              <div className="p-6 sm:p-8 rounded-2xl border relative overflow-hidden text-left mb-8 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent shadow-sm animate-none" style={{ borderColor: 'var(--border-card)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-xl rounded-full" />
                 <h4 className="text-sm font-mono uppercase tracking-widest text-emerald-500 mb-4 flex items-center gap-2 font-bold">
                   <Zap size={16} className="animate-pulse text-emerald-500" /> Simulator Guide
@@ -439,7 +439,7 @@ export default function GrowthSimulator() {
           
           {/* Inputs */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="rounded-[2.5rem] p-8 border backdrop-blur-md shadow-2xl space-y-8 text-left" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+            <div className="rounded-2xl p-6 sm:p-8 border shadow-sm space-y-8 text-left" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
               <div className="flex items-center justify-between pb-4 border-b border-white/5">
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Growth Inputs</h3>
@@ -582,7 +582,7 @@ export default function GrowthSimulator() {
           <div className="lg:col-span-8 space-y-8 text-left">
             
             {/* Chart Card */}
-            <div className="rounded-[3rem] p-8 md:p-12 border backdrop-blur-md shadow-2xl space-y-10" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+            <div className="rounded-2xl p-6 sm:p-10 border shadow-sm space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-1">
                   <h3 className="text-2xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>12-Month Growth Trajectory</h3>
@@ -718,7 +718,7 @@ export default function GrowthSimulator() {
 
             {/* Email Gate */}
             {!isUnlocked ? (
-              <div className="rounded-[3rem] p-10 md:p-16 border backdrop-blur-md relative overflow-hidden shadow-2xl" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+              <div className="rounded-2xl p-6 sm:p-12 border relative overflow-hidden shadow-sm" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                 <div className="relative z-10 space-y-10 max-w-xl">
                   <div className="space-y-4">
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-emerald-500 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
@@ -787,7 +787,7 @@ export default function GrowthSimulator() {
                 className="space-y-12 print-area"
               >
                 {/* Success Feedback Card */}
-                <div className="p-8 rounded-[2.5rem] border backdrop-blur-md flex items-start gap-4 shadow-xl print-hide animate-none" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                <div className="p-6 sm:p-8 rounded-2xl border flex items-start gap-4 shadow-sm print-hide animate-none" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-slate-950 shrink-0 shadow-lg shadow-emerald-500/20">
                     <CheckCircle2 size={24} />
                   </div>
@@ -800,7 +800,7 @@ export default function GrowthSimulator() {
                 </div>
 
                 {/* Full Report Table */}
-                <div className="rounded-[3rem] border backdrop-blur-md shadow-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                <div className="rounded-2xl border shadow-sm overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <div className="p-8 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-card)' }}>
                     <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Monthly Performance Comparison</h4>
                     <div className="flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
@@ -861,7 +861,7 @@ export default function GrowthSimulator() {
                 </div>
 
                 {/* Benchmark Note */}
-                <div className="p-8 rounded-3xl border backdrop-blur-md flex items-start gap-4 shadow-xl" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                <div className="p-6 sm:p-8 rounded-2xl border flex items-start gap-4 shadow-sm" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center text-emerald-500 shrink-0 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                     <BarChart3 size={20} />
                   </div>
@@ -871,7 +871,7 @@ export default function GrowthSimulator() {
                 </div>
  
                 {/* Final CTA */}
-                <div className="border rounded-[4rem] p-12 md:p-20 text-center space-y-10 relative overflow-hidden shadow-2xl backdrop-blur-lg" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                <div className="border rounded-2xl p-8 sm:p-16 text-center space-y-8 relative overflow-hidden shadow-sm" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <div className="relative z-10 max-w-2xl mx-auto space-y-8">
                     <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
                       See what this looks like <br />

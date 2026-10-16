@@ -376,7 +376,7 @@ export default function MyStory() {
                   {[
                     { label: 'System Uptime', val: '99.9%', bar: 99, color: 'emerald', prefix: '⚡' },
                     { label: 'Articles / mo (automated)', val: '40+', bar: 100, color: 'blue', prefix: '🤖' },
-                    { label: 'Client ROI Average', val: '520%', bar: 85, color: 'indigo', prefix: '📈' },
+                    { label: 'Client ROI Average', val: '520%', bar: 85, color: 'amber', prefix: '📈' },
                   ].map((stat, i) => (
                     <div
                       key={i}

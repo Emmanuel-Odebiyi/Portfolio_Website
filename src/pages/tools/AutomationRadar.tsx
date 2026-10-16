@@ -518,7 +518,7 @@ export default function AutomationRadar() {
             {/* Form Section */}
             <div className="lg:col-span-7 space-y-12">
               {/* Onboarding Guide Banner */}
-              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent shadow-xl" style={{ borderColor: 'var(--border-card)' }}>
+              <div className="p-6 sm:p-8 rounded-2xl border relative overflow-hidden text-left bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent shadow-sm" style={{ borderColor: 'var(--border-card)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-xl rounded-full" />
                 <h4 className="text-sm font-mono uppercase tracking-widest text-emerald-500 mb-4 flex items-center gap-2 font-bold">
                   <Zap size={16} className="animate-pulse text-emerald-500" /> Onboarding Guide
@@ -709,8 +709,8 @@ export default function AutomationRadar() {
  
             {/* Info Section */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-32 text-left">
-              <div className="p-10 rounded-[2.5rem] border backdrop-blur-md space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-emerald-500 shadow-xl border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+              <div className="p-8 sm:p-10 rounded-2xl border space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-emerald-500 shadow-sm border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                   <RadarIcon size={32} />
                 </div>
                 <div className="space-y-4">
@@ -740,7 +740,7 @@ export default function AutomationRadar() {
             {/* Instant Results Panel */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
               {/* Radar Chart */}
-              <div className="lg:col-span-6 aspect-square rounded-[3rem] border p-8 flex items-center justify-center backdrop-blur-md" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+              <div className="lg:col-span-6 aspect-square rounded-2xl border p-6 sm:p-8 flex items-center justify-center" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart 
                     cx="50%" 
@@ -890,7 +890,7 @@ export default function AutomationRadar() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       {[...results.depts].sort((a, b) => b.score - a.score).map((dept, i) => (
-                        <div key={dept.name} className="p-10 rounded-[3rem] border backdrop-blur-md space-y-8 relative overflow-hidden group interactive-card" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                        <div key={dept.name} className="p-8 sm:p-10 rounded-2xl border space-y-8 relative overflow-hidden group interactive-card" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                           <div className={`absolute top-0 right-0 w-32 h-32 blur-3xl opacity-10 transition-opacity group-hover:opacity-20 ${dept.color}`} />
                           
                           <div className="flex justify-between items-start">
@@ -899,7 +899,7 @@ export default function AutomationRadar() {
                               <h3 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{dept.name}</h3>
                             </div>
                             <div className={`px-4 py-1.5 rounded-full text-[10px] font-sans uppercase tracking-widest font-bold text-white ${dept.color}`}>
-                              {dept.tier} — {dept.score}/100
+                              {dept.tier} : {dept.score}/100
                             </div>
                           </div>
 
@@ -931,7 +931,7 @@ export default function AutomationRadar() {
                   </div>
 
                   {/* Estimated Impact */}
-                  <div className="border rounded-[4rem] p-12 md:p-24 text-center space-y-12 relative overflow-hidden backdrop-blur-md" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <div className="border rounded-2xl p-8 sm:p-16 text-center space-y-8 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="relative z-10 space-y-6">
                       <h2 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
                         {formData.companyName ? `${formData.companyName}'s` : 'Estimated'} Annual Impact

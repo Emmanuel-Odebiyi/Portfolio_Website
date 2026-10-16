@@ -96,7 +96,7 @@ const MATURITY_LEVELS: Record<MaturityLevel, { name: string; color: string; rang
   },
   Orchestrated: {
     name: 'Orchestrated / Strategic',
-    color: '#8b5cf6',
+    color: '#0d9488',
     range: '61-80',
     summary: 'Centralized governance. Cross-functional automation. Team runs most operations independently.',
   },
@@ -520,7 +520,7 @@ export default function AutopilotScore() {
               className="max-w-4xl mx-auto space-y-12"
             >
               {/* Onboarding Guide Banner */}
-              <div className="p-8 rounded-[2rem] border relative overflow-hidden text-left bg-gradient-to-br from-blue-500/10 via-transparent to-transparent shadow-xl animate-none" style={{ borderColor: 'var(--border-card)' }}>
+              <div className="p-6 sm:p-8 rounded-2xl border relative overflow-hidden text-left bg-gradient-to-br from-blue-500/10 via-transparent to-transparent shadow-sm animate-none" style={{ borderColor: 'var(--border-card)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-xl rounded-full" />
                 <h4 className="text-sm font-mono uppercase tracking-widest text-blue-500 mb-4 flex items-center gap-2 font-bold">
                   <Zap size={16} className="animate-pulse text-blue-500" /> Scorecard Guide
@@ -560,7 +560,7 @@ export default function AutopilotScore() {
                 </p>
               </div>
 
-              <div className="rounded-[3rem] p-8 md:p-12 border backdrop-blur-md shadow-2xl space-y-10" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+              <div className="rounded-2xl p-6 sm:p-10 border shadow-sm space-y-10" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
                   <div className="space-y-1 text-left">
                     <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Step {formStep} of 3</span>
@@ -728,7 +728,7 @@ export default function AutopilotScore() {
                     {MATURITY_LEVELS[results.level].name}
                   </h2>
                 </div>
-                <div className="flex items-center gap-6 p-6 rounded-[2.5rem] border backdrop-blur-md" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                <div className="flex items-center gap-6 p-6 rounded-2xl border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                   <GaugeChart score={results.score} color={results.color} />
                   <div className="space-y-1">
                     <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Classification</span>
@@ -740,7 +740,7 @@ export default function AutopilotScore() {
               {/* Instant Insights */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
                 <div className="lg:col-span-7 space-y-8">
-                  <div className="p-10 rounded-[3rem] border backdrop-blur-md space-y-6 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <div className="p-8 sm:p-10 rounded-2xl border space-y-6 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="relative z-10 space-y-4">
                       <h4 className="text-2xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>The Verdict</h4>
                       <p className="text-xl font-light leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
@@ -759,7 +759,7 @@ export default function AutopilotScore() {
                   </div>
 
                   {/* Benchmark Comparison */}
-                  <div className="p-10 rounded-[3rem] border backdrop-blur-md space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <div className="p-8 sm:p-10 rounded-2xl border space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="flex items-center gap-3">
                       <TrendingUp className="text-blue-500" size={24} />
                       <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Benchmark Comparison</h4>
@@ -788,7 +788,7 @@ export default function AutopilotScore() {
 
                 {/* Email Gate */}
                 <div className="lg:col-span-5">
-                  <div className="sticky top-32 p-10 rounded-[3rem] border backdrop-blur-md shadow-2xl space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <div className="sticky top-32 p-8 sm:p-10 rounded-2xl border shadow-md space-y-8" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="space-y-4">
                       <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-blue-500 border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
                         {isEmailUnlocked ? <Unlock size={28} /> : <Lock size={28} />}
@@ -876,7 +876,7 @@ export default function AutopilotScore() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                     {(Object.values(results.pillarScores) as PillarScore[]).map((pillar) => (
-                      <div key={pillar.label} className="p-10 rounded-[3rem] border backdrop-blur-md space-y-8 interactive-card" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                      <div key={pillar.label} className="p-8 sm:p-10 rounded-2xl border space-y-8 interactive-card" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                         <div className="flex items-center justify-between">
                           <h4 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{pillar.label}</h4>
                           <div className="flex items-baseline gap-1">
@@ -905,7 +905,7 @@ export default function AutopilotScore() {
                   </div>
 
                   {/* Final CTA */}
-                  <div className="border rounded-[4rem] p-12 md:p-24 text-center space-y-12 relative overflow-hidden backdrop-blur-md" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+                  <div className="border rounded-2xl p-8 sm:p-16 text-center space-y-8 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
                     <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
                       <h2 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
                         Ready to move from <span className="text-blue-500">{results.level}</span> to Autopilot?

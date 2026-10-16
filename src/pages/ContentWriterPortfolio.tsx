@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import {
   ArrowRight, FileText, Globe, Target, ExternalLink, Quote,
   CheckCircle, X, Send, Loader2, PenTool, BookOpen, ChevronDown,
   ChevronUp, MapPin, Clock, BarChart3, Award, Sparkles, Building2,
+  Search, Filter, ArrowUpRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
-import { OptimizedImage } from '../components/common/OptimizedImage';
 import { HeroPhoto } from '../components/HeroPhoto';
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -15,266 +15,218 @@ import { HeroPhoto } from '../components/HeroPhoto';
 // ──────────────────────────────────────────────────────────────────────────────
 
 const herbvityArticles = [
-  { title: '26 Fantastic Companion Plants for Knockout Roses', url: 'https://herbvity.com/companion-plants-for-knockout-roses/', topic: 'Gardening' },
-  { title: '28 Great Companion Plants For Lambs Ear', url: 'https://herbvity.com/companion-plants-for-lambs-ear/', topic: 'Gardening' },
-  { title: '24 Great Companion Plants For Hydrangeas', url: 'https://herbvity.com/companion-plants-for-hydrangeas/', topic: 'Gardening' },
-  { title: '30 Great Companion Plants For Boxwoods', url: 'https://herbvity.com/companion-plants-for-boxwoods/', topic: 'Gardening' },
-  { title: '26 Great Companion Plants for Peonies', url: 'https://herbvity.com/companion-plants-for-peonies/', topic: 'Gardening' },
-  { title: '23 Great Companion Plants for Cherry Trees', url: 'https://herbvity.com/companion-plants-for-cherry-trees/', topic: 'Gardening' },
-  { title: '28 Great Companion Plants for Cilantro', url: 'https://herbvity.com/companion-plants-for-cilantro/', topic: 'Gardening' },
-  { title: '29 Great Companion Plants For Watermelon', url: 'https://herbvity.com/companion-plants-for-watermelon/', topic: 'Gardening' },
-  { title: '23 Great Companion Plants For Asparagus', url: 'https://herbvity.com/companion-plants-for-asparagus/', topic: 'Gardening' },
-  { title: '39 Great Companion Plants for Green Beans', url: 'https://herbvity.com/companion-plants-for-green-beans/', topic: 'Gardening' },
-  { title: '40 Great Companion Plants for Bell Peppers', url: 'https://herbvity.com/companion-plants-for-bell-peppers/', topic: 'Gardening' },
-  { title: '44 Great Companion Plants For Bee Balm', url: 'https://herbvity.com/companion-plants-for-bee-balm/', topic: 'Gardening' },
-  { title: '37 Great Companion Plants For Daylilies', url: 'https://herbvity.com/companion-plants-for-daylilies/', topic: 'Gardening' },
-  { title: '35 Great Companion Plants for Azaleas', url: 'https://herbvity.com/companion-plants-for-azaleas/', topic: 'Gardening' },
-  { title: '22 Great Companion Plants for Snow Peas', url: 'https://herbvity.com/companion-plants-for-snow-peas/', topic: 'Gardening' },
-  { title: '12 Disastrous Companion Plants for Fennel', url: 'https://herbvity.com/companion-plants-for-fennel/', topic: 'Gardening' },
-  { title: '20 Great Companion Plants for Parsley', url: 'https://herbvity.com/companion-plants-for-parsley/', topic: 'Gardening' },
-  { title: '34 Great Companion Plants For Chives', url: 'https://herbvity.com/companion-plants-for-chives/', topic: 'Gardening' },
-  { title: '27 Great Companion Plants for Basil', url: 'https://herbvity.com/companion-plants-for-basil/', topic: 'Gardening' },
+  { title: '26 Fantastic Companion Plants for Knockout Roses', url: 'https://herbvity.com/companion-plants-for-knockout-roses/', topic: 'Roses & Shrubs', count: '26 Plants' },
+  { title: '28 Great Companion Plants For Lambs Ear', url: 'https://herbvity.com/companion-plants-for-lambs-ear/', topic: 'Foliage & Groundcovers', count: '28 Plants' },
+  { title: '24 Great Companion Plants For Hydrangeas', url: 'https://herbvity.com/companion-plants-for-hydrangeas/', topic: 'Acid-Loving Flowers', count: '24 Plants' },
+  { title: '30 Great Companion Plants For Boxwoods', url: 'https://herbvity.com/companion-plants-for-boxwoods/', topic: 'Evergreens & Borders', count: '30 Plants' },
+  { title: '26 Great Companion Plants for Peonies', url: 'https://herbvity.com/companion-plants-for-peonies/', topic: 'Perennials & Blooms', count: '26 Plants' },
+  { title: '23 Great Companion Plants for Cherry Trees', url: 'https://herbvity.com/companion-plants-for-cherry-trees/', topic: 'Fruit & Orchard Trees', count: '23 Plants' },
+  { title: '28 Great Companion Plants for Cilantro', url: 'https://herbvity.com/companion-plants-for-cilantro/', topic: 'Culinary Herbs', count: '28 Plants' },
+  { title: '29 Great Companion Plants For Watermelon', url: 'https://herbvity.com/companion-plants-for-watermelon/', topic: 'Vines & Melons', count: '29 Plants' },
+  { title: '23 Great Companion Plants For Asparagus', url: 'https://herbvity.com/companion-plants-for-asparagus/', topic: 'Perennial Vegetables', count: '23 Plants' },
+  { title: '39 Great Companion Plants for Green Beans', url: 'https://herbvity.com/companion-plants-for-green-beans/', topic: 'Legumes & Pods', count: '39 Plants' },
+  { title: '40 Great Companion Plants for Bell Peppers', url: 'https://herbvity.com/companion-plants-for-bell-peppers/', topic: 'Nightshades & Peppers', count: '40 Plants' },
+  { title: '44 Great Companion Plants For Bee Balm', url: 'https://herbvity.com/companion-plants-for-bee-balm/', topic: 'Pollinator Favorites', count: '44 Plants' },
+  { title: '37 Great Companion Plants For Daylilies', url: 'https://herbvity.com/companion-plants-for-daylilies/', topic: 'Hardy Perennials', count: '37 Plants' },
+  { title: '35 Great Companion Plants for Azaleas', url: 'https://herbvity.com/companion-plants-for-azaleas/', topic: 'Woodland Shrubs', count: '35 Plants' },
+  { title: '22 Great Companion Plants for Snow Peas', url: 'https://herbvity.com/companion-plants-for-snow-peas/', topic: 'Cool Season Greens', count: '22 Plants' },
+  { title: '12 Disastrous Companion Plants for Fennel', url: 'https://herbvity.com/companion-plants-for-fennel/', topic: 'Allelopathic Warnings', count: '12 Plants' },
+  { title: '20 Great Companion Plants for Parsley', url: 'https://herbvity.com/companion-plants-for-parsley/', topic: 'Biennial Herbs', count: '20 Plants' },
+  { title: '34 Great Companion Plants For Chives', url: 'https://herbvity.com/companion-plants-for-chives/', topic: 'Alliums & Pest Control', count: '34 Plants' },
+  { title: '27 Great Companion Plants for Basil', url: 'https://herbvity.com/companion-plants-for-basil/', topic: 'Companion Staples', count: '27 Plants' },
 ];
 
 const featuredSample = {
   id: 0,
+  catalogNum: 'CAT-01 // LEAD ESSAY',
   title: 'How Topic Clusters and Semantic Search Are Redefining B2B SEO',
   publication: 'StoryChief',
+  publicationCategory: 'Global B2B Content Marketing Platform',
   url: 'https://storychief.io/blog/topic-clusters-semantic-search',
-  type: 'SEO Guide',
-  industry: 'B2B / MarTech',
-  readTime: '7 min',
-  excerpt: 'The way search engines evaluate authority has changed. This guide breaks down how topic clusters and semantic SEO work together to move content from invisible to dominant — for B2B brands that need long-term organic traction.',
-  highlight: 'Published on StoryChief — Global B2B Content Platform',
+  type: 'SEO Strategy & MarTech Guide',
+  industry: 'B2B SaaS / MarTech',
+  readTime: '7 min read',
+  date: 'Published on StoryChief Official Blog',
+  excerpt: 'The way search engines evaluate domain authority has fundamentally evolved. This guide details how topic cluster architecture and semantic entity mapping replace obsolete keyword-stuffing tactics to deliver predictable, compounding organic pipeline for B2B brands.',
+  highlight: 'Published Author on StoryChief (Global B2B Platform)',
   image: '/images/storychief_topic_clusters.webp',
+  coreTakeaways: [
+    'How Google Hummingbird and RankBrain prioritize contextual entity graphs over raw keywords',
+    'Step-by-step topic cluster blueprints: Pillar page, sub-cluster spokes, and bi-directional internal linking',
+    'Practical pipeline attribution: Converting informational traffic into high-intent MQLs'
+  ]
 };
+
+type CatalogCategory = 'All' | 'B2B SaaS' | 'Wellness & Botanical' | 'Case Studies';
 
 const writingSamples = [
   {
     id: 2,
+    catalogNum: 'CAT-02 // HERBAL RESEARCH',
     title: 'Herbs for Anxiety: 7 Natural Remedies That Actually Work',
-    publication: 'Herbvity', url: 'https://herbvity.com/author/Emmanuel-Odebiyi/',
-    type: 'Long-form Article', industry: 'Health & Wellness', readTime: '8 min',
-    excerpt: 'Research-backed guide to herbal anxiety remedies — written to rank for high-intent search terms while genuinely serving readers seeking natural alternatives.',
+    publication: 'Herbvity',
+    url: 'https://herbvity.com/author/Emmanuel-Odebiyi/',
+    category: 'Wellness & Botanical' as CatalogCategory,
+    type: 'Research Article',
+    industry: 'Health & Wellness',
+    readTime: '8 min read',
+    excerpt: 'A research-backed guide to botanical anxiety interventions. Structured with clinical references to rank for high-intent search queries while providing genuine guidance for readers seeking evidence-based natural alternatives.',
     accent: 'green',
     image: '/images/herbvity_anxiety_cover.webp',
+    isInternal: false,
+    proofPoint: 'Ranked for competitive natural health search queries'
   },
   {
     id: 3,
+    catalogNum: 'CAT-03 // CLINICAL SEO',
     title: 'Natural Remedies for Common Ailments: Evidence-Based Herbal Approaches',
-    publication: 'Herbvity', url: 'https://herbvity.com/author/Emmanuel-Odebiyi/',
-    type: 'Health Content', industry: 'Health & Wellness', readTime: '10 min',
-    excerpt: 'Health content that earns trust without sacrificing search performance — rigorous research made accessible.',
+    publication: 'Herbvity',
+    url: 'https://herbvity.com/author/Emmanuel-Odebiyi/',
+    category: 'Wellness & Botanical' as CatalogCategory,
+    type: 'E-E-A-T Guide',
+    industry: 'Health & Wellness',
+    readTime: '10 min read',
+    excerpt: 'Medical-grade health editorial that earns reader trust without sacrificing search engine performance. Built with strict E-E-A-T criteria, peer-reviewed citations, and clear layperson breakdowns.',
     accent: 'green',
     image: '/images/herbvity_natural_cover.webp',
+    isInternal: false,
+    proofPoint: 'Complies with rigorous Google YMYL & E-E-A-T guidelines'
   },
   {
     id: 4,
+    catalogNum: 'CAT-04 // EDITORIAL SCALE',
     title: 'Content Strategy That Grew Organic Traffic 150% in 4 Months',
-    publication: 'The Scoove Africa', url: '/portfolio/scoove-africa',
-    type: 'Case Study', industry: 'Entertainment Media', readTime: '5 min',
-    excerpt: 'Led end-to-end content strategy for Nigeria\'s digital entertainment platform — taking it from Position 45 to Page 1 for 20+ competitive keywords.',
-    accent: 'blue', isInternal: true,
+    publication: 'The Scoove Africa',
+    url: '/portfolio/scoove-africa',
+    category: 'Case Studies' as CatalogCategory,
+    type: 'Documented Case Study',
+    industry: 'Entertainment Media',
+    readTime: '5 min read',
+    excerpt: 'Directed the complete content editorial strategy for a digital entertainment platform. Moved 20+ competitive search terms from Position 45 straight to Page 1, reducing bounce rates by 25%.',
+    accent: 'blue',
+    isInternal: true,
     image: '/images/scoove_writing_cover.webp',
+    proofPoint: '150% traffic growth in 4 months with 20+ Page 1 rankings'
   },
   {
     id: 5,
+    catalogNum: 'CAT-05 // CONVERSION COPY',
     title: 'Local SEO Copy That Generated 180% More Organic Leads',
-    publication: 'Emergency Response Africa', url: '/portfolio/emergency-response-africa',
-    type: 'Local SEO Copy', industry: 'Healthcare / MedTech', readTime: '4 min',
-    excerpt: 'Geo-targeted landing page copy that pushed 10+ high-intent healthcare search terms to Page 1 and increased call volume by 30%.',
-    accent: 'rose', isInternal: true,
+    publication: 'Emergency Response Africa',
+    url: '/portfolio/emergency-response-africa',
+    category: 'Case Studies' as CatalogCategory,
+    type: 'Conversion Copy & Local SEO',
+    industry: 'Healthcare / MedTech',
+    readTime: '4 min read',
+    excerpt: 'Geo-targeted landing page copy and structured medical schema that propelled 10+ high-urgency healthcare queries to Google Page 1 and increased emergency dispatch call volume by 30%.',
+    accent: 'teal',
+    isInternal: true,
     image: '/images/era_writing_cover.webp',
+    proofPoint: '180% inbound lead increase and 30% direct call growth'
   },
   {
     id: 6,
+    catalogNum: 'CAT-06 // REVENUE ENGINE',
     title: 'B2B SaaS Content That Delivered 520% ROI in 90 Days',
-    publication: 'TechFlow Solutions', url: '/portfolio/techflow-solutions',
-    type: 'Content Strategy', industry: 'B2B SaaS', readTime: '6 min',
-    excerpt: 'Designed and wrote a full SEO content system for a B2B SaaS platform — scaling from 8 to 35+ articles monthly and attributing $127K in revenue to content.',
-    accent: 'amber', isInternal: true,
-    image: '/images/techflow_ga4_traffic.webp',
-  },
-];
-
-const pillars = [
-  {
-    icon: PenTool, title: 'Long-Form SEO Writing',
-    description: 'Blog posts, pillar pages, comprehensive guides written to rank and hold attention. Articles people read to the end.',
-    skills: ['Topic cluster architecture', 'On-page SEO', 'Search intent matching', 'E-E-A-T content'],
-  },
-  {
-    icon: Globe, title: 'Web Copy & Landing Pages',
-    description: 'Homepage copy, product pages, service pages — written to convert. The difference is the writing.',
-    skills: ['Conversion copy', 'Brand voice matching', 'Value proposition clarity', 'CTA optimization'],
-  },
-  {
-    icon: Target, title: 'Content Strategy & Editing',
-    description: 'Editorial planning, content audits, topic architecture built around what your audience searches for.',
-    skills: ['Keyword gap analysis', 'Content calendars', 'Editorial briefs', 'Content team management'],
-  },
-];
-
-const results = [
-  {
-    client: 'TechFlow Solutions', industry: 'B2B SaaS',
-    metrics: [
-      { value: '35+', label: 'articles per month' },
-      { value: '→ P1', label: 'avg keyword movement' },
-      { value: '$127K', label: 'revenue from content' },
-    ],
+    publication: 'TechFlow Solutions',
+    url: '/portfolio/techflow-solutions',
+    category: 'B2B SaaS' as CatalogCategory,
+    type: 'Content System & Strategy',
+    industry: 'B2B SaaS',
+    readTime: '6 min read',
+    excerpt: 'Engineered a full-funnel content production system for a high-growth SaaS platform. Scaled output from 8 to 40+ monthly articles and directly attributed $127,000 in customer pipeline revenue.',
     accent: 'amber',
+    isInternal: true,
+    image: '/images/techflow_ga4_traffic.webp',
+    proofPoint: '$127,000 direct revenue attributed to content system'
+  },
+];
+
+const brands = [
+  {
+    name: 'StoryChief',
+    category: 'Global MarTech Platform',
+    detail: 'Published Author',
+    url: 'https://storychief.io/blog/author/emmanuel-odebiyi-ayomide',
+    logo: '/images/logos/storychief.webp',
   },
   {
-    client: 'The Scoove Africa', industry: 'Entertainment Media',
-    metrics: [
-      { value: '150%', label: 'organic traffic growth' },
-      { value: '20+', label: 'new Page 1 rankings' },
-      { value: '40%', label: 'CTR improvement' },
-    ],
-    accent: 'blue',
+    name: 'Herbvity',
+    category: 'Health & Botanical Media',
+    detail: '19 Indexed Articles',
+    url: 'https://herbvity.com/author/Emmanuel-Odebiyi/',
+    logo: '/images/logos/herbvity.webp',
   },
   {
-    client: 'Emergency Response Africa', industry: 'Healthcare',
-    metrics: [
-      { value: '180%', label: 'organic lead growth' },
-      { value: '10+', label: 'Page 1 keywords' },
-      { value: '30%', label: 'more direct calls' },
-    ],
-    accent: 'rose',
+    name: 'The Scoove Africa',
+    category: 'Digital Entertainment Platform',
+    detail: '150% Traffic Growth',
+    url: '/portfolio/scoove-africa',
+    logo: '/images/logos/scoove.webp',
+  },
+  {
+    name: 'Emergency Response Africa',
+    category: 'Healthcare Dispatch Network',
+    detail: '180% Inbound Leads',
+    url: '/portfolio/emergency-response-africa',
+    logo: '/images/logos/era.webp',
+  },
+  {
+    name: 'TechFlow Solutions',
+    category: 'B2B SaaS Platform',
+    detail: '520% Content ROI',
+    url: '/portfolio/techflow-solutions',
+    logo: '/images/logos/techflow.webp',
   },
 ];
 
 const testimonials = [
   {
-    quote: "Emmanuel didn't just improve our content — he transformed how our entire marketing operation works. The 520% ROI in the first quarter turned our entire board into believers. It's the best strategic investment we made all year.",
-    name: 'Sarah Mitchell', role: 'VP of Marketing', company: 'TechFlow Solutions',
+    quote: "Emmanuel transformed how our entire marketing operation works. The 520% ROI in the first quarter turned our leadership team into believers. It is the best strategic content investment we made all year.",
+    name: 'Sarah Mitchell',
+    role: 'VP of Marketing',
+    company: 'TechFlow Solutions',
     avatar: '/images/testimonials/sarah_mitchell.webp',
-    featured: true,
+    metric: '520% ROI in 90 Days'
   },
   {
-    quote: "I was skeptical that 150% traffic growth in four months was even possible without a full team. It wasn't luck — it was a system. Precise SEO, consistent output, and results we could actually measure.",
-    name: 'Olaylide Bolaji-Daniel', role: 'Head of Content', company: 'The Scoove Africa',
+    quote: "I was skeptical that 150% traffic growth in four months was possible without an army of writers. It was not luck: it was a system. Precise SEO, consistent output, and results we could measure.",
+    name: 'Olaylide Bolaji-Daniel',
+    role: 'Head of Content',
+    company: 'The Scoove Africa',
     avatar: '/images/testimonials/Bolaji.webp',
-    featured: false,
+    metric: 'Position 45 → Page 1'
   },
   {
-    quote: "Emmanuel's localized health copy transformed how emergency services found us online. Pushing 10+ medical keywords to Page 1 increased direct emergency calls by 30% in under 60 days.",
-    name: 'Paul Olaniyi', role: 'Marketing Director', company: 'Emergency Response Africa',
+    quote: "Emmanuel's localized health copy transformed how emergency services found us online. Pushing 10+ medical keywords to Page 1 increased direct emergency dispatch calls by 30% in under 60 days.",
+    name: 'Paul Olaniyi',
+    role: 'Marketing Director',
+    company: 'Emergency Response Africa',
     avatar: '/images/testimonials/paul_olaniyi.webp',
-    featured: false,
+    metric: '30% Increase in Emergency Calls'
   },
 ];
 
-const brands = [
-  { 
-    name: 'StoryChief', 
-    category: 'B2B MarTech Platform', 
-    count: 'Published Author', 
-    url: 'https://storychief.io/blog/author/emmanuel-odebiyi-ayomide', 
-    logo: '/images/logos/storychief.webp',
+const pillars = [
+  {
+    catalogNum: '01',
+    title: 'Editorial & Long-Form SEO',
+    description: 'Deep-dive guides, pillar articles, and technical breakdowns crafted to rank on Page 1 and maintain reader engagement from the first sentence to the final CTA.',
+    deliverables: ['Semantic entity coverage', 'Topic cluster architecture', 'Search intent satisfaction', 'E-E-A-T research citations']
   },
-  { 
-    name: 'Herbvity', 
-    category: 'Health & Wellness', 
-    count: '19 Articles Published', 
-    url: 'https://herbvity.com/author/Emmanuel-Odebiyi/', 
-    logo: '/images/logos/herbvity.webp',
+  {
+    catalogNum: '02',
+    title: 'High-Conversion Web Copy',
+    description: 'Value proposition messaging, product pages, and conversion landing pages designed to eliminate sales resistance and turn cold readers into qualified leads.',
+    deliverables: ['Value proposition clarity', 'Objection handling structure', 'Audience voice calibration', 'Frictionless call to actions']
   },
-  { 
-    name: 'The Scoove Africa', 
-    category: 'Entertainment & Media', 
-    count: 'Content & SEO Strategy', 
-    url: '/portfolio/scoove-africa', 
-    logo: '/images/logos/scoove.webp',
-  },
-  { 
-    name: 'Emergency Response Africa', 
-    category: 'Healthcare / MedTech', 
-    count: 'Local SEO Copywriting', 
-    url: '/portfolio/emergency-response-africa', 
-    logo: '/images/logos/era.webp',
-  },
-  { 
-    name: 'TechFlow Solutions', 
-    category: 'B2B SaaS', 
-    count: '35+ Monthly Articles', 
-    url: '/portfolio/techflow-solutions', 
-    logo: '/images/logos/techflow.webp',
-  },
+  {
+    catalogNum: '03',
+    title: 'Content Strategy & Editorial Systems',
+    description: 'Systematic editorial calendars, keyword gap analysis, and content operations workflows that produce compounding organic compounding without chaos.',
+    deliverables: ['Competitive keyword gap audits', 'Structured editorial briefs', 'Production workflow automation', 'GA4 revenue attribution']
+  }
 ];
-
-const accentMap: Record<string, { border: string; bg: string; badge: string; text: string; dot: string; glow: string }> = {
-  amber: { border: 'border-amber-500/25', bg: 'rgba(245,158,11,0.06)', badge: 'bg-amber-500/10 text-amber-500 border border-amber-500/20', text: 'text-amber-500', dot: 'bg-amber-500', glow: 'rgba(245,158,11,0.15)' },
-  blue: { border: 'border-blue-500/25', bg: 'rgba(59,130,246,0.06)', badge: 'bg-blue-500/10 text-blue-400 border border-blue-500/20', text: 'text-blue-400', dot: 'bg-blue-400', glow: 'rgba(59,130,246,0.15)' },
-  green: { border: 'border-emerald-500/25', bg: 'rgba(16,185,129,0.06)', badge: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20', text: 'text-emerald-400', dot: 'bg-emerald-400', glow: 'rgba(16,185,129,0.15)' },
-  rose: { border: 'border-rose-500/25', bg: 'rgba(244,63,94,0.06)', badge: 'bg-rose-500/10 text-rose-400 border border-rose-500/20', text: 'text-rose-400', dot: 'bg-rose-400', glow: 'rgba(244,63,94,0.15)' },
-};
-
-// ──────────────────────────────────────────────────────────────────────────────
-// ANIMATED COUNTER
-// ──────────────────────────────────────────────────────────────────────────────
-function AnimatedStat(props: React.Attributes & { value: string; label: string }) {
-  const { value, label } = props;
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-40px' });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col items-start gap-1 p-4 sm:p-5 rounded-2xl border"
-      style={{ borderColor: 'rgba(245,158,11,0.2)', backgroundColor: 'rgba(245,158,11,0.05)' }}
-    >
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.15 }}
-        className="text-2xl sm:text-3xl font-bold font-display tabular-nums"
-        style={{ color: '#f59e0b' }}
-      >
-        {value}
-      </motion.span>
-      <span className="text-xs leading-tight font-medium" style={{ color: 'var(--text-muted)' }}>{label}</span>
-    </motion.div>
-  );
-}
-
-// ──────────────────────────────────────────────────────────────────────────────
-// FLOATING HIRE CTA
-// ──────────────────────────────────────────────────────────────────────────────
-function FloatingHireCTA({ onClick }: { onClick: () => void }) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const handler = () => setVisible(window.scrollY > 600);
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.button
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.9 }}
-          transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-          onClick={onClick}
-          id="floating-hire-cta"
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold shadow-2xl transition-transform hover:scale-105 active:scale-95"
-          style={{
-            backgroundColor: '#f59e0b',
-            color: '#0a0a0a',
-            boxShadow: '0 8px 32px rgba(245,158,11,0.4)',
-          }}
-        >
-          Hire Me
-          <ArrowRight className="w-4 h-4" />
-        </motion.button>
-      )}
-    </AnimatePresence>
-  );
-}
 
 // ──────────────────────────────────────────────────────────────────────────────
 // QUICK APPLY MODAL
@@ -292,9 +244,9 @@ function QuickApplyModal({ onClose }: { onClose: () => void }) {
   const validate = () => {
     const errs: Record<string, string> = {};
     if (!form.name.trim()) errs.name = 'Your name is required';
-    if (!form.email.trim()) errs.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(form.email)) errs.email = 'Enter a valid email';
-    if (!form.message.trim()) errs.message = 'Tell me what you need';
+    if (!form.email.trim()) errs.email = 'Email address is required';
+    else if (!/\S+@\S+\.\S+/.test(form.email)) errs.email = 'Please provide a valid email';
+    if (!form.message.trim()) errs.message = 'Please share a brief summary of your project or role';
     return errs;
   };
 
@@ -303,95 +255,173 @@ function QuickApplyModal({ onClose }: { onClose: () => void }) {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setStatus('sending');
-    const subject = encodeURIComponent(`Content Writer Inquiry — ${form.company || form.name}`);
-    const body = encodeURIComponent(`Hi Emmanuel,\n\nMy name is ${form.name}${form.company ? ` from ${form.company}` : ''}.\n\n${form.message}\n\nBest,\n${form.name}\n${form.email}`);
-    window.open(`mailto:emmanuel@emmanuelodebiyi.name.ng?subject=${subject}&body=${body}`);
-    setTimeout(() => setStatus('sent'), 800);
+    const subject = encodeURIComponent(`Content Writing Inquiry: ${form.company || form.name}`);
+    const body = encodeURIComponent(
+      `Hello Emmanuel,\n\nMy name is ${form.name}${form.company ? ` from ${form.company}` : ''}.\n\nProject details:\n${form.message}\n\nBest regards,\n${form.name}\n${form.email}`
+    );
+    window.open(`mailto:emmanuel@emmanuel.name.ng?subject=${subject}&body=${body}`);
+    setTimeout(() => setStatus('sent'), 600);
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ backgroundColor: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)' }}
+      style={{ backgroundColor: 'rgba(14,28,42,0.7)', backdropFilter: 'blur(8px)' }}
       onClick={onClose}
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.94, y: 24 }}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.94, y: 24 }}
-        transition={{ type: 'spring', damping: 26, stiffness: 320 }}
-        className="relative w-full max-w-md rounded-2xl border p-8"
-        style={{ backgroundColor: 'var(--bg-card, #111)', borderColor: 'rgba(245,158,11,0.3)', boxShadow: '0 0 80px rgba(245,158,11,0.1), 0 24px 64px rgba(0,0,0,0.5)' }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ type: 'spring', damping: 26, stiffness: 300 }}
+        className="relative w-full max-w-lg rounded-2xl border p-8 shadow-2xl"
+        style={{
+          backgroundColor: 'var(--bg-surface)',
+          borderColor: 'var(--border-card)',
+          color: 'var(--text-body)',
+        }}
         onClick={e => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close">
-          <X className="w-4 h-4" />
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 p-2 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/10"
+          style={{ color: 'var(--text-muted)' }}
+          aria-label="Close dialog"
+        >
+          <X className="w-5 h-5" />
         </button>
 
         {status === 'sent' ? (
           <div className="text-center py-8 space-y-4">
-            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', damping: 14 }}>
-              <CheckCircle className="w-14 h-14 text-amber-500 mx-auto" />
-            </motion.div>
-            <h3 className="text-xl font-bold" style={{ color: 'var(--text-body)' }}>Brief sent!</h3>
-            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-              Your email client should have opened. Alternatively: {' '}
-              <a href="mailto:emmanuel@emmanuelodebiyi.name.ng" className="text-amber-500 underline">emmanuel@emmanuelodebiyi.name.ng</a>
+            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto" style={{ backgroundColor: 'rgba(201,123,10,0.15)' }}>
+              <CheckCircle className="w-8 h-8" style={{ color: 'var(--accent-amber)' }} />
+            </div>
+            <h3 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
+              Brief Prepared
+            </h3>
+            <p className="text-sm max-w-sm mx-auto leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              Your default email client opened with the project details. If it did not launch automatically, reach out directly at:
             </p>
+            <a
+              href="mailto:emmanuel@emmanuel.name.ng"
+              className="inline-block font-mono text-sm font-bold underline"
+              style={{ color: 'var(--accent-amber)' }}
+            >
+              emmanuel@emmanuel.name.ng
+            </a>
           </div>
         ) : (
           <>
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Send a brief</h3>
-              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>I respond within 24 hours.</p>
+            <div className="mb-6 space-y-1">
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase" style={{ color: 'var(--accent-amber)' }}>
+                Direct Inquiry
+              </span>
+              <h3 className="text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
+                Start an Editorial Project
+              </h3>
+              <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                Share your publishing goals, target audience, or timeline. You will receive a response within 24 business hours.
+              </p>
             </div>
+
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { name: 'name', label: 'Your name *', placeholder: 'Sarah', type: 'text' },
-                  { name: 'company', label: 'Company', placeholder: 'Acme Inc.', type: 'text' },
-                ].map(f => (
-                  <div key={f.name}>
-                    <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-muted)' }}>{f.label}</label>
-                    <input
-                      type={f.type} name={f.name} value={form[f.name as keyof typeof form]} onChange={handleChange} placeholder={f.placeholder}
-                      className="w-full rounded-lg border px-3 py-2 text-sm outline-none transition-all"
-                      style={{
-                        backgroundColor: 'rgba(255,255,255,0.04)',
-                        borderColor: errors[f.name] ? '#f43f5e' : 'rgba(255,255,255,0.1)',
-                        color: 'var(--text-body)',
-                      }}
-                    />
-                    {errors[f.name] && <p className="text-xs text-rose-400 mt-1">{errors[f.name]}</p>}
-                  </div>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-bold font-mono uppercase tracking-wider mb-1.5 block" style={{ color: 'var(--text-muted)' }}>
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="e.g. Sarah Mitchell"
+                    className="w-full rounded-xl border px-3.5 py-2.5 text-sm outline-none transition-all focus:border-[var(--accent-amber)]"
+                    style={{
+                      backgroundColor: 'var(--bg-page)',
+                      borderColor: errors.name ? '#ef4444' : 'var(--border-card)',
+                      color: 'var(--text-body)',
+                    }}
+                  />
+                  {errors.name && <p className="text-xs text-red-500 mt-1 font-medium">{errors.name}</p>}
+                </div>
+                <div>
+                  <label className="text-xs font-bold font-mono uppercase tracking-wider mb-1.5 block" style={{ color: 'var(--text-muted)' }}>
+                    Company / Publication
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={form.company}
+                    onChange={handleChange}
+                    placeholder="e.g. TechFlow SaaS"
+                    className="w-full rounded-xl border px-3.5 py-2.5 text-sm outline-none transition-all focus:border-[var(--accent-amber)]"
+                    style={{
+                      backgroundColor: 'var(--bg-page)',
+                      borderColor: 'var(--border-card)',
+                      color: 'var(--text-body)',
+                    }}
+                  />
+                </div>
               </div>
+
               <div>
-                <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-muted)' }}>Email *</label>
+                <label className="text-xs font-bold font-mono uppercase tracking-wider mb-1.5 block" style={{ color: 'var(--text-muted)' }}>
+                  Work Email *
+                </label>
                 <input
-                  type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@company.com"
-                  className="w-full rounded-lg border px-3 py-2 text-sm outline-none transition-all"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.04)', borderColor: errors.email ? '#f43f5e' : 'rgba(255,255,255,0.1)', color: 'var(--text-body)' }}
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="sarah@company.com"
+                  className="w-full rounded-xl border px-3.5 py-2.5 text-sm outline-none transition-all focus:border-[var(--accent-amber)]"
+                  style={{
+                    backgroundColor: 'var(--bg-page)',
+                    borderColor: errors.email ? '#ef4444' : 'var(--border-card)',
+                    color: 'var(--text-body)',
+                  }}
                 />
-                {errors.email && <p className="text-xs text-rose-400 mt-1">{errors.email}</p>}
+                {errors.email && <p className="text-xs text-red-500 mt-1 font-medium">{errors.email}</p>}
               </div>
+
               <div>
-                <label className="text-xs font-medium mb-1 block" style={{ color: 'var(--text-muted)' }}>What do you need? *</label>
+                <label className="text-xs font-bold font-mono uppercase tracking-wider mb-1.5 block" style={{ color: 'var(--text-muted)' }}>
+                  Project Scope or Requirements *
+                </label>
                 <textarea
-                  name="message" rows={4} value={form.message} onChange={handleChange}
-                  placeholder="Tell me about the role or project — topic, word count, audience, turnaround..."
-                  className="w-full rounded-lg border px-3 py-2 text-sm outline-none transition-all resize-none"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.04)', borderColor: errors.message ? '#f43f5e' : 'rgba(255,255,255,0.1)', color: 'var(--text-body)' }}
+                  name="message"
+                  rows={4}
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="What are you building? Mention your target topics, approximate article count, or strategic goals..."
+                  className="w-full rounded-xl border px-3.5 py-2.5 text-sm outline-none transition-all resize-none focus:border-[var(--accent-amber)]"
+                  style={{
+                    backgroundColor: 'var(--bg-page)',
+                    borderColor: errors.message ? '#ef4444' : 'var(--border-card)',
+                    color: 'var(--text-body)',
+                  }}
                 />
-                {errors.message && <p className="text-xs text-rose-400 mt-1">{errors.message}</p>}
+                {errors.message && <p className="text-xs text-red-500 mt-1 font-medium">{errors.message}</p>}
               </div>
+
               <button
-                type="submit" disabled={status === 'sending'}
-                className="w-full flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
-                style={{ backgroundColor: '#f59e0b', color: '#0a0a0a' }}
+                type="submit"
+                disabled={status === 'sending'}
+                className="w-full flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold transition-all hover:opacity-95 active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                style={{ backgroundColor: 'var(--accent-amber)', color: '#0E1C2A' }}
               >
-                {status === 'sending' ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Send className="w-4 h-4" /> Send brief</>}
+                {status === 'sending' ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Send Project Brief</span>
+                  </>
+                )}
               </button>
             </form>
           </>
@@ -402,187 +432,212 @@ function QuickApplyModal({ onClose }: { onClose: () => void }) {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// SAMPLE CARD WITH IMAGE COVER
+// FLOATING HIRE CTA
 // ──────────────────────────────────────────────────────────────────────────────
-function SampleCard(props: React.Attributes & { sample: typeof writingSamples[0]; index: number }) {
-  const { sample, index } = props;
-  const accent = accentMap[sample.accent] || accentMap.amber;
+function FloatingHireCTA({ onClick }: { onClick: () => void }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const handler = () => setVisible(window.scrollY > 500);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.07 }}
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
-      className={`group flex flex-col justify-between rounded-2xl border overflow-hidden transition-all ${accent.border}`}
-      style={{ backgroundColor: accent.bg }}
-    >
-      <div>
-        {/* Cover Image */}
-        <div className="relative w-full aspect-[16/9] overflow-hidden border-b" style={{ borderColor: 'rgba(255,255,255,0.08)', backgroundColor: 'var(--bg-surface)' }}>
-          <img
-            src={sample.image}
-            alt={sample.title}
-            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <span className={`absolute bottom-3 left-3 rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase shadow-md ${accent.badge}`}>
-            {sample.type}
-          </span>
-          <span className="absolute bottom-3 right-3 text-xs text-white/90 font-medium flex items-center gap-1 bg-black/40 backdrop-blur-md px-2 py-0.5 rounded-full">
-            <Clock className="w-3 h-3 text-amber-400" />{sample.readTime}
-          </span>
-        </div>
-
-        {/* Card Content */}
-        <div className="p-5 space-y-3">
-          <h3 className="text-base font-bold leading-snug group-hover:text-amber-500 transition-colors" style={{ color: 'var(--text-body)' }}>
-            {sample.title}
-          </h3>
-          <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            {sample.excerpt}
-          </p>
-        </div>
-      </div>
-
-      <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-        <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
-          <BookOpen className="w-3.5 h-3.5 shrink-0 text-amber-500" />
-          <span className="truncate max-w-[130px]">{sample.publication}</span>
-        </div>
-        {sample.isInternal ? (
-          <Link to={sample.url} className={`flex items-center gap-1 text-xs font-bold ${accent.text}`}>
-            Case study <ArrowRight className="w-3 h-3" />
-          </Link>
-        ) : (
-          <a href={sample.url} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1 text-xs font-bold ${accent.text}`}>
-            Read <ExternalLink className="w-3 h-3" />
-          </a>
-        )}
-      </div>
-    </motion.article>
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.95 }}
+          transition={{ type: 'spring', damping: 22, stiffness: 300 }}
+          onClick={onClick}
+          id="floating-hire-cta"
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 rounded-full px-5 py-3 text-xs font-mono font-bold uppercase tracking-wider shadow-2xl transition-all hover:scale-105 active:scale-95 cursor-pointer border"
+          style={{
+            backgroundColor: 'var(--accent-amber)',
+            borderColor: 'rgba(14,28,42,0.2)',
+            color: '#0E1C2A',
+            boxShadow: '0 12px 32px rgba(201,123,10,0.35)',
+          }}
+        >
+          <span className="w-2 h-2 rounded-full bg-[#0E1C2A] animate-pulse" />
+          <span>Hire for Writing</span>
+          <ArrowRight className="w-4 h-4" />
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// MAIN PAGE
+// MAIN CONTENT WRITER PORTFOLIO COMPONENT
 // ──────────────────────────────────────────────────────────────────────────────
 export default function ContentWriterPortfolio() {
   const [showModal, setShowModal] = useState(false);
-  const [showArchive, setShowArchive] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<CatalogCategory>('All');
+  const [plantSearch, setPlantSearch] = useState('');
+  const [isBotanicalExpanded, setIsBotanicalExpanded] = useState(false);
+
+  // Filtered samples
+  const filteredSamples = useMemo(() => {
+    if (activeCategory === 'All') return writingSamples;
+    return writingSamples.filter(s => s.category === activeCategory);
+  }, [activeCategory]);
+
+  // Filtered Herbvity botanical articles
+  const filteredHerbvity = useMemo(() => {
+    if (!plantSearch.trim()) return herbvityArticles;
+    const q = plantSearch.toLowerCase();
+    return herbvityArticles.filter(
+      a => a.title.toLowerCase().includes(q) || a.topic.toLowerCase().includes(q)
+    );
+  }, [plantSearch]);
 
   return (
-    <div className="min-h-screen font-sans" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO
         title="Senior Content Writer & SEO Specialist | Emmanuel Odebiyi"
-        description="Emmanuel Odebiyi is a senior content writer and SEO specialist with 5+ years delivering long-form blog posts, web copy, and content strategy for B2B SaaS, media, and healthcare brands."
-        keywords="senior content writer, SEO writer for hire, SEO content specialist, B2B content writer, blog writer, content marketing specialist, Emmanuel Odebiyi"
+        description="Senior content writer and SEO strategist with 5+ years delivering published B2B SaaS guides, authoritative topic clusters, and high-conversion copy for StoryChief, Herbvity, and The Scoove Africa."
+        keywords="senior content writer, B2B SaaS content writer, SEO content specialist, StoryChief writer, topic cluster architecture, Emmanuel Odebiyi"
       />
 
-      <AnimatePresence>{showModal && <QuickApplyModal onClose={() => setShowModal(false)} />}</AnimatePresence>
+      <AnimatePresence>
+        {showModal && <QuickApplyModal onClose={() => setShowModal(false)} />}
+      </AnimatePresence>
+
       <FloatingHireCTA onClick={() => setShowModal(true)} />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative pt-36 pb-20 px-6 overflow-hidden">
-        {/* Subtle dot grid bg */}
-        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-
-        {/* Ambient radial glow */}
-        <div
-          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none -z-10 opacity-20"
-          style={{ background: 'radial-gradient(ellipse, #f59e0b 0%, transparent 70%)', filter: 'blur(70px)' }}
-          aria-hidden="true"
-        />
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      {/* ── 01. HERO: WORKS STUDIO / EDITORIAL READING ROOM AESTHETIC ────────── */}
+      <section className="relative pt-36 sm:pt-40 lg:pt-44 pb-16 px-6 border-b" style={{ borderColor: 'var(--border-card)' }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Left Column: Copy & Actions */}
-            <div className="lg:col-span-7 space-y-8">
-              {/* Badge */}
+            {/* Left 7 Columns: Editorial Headline, Authority Proof & CTAs */}
+            <div className="lg:col-span-7 space-y-8 text-left">
+              
+              {/* Monospaced Archive Badge */}
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase"
-                style={{ backgroundColor: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.25)', color: '#f59e0b' }}
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono font-bold uppercase tracking-wider"
+                style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-muted)',
+                }}
               >
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                Senior Content Writer &amp; SEO Specialist
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+                <span>INDEX // EDITORIAL WRITING &amp; TOPIC CLUSTERS</span>
               </motion.div>
 
               {/* Headline */}
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-display tracking-tight leading-[1.05]"
-                style={{ color: 'var(--text-body)' }}
-              >
-                Content That Ranks.<br />
-                Words That <span style={{ color: '#f59e0b' }}>Convert.</span>
-              </motion.h1>
-
-              {/* Subheading */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                5+ years writing high-performing long-form articles, web copy, and SEO content strategies for brands in B2B SaaS, healthcare, media, and wellness.
-              </motion.p>
-
-              {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+                transition={{ delay: 0.08 }}
+                className="space-y-3"
+              >
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.98] font-display" style={{ color: 'var(--text-body)' }}>
+                  Content That Ranks. <br />
+                  <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>
+                    Words That Convert.
+                  </span>
+                </h1>
+                <p className="text-lg sm:text-xl font-normal leading-relaxed max-w-2xl pt-2 font-sans" style={{ color: 'var(--text-muted)' }}>
+                  5+ years authoring authoritative B2B SaaS guides, research-backed health clusters, and conversion landing pages. Published on global platforms including StoryChief, Herbvity, and The Scoove Africa.
+                </p>
+              </motion.div>
+
+              {/* Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.16 }}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
               >
                 <button
                   onClick={() => setShowModal(true)}
                   id="hero-hire-me-btn"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-bold transition-all hover:scale-105 active:scale-95"
-                  style={{ backgroundColor: '#f59e0b', color: '#0a0a0a', boxShadow: '0 4px 20px rgba(245,158,11,0.35)' }}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-4 text-sm font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg cursor-pointer"
+                  style={{
+                    backgroundColor: 'var(--accent-amber)',
+                    color: '#0E1C2A',
+                    boxShadow: '0 4px 20px rgba(201,123,10,0.3)',
+                  }}
                 >
-                  Hire Me for Writing
+                  <span>Commission an Article</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
+
                 <a
-                  href="#samples"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border px-8 py-4 text-sm font-bold transition-all hover:bg-white/5"
-                  style={{ borderColor: 'rgba(255,255,255,0.15)', color: 'var(--text-body)' }}
+                  href="#catalog"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border px-7 py-4 text-sm font-bold transition-all hover:bg-black/5 dark:hover:bg-white/5"
+                  style={{
+                    backgroundColor: 'var(--bg-surface)',
+                    borderColor: 'var(--border-card)',
+                    color: 'var(--text-body)',
+                  }}
                 >
-                  View Writing Samples
+                  <span>Explore Catalog</span>
                   <ChevronDown className="w-4 h-4" />
                 </a>
+
+                <Link
+                  to="/portfolio"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border px-5 py-4 text-sm font-medium transition-all hover:bg-black/5 dark:hover:bg-white/5"
+                  style={{
+                    borderColor: 'var(--border-card)',
+                    color: 'var(--text-muted)',
+                  }}
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  <span>Automation Work</span>
+                </Link>
               </motion.div>
 
-              {/* Quick stats grid */}
+              {/* Audited Proof Metrics (Kept strictly on left column per user rule) */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2"
+                transition={{ delay: 0.24 }}
+                className="pt-6 border-t"
+                style={{ borderColor: 'var(--border-card)' }}
               >
-                {[
-                  { value: '150+', label: 'Articles delivered' },
-                  { value: '5+', label: 'Years experience' },
-                  { value: '65%+', label: 'Avg organic growth' },
-                  { value: '520%', label: 'Content ROI (TechFlow)' },
-                ].map((s, i) => (
-                  <AnimatedStat key={i} value={s.value} label={s.label} />
-                ))}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {[
+                    { metric: '150+', label: 'Delivered Articles', sub: 'Across 6 Industries' },
+                    { metric: '520%', label: 'Content ROI', sub: 'TechFlow Solutions' },
+                    { metric: '19', label: 'Indexed Guides', sub: 'Herbvity Botanical Cluster' },
+                    { metric: '65%+', label: 'Avg Traffic Growth', sub: '3-Month Compounding' },
+                  ].map((stat, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-xl border"
+                      style={{
+                        backgroundColor: 'var(--bg-surface)',
+                        borderColor: 'var(--border-card)',
+                      }}
+                    >
+                      <div className="text-2xl sm:text-3xl font-bold font-display tracking-tight" style={{ color: 'var(--accent-amber)' }}>
+                        {stat.metric}
+                      </div>
+                      <div className="text-xs font-bold font-sans mt-1" style={{ color: 'var(--text-body)' }}>
+                        {stat.label}
+                      </div>
+                      <div className="text-[11px] font-mono mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                        {stat.sub}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </div>
 
-            {/* Right Column: Full Hero Portrait Card */}
-            <div className="lg:col-span-5 flex justify-center">
+            {/* Right 5 Columns: Clean Cutout Portrait (Unclipped Containment) */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <HeroPhoto
-                captionLabel="Senior Content Writer & SEO Specialist"
-                maxWidth="max-w-full sm:max-w-[440px] lg:max-w-full"
+                captionLabel="Senior Content Writer &amp; SEO Specialist"
+                maxWidth="w-full max-w-[440px] sm:max-w-[480px] lg:max-w-[520px]"
                 animateDelay={0.2}
               />
             </div>
@@ -590,525 +645,641 @@ export default function ContentWriterPortfolio() {
         </div>
       </section>
 
-      {/* ── PUBLISHED ON & TRUSTED BY (CLEAN LOGO STRIP WITH OFFICIAL BRAND LOGOS) ── */}
-      <section className="py-10 px-6 border-y" style={{ borderColor: 'var(--border-card)', backgroundColor: 'transparent' }}>
-        <div className="max-w-7xl mx-auto space-y-6">
-          <div className="flex items-center gap-3">
-            <span className="w-6 h-px bg-amber-500" />
-            <p className="text-xs font-bold tracking-widest uppercase" style={{ color: '#f59e0b' }}>
-              Published On &amp; Trusted By
-            </p>
-          </div>
+      {/* ── 02. MASTHEAD: PUBLISHED ON & TRUSTED PARTNERS ─────────────────────── */}
+      <section className="py-10 px-6 border-b" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+              <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                Published On &amp; Editorial Partners
+              </span>
+            </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-6 sm:gap-8">
-            {brands.map((b, i) => (
-              <motion.a
-                key={i}
-                href={b.url}
-                target={b.url.startsWith('http') ? '_blank' : '_self'}
-                rel={b.url.startsWith('http') ? 'noopener noreferrer' : ''}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="group flex items-center gap-3 py-2 px-3 rounded-xl transition-all hover:bg-amber-500/5"
-              >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl p-1.5 flex items-center justify-center shrink-0 border"
-                  style={{ borderColor: 'rgba(255,255,255,0.1)', backgroundColor: 'rgba(255,255,255,0.03)' }}>
-                  <img
-                    src={b.logo}
-                    alt={`${b.name} Logo`}
-                    className="w-full h-full object-contain transition-transform group-hover:scale-110"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1">
-                    <span className="font-bold text-sm sm:text-base group-hover:text-amber-500 transition-colors" style={{ color: 'var(--text-body)' }}>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-wrap items-center gap-4 sm:gap-6">
+              {brands.map((b, i) => (
+                <a
+                  key={i}
+                  href={b.url}
+                  target={b.url.startsWith('http') ? '_blank' : '_self'}
+                  rel={b.url.startsWith('http') ? 'noopener noreferrer' : ''}
+                  className="group flex items-center gap-3 p-2.5 rounded-xl border transition-all hover:border-[var(--accent-amber)]"
+                  style={{
+                    backgroundColor: 'var(--bg-page)',
+                    borderColor: 'var(--border-card)',
+                  }}
+                >
+                  <div className="w-8 h-8 rounded-lg p-1 flex items-center justify-center shrink-0 border"
+                    style={{ borderColor: 'var(--border-card)', backgroundColor: '#ffffff' }}>
+                    <img
+                      src={b.logo}
+                      alt={`${b.name} logo`}
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-col text-left">
+                    <span className="text-xs font-bold font-sans group-hover:text-[var(--accent-amber)] transition-colors" style={{ color: 'var(--text-body)' }}>
                       {b.name}
                     </span>
-                    <ExternalLink className="w-3 h-3 text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
+                      {b.detail}
+                    </span>
                   </div>
-                  <span className="text-[11px] font-medium" style={{ color: 'var(--text-muted)' }}>
-                    {b.count}
-                  </span>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WRITER IDENTITY ───────────────────────────────────────────────── */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-[1fr_1.6fr] gap-16 items-start">
-            <div className="space-y-6">
-              <div>
-                <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#f59e0b' }}>About</p>
-                <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
-                  The writer<br />behind the results
-                </h2>
-              </div>
-              {/* Quick facts bar */}
-              <div className="grid grid-cols-1 gap-2.5">
-                {[
-                  { label: 'Industries written for', value: '6+' },
-                  { label: 'Published articles', value: '150+' },
-                  { label: 'Avg. client organic growth', value: '65%+' },
-                ].map((f, i) => (
-                  <div key={i} className="flex items-center justify-between rounded-xl px-4 py-3 border" style={{ borderColor: 'rgba(255,255,255,0.08)', backgroundColor: 'var(--bg-surface)' }}>
-                    <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>{f.label}</span>
-                    <span className="text-sm font-bold" style={{ color: '#f59e0b' }}>{f.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-5 text-base leading-relaxed font-medium" style={{ color: 'var(--text-muted)' }}>
-              <p>
-                I fell in love with writing right after secondary school. The idea that words could
-                connect brands with the right people, earn trust, and drive real business outcomes
-                — that felt like something worth mastering.
-              </p>
-              <p>
-                Over the past five years, I've written for B2B software companies, healthcare
-                providers, entertainment media platforms, and wellness brands. The common thread:
-                content that needed to rank <em>and</em> content that needed to convert. The good
-                ones do both.
-              </p>
-              <p>
-                I write with an SEO skeleton underneath every piece — keyword intent, topic cluster
-                positioning, semantic coverage — but the reader never feels it. They just feel like
-                they're reading something worth their time.
-              </p>
-              <blockquote className="border-l-2 border-amber-500 pl-4 italic text-sm font-semibold py-1" style={{ color: 'var(--text-body)' }}>
-                "Not just rankings. Not just wordcount. Content that earns traffic and then does something with it."
-              </blockquote>
+                  {b.url.startsWith('http') && (
+                    <ExternalLink className="w-3 h-3 ml-auto opacity-40 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--accent-amber)' }} />
+                  )}
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── FEATURED ARTICLE & SAMPLES WITH IMAGES ───────────────────────── */}
-      <section id="samples" className="py-12 px-6">
-        <div className="max-w-6xl mx-auto space-y-10">
-          <div className="space-y-2">
-            <p className="text-xs font-bold tracking-widest uppercase" style={{ color: '#f59e0b' }}>Portfolio</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>Selected writing work</h2>
-            <p className="text-sm max-w-lg" style={{ color: 'var(--text-muted)' }}>
-              Every article below is indexed, published, and complete with live proof.
-            </p>
+      {/* ── 03. FEATURED ARTICLE: STORYCHIEF MARTECH CENTERPIECE ──────────────── */}
+      <section className="py-20 px-6 border-b" style={{ borderColor: 'var(--border-card)' }}>
+        <div className="max-w-7xl mx-auto space-y-8">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-2 text-left">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                {featuredSample.catalogNum}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                Featured Editorial Publication
+              </h2>
+            </div>
+            <div className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+              {featuredSample.date}
+            </div>
           </div>
 
-          {/* Featured Article Card */}
-          <motion.a
-            href={featuredSample.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4 }}
-            className="group block rounded-3xl border overflow-hidden transition-all relative"
+          {/* Magazine-style Feature Spread */}
+          <div
+            className="rounded-2xl border overflow-hidden transition-all shadow-md"
             style={{
-              borderColor: 'rgba(245,158,11,0.35)',
               backgroundColor: 'var(--bg-surface)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+              borderColor: 'var(--border-card)',
             }}
           >
-            <div className="grid md:grid-cols-12 items-center">
-              {/* Image half */}
-              <div className="md:col-span-6 relative aspect-[16/10] md:aspect-auto md:h-full overflow-hidden border-b md:border-b-0 md:border-r" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              
+              {/* Left 6 Columns: Editorial Synopsis & Strategic Breakdown */}
+              <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between space-y-8 text-left">
+                <div className="space-y-6">
+                  
+                  {/* Meta tag pill */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span
+                      className="px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider"
+                      style={{
+                        backgroundColor: 'rgba(201,123,10,0.12)',
+                        color: 'var(--accent-amber)',
+                        border: '1px solid rgba(201,123,10,0.25)',
+                      }}
+                    >
+                      {featuredSample.type}
+                    </span>
+                    <span className="text-xs font-mono flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
+                      <Clock className="w-3.5 h-3.5" style={{ color: 'var(--accent-amber)' }} />
+                      {featuredSample.readTime}
+                    </span>
+                    <span className="text-xs font-mono font-medium" style={{ color: 'var(--text-muted)' }}>
+                      Published on StoryChief.io
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>
+                    {featuredSample.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p className="text-base sm:text-lg leading-relaxed font-sans" style={{ color: 'var(--text-muted)' }}>
+                    {featuredSample.excerpt}
+                  </p>
+
+                  {/* Key Editorial Takeaways */}
+                  <div className="space-y-3 pt-2">
+                    <div className="text-xs font-mono font-bold uppercase tracking-wider" style={{ color: 'var(--text-body)' }}>
+                      Core Frameworks Explored in the Article:
+                    </div>
+                    <ul className="space-y-2">
+                      {featuredSample.coreTakeaways.map((takeaway, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-sans" style={{ color: 'var(--text-muted)' }}>
+                          <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--accent-amber)' }} />
+                          <span>{takeaway}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Footer Action */}
+                <div className="pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4" style={{ borderColor: 'var(--border-card)' }}>
+                  <div className="text-xs font-mono font-bold" style={{ color: 'var(--accent-amber)' }}>
+                    {featuredSample.highlight}
+                  </div>
+                  <a
+                    href={featuredSample.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-mono font-bold uppercase tracking-wider transition-all hover:scale-105 active:scale-95 cursor-pointer border"
+                    style={{
+                      backgroundColor: 'var(--accent-amber)',
+                      borderColor: 'rgba(14,28,42,0.2)',
+                      color: '#0E1C2A',
+                    }}
+                  >
+                    <span>Read on StoryChief</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Right 5 Columns: Official Publication Cover */}
+              <div
+                className="lg:col-span-5 relative min-h-[300px] lg:min-h-full border-t lg:border-t-0 lg:border-l overflow-hidden flex items-center justify-center"
+                style={{
+                  borderColor: 'var(--border-card)',
+                  backgroundColor: 'var(--bg-page)',
+                }}
+              >
                 <img
                   src={featuredSample.image}
                   alt={featuredSample.title}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/70 via-transparent to-transparent" />
-                <span className="absolute top-4 left-4 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider bg-amber-500 text-black shadow-lg">
-                  ⭐ Featured Article
-                </span>
-              </div>
-
-              {/* Content half */}
-              <div className="md:col-span-6 p-8 lg:p-10 space-y-5">
-                <div className="flex items-center gap-3 flex-wrap text-xs">
-                  <span className="rounded-full px-2.5 py-0.5 font-bold uppercase border border-amber-500/30 text-amber-500 bg-amber-500/10">
-                    {featuredSample.type}
-                  </span>
-                  <span className="text-xs flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
-                    <Clock className="w-3.5 h-3.5 text-amber-500" />{featuredSample.readTime} read
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold leading-snug group-hover:text-amber-500 transition-colors" style={{ color: 'var(--text-body)' }}>
-                  {featuredSample.title}
-                </h3>
-
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  {featuredSample.excerpt}
-                </p>
-
-                <div className="pt-2 flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-500">{featuredSample.highlight}</span>
-                  <div className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold transition-all group-hover:scale-105" style={{ backgroundColor: '#f59e0b', color: '#0a0a0a' }}>
-                    Read Article <ExternalLink className="w-3.5 h-3.5" />
-                  </div>
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/75 text-white backdrop-blur-sm border border-white/20">
+                  Global Syndication
                 </div>
               </div>
             </div>
-          </motion.a>
-
-          {/* 5-Card Grid with Rich Cover Images */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {writingSamples.map((s, i) => <SampleCard key={s.id} sample={s} index={i} />)}
           </div>
-
-          {/* Herbvity archive expander */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border overflow-hidden"
-            style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-          >
-            <button
-              onClick={() => setShowArchive(v => !v)}
-              id="herbvity-archive-toggle"
-              className="w-full flex items-center justify-between px-6 py-5 text-left transition-colors hover:bg-white/3"
-              style={{ backgroundColor: 'var(--bg-surface)' }}
-            >
-              <div className="space-y-0.5">
-                <p className="text-sm font-bold" style={{ color: 'var(--text-body)' }}>
-                  + View all 19 published Herbvity articles
-                </p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                  Companion planting &amp; gardening guides — health &amp; wellness niche
-                </p>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="text-xs rounded-full px-2.5 py-1 font-bold" style={{ backgroundColor: 'rgba(16,185,129,0.15)', color: '#10b981' }}>
-                  19 articles
-                </span>
-                {showArchive ? <ChevronUp className="w-4 h-4 text-amber-500" /> : <ChevronDown className="w-4 h-4 text-amber-500" />}
-              </div>
-            </button>
-
-            <AnimatePresence>
-              {showArchive && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: 'easeInOut' }}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <div className="px-6 pb-6 pt-3 grid sm:grid-cols-2 gap-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-                    {herbvityArticles.map((a, i) => (
-                      <motion.a
-                        key={i}
-                        href={a.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.02 }}
-                        className="flex items-start gap-2.5 group py-2 px-3 rounded-lg hover:bg-white/5 transition-colors"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
-                        <span className="text-xs leading-snug group-hover:text-amber-500 transition-colors font-medium" style={{ color: 'var(--text-muted)' }}>
-                          {a.title}
-                        </span>
-                        <ExternalLink className="w-3 h-3 shrink-0 mt-0.5 text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </motion.a>
-                    ))}
-                  </div>
-                  <div className="px-6 pb-5">
-                    <a
-                      href="https://herbvity.com/author/Emmanuel-Odebiyi/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-                    >
-                      View full Herbvity archive <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
         </div>
       </section>
 
-      {/* ── EXPERTISE PILLARS ─────────────────────────────────────────────── */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto space-y-12">
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#f59e0b' }}>Expertise</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>What I do, precisely</h2>
+      {/* ── 04. BOTANICAL REPOSITORY: HERBVITY 19-ARTICLE TOPIC CLUSTER ───────── */}
+      <section className="py-20 px-6 border-b" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}>
+        <div className="max-w-7xl mx-auto space-y-10">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8 space-y-3 text-left">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--accent-teal)' }}>
+                PROGRAMMATIC TOPIC CLUSTER ARCHITECTURE
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                Herbvity Botanical SEO Repository
+              </h2>
+              <p className="text-base leading-relaxed max-w-2xl font-sans" style={{ color: 'var(--text-muted)' }}>
+                19 comprehensive companion planting and botanical medicine guides authored for Herbvity. Built as an interconnected topical mesh with zero cannibalization, capturing high-intent search volume across gardening and natural health queries.
+              </p>
+            </div>
+
+            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
+              <div className="p-4 rounded-xl border text-left" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+                <div className="flex items-center justify-between text-xs font-mono">
+                  <span style={{ color: 'var(--text-muted)' }}>Indexed Articles</span>
+                  <span className="font-bold" style={{ color: 'var(--accent-teal)' }}>19 of 19 Live</span>
+                </div>
+                <div className="w-full h-1.5 rounded-full mt-2 overflow-hidden bg-black/10 dark:bg-white/10">
+                  <div className="h-full rounded-full w-full" style={{ backgroundColor: 'var(--accent-teal)' }} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {pillars.map((pillar, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(245,158,11,0.1)' }}
-                className="rounded-2xl border p-7 space-y-5 transition-all cursor-default"
-                style={{ borderColor: 'rgba(245,158,11,0.2)', backgroundColor: 'rgba(245,158,11,0.04)' }}
+
+          {/* Interactive Search & Filter Controls */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-xl border"
+            style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+            <div className="relative flex-1">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                value={plantSearch}
+                onChange={e => setPlantSearch(e.target.value)}
+                placeholder="Search plants or herbs (e.g. roses, cilantro, bell peppers, basil)..."
+                className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-lg border outline-none font-sans"
+                style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-body)',
+                }}
+              />
+              {plantSearch && (
+                <button
+                  onClick={() => setPlantSearch('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-gray-400 hover:text-gray-600"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-medium" style={{ color: 'var(--text-muted)' }}>
+                Showing {filteredHerbvity.length} of 19 guides
+              </span>
+              <a
+                href="https://herbvity.com/author/Emmanuel-Odebiyi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider border hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                style={{
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--accent-teal)',
+                }}
               >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245,158,11,0.15)' }}>
-                  <pillar.icon className="w-6 h-6" style={{ color: '#f59e0b' }} />
+                <span>Author Archive</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
+          {/* Botanical Article Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {(isBotanicalExpanded ? filteredHerbvity : filteredHerbvity.slice(0, 9)).map((article, idx) => (
+              <a
+                key={idx}
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col justify-between p-4 rounded-xl border transition-all hover:border-[var(--accent-teal)] hover:shadow-sm text-left"
+                style={{
+                  backgroundColor: 'var(--bg-page)',
+                  borderColor: 'var(--border-card)',
+                }}
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-[10px] font-mono">
+                    <span className="px-2 py-0.5 rounded-md border" style={{ borderColor: 'var(--border-card)', color: 'var(--accent-teal)', backgroundColor: 'var(--bg-surface)' }}>
+                      {article.topic}
+                    </span>
+                    <span style={{ color: 'var(--text-muted)' }}>{article.count}</span>
+                  </div>
+                  <h4 className="text-sm font-bold font-sans line-clamp-2 group-hover:text-[var(--accent-teal)] transition-colors" style={{ color: 'var(--text-body)' }}>
+                    {article.title}
+                  </h4>
                 </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--text-body)' }}>{pillar.title}</h3>
-                  <p className="text-sm leading-relaxed font-medium" style={{ color: 'var(--text-muted)' }}>{pillar.description}</p>
+
+                <div className="pt-3 mt-3 border-t flex items-center justify-between text-[11px] font-mono" style={{ borderColor: 'var(--border-card)' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>herbvity.com</span>
+                  <span className="inline-flex items-center gap-1 font-bold group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--accent-teal)' }}>
+                    <span>Read Guide</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </span>
                 </div>
-                <ul className="space-y-2">
-                  {pillar.skills.map((s, j) => (
-                    <li key={j} className="flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
-                      <CheckCircle className="w-3.5 h-3.5 shrink-0 text-amber-500" />{s}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+              </a>
             ))}
           </div>
+
+          {/* Expander Toggle */}
+          {filteredHerbvity.length > 9 && (
+            <div className="text-center pt-2">
+              <button
+                onClick={() => setIsBotanicalExpanded(prev => !prev)}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border text-xs font-mono font-bold uppercase tracking-wider hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer"
+                style={{
+                  backgroundColor: 'var(--bg-page)',
+                  borderColor: 'var(--border-card)',
+                  color: 'var(--text-body)',
+                }}
+              >
+                <span>{isBotanicalExpanded ? 'Collapse Cluster' : `View All ${filteredHerbvity.length} Guides`}</span>
+                {isBotanicalExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ── RESULTS WALL ──────────────────────────────────────────────────── */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto space-y-12">
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#f59e0b' }}>Results</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
-              Real numbers.<br />No projections.
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {results.map((r, i) => {
-              const a = accentMap[r.accent] || accentMap.amber;
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -4 }}
-                  className={`rounded-2xl border p-7 space-y-6 transition-all ${a.border}`}
-                  style={{ backgroundColor: a.bg }}
+      {/* ── 05. CATALOG OF SELECTED WRITING PIECES ───────────────────────────── */}
+      <section id="catalog" className="py-20 px-6 border-b" style={{ borderColor: 'var(--border-card)' }}>
+        <div className="max-w-7xl mx-auto space-y-10">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+            <div className="space-y-3 text-left">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                PUBLISHED WRITING CATALOG
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                Selected Articles &amp; Case Studies
+              </h2>
+              <p className="text-sm font-sans max-w-xl" style={{ color: 'var(--text-muted)' }}>
+                Every sample below represents published work with verifiable organic performance, live links, or documented revenue attribution.
+              </p>
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl border"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
+              {(['All', 'B2B SaaS', 'Wellness & Botanical', 'Case Studies'] as CatalogCategory[]).map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                    activeCategory === cat
+                      ? 'border shadow-xs'
+                      : 'hover:text-[var(--text-body)]'
+                  }`}
+                  style={
+                    activeCategory === cat
+                      ? {
+                          backgroundColor: 'var(--accent-amber)',
+                          borderColor: 'rgba(14,28,42,0.2)',
+                          color: '#0E1C2A',
+                        }
+                      : { color: 'var(--text-muted)' }
+                  }
                 >
-                  <div className="flex items-center gap-2.5">
-                    <div className={`w-3 h-3 rounded-full ${a.dot}`} />
-                    <div>
-                      <p className="text-base font-bold" style={{ color: 'var(--text-body)' }}>{r.client}</p>
-                      <p className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>{r.industry}</p>
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Catalog Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredSamples.map((sample, idx) => (
+              <article
+                key={sample.id}
+                className="group flex flex-col justify-between rounded-2xl border overflow-hidden transition-all hover:border-[var(--accent-amber)] hover:shadow-lg text-left"
+                style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderColor: 'var(--border-card)',
+                }}
+              >
+                <div>
+                  {/* Article Cover Photo */}
+                  <div className="relative aspect-[16/10] overflow-hidden border-b" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-page)' }}>
+                    <img
+                      src={sample.image}
+                      alt={sample.title}
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-black/75 text-white backdrop-blur-xs border border-white/20">
+                      {sample.catalogNum}
+                    </div>
+                    <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-mono bg-black/60 text-white backdrop-blur-xs flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-[var(--accent-amber)]" />
+                      {sample.readTime}
                     </div>
                   </div>
-                  <div className="space-y-5">
-                    {r.metrics.map((m, j) => (
-                      <div key={j}>
-                        <p className={`text-3xl sm:text-4xl font-bold font-display tabular-nums ${a.text}`}>{m.value}</p>
-                        <p className="text-xs mt-0.5 font-medium" style={{ color: 'var(--text-muted)' }}>{m.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
-      {/* ── TESTIMONIALS WITH REAL PHOTO AVATARS ──────────────────────────── */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto space-y-12">
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#f59e0b' }}>Testimonials</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>What clients say</h2>
-          </div>
+                  {/* Body Content */}
+                  <div className="p-6 space-y-3">
+                    <div className="flex items-center justify-between text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+                      <span className="font-bold" style={{ color: 'var(--accent-amber)' }}>{sample.publication}</span>
+                      <span>{sample.industry}</span>
+                    </div>
 
-          {/* Featured testimonial */}
-          {testimonials.filter(t => t.featured).map((t, i) => (
-            <motion.blockquote
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="rounded-3xl p-8 lg:p-10 relative overflow-hidden"
-              style={{
-                background: 'linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(245,158,11,0.03) 100%)',
-                border: '1px solid rgba(245,158,11,0.3)',
-              }}
-            >
-              <div className="absolute top-6 right-8 text-8xl font-black pointer-events-none select-none opacity-10" style={{ color: '#f59e0b' }}>"</div>
-              <div className="relative space-y-6">
-                <Quote className="w-8 h-8 text-amber-500 opacity-60" />
-                <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed font-semibold" style={{ color: 'var(--text-body)' }}>
-                  "{t.quote}"
-                </p>
-                <div className="flex items-center gap-4 pt-2">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-amber-500/50 shadow-md"
-                  />
-                  <div>
-                    <p className="font-bold text-base" style={{ color: 'var(--text-body)' }}>{t.name}</p>
-                    <p className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>{t.role} · {t.company}</p>
+                    <h3 className="text-lg font-bold font-display leading-snug group-hover:text-[var(--accent-amber)] transition-colors" style={{ color: 'var(--text-body)' }}>
+                      {sample.title}
+                    </h3>
+
+                    <p className="text-xs leading-relaxed font-sans line-clamp-3" style={{ color: 'var(--text-muted)' }}>
+                      {sample.excerpt}
+                    </p>
+
+                    <div className="p-2.5 rounded-lg border text-[11px] font-mono" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                      <span className="font-bold text-[var(--text-body)]">Outcome:</span> {sample.proofPoint}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.blockquote>
-          ))}
 
-          {/* Grid of secondary testimonials with photo avatars */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {testimonials.filter(t => !t.featured).map((t, i) => (
-              <motion.blockquote
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * i }}
-                className="rounded-2xl border p-7 space-y-5 flex flex-col justify-between"
-                style={{ borderColor: 'rgba(245,158,11,0.15)', backgroundColor: 'var(--bg-surface)' }}
-              >
-                <div className="space-y-3">
-                  <Quote className="w-5 h-5 text-amber-500 opacity-40" />
-                  <p className="text-sm leading-relaxed font-medium" style={{ color: 'var(--text-body)' }}>"{t.quote}"</p>
+                {/* Footer Link */}
+                <div className="px-6 py-4 border-t flex items-center justify-between text-xs font-mono font-bold" style={{ borderColor: 'var(--border-card)' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>
+                    {sample.isInternal ? 'Documented System' : 'Indexed Article'}
+                  </span>
+                  {sample.isInternal ? (
+                    <Link
+                      to={sample.url}
+                      className="inline-flex items-center gap-1 text-[var(--accent-amber)] hover:underline"
+                    >
+                      <span>Read Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={sample.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[var(--accent-amber)] hover:underline"
+                    >
+                      <span>Read Publication</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                 </div>
-                <div className="flex items-center gap-3 pt-2">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-11 h-11 rounded-full object-cover border border-amber-500/40"
-                  />
-                  <div>
-                    <p className="text-sm font-bold" style={{ color: 'var(--text-body)' }}>{t.name}</p>
-                    <p className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>{t.role} · {t.company}</p>
-                  </div>
-                </div>
-              </motion.blockquote>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── SKILLS ────────────────────────────────────────────────────────── */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto space-y-10">
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#f59e0b' }}>Skills & Tools</p>
-            <h2 className="text-3xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>The craft and the tools</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: 'var(--text-muted)' }}>Content skills</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Long-form blog writing', 'Web copywriting', 'Case study writing', 'Email sequences', 'LinkedIn content', 'Content strategy', 'Editorial planning', 'Content briefs', 'Proofreading & editing', 'Topic cluster architecture'].map(s => (
-                  <span key={s} className="rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors hover:border-amber-500/40"
-                    style={{ borderColor: 'rgba(255,255,255,0.09)', backgroundColor: 'var(--bg-surface)', color: 'var(--text-muted)' }}>
-                    {s}
-                  </span>
-                ))}
+      {/* ── 06. EDITORIAL PHILOSOPHY & THE CRAFT ─────────────────────────────── */}
+      <section className="py-20 px-6 border-b" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)' }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left 5 Columns: Manifesto */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                THE WRITING PHILOSOPHY
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                The Invisible SEO Skeleton
+              </h2>
+              <div className="space-y-4 text-sm leading-relaxed font-sans" style={{ color: 'var(--text-muted)' }}>
+                <p>
+                  Most SEO content feels like a robotic checklist created for algorithms rather than humans. It bores the reader, damages brand equity, and inflates bounce rates.
+                </p>
+                <p>
+                  My approach embeds the technical SEO skeleton underneath natural, engaging prose. The reader experiences a clear, compelling story that answers their problem. Meanwhile, search engines discover comprehensive semantic entity coverage, structured schema, and deep topic authority.
+                </p>
+                <blockquote className="p-4 rounded-xl border-l-2 font-serif italic text-base"
+                  style={{
+                    backgroundColor: 'var(--bg-page)',
+                    borderLeftColor: 'var(--accent-amber)',
+                    color: 'var(--text-body)',
+                  }}
+                >
+                  "Rankings get visitors through the door. Convincing, authoritative writing turns them into customers."
+                </blockquote>
               </div>
             </div>
-            <div>
-              <h3 className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: 'var(--text-muted)' }}>SEO & research tools</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Semrush', 'Ahrefs', 'Surfer SEO', 'Frase', 'Google Search Console', 'Google Analytics 4', 'WordPress', 'Keyword research'].map(s => (
-                  <span key={s} className="rounded-full border px-3.5 py-1.5 text-xs font-semibold"
-                    style={{ borderColor: 'rgba(245,158,11,0.25)', backgroundColor: 'rgba(245,158,11,0.08)', color: '#f59e0b' }}>
-                    {s}
-                  </span>
-                ))}
-              </div>
+
+            {/* Right 7 Columns: Precision Pillars */}
+            <div className="lg:col-span-7 space-y-4">
+              {pillars.map((pillar, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-xl border text-left space-y-3"
+                  style={{
+                    backgroundColor: 'var(--bg-page)',
+                    borderColor: 'var(--border-card)',
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold" style={{ color: 'var(--accent-amber)' }}>
+                      {pillar.catalogNum} // SERVICE CORE
+                    </span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                      Production Ready
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold font-display" style={{ color: 'var(--text-body)' }}>
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm leading-relaxed font-sans" style={{ color: 'var(--text-muted)' }}>
+                    {pillar.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {pillar.deliverables.map((item, dIdx) => (
+                      <span
+                        key={dIdx}
+                        className="px-2.5 py-1 rounded-md text-[11px] font-mono border"
+                        style={{
+                          backgroundColor: 'var(--bg-surface)',
+                          borderColor: 'var(--border-card)',
+                          color: 'var(--text-body)',
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── FINAL CTA ─────────────────────────────────────────────────────── */}
-      <section className="py-28 px-6 relative overflow-hidden">
-        {/* Dark gradient background */}
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.12) 0%, transparent 50%, rgba(245,158,11,0.06) 100%)' }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 70%)' }}
-          aria-hidden="true"
-        />
-        <div className="absolute top-0 left-0 right-0 h-px pointer-events-none" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.3), transparent)' }} aria-hidden="true" />
-        <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} aria-hidden="true" />
-
-        <div className="relative max-w-2xl mx-auto text-center space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-5"
-          >
-            <p className="text-xs font-bold tracking-widest uppercase" style={{ color: '#f59e0b' }}>Ready to work?</p>
-            <h2 className="text-4xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
-              Let's build something
-              <br />
-              <span style={{ color: '#f59e0b' }}>worth reading.</span>
+      {/* ── 07. VERIFIED CLIENT TESTIMONIALS ─────────────────────────────────── */}
+      <section className="py-20 px-6 border-b" style={{ borderColor: 'var(--border-card)' }}>
+        <div className="max-w-7xl mx-auto space-y-12">
+          
+          <div className="space-y-2 text-left">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+              VERIFIED CLIENT OUTCOMES
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Proof From Editorial Leaders
             </h2>
-            <p className="text-base max-w-md mx-auto font-medium" style={{ color: 'var(--text-muted)' }}>
-              Currently open to senior content writing and SEO writing opportunities.
-              Remote. Global. Fast turnaround.
-            </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.12 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col justify-between p-8 rounded-2xl border text-left space-y-6"
+                style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderColor: 'var(--border-card)',
+                }}
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <Quote className="w-6 h-6 opacity-40" style={{ color: 'var(--accent-amber)' }} />
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold"
+                      style={{
+                        backgroundColor: 'rgba(201,123,10,0.12)',
+                        color: 'var(--accent-amber)',
+                      }}
+                    >
+                      {t.metric}
+                    </span>
+                  </div>
+                  <p className="text-sm leading-relaxed font-sans font-medium" style={{ color: 'var(--text-body)' }}>
+                    "{t.quote}"
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3.5 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="w-11 h-11 rounded-full object-cover border"
+                    style={{ borderColor: 'var(--border-card)' }}
+                    loading="lazy"
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold font-display" style={{ color: 'var(--text-body)' }}>
+                      {t.name}
+                    </span>
+                    <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+                      {t.role}, {t.company}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 08. FINAL COMMISSION CTA ─────────────────────────────────────────── */}
+      <section className="py-24 px-6 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)' }}>
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          
+          <div className="space-y-3">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+              AVAILABLE FOR NEW EDITORIAL PROJECTS
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Ready to Publish Content <br />
+              <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>
+                That Actually Moves the Needle?
+              </span>
+            </h2>
+            <p className="text-base font-sans max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              Open to senior content writing retainers, technical SaaS guides, and comprehensive SEO topic cluster architectures. Remote worldwide.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setShowModal(true)}
-              id="footer-send-brief-btn"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-bold transition-all hover:scale-105 active:scale-95"
-              style={{ backgroundColor: '#f59e0b', color: '#0a0a0a', boxShadow: '0 8px 32px rgba(245,158,11,0.4)' }}
+              id="footer-commission-btn"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-mono font-bold uppercase tracking-wider transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg border"
+              style={{
+                backgroundColor: 'var(--accent-amber)',
+                borderColor: 'rgba(14,28,42,0.2)',
+                color: '#0E1C2A',
+                boxShadow: '0 8px 30px rgba(201,123,10,0.3)',
+              }}
             >
-              Send me a brief <ArrowRight className="w-4 h-4" />
+              <span>Send Project Brief</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
+
             <Link
               to="/resume"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border px-8 py-4 text-sm font-bold transition-all hover:bg-white/5"
-              style={{ borderColor: 'rgba(255,255,255,0.15)', color: 'var(--text-body)' }}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border px-8 py-4 text-sm font-sans font-bold transition-all hover:bg-black/5 dark:hover:bg-white/5"
+              style={{
+                borderColor: 'var(--border-card)',
+                color: 'var(--text-body)',
+              }}
             >
-              View full resume <FileText className="w-4 h-4" />
+              <FileText className="w-4 h-4" />
+              <span>View Resume</span>
             </Link>
-          </motion.div>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-xs font-medium"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            Main site:{' '}
-            <Link to="/" className="text-amber-500 hover:underline transition-colors font-bold">
-              emmanuelodebiyi.name.ng
-            </Link>
-            {' · '}
-            <a href="mailto:emmanuel@emmanuelodebiyi.name.ng" className="text-amber-500 hover:underline transition-colors font-bold">
-              emmanuel@emmanuelodebiyi.name.ng
+          <div className="pt-4 text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+            <span>Direct contact: </span>
+            <a
+              href="mailto:emmanuel@emmanuel.name.ng"
+              className="font-bold underline transition-colors hover:text-[var(--accent-amber)]"
+              style={{ color: 'var(--text-body)' }}
+            >
+              emmanuel@emmanuel.name.ng
             </a>
-          </motion.p>
+          </div>
         </div>
       </section>
     </div>
