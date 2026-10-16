@@ -32,15 +32,15 @@ interface Tool {
 const tools: Tool[] = [
   {
     id: 'automation-radar',
-    name: 'Workday Bottleneck Finder™',
-    badge: 'OPERATIONAL TELEMETRY // RADAR',
+    name: 'Workflow Bottleneck Finder™',
+    badge: 'OPERATIONAL AUDIT',
     description: 'Diagnose team operations to pinpoint manual friction points and time sinks.',
     benefit: 'Reclaim up to 14+ hours of manual administrative tasks weekly.',
     icon: <Radar size={20} />,
     accent: 'var(--accent-teal)',
     path: '/tools/automation-radar',
     outcomes: ['Hours Lost Location Map', 'Task Friction Diagnostic'],
-    systemMetric: 'SCANNING ACTIVE // 14.5 HRS DEFICIT',
+    systemMetric: 'SCANNING ACTIVE • 14.5 HRS DEFICIT',
     renderMockup: () => (
       <div className="relative w-full h-40 rounded-xl border overflow-hidden flex items-center justify-center p-4" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         {/* Radar concentric rings */}
@@ -73,15 +73,15 @@ const tools: Tool[] = [
   },
   {
     id: 'autopilot-score',
-    name: 'Content Autopilot Readiness Score™',
-    badge: 'AUTONOMY INDEX // BENCHMARK',
-    description: 'Audit your current publishing workflow to evaluate autonomous scaling readiness.',
+    name: 'Business Freedom Calculator™',
+    badge: 'FOUNDER AUTONOMY SCORE',
+    description: 'Audit your current business operations to evaluate how smoothly you run without daily micromanagement.',
     benefit: 'Establish a clear, step-by-step autopilot roadmap for leadership.',
     icon: <Gauge size={20} />,
     accent: 'var(--cta-blue)',
     path: '/tools/autopilot-score',
     outcomes: ['Founder Freedom Index', 'Bottleneck Elimination Matrix'],
-    systemMetric: 'INDEX: 82.4% // LEVEL 3 AUTONOMOUS',
+    systemMetric: 'INDEX: 82.4% • LEVEL 3 AUTONOMOUS',
     renderMockup: () => (
       <div className="relative w-full h-40 rounded-xl border overflow-hidden flex flex-col items-center justify-center p-4 space-y-2" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <div className="flex items-center gap-2">
@@ -92,26 +92,26 @@ const tools: Tool[] = [
           <div className="h-full bg-[var(--cta-blue)] rounded-full w-[82%]" />
         </div>
         <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--text-muted)]">
-          FOUNDER TIME DECOUPLED // SYS-STABLE
+          FOUNDER TIME DECOUPLED • SYS-STABLE
         </span>
       </div>
     )
   },
   {
     id: 'roi-time-machine',
-    name: 'Time & Dollar Savings Predictor™',
-    badge: 'ROI MODEL // ANNUAL LEDGER',
+    name: 'Time & Cost Savings Calculator™',
+    badge: 'HOURS & DOLLARS SAVED',
     description: 'Calculate the exact operational hours and contractor capital saved via automation.',
     benefit: 'Map out 12 months of compounding time and dollar retention.',
     icon: <Timer size={20} />,
     accent: 'var(--accent-amber)',
     path: '/tools/roi-time-machine',
     outcomes: ['Hours Recaptured Forecast', 'Cash Savings Calculation'],
-    systemMetric: '+384% ROI // 56.5 DAYS SAVED/YR',
+    systemMetric: '+384% ROI • 56.5 DAYS SAVED/YR',
     renderMockup: () => (
       <div className="relative w-full h-40 rounded-xl border overflow-hidden flex flex-col justify-between p-4" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <div className="flex justify-between items-center text-[10px] font-mono">
-          <span className="text-[var(--text-muted)]">TEMPORAL PROJECTION</span>
+          <span className="text-[var(--text-muted)]">ANNUAL PROJECTION</span>
           <span className="font-bold text-[var(--accent-amber)]">+384% DELTA</span>
         </div>
         <div className="space-y-1.5">
@@ -132,15 +132,15 @@ const tools: Tool[] = [
   },
   {
     id: 'growth-simulator',
-    name: 'Revenue Scaling Planner™',
-    badge: 'REVENUE PROJECTION // 90 DAYS',
+    name: '12-Month Growth Forecaster™',
+    badge: '12-MONTH REVENUE MODEL',
     description: 'Model organic search and workflow scenarios to eliminate founder risk.',
     benefit: 'Forecast conversion milestones based on proven B2B benchmarks.',
     icon: <TrendingUp size={20} />,
     accent: 'var(--accent-teal)',
     path: '/tools/growth-simulator',
     outcomes: ['Compounding Growth Predictor', 'Resource Allocator Matrix'],
-    systemMetric: 'SCENARIO-B // $127K MODEL',
+    systemMetric: 'SCENARIO-B • $127K MODEL',
     renderMockup: () => (
       <div className="relative w-full h-40 rounded-xl border overflow-hidden flex flex-col justify-between p-4" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <div className="flex justify-between items-center text-[10px] font-mono">
@@ -177,10 +177,10 @@ export default function GrowthIntelligenceLab() {
 
       {/* Header — Raycast Instrument Aesthetics */}
       <section className="max-w-7xl mx-auto px-6 pt-28 md:pt-36 pb-12 border-b" style={{ borderColor: 'var(--border-card)' }}>
-        <div className="space-y-6 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-mono font-bold tracking-widest uppercase" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+        <div className="space-y-6 max-w-3xl mx-auto text-center flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-sans font-bold tracking-widest uppercase" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
             <Terminal size={14} className="text-[var(--accent-amber)]" />
-            INSTRUMENTATION // LAB BENCH
+            LAB INSTRUMENTS &amp; CALCULATORS
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.98] font-display" style={{ color: 'var(--text-body)' }}>
@@ -190,7 +190,7 @@ export default function GrowthIntelligenceLab() {
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl font-normal leading-relaxed text-[var(--text-muted)] font-sans">
+          <p className="text-lg md:text-xl font-normal leading-relaxed text-[var(--text-muted)] font-sans max-w-2xl">
             It is not about saving time. It is about never wasting it. Use these interactive instruments to audit bottlenecks, calculate automation ROI, and simulate scaling curves in minutes.
           </p>
         </div>

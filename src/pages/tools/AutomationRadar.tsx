@@ -320,7 +320,7 @@ export default function AutomationRadar() {
           body: JSON.stringify({
             name,
             email,
-            tool: 'Automation Radar',
+            tool: 'Workflow Bottleneck Finder',
             company: formData.companyName,
             industry: formData.industry === 'Others' ? formData.customIndustry : formData.industry,
             inputs: formData,
@@ -378,9 +378,9 @@ export default function AutomationRadar() {
   return (
     <div className="min-h-screen pt-32 pb-20 relative overflow-x-clip print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
-        title="Automation Radar | Emmanuel Odebiyi"
-        description="Map your current marketing stack, uncover hidden bottlenecks, and get a prioritized automation roadmap with ROI estimates for each opportunity."
-        keywords="automation radar, marketing bottleneck finder, operations audit tool, automation ROI estimator"
+        title="Workflow Bottleneck Finder | Emmanuel Odebiyi"
+        description="Scan your daily operations, uncover hidden bottlenecks, and get a prioritized roadmap with ROI estimates for each opportunity."
+        keywords="workflow bottleneck finder, operations audit tool, automation ROI estimator, task friction diagnostic"
       />
       {/* Dynamic Print Stylesheet */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -467,7 +467,7 @@ export default function AutomationRadar() {
         <div className="flex justify-between items-end">
           <div>
             <h2 className="text-xl font-bold tracking-tight">EMMANUEL ODEBIYI</h2>
-            <p className="text-xs uppercase tracking-wider text-slate-500">Growth Intelligence & Automation Roadmap</p>
+            <p className="text-xs uppercase tracking-wider text-slate-500">Growth Intelligence &amp; Automation Roadmap</p>
           </div>
           <div className="text-right text-xs font-mono">
             <p>radar.odebiyi.com</p>
@@ -483,20 +483,19 @@ export default function AutomationRadar() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-16 print-hide">
-          <div className="space-y-4 text-left">
-            <Link to="/growth-intelligence-lab" className="inline-flex items-center gap-2 transition-colors text-sm font-sans font-bold uppercase tracking-widest group border rounded-full px-4 py-1.5" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
-              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-              Back to Lab
-            </Link>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
-              Workday Bottleneck Finder<span style={{ color: 'var(--accent-teal)' }}>™</span>
-            </h1>
-            <p className="text-xl font-light max-w-2xl animate-none" style={{ color: 'var(--text-muted)' }}>
-              Scan your daily operations to pinpoint exactly what is slowing down your team and wasting hours.
-            </p>
-          </div>
+        {/* Header — Centered for visual poise */}
+        <div className="text-center space-y-4 mb-16 print-hide max-w-3xl mx-auto flex flex-col items-center">
+          <Link to="/growth-intelligence-lab" className="inline-flex items-center gap-2 transition-colors text-sm font-sans font-bold uppercase tracking-widest group border rounded-full px-4 py-1.5" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Lab
+          </Link>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight font-display" style={{ color: 'var(--text-body)' }}>
+            Workflow Bottleneck Finder<span style={{ color: 'var(--accent-teal)' }}>™</span>
+          </h1>
+          <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>
+            Scan your daily operations to pinpoint exactly what is slowing down your team and wasting hours.
+          </p>
+
           {step === 'results' && (
             <button 
               onClick={() => {
@@ -504,7 +503,7 @@ export default function AutomationRadar() {
                 setIsEmailUnlocked(false);
                 setShowSuccess(false);
               }}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl border text-sm font-bold transition-all cursor-pointer hover:brightness-110"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl border text-sm font-bold transition-all cursor-pointer hover:brightness-110 mt-4"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
             >
               <RefreshCcw size={18} />

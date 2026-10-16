@@ -515,11 +515,11 @@ export default function ContentWriterPortfolio() {
             {/* Left 7 Columns: Editorial Headline, Authority Proof & CTAs */}
             <div className="lg:col-span-7 space-y-8 text-left">
               
-              {/* Monospaced Archive Badge */}
+              {/* Editorial Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono font-bold uppercase tracking-wider"
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-sans font-bold uppercase tracking-wider"
                 style={{
                   backgroundColor: 'var(--bg-surface)',
                   borderColor: 'var(--border-card)',
@@ -527,7 +527,7 @@ export default function ContentWriterPortfolio() {
                 }}
               >
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
-                <span>INDEX // EDITORIAL WRITING &amp; TOPIC CLUSTERS</span>
+                <span>EDITORIAL WRITING &amp; TOPIC CLUSTERS</span>
               </motion.div>
 
               {/* Headline */}

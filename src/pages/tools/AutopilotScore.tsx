@@ -284,7 +284,7 @@ export default function AutopilotScore() {
           body: JSON.stringify({
             name,
             email,
-            tool: 'Autopilot Score',
+            tool: 'Business Freedom Calculator',
             company: formData.companyName,
             inputs: formData,
             results: {
@@ -553,7 +553,7 @@ export default function AutopilotScore() {
                   Back to Lab
                 </Link>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
-                  Business Autopilot <span style={{ color: 'var(--accent-blue)' }}>Scorecard™</span>
+                  Business Freedom <span style={{ color: 'var(--cta-blue)' }}>Calculator™</span>
                 </h1>
                 <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>
                   Find out exactly how close your business is to running smoothly and profitably without you or your daily intervention.

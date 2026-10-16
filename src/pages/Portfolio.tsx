@@ -136,70 +136,69 @@ export default function Portfolio() {
 
       {/* Hero Section — Works.studio / Linear Editorial Precision */}
       <section className="max-w-7xl mx-auto px-6 pt-28 md:pt-36 pb-12 relative z-10 border-b" style={{ borderColor: 'var(--border-card)' }}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
-          
-          {/* Main Statement (8 Columns) */}
-          <div className="lg:col-span-8 space-y-6">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-sans font-bold tracking-widest uppercase"
-              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
-              AUDITED CLIENT WORK // INDEX 2026
-            </div>
+        <div className="space-y-6 max-w-3xl mx-auto text-center flex flex-col items-center">
+          <div
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-sans font-bold tracking-widest uppercase"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+            AUDITED CLIENT CASE STUDIES
+          </div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.98] font-display" style={{ color: 'var(--text-body)' }}>
-              Documented Proof. <br />
-              <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>
-                Zero Estimates.
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.98] font-display" style={{ color: 'var(--text-body)' }}>
+            Documented Proof. <br />
+            <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>
+              Zero Estimates.
+            </span>
+          </h1>
+
+          <p className="text-lg md:text-xl font-normal leading-relaxed text-[var(--text-muted)] max-w-2xl font-sans">
+            Every system below was designed, deployed, and measured in production. Real numbers, real revenue attribution, verified by client dashboards.
+          </p>
+
+          {/* Quick Link to Writing Samples */}
+          <div className="pt-1">
+            <Link
+              to="/writing-portfolio"
+              className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-semibold transition-all duration-200 hover:border-[var(--accent-amber)]"
+              style={{
+                backgroundColor: 'var(--bg-surface)',
+                borderColor: 'var(--border-card)',
+                color: 'var(--text-body)'
+              }}
+            >
+              <FileText className="w-4 h-4 shrink-0 text-[var(--accent-amber)]" />
+              <span className="text-[var(--text-muted)]">Looking for editorial articles &amp; B2B thought leadership?</span>
+              <span className="font-bold underline underline-offset-4 text-[var(--accent-amber)] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                View Writing Portfolio <ArrowRight className="w-3.5 h-3.5" />
               </span>
-            </h1>
-
-            <p className="text-lg md:text-xl font-normal leading-relaxed text-[var(--text-muted)] max-w-2xl font-sans">
-              Every system below was designed, deployed, and measured in production. Real numbers, real revenue attribution, verified by client dashboards.
-            </p>
-
-            {/* Quick Link to Writing Samples */}
-            <div className="pt-2">
-              <Link
-                to="/writing-portfolio"
-                className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-semibold transition-all duration-200 hover:border-[var(--accent-amber)]"
-                style={{
-                  backgroundColor: 'var(--bg-surface)',
-                  borderColor: 'var(--border-card)',
-                  color: 'var(--text-body)'
-                }}
-              >
-                <FileText className="w-4 h-4 shrink-0 text-[var(--accent-amber)]" />
-                <span className="text-[var(--text-muted)]">Looking for editorial articles &amp; B2B thought leadership?</span>
-                <span className="font-bold underline underline-offset-4 text-[var(--accent-amber)] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                  View Writing Portfolio <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </Link>
-            </div>
+            </Link>
           </div>
+        </div>
 
-          {/* Quick Stats Ledger (4 Columns) */}
-          <div className="lg:col-span-4 flex flex-col justify-end space-y-3 pt-4 lg:pt-0">
-            <div 
-              className="border rounded-2xl p-6 space-y-3 shadow-sm"
-              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-            >
-              <div className="flex justify-between items-baseline border-b pb-2" style={{ borderColor: 'var(--border-card)' }}>
-                <span className="text-xs font-mono font-bold uppercase text-[var(--text-muted)]">CUMULATIVE REVENUE LINK</span>
-                <span className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>$2.4M+</span>
-              </div>
-              <div className="flex justify-between items-baseline border-b pb-2" style={{ borderColor: 'var(--border-card)' }}>
-                <span className="text-xs font-mono font-bold uppercase text-[var(--text-muted)]">FOUNDER HOURS RECAPTURED</span>
-                <span className="text-xl font-bold font-display text-[var(--accent-amber)]">70%+</span>
-              </div>
-              <div className="flex justify-between items-baseline">
-                <span className="text-xs font-mono font-bold uppercase text-[var(--text-muted)]">TOP-TIER CLIENT RETENTION</span>
-                <span className="text-xl font-bold font-display text-[var(--accent-teal)]">95%+</span>
-              </div>
-            </div>
+        {/* Quick Stats Ledger */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto w-full pt-10">
+          <div 
+            className="border rounded-2xl p-5 text-center shadow-sm space-y-1"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-2xl sm:text-3xl font-bold font-display block" style={{ color: 'var(--text-body)' }}>$2.4M+</span>
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--text-muted)]">Cumulative Revenue Linked</span>
           </div>
-
+          <div 
+            className="border rounded-2xl p-5 text-center shadow-sm space-y-1"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-2xl sm:text-3xl font-bold font-display text-[var(--accent-amber)] block">70%+</span>
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--text-muted)]">Founder Hours Recaptured</span>
+          </div>
+          <div 
+            className="border rounded-2xl p-5 text-center shadow-sm space-y-1"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-2xl sm:text-3xl font-bold font-display text-[var(--accent-teal)] block">95%+</span>
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--text-muted)]">Client Retention Rate</span>
+          </div>
         </div>
       </section>
 
@@ -248,7 +247,7 @@ export default function Portfolio() {
                   {/* Left Column (7 cols): Data & Story */}
                   <div className="lg:col-span-7 space-y-6">
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-sm font-bold text-[var(--accent-amber)]">01 // FEATURED SYSTEM</span>
+                      <span className="font-sans text-xs font-bold uppercase tracking-wider text-[var(--accent-amber)]">01 • FEATURED CASE STUDY</span>
                       <span className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">• SaaS / B2B Technology</span>
                     </div>
 
@@ -311,7 +310,7 @@ export default function Portfolio() {
                   {/* Visual Header */}
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-bold text-[var(--accent-amber)]">{project.number} // AUDIT</span>
+                      <span className="font-sans text-xs font-bold uppercase tracking-wider text-[var(--accent-amber)]">{project.number} • AUDIT BREAKDOWN</span>
                       <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[var(--text-muted)]">{project.industry}</span>
                     </div>
 
@@ -361,7 +360,7 @@ export default function Portfolio() {
       <section className="max-w-7xl mx-auto px-6 pb-24 border-t pt-16" style={{ borderColor: 'var(--border-card)' }}>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[var(--text-muted)]">TELEMETRY // FAST INTEGRATIONS</span>
+            <span className="font-sans text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">ACTIVE WORKFLOW ARCHITECTURES</span>
             <h2 className="text-3xl font-bold font-display tracking-tight mt-1" style={{ color: 'var(--text-body)' }}>
               Micro Systems &amp; Workflow Automations
             </h2>

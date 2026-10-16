@@ -105,7 +105,7 @@ export default function TermsOfService() {
               <h2 className="text-2xl font-bold tracking-tight font-sans" style={{ color: 'var(--text-body)' }}>2. Use of Site and Tools</h2>
               <div className="text-[var(--text-muted)] font-light text-base md:text-lg leading-relaxed space-y-4">
                 <p>
-                  All dynamic calculators, automation maps, and reports provided in the **Growth Intelligence Lab** are for strategic diagnostic and educational purposes only. They model projections based on generalized market benchmarks and my own operational results—they are not guaranteed financial predictions.
+                  All dynamic calculators, automation maps, and reports provided in the **Growth Intelligence Lab** (including the *Workflow Bottleneck Finder*, *Business Freedom Calculator*, *Time &amp; Cost Savings Calculator*, and *12-Month Growth Forecaster*) are for strategic diagnostic and educational purposes only. They model projections based on generalized market benchmarks and my own operational results—they are not guaranteed financial predictions.
                 </p>
                 <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-card)] space-y-3 mt-4">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] block font-bold">Usage Restrictions:</span>

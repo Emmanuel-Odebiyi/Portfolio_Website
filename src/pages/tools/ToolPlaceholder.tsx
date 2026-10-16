@@ -8,10 +8,10 @@ export default function ToolPlaceholder() {
   const { toolId } = useParams();
   
   const toolNames: Record<string, string> = {
-    'automation-radar': 'Automation Radar™',
-    'autopilot-score': 'Full Autopilot Score™',
-    'roi-time-machine': 'ROI Time Machine™',
-    'growth-simulator': 'Growth Simulator™'
+    'automation-radar': 'Workflow Bottleneck Finder™',
+    'autopilot-score': 'Business Freedom Calculator™',
+    'roi-time-machine': 'Time & Cost Savings Calculator™',
+    'growth-simulator': '12-Month Growth Forecaster™'
   };
 
   const name = toolNames[toolId || ''] || 'Interactive Tool';

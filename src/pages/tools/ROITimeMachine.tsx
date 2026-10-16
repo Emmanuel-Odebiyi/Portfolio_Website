@@ -223,7 +223,7 @@ export default function ROITimeMachine() {
           body: JSON.stringify({
             name,
             email,
-            tool: 'ROI Time Machine',
+            tool: 'Time & Cost Savings Calculator',
             inputs,
             results: {
               monthlySavings: results.monthlyAutomationSavings,
@@ -260,7 +260,7 @@ export default function ROITimeMachine() {
   return (
     <div className="pt-32 pb-20 bg-[var(--bg-page)] text-[var(--text-body)] min-h-screen relative overflow-x-clip transition-colors duration-300 print-area">
       <SEO 
-        title="Time & Dollar Savings Predictor | Emmanuel Odebiyi"
+        title="Time & Cost Savings Calculator | Emmanuel Odebiyi"
         description="Quantify exact hours and dollars you will reclaim by automating repetitive tasks. 12-month projections with breakeven analysis and industry benchmarks."
         keywords="ROI calculator, automation savings predictor, time savings estimator, operations cost reduction"
       />
@@ -382,7 +382,7 @@ export default function ROITimeMachine() {
             Savings Diagnostic
           </motion.div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
-            Time & Dollar <span className="text-amber-gradient font-bold">Savings Predictor™</span>
+            Time & Cost <span className="text-amber-gradient font-bold">Savings Calculator™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Quantify the exact hours and software expense you will reclaim by automating repetitive workday tasks.

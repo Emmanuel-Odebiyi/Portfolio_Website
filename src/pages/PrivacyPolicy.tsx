@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
               <h2 className="text-2xl font-bold tracking-tight font-sans" style={{ color: 'var(--text-body)' }}>1. Introduction</h2>
               <div className="text-[var(--text-muted)] font-light text-base md:text-lg leading-relaxed space-y-4">
                 <p>
-                  To put it as clearly as possible: **I value your privacy.** This privacy charter details exactly how I manage, secure, and review data whenever you interact with my sitemap, utilize my optimization tools, or submit details to obtain growth blue-printing models.
+                  To put it as clearly as possible: **I value your privacy.** This privacy charter details exactly how I manage, secure, and handle data whenever you interact with my website, utilize the interactive calculators in my **Growth Intelligence Lab** (including the *Workflow Bottleneck Finder*, *Business Freedom Calculator*, *Time &amp; Cost Savings Calculator*, and *12-Month Growth Forecaster*), or submit details to obtain growth roadmaps.
                 </p>
               </div>
             </section>

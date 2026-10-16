@@ -30,10 +30,10 @@ const navLinks = [
     href: '/growth-intelligence-lab',
     dropdown: [
       { name: 'Growth Intelligence Lab™', desc: 'Explore all interactive calculators & audits', href: '/growth-intelligence-lab', icon: <Microscope className="w-4 h-4" /> },
-      { name: 'Workday Bottleneck Finder™', desc: 'Pinpoint daily friction & reclaim hours', href: '/tools/automation-radar', icon: <Activity className="w-4 h-4" /> },
-      { name: 'Business Freedom Calculator™', desc: 'Benchmark your scaling independence', href: '/tools/autopilot-score', icon: <Calculator className="w-4 h-4" /> },
-      { name: 'Time & Dollar Savings Predictor™', desc: 'Reclaimed hours & cash returns forecast', href: '/tools/roi-time-machine', icon: <TrendingUp className="w-4 h-4" /> },
-      { name: 'Revenue Scaling Planner™', desc: 'Zero-risk future scaling forecaster', href: '/tools/growth-simulator', icon: <Cpu className="w-4 h-4" /> },
+      { name: 'Workflow Bottleneck Finder™', desc: 'Pinpoint manual friction & reclaim hours', href: '/tools/automation-radar', icon: <Activity className="w-4 h-4" /> },
+      { name: 'Business Freedom Calculator™', desc: 'Benchmark your operational independence', href: '/tools/autopilot-score', icon: <Calculator className="w-4 h-4" /> },
+      { name: 'Time & Cost Savings Calculator™', desc: 'Calculate exact hours & dollar returns', href: '/tools/roi-time-machine', icon: <TrendingUp className="w-4 h-4" /> },
+      { name: '12-Month Growth Forecaster™', desc: 'Project compounding traffic & revenue', href: '/tools/growth-simulator', icon: <Cpu className="w-4 h-4" /> },
     ]
   },
   { 

@@ -260,7 +260,7 @@ export default function GrowthSimulator() {
           name,
           email,
           company,
-          tool: 'Growth Simulator',
+          tool: '12-Month Growth Forecaster',
           inputs,
           gap: {
             revenue: gap.revenue,
@@ -288,9 +288,9 @@ export default function GrowthSimulator() {
   return (
     <div className="pt-32 pb-20 min-h-screen relative overflow-x-clip print-area" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
-        title="Revenue Scaling Planner | Emmanuel Odebiyi"
+        title="12-Month Growth Forecaster | Emmanuel Odebiyi"
         description="Model different growth scenarios to map the easiest path to scaling your revenue. Compare manual vs automated growth trajectories across 12 months."
-        keywords="revenue scaling planner, growth simulator, T2D3 growth model, automation ROI projections"
+        keywords="12-month growth forecaster, growth simulator, revenue model, automation ROI projections"
       />
       {/* Dynamic Print Stylesheet */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -400,7 +400,7 @@ export default function GrowthSimulator() {
             Back to Lab
           </Link>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display leading-[1.1] break-words" style={{ color: 'var(--text-body)' }}>
-            Revenue Scaling <span style={{ color: 'var(--accent-teal)' }}>Planner™</span>
+            12-Month Growth <span style={{ color: 'var(--accent-teal)' }}>Forecaster™</span>
           </h1>
           <p className="text-xl font-light max-w-2xl mx-auto animate-none" style={{ color: 'var(--text-muted)' }}>
             Model different growth scenarios to map the easiest path to scaling your revenue with zero guesswork.
