@@ -2,153 +2,106 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowLeft, ArrowRight, Bot, Cpu, Rocket, 
-  Terminal, ShieldAlert, Sparkles, Check, CheckCircle2, ChevronRight,
-  RefreshCw, Settings, Play, AlertCircle
+  Terminal, Sparkles, Check, CheckCircle2, ChevronRight,
+  TrendingUp, ShieldCheck, Database, Layers, Compass, Clock, Zap
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' as const } }
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' as const } }
 };
 
-export default function MyStory() {
-  // Simulator State
-  const [simMode, setSimMode] = useState<'burnout' | 'autopilot'>('burnout');
-  const [stressLevel, setStressLevel] = useState(40);
-  const [tasksDone, setTasksDone] = useState(0);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [sysLog, setSysLog] = useState<string[]>([]);
-  const [clickForce, setClickForce] = useState<{ id: number; x: number; y: number }[]>([]);
-  const [modesTried, setModesTried] = useState<{ burnout: boolean; autopilot: boolean }>({ burnout: false, autopilot: false });
+interface ComparisonRow {
+  aspect: string;
+  manual: string;
+  automated: string;
+}
 
-  // Skill Terminal State
+const comparisonLedger: ComparisonRow[] = [
+  {
+    aspect: 'Operating Model',
+    manual: 'Linear effort-to-output. Writing every paragraph, title, and metadata field manually. Trapped in time-for-money billing.',
+    automated: 'Modular pipeline architecture. Automated research scraping, structured prompt chaining, and direct CMS staging.'
+  },
+  {
+    aspect: 'Production Capacity',
+    manual: '4 to 6 long-form articles per month before severe creative fatigue and quality decline set in.',
+    automated: '40+ authoritative, multi-channel assets queued per month with zero degradation in editorial quality.'
+  },
+  {
+    aspect: 'Time Allocation',
+    manual: '55–65+ hours weekly on manual typing, repetitive formatting, image uploads, and admin overhead.',
+    automated: '4–6 hours weekly focused strictly on high-level editorial review, narrative tuning, and pipeline optimization.'
+  },
+  {
+    aspect: 'Quality & Governance',
+    manual: 'Erratic variance. Rushed deadlines cause missed typos, inconsistent brand voice, and shallow depth.',
+    automated: 'Strict multi-stage guardrails. Automated readability scoring, brand voice calibration, and fact-check validation.'
+  },
+  {
+    aspect: 'Business ROI',
+    manual: 'High client churn, unpredictable monthly retainers, and constant pricing friction against low-cost agencies.',
+    automated: 'Predictable 12+ month client retention with an audited 520% average ROI delivered across accounts.'
+  }
+];
+
+export default function MyStory() {
+  // Terminal state
   const [activeTab, setActiveTab] = useState<'seo' | 'ai' | 'automation'>('seo');
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
   const [isStreamingLog, setIsStreamingLog] = useState(false);
   const [isTerminalAutoCycling, setIsTerminalAutoCycling] = useState(true);
   const [terminalProgress, setTerminalProgress] = useState(0);
 
-  // Manual Click handler for Stressed Mode
-  const handleManualClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (simMode !== 'burnout') return;
-    
-    // Add floating task particle
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const id = Date.now();
-    setClickForce((prev) => [...prev, { id, x, y }]);
-    setTimeout(() => {
-      setClickForce((prev) => prev.filter((item) => item.id !== id));
-    }, 1000);
-
-    // Update Simulator values
-    setStressLevel((prev) => Math.min(prev + 8, 100));
-    setTasksDone((prev) => prev + 1);
-  };
-
-  // Autopilot generator runner
-  const startAutopilotSim = () => {
-    if (isGenerating) return;
-    setIsGenerating(true);
-    setTasksDone(0);
-    setSysLog([]);
-    
-    const logs = [
-      '⚡ [n8n]: Initializing content generation schedule...',
-      '🔍 [Semrush API]: Pulling top-ranking keywords for B2B SaaS...',
-      '📈 [Strategy]: Assembling topic cluster tree (5 subtopics)...',
-      '🤖 [OpenAI GPT-4o]: Drafting article drafts with verified brand voice...',
-      '📄 [Hemingway Editor]: Analyzing readability rating... OK',
-      '🎨 [SEO Checker]: Validating headers & metadata rules... PASS',
-      '🚀 [WordPress API]: Publishing draft post automatically...',
-      '✉️ [Make.com]: Cross-posting newsletter block to HubSpot...',
-      '🐦 [Buffer API]: Scheduling distribution triggers (LinkedIn & X)...',
-      '🎉 [Automation Hub]: Workflow completed. 40+ articles queued!'
-    ];
-
-    let currentLog = 0;
-    const interval = setInterval(() => {
-      if (currentLog < logs.length) {
-        setSysLog((prev) => [...prev, logs[currentLog]]);
-        setTasksDone((prev) => prev + 4);
-        currentLog++;
-      } else {
-        clearInterval(interval);
-        setIsGenerating(false);
-      }
-    }, 700);
-  };
-
-  // Skill Terminal Streams
   const runTerminalStream = (skillId: 'seo' | 'ai' | 'automation') => {
     setIsStreamingLog(true);
     setTerminalLogs([]);
 
     const streams = {
       seo: [
-        'Connecting to Google Search Console API...',
-        'Extracting raw query impression matrices...',
-        'Evaluating topic cluster index points...',
-        'Found competitor keyword gap: "B2B automation ROI frameworks" (KD: 24, SV: 1.2K/mo)',
-        'Recommended Action: Construct Pillar Page + 4 Child posts',
-        'Topical Authority Score increased by +12.4%'
+        'Connecting to Google Search Console API [Telemetry Endpoint]...',
+        'Extracting query impression matrices and cannibalization clusters...',
+        'Evaluating high-intent search gaps: "B2B automation ROI frameworks"...',
+        'Competitor SERP audit complete: 1,200/mo search volume (Keyword Difficulty: 24)',
+        'Synthesizing 1 Pillar Blueprint + 4 Supporting Semantic Cluster Nodes...',
+        'Status: Topical Authority score projected to increase +14.2% within 60 days.'
       ],
       ai: [
-        'Loading brand_voice_template.json (Persona: Editorial Tech Pro)...',
-        'Calling OpenAI Chat Completion [model: gpt-4o-2024-05-13]...',
-        'Streaming context layers and few-shot formatting tokens...',
-        'System prompt instruction applied: "Avoid corporate fluff. Prioritize active voice."',
-        'Running Editorial Quality Guard filters (Length check, cliché scan)...',
-        'Draft validated against brand voice standards: 100% MATCH'
+        'Loading brand_voice_taxonomy.json [Tone: Editorial Authority & Precision]...',
+        'Executing multi-pass prompt chain via OpenAI GPT-4o API...',
+        'Streaming domain context and negative prompt constraints (Zero Corporate Clichés)...',
+        'Running Editorial Quality Guard: Readability Target = Grade 8.2 (Hemingway Index)...',
+        'Passing through Brand Voice Validation Filters: 100% Parameter Match.',
+        'Status: High-authority draft generated with complete data citations.'
       ],
       automation: [
-        'n8n workflow trigger received: cron_daily_0900_GMT',
-        'Fetching unprocessed drafts from Airtable database...',
-        'Posting raw content chunk to custom microservice...',
-        'Tesseract OCR: extracting textual arrays from client slides... done',
-        'Broadcasting distribution payload to HubSpot & Make webhook...',
-        'Workflow execution complete (0 errors, execution time: 1.28s)'
+        'n8n orchestration workflow triggered: cron_daily_0900_GMT...',
+        'Ingesting validated draft payloads from Airtable Database...',
+        'Converting markdown structures to native CMS blocks (WordPress & Webflow REST API)...',
+        'Executing Tesseract OCR extraction on client technical diagrams... Complete.',
+        'Dispatching omnichannel syndication hooks to HubSpot, LinkedIn, and Email Subscribers...',
+        'Status: Pipeline execution finished in 1.42s (0 errors logged).'
       ]
     };
 
     let idx = 0;
     const interval = setInterval(() => {
       if (idx < streams[skillId].length) {
-        setTerminalLogs((prev) => [...prev, `> ${streams[skillId][idx]}`]);
+        setTerminalLogs((prev) => [...prev, streams[skillId][idx]]);
         idx++;
       } else {
         clearInterval(interval);
         setIsStreamingLog(false);
       }
-    }, 450);
+    }, 400);
   };
 
   useEffect(() => {
     runTerminalStream(activeTab);
   }, [activeTab]);
 
-  // Burnout stress dissipation
-  useEffect(() => {
-    if (simMode !== 'burnout') return;
-    const interval = setInterval(() => {
-      setStressLevel((prev) => Math.max(prev - 2, 20));
-    }, 1200);
-    return () => clearInterval(interval);
-  }, [simMode]);
-
-  // Update modesTried when tasks are completed
-  useEffect(() => {
-    if (simMode === 'burnout' && tasksDone > 0) {
-      setModesTried((prev) => ({ ...prev, burnout: true }));
-    } else if (simMode === 'autopilot' && tasksDone > 0) {
-      setModesTried((prev) => ({ ...prev, autopilot: true }));
-    }
-  }, [simMode, tasksDone]);
-
-  // Skill Terminal Auto-cycling
   useEffect(() => {
     if (!isTerminalAutoCycling) {
       setTerminalProgress(0);
@@ -174,696 +127,409 @@ export default function MyStory() {
     <div className="min-h-screen relative overflow-x-clip" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-body)' }}>
       <SEO 
         title="My Story | Emmanuel Odebiyi"
-        description="Discover how Emmanuel Odebiyi went from drowning in deadlines to building automated marketing engines that deliver 520% ROI on autopilot."
-        keywords="emmanuel odebiyi story, content marketing transformation, AI automation journey, burnout to systems architect"
+        description="From hitting the freelance ceiling to building automated marketing engines that deliver 520% ROI. The evolution of Emmanuel Odebiyi from manual copywriter to systems architect."
+        keywords="emmanuel odebiyi story, content marketing transformation, AI automation journey, systems architect, B2B content pipeline"
       />
 
       <div className="relative z-10 pt-32 pb-24 max-w-6xl mx-auto px-6">
         
-        {/* Back Navigation Tag */}
+        {/* Back Navigation */}
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>
           <Link 
             to="/about" 
-            className="inline-flex items-center gap-3 transition-colors mb-16 group font-sans font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full border backdrop-blur-md"
+            className="inline-flex items-center gap-2.5 transition-colors mb-16 group font-sans font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-xl border"
             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
           >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            Back to About
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+            Back to About Profile
           </Link>
         </motion.div>
         
-        {/* ── HERO: TRANSFORMATION ── */}
-        <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh] pt-8">
-
-          {/* LEFT: Story Hook */}
-          <div className="space-y-8 flex flex-col items-center text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border text-xs font-sans font-bold tracking-widest uppercase text-center"
-              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
-              The Origin Story
-            </motion.div>
-
-            <div className="flex flex-col items-center">
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] font-display text-center"
-                style={{ color: 'var(--text-body)' }}
-              >
-                The writer who got{' '}
-                <br />
-                <span className="italic font-medium animate-none" style={{ color: 'var(--accent-amber)' }}>
-                  tired of grinding.
-                </span>
-                <br />
-                So he built a{' '}
-                <span className="italic font-medium text-[var(--cta-blue)]">
-                  machine.
-                </span>
-              </motion.h1>
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.25 }}
-              className="text-lg sm:text-xl font-light leading-relaxed text-center"
-              style={{ color: 'var(--text-muted)' }}
-            >
-              I went from drowning in deadlines and losing clients to pricing pressure — 
-              to building automated marketing engines that deliver{' '}
-              <strong className="font-bold" style={{ color: 'var(--text-body)' }}>520% ROI on autopilot.</strong>
-              {' '}This is that story.
-            </motion.p>
-
-            {/* Transformation stat badges */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-wrap gap-3 justify-center"
-            >
-              {[
-                { val: '3 yrs', label: 'of building' },
-                { val: '520%', label: 'avg ROI delivered' },
-                { val: '0hrs', label: 'manual content work' },
-              ].map((b, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl border data-no-grayscale"
-                  style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-                >
-                  <span className="text-base font-bold" style={{ color: 'var(--text-body)' }}>{b.val}</span>
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest animate-none" style={{ color: 'var(--text-muted)' }}>{b.label}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.55 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base hover:brightness-110 shadow-2xl transition-all group"
-                style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
-              >
-                Work With Me
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/my-approach"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border text-base transition-all font-bold hover:brightness-110"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-              >
-                See My Methodology
-                <ChevronRight size={16} />
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* RIGHT: Transformation Identity Card */}
+        {/* ── HERO SECTION ── */}
+        <div className="mb-28 text-center max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: 60, scale: 0.92 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.2, ease: 'easeOut' }}
-            className="relative hidden lg:block"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-sans font-bold tracking-widest uppercase mb-8"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
           >
-            {/* Card container */}
-            <div className="relative rounded-[2rem] border backdrop-blur-xl shadow-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-
-              {/* Card top header */}
-              <div className="flex items-center gap-2 p-5 border-b" style={{ borderColor: 'var(--border-card)' }}>
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="ml-2 text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Emmanuel Odebiyi — Identity Log</span>
-              </div>
-
-              {/* Before / After toggle */}
-              <div className="p-6 space-y-5">
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('story-sim');
-                      if (el) el.setAttribute('data-mode', 'before');
-                      el?.querySelectorAll('[data-before]').forEach(e => (e as HTMLElement).style.display = 'flex');
-                      el?.querySelectorAll('[data-after]').forEach(e => (e as HTMLElement).style.display = 'none');
-                    }}
-                    className="flex-1 py-2.5 rounded-xl text-xs font-sans font-bold tracking-widest uppercase border transition-all"
-                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
-                  >
-                    ⚠ Before — 2021
-                  </button>
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('story-sim');
-                      if (el) el.setAttribute('data-mode', 'after');
-                      el?.querySelectorAll('[data-before]').forEach(e => (e as HTMLElement).style.display = 'none');
-                      el?.querySelectorAll('[data-after]').forEach(e => (e as HTMLElement).style.display = 'flex');
-                    }}
-                    className="flex-1 py-2.5 rounded-xl text-xs font-sans font-bold tracking-widest uppercase border transition-all"
-                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
-                  >
-                    ✦ After — 2025
-                  </button>
-                </div>
-
-                {/* State display */}
-                <div id="story-sim" className="space-y-3">
-                  {/* BEFORE stats */}
-                  {[
-                    { label: 'Stress Level', val: '94%', bar: 94, color: 'red', prefix: '🔥' },
-                    { label: 'Articles / mo (manual)', val: '4', bar: 10, color: 'orange', prefix: '✍' },
-                    { label: 'Revenue Predictability', val: '12%', bar: 12, color: 'red', prefix: '📉' },
-                  ].map((stat, i) => (
-                    <motion.div
-                      key={i}
-                      data-before
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 + i * 0.1, duration: 0.4 }}
-                      className="flex flex-col gap-1.5"
-                    >
-                      <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                        <span>{stat.prefix} {stat.label}</span>
-                        <span style={{ color: 'var(--accent-amber)' }}>{stat.val}</span>
-                      </div>
-                      <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${stat.bar}%` }}
-                          transition={{ delay: 0.9 + i * 0.1, duration: 0.8 }}
-                          className="h-full rounded-full"
-                          style={{ backgroundColor: 'var(--accent-amber)' }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {/* AFTER stats — hidden by default, shown via button */}
-                  {[
-                    { label: 'System Uptime', val: '99.9%', bar: 99, color: 'emerald', prefix: '⚡' },
-                    { label: 'Articles / mo (automated)', val: '40+', bar: 100, color: 'blue', prefix: '🤖' },
-                    { label: 'Client ROI Average', val: '520%', bar: 85, color: 'amber', prefix: '📈' },
-                  ].map((stat, i) => (
-                    <div
-                      key={i}
-                      data-after
-                      style={{ display: 'none' }}
-                      className="flex flex-col gap-1.5"
-                    >
-                      <div className="flex justify-between text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                        <span>{stat.prefix} {stat.label}</span>
-                        <span style={{ color: 'var(--accent-amber)' }}>{stat.val}</span>
-                      </div>
-                      <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
-                        <div
-                          className="h-full rounded-full"
-                          style={{ width: `${stat.bar}%`, backgroundColor: 'var(--accent-amber)' }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Journey progress bar */}
-                <div className="pt-2 space-y-2">
-                  <div className="flex justify-between text-[9px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                    <span>Burnout Writer</span>
-                    <span>Systems Architect</span>
-                  </div>
-                  <div className="h-2 rounded-full overflow-hidden relative" style={{ backgroundColor: 'var(--bg-page)' }}>
-                    <motion.div
-                      initial={{ width: '15%' }}
-                      animate={{ width: '88%' }}
-                      transition={{ delay: 1.2, duration: 1.5, ease: 'easeOut' }}
-                      className="h-full rounded-full"
-                      style={{ backgroundColor: 'var(--accent-amber)' }}
-                    />
-                  </div>
-                </div>
-
-                {/* Floating achievement pills */}
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {[
-                    { text: '520% ROI' },
-                    { text: 'n8n Certified' },
-                    { text: '40+ articles/mo' },
-                    { text: 'SEO Specialist' },
-                  ].map((badge, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.5, y: 10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ delay: 1.4 + i * 0.08, duration: 0.4 }}
-                      className="text-[9px] font-sans font-bold uppercase tracking-widest px-2.5 py-1 rounded-lg border"
-                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
-                    >
-                      ✦ {badge.text}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
+            The Origin & Evolution
           </motion.div>
 
-        </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] font-display mb-8"
+            style={{ color: 'var(--text-body)' }}
+          >
+            The writer who hit the wall. <br />
+            <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>
+              And engineered a way through.
+            </span>
+          </motion.h1>
 
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-lg sm:text-xl font-light leading-relaxed max-w-3xl mx-auto mb-10"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            I spent years trading hours for words — battling 2 AM deadlines, chasing invoices, and watching manual effort get overwhelmed by demand. Here is how I dismantled the freelance treadmill and built autonomous marketing pipelines that deliver <strong className="font-bold" style={{ color: 'var(--text-body)' }}>520% average client ROI</strong>.
+          </motion.p>
 
-        {/* ── INTERACTIVE SIMULATOR SECTION ── */}
-        <div className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Left Context Pane */}
-            <div className="lg:col-span-5 space-y-6 text-left">
-              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Experience Simulator</span>
-              <h3 className="text-3xl sm:text-4xl font-bold font-display tracking-tight text-left" style={{ color: 'var(--text-body)' }}>
-                Play the game. <br /> See the system.
-              </h3>
-              <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                Most content marketers burn out trying to keep up. I burned out too — and then I reverse-engineered why, and built something better.
-              </p>
-              <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                Growing businesses face a brutal contradiction: content marketing drives growth, but producing it consistently is expensive, time-consuming, and unsustainable.
-              </p>
+          {/* Quick Metrics Ribbon */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-12"
+          >
+            {[
+              { val: '3+ Years', label: 'Systems Engineering' },
+              { val: '520%', label: 'Audited Average ROI' },
+              { val: '0 Hours', label: 'Manual Repetition' },
+              { val: '40+ Pieces', label: 'Monthly Asset Output' }
+            ].map((stat, i) => (
               <div 
-                className="p-4 rounded-xl border font-bold text-base flex items-center gap-3"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-              >
-                <div 
-                  className="w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 font-bold"
-                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
-                >
-                  <Check size={18} />
-                </div>
-                <span>I solve that exact problem.</span>
-              </div>
-            </div>
-
-            {/* Right Simulator Card Box */}
-            <div className="lg:col-span-7">
-              <div 
-                className="rounded-[2rem] border overflow-hidden shadow-2xl p-6 sm:p-8 relative text-left"
+                key={i}
+                className="p-4 rounded-xl border text-center"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                {/* Purpose Statement */}
-                <p className="text-xs font-light text-center mb-4 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  Try both modes below to feel the difference between manual content marketing and automated systems.
-                </p>
-
-                {/* Simulator Mode Header Slider */}
-                <div 
-                  className="flex p-1.5 rounded-full mb-4 relative border"
-                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
-                >
-                  <button 
-                    onClick={() => { setSimMode('burnout'); setTasksDone(0); }}
-                    className="flex-1 py-3 rounded-full text-sm font-bold transition-all relative z-10 flex items-center justify-center gap-2"
-                    style={{
-                      backgroundColor: simMode === 'burnout' ? 'var(--text-body)' : 'transparent',
-                      color: simMode === 'burnout' ? 'var(--bg-page)' : 'var(--text-muted)'
-                    }}
-                  >
-                    <AlertCircle size={16} />
-                    Manual Burnout Hustle
-                  </button>
-                  <button 
-                    onClick={() => { setSimMode('autopilot'); setTasksDone(0); }}
-                    className="flex-1 py-3 rounded-full text-sm font-bold transition-all relative z-10 flex items-center justify-center gap-2"
-                    style={{
-                      backgroundColor: simMode === 'autopilot' ? 'var(--text-body)' : 'transparent',
-                      color: simMode === 'autopilot' ? 'var(--bg-page)' : 'var(--text-muted)'
-                    }}
-                  >
-                    <Sparkles size={16} />
-                    Autonomous Autopilot
-                  </button>
-                </div>
-
-                <div className="text-center mb-6">
-                  <span className="inline-block text-[10px] font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
-                    🎮 Choose a mode, then interact with it below
-                  </span>
-                </div>
-
-                {/* Simulator Display Screen */}
-                <AnimatePresence mode="wait">
-                  {simMode === 'burnout' ? (
-                    <motion.div
-                      key="burnout"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      className="space-y-6"
-                    >
-                      {/* Stress Level Meter */}
-                      <div 
-                        className="p-6 rounded-2xl border space-y-3 relative overflow-hidden"
-                        style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
-                      >
-                        <div className="flex justify-between items-center text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                          <span>Burnout Stress Capacity</span>
-                          <span style={{ color: 'var(--accent-amber)' }}>{stressLevel}%</span>
-                        </div>
-                        <div className="h-4 rounded-full overflow-hidden border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}>
-                          <motion.div 
-                            className="h-full" 
-                            style={{ backgroundColor: 'var(--accent-amber)' }}
-                            animate={{ width: `${stressLevel}%` }}
-                            transition={{ type: 'spring', stiffness: 80 }}
-                          />
-                        </div>
-                        {stressLevel > 75 && (
-                          <motion.p 
-                            animate={{ opacity: [0, 1, 0] }}
-                            transition={{ repeat: Infinity, duration: 1.5 }}
-                            className="text-xs font-sans font-bold uppercase tracking-widest flex items-center gap-2"
-                            style={{ color: 'var(--accent-amber)' }}
-                          >
-                            <ShieldAlert size={12} /> CRITICAL LEVEL! BURN-OUT INEVITABLE.
-                          </motion.p>
-                        )}
-                      </div>
-
-                      {/* Click sandbox */}
-                      <div 
-                        className="h-42 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden text-center p-4"
-                        style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
-                      >
-                        {stressLevel >= 100 ? (
-                          <div className="space-y-2">
-                            <span className="font-bold text-2xl tracking-tight block" style={{ color: 'var(--accent-amber)' }}>🔥 OVERLOAD COLLAPSE</span>
-                            <p className="text-xs font-light" style={{ color: 'var(--text-muted)' }}>Deadlines missed. Client retainers lost. Creative energy fully empty.</p>
-                            <button 
-                              onClick={() => { setStressLevel(40); setTasksDone(0); }}
-                              className="px-4 py-1.5 border rounded-lg text-xs font-sans font-bold uppercase tracking-widest transition-colors"
-                              style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-                            >
-                              Restart Career Loop
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="space-y-2">
-                            <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Active Manual Tasks Waiting</span>
-                            <span className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{tasksDone} / 40</span>
-                            <p className="text-xs font-light max-w-sm" style={{ color: 'var(--text-muted)' }}>Every draft is written manually. Press the button frantically to keep up!</p>
-                            <p className="text-[10px] font-bold tracking-wider text-[var(--accent-amber)] animate-pulse uppercase mt-1">
-                              👇 Click the button rapidly to simulate manual work — watch stress build
-                            </p>
-                          </div>
-                        )}
-
-                        {/* Floating task indicators */}
-                        {clickForce.map((item) => (
-                          <motion.span
-                            key={item.id}
-                            initial={{ opacity: 1, y: item.y, x: item.x, scale: 1 }}
-                            animate={{ opacity: 0, y: item.y - 60, scale: 0.7 }}
-                            transition={{ duration: 0.8 }}
-                            className="absolute font-sans text-xs font-bold uppercase tracking-widest pointer-events-none select-none"
-                            style={{ color: 'var(--accent-amber)' }}
-                          >
-                            📝 Write Draft (+8% Stress)
-                          </motion.span>
-                        ))}
-                      </div>
-
-                      {/* Execution triggers */}
-                      <button 
-                        onClick={handleManualClick}
-                        disabled={stressLevel >= 100}
-                        className="w-full py-4 rounded-xl font-bold text-base hover:brightness-110 shadow-lg active:scale-95 transition-all uppercase tracking-widest font-sans disabled:opacity-50"
-                        style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
-                      >
-                        <Play size={18} className="inline mr-2" />
-                        Manual Content Spin-up!
-                      </button>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="autopilot"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      className="space-y-6"
-                    >
-                      {/* Dashboard parameters */}
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="p-4 rounded-xl border text-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-                          <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Manual Effort</span>
-                          <span className="text-lg font-bold" style={{ color: 'var(--accent-amber)' }}>0%</span>
-                        </div>
-                        <div className="p-4 rounded-xl border text-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-                          <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>Articles Done</span>
-                          <span className="text-lg font-bold" style={{ color: 'var(--text-body)' }}>{tasksDone} / 40</span>
-                        </div>
-                        <div className="p-4 rounded-xl border text-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-                          <span className="text-[10px] font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>ROI Predictability</span>
-                          <span className="text-lg font-bold" style={{ color: 'var(--cta-blue)' }}>520%</span>
-                        </div>
-                      </div>
-
-                      {/* Log monitor screen */}
-                      <div 
-                        className="h-40 rounded-2xl border p-4 font-mono text-xs overflow-y-auto no-scrollbar space-y-1 text-left"
-                        style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-                      >
-                        {sysLog.length === 0 ? (
-                          <div className="text-zinc-500 flex flex-col items-center justify-center h-full text-center p-4">
-                            <Cpu className="mb-2 animate-spin" style={{ color: 'var(--accent-amber)', animationDuration: '4s' }} />
-                            <span style={{ color: 'var(--text-muted)' }}>System is Idle. Click "Launch Automation Engine" to watch the system work for you.</span>
-                          </div>
-                        ) : (
-                          sysLog.map((log, index) => (
-                            <motion.div 
-                              key={index}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              className="leading-relaxed border-l-2 pl-2 py-0.5"
-                              style={{ borderLeftColor: 'var(--border-card)', color: 'var(--text-body)' }}
-                            >
-                              {log}
-                            </motion.div>
-                          ))
-                        )}
-                      </div>
-
-                      {/* Autopilot trigger button */}
-                      <button 
-                        onClick={startAutopilotSim}
-                        disabled={isGenerating}
-                        className="w-full py-4 rounded-xl font-bold text-base hover:brightness-110 shadow-lg active:scale-95 transition-all uppercase tracking-widest font-sans disabled:opacity-50"
-                        style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
-                      >
-                        <RefreshCw size={18} className={`inline mr-2 ${isGenerating ? 'animate-spin' : ''}`} />
-                        Launch Automation Engine
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Comparison Summary */}
-                {modesTried.burnout && modesTried.autopilot && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-5 rounded-2xl border text-left mt-6 space-y-2"
-                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--accent-amber)' }}
-                  >
-                    <h4 className="font-bold text-xs uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--text-body)' }}>
-                      <CheckCircle2 size={14} style={{ color: 'var(--accent-teal)' }} />
-                      System Comparison Summary
-                    </h4>
-                    <p className="text-xs font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                      <span className="font-semibold" style={{ color: 'var(--text-body)' }}>Manual Hustle:</span> High stress (100% overload), low throughput, and high burnout risk. <br />
-                      <span className="font-semibold" style={{ color: 'var(--text-body)' }}>Autopilot:</span> Zero manual effort, 40+ articles queued, 0% stress, and 520% ROI velocity.
-                    </p>
-                  </motion.div>
-                )}
+                <div className="text-xl sm:text-2xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{stat.val}</div>
+                <div className="text-[10px] font-sans font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
               </div>
-            </div>
+            ))}
+          </motion.div>
 
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm hover:brightness-110 shadow-lg transition-all"
+              style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
+            >
+              Discuss Your Project
+              <ArrowRight size={16} />
+            </Link>
+            <Link
+              to="/my-approach"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border text-sm font-bold hover:brightness-110 transition-all"
+              style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
+            >
+              Inspect My Methodology
+              <ChevronRight size={16} />
+            </Link>
+          </motion.div>
         </div>
 
-        {/* ── SCROLL TIMELINE CHAPTERS ── */}
-        <div className="mb-32 space-y-28 relative">
-          {/* Timeline Center Line decorator */}
-          <div className="hidden md:block absolute left-10 top-0 w-px h-full z-0" style={{ backgroundColor: 'var(--border-card)' }} />
+        {/* ── BEFORE VS. AFTER COMPARISON LEDGER ── */}
+        <div className="mb-32">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-2" style={{ color: 'var(--text-muted)' }}>The Operational Shift</span>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Manual Grind vs. The Autonomous Engine
+            </h2>
+            <p className="text-sm font-light mt-2" style={{ color: 'var(--text-muted)' }}>
+              A side-by-side audit of how systemic automation transforms velocity, reliability, and business outcomes.
+            </p>
+          </div>
 
-          {/* Intro statement */}
           <div 
-            className="p-8 md:p-12 rounded-[2rem] border shadow-2xl relative z-10 text-left"
+            className="rounded-2xl border overflow-hidden shadow-xl"
             style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
-            <blockquote className="font-light leading-relaxed text-lg md:text-xl max-w-4xl" style={{ color: 'var(--text-body)' }}>
-              "I design and build automated marketing systems that deliver enterprise-level content output — without the enterprise price tag, the management overhead, or the constant scramble to keep things moving. <strong>Marketing that runs while you build. That's what I create.</strong>"
-            </blockquote>
+            {/* Table Header */}
+            <div 
+              className="grid grid-cols-1 md:grid-cols-12 border-b text-xs font-sans font-bold uppercase tracking-widest"
+              style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-page)' }}
+            >
+              <div className="p-4 md:col-span-3 text-left" style={{ color: 'var(--text-muted)' }}>Dimension</div>
+              <div className="p-4 md:col-span-4 text-left border-t md:border-t-0 md:border-l" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                Manual Freelance Hustle (2020–2022)
+              </div>
+              <div className="p-4 md:col-span-5 text-left border-t md:border-t-0 md:border-l" style={{ borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
+                ✦ Autonomous Production Engine (2023–Present)
+              </div>
+            </div>
+
+            {/* Table Rows */}
+            <div className="divide-y" style={{ borderColor: 'var(--border-card)' }}>
+              {comparisonLedger.map((row, idx) => (
+                <div 
+                  key={idx}
+                  className="grid grid-cols-1 md:grid-cols-12 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                >
+                  <div className="p-4 md:p-5 md:col-span-3 font-bold text-sm text-left flex items-center" style={{ color: 'var(--text-body)' }}>
+                    {row.aspect}
+                  </div>
+                  <div className="p-4 md:p-5 md:col-span-4 text-sm font-light text-left border-t md:border-t-0 md:border-l leading-relaxed" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                    {row.manual}
+                  </div>
+                  <div className="p-4 md:p-5 md:col-span-5 text-sm font-normal text-left border-t md:border-t-0 md:border-l leading-relaxed" style={{ borderColor: 'var(--border-card)', color: 'var(--text-body)' }}>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 size={16} className="shrink-0 mt-0.5 text-emerald-500" />
+                      <span>{row.automated}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Ledger Takeaway Footer */}
+            <div 
+              className="p-5 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+              style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+            >
+              <span className="font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                Result: 10x throughput with 90% less operational friction.
+              </span>
+              <span className="font-bold flex items-center gap-1.5" style={{ color: 'var(--accent-amber)' }}>
+                <TrendingUp size={14} /> Proven across B2B SaaS, Professional Services & Technical Content
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 4-CHAPTER NARRATIVE TIMELINE ── */}
+        <div className="mb-32 space-y-16">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-2" style={{ color: 'var(--text-muted)' }}>The Detailed Journey</span>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Four Chapters of Transformation
+            </h2>
+            <p className="text-sm font-light mt-2" style={{ color: 'var(--text-muted)' }}>
+              From structural cost estimation in Osogbo to enterprise marketing pipelines.
+            </p>
           </div>
 
-          {/* Chapter 1 */}
+          {/* Chapter 01 */}
           <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-            className="flex flex-col md:flex-row gap-8 md:gap-16 relative z-10 text-left"
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
-            <div className="shrink-0 flex md:justify-center">
-              <div 
-                className="w-20 h-20 rounded-2xl border flex items-center justify-center shadow-xl backdrop-blur-md"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
-              >
-                <Bot size={28} />
-              </div>
-            </div>
-            <div className="space-y-4 max-w-3xl">
-              <span className="text-xs font-sans font-bold uppercase tracking-widest text-zinc-500" style={{ color: 'var(--text-muted)' }}>Chapter 01 — The Hustle</span>
-              <h3 className="text-3xl font-bold font-display tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>
-                Where it started — falling in love with words and running into walls.
-              </h3>
-              <p className="text-lg font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                I fell in love with writing right after secondary school. The idea that words could connect brands with the right people, earn trust, and drive real business outcomes — that felt like something worth mastering.
-              </p>
-              <div 
-                className="border-l-4 pl-4 py-1 space-y-3 mt-4"
-                style={{ borderLeftColor: 'var(--accent-amber)', backgroundColor: 'var(--bg-surface-alt)' }}
-              >
-                <h5 className="font-sans font-bold uppercase text-xs tracking-widest" style={{ color: 'var(--accent-amber)' }}>The Hard Reality</h5>
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+              <div className="space-y-4 max-w-2xl">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-md border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
+                    Chapter 01
+                  </span>
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                    The Foundation & Osogbo
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                  Quantity Surveying & The Economics of Words
+                </h3>
                 <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  Budgets that didn't match the work. Clients who needed high volumes of content but couldn't afford the traditional way of getting it. Quality expectations that demanded more hours than were on the invoice. Constant deadline pressure with no sustainable system underneath any of it.
+                  My professional journey didn’t begin in an advertising agency. It began in classrooms studying Quantity Surveying and Construction Economics at Obafemi Awolowo University. In construction, there is zero tolerance for guesswork. Every foundation requires exact calculations: cost estimating, bill of quantities, structural stress tolerances, and material efficiency.
                 </p>
-                <span className="font-bold text-base block mt-2" style={{ color: 'var(--text-body)' }}>I was living the exact problem I now solve.</span>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  When I started writing professionally, I realized the broader creative marketing industry was treating content like romantic guesswork. Nobody was treating content as load-bearing structural material designed to support commercial pipeline weight. That analytical background became my unfair advantage.
+                </p>
               </div>
-            </div>
-          </motion.div>
 
-          {/* Chapter 2 */}
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-            className="flex flex-col md:flex-row gap-8 md:gap-16 relative z-10 text-left"
-          >
-            <div className="shrink-0 flex md:justify-center">
               <div 
-                className="w-20 h-20 rounded-2xl border flex items-center justify-center shadow-xl backdrop-blur-md"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
+                className="lg:w-80 p-6 rounded-xl border shrink-0 flex flex-col justify-between"
+                style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
               >
-                <Cpu size={28} />
-              </div>
-            </div>
-            <div className="space-y-4 max-w-3xl">
-              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>Chapter 02 — The Observation</span>
-              <h3 className="text-3xl font-bold font-display tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>
-                The pattern I couldn't ignore.
-              </h3>
-              <p className="text-lg font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                As more projects came in, something became impossible to miss:
-              </p>
-              <div 
-                className="p-6 rounded-2xl border grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-              >
-                {[
-                  { label: 'Freelancers', val: 'were unreliable' },
-                  { label: 'Agencies', val: 'were out of budget' },
-                  { label: 'In-House Teams', val: 'burned out the best people' },
-                  { label: 'DIY Approach', val: 'meant it never got done' }
-                ].map((item) => (
-                  <div key={item.label} className="flex gap-3 items-center">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
-                    <span className="text-sm font-light" style={{ color: 'var(--text-muted)' }}>
-                      <strong className="font-bold" style={{ color: 'var(--text-body)' }}>{item.label}</strong> {item.val}
-                    </span>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                    <Compass size={14} /> Core Realization
                   </div>
-                ))}
-              </div>
-              <div 
-                className="p-4 rounded-xl border font-bold mt-4 text-base"
-                style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-              >
-                The problem wasn't effort. The problem was that no one had built a real system.
+                  <blockquote className="text-sm font-medium italic leading-snug" style={{ color: 'var(--text-body)' }}>
+                    "Words connect ideas to capital. But without an engineered foundation, even the most poetic copy collapses under market pressure."
+                  </blockquote>
+                </div>
+                <div className="mt-6 pt-4 border-t text-[10px] font-sans font-bold uppercase tracking-widest" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                  Discipline: Structural Cost Economics
+                </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Chapter 3 */}
+          {/* Chapter 02 */}
           <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
-            className="flex flex-col md:flex-row gap-8 md:gap-16 relative z-10 text-left"
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
-            <div className="shrink-0 flex md:justify-center">
-              <div 
-                className="w-20 h-20 rounded-2xl border flex items-center justify-center shadow-xl backdrop-blur-md"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
-              >
-                <Rocket size={28} />
-              </div>
-            </div>
-            <div className="space-y-4 max-w-3xl">
-              <span className="text-xs font-sans font-bold uppercase tracking-widest text-zinc-500" style={{ color: 'var(--text-muted)' }}>Chapter 03 — The Pivot</span>
-              <h3 className="text-3xl font-bold font-display tracking-tight leading-snug" style={{ color: 'var(--text-body)' }}>
-                The turning point — when I stopped fearing AI and started building with it.
-              </h3>
-              <p className="text-lg font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                When AI tools emerged, most content writers panicked. <strong className="font-bold" style={{ color: 'var(--text-body)' }}>I saw an opportunity.</strong>
-              </p>
-              <div 
-                className="p-6 rounded-2xl border backdrop-blur-sm relative overflow-hidden mt-4"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-              >
-                <h5 className="font-bold text-base mb-2" style={{ color: 'var(--text-body)' }}>The Golden Question:</h5>
-                <p className="font-light italic leading-relaxed text-base" style={{ color: 'var(--text-muted)' }}>
-                  "What if you could combine AI's speed and scale with human strategy, brand understanding, and systematic processes? What if you could build something that actually ran — reliably, consistently, without constant babysitting?"
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+              <div className="space-y-4 max-w-2xl">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-md border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
+                    Chapter 02
+                  </span>
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                    2020 – 2022
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                  The Freelance Ceiling & The 2:00 AM Crisis
+                </h3>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  By 2021, I was writing for tech startups and B2B SaaS firms around the world. On paper, it was working: my client list was growing, and demand was high. In reality, I was drowning. Writing 40,000 to 50,000 words each month by hand meant 14-hour workdays, staring at blank Google Docs at 2:00 AM, battling creative exhaustion, and sacrificing weekends.
                 </p>
-                <span className="font-bold block mt-4 text-sm font-sans tracking-widest uppercase" style={{ color: 'var(--accent-amber)' }}>That question changed everything.</span>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  When clients asked for more volume to support rapid product launches, I had to say no. When I charged higher rates to match the time required, I met friction against low-cost offshore agencies. I hit the inescapable physical ceiling of manual labor: <em>you cannot scale a business when you are the single point of failure.</em>
+                </p>
+              </div>
+
+              <div 
+                className="lg:w-80 p-6 rounded-xl border shrink-0 flex flex-col justify-between"
+                style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                    <Clock size={14} /> The Bottleneck
+                  </div>
+                  <blockquote className="text-sm font-medium italic leading-snug" style={{ color: 'var(--text-body)' }}>
+                    "Effort has a hard biological limit. If your growth depends solely on typing faster, you have built a cage, not a business."
+                  </blockquote>
+                </div>
+                <div className="mt-6 pt-4 border-t text-[10px] font-sans font-bold uppercase tracking-widest" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                  Friction: The 24-Hour Physical Ceiling
+                </div>
               </div>
             </div>
           </motion.div>
 
+          {/* Chapter 03 */}
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+              <div className="space-y-4 max-w-2xl">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-md border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
+                    Chapter 03
+                  </span>
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                    November 2022 – 2023
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                  The Automation Epiphany: Reverse-Engineering AI
+                </h3>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  When large language models erupted into the mainstream in late 2022, freelance writers responded with either existential dread or lazy complacency. Most simply used generic prompts like "write me a 1,000-word blog post," flooding the web with robotic, cliché-ridden fluff that sounded like every other SaaS landing page.
+                </p>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  I saw a fundamentally different opportunity. The model was not the final product; it was merely the raw electrical current. To harness it, you needed an industrial pipeline. I invested heavily in mastering n8n workflow orchestration, Python scripting, REST APIs, Semrush data extraction, and multi-tier prompt chaining. I created automated guardrails that audited tone, banned corporate jargon, verified data points, and preserved human brand nuance at scale.
+                </p>
+              </div>
+
+              <div 
+                className="lg:w-80 p-6 rounded-xl border shrink-0 flex flex-col justify-between"
+                style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                    <Zap size={14} /> The Paradigm Shift
+                  </div>
+                  <blockquote className="text-sm font-medium italic leading-snug" style={{ color: 'var(--text-body)' }}>
+                    "I didn't need software that typed faster. I needed an autonomous factory that operated reliably while I focused on strategy."
+                  </blockquote>
+                </div>
+                <div className="mt-6 pt-4 border-t text-[10px] font-sans font-bold uppercase tracking-widest" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                  Stack: n8n, Python, OpenAI, Webhooks
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Chapter 04 */}
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+            className="p-8 sm:p-12 rounded-2xl border shadow-xl relative overflow-hidden text-left"
+            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+              <div className="space-y-4 max-w-2xl">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-md border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
+                    Chapter 04
+                  </span>
+                  <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                    Present Day
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                  The Systems Architect: 520% ROI & Closed-Loop Attribution
+                </h3>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  Today, I no longer sell one-off articles or hours on a clock. I partner with growth-minded founders, technology executives, and high-impact brands as a Marketing Systems Architect. I build custom Growth Intelligence Labs that connect search intent discovery directly to automated production, publishing, and analytics attribution.
+                </p>
+                <p className="font-light text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  Our results speak for themselves: client campaigns consistently generate 50% to 65% organic traffic expansion in under 90 days, reclaiming 15+ hours of leadership time every week, while delivering an audited 520% average ROI. Marketing is no longer an unpredictable expense — it is an automated, self-sustaining revenue engine.
+                </p>
+              </div>
+
+              <div 
+                className="lg:w-80 p-6 rounded-xl border shrink-0 flex flex-col justify-between"
+                style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                    <ShieldCheck size={14} /> The Result
+                  </div>
+                  <blockquote className="text-sm font-medium italic leading-snug" style={{ color: 'var(--text-body)' }}>
+                    "Content marketing is no longer a cost center or a manual grind. It is an engineered revenue asset that compounds over time."
+                  </blockquote>
+                </div>
+                <div className="mt-6 pt-4 border-t text-[10px] font-sans font-bold uppercase tracking-widest" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                  Outcome: Autonomous Growth Infrastructure
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         {/* ── TECHNICAL MASTERY TERMINAL ── */}
         <div className="mb-32">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 text-left"
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 text-left"
           >
             <div>
-              <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-3" style={{ color: 'var(--text-muted)' }}>Skill Engine</span>
-              <h3 className="text-3xl md:text-4xl font-bold font-display tracking-tight text-left" style={{ color: 'var(--text-body)' }}>Three years of building — so you don't have to.</h3>
+              <span className="text-xs font-sans font-bold uppercase tracking-widest block mb-2" style={{ color: 'var(--text-muted)' }}>Architectural Telemetry</span>
+              <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                Under the Hood: The Engine in Motion
+              </h2>
             </div>
-            <p className="font-light max-w-md text-left" style={{ color: 'var(--text-muted)' }}>
-              I spent three years mastering the exact disciplines that make autonomous content marketing engines possible. Select a track below to run trace.
+            <p className="font-light max-w-md text-left text-sm" style={{ color: 'var(--text-muted)' }}>
+              Explore the real-time execution traces powering my autonomous marketing systems across search intelligence, prompt engineering, and pipeline automation.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             
-            {/* Left selector keys */}
+            {/* Left selector buttons */}
             <div className="lg:col-span-4 flex flex-col gap-3 justify-center text-left">
               <div 
-                className="flex items-center gap-2 mb-2 px-4 py-2 rounded-xl border text-xs font-sans font-bold uppercase tracking-widest w-fit"
+                className="flex items-center gap-2 mb-1 px-3.5 py-1.5 rounded-lg border text-xs font-sans font-bold uppercase tracking-widest w-fit"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
               >
                 <Sparkles size={12} className={isTerminalAutoCycling ? "animate-spin" : ""} style={{ animationDuration: '4s' }} />
-                <span>{isTerminalAutoCycling ? "Auto-Running Traces" : "Manual Exploration"}</span>
+                <span>{isTerminalAutoCycling ? "Telemetry Stream Active" : "Interactive Inspection"}</span>
               </div>
-              <p className="text-[10.5px] font-sans font-bold uppercase tracking-widest mb-2 ml-1" style={{ color: 'var(--text-muted)' }}>
-                Watch each skill in action — or click to explore manually
+              <p className="text-[10px] font-sans font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)' }}>
+                Select a discipline to inspect its live execution stream:
               </p>
               {[
-                { id: 'seo', title: 'SEO Expertise Core', desc: 'Making content discoverable & ranking.' },
-                { id: 'ai', title: 'AI Implementation Core', desc: 'Configuring prompt logic & quality gates.' },
-                { id: 'automation', title: 'Process Automation Core', desc: 'Orchestrating microservice ecosystems.' }
+                { id: 'seo', num: '01', title: 'SEO & SERP Cluster Engine', desc: 'Google Search Console, keyword gap matrices, and topical maps.' },
+                { id: 'ai', num: '02', title: 'AI Brand Voice & Quality Gates', desc: 'Context layering, Hemingway scoring, and zero-cliché guardrails.' },
+                { id: 'automation', num: '03', title: 'Pipeline Orchestration Engine', desc: 'n8n microservices, Airtable database sync, and CMS staging.' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -871,26 +537,20 @@ export default function MyStory() {
                     setActiveTab(tab.id as any);
                     setIsTerminalAutoCycling(false);
                   }}
-                  className="w-full text-left p-5 rounded-2xl transition-all duration-300 border group relative overflow-hidden"
+                  className="w-full text-left p-4 rounded-xl transition-all duration-200 border group relative overflow-hidden"
                   style={{
                     backgroundColor: activeTab === tab.id ? 'var(--bg-surface)' : 'var(--bg-page)',
                     borderColor: activeTab === tab.id ? 'var(--text-body)' : 'var(--border-card)',
                     color: activeTab === tab.id ? 'var(--text-body)' : 'var(--text-muted)'
                   }}
                 >
-                  <span className="text-[10px] font-sans font-bold block mb-1 uppercase tracking-widest opacity-60">0{tab.id === 'seo' ? '1' : tab.id === 'ai' ? '2' : '3'} // Node</span>
-                  <div className="flex-1 pr-6">
-                    <h4 className="text-lg font-bold tracking-tight" style={{ color: 'var(--text-body)' }}>{tab.title}</h4>
+                  <span className="text-[10px] font-sans font-bold block mb-1 uppercase tracking-widest opacity-60">
+                    Module {tab.num}
+                  </span>
+                  <div className="flex-1 pr-4">
+                    <h4 className="text-base font-bold tracking-tight" style={{ color: 'var(--text-body)' }}>{tab.title}</h4>
                     <p className="text-xs font-light mt-1" style={{ color: 'var(--text-muted)' }}>{tab.desc}</p>
                   </div>
-                  {activeTab !== tab.id && (
-                    <div 
-                      className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none flex items-center gap-1 text-[10px] font-sans font-bold uppercase tracking-widest"
-                      style={{ color: 'var(--accent-amber)' }}
-                    >
-                      Run <ArrowRight size={10} />
-                    </div>
-                  )}
                   {activeTab === tab.id && isTerminalAutoCycling && (
                     <div className="absolute bottom-0 left-0 h-1 bg-[var(--accent-amber)] transition-all duration-100" style={{ width: `${terminalProgress}%` }} />
                   )}
@@ -901,31 +561,33 @@ export default function MyStory() {
             {/* Right code trace sandbox */}
             <div className="lg:col-span-8">
               <div 
-                className="rounded-[2rem] border shadow-2xl p-6 sm:p-8 flex flex-col h-full justify-between font-mono relative overflow-hidden"
+                className="rounded-2xl border shadow-xl p-6 flex flex-col h-full justify-between font-mono relative overflow-hidden"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
                 {/* Embedded Terminal Frame Header */}
-                <div className="flex items-center justify-between border-b pb-4 mb-6" style={{ borderColor: 'var(--border-card)' }}>
+                <div className="flex items-center justify-between border-b pb-3 mb-4" style={{ borderColor: 'var(--border-card)' }}>
                   <div className="flex items-center gap-2">
-                    <span className="w-3.5 h-3.5 rounded-full bg-red-500/80" />
-                    <span className="w-3.5 h-3.5 rounded-full bg-amber-500/80" />
-                    <span className="w-3.5 h-3.5 rounded-full bg-emerald-500/80" />
+                    <span className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+                    <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>developer@emmanuel.io:~</span>
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                    pipeline-daemon // emmanuel.architecture.local
+                  </span>
                 </div>
 
                 {/* Stream Output */}
-                <div className="space-y-2 min-h-48 text-sm text-left flex flex-col justify-start">
+                <div className="space-y-2 min-h-48 text-xs text-left flex flex-col justify-start">
                   <AnimatePresence>
                     {terminalLogs.map((log, index) => (
                       <motion.div 
                         key={index}
-                        initial={{ opacity: 0, y: 5 }}
+                        initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className={log.includes('FAIL') || log.includes('error') ? 'text-red-400 font-bold' : log.includes('PASS') || log.includes('100%') ? 'text-emerald-500 font-bold' : 'text-zinc-300'}
-                        style={{ color: (log.includes('FAIL') || log.includes('error')) ? '' : (log.includes('PASS') || log.includes('100%')) ? '' : 'var(--text-body)' }}
+                        className={log.includes('100%') || log.includes('Complete') || log.includes('projected') ? 'text-emerald-500 font-bold' : 'text-zinc-300'}
+                        style={{ color: (log.includes('100%') || log.includes('Complete') || log.includes('projected')) ? '' : 'var(--text-body)' }}
                       >
-                        {log}
+                        <span className="text-zinc-500 mr-2">&gt;</span>{log}
                       </motion.div>
                     ))}
                   </AnimatePresence>
@@ -933,31 +595,23 @@ export default function MyStory() {
                     <motion.span 
                       animate={{ opacity: [1, 0, 1] }} 
                       transition={{ repeat: Infinity, duration: 0.8 }}
-                      className="inline-block w-2.5 h-4 mt-1" 
+                      className="inline-block w-2 h-3.5 mt-1" 
                       style={{ backgroundColor: 'var(--text-muted)' }}
                     />
                   )}
                 </div>
 
-                {/* Explanatory text block beneath sandbox */}
-                <div className="border-t pt-6 mt-6" style={{ borderColor: 'var(--border-card)' }}>
-                  <AnimatePresence mode="wait">
-                    {activeTab === 'seo' && (
-                      <motion.div key="seo" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="font-sans text-sm font-light text-left leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
-                        <strong className="font-bold" style={{ color: 'var(--text-body)' }}>SEO Expertise:</strong> Keyword research, on-page optimization, topic cluster architecture, and SERP analysis. Making sure content doesn't just exist — it ranks, hooks readers, and drives authority.
-                      </motion.div>
-                    )}
-                    {activeTab === 'ai' && (
-                      <motion.div key="ai" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="font-sans text-sm font-light text-left leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
-                        <strong className="font-bold" style={{ color: 'var(--text-body)' }}>AI Implementation:</strong> Prompt engineering, API orchestrations, automated editorial workflows, and brand voice validation gates. Scale output 10x without compromising brand standards.
-                      </motion.div>
-                    )}
-                    {activeTab === 'automation' && (
-                      <motion.div key="automation" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="font-sans text-sm font-light text-left leading-relaxed animate-none" style={{ color: 'var(--text-muted)' }}>
-                        <strong className="font-bold" style={{ color: 'var(--text-body)' }}>Business Process Automation:</strong> Constructing reliable cross-app pipelines using n8n, Zapier, Make, custom Python scripts, and REST APIs. Systems that operate like clockwork.
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                {/* Explanatory footer */}
+                <div className="border-t pt-4 mt-4 font-sans text-xs font-light text-left leading-relaxed" style={{ borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
+                  {activeTab === 'seo' && (
+                    <div><strong className="font-bold" style={{ color: 'var(--text-body)' }}>Search Engine Intelligence:</strong> We systematically identify commercial-intent queries with high business value, eliminating random guesswork through structural topical mapping.</div>
+                  )}
+                  {activeTab === 'ai' && (
+                    <div><strong className="font-bold" style={{ color: 'var(--text-body)' }}>Editorial Quality Guardrails:</strong> Every AI-generated asset is constrained by strict multi-step prompt chains, readability indexes, and human review gates to protect brand trust.</div>
+                  )}
+                  {activeTab === 'automation' && (
+                    <div><strong className="font-bold" style={{ color: 'var(--text-body)' }}>Autonomous Pipeline Infrastructure:</strong> Connecting data stores to CMS deployments with zero manual copy-pasting, reducing distribution cycle time by over 90%.</div>
+                  )}
                 </div>
 
               </div>
@@ -966,96 +620,41 @@ export default function MyStory() {
           </div>
         </div>
 
-        {/* ── TODAY'S MISSION & RESULTS BLOCK ── */}
-        <div className="mb-32">
-          <div 
-            className="rounded-[2.5rem] border p-8 md:p-16 relative overflow-hidden shadow-2xl"
-            style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              {/* Mission text */}
-              <div className="lg:col-span-6 space-y-6 text-left">
-                <span className="text-xs font-sans font-bold uppercase tracking-widest block" style={{ color: 'var(--text-muted)' }}>The Objective</span>
-                <h3 className="text-4xl md:text-5xl font-bold font-display tracking-tight leading-tight text-left" style={{ color: 'var(--text-body)' }}>
-                  Today — on a <br /> clear mission.
-                </h3>
-                <p className="font-light leading-relaxed text-base sm:text-lg" style={{ color: 'var(--text-muted)' }}>
-                  I'm giving growing businesses access to the kind of marketing infrastructure that used to be reserved for companies with million-dollar budgets.
-                </p>
-                <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  These aren't projections. They're what I've delivered — for real businesses, with measurable results.
-                </p>
-                <div 
-                  className="p-4 rounded-xl border font-bold text-base"
-                  style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
-                >
-                  Your marketing should run while you build. That's what I create.
-                </div>
-              </div>
-
-              {/* Big Counters Dashboard */}
-              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                  { val: '520%', label: 'Average ROI', desc: 'delivered per system' },
-                  { val: '65%', label: 'Traffic Growth', desc: 'achieved within 90 days' },
-                  { val: '70%', label: 'Time Savings', desc: 'reclaimed weekly' }
-                ].map((stat, idx) => (
-                  <motion.div
-                    key={stat.label}
-                    initial="hidden" whileInView="visible" viewport={{ once: true }}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0, transition: { delay: idx * 0.1, duration: 0.5 } }
-                    }}
-                    className="p-6 rounded-2xl border flex flex-col justify-between text-center"
-                    style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
-                  >
-                    <span className="text-3xl font-bold font-display" style={{ color: 'var(--text-body)' }}>{stat.val}</span>
-                    <div className="mt-4">
-                      <strong className="text-sm font-bold block tracking-tight" style={{ color: 'var(--text-body)' }}>{stat.label}</strong>
-                      <span className="text-[10px] font-light mt-1 block" style={{ color: 'var(--text-muted)' }}>{stat.desc}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        {/* Premium Dual CTA block */}
+        {/* ── CTA PORTAL BLOCK ── */}
         <motion.div 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-          className="relative rounded-[2.5rem] p-12 md:p-16 border overflow-hidden shadow-2xl text-left"
-          style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}
+          className="rounded-2xl p-10 md:p-14 border shadow-xl text-left"
+          style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
         >
-          <div className="relative z-10 max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div className="flex-1 space-y-4 text-center lg:text-left">
-              <h3 className="text-3xl sm:text-5xl font-bold font-display tracking-tight leading-tight" style={{ color: 'var(--text-body)' }}>
-                Ready to Stop Burning Out?
+          <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
+            <div className="space-y-3 text-center lg:text-left">
+              <span className="text-xs font-sans font-bold uppercase tracking-widest" style={{ color: 'var(--accent-amber)' }}>
+                Next Step
+              </span>
+              <h3 className="text-3xl sm:text-4xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+                Ready to replace manual grind with scalable architecture?
               </h3>
-              <p className="text-lg font-light max-w-xl" style={{ color: 'var(--text-muted)' }}>
-                Let's discuss how we can build a scalable marketing autopilot engine customized for your product or brand.
+              <p className="text-base font-light max-w-xl" style={{ color: 'var(--text-muted)' }}>
+                Let’s analyze your current content production bottlenecks and build an autonomous engine tailored to your team.
               </p>
             </div>
 
-            <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center w-full lg:w-auto">
               <Link 
-                to="/resume"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4.5 rounded-2xl font-bold hover:brightness-110 transition-all text-center group border"
+                to="/my-approach"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border text-sm font-bold hover:brightness-110 transition-all text-center"
                 style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-body)' }}
               >
-                View Detailed Resume
+                Inspect Methodology
+                <ChevronRight size={16} />
               </Link>
-
               <Link 
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4.5 rounded-2xl font-bold hover:brightness-110 shadow-lg transition-all text-center group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm hover:brightness-110 shadow-lg transition-all text-center"
                 style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
               >
-                Book a Free Call
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                Schedule Architecture Call
+                <ArrowRight size={16} />
               </Link>
             </div>
           </div>
