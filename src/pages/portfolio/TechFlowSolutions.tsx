@@ -386,10 +386,12 @@ export default function TechFlowSolutions() {
 
               <div className="space-y-4">
                 <div className="flex justify-between items-center text-sm font-sans font-bold" style={{ color: 'var(--text-muted)' }}>
-                  <span>Target Monthly Output</span>
+                  <label htmlFor="target-monthly-output">Target Monthly Output</label>
                   <span style={{ color: 'var(--text-body)' }}>{articlesCount} Articles</span>
                 </div>
                 <input 
+                  id="target-monthly-output"
+                  aria-label="Target Monthly Output"
                   type="range" 
                   min="8" 
                   max="100" 

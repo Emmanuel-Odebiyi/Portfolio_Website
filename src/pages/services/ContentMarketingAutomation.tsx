@@ -19,8 +19,8 @@ const stagger = {
 };
 
 const PIPELINE_STEPS = [
-  { id: 1, label: 'Keyword & Audience Research', color: 'indigo', desc: 'We audit your market landscape, identify high-intent search clusters, and map content to your buyer journey stages.' },
-  { id: 2, label: 'Editorial Calendar Build', color: 'purple', desc: 'A 90-day, pre-populated content roadmap with titles, angles, keyword targets, and distribution channels for every piece.' },
+  { id: 1, label: 'Keyword & Audience Research', color: 'sky', desc: 'We audit your market landscape, identify high-intent search clusters, and map content to your buyer journey stages.' },
+  { id: 2, label: 'Editorial Calendar Build', color: 'cyan', desc: 'A 90-day, pre-populated content roadmap with titles, angles, keyword targets, and distribution channels for every piece.' },
   { id: 3, label: 'AI Brand-Voice Writing', color: 'blue', desc: 'Each piece is generated through a custom AI pipeline — tuned to your tone, reviewed for accuracy, and polished to publication standard.' },
   { id: 4, label: 'Quality Control Review', color: 'teal', desc: 'Every article passes a structured editorial review checklist before it leaves the system. No filler. No generic output.' },
   { id: 5, label: 'Automated Multi-Channel Distribution', color: 'emerald', desc: 'Content is published to blog, LinkedIn, email, and social automatically — on schedule, without manual intervention.' },

@@ -18,10 +18,10 @@ const stagger = {
 
 const WORKFLOW_STEPS = [
   { id: 1, label: 'Workflow Audit & Process Mapping', color: 'amber', icon: <Activity size={18} />, desc: 'We document every repeatable manual task your team performs — email handling, data entry, report generation, follow-ups — and map them into an automation blueprint.', saves: '2–4 hrs/task' },
-  { id: 2, label: 'Custom Automation Design', color: 'purple', icon: <Settings size={18} />, desc: 'Using n8n, Zapier, or Make.com, I design the exact automation logic that replaces each manual workflow — tested, documented, and built to your specific stack.', saves: '0 manual steps' },
+  { id: 2, label: 'Custom Automation Design', color: 'cyan', icon: <Settings size={18} />, desc: 'Using n8n, Zapier, or Make.com, I design the exact automation logic that replaces each manual workflow — tested, documented, and built to your specific stack.', saves: '0 manual steps' },
   { id: 3, label: 'Tool & Platform Integration', color: 'blue', icon: <Database size={18} />, desc: 'Your CRM, email platform, spreadsheets, project management tools, and databases are all wired together. No more copy-pasting between tabs.', saves: '100% sync' },
   { id: 4, label: 'Automated Reporting & Tracking', color: 'teal', icon: <Activity size={18} />, desc: 'Reports that used to take hours now generate automatically and land in your inbox on schedule. Real-time dashboards replace manual data pulls.', saves: '5–10 hrs/week' },
-  { id: 5, label: 'Documentation & Team Training', color: 'indigo', icon: <CheckCircle2 size={18} />, desc: 'Every automation is documented with clear instructions. Your team gets a short walkthrough so they can manage and adapt the system confidently.', saves: 'Full self-sufficiency' },
+  { id: 5, label: 'Documentation & Team Training', color: 'sky', icon: <CheckCircle2 size={18} />, desc: 'Every automation is documented with clear instructions. Your team gets a short walkthrough so they can manage and adapt the system confidently.', saves: 'Full self-sufficiency' },
   { id: 6, label: 'Ongoing Optimization & Support', color: 'emerald', icon: <RefreshCw size={18} />, desc: 'As your business evolves, so does your automation stack. I monitor for errors, add new workflows, and optimize performance on an ongoing basis.', saves: 'Continuous ROI' },
 ];
 

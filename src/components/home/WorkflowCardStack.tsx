@@ -41,7 +41,7 @@ const CARDS: Card[] = [
 
 const BADGE: Record<Card['platform'], { label: string; color: string; bg: string }> = {
   n8n:    { label: 'n8n',    color: '#ff6d3a', bg: 'rgba(255,109,58,0.15)' },
-  make:   { label: 'Make',   color: '#a78bfa', bg: 'rgba(167,139,250,0.15)' },
+  make:   { label: 'Make',   color: '#0ea5e9', bg: 'rgba(14,165,233,0.15)' },
   zapier: { label: 'Zapier', color: '#f97316', bg: 'rgba(249,115,22,0.15)' },
 };
 

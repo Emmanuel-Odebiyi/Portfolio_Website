@@ -55,9 +55,9 @@ const SOLUTIONS: Solution[] = [
     subtitle: 'Your voice, preserved.',
     description:
       'It sounds like you wrote it. The entire system is custom-built around your unique tone, expertise, and audience — so your differentiation is never erased.',
-    bgColor: '#F0E5FF',
-    accentColor: '#8b5cf6',
-    textColor: '#2e1065',
+    bgColor: '#E0F2FE',
+    accentColor: '#0284c7',
+    textColor: '#0c4a6e',
     Icon: Cpu,
   },
   {

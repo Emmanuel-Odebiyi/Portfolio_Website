@@ -137,7 +137,7 @@ const PROBLEMS: Problem[] = [
     detail: "Your brand voice? Gone. Your differentiation? Erased. Your audience can tell — and they're clicking away.",
     icon: Bot,
     animationPath: '/animation/ai-tools.json',
-    accentColor: '#8b5cf6',
+    accentColor: '#0ea5e9',
   },
   {
     id: 4,
