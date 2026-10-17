@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { motion, AnimatePresence, useInView } from 'motion/react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   ArrowRight, FileText, Globe, Target, ExternalLink, Quote,
   CheckCircle, X, Send, Loader2, PenTool, BookOpen, ChevronDown,

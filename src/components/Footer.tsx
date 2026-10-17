@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Twitter, Linkedin, Instagram, Mail, ArrowRight } from 'lucide-react';
 import logo from '../assets/logo.svg';

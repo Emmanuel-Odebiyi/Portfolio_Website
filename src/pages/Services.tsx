@@ -54,7 +54,7 @@ export default function Services() {
   const faqs = [
     {
       question: "How quickly will I see results?",
-      answer: "Most clients see measurable improvements in content output and traffic within the first 60 days. SEO results typically compound over 3–6 months — the earlier we start, the faster the gains."
+      answer: "Most clients see measurable improvements in content output and traffic within the first 60 days. SEO results typically compound over 3–6 months: the earlier we start, the faster the gains."
     },
     {
       question: "Do you work with businesses outside Nigeria?",
@@ -62,11 +62,11 @@ export default function Services() {
     },
     {
       question: "What size business is this right for?",
-      answer: "I work best with growing businesses — typically SMBs and mid-market companies that have validated their offer but haven't yet built a scalable marketing system."
+      answer: "I work best with growing businesses: typically SMBs and mid-market companies that have validated their offer but haven't yet built a scalable marketing system."
     },
     {
       question: "Will the content actually sound like me?",
-      answer: "Yes. Before building anything, I conduct a brand voice audit. Every piece of content goes through quality review to ensure it reflects your tone, language, and positioning — not generic AI output."
+      answer: "Yes. Before building anything, I conduct a brand voice audit. Every piece of content goes through quality review to ensure it reflects your tone, language, and positioning, not generic AI output."
     },
     {
       question: "What if I already have some systems in place?",
@@ -87,7 +87,7 @@ export default function Services() {
 
       <div className="relative z-10 pt-28 md:pt-32 pb-16 md:pb-24 max-w-7xl mx-auto px-6">
 
-        {/* ── Page Header — Centered ── */}
+        {/* Page Header: Centered */}
         <div className="mb-16 md:mb-24 border-b pb-12 flex flex-col items-center text-center" style={{ borderColor: 'var(--border-card)' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -483,7 +483,7 @@ export default function Services() {
                       <div className="space-y-3 border-t pt-6" style={{ borderColor: 'var(--border-card)' }}>
                         <h4 className="font-bold text-sm" style={{ color: 'var(--text-body)' }}>What's included:</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-light" style={{ color: 'var(--text-muted)' }}>
-                          {['Full content strategy & editorial calendar', 'AI-assisted content creation — brand tuned', 'Automated publishing workflow (8–40+ posts)', 'Blog, LinkedIn, Email multi-distribution'].map((item) => (
+                          {['Full content strategy & editorial calendar', 'AI-assisted content creation (brand tuned)', 'Automated publishing workflow (8–40+ posts)', 'Blog, LinkedIn, Email multi-distribution'].map((item) => (
                             <div key={item} className="flex items-center gap-2.5">
                               <CheckCircle2 size={14} style={{ color: 'var(--accent-teal)' }} className="shrink-0" />
                               <span>{item}</span>
@@ -492,7 +492,7 @@ export default function Services() {
                         </div>
                       </div>
                       <div className="p-4 rounded-xl border font-bold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--accent-amber) 8%, transparent)', color: 'var(--text-body)' }}>
-                        Result: Your audience sees you everywhere, every week — without you writing a single word.
+                        Result: Your audience sees you everywhere, every week, without you writing a single word.
                       </div>
                       <Link to="/services/content-marketing-automation" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all hover:brightness-110" style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}>
                         Build my content engine <ArrowRight size={16} />
@@ -508,7 +508,7 @@ export default function Services() {
                         <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>It's architecture.</span>
                       </h3>
                       <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                        You can publish great content and still get zero traffic. SEO is what determines whether your content gets found — or gets buried. I build SEO strategies from the foundation up.
+                        You can publish great content and still get zero traffic. SEO is what determines whether your content gets found or gets buried. I build SEO strategies from the foundation up.
                       </p>
                       <div className="p-4 rounded-xl border grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs font-sans font-semibold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)' }}>
                         {['1. Keyword gap scan', '2. Topic cluster layout', '3. Technical audit sync'].map((step, i) => (
@@ -529,7 +529,7 @@ export default function Services() {
                         </div>
                       </div>
                       <div className="p-4 rounded-xl border font-bold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--cta-blue) 8%, transparent)', color: 'var(--text-body)' }}>
-                        Result: Content that doesn't just exist — it ranks, gets clicked, and brings in the right traffic.
+                        Result: Content that does not just exist: it ranks, gets clicked, and brings in the right traffic.
                       </div>
                       <Link to="/services/seo-strategy-optimization" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all hover:brightness-110" style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}>
                         Build my SEO foundation <ArrowRight size={16} />
@@ -545,7 +545,7 @@ export default function Services() {
                         <span className="italic font-medium" style={{ color: 'var(--accent-amber)' }}>are hours you're not growing.</span>
                       </h3>
                       <p className="font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                        Marketing isn't the only place where manual, repetitive work is stealing your time. Most growing businesses have entire workflows that could — and should — be automated.
+                        Marketing isn't the only place where manual, repetitive work is stealing your time. Most growing businesses have entire workflows that could, and should, be automated.
                       </p>
                       <div className="p-4 rounded-xl border grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs font-sans font-semibold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface-alt)' }}>
                         {['1. Task audit map', '2. n8n/Zapier build', '3. API sync & launch'].map((step, i) => (
@@ -566,7 +566,7 @@ export default function Services() {
                         </div>
                       </div>
                       <div className="p-4 rounded-xl border font-bold" style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--accent-teal) 8%, transparent)', color: 'var(--text-body)' }}>
-                        Result: Reclaim 10–20 hours per week — so your team can focus on building, not administrating.
+                        Result: Reclaim 10–20 hours per week so your team can focus on building, not administrating.
                       </div>
                       <Link to="/services/business-process-automation" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all hover:brightness-110" style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}>
                         Automate my business <ArrowRight size={16} />
@@ -721,7 +721,7 @@ export default function Services() {
                 Not sure which service is right for you?
               </h2>
               <p className="text-lg font-light max-w-xl" style={{ color: 'var(--text-muted)' }}>
-                Let's figure it out together. Book a free 30-minute call and I'll tell you exactly what I'd build — and what results to expect.
+                Let's figure it out together. Book a free 30-minute call and I'll tell you exactly what I'd build, and what results to expect.
               </p>
             </div>
 

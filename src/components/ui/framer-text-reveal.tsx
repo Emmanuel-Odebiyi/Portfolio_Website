@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, MotionValue, useTransform } from "motion/react";
+import { motion, MotionValue, useTransform } from 'framer-motion';
 import { cn } from "../../lib/utils";
 
 interface FramerTextRevealProps {

@@ -3,7 +3,7 @@ title: How I Save 15+ Hours Every Week With Content Automation
 date: 2026-03-22T00:00:00.000Z
 author: Emmanuel Odebiyi
 authorBio: Emmanuel is a Content Strategist and AI Automation Expert dedicated to helping B2B SaaS companies scale their organic growth through data-driven storytelling and systematic workflows.
-authorImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel'
+authorImage: '/images/emmanuel-portrait.webp'
 readTime: 8 min read
 excerpt: 'The exact workflow I use to publish 40+ articles monthly — without burning out. Tools, processes, honest lessons, and what I''d do differently.'
 image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070'

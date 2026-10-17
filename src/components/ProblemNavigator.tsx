@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence, MotionValue } from 'motion/react';
+import { motion, AnimatePresence, MotionValue } from 'framer-motion';
 
 interface ProblemNode {
   id: number;

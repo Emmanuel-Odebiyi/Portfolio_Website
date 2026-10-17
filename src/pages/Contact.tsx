@@ -329,7 +329,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10 space-y-12">
         
         {/* Header Block */}
-        <div className="space-y-4 max-w-3xl">
+        <div className="space-y-4 max-w-3xl mx-auto text-center flex flex-col items-center">
           <div 
             className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-[11px] font-mono tracking-wider uppercase"
             style={{ 
@@ -346,7 +346,7 @@ export default function Contact() {
             Let's Build Something <span className="text-amber-gradient italic">That Actually Scales</span>
           </h1>
 
-          <p className="text-base md:text-lg font-light leading-relaxed max-w-2xl" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Direct communication channel for B2B founders, growth leaders, and editorial teams. Choose between a rapid message or a structured project scope.
           </p>
         </div>

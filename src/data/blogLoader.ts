@@ -618,7 +618,7 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
           id,
           title: cleanTitle,
           author: post.author || 'Emmanuel Odebiyi',
-          authorImage: post.authorImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel',
+          authorImage: post.authorImage || '/images/emmanuel-portrait.webp',
           authorBio: post.authorBio || '',
           date: formatDate(post.date) || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
           readTime: post.readTime || '5 min read',

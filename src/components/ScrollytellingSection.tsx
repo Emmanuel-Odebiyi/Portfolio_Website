@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 
 export interface Milestone {
