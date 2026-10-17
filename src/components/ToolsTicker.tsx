@@ -37,7 +37,11 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
                 className="flex items-center gap-4 px-6 py-4.5 rounded-2xl border group transition-all duration-300 shadow-sm hover:shadow-md hover:border-[color-mix(in_srgb,var(--accent-amber)_40%,transparent)] hover:shadow-[0_0_20px_rgba(245,158,11,0.12)] cursor-default"
                 style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
               >
-                {tool.logo ? (
+                {tool.icon ? (
+                  <div className="w-7 h-7 flex items-center justify-center transition-colors duration-500 group-hover:text-[var(--accent-amber)]" style={{ color: 'var(--text-muted)' }}>
+                    {tool.icon}
+                  </div>
+                ) : tool.logo ? (
                   <img
                     src={tool.logo}
                     alt={tool.name}
@@ -45,12 +49,11 @@ export const ToolsTicker: React.FC<ToolsTickerProps> = ({ tools }) => {
                     height={28}
                     className="w-7 h-7 object-contain opacity-90 group-hover:opacity-100 group-hover:scale-110 group-hover:brightness-110 transition-all duration-500"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLElement).style.display = 'none';
+                    }}
                   />
-                ) : (
-                  <div className="w-7 h-7 flex items-center justify-center transition-colors duration-500 group-hover:text-[var(--accent-amber)]" style={{ color: 'var(--text-muted)' }}>
-                    {tool.icon}
-                  </div>
-                )}
+                ) : null}
                 <span className="text-lg font-bold transition-colors duration-300 group-hover:text-[var(--text-body)]" style={{ color: 'var(--text-muted)' }}>
                   {tool.name}
                 </span>

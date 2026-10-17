@@ -9,12 +9,12 @@ import { SEO } from '../components/SEO';
 import { ToolsTicker, Tool } from '../components/ToolsTicker';
 
 const toolData: Tool[] = [
-  { name: 'Zapier', logo: 'https://cdn.simpleicons.org/zapier' },
-  { name: 'n8n', logo: 'https://cdn.simpleicons.org/n8n' },
-  { name: 'Make', logo: 'https://cdn.simpleicons.org/make' },
-  { name: 'HubSpot', logo: 'https://cdn.simpleicons.org/hubspot' },
-  { name: 'Python', logo: 'https://cdn.simpleicons.org/python' },
-  { name: 'OpenAI', logo: 'https://cdn.simpleicons.org/openai' },
+  { name: 'Zapier', logo: '/icons/zapier.svg' },
+  { name: 'n8n', logo: '/icons/n8n.svg' },
+  { name: 'Make', logo: '/icons/make.svg' },
+  { name: 'HubSpot', logo: '/icons/hubspot.svg' },
+  { name: 'Python', logo: '/icons/python.svg' },
+  { name: 'OpenAI', logo: '/icons/openai.svg' },
 ];
 
 export default function Services() {

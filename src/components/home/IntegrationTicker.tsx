@@ -64,16 +64,16 @@ export const IntegrationTicker: React.FC = () => {
     'https://cdn.simpleicons.org/zapier',
     'https://cdn.simpleicons.org/n8n',
     'https://cdn.simpleicons.org/make',
-    'https://cdn.simpleicons.org/openai',
+    '/icons/openai.svg',
     'https://cdn.simpleicons.org/cloudflare',
     'https://cdn.simpleicons.org/notion',
-    'https://cdn.simpleicons.org/slack',
+    '/icons/slack.svg',
     'https://cdn.simpleicons.org/discord',
     'https://cdn.simpleicons.org/github'
   ];
 
   const row2 = [
-    'https://cdn.simpleicons.org/salesforce',
+    '/icons/salesforce.svg',
     'https://cdn.simpleicons.org/mailchimp',
     'https://cdn.simpleicons.org/airtable',
     'https://cdn.simpleicons.org/figma',
@@ -82,7 +82,7 @@ export const IntegrationTicker: React.FC = () => {
     'https://cdn.simpleicons.org/shopify',
     'https://cdn.simpleicons.org/googleanalytics',
     'https://cdn.simpleicons.org/x',
-    'https://cdn.simpleicons.org/linkedin'
+    '/icons/linkedin.svg'
   ];
 
   const row3 = [
@@ -91,7 +91,7 @@ export const IntegrationTicker: React.FC = () => {
     'https://cdn.simpleicons.org/tiktok',
     'https://cdn.simpleicons.org/calendly',
     'https://cdn.simpleicons.org/zoom',
-    'https://cdn.simpleicons.org/twilio',
+    '/icons/twilio.svg',
     'https://cdn.simpleicons.org/jira',
     'https://cdn.simpleicons.org/asana',
     'https://cdn.simpleicons.org/trello',
