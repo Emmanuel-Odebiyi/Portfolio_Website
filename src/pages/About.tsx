@@ -191,14 +191,14 @@ export default function About() {
                 {/* Portrait Image with soft natural dissolve */}
                 <div className="relative aspect-[4/5] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
                   <OptimizedImage
-                    src="/images/about-hero.webp"
+                    src="/images/emmanuel-portrait.webp"
                     alt="Emmanuel Odebiyi | Content Marketing Automation Specialist"
-                    className="w-full h-full object-cover object-top block transition-transform duration-700 hover:scale-105"
+                    className="w-full h-full object-cover object-[50%_15%] block transition-transform duration-700 hover:scale-105"
                     fetchPriority="high"
                   />
                   {/* Subtle bottom gradient inside card */}
                   <div 
-                    className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+                    className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
                     style={{
                       background: 'linear-gradient(to top, var(--bg-surface) 10%, transparent 100%)'
                     }}

@@ -79,33 +79,35 @@ export const Header: React.FC = () => {
   const showBg = isScrolled || !isHomePage;
 
   return (
-    <header className={`fixed left-1/2 -translate-x-1/2 z-[500] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-5xl' : 'top-6 max-w-5xl'}`}>
+    <header className={`fixed left-1/2 -translate-x-1/2 z-[500] w-[95%] transition-all duration-500 ease-in-out ${isScrolled ? 'top-3 max-w-6xl' : 'top-6 max-w-6xl'}`}>
       <div 
         className={`w-full transition-all duration-500 pointer-events-auto ${
           showBg 
-            ? 'py-1.5 px-4 md:px-4 xl:px-6 backdrop-blur-xl border shadow-2xl rounded-[1.25rem]'
-            : 'py-2 px-6 md:px-5 xl:px-8 bg-transparent border-transparent backdrop-blur-sm rounded-[1.5rem]'
+            ? 'py-1.5 px-4 md:px-5 xl:px-6 backdrop-blur-xl border shadow-2xl rounded-[1.25rem]'
+            : 'py-2 px-5 md:px-6 xl:px-7 bg-transparent border-transparent backdrop-blur-sm rounded-[1.5rem]'
         }`}
         style={showBg ? {
           backgroundColor: 'color-mix(in srgb, var(--bg-surface) 92%, transparent)',
           borderColor: 'var(--border-card)',
         } : undefined}
       >
-        <div className="mx-auto grid grid-cols-2 xl:grid-cols-[auto_1fr_auto] items-center gap-4">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex justify-start">
+        <div className="w-full flex items-center justify-between gap-4">
+          {/* Brand Logo */}
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex justify-start shrink-0">
             <Link to="/" className="flex items-center gap-3 group">
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
                 width={375}
                 height={375}
-                className="h-8 md:h-12 w-auto transition-all dark:brightness-0 dark:invert"
+                className="h-8 md:h-10 w-auto transition-all dark:brightness-0 dark:invert"
                 style={{ filter: 'var(--logo-filter, none)' }}
               />
             </Link>
           </motion.div>
 
-          <nav className="hidden xl:flex items-center justify-center xl:gap-6">
+          {/* Desktop Nav Links */}
+          <nav className="hidden xl:flex items-center justify-center gap-4 2xl:gap-6 mx-auto">
             {navLinks.map((link) => (
               <div 
                 key={link.name}
@@ -115,7 +117,7 @@ export const Header: React.FC = () => {
               >
                 <Link
                   to={link.href}
-                  className={`flex items-center md:gap-1 xl:gap-1.5 text-xs xl:text-sm font-black tracking-tight transition-all relative group`}
+                  className={`flex items-center gap-1.5 text-xs xl:text-sm font-bold tracking-tight transition-all relative group`}
                   style={{
                     color: location.pathname === link.href
                       ? 'var(--accent-amber)'
@@ -173,8 +175,8 @@ export const Header: React.FC = () => {
                                 {sub.icon}
                               </div>
                               <div className="flex flex-col gap-0.5">
-                                <span className="font-black text-sm tracking-tight" style={{ color: 'var(--text-body)' }}>{sub.name}</span>
-                                <span className="text-[11px] font-bold leading-snug uppercase tracking-[0.05em] transition-colors" style={{ color: 'var(--text-muted)' }}>{sub.desc}</span>
+                                <span className="font-bold text-sm tracking-tight" style={{ color: 'var(--text-body)' }}>{sub.name}</span>
+                                <span className="text-[11px] font-semibold leading-snug uppercase tracking-[0.05em] transition-colors" style={{ color: 'var(--text-muted)' }}>{sub.desc}</span>
                               </div>
                             </Link>
                           ))}
@@ -187,24 +189,24 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
-          <div className="flex justify-end items-center gap-3 md:gap-4">
+          {/* Right Action Controls: Theme Pill & CTA */}
+          <div className="flex justify-end items-center gap-3 shrink-0">
             <ThemeToggle />
             {/* Visual divider between toggle and CTA */}
             <span className="hidden xl:block w-px h-5 rounded-full" style={{ backgroundColor: 'var(--border-card)' }} />
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }} 
               animate={{ opacity: 1, scale: 1 }} 
-              whileHover={{ scale: 1.05, y: -1 }}
-              whileTap={{ scale: 0.95 }}
-              className="hidden xl:block"
+              whileHover={{ scale: 1.04, y: -1 }}
+              whileTap={{ scale: 0.96 }}
+              className="hidden xl:block shrink-0"
             >
               <Link
                 to="/contact"
-                className="inline-block px-4 xl:px-6 py-2.5 text-xs xl:text-sm font-black rounded-xl transition-all relative overflow-hidden group border-none"
+                className="inline-block px-4 xl:px-5 py-2.5 text-xs xl:text-sm font-bold rounded-xl transition-all relative overflow-hidden group border-none shadow-md hover:shadow-lg"
                 style={{ 
                   background: 'var(--btn-cta-bg)', 
                   color: 'var(--btn-cta-text)',
-                  boxShadow: '0 4px 20px var(--btn-cta-shadow)' 
                 }}
               >
                 <span className="relative z-10">Contact Me</span>

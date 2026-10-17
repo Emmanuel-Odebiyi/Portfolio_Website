@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, 
   ArrowLeft, 
@@ -603,11 +603,18 @@ export default function Contact() {
                             setFormMode('quick');
                             setSubmitError(null);
                           }}
-                          className={`px-3.5 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                          className={`px-3.5 py-1.5 rounded-lg font-bold transition-all cursor-pointer border ${
                             formMode === 'quick'
-                              ? 'bg-[var(--bg-surface-alt)] text-[var(--accent-amber)] border border-[var(--accent-amber)]/30 shadow-sm'
-                              : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
+                              ? 'shadow-sm'
+                              : 'border-transparent hover:text-[var(--text-body)]'
                           }`}
+                          style={formMode === 'quick' ? {
+                            backgroundColor: 'var(--bg-surface-alt)',
+                            color: 'var(--accent-amber)',
+                            borderColor: 'color-mix(in srgb, var(--accent-amber) 35%, transparent)'
+                          } : {
+                            color: 'var(--text-muted)'
+                          }}
                         >
                           Quick Note
                         </button>
@@ -619,11 +626,18 @@ export default function Contact() {
                             setFormMode('blueprint');
                             setSubmitError(null);
                           }}
-                          className={`px-3.5 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                          className={`px-3.5 py-1.5 rounded-lg font-bold transition-all cursor-pointer border ${
                             formMode === 'blueprint'
-                              ? 'bg-[var(--bg-surface-alt)] text-[var(--accent-amber)] border border-[var(--accent-amber)]/30 shadow-sm'
-                              : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
+                              ? 'shadow-sm'
+                              : 'border-transparent hover:text-[var(--text-body)]'
                           }`}
+                          style={formMode === 'blueprint' ? {
+                            backgroundColor: 'var(--bg-surface-alt)',
+                            color: 'var(--accent-amber)',
+                            borderColor: 'color-mix(in srgb, var(--accent-amber) 35%, transparent)'
+                          } : {
+                            color: 'var(--text-muted)'
+                          }}
                         >
                           Project Scope
                         </button>
@@ -741,7 +755,7 @@ export default function Contact() {
                             }`}
                           >
                             {loading ? (
-                              <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                              <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
                             ) : (
                               <>
                                 <span>Send Message</span>
@@ -1075,7 +1089,7 @@ export default function Contact() {
                               }`}
                             >
                               {loading ? (
-                                <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
                               ) : (
                                 <>
                                   <span>Submit Project Blueprint</span>
