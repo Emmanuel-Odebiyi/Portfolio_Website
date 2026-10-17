@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight,
@@ -15,14 +15,17 @@ import {
   Clock,
   TrendingUp,
   ShieldCheck,
-  Zap
+  Zap,
+  MapPin,
+  Cpu,
+  Layers
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { NumberTicker } from '../components/NumberTicker';
 import { OrbitalTestimonials } from '../components/ui/OrbitalTestimonials';
 import { OptimizedImage } from '../components/common/OptimizedImage';
 
-/* ─── Fade-up animation variants ─── */
+/* Animation variants */
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -45,122 +48,417 @@ export default function About() {
       />
       
       {/* ═══════════════════════════════════════════
-           01. HERO SECTION (EXPANSIVE CINEMATIC)
+           01. EXECUTIVE HERO (EDITORIAL SPLIT STAGE)
          ═══════════════════════════════════════════ */}
-      <section className="relative h-screen min-h-[550px] sm:min-h-[600px] md:min-h-[750px] flex flex-col justify-end pb-10 sm:pb-12 md:pb-16 overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
-        
-        {/* Fullscreen Background Image */}
-        <div className="absolute inset-0 z-0 select-none">
-          <OptimizedImage
-            src="/images/about-hero-landscape.webp"
-            alt="Emmanuel Odebiyi Portrait"
-            className="w-full h-full object-cover object-[50%_25%]"
-            draggable={false}
-          />
+      <section 
+        className="relative pt-32 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden border-b"
+        style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+      >
+        {/* Subtle background ambient texture */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+          style={{ backgroundImage: 'radial-gradient(circle, var(--text-body) 1px, transparent 1px)', backgroundSize: '24px 24px' }} 
+        />
 
-          {/* Localized subtle bottom-only gradient strictly behind text baseline */}
-          <div 
-            className="absolute inset-x-0 bottom-0 h-64 md:h-72 pointer-events-none z-5"
-            style={{
-              background: 'linear-gradient(to top, rgba(14, 28, 42, 0.88) 0%, rgba(14, 28, 42, 0.4) 50%, transparent 100%)'
-            }}
-          />
-        </div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Column: Executive Identity & Positioning */}
+            <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6 sm:space-y-8">
+              
+              {/* Executive Status Badge */}
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-sans font-bold uppercase tracking-wider shadow-sm"
+                style={{ 
+                  backgroundColor: 'var(--bg-surface)', 
+                  borderColor: 'var(--border-card)', 
+                  color: 'var(--text-muted)' 
+                }}
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Available for Custom Automations</span>
+              </motion.div>
 
-        {/* Floating Status Badge */}
-        <div className="absolute left-6 md:left-12 lg:left-24 top-32 z-20">
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] font-bold backdrop-blur-md shadow-lg"
-            style={{ 
-              backgroundColor: 'rgba(14, 28, 42, 0.75)', 
-              borderColor: 'rgba(255, 255, 255, 0.15)', 
-              color: '#ffffff' 
-            }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Available for Custom Automations</span>
-          </motion.div>
-        </div>
+              {/* Master Editorial Headline */}
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.7 }}
+                className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08] font-display"
+                style={{ color: 'var(--text-body)' }}
+              >
+                Engineering Content Systems That Turn Chaos into{' '}
+                <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>
+                  Compounding Revenue.
+                </span>
+              </motion.h1>
 
-        {/* Content container aligned at the bottom */}
-        <div className="max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-24 z-10 relative">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end pointer-events-none">
-            {/* Left - Headline */}
-            <div className="lg:col-span-8 text-left space-y-4 pointer-events-auto">
-              <h1 className="text-[1.35rem] sm:text-2xl md:text-3xl lg:text-[2.25rem] xl:text-[2.75rem] font-bold tracking-tight leading-[1.1] md:leading-[1.05] text-white [text-shadow:_0_2px_12px_rgba(0,0,0,0.85)] font-display">
-                Emmanuel is engineering <span className="text-emerald-400 font-extrabold [text-shadow:_0_2px_14px_rgba(0,0,0,0.9)]">content marketing automation</span> systems that turn chaos into growth engines.
-              </h1>
-            </div>
+              {/* Concise Positioning Copy (Non-Sprawling) */}
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.7 }}
+                className="text-base sm:text-lg md:text-xl font-normal leading-relaxed text-[var(--text-muted)] max-w-2xl font-sans"
+              >
+                I am Emmanuel Odebiyi, a systems architect and content strategist. I bridge high-intent editorial authority with programmatic workflows built on n8n, Make, and Zapier to help B2B tech companies scale organic traffic without team burnout.
+              </motion.p>
 
-            {/* Right - Bio & CTA */}
-            <div className="lg:col-span-4 lg:col-start-9 text-left space-y-6 pointer-events-auto">
-              <p className="text-xs sm:text-sm md:text-base lg:text-[1.05rem] font-medium leading-relaxed text-zinc-100 [text-shadow:_0_1px_8px_rgba(0,0,0,0.85)] font-sans">
-                By integrating smart editorial workflows with systems built on n8n and Make, he constructs self-running pipelines that publish, distribute, and optimize content automatically.
-              </p>
-              <div className="flex flex-wrap items-center gap-4">
+              {/* Action Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.7 }}
+                className="flex flex-wrap items-center gap-4 w-full sm:w-auto"
+              >
                 <Link 
                   to="/contact"
-                  className="px-6 py-3 rounded-xl font-bold text-sm tracking-wide shadow-lg hover:scale-105 active:scale-95 transition-all bg-white text-zinc-950 hover:bg-zinc-100"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-sm tracking-wide transition-all shadow-md hover:scale-105 active:scale-95"
+                  style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
                 >
-                  Book Strategy Call
+                  Book Strategy Call <ArrowRight size={16} />
                 </Link>
                 <Link 
                   to="/portfolio"
-                  className="px-6 py-3 rounded-xl font-bold text-sm tracking-wide border border-white/25 text-white bg-black/30 backdrop-blur-sm hover:bg-white/15 transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-sm tracking-wide border transition-all shadow-sm hover:bg-zinc-500/10"
+                  style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)', color: 'var(--text-body)' }}
                 >
                   View Audited Work
                 </Link>
-              </div>
+              </motion.div>
+
+              {/* Live Operational Telemetry Strip */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.7 }}
+                className="pt-6 w-full border-t flex flex-wrap items-center gap-y-3 gap-x-6 text-xs font-sans font-semibold text-[var(--text-muted)]"
+                style={{ borderColor: 'var(--border-card)' }}
+              >
+                <div className="flex items-center gap-2">
+                  <MapPin size={14} className="text-[var(--accent-amber)]" />
+                  <span>Operating from Lagos, Nigeria (WAT)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Globe size={14} className="text-[var(--cta-blue)]" />
+                  <span>Serving US, UK, Europe & Africa</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={14} className="text-[var(--accent-teal)]" />
+                  <span>520% ROI Audited in Production</span>
+                </div>
+              </motion.div>
+
             </div>
+
+            {/* Right Column: Refined Editorial Portrait Showcase */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.8 }}
+              className="lg:col-span-5 relative w-full flex justify-center lg:justify-end"
+            >
+              {/* Soft Ambient Radial Glow */}
+              <div 
+                className="absolute -inset-4 rounded-[2.5rem] blur-3xl opacity-25 dark:opacity-15 pointer-events-none -z-10"
+                style={{ background: 'radial-gradient(ellipse at 50% 50%, var(--accent-amber) 0%, transparent 70%)' }}
+              />
+
+              {/* Framed Editorial Card */}
+              <div 
+                className="relative w-full max-w-[440px] rounded-[2rem] overflow-hidden border shadow-2xl backdrop-blur-sm"
+                style={{ 
+                  backgroundColor: 'var(--bg-surface)', 
+                  borderColor: 'var(--border-card)' 
+                }}
+              >
+                {/* Header Tag in Card */}
+                <div 
+                  className="px-6 py-4 border-b flex items-center justify-between"
+                  style={{ borderColor: 'var(--border-card)', backgroundColor: 'color-mix(in srgb, var(--bg-surface-alt) 50%, transparent)' }}
+                >
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                    PORTFOLIO ARCHIVE
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                    <span className="text-[11px] font-bold font-sans text-emerald-600 dark:text-emerald-400">Systems Active</span>
+                  </div>
+                </div>
+
+                {/* Portrait Image with soft natural dissolve */}
+                <div className="relative aspect-[4/5] overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
+                  <OptimizedImage
+                    src="/images/about-hero.webp"
+                    alt="Emmanuel Odebiyi | Content Marketing Automation Specialist"
+                    className="w-full h-full object-cover object-top block transition-transform duration-700 hover:scale-105"
+                    fetchPriority="high"
+                  />
+                  {/* Subtle bottom gradient inside card */}
+                  <div 
+                    className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(to top, var(--bg-surface) 10%, transparent 100%)'
+                    }}
+                  />
+                </div>
+
+                {/* Card Footer: Executive Identity Badge */}
+                <div className="p-6 space-y-2 text-left relative z-10" style={{ backgroundColor: 'var(--bg-surface)' }}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold font-display" style={{ color: 'var(--text-body)' }}>
+                        Emmanuel Odebiyi
+                      </h3>
+                      <p className="text-xs font-sans font-semibold text-[var(--accent-amber)]">
+                        Systems Architect &amp; Content Strategist
+                      </p>
+                    </div>
+                    <div 
+                      className="p-2 rounded-xl border flex items-center justify-center text-[var(--accent-amber)]"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}
+                    >
+                      <Sparkles size={16} />
+                    </div>
+                  </div>
+                  <p className="text-xs text-[var(--text-muted)] leading-relaxed pt-1">
+                    Engineering programmatic SEO engines and multi-platform publishing workflows that scale revenue predictably.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-           02. EXECUTIVE STATEMENT & PHILOSOPHY
+           02. DUAL EDITORIAL PORTALS (MY STORY & MY APPROACH)
          ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 border-b relative z-10" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
+      <section className="py-20 md:py-28 border-b relative" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
+        <div className="max-w-6xl mx-auto px-6 space-y-12">
           
-          <motion.div {...fadeUp} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-sans font-bold uppercase tracking-wider" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-amber)' }} />
-            EXECUTIVE PROFILE
+          <motion.div {...fadeUp} className="text-center space-y-3">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--accent-amber)' }}>
+              CHOOSE YOUR PERSPECTIVE
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Two Sides of the Same Coin
+            </h2>
+            <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-xl mx-auto font-sans">
+              Explore the personal narrative that forced me into systems, or inspect the 4-phase technical methodology that powers client results.
+            </p>
           </motion.div>
 
-          <motion.h2 
-            {...fadeUp}
-            className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] font-display"
-            style={{ color: 'var(--text-body)' }}
-          >
-            Content Systems Architect &amp; <br />
-            <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>
-              B2B Growth Specialist.
-            </span>
-          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* Card 1: My Story */}
+            <Link to="/my-story" className="group block h-full">
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                className="p-8 sm:p-10 rounded-2xl border shadow-sm flex flex-col justify-between h-full transition-all duration-300 hover:shadow-xl relative overflow-hidden"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <span 
+                      className="px-3 py-1 rounded-full text-xs font-sans font-bold uppercase tracking-wider border"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
+                    >
+                      THE NARRATIVE EVOLUTION
+                    </span>
+                    <div 
+                      className="p-2.5 rounded-xl border group-hover:scale-110 transition-transform"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
+                    >
+                      <BookOpen className="w-5 h-5" />
+                    </div>
+                  </div>
 
-          <motion.p 
-            {...fadeUp}
-            className="text-lg md:text-xl font-normal leading-relaxed text-[var(--text-muted)] max-w-3xl mx-auto font-sans"
-          >
-            I bridge the gap between high-ranking editorial writing and programmatic workflow automation. For growing B2B SaaS and technology companies, I engineer self-operating marketing engines that publish consistently, rank organically, and attribute direct revenue—without burning out the founder or requiring a bloated in-house department.
-          </motion.p>
+                  <div className="space-y-3">
+                    <h3 
+                      className="text-2xl sm:text-3xl font-bold font-display group-hover:text-[var(--accent-amber)] transition-colors" 
+                      style={{ color: 'var(--text-body)' }}
+                    >
+                      My Story: The Writer Who Built a Machine
+                    </h3>
+                    <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed font-sans font-normal">
+                      From studying Construction Economics in Osogbo to hitting the 24-hour freelance burnout ceiling, and the exact automation epiphany that changed everything.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {['Osogbo Roots', 'The 2:00 AM Ceiling', 'Automation Epiphany', 'Production Scale'].map((tag) => (
+                      <span 
+                        key={tag} 
+                        className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-md border" 
+                        style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div 
+                  className="pt-8 mt-8 border-t flex items-center justify-between text-xs font-bold text-[var(--accent-amber)] group-hover:translate-x-1 transition-transform" 
+                  style={{ borderColor: 'var(--border-card)' }}
+                >
+                  <span>Read The Full Journey</span>
+                  <ArrowRight size={16} />
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Card 2: My Approach */}
+            <Link to="/my-approach" className="group block h-full">
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                className="p-8 sm:p-10 rounded-2xl border shadow-sm flex flex-col justify-between h-full transition-all duration-300 hover:shadow-xl relative overflow-hidden"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <span 
+                      className="px-3 py-1 rounded-full text-xs font-sans font-bold uppercase tracking-wider border"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--cta-blue)' }}
+                    >
+                      THE OPERATING SYSTEM
+                    </span>
+                    <div 
+                      className="p-2.5 rounded-xl border group-hover:scale-110 transition-transform"
+                      style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--cta-blue)' }}
+                    >
+                      <Target className="w-5 h-5" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <h3 
+                      className="text-2xl sm:text-3xl font-bold font-display group-hover:text-[var(--cta-blue)] transition-colors" 
+                      style={{ color: 'var(--text-body)' }}
+                    >
+                      My Approach: Data, Systems &amp; Zero Guesswork
+                    </h3>
+                    <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed font-sans font-normal">
+                      The engineering methodology behind 520% ROI. Explore the 4-phase operating framework: Telemetry audits, topic architecture, pipeline orchestration, and editorial guardrails.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {['Stack Telemetry', 'Topic Architecture', 'Pipeline Orchestration', 'Quality Guardrails'].map((tag) => (
+                      <span 
+                        key={tag} 
+                        className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-md border" 
+                        style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div 
+                  className="pt-8 mt-8 border-t flex items-center justify-between text-xs font-bold text-[var(--cta-blue)] group-hover:translate-x-1 transition-transform" 
+                  style={{ borderColor: 'var(--border-card)' }}
+                >
+                  <span>Inspect The Methodology</span>
+                  <ArrowRight size={16} />
+                </div>
+              </motion.div>
+            </Link>
+
+          </div>
         </div>
+      </section>
 
-        {/* 3 Core Pillars of Execution */}
-        <div className="max-w-6xl mx-auto px-6 pt-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* ═══════════════════════════════════════════
+           03. AUDITED PRODUCTION BENCHMARKS
+         ═══════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 border-b" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
+        <div className="max-w-6xl mx-auto px-6 space-y-12">
+          
+          <div className="text-center space-y-3">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>
+              MEASURABLE TRACK RECORD
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
+              Audited Production Benchmarks
+            </h2>
+            <p className="font-light text-sm max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+              Every benchmark is mathematically tracked through Search Console and client GA4 telemetry.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              { value: 520, suffix: '%', label: 'ROI Delivered in 90 Days', sub: 'TechFlow Solutions · $127K Linked Revenue' },
+              { value: 65,  suffix: '%', label: 'Organic Traffic Lift', sub: 'The Scoove Africa · 3-Month Scale' },
+              { value: 15,  suffix: '+', label: 'Hours Reclaimed Weekly', sub: 'Across Active Client Operations' },
+              { value: 95,  suffix: '%', label: 'Client Retention Rate', sub: 'Long-Term System Maintenance Contracts' },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                {...stagger(i)}
+                className="text-center p-6 sm:p-8 rounded-2xl border shadow-sm transition-all hover:shadow-md"
+                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="text-4xl sm:text-5xl md:text-6xl font-bold leading-none mb-3 font-display" style={{ color: 'var(--accent-amber)' }}>
+                  <NumberTicker value={stat.value} delay={0.2 + i * 0.1} className="text-4xl sm:text-5xl md:text-6xl font-bold font-display" />
+                  <span>{stat.suffix}</span>
+                </div>
+                <p className="text-xs font-sans font-bold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-body)' }}>
+                  {stat.label}
+                </p>
+                <p className="text-xs font-normal" style={{ color: 'var(--text-muted)' }}>
+                  {stat.sub}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <p className="text-center text-xs sm:text-sm font-medium tracking-wide flex items-center justify-center gap-2 pt-2" style={{ color: 'var(--text-muted)' }}>
+            <Globe size={16} className="text-[var(--accent-teal)] shrink-0" />
+            <span>Operating remotely from Nigeria with technology teams across the US, UK, Canada, and Europe.</span>
+          </p>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+           04. 3 CORE PILLARS OF EXECUTION
+         ═══════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 border-b" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
+        <div className="max-w-6xl mx-auto px-6 space-y-16">
+          
+          <motion.div {...fadeUp} className="text-center space-y-4 max-w-3xl mx-auto">
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>
+              CORE ARCHITECTURE
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              The 3 Pillars of Autonomous Content
+            </h2>
+            <p className="text-base text-[var(--text-muted)] font-sans">
+              Eliminating marketing speculation with an interconnected triad of editorial craft, automation pipelines, and closed-loop revenue attribution.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Pillar 1 */}
             <motion.div 
               {...stagger(0)}
-              className="p-8 rounded-2xl border flex flex-col justify-between shadow-sm"
+              className="p-8 rounded-2xl border flex flex-col justify-between shadow-sm transition-all hover:shadow-lg"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl border flex items-center justify-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
+                <div 
+                  className="w-12 h-12 rounded-xl border flex items-center justify-center" 
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}
+                >
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
@@ -168,7 +466,7 @@ export default function About() {
                   <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Editorial Authority</h3>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed font-sans">
-                  Published across global platforms including StoryChief, Herbvity, and Scoove Africa. I craft high-intent B2B guides and topic clusters that educate decision-makers and convert organic searchers into pipeline.
+                  Published across global platforms including StoryChief, Herbvity, and Scoove Africa. I craft high-intent B2B topic clusters and deep-dive guides that educate decision-makers and convert searchers into pipeline.
                 </p>
               </div>
               <div className="pt-6 border-t mt-6 flex items-center gap-2 text-xs font-bold text-[var(--accent-amber)]" style={{ borderColor: 'var(--border-card)' }}>
@@ -180,11 +478,14 @@ export default function About() {
             {/* Pillar 2 */}
             <motion.div 
               {...stagger(1)}
-              className="p-8 rounded-2xl border flex flex-col justify-between shadow-sm"
+              className="p-8 rounded-2xl border flex flex-col justify-between shadow-sm transition-all hover:shadow-lg"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl border flex items-center justify-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--cta-blue)' }}>
+                <div 
+                  className="w-12 h-12 rounded-xl border flex items-center justify-center" 
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--cta-blue)' }}
+                >
                   <Workflow className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
@@ -192,7 +493,7 @@ export default function About() {
                   <h3 className="text-xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Pipeline Automation</h3>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed font-sans">
-                  Production workflows orchestrated with n8n, Make, Zapier, and Python microservices. Centralized databases in Airtable, multi-platform publishing in WordPress/Webflow, and CRM sync in HubSpot.
+                  Production workflows orchestrated with n8n, Make, Zapier, and Python microservices. Centralized databases in Airtable, multi-platform publishing in WordPress/Webflow, and instant CRM sync in HubSpot.
                 </p>
               </div>
               <div className="pt-6 border-t mt-6 flex items-center gap-2 text-xs font-bold text-[var(--cta-blue)]" style={{ borderColor: 'var(--border-card)' }}>
@@ -204,11 +505,14 @@ export default function About() {
             {/* Pillar 3 */}
             <motion.div 
               {...stagger(2)}
-              className="p-8 rounded-2xl border flex flex-col justify-between shadow-sm"
+              className="p-8 rounded-2xl border flex flex-col justify-between shadow-sm transition-all hover:shadow-lg"
               style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
             >
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl border flex items-center justify-center" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-teal)' }}>
+                <div 
+                  className="w-12 h-12 rounded-xl border flex items-center justify-center" 
+                  style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-teal)' }}
+                >
                   <TrendingUp className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
@@ -230,53 +534,17 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════════════════
-           03. AUDITED BENCHMARKS & GLOBAL FOOTPRINT
-         ═══════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 border-b" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
-        <div className="max-w-6xl mx-auto px-6 space-y-12">
-          
-          <div className="text-center space-y-3">
-            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>MEASURABLE TRACK RECORD</span>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display" style={{ color: 'var(--text-body)' }}>Audited Production Benchmarks</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { value: 520, suffix: '%', label: 'ROI Delivered in 90 Days', sub: 'TechFlow Solutions · $127K Revenue Linked' },
-              { value: 65,  suffix: '%', label: 'Organic Traffic Lift', sub: 'The Scoove Africa · 3-Month Scale' },
-              { value: 15,  suffix: '+', label: 'Hours Reclaimed Weekly', sub: 'Across Active Client Operations' },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                {...stagger(i)}
-                className="text-center p-8 rounded-2xl border shadow-sm"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-              >
-                <div className="text-5xl sm:text-6xl md:text-7xl font-bold leading-none mb-3 font-display" style={{ color: 'var(--accent-amber)' }}>
-                  <NumberTicker value={stat.value} delay={0.2 + i * 0.15} className="text-5xl sm:text-6xl md:text-7xl font-bold font-display" />
-                  <span>{stat.suffix}</span>
-                </div>
-                <p className="text-xs font-sans font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--text-body)' }}>{stat.label}</p>
-                <p className="text-xs font-normal" style={{ color: 'var(--text-muted)' }}>{stat.sub}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <p className="text-center text-xs sm:text-sm font-medium tracking-wide flex items-center justify-center gap-2 pt-2" style={{ color: 'var(--text-muted)' }}>
-            <Globe size={16} className="text-[var(--accent-teal)] shrink-0" />
-            <span>Operating remotely from Nigeria with technology teams across the US, UK, Canada, and Europe.</span>
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-           04. VERIFIED TESTIMONIALS
+           05. VERIFIED CLIENT WORDS
          ═══════════════════════════════════════════ */}
       <section className="py-24 md:py-32 overflow-visible border-b" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-6xl mx-auto px-6 space-y-12 overflow-visible">
           <motion.div {...fadeUp} className="text-center space-y-3">
-            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>CLIENT ENDORSEMENTS</span>
-            <h2 className="text-3xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>Verified Client Words</h2>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>
+              CLIENT ENDORSEMENTS
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
+              Verified Client Words
+            </h2>
             <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-xl mx-auto font-sans">
               Real feedback from founders, product managers, and marketing leaders who scaled with my systems.
             </p>
@@ -348,13 +616,15 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════════════════
-           05. OPERATING PRINCIPLES
+           06. OPERATING PRINCIPLES & CREED
          ═══════════════════════════════════════════ */}
       <section className="py-24 md:py-32 border-b" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-5xl mx-auto px-6 space-y-16">
           
           <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--accent-amber)' }}>CORE OPERATING CREED</span>
+            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--accent-amber)' }}>
+              CORE OPERATING CREED
+            </span>
             <h2 className="text-3xl sm:text-5xl font-bold font-display" style={{ color: 'var(--text-body)' }}>
               Working harder doesn't guarantee better results. <br />
               <span className="italic font-serif font-normal" style={{ color: 'var(--accent-amber)' }}>Systems do.</span>
@@ -391,124 +661,16 @@ export default function About() {
             <p className="text-lg sm:text-xl italic leading-relaxed text-[var(--text-muted)] font-serif">
               "Do you see someone skilled in their work? They will serve before kings; they will not serve before officials of low rank."
             </p>
-            <cite className="block mt-2 text-xs font-mono font-bold not-italic text-[var(--text-muted)]">— PROVERBS 22:29</cite>
+            <cite className="block mt-2 text-xs font-mono font-bold not-italic text-[var(--text-muted)]">PROVERBS 22:29</cite>
           </blockquote>
 
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-           06. DEEP DIVE PORTAL CARDS (MY STORY & MY APPROACH)
-         ═══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative" style={{ backgroundColor: 'var(--bg-page)' }}>
-        <div className="max-w-6xl mx-auto px-6 relative z-10 space-y-16">
-          
-          <motion.div {...fadeUp} className="text-center space-y-3">
-            <span className="text-xs font-sans font-bold uppercase tracking-[0.25em]" style={{ color: 'var(--text-muted)' }}>EXPLORE IN DEPTH</span>
-            <h2 className="text-3xl sm:text-5xl font-bold font-display tracking-tight" style={{ color: 'var(--text-body)' }}>
-              Two Sides of the Same Coin
-            </h2>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-xl mx-auto font-sans">
-              Dive into the personal journey that forced me into systems, or inspect the technical framework that powers client results.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            {/* Card 1: My Story */}
-            <Link to="/my-story" className="group block">
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="p-8 sm:p-10 rounded-2xl border shadow-sm flex flex-col justify-between h-full transition-shadow duration-300 hover:shadow-md"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-              >
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full text-xs font-sans font-bold uppercase tracking-wider border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
-                      THE NARRATIVE EVOLUTION
-                    </span>
-                    <div className="p-2.5 rounded-xl border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--accent-amber)' }}>
-                      <BookOpen className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h3 className="text-2xl sm:text-3xl font-bold font-display group-hover:text-[var(--accent-amber)] transition-colors" style={{ color: 'var(--text-body)' }}>
-                      My Story: The Writer Who Built a Machine
-                    </h3>
-                    <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed font-sans font-normal">
-                      From studying Construction Economics in Osogbo to hitting the 24-hour freelance burnout ceiling—and the exact automation epiphany that changed everything.
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {['Osogbo Roots', 'The 2:00 AM Ceiling', 'Automation Epiphany', 'Lessons Learned'].map((tag) => (
-                      <span key={tag} className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-md border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-8 mt-8 border-t flex items-center justify-between text-xs font-bold text-[var(--accent-amber)] group-hover:translate-x-1 transition-transform" style={{ borderColor: 'var(--border-card)' }}>
-                  <span>Read The Full Story</span>
-                  <ArrowRight size={16} />
-                </div>
-              </motion.div>
-            </Link>
-
-            {/* Card 2: My Approach */}
-            <Link to="/my-approach" className="group block">
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="p-8 sm:p-10 rounded-2xl border shadow-sm flex flex-col justify-between h-full transition-shadow duration-300 hover:shadow-md"
-                style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-              >
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full text-xs font-sans font-bold uppercase tracking-wider border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--cta-blue)' }}>
-                      THE OPERATING SYSTEM
-                    </span>
-                    <div className="p-2.5 rounded-xl border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--cta-blue)' }}>
-                      <Target className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h3 className="text-2xl sm:text-3xl font-bold font-display group-hover:text-[var(--cta-blue)] transition-colors" style={{ color: 'var(--text-body)' }}>
-                      My Approach: Data, Systems &amp; Zero Guesswork
-                    </h3>
-                    <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed font-sans font-normal">
-                      The engineering methodology behind 520% ROI. Explore the 4-phase operating framework: Telemetry audits, topic architecture, pipeline orchestration, and editorial guardrails.
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {['Stack Telemetry', 'Topic Architecture', 'Pipeline Orchestration', 'Quality Guardrails'].map((tag) => (
-                      <span key={tag} className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-md border" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)', color: 'var(--text-muted)' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-8 mt-8 border-t flex items-center justify-between text-xs font-bold text-[var(--cta-blue)] group-hover:translate-x-1 transition-transform" style={{ borderColor: 'var(--border-card)' }}>
-                  <span>Inspect The Methodology</span>
-                  <ArrowRight size={16} />
-                </div>
-              </motion.div>
-            </Link>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
            07. FINAL ACTION CTA
          ═══════════════════════════════════════════ */}
-      <section id="contact-cta" className="py-24 md:py-32 border-t" style={{ backgroundColor: 'var(--bg-surface-alt)', borderColor: 'var(--border-card)' }}>
+      <section id="contact-cta" className="py-24 md:py-32 border-t" style={{ backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-card)' }}>
         <div className="max-w-4xl mx-auto px-6 text-center space-y-10">
           
           <motion.div {...fadeUp} className="space-y-3">
@@ -524,14 +686,14 @@ export default function About() {
           <motion.div {...stagger(1)} className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
             <Link 
               to="/contact"
-              className="px-8 py-4 font-bold text-sm rounded-xl transition-all hover:brightness-110 flex items-center justify-center gap-3 shadow-lg"
+              className="px-8 py-4 font-bold text-sm rounded-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3 shadow-lg"
               style={{ backgroundColor: 'var(--btn-cta-bg)', color: 'var(--btn-cta-text)' }}
             >
               Book Strategy Call <ArrowRight size={16} />
             </Link>
             <Link 
               to="/resume"
-              className="px-8 py-4 font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-3 border shadow-sm hover:brightness-105"
+              className="px-8 py-4 font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-3 border shadow-sm hover:scale-105 active:scale-95"
               style={{ borderColor: 'var(--border-card)', backgroundColor: 'var(--bg-surface)', color: 'var(--text-body)' }}
             >
               View Full Resume
