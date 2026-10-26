@@ -28,27 +28,16 @@ import {
   ResponsiveContainer,
   ReferenceLine
 } from 'recharts';
-
-// --- Types ---
-
-interface CalculatorInputs {
-  teamSize: number;
-  hourlyCost: number;
-  weeklyHours: number;
-  freelancerSpend: number;
-  softwareBudget: number;
-  setupInvestment: number;
-  industry: 'SaaS' | 'E-commerce' | 'Other';
-  currency: string;
-}
-
-interface ROIData {
-  month: number;
-  manualCost: number;
-  automationCost: number;
-  netSavings: number;
-  cumulativeSavings: number;
-}
+import { 
+  calculateROI, 
+  type CalculatorInputs, 
+  type ROIData, 
+  type ROIResults,
+  INDUSTRY_EFFICIENCY,
+  OVERHEAD_MULTIPLIER,
+  MONTHLY_EFFICIENCY_GAIN,
+  MONTHLY_MAINTENANCE_RATE
+} from '../../lib/roiCalculator';
 
 // --- Constants ---
 
@@ -74,17 +63,8 @@ const CURRENCIES = [
   { code: 'JPY', symbol: '¥', name: 'Japanese Yen' },
 ];
 
-const INDUSTRY_EFFICIENCY: Record<string, { rate: number; label: string }> = {
-  'SaaS': { rate: 0.75, label: 'SaaS (75% automation efficiency)' },
-  'E-commerce': { rate: 0.60, label: 'E-commerce (60% automation efficiency)' },
-  'Other': { rate: 0.65, label: 'General (65% automation efficiency)' },
-};
-
 const NUCLEUS_BENCHMARK_ROI = 544;
 const BENCHMARK_HOURS = 15.3;
-const OVERHEAD_MULTIPLIER = 1.3;
-const MONTHLY_EFFICIENCY_GAIN = 0.005;
-const MONTHLY_MAINTENANCE_RATE = 0.05;
 
 // --- Components ---
 
@@ -155,60 +135,7 @@ export default function ROITimeMachine() {
 
   // --- Calculations ---
 
-  const results = useMemo(() => {
-    const fullyLoadedRate = inputs.hourlyCost * OVERHEAD_MULTIPLIER;
-    const weeklyManualHours = inputs.weeklyHours * inputs.teamSize;
-    const monthlyManualHours = weeklyManualHours * 4.33;
-    const monthlyManualLabourCost = monthlyManualHours * fullyLoadedRate;
-    const efficiencyRate = INDUSTRY_EFFICIENCY[inputs.industry].rate;
-    
-    const chartData: ROIData[] = [];
-    let cumulativeSavings = -inputs.setupInvestment;
-    let cumulativeManualCost = 0;
-    
-    for (let i = 0; i <= 12; i++) {
-      const monthEfficiency = efficiencyRate * (1 + MONTHLY_EFFICIENCY_GAIN * i);
-      const monthlySavings = i === 0 ? 0 : monthlyManualLabourCost * Math.min(monthEfficiency, 0.95);
-      const monthlyMaintenance = i === 0 ? 0 : inputs.setupInvestment * MONTHLY_MAINTENANCE_RATE;
-      const netMonthlySavings = monthlySavings - monthlyMaintenance;
-      cumulativeManualCost += i === 0 ? 0 : monthlyManualLabourCost;
-      
-      if (i > 0) {
-        cumulativeSavings += netMonthlySavings;
-      }
-      
-      chartData.push({
-        month: i,
-        manualCost: Math.round(cumulativeManualCost),
-        automationCost: Math.round(i === 0 ? inputs.setupInvestment : monthlyMaintenance),
-        netSavings: Math.round(i === 0 ? -inputs.setupInvestment : netMonthlySavings),
-        cumulativeSavings: Math.round(cumulativeSavings),
-      });
-    }
-    
-    const baseMonthlyNetSavings = (monthlyManualLabourCost * efficiencyRate) - (inputs.setupInvestment * MONTHLY_MAINTENANCE_RATE);
-    const breakevenMonth = baseMonthlyNetSavings > 0 
-      ? Math.ceil(inputs.setupInvestment / baseMonthlyNetSavings) 
-      : Infinity;
-    
-    const twelveMonthSavings = chartData[12].cumulativeSavings;
-    const roi = inputs.setupInvestment > 0 
-      ? (twelveMonthSavings / inputs.setupInvestment) * 100 
-      : 0;
-    
-    const weeklyHoursSaved = Math.round(weeklyManualHours * efficiencyRate);
-
-    return {
-      monthlyManualLabourCost: Math.round(monthlyManualLabourCost),
-      monthlyAutomationSavings: Math.round(baseMonthlyNetSavings),
-      breakevenMonth,
-      twelveMonthSavings: Math.round(twelveMonthSavings),
-      roi: Math.round(roi),
-      chartData,
-      weeklyHoursSaved,
-      fullyLoadedRate: Math.round(fullyLoadedRate),
-    };
-  }, [inputs]);
+  const results = useMemo(() => calculateROI(inputs), [inputs]);
 
   const handleUnlockReport = async (e: React.FormEvent) => {
     e.preventDefault();

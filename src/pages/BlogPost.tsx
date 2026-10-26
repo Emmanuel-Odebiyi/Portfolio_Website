@@ -19,7 +19,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { allBlogPosts as blogPosts, type ExtendedBlogPostType, type PortableTextNode, type PortableTextBlock, type PortableTextSpan, type FAQType } from '../data/blogLoader';
+import { useBlogPostsSync, type ExtendedBlogPostType, type PortableTextNode, type PortableTextBlock, type PortableTextSpan, type FAQType } from '../data/blogLoader';
 
 // ── Custom Monospace Terminal Code Block with Copy Action ─────────────────────
 interface TerminalCodeBlockProps {
@@ -818,7 +818,7 @@ const DEFAULT_FAQS: FAQType[] = [
 
 export default function BlogPost() {
   const { id } = useParams();
-  
+  const blogPosts = useBlogPostsSync();
   const post = (blogPosts.find(p => p.id === id) || blogPosts[0]) as ExtendedBlogPostType;
   const hasPortableContent = !!(post.portableContent && post.portableContent.length > 0);
   const faqs = (post.faqs && post.faqs.length > 0) ? post.faqs : DEFAULT_FAQS;

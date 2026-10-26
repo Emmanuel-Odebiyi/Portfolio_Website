@@ -12,6 +12,7 @@
  * 100% of your Vite portfolio performance, GSAP animations, and 3D scenes.
  */
 
+import { useState, useEffect } from 'react';
 import { BlogPostType, BlogSection, FAQType, blogPosts as legacyPosts } from './blogData';
 export type { FAQType };
 import { fetchSanityQuery } from './sanityClient';
@@ -644,22 +645,78 @@ async function fetchSanityPosts(): Promise<ExtendedBlogPostType[]> {
   }
 }
 
-// ── Top-Level Await Execution ────────────────────────────────────────────────
-const cmsPosts = await fetchSanityPosts();
+// ── Synchronous Instant Local Hydration ──────────────────────────────────────
+export function getLocalBlogPosts(): ExtendedBlogPostType[] {
+  const localCms = loadLocalCMSPosts();
+  const localTitles = new Set(localCms.map(p => p.title.toLowerCase()));
+  const uniqueLegacy = legacyPosts.filter(p => !localTitles.has(p.title.toLowerCase()));
 
-const legacyTitles = new Set(cmsPosts.map(p => p.title.toLowerCase()));
-const uniqueLegacyPosts = legacyPosts.filter(p => !legacyTitles.has(p.title.toLowerCase()));
+  const list: ExtendedBlogPostType[] = [...localCms, ...uniqueLegacy];
+  list.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    if (isNaN(dateA) || isNaN(dateB)) return 0;
+    return dateB - dateA;
+  });
+  return list;
+}
 
-// Deduplicate legacy posts and modern CMS posts
-const finalPostsList: ExtendedBlogPostType[] = [...cmsPosts, ...uniqueLegacyPosts];
+/** Initial synchronous blog posts (local Markdown + legacy data) */
+export let allBlogPosts: ExtendedBlogPostType[] = getLocalBlogPosts();
 
-// Sort final array by date (newest first)
-finalPostsList.sort((a, b) => {
-  const dateA = new Date(a.date).getTime();
-  const dateB = new Date(b.date).getTime();
-  if (isNaN(dateA) || isNaN(dateB)) return 0;
-  return dateB - dateA;
-});
+type BlogPostsListener = (posts: ExtendedBlogPostType[]) => void;
+const listeners = new Set<BlogPostsListener>();
 
-/** All blog posts — Cloud Sanity CMS + Local Markdown fallback + Legacy hardcoded */
-export const allBlogPosts: ExtendedBlogPostType[] = finalPostsList;
+export function subscribeBlogPosts(listener: BlogPostsListener): () => void {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+let syncPromise: Promise<ExtendedBlogPostType[]> | null = null;
+
+/**
+ * Asynchronously checks Sanity CMS at runtime without blocking initial module evaluation.
+ * If new or updated articles exist, updates allBlogPosts and notifies active subscribers.
+ */
+export async function syncSanityPosts(): Promise<ExtendedBlogPostType[]> {
+  if (syncPromise) return syncPromise;
+  syncPromise = (async () => {
+    try {
+      const cms = await fetchSanityPosts();
+      if (cms && cms.length > 0) {
+        const cmsTitles = new Set(cms.map(p => p.title.toLowerCase()));
+        const uniqueLegacy = legacyPosts.filter(p => !cmsTitles.has(p.title.toLowerCase()));
+        const merged: ExtendedBlogPostType[] = [...cms, ...uniqueLegacy];
+        merged.sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          if (isNaN(dateA) || isNaN(dateB)) return 0;
+          return dateB - dateA;
+        });
+        allBlogPosts = merged;
+        listeners.forEach(fn => fn(allBlogPosts));
+      }
+    } catch (err) {
+      console.warn('[BlogLoader] Background Sanity sync caught error:', err);
+    }
+    return allBlogPosts;
+  })();
+  return syncPromise;
+}
+
+/**
+ * React hook for instantaneous local rendering with background Sanity revalidation.
+ */
+export function useBlogPostsSync(): ExtendedBlogPostType[] {
+  const [posts, setPosts] = useState<ExtendedBlogPostType[]>(allBlogPosts);
+
+  useEffect(() => {
+    const unsubscribe = subscribeBlogPosts(setPosts);
+    syncSanityPosts();
+    return unsubscribe;
+  }, []);
+
+  return posts;
+}

@@ -13,9 +13,10 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
-import { allBlogPosts as blogPosts } from '../data/blogLoader';
+import { useBlogPostsSync } from '../data/blogLoader';
 
 export default function Blog() {
+  const blogPosts = useBlogPostsSync();
   const [selectedTag, setSelectedTag] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);

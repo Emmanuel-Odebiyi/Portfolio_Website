@@ -5,6 +5,8 @@ import {
   parseFrontmatter,
   parseMarkdownBodyToSections,
   allBlogPosts,
+  getLocalBlogPosts,
+  subscribeBlogPosts,
 } from './blogLoader';
 
 describe('Blog Ingestion & Loader Tests', () => {
@@ -84,6 +86,21 @@ This is an intro line.
       expect(post).toHaveProperty('title');
       expect(post).toHaveProperty('author');
       expect(post).toHaveProperty('date');
+    });
+
+    it('should return synchronous local posts from getLocalBlogPosts()', () => {
+      const local = getLocalBlogPosts();
+      expect(Array.isArray(local)).toBe(true);
+      expect(local.length).toBeGreaterThan(0);
+    });
+
+    it('should allow subscribing to post updates via subscribeBlogPosts()', () => {
+      let notified = false;
+      const unsubscribe = subscribeBlogPosts(() => {
+        notified = true;
+      });
+      expect(typeof unsubscribe).toBe('function');
+      unsubscribe();
     });
   });
 });
