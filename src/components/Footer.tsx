@@ -50,9 +50,9 @@ export const Footer: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                width={375}
-                height={375}
-                className="h-20 md:h-32 w-auto transition-all duration-300"
+                width={800}
+                height={579}
+                className="h-14 md:h-16 w-auto object-contain transition-all duration-300"
                 style={{ filter: 'var(--logo-filter)' }}
               />
             </div>

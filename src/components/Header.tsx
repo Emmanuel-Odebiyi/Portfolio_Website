@@ -98,10 +98,10 @@ export const Header: React.FC = () => {
               <img 
                 src={logo} 
                 alt="Emmanuel Odebiyi Logo" 
-                width={375}
-                height={375}
-                className="h-8 md:h-10 w-auto transition-all dark:brightness-0 dark:invert"
-                style={{ filter: 'var(--logo-filter, none)' }}
+                width={800}
+                height={579}
+                className="h-8 md:h-10 w-auto object-contain transition-all duration-300"
+                style={{ filter: 'var(--logo-filter)' }}
               />
             </Link>
           </motion.div>

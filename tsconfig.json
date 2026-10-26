@@ -25,7 +25,6 @@
   },
   "include": [
     "src/**/*",
-    "components/**/*",
     "lib/**/*"
   ],
   "exclude": [

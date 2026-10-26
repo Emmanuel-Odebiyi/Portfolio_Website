@@ -96,10 +96,10 @@
   --bg-surface:     #fffaf2;                  /* elevated ivory surface */
   --bg-surface-alt: #eee7dc;                  /* tactile chapter background */
   --text-body:      #0E1C2A;                  /* brand navy text */
-  --text-muted:     #4b5a6a;                  /* balanced navy-slate secondary text — clear hierarchy on ivory */
+  --text-muted:     #4b5a6a;                  /* balanced navy-slate secondary text: clear hierarchy on ivory */
   --border-card:    rgba(14,28,42,0.12);      /* card borders, dividers */
   --cta-blue:       #3B82F6;                  /* brand blue CTA */
-  --logo-filter:    none;                     /* logo keeps original colors on light */
+  --logo-filter:    brightness(0);            /* black logo on light theme */
   --btn-cta-bg:     #F0B429;
   --btn-cta-text:   #0E1C2A;
   --btn-cta-shadow: rgba(180, 83, 9, 0.25);
@@ -129,8 +129,8 @@ body {
   --text-body:      #F5F1EA;                        /* brand ivory */
   --text-muted:     #94a3b8;                        /* slate 400 */
   --border-card:    rgba(255,255,255,0.08);
-  --cta-blue:       var(--accent-blue);            /* #3b7deb — works on dark */
-  --logo-filter:    brightness(0) invert(1);       /* white logo on dark */
+  --cta-blue:       var(--accent-blue);            /* #3b7deb: works on dark */
+  --logo-filter:    brightness(0) invert(1);       /* white logo on dark theme */
   --btn-cta-bg:     #F0B429;
   --btn-cta-text:   #0E1C2A;
   --btn-cta-shadow: rgba(240, 175, 24, 0.30);
